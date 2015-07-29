@@ -1,0 +1,1 @@
+Here zou can find proposed relational db schema for the project.
