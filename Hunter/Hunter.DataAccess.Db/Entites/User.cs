@@ -1,16 +1,11 @@
+using Microsoft.AspNet.Identity;
+using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
+using System.Threading.Tasks;
+
 namespace Hunter.DataAccess.Db
 {
-    using Microsoft.AspNet.Identity;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-    using System.Security.Claims;
-    using System.Threading.Tasks;
-
-    [Table("User")]
-    public partial class User : IUser<int>
+    public partial class User : IUser<int>, IEntity
     {
         public int Id { get; set; }
 
