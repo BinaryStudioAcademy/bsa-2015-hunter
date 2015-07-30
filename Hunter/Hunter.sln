@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hunter.DataAccess.Interface
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hunter.Rest", "Hunter.Rest\Hunter.Rest.csproj", "{5AF4F732-0936-4774-A280-54DBCD93CA2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hunter.Services", "Hunter.Services\Hunter.Services.csproj", "{7CB1E630-4503-4083-BA17-A17FA6FB74AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{5AF4F732-0936-4774-A280-54DBCD93CA2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AF4F732-0936-4774-A280-54DBCD93CA2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AF4F732-0936-4774-A280-54DBCD93CA2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CB1E630-4503-4083-BA17-A17FA6FB74AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CB1E630-4503-4083-BA17-A17FA6FB74AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CB1E630-4503-4083-BA17-A17FA6FB74AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CB1E630-4503-4083-BA17-A17FA6FB74AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
