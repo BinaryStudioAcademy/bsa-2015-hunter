@@ -1,12 +1,13 @@
 namespace Hunter.DataAccess.Db
 {
+    using Microsoft.AspNet.Identity;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Users
+    public partial class Users : IUser<int>
     {
         public int Id { get; set; }
 
@@ -23,5 +24,18 @@ namespace Hunter.DataAccess.Db
         public int RoleId { get; set; }
 
         public virtual UserRole UserRole { get; set; }
+
+        public string UserName
+        {
+            get
+            {
+                return Login;
+            }
+
+            set
+            {
+                Login = value;
+            }
+        }
     }
 }
