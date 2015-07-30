@@ -1,13 +1,14 @@
+using Hunter.DataAccess.Interface;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Spatial;
+
 namespace Hunter.DataAccess.Db
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
     [Table("Test")]
-    public partial class Test
+    public partial class Test : IEntity
     {
         public int Id { get; set; }
 

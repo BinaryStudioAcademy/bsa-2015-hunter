@@ -1,13 +1,14 @@
+using Hunter.DataAccess.Interface;
+using Microsoft.AspNet.Identity;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Spatial;
+
 namespace Hunter.DataAccess.Db
 {
-    using Microsoft.AspNet.Identity;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
-    public partial class Users : IUser<int>
+    public partial class User : IUser<int>, IEntity
     {
         public int Id { get; set; }
 

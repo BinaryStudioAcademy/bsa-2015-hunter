@@ -24,7 +24,7 @@ namespace Hunter.DataAccess.Db
         public virtual DbSet<Test> Test { get; set; }
         public virtual DbSet<UserProfile> UserProfile { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Vacancy> Vacancy { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
