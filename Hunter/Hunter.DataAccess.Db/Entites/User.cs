@@ -6,8 +6,11 @@ namespace Hunter.DataAccess.Db
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
 
-    public partial class Users : IUser<int>
+    [Table("User")]
+    public partial class User : IUser<int>
     {
         public int Id { get; set; }
 
@@ -36,6 +39,14 @@ namespace Hunter.DataAccess.Db
             {
                 Login = value;
             }
+        }
+
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User,int> manager, string authenticationType)
+        {
+            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+            var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
+            // Add custom user claims here
+            return userIdentity;
         }
     }
 }

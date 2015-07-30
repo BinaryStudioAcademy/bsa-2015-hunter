@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using Hunter.Rest.Models;
 using Hunter.Rest.Providers;
 using Hunter.Rest.Results;
+using Hunter.DataAccess.Db;
 
 namespace Hunter.Rest.Controllers
 {
@@ -74,45 +75,6 @@ namespace Hunter.Rest.Controllers
             return Ok();
         }
 
-        // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
-        [Route("ManageInfo")]
-        public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
-        {
-            IdentityUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-
-            if (user == null)
-            {
-                return null;
-            }
-
-            List<UserLoginInfoViewModel> logins = new List<UserLoginInfoViewModel>();
-
-            foreach (IdentityUserLogin linkedAccount in user.Logins)
-            {
-                logins.Add(new UserLoginInfoViewModel
-                {
-                    LoginProvider = linkedAccount.LoginProvider,
-                    ProviderKey = linkedAccount.ProviderKey
-                });
-            }
-
-            if (user.PasswordHash != null)
-            {
-                logins.Add(new UserLoginInfoViewModel
-                {
-                    LoginProvider = LocalLoginProvider,
-                    ProviderKey = user.UserName,
-                });
-            }
-
-            return new ManageInfoViewModel
-            {
-                LocalLoginProvider = LocalLoginProvider,
-                Email = user.UserName,
-                Logins = logins,
-                ExternalLoginProviders = GetExternalLogins(returnUrl, generateState)
-            };
-        }
 
         // POST api/Account/ChangePassword
         [Route("ChangePassword")]
@@ -123,7 +85,7 @@ namespace Hunter.Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
+            IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId<int>(), model.OldPassword,
                 model.NewPassword);
             
             if (!result.Succeeded)
@@ -143,7 +105,7 @@ namespace Hunter.Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
+            IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId<int>(), model.NewPassword);
 
             if (!result.Succeeded)
             {
@@ -180,7 +142,7 @@ namespace Hunter.Rest.Controllers
                 return BadRequest("The external login is already associated with an account.");
             }
 
-            IdentityResult result = await UserManager.AddLoginAsync(User.Identity.GetUserId(),
+            IdentityResult result = await UserManager.AddLoginAsync(User.Identity.GetUserId<int>(),
                 new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey));
 
             if (!result.Succeeded)
@@ -204,11 +166,11 @@ namespace Hunter.Rest.Controllers
 
             if (model.LoginProvider == LocalLoginProvider)
             {
-                result = await UserManager.RemovePasswordAsync(User.Identity.GetUserId());
+                result = await UserManager.RemovePasswordAsync(User.Identity.GetUserId<int>());
             }
             else
             {
-                result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(),
+                result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId<int>(),
                     new UserLoginInfo(model.LoginProvider, model.ProviderKey));
             }
 
@@ -250,7 +212,7 @@ namespace Hunter.Rest.Controllers
                 return new ChallengeResult(provider, this);
             }
 
-            ApplicationUser user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
+            User user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
                 externalLogin.ProviderKey));
 
             bool hasRegistered = user != null;
@@ -328,7 +290,7 @@ namespace Hunter.Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new User() { UserName = model.Email};
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
@@ -357,7 +319,7 @@ namespace Hunter.Rest.Controllers
                 return InternalServerError();
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new User() { UserName = model.Email };
 
             IdentityResult result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)

@@ -68,7 +68,7 @@
     <Compile Include="Entites\Test.cs" />
     <Compile Include="Entites\UserProfile.cs" />
     <Compile Include="Entites\UserRole.cs" />
-    <Compile Include="Entites\Users.cs" />
+    <Compile Include="Entites\User.cs" />
     <Compile Include="Entites\Vacancy.cs" />
   </ItemGroup>
   <ItemGroup>

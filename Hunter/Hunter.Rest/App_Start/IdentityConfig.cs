@@ -4,29 +4,98 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Hunter.Rest.Models;
+using Hunter.DataAccess.Db;
+using System;
+using System.Collections.Generic;
+using Microsoft.Owin.Security.DataProtection;
 
 namespace Hunter.Rest
 {
-    // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
+    public class HunterUserStore : IUserStore<User, int>,
+            IUserPasswordStore<User, int>,
+            IUserRoleStore<User, int>
 
-    public class ApplicationUserManager : UserManager<ApplicationUser>
     {
-        public ApplicationUserManager(IUserStore<ApplicationUser> store)
-            : base(store)
+        public Task AddToRoleAsync(User user, string roleName)
         {
+            throw new NotImplementedException();
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
+        public Task CreateAsync(User user)
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
-            // Configure validation logic for usernames
-            manager.UserValidator = new UserValidator<ApplicationUser>(manager)
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<User> FindByIdAsync(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<User> FindByNameAsync(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> GetPasswordHashAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IList<string>> GetRolesAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> HasPasswordAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> IsInRoleAsync(User user, string roleName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task RemoveFromRoleAsync(User user, string roleName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetPasswordHashAsync(User user, string passwordHash)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+
+    public class ApplicationUserManager : UserManager<User, int>
+    {
+        public ApplicationUserManager(IUserStore<User, int> store, IDataProtectionProvider dataProtectionProvider)
+            : base(store)
+        {
+            UserValidator = new UserValidator<User, int>(this)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
             };
-            // Configure validation logic for passwords
-            manager.PasswordValidator = new PasswordValidator
+
+            PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
                 RequireNonLetterOrDigit = true,
@@ -34,12 +103,12 @@ namespace Hunter.Rest
                 RequireLowercase = true,
                 RequireUppercase = true,
             };
-            var dataProtectionProvider = options.DataProtectionProvider;
-            if (dataProtectionProvider != null)
-            {
-                manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
-            }
-            return manager;
+
+            UserTokenProvider = new DataProtectorTokenProvider<User, int>(dataProtectionProvider.Create("ASP.NET Identity"));
+
+
         }
+
+       
     }
 }

@@ -12,7 +12,7 @@ namespace Hunter.DataAccess.Db
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UserRole()
         {
-            Users = new HashSet<Users>();
+            Users = new HashSet<User>();
         }
 
         public int Id { get; set; }
@@ -22,6 +22,6 @@ namespace Hunter.DataAccess.Db
         public string Name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Users> Users { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }
