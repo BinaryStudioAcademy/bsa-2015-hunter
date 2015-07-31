@@ -10,7 +10,7 @@ namespace Hunter.DataAccess.Db
         public HunterDbContext()
             : base("name=HunterDb")
         {
-            Database.SetInitializer<HunterDbContext>(new CreateDatabaseIfNotExists<HunterDbContext>());
+            Database.SetInitializer(new HunterDbInitializer());
         }
 
         public virtual DbSet<Activity> Activity { get; set; }
