@@ -31,24 +31,13 @@ namespace Hunter.Rest.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager,
-            ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+        public AccountController(ApplicationUserManager userManager,ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
-            UserManager = userManager;
+            _userManager = userManager;
             AccessTokenFormat = accessTokenFormat;
         }
 
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
+        public ApplicationUserManager UserManager{get{return _userManager;}}
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
@@ -290,7 +279,7 @@ namespace Hunter.Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new User() { UserName = model.Email};
+            var user = new User() { UserName = model.Email, State = model.State,RoleId = model.RoleId};
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 

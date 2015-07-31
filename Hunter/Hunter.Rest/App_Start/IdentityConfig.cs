@@ -8,6 +8,7 @@ using Hunter.DataAccess.Db;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.WebPages;
 using Hunter.Services;
 using Microsoft.Owin.Security.DataProtection;
 
@@ -18,9 +19,9 @@ namespace Hunter.Rest
             IUserRoleStore<User, int>
 
     {
-        private readonly UserServices _userServices;
+        private readonly IUserService _userServices;
 
-        public HunterUserStore(UserServices userServices)
+        public HunterUserStore(IUserService userServices)
         {
             _userServices = userServices;
         }
@@ -61,7 +62,7 @@ namespace Hunter.Rest
 
         public Task<string> GetPasswordHashAsync(User user)
         {
-            return null;
+            return Task.FromResult(user.PasswordHash);
         }
 
         public Task<IList<string>> GetRolesAsync(User user)
@@ -71,7 +72,7 @@ namespace Hunter.Rest
 
         public Task<bool> HasPasswordAsync(User user)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(!user.PasswordHash.IsEmpty());
         }
 
         public Task<bool> IsInRoleAsync(User user, string roleName)
@@ -86,7 +87,8 @@ namespace Hunter.Rest
 
         public Task SetPasswordHashAsync(User user, string passwordHash)
         {
-            throw new NotImplementedException();
+            user.PasswordHash = passwordHash;
+            return Task.FromResult<Object>(null);
         }
 
         public Task UpdateAsync(User user)
