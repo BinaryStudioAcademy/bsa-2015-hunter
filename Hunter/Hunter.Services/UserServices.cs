@@ -21,6 +21,11 @@ namespace Hunter.Services
             _userRoleRepository = userRoleRepository;
         }
 
+        public User GetUserByName(string name)
+        {
+            return _userRepository.Get(u => u.UserName.ToLower() == name.ToLower());
+        }
+
         public User GetUserById(int id)
         {
             return _userRepository.Get(id);
@@ -49,6 +54,12 @@ namespace Hunter.Services
             _unitOfWork.SaveChanges();
         }
 
+        public void UpdateUser(User user)
+        {
+            _userRepository.Update(user);
+            _unitOfWork.SaveChanges();
+        }
+       
 
     }
 }

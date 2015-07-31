@@ -7,6 +7,7 @@ using Hunter.Rest.Models;
 using Hunter.DataAccess.Db;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Hunter.Services;
 using Microsoft.Owin.Security.DataProtection;
 
@@ -26,25 +27,25 @@ namespace Hunter.Rest
 
         public Task AddToRoleAsync(User user, string roleName)
         {
-           _userServices.AddToRole(user,roleName);
-            return new Task<object>(null);
+            _userServices.AddToRole(user, roleName);
+            return Task.FromResult<object>(null);
         }
 
         public Task CreateAsync(User user)
         {
             _userServices.CreateUser(user);
-            return new Task<object>(null);
+            return Task.FromResult<object>(null);
         }
 
         public Task DeleteAsync(User user)
         {
             _userServices.DeleteUser(user);
-            return new Task<object>(null);
+            return Task.FromResult<object>(null);
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
 
         public Task<User> FindByIdAsync(int userId)
@@ -55,17 +56,17 @@ namespace Hunter.Rest
 
         public Task<User> FindByNameAsync(string userName)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(_userServices.GetUserByName(userName));
         }
 
         public Task<string> GetPasswordHashAsync(User user)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public Task<IList<string>> GetRolesAsync(User user)
         {
-            throw new NotImplementedException();
+            return Task.FromResult<IList<string>>(new List<string> { user.UserRole.Name });
         }
 
         public Task<bool> HasPasswordAsync(User user)
@@ -75,12 +76,12 @@ namespace Hunter.Rest
 
         public Task<bool> IsInRoleAsync(User user, string roleName)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(user.UserRole.Name.ToLower() == roleName.ToLower());
         }
 
         public Task RemoveFromRoleAsync(User user, string roleName)
         {
-            throw new NotImplementedException();
+            return Task.FromResult<object>(null);
         }
 
         public Task SetPasswordHashAsync(User user, string passwordHash)
@@ -90,7 +91,8 @@ namespace Hunter.Rest
 
         public Task UpdateAsync(User user)
         {
-            throw new NotImplementedException();
+            _userServices.UpdateUser(user);
+            return Task.FromResult<object>(null);
         }
     }
 
@@ -121,6 +123,6 @@ namespace Hunter.Rest
 
         }
 
-       
+
     }
 }
