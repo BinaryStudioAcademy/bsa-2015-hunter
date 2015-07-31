@@ -67,6 +67,7 @@
     <Compile Include="Entites\Interview.cs" />
     <Compile Include="HunterDbContext.cs" />
     <Compile Include="Entites\Pool.cs" />
+    <Compile Include="HunterDbInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entites\Resume.cs" />
     <Compile Include="Entites\SpecialNote.cs" />

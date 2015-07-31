@@ -8,18 +8,24 @@ using Hunter.DataAccess.Db;
 
 namespace Hunter.Services
 {
-    public class UserServices
+    public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
         private readonly IUserRoleRepository _userRoleRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UserServices(IUserRepository userRepository, IUnitOfWork unitOfWork, IUserRoleRepository userRoleRepository)
+        public UserService(IUserRepository userRepository, IUnitOfWork unitOfWork, IUserRoleRepository userRoleRepository)
         {
             _userRepository = userRepository;
             _unitOfWork = unitOfWork;
             _userRoleRepository = userRoleRepository;
         }
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            return _userRepository.All();
+        }
+
 
         public User GetUserByName(string name)
         {

@@ -10,12 +10,15 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Hunter.Rest.Providers;
 using Hunter.Rest.Models;
+using Microsoft.Owin.Security.DataProtection;
 
 namespace Hunter.Rest
 {
     public partial class Startup
     {
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
+
+        internal static IDataProtectionProvider DataProtectionProvider { get; private set; }
 
         public static string PublicClientId { get; private set; }
 
@@ -30,6 +33,8 @@ namespace Hunter.Rest
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+
+            DataProtectionProvider = app.GetDataProtectionProvider();
 
             // Configure the application for OAuth based flow
             PublicClientId = "self";

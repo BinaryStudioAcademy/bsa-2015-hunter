@@ -1,11 +1,13 @@
 using Microsoft.AspNet.Identity;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Hunter.DataAccess.Db
 {
-    public partial class User : IUser<int>, IEntity
+    [Table("User")]
+    public class User : IUser<int>, IEntity
     {
         public int Id { get; set; }
 
@@ -23,6 +25,7 @@ namespace Hunter.DataAccess.Db
 
         public virtual UserRole UserRole { get; set; }
 
+        [NotMapped]
         public string UserName
         {
             get
