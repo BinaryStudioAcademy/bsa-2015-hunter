@@ -105,4 +105,3 @@ namespace Hunter.DataAccess.Db
         }
     }
 }
-
