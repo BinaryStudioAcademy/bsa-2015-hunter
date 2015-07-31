@@ -50,3 +50,7 @@ packages/
 
 #OpenCover
 OpenCover/
+
+# JS
+node_modules/
+bower_components/
