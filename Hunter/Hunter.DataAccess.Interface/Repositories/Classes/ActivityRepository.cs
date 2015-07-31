@@ -10,9 +10,9 @@ namespace Hunter.DataAccess.Interface.Repositories.Classes
 {
     public class ActivityRepository : Repository<Activity>, IActivityRepository
     {
-        public ActivityRepository(DbContext dataContext)
-            : base(dataContext)
-        { }
+        public ActivityRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
+        {
+        }
 
     }
 }

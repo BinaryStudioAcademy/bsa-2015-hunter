@@ -5,7 +5,7 @@ using Hunter.DataAccess.Db;
 
 namespace Hunter.DataAccess.Interface
 {
-    public interface IRepository<T> where T : class, IEntity
+    public interface IRepository<T> where T : class//, IEntity
     {
         IQueryable<T> Query();
         IEnumerable<T> All();
@@ -14,6 +14,6 @@ namespace Hunter.DataAccess.Interface
         void Add(T entity);
         void Update(T entity);
         void Delete(T entity);
-        void SaveChanges();
+        //void SaveChanges();
     }
 }

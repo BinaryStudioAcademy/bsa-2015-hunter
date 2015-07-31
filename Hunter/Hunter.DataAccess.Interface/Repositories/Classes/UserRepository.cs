@@ -10,8 +10,9 @@ namespace Hunter.DataAccess.Interface.Repositories.Classes
 {
     public class UserRepository : Repository<User>, IUserRepository
     {
-        public UserRepository(DbContext dataContext)
-            : base(dataContext)
-        { }
+        public UserRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
+        {
+
+        }
     }
 }

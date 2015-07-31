@@ -10,8 +10,9 @@ namespace Hunter.DataAccess.Interface.Repositories.Classes
 {
     public class SpecialNoteRepository : Repository<SpecialNote>, ISpecialNoteRepository
     {
-        public SpecialNoteRepository(DbContext dataContext)
-            : base(dataContext)
-        { }
+        public SpecialNoteRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
+        {
+
+        }
     }
 }

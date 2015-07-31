@@ -10,8 +10,9 @@ namespace Hunter.DataAccess.Interface.Repositories.Classes
 {
     public class VacancyRepository : Repository<Vacancy>, IVacancyRepository
     {
-        public VacancyRepository(DbContext dataContext)
-            : base(dataContext)
-        { }
+        public VacancyRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
+        {
+
+        }
     }
 }

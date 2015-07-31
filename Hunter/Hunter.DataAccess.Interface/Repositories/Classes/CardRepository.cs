@@ -10,8 +10,9 @@ namespace Hunter.DataAccess.Interface.Repositories.Classes
 {
     public class CardRepository : Repository<Card>, ICardRepository
     {
-        public CardRepository(DbContext dataContext)
-            : base(dataContext)
-        { }
+        public CardRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
+        {
+
+        }
     }
 }

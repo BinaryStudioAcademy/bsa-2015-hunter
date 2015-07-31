@@ -6,16 +6,34 @@ using System.Linq;
 
 namespace Hunter.DataAccess.Interface
 {
-    public class Repository<T> : IRepository<T> where T : class, IEntity
+    public abstract class Repository<T> : IRepository<T> where T : class, IEntity,new()
     {
-        protected readonly DbContext _dataContext;
-        protected readonly DbSet<T> _dataSet;
-
-        public Repository(DbContext dataContext)
+        private  DbContext _dataContext;
+        private readonly DbSet<T> _dataSet;
+        protected Repository(IDatabaseFactory databaseFactory)
         {
-            _dataContext = dataContext;
-            _dataSet = dataContext.Set<T>();
+            DatabaseFactory = databaseFactory;
+            _dataSet = DataContext.Set<T>();
         }
+
+        //public Repository(DbContext dataContext)
+        //{
+        //    _dataContext = dataContext;
+        //    _dataSet = dataContext.Set<T>();
+        //}
+
+
+        protected IDatabaseFactory DatabaseFactory
+        {
+            get;
+            private set;
+        }
+
+        protected DbContext DataContext
+        {
+            get { return _dataContext ?? (_dataContext = DatabaseFactory.Get()); }
+        }
+
 
         public IQueryable<T> Query()
         {
@@ -47,10 +65,10 @@ namespace Hunter.DataAccess.Interface
             _dataSet.Remove(entity);
         }
 
-        public void SaveChanges()
-        {
-            _dataContext.SaveChanges();
-        }
+        //public void SaveChanges()
+        //{
+        //    _dataContext.SaveChanges();
+        //}
 
         public void Update(T entity)
         {

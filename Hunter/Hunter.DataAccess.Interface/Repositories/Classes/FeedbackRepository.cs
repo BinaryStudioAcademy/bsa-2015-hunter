@@ -10,8 +10,9 @@ namespace Hunter.DataAccess.Interface.Repositories.Classes
 {
     public class FeedbackRepository : Repository<Feedback>, IFeedbackRepository
     {
-        public FeedbackRepository(DbContext dataContext)
-            : base(dataContext)
-        { }
+        public FeedbackRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
+        {
+
+        }
     }
 }

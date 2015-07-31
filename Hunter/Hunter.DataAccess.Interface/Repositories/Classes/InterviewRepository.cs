@@ -10,8 +10,9 @@ namespace Hunter.DataAccess.Interface.Repositories.Classes
 {
     public class InterviewRepository : Repository<Interview>, IInterviewRepository
     {
-        public InterviewRepository(DbContext dataContext)
-            : base(dataContext)
-        { }
+        public InterviewRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
+        {
+
+        }
     }
 }

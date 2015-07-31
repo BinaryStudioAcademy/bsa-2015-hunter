@@ -10,8 +10,9 @@ namespace Hunter.DataAccess.Interface.Repositories.Classes
 {
     public class TestRepository : Repository<Test>, ITestRepository
     {
-        public TestRepository(DbContext dataContext)
-            : base(dataContext)
-        { }
+        public TestRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
+        {
+
+        }
     }
 }

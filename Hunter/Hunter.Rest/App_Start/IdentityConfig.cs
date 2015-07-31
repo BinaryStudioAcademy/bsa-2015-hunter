@@ -7,6 +7,7 @@ using Hunter.Rest.Models;
 using Hunter.DataAccess.Db;
 using System;
 using System.Collections.Generic;
+using Hunter.Services;
 using Microsoft.Owin.Security.DataProtection;
 
 namespace Hunter.Rest
@@ -16,19 +17,29 @@ namespace Hunter.Rest
             IUserRoleStore<User, int>
 
     {
+        private readonly UserServices _userServices;
+
+        public HunterUserStore(UserServices userServices)
+        {
+            _userServices = userServices;
+        }
+
         public Task AddToRoleAsync(User user, string roleName)
         {
-            throw new NotImplementedException();
+           _userServices.AddToRole(user,roleName);
+            return new Task<object>(null);
         }
 
         public Task CreateAsync(User user)
         {
-            throw new NotImplementedException();
+            _userServices.CreateUser(user);
+            return new Task<object>(null);
         }
 
         public Task DeleteAsync(User user)
         {
-            throw new NotImplementedException();
+            _userServices.DeleteUser(user);
+            return new Task<object>(null);
         }
 
         public void Dispose()
@@ -38,7 +49,8 @@ namespace Hunter.Rest
 
         public Task<User> FindByIdAsync(int userId)
         {
-            throw new NotImplementedException();
+            var user = _userServices.GetUserById(userId);
+            return Task.FromResult(user);
         }
 
         public Task<User> FindByNameAsync(string userName)

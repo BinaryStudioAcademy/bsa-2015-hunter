@@ -10,8 +10,9 @@ namespace Hunter.DataAccess.Interface.Repositories.Classes
 {
     public class PoolRepository : Repository<Pool>, IPoolRepository
     {
-        public PoolRepository(DbContext dataContext)
-            : base(dataContext)
-        { }
+        public PoolRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
+        {
+
+        }
     }
 }
