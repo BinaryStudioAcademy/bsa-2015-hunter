@@ -20,31 +20,7 @@ namespace Hunter.Rest
     {
         public void Configuration(IAppBuilder app)
         {
-
             ConfigureAuth(app);
-
-        }
-
-        private static StandardKernel CreateKernel()
-        {
-            var kernel = new StandardKernel();
-            kernel.Load(Assembly.GetExecutingAssembly());
-            kernel.Bind<IUserStore<User,int>>().To<HunterUserStore>();
-            kernel.Bind(x => x
-                .FromThisAssembly()
-                .SelectAllClasses()
-                .EndingWith("Repository")
-                .BindAllInterfaces()
-                );
-
-            kernel.Bind(x => x
-                .FromThisAssembly()
-                .SelectAllClasses()
-                .EndingWith("Service")
-                .BindAllInterfaces()
-                );
-
-            return kernel;
         }
     }
 }

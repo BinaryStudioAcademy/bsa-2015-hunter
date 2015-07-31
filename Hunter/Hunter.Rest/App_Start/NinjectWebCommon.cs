@@ -5,11 +5,16 @@ using System.Web;
 using Hunter.DataAccess.Db;
 using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Interface.Pattern.Classes;
+using Hunter.DataAccess.Interface.Repositories.Classes;
 using Hunter.Rest;
+using Hunter.Services;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
 using Ninject.Extensions.Conventions;
+using Ninject.Extensions.NamedScope;
 using Ninject.Web.Common;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
@@ -49,26 +54,18 @@ namespace Hunter.Rest
             try
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
+                kernel.Bind<IDataProtectionProvider>().ToSelf();
+                kernel.Bind<ApplicationUserManager>().ToSelf().InRequestScope();
+
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
                 kernel.Bind<IDatabaseFactory>().To<DatabaseFactory>();
                 kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
 
 
                 kernel.Bind<IUserStore<User, int>>().To<HunterUserStore>();
-                kernel.Bind(x => x
-                    .FromThisAssembly()
-                    .SelectAllClasses()
-                    .EndingWith("Repository")
-                    .BindAllInterfaces()
-                    );
-
-                kernel.Bind(x => x
-                    .FromThisAssembly()
-                    .SelectAllClasses()
-                    .EndingWith("Service")
-                    .BindAllInterfaces()
-                    );
-
+                kernel.Bind<IUserRepository>().To<UserRepository>();
+                kernel.Bind<IUserRoleRepository>().To<UserRoleRepository>();
+                kernel.Bind<IUserService>().To<UserService>();
 
 
                 return kernel;
