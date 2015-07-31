@@ -67,6 +67,8 @@ namespace Hunter.Rest
                 kernel.Bind<IUserRoleRepository>().To<UserRoleRepository>();
                 kernel.Bind<IUserService>().To<UserService>();
 
+                kernel.Bind<ICandidateRepository>().To<CandidateRepository>();
+                kernel.Bind<ICandidateService>().To<CandidateService>();
 
                 return kernel;
             }
