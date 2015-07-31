@@ -1,0 +1,26 @@
+{
+  "name": "Hunter",
+  "version": "0.0.1",
+  "authors": [
+    "Beseda Dmitriy <BesedaDG@gmail.com>",
+    "Anton Vasilenko <toxa07@gmail.com>"
+  ],
+  "license": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.1",
+    "angular-route": "~1.4.1",
+    "underscore": "~1.8.3",
+    "angular-resource": "~1.4.1",
+    "bootstrap": "~3.3.5",
+    "alertifyjs": "~0.3.16",
+    "angular-bootstrap": "~0.13.0"
+  }
+}
