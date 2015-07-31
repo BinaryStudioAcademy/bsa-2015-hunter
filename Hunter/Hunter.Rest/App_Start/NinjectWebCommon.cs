@@ -54,19 +54,38 @@ namespace Hunter.Rest
             try
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
-                kernel.Bind<IDataProtectionProvider>().ToSelf();
+                kernel.Bind<IUserStore<User, int>>().To<HunterUserStore>();
                 kernel.Bind<ApplicationUserManager>().ToSelf().InRequestScope();
 
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-                kernel.Bind<IDatabaseFactory>().To<DatabaseFactory>();
-                kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+                kernel.Bind<IDatabaseFactory>().To<DatabaseFactory>().InSingletonScope();
+                kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InSingletonScope();
 
+                
 
-                kernel.Bind<IUserStore<User, int>>().To<HunterUserStore>();
+                #region Repositories
+                kernel.Bind<IActivityRepository>().To<ActivityRepository>();
+                kernel.Bind<ICandidateRepository>().To<CandidateRepository>();
+                kernel.Bind<ICardRepository>().To<CardRepository>();
+                kernel.Bind<IFeedbackRepository>().To<FeedbackRepository>();
+                kernel.Bind<IInterviewRepository>().To<InterviewRepository>();
+                kernel.Bind<IPoolRepository>().To<PoolRepository>();
+                kernel.Bind<IResumeRepository>().To<ResumeRepository>();
+                kernel.Bind<ISpecialNoteRepository>().To<SpecialNoteRepository>();
+                kernel.Bind<ITestRepository>().To<TestRepository>();
+                kernel.Bind<IUserProfileRepository>().To<UserProfileRepository>();
                 kernel.Bind<IUserRepository>().To<UserRepository>();
                 kernel.Bind<IUserRoleRepository>().To<UserRoleRepository>();
+                kernel.Bind<IVacancyRepository>().To<VacancyRepository>();
+                #endregion
+                
+
+
+                #region Services
                 kernel.Bind<IUserService>().To<UserService>();
 
+
+                #endregion
 
                 return kernel;
             }

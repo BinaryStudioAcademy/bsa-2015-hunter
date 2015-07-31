@@ -102,7 +102,7 @@ namespace Hunter.Rest
 
     public class ApplicationUserManager : UserManager<User, int>
     {
-        public ApplicationUserManager(IUserStore<User, int> store, IDataProtectionProvider dataProtectionProvider)
+        public ApplicationUserManager(IUserStore<User, int> store)
             : base(store)
         {
             UserValidator = new UserValidator<User, int>(this)
@@ -120,8 +120,15 @@ namespace Hunter.Rest
                 RequireUppercase = true,
             };
 
-            UserTokenProvider = new DataProtectorTokenProvider<User, int>(dataProtectionProvider.Create("ASP.NET Identity"));
+            var dataProtectionProvider = Startup.DataProtectionProvider;
 
+            // this is unchanged
+            if (dataProtectionProvider != null)
+            {
+                IDataProtector dataProtector = dataProtectionProvider.Create("ASP.NET Identity");
+
+                this.UserTokenProvider = new DataProtectorTokenProvider<User,int>(dataProtector);
+            }
 
         }
 
