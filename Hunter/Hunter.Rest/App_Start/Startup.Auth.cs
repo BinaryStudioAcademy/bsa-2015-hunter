@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin;
-using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
-using Microsoft.Owin.Security.OAuth;
-using Owin;
 using Hunter.Rest.Providers;
-using Hunter.Rest.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.DataHandler;
 using Microsoft.Owin.Security.DataProtection;
+using Microsoft.Owin.Security.OAuth;
+using Ninject.Web.Common.OwinHost;
+using Owin;
 
 namespace Hunter.Rest
 {
@@ -25,16 +23,18 @@ namespace Hunter.Rest
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
+            DataProtectionProvider = app.GetDataProtectionProvider();
             // Configure the db context and user manager to use a single instance per request
             //app.CreatePerOwinContext(ApplicationDbContext.Create);
-            //app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+            app.CreatePerOwinContext(CreateKernel);
+            app.UseNinjectMiddleware(CreateKernel);
+            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
-            DataProtectionProvider = app.GetDataProtectionProvider();
 
             // Configure the application for OAuth based flow
             PublicClientId = "self";
@@ -70,5 +70,8 @@ namespace Hunter.Rest
             //    ClientSecret = ""
             //});
         }
+
+
+        
     }
 }
