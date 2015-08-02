@@ -17,6 +17,8 @@ using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Interface.Pattern.Classes;
 using Hunter.DataAccess.Interface.Repositories.Classes;
 using Hunter.Services;
+using Hunter.Services.Concrete;
+using Hunter.Services.Interfaces;
 using Ninject.Web.Common;
 
 [assembly: OwinStartup(typeof(Hunter.Rest.Startup))]
@@ -63,6 +65,7 @@ namespace Hunter.Rest
 
             #region Services
             kernel.Bind<IUserService>().To<UserService>();
+            kernel.Bind<IPoolService>().To<PoolService>();
 
 
             #endregion
