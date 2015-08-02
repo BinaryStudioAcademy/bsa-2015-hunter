@@ -21,6 +21,7 @@ using Hunter.Services.Concrete;
 using Hunter.Services.Interfaces;
 using Microsoft.Owin.Logging;
 using Ninject.Web.Common;
+using Hunter.Common.Concrete;
 
 [assembly: OwinStartup(typeof(Hunter.Rest.Startup))]
 
@@ -68,7 +69,7 @@ namespace Hunter.Rest
 
             #endregion
 
-            kernel.Bind<ILogger>().To<Logger>();
+            kernel.Bind<Common.Interfaces.ILogger>().To<Logger>();
 
             return kernel;
         }

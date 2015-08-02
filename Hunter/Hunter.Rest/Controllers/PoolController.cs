@@ -25,13 +25,11 @@ namespace Hunter.Rest.Controllers
         // GET: api/Pool
         public IEnumerable<Pool> Get()
         {
-            //return new List<Pool>[] { "value1", "value2" };
             return _poolService.GetAllPools();
         }
 
         // GET: api/Pool/5
         public Pool Get(int id)
-        //public string Get(int id)
         {
             var pool = _poolService.GetPoolById(id);
 
@@ -40,8 +38,6 @@ namespace Hunter.Rest.Controllers
                 return new Pool();
             }
             return pool;
-            //return "value";
-            
         }
 
         // POST: api/Pool

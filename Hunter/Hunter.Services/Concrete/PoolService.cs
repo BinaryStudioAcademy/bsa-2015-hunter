@@ -13,31 +13,24 @@ namespace Hunter.Services.Concrete
     {
         private readonly IPoolRepository _poolRepository;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger _logger;
+        private readonly Common.Interfaces.ILogger _logger;
 
-        public PoolService(IPoolRepository poolRepository, IUnitOfWork unitOfWork)
+        public PoolService(IPoolRepository poolRepository, IUnitOfWork unitOfWork, Common.Interfaces.ILogger logger)
         {
             _poolRepository = poolRepository;
             _unitOfWork = unitOfWork;
+            _logger = logger;
         }
 
         public IEnumerable<Pool> GetAllPools()
         {
             try
             {
-                
-                //var pools = new List<Pool>
-                //{
-                //    new Pool(){Id = 1, Name = "JS"},
-                //    new Pool(){Id = 2, Name = ".Net"}
-                //};
-                //return pools;
-
                 return _poolRepository.All();
             }
             catch (Exception ex)
             {
-                _logger.Error(ex);
+                _logger.Log(ex);
                 return new Pool[0];
             }
         }
@@ -48,7 +41,6 @@ namespace Hunter.Services.Concrete
             {
                 return _poolRepository.Get(id);
 
-                //return new Pool { Id = 1, Name = "test" };
             }
             catch (Exception ex)
             {
@@ -65,7 +57,7 @@ namespace Hunter.Services.Concrete
             }
             catch (Exception ex)
             {
-
+                _logger.Log(ex);
             }
 
         }
@@ -74,12 +66,14 @@ namespace Hunter.Services.Concrete
         {
             try
             {
+                //var updatePool = _poolRepository.Get(pool.Id);
+
                 _poolRepository.Update(pool);
                 _unitOfWork.SaveChanges();
             }
             catch (Exception ex)
             {
-
+                _logger.Log(ex);
             }
         }
 
@@ -87,12 +81,13 @@ namespace Hunter.Services.Concrete
         {
             try
             {
-                _poolRepository.Delete(pool);
+                var deletePool = _poolRepository.Get(pool.Id);
+                _poolRepository.Delete(deletePool);
                 _unitOfWork.SaveChanges();
             }
             catch (Exception ex)
             {
-
+                _logger.Log(ex);
             }
         }
     }

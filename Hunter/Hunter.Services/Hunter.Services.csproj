@@ -55,6 +55,10 @@
     <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Hunter.Common\Hunter.Common.csproj">
+      <Project>{e541870a-0b8f-4699-ab3c-d34dfe630586}</Project>
+      <Name>Hunter.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hunter.DataAccess.Db\Hunter.DataAccess.Db.csproj">
       <Project>{6293AEEB-7108-49A2-8300-4EA40D4222D0}</Project>
       <Name>Hunter.DataAccess.Db</Name>
