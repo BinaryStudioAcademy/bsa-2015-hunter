@@ -6,10 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Mvc;
 using Hunter.DataAccess.Db;
-using Hunter.DataAccess.Interface.Repositories.Classes;
-using Hunter.Services;
 using Hunter.Services.Interfaces;
-using Hunter.Services.Concrete;
+
 
 namespace Hunter.Rest.Controllers
 {
@@ -49,16 +47,12 @@ namespace Hunter.Rest.Controllers
         // PUT: api/Pool/5
         public void Put(Pool pool)
         {
-            //Pool pool = _poolService.GetPoolById(id);
-
             _poolService.UpdatePool(pool);
         }
 
         // DELETE: api/Pool/5
         public void Delete(Pool pool)
         {
-            //Pool pool = _poolService.GetPoolById(id);
-
             _poolService.DeletePool(pool);
         }
     }
