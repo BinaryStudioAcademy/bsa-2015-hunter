@@ -13,6 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hunter.Rest", "Hunter.Rest\
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hunter.Services", "Hunter.Services\Hunter.Services.csproj", "{7CB1E630-4503-4083-BA17-A17FA6FB74AB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E541870A-0B8F-4699-AB3C-D34DFE630586} = {E541870A-0B8F-4699-AB3C-D34DFE630586}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hunter.Common", "Hunter.Common\Hunter.Common.csproj", "{E541870A-0B8F-4699-AB3C-D34DFE630586}"
 EndProject
