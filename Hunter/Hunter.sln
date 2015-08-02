@@ -1,15 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hunter.DataAccess.Db", "Hunter.DataAccess.Db\Hunter.DataAccess.Db.csproj", "{6293AEEB-7108-49A2-8300-4EA40D4222D0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hunter.DataAccess.Interface", "Hunter.DataAccess.Interface\Hunter.DataAccess.Interface.csproj", "{870A30FE-6780-4B1C-81F5-1EAF8BD8F50C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hunter.Rest", "Hunter.Rest\Hunter.Rest.csproj", "{5AF4F732-0936-4774-A280-54DBCD93CA2F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E541870A-0B8F-4699-AB3C-D34DFE630586} = {E541870A-0B8F-4699-AB3C-D34DFE630586}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hunter.Services", "Hunter.Services\Hunter.Services.csproj", "{7CB1E630-4503-4083-BA17-A17FA6FB74AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hunter.Common", "Hunter.Common\Hunter.Common.csproj", "{E541870A-0B8F-4699-AB3C-D34DFE630586}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +38,10 @@ Global
 		{7CB1E630-4503-4083-BA17-A17FA6FB74AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CB1E630-4503-4083-BA17-A17FA6FB74AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CB1E630-4503-4083-BA17-A17FA6FB74AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E541870A-0B8F-4699-AB3C-D34DFE630586}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E541870A-0B8F-4699-AB3C-D34DFE630586}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E541870A-0B8F-4699-AB3C-D34DFE630586}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E541870A-0B8F-4699-AB3C-D34DFE630586}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

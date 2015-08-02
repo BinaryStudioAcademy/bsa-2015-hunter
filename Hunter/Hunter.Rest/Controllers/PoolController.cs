@@ -25,44 +25,45 @@ namespace Hunter.Rest.Controllers
         // GET: api/Pool
         public IEnumerable<Pool> Get()
         {
-            
-            //return new string[] { "value1", "value2" };
-            var pools = new List<Pool>
-            {
-                new Pool(){Id = 1, Name = "JS"},
-                new Pool(){Id = 2, Name = ".Net"}
-            };
-            return pools;
+            //return new List<Pool>[] { "value1", "value2" };
+            return _poolService.GetAllPools();
         }
 
         // GET: api/Pool/5
         public Pool Get(int id)
         //public string Get(int id)
         {
-            //var pool = _poolService.GetPoolById(id);
+            var pool = _poolService.GetPoolById(id);
 
-            //if (pool == null)
-            //{
-            //    return new Pool();
-            //}
-            //return pool;
-            //    return "value";
-            return new Pool(){Id = 1, Name = "JS"};
+            if (pool == null)
+            {
+                return new Pool();
+            }
+            return pool;
+            //return "value";
+            
         }
 
         // POST: api/Pool
-        public void Post([FromBody]string value)
+        public void Post(Pool pool)
         {
+            _poolService.CreatePool(pool);
         }
 
         // PUT: api/Pool/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(Pool pool)
         {
+            //Pool pool = _poolService.GetPoolById(id);
+
+            _poolService.UpdatePool(pool);
         }
 
         // DELETE: api/Pool/5
-        public void Delete(int id)
+        public void Delete(Pool pool)
         {
+            //Pool pool = _poolService.GetPoolById(id);
+
+            _poolService.DeletePool(pool);
         }
     }
 }

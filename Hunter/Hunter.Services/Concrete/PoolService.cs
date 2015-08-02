@@ -13,6 +13,7 @@ namespace Hunter.Services.Concrete
     {
         private readonly IPoolRepository _poolRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ILogger _logger;
 
         public PoolService(IPoolRepository poolRepository, IUnitOfWork unitOfWork)
         {
@@ -24,10 +25,19 @@ namespace Hunter.Services.Concrete
         {
             try
             {
+                
+                //var pools = new List<Pool>
+                //{
+                //    new Pool(){Id = 1, Name = "JS"},
+                //    new Pool(){Id = 2, Name = ".Net"}
+                //};
+                //return pools;
+
                 return _poolRepository.All();
             }
             catch (Exception ex)
             {
+                _logger.Error(ex);
                 return new Pool[0];
             }
         }
@@ -36,8 +46,9 @@ namespace Hunter.Services.Concrete
         {
             try
             {
-                //return _poolRepository.Get(id);
-                return new Pool { Id = 1, Name = "test" };
+                return _poolRepository.Get(id);
+
+                //return new Pool { Id = 1, Name = "test" };
             }
             catch (Exception ex)
             {
