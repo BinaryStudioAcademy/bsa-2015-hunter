@@ -15,14 +15,12 @@ namespace Hunter.Rest.Controllers
 {
     public class PoolController : ApiController
     {
-        private IPoolService _poolService;
+        private readonly IPoolService _poolService;
 
-        //public PoolController(IPoolService poolService)
-        //{
-        //    _poolService = poolService;
-        //}
-
-        //private PoolService _poolService = new PoolService(new PoolRepository(), );
+        public PoolController(IPoolService poolService)
+        {
+            _poolService = poolService;
+        }
 
         // GET: api/Pool
         public IEnumerable<Pool> Get()
