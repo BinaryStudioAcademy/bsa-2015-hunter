@@ -11,17 +11,17 @@ using Hunter.Services;
 
 namespace Hunter.Rest.Controllers
 {
-    [RoutePrefix("api/Candidate")]
-    public class CandidateController : ApiController
+    [RoutePrefix("api/Candidates")]
+    public class CandidatesController : ApiController
     {
-        private ICandidateService _candidateService;
+        private readonly ICandidateService _candidateService;
 
-        public CandidateController(ICandidateService candidateService)
+        public CandidatesController(ICandidateService candidateService)
         {
             _candidateService = candidateService;
         }
 
-        public CandidateController()
+        public CandidatesController()
         {
         }
 
