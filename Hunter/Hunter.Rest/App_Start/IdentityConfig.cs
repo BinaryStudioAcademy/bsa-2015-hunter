@@ -11,11 +11,13 @@ using System.Linq;
 using System.Web.WebPages;
 using Hunter.Services;
 using Microsoft.Owin.Security.DataProtection;
+using Ninject;
 
 namespace Hunter.Rest
 {
     public class HunterUserStore : IUserStore<User, int>,
-            IUserPasswordStore<User, int>,
+            IUserEmailStore<User,int>,
+    IUserPasswordStore<User, int>,
             IUserRoleStore<User, int>
 
     {
@@ -96,6 +98,33 @@ namespace Hunter.Rest
             _userServices.UpdateUser(user);
             return Task.FromResult<object>(null);
         }
+
+        public Task SetEmailAsync(User user, string email)
+        {
+            user.Login = email;
+            return Task.FromResult<object>(null);
+        }
+
+        public Task<string> GetEmailAsync(User user)
+        {
+            return Task.FromResult(user.Login);
+        }
+
+        public Task<bool> GetEmailConfirmedAsync(User user)
+        {
+            //TODO:Email allways confirmed!
+            return Task.FromResult(true);
+        }
+
+        public Task SetEmailConfirmedAsync(User user, bool confirmed)
+        {
+            return Task.FromResult<object>(null);
+        }
+
+        public Task<User> FindByEmailAsync(string email)
+        {
+            return Task.FromResult(_userServices.GetUserByName(email));
+        }
     }
 
 
@@ -105,13 +134,24 @@ namespace Hunter.Rest
         public ApplicationUserManager(IUserStore<User, int> store)
             : base(store)
         {
-            UserValidator = new UserValidator<User, int>(this)
+           
+
+        }
+
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
+        {
+            var kernel = context.Get<StandardKernel>();
+            var userStore = kernel.Get<IUserStore<User, int>>();
+            var manager = new ApplicationUserManager(userStore);
+            //...
+
+            manager.UserValidator = new UserValidator<User, int>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
             };
 
-            PasswordValidator = new PasswordValidator
+            manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
                 RequireNonLetterOrDigit = true,
@@ -127,9 +167,9 @@ namespace Hunter.Rest
             {
                 IDataProtector dataProtector = dataProtectionProvider.Create("ASP.NET Identity");
 
-                this.UserTokenProvider = new DataProtectorTokenProvider<User,int>(dataProtector);
+                manager.UserTokenProvider = new DataProtectorTokenProvider<User, int>(dataProtector);
             }
-
+            return manager;
         }
 
 

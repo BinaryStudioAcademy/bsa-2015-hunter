@@ -25,7 +25,7 @@ namespace Hunter.Rest.Controllers
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
-        private readonly ApplicationUserManager _userManager;
+        private  ApplicationUserManager _userManager;
 
         public AccountController()
         {
@@ -33,11 +33,21 @@ namespace Hunter.Rest.Controllers
 
         public AccountController(ApplicationUserManager userManager, ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
-            _userManager = userManager;
+            UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
         }
 
-      
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
@@ -74,7 +84,7 @@ namespace Hunter.Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await _userManager.ChangePasswordAsync(User.Identity.GetUserId<int>(), model.OldPassword,
+            IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId<int>(), model.OldPassword,
                 model.NewPassword);
 
             if (!result.Succeeded)
@@ -94,7 +104,7 @@ namespace Hunter.Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await _userManager.AddPasswordAsync(User.Identity.GetUserId<int>(), model.NewPassword);
+            IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId<int>(), model.NewPassword);
 
             if (!result.Succeeded)
             {
@@ -131,7 +141,7 @@ namespace Hunter.Rest.Controllers
                 return BadRequest("The external login is already associated with an account.");
             }
 
-            IdentityResult result = await _userManager.AddLoginAsync(User.Identity.GetUserId<int>(),
+            IdentityResult result = await UserManager.AddLoginAsync(User.Identity.GetUserId<int>(),
                 new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey));
 
             if (!result.Succeeded)
@@ -155,11 +165,11 @@ namespace Hunter.Rest.Controllers
 
             if (model.LoginProvider == LocalLoginProvider)
             {
-                result = await _userManager.RemovePasswordAsync(User.Identity.GetUserId<int>());
+                result = await UserManager.RemovePasswordAsync(User.Identity.GetUserId<int>());
             }
             else
             {
-                result = await _userManager.RemoveLoginAsync(User.Identity.GetUserId<int>(),
+                result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId<int>(),
                     new UserLoginInfo(model.LoginProvider, model.ProviderKey));
             }
 
@@ -201,7 +211,7 @@ namespace Hunter.Rest.Controllers
                 return new ChallengeResult(provider, this);
             }
 
-            User user = await _userManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
+            User user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
                 externalLogin.ProviderKey));
 
             bool hasRegistered = user != null;
@@ -210,9 +220,9 @@ namespace Hunter.Rest.Controllers
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
-                ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(_userManager,
+                ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
                    OAuthDefaults.AuthenticationType);
-                ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(_userManager,
+                ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
                 AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
@@ -281,7 +291,7 @@ namespace Hunter.Rest.Controllers
 
             var user = new User() { UserName = model.Email, State = model.State, RoleId = model.RoleId };
 
-            IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
             {
@@ -310,13 +320,13 @@ namespace Hunter.Rest.Controllers
 
             var user = new User() { UserName = model.Email };
 
-            IdentityResult result = await _userManager.CreateAsync(user);
+            IdentityResult result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
             }
 
-            result = await _userManager.AddLoginAsync(user.Id, info.Login);
+            result = await UserManager.AddLoginAsync(user.Id, info.Login);
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -326,9 +336,9 @@ namespace Hunter.Rest.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && _userManager != null)
+            if (disposing && UserManager != null)
             {
-                _userManager.Dispose();
+                UserManager.Dispose();
             }
 
             base.Dispose(disposing);
