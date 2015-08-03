@@ -30,11 +30,8 @@ namespace Hunter.Rest
             ConfigureAuth(app);
         }
 
-
-
         public static StandardKernel CreateKernel()
         {
-
             var kernel = new StandardKernel();
             kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
             kernel.Load(Assembly.GetExecutingAssembly());
@@ -59,15 +56,11 @@ namespace Hunter.Rest
             kernel.Bind<IVacancyRepository>().To<VacancyRepository>();
             #endregion
 
-
-
             #region Services
             kernel.Bind<IUserService>().To<UserService>();
 
 
             #endregion
-
-
 
             return kernel;
         }
