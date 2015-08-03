@@ -26,25 +26,44 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("All")]
-        public IEnumerable<Candidate> Get()
+        [Route("")]
+        public HttpResponseMessage Get()
         {
-            return _candidateService.GetAll();
+            try
+            {
+                var data = _candidateService.GetAllInfo();
+                return Request.CreateResponse(HttpStatusCode.OK, data);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
+            }
+            
         }
 
         [HttpGet]
         [Route("{id:int}")]
-        public Candidate Get(int id)
+        public HttpResponseMessage Get(int id)
         {
-            var candidate = _candidateService.Get(id);
-            if (candidate == null)
+            try
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                var data = _candidateService.GetInfo(id);
+                
+                if (data == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
+
+                return Request.CreateResponse(HttpStatusCode.OK, data);
             }
-            return candidate;
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
+            }
         }
 
         [HttpPost]
+        [Route("")]
         public HttpResponseMessage Post(Candidate candidate)
         {
             if (ModelState.IsValid)
@@ -68,10 +87,10 @@ namespace Hunter.Rest.Controllers
                 {
                     _candidateService.Update(candidate);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
 
-                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                    return Request.CreateResponse(HttpStatusCode.NotFound, e.Message);
                 }
 
                 return Request.CreateResponse(HttpStatusCode.OK);

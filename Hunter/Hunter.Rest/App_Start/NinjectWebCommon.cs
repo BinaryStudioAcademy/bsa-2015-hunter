@@ -58,8 +58,8 @@ namespace Hunter.Rest
                 kernel.Bind<ApplicationUserManager>().ToSelf().InRequestScope();
 
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-                kernel.Bind<IDatabaseFactory>().To<DatabaseFactory>();
-                kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+                kernel.Bind<IDatabaseFactory>().To<DatabaseFactory>().InRequestScope();
+                kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
 
 
                 kernel.Bind<IUserStore<User, int>>().To<HunterUserStore>();
