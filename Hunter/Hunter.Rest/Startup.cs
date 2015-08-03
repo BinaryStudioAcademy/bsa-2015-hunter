@@ -17,7 +17,11 @@ using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Interface.Pattern.Classes;
 using Hunter.DataAccess.Interface.Repositories.Classes;
 using Hunter.Services;
+using Hunter.Services.Concrete;
+using Hunter.Services.Interfaces;
+using Microsoft.Owin.Logging;
 using Ninject.Web.Common;
+using Hunter.Common.Concrete;
 
 [assembly: OwinStartup(typeof(Hunter.Rest.Startup))]
 
@@ -40,8 +44,11 @@ namespace Hunter.Rest
             kernel.Load(Assembly.GetExecutingAssembly());
             kernel.Bind<IUserStore<User, int>>().To<HunterUserStore>();
 
-            kernel.Bind<IDatabaseFactory>().To<DatabaseFactory>().InSingletonScope();
-            kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InSingletonScope();
+            //kernel.Bind<IDatabaseFactory>().To<DatabaseFactory>().InSingletonScope();
+            //kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InSingletonScope();
+
+            kernel.Bind<IDatabaseFactory>().To<DatabaseFactory>().InRequestScope();
+            kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
 
             #region Repositories
             kernel.Bind<IActivityRepository>().To<ActivityRepository>();
@@ -59,15 +66,13 @@ namespace Hunter.Rest
             kernel.Bind<IVacancyRepository>().To<VacancyRepository>();
             #endregion
 
-
-
             #region Services
             kernel.Bind<IUserService>().To<UserService>();
-
+            kernel.Bind<IPoolService>().To<PoolService>();
 
             #endregion
 
-
+            kernel.Bind<Common.Interfaces.ILogger>().To<Logger>();
 
             return kernel;
         }
