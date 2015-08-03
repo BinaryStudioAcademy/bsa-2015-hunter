@@ -58,3 +58,13 @@ System.InvalidOperationException: Attaching an entity of type 'Hunter.DataAccess
    в System.Data.Entity.DbSet`1.Attach(TEntity entity)
    в Hunter.DataAccess.Interface.Repository`1.Update(T entity) в d:\projects\bsa-2015-hunter\Hunter\Hunter.DataAccess.Interface\Pattern\Classes\Repository.cs:строка 75
    в Hunter.Services.Concrete.PoolService.UpdatePool(Pool pool) в d:\projects\bsa-2015-hunter\Hunter\Hunter.Services\Concrete\PoolService.cs:строка 71
+2015-08-03 16:30:40,468 [5] ERROR Hunter [(null)] - Attaching an entity of type 'Hunter.DataAccess.Db.Pool' failed because another entity of the same type already has the same primary key value. This can happen when using the 'Attach' method or setting the state of an entity to 'Unchanged' or 'Modified' if any entities in the graph have conflicting key values. This may be because some entities are new and have not yet received database-generated key values. In this case use the 'Add' method or the 'Added' entity state to track the graph and then set the state of non-new entities to 'Unchanged' or 'Modified' as appropriate.
+System.InvalidOperationException: Attaching an entity of type 'Hunter.DataAccess.Db.Pool' failed because another entity of the same type already has the same primary key value. This can happen when using the 'Attach' method or setting the state of an entity to 'Unchanged' or 'Modified' if any entities in the graph have conflicting key values. This may be because some entities are new and have not yet received database-generated key values. In this case use the 'Add' method or the 'Added' entity state to track the graph and then set the state of non-new entities to 'Unchanged' or 'Modified' as appropriate.
+   в System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd(Boolean doAttach, String entitySetName, IEntityWrapper wrappedEntity, EntityEntry existingEntry, EntitySet& entitySet, Boolean& isNoOperation)
+   в System.Data.Entity.Core.Objects.ObjectContext.AttachTo(String entitySetName, Object entity)
+   в System.Data.Entity.Internal.Linq.InternalSet`1.<>c__DisplayClassa.<Attach>b__9()
+   в System.Data.Entity.Internal.Linq.InternalSet`1.ActOnSet(Action action, EntityState newState, Object entity, String methodName)
+   в System.Data.Entity.Internal.Linq.InternalSet`1.Attach(Object entity)
+   в System.Data.Entity.DbSet`1.Attach(TEntity entity)
+   в Hunter.DataAccess.Interface.Repository`1.Update(T entity) в d:\projects\bsa-2015-hunter\Hunter\Hunter.DataAccess.Interface\Pattern\Classes\Repository.cs:строка 75
+   в Hunter.Services.Concrete.PoolService.UpdatePool(Pool pool) в d:\projects\bsa-2015-hunter\Hunter\Hunter.Services\Concrete\PoolService.cs:строка 71

@@ -14,5 +14,6 @@ namespace Hunter.Services.Interfaces
         void CreatePool(Pool pool);
         void UpdatePool(Pool pool);
         void DeletePool(Pool pool);
+        bool IsPoolExists(string name);
     }
 }

@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Mvc;
 using Hunter.DataAccess.Db;
+using Hunter.Rest.DtoModels.Extentions;
+using Hunter.Rest.DtoModels.Models;
 using Hunter.Services.Interfaces;
 
 
@@ -21,39 +23,51 @@ namespace Hunter.Rest.Controllers
         }
 
         // GET: api/Pool
-        public IEnumerable<Pool> Get()
+        public IEnumerable<PoolViewModel> Get()
         {
-            return _poolService.GetAllPools();
+            var pools = _poolService.GetAllPools();
+
+            if (pools == null)
+            {
+                return null;
+            }
+
+            return pools.ToPoolViewModel();
         }
 
         // GET: api/Pool/5
-        public Pool Get(int id)
+        public PoolViewModel Get(int id)
         {
             var pool = _poolService.GetPoolById(id);
 
             if (pool == null)
             {
-                return new Pool();
+                return null;
             }
-            return pool;
+            return pool.ToPoolViewModel();
         }
 
         // POST: api/Pool
-        public void Post(Pool pool)
+        public void Post(PoolViewModel poolView)
         {
-            _poolService.CreatePool(pool);
+            _poolService.CreatePool(poolView.ToPoolModel());
         }
 
         // PUT: api/Pool/5
-        public void Put(Pool pool)
+        public void Put(PoolViewModel poolView)
         {
-            _poolService.UpdatePool(pool);
+            _poolService.UpdatePool(poolView.ToPoolModel());
         }
 
         // DELETE: api/Pool/5
-        public void Delete(Pool pool)
+        public void Delete(PoolViewModel poolView)
         {
-            _poolService.DeletePool(pool);
+            _poolService.DeletePool(poolView.ToPoolModel());
         }
+
+        //public bool IsPoolExists(string name)
+        //{
+        //    return _poolService.IsPoolExists(name);
+        //}
     }
 }

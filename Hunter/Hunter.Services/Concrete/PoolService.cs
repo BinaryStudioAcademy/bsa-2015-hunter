@@ -90,5 +90,18 @@ namespace Hunter.Services.Concrete
                 _logger.Log(ex);
             }
         }
+
+        public bool IsPoolExists(string name)
+        {
+            try
+            {
+                return _poolRepository.All().Select(p => p.Name == name).Any();
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return false;
+            }
+        }
     }
 }

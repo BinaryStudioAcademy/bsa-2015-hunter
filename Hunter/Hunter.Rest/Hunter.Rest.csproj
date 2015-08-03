@@ -255,6 +255,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PoolController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DtoModels\Extentions\PoolExtentions.cs" />
+    <Compile Include="DtoModels\Models\PoolViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
