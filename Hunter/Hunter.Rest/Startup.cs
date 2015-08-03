@@ -40,8 +40,8 @@ namespace Hunter.Rest
             kernel.Load(Assembly.GetExecutingAssembly());
             kernel.Bind<IUserStore<User, int>>().To<HunterUserStore>();
 
-            kernel.Bind<IDatabaseFactory>().To<DatabaseFactory>().InSingletonScope();
-            kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InSingletonScope();
+            kernel.Bind<IDatabaseFactory>().To<DatabaseFactory>().InRequestScope();
+            kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
 
             #region Repositories
             kernel.Bind<IActivityRepository>().To<ActivityRepository>();
