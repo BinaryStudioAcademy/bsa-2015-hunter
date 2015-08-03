@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 
 namespace Hunter.DataAccess.Db
 {
     internal class HunterDbInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<HunterDbContext>
+    //internal class HunterDbInitializer : System.Data.Entity.CreateDatabaseIfNotExists<HunterDbContext>
+    //DropCreateDatabaseIfModelChanges<HunterDbContext>
     {
         protected override void Seed(HunterDbContext context)
         {
@@ -59,6 +62,20 @@ namespace Hunter.DataAccess.Db
             var candidates = new List<Candidate>() { candidate1, candidate2, candidate3, candidate4, candidate5, candidate6, candidate7, candidate8, candidate9, candidate10, candidate11, candidate12, candidate13, candidate14, candidate15 };
             candidates.ForEach(candidate => context.Candidate.Add(candidate));
             context.SaveChanges();
+            #endregion
+
+            #region POOLS
+
+            var pools = new List<Pool>
+            {
+                new Pool { Name = "JavaScript" },
+                new Pool { Name = ".Net" },
+                new Pool { Name = "PHP" }
+            };
+
+            pools.ForEach(pool => context.Pool.Add(pool));
+            context.SaveChanges();
+
             #endregion
         }
 

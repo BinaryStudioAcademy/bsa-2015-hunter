@@ -9,6 +9,7 @@ using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.OAuth;
 using Ninject.Web.Common.OwinHost;
 using Owin;
+using Owin.Security.Providers.LinkedIn;
 
 namespace Hunter.Rest
 {
@@ -52,23 +53,10 @@ namespace Hunter.Rest
             app.UseOAuthBearerTokens(OAuthOptions);
 
             // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
-
-            //app.UseTwitterAuthentication(
-            //    consumerKey: "",
-            //    consumerSecret: "");
-
-            //app.UseFacebookAuthentication(
-            //    appId: "",
-            //    appSecret: "");
-
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            //app.UseLinkedInAuthentication(
+            //    "<YOUR API KEY>", 
+            //    "<YOUR SECRET KEY>"
+            //    );
         }
 
 
