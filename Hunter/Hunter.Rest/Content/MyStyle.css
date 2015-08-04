@@ -4,6 +4,14 @@
 	padding:0;
 }
 
+.margin-bottom{
+	margin-bottom: 15px;
+}
+
+li{
+	list-style-type: none;
+}
+
 .top-header{
 	margin:0 auto;
 	width:80%;
