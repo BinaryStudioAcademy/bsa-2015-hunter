@@ -23,43 +23,39 @@ namespace Hunter.Rest.Controllers
         }
 
         // GET: api/Pool
+        [System.Web.Mvc.HttpGet]
         public IEnumerable<PoolViewModel> Get()
         {
             var pools = _poolService.GetAllPools();
 
-            if (pools == null)
-            {
-                return null;
-            }
-
-            return pools.ToPoolViewModel();
+            return pools == null ? null : pools.ToPoolViewModel();
         }
 
         // GET: api/Pool/5
+        [System.Web.Mvc.HttpGet]
         public PoolViewModel Get(int id)
         {
             var pool = _poolService.GetPoolById(id);
 
-            if (pool == null)
-            {
-                return null;
-            }
-            return pool.ToPoolViewModel();
+            return pool == null ? null : pool.ToPoolViewModel();
         }
 
         // POST: api/Pool
+        [System.Web.Mvc.HttpPost]
         public void Post(PoolViewModel poolView)
         {
             _poolService.CreatePool(poolView.ToPoolModel());
         }
 
         // PUT: api/Pool/5
+        [System.Web.Mvc.HttpPut]
         public void Put(PoolViewModel poolView)
         {
             _poolService.UpdatePool(poolView.ToPoolModel());
         }
 
         // DELETE: api/Pool/5
+        [System.Web.Mvc.HttpDelete]
         public void Delete(PoolViewModel poolView)
         {
             _poolService.DeletePool(poolView.ToPoolModel());

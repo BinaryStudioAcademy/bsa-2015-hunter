@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hunter.Services", "Hunter.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hunter.Common", "Hunter.Common\Hunter.Common.csproj", "{E541870A-0B8F-4699-AB3C-D34DFE630586}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hunter.Tests", "Hunter.Tests\Hunter.Tests.csproj", "{2EFB30C3-BEC1-4B3C-8F2C-AD3EA56AF9D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{E541870A-0B8F-4699-AB3C-D34DFE630586}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E541870A-0B8F-4699-AB3C-D34DFE630586}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E541870A-0B8F-4699-AB3C-D34DFE630586}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EFB30C3-BEC1-4B3C-8F2C-AD3EA56AF9D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EFB30C3-BEC1-4B3C-8F2C-AD3EA56AF9D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EFB30C3-BEC1-4B3C-8F2C-AD3EA56AF9D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EFB30C3-BEC1-4B3C-8F2C-AD3EA56AF9D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
