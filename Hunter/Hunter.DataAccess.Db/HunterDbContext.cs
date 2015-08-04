@@ -8,6 +8,7 @@ namespace Hunter.DataAccess.Db
     public partial class HunterDbContext : DbContext
     {
         public HunterDbContext()
+            //: base("Hunter")
             : base("name=HunterDb")
         {
             Database.SetInitializer(new HunterDbInitializer());
@@ -105,4 +106,3 @@ namespace Hunter.DataAccess.Db
         }
     }
 }
-
