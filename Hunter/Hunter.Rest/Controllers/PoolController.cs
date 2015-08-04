@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
-using System.Web.Mvc;
-using Hunter.DataAccess.Db;
-using Hunter.Rest.DtoModels.Extentions;
-using Hunter.Rest.DtoModels.Models;
+using Hunter.Services.DtoModels.Models;
 using Hunter.Services.Interfaces;
-
 
 namespace Hunter.Rest.Controllers
 {
@@ -26,44 +18,62 @@ namespace Hunter.Rest.Controllers
         [System.Web.Mvc.HttpGet]
         public IEnumerable<PoolViewModel> Get()
         {
-            var pools = _poolService.GetAllPools();
-
-            return pools == null ? null : pools.ToPoolViewModel();
+            return _poolService.GetAllPools();
         }
 
         // GET: api/Pool/5
         [System.Web.Mvc.HttpGet]
         public PoolViewModel Get(int id)
         {
-            var pool = _poolService.GetPoolById(id);
-
-            return pool == null ? null : pool.ToPoolViewModel();
+            return _poolService.GetPoolById(id);
         }
 
         // POST: api/Pool
         [System.Web.Mvc.HttpPost]
-        public void Post(PoolViewModel poolView)
+        public IHttpActionResult Post([FromBody] PoolViewModel poolViewModel)
         {
-            _poolService.CreatePool(poolView.ToPoolModel());
+            if (_poolService.IsPoolNameExist(poolViewModel.Name))
+            {
+                return BadRequest("Pool name alreafy exists!");
+            }
+
+            poolViewModel = _poolService.CreatePool(poolViewModel);
+
+            if (poolViewModel != null)
+            {
+                return Created(Request.RequestUri + poolViewModel.Id.ToString(), poolViewModel);
+            }
+
+            return InternalServerError();
         }
 
         // PUT: api/Pool/5
         [System.Web.Mvc.HttpPut]
-        public void Put(PoolViewModel poolView)
+        public IHttpActionResult Put(int id, [FromBody] PoolViewModel poolViewModel)
         {
-            _poolService.UpdatePool(poolView.ToPoolModel());
+            if (!_poolService.IsPoolExist(id))
+            {
+                return NotFound();
+            }
+            
+            poolViewModel.Id = id;
+            _poolService.UpdatePool(poolViewModel);
+            
+            return Ok(poolViewModel);
         }
 
         // DELETE: api/Pool/5
         [System.Web.Mvc.HttpDelete]
-        public void Delete(PoolViewModel poolView)
+        public IHttpActionResult Delete(int id)
         {
-            _poolService.DeletePool(poolView.ToPoolModel());
-        }
+            if (!_poolService.IsPoolExist(id))
+            {
+                return NotFound();
+            }
 
-        //public bool IsPoolExists(string name)
-        //{
-        //    return _poolService.IsPoolExists(name);
-        //}
+            _poolService.DeletePool(id);
+
+            return Ok(id);
+        }
     }
 }

@@ -55,9 +55,10 @@ namespace Hunter.DataAccess.Interface
             return _dataSet.FirstOrDefault(predicate);
         }
 
-        public void Add(T entity)
+        public T Add(T entity)
         {
-            _dataSet.Add(entity);
+            entity = _dataSet.Add(entity);
+            return entity;
         }
 
         public void Delete(T entity)

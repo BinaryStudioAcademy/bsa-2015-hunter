@@ -8,6 +8,7 @@ using Hunter.Services.Concrete;
 using Hunter.Services.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
+using Hunter.Services.DtoModels.Models;
 
 namespace Hunter.Tests.Services
 {
@@ -33,7 +34,8 @@ namespace Hunter.Tests.Services
             _repository.All().Returns(new List<Pool>()
             {
                 new Pool(){Id = 1, Name = "Pool name #1"},
-                new Pool(){Id = 2, Name = "Pool name #2"}
+                new Pool(){Id = 2, Name = "Pool name #2"},
+                new Pool(){Id = 3, Name = "Pool name #3"}
             });
         }
 
@@ -58,7 +60,7 @@ namespace Hunter.Tests.Services
             var results = _service.GetAllPools();
 
             // Assert
-            Assert.AreEqual(2, results.Count());
+            Assert.AreEqual(3, results.Count());
         }
 
         [Test]
@@ -73,7 +75,7 @@ namespace Hunter.Tests.Services
             _repository.When(r => r.Add(Arg.Any<Pool>()))
                 .Do(r => { throw new Exception(); });
 
-            _service.CreatePool(new Pool() { Id = 1, Name = "Pool name" });
+            _service.CreatePool(new PoolViewModel() { Id = 1, Name = "Pool name" });
 
             // Assert
             Assert.AreEqual(1, counter);
@@ -90,7 +92,7 @@ namespace Hunter.Tests.Services
             _repository.When(r => r.Update(Arg.Any<Pool>()))
                 .Do(r => counter++);
 
-            _service.UpdatePool(new Pool() { Id = 1, Name = "Pool name" });
+            _service.UpdatePool(new PoolViewModel() { Id = 1, Name = "Pool name" });
 
             // Assert
             Assert.AreEqual(1, counter);
@@ -107,11 +109,36 @@ namespace Hunter.Tests.Services
             _repository.When(r => r.Delete(Arg.Any<Pool>()))
                 .Do(r => counter++);
 
-            _service.DeletePool(new Pool() { Id = 1, Name = "Pool name" });
+            _service.DeletePool(1);
 
             // Assert
             Assert.AreEqual(1, counter);
             Assert.DoesNotThrow(() => _repository.Delete(Arg.Any<Pool>()));
         }
+
+        [Test]
+        public void Should_return_true_When_pool_name_exists()
+        {
+            // Arrange
+
+            // Act
+            var result = _service.IsPoolNameExist("Pool name #1");
+            
+            // Assert
+            Assert.True(result);
+        }
+
+        [Test]
+        public void Should_return_true_When_pool_exists()
+        {
+            // Arrange
+
+            // Act
+            var result = _service.IsPoolExist(1);
+
+            // Assert
+            Assert.True(result);
+        }
+
     }
 }

@@ -11,7 +11,7 @@ namespace Hunter.DataAccess.Interface
         IEnumerable<T> All();
         T Get(Int32 id);
         T Get(Func<T, bool> predicate);
-        void Add(T entity);
+        T Add(T entity);
         void Update(T entity);
         void Delete(T entity);
         //void SaveChanges();

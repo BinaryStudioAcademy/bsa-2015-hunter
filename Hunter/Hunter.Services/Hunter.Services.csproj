@@ -39,6 +39,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,6 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Concrete\PoolService.cs" />
+    <Compile Include="DtoModels\Extentions\HunterValidation.cs" />
+    <Compile Include="DtoModels\Extentions\PoolExtentions.cs" />
+    <Compile Include="DtoModels\Models\PoolViewModel.cs" />
     <Compile Include="Interfaces\IPoolService.cs" />
     <Compile Include="IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hunter.DataAccess.Db;
+using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Interface;
+using Hunter.Services.DtoModels.Extentions;
+using Hunter.Services.DtoModels.Models;
 using Hunter.Services.Interfaces;
 
 namespace Hunter.Services.Concrete
@@ -13,76 +13,62 @@ namespace Hunter.Services.Concrete
     {
         private readonly IPoolRepository _poolRepository;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly Common.Interfaces.ILogger _logger;
+        private readonly ILogger _logger;
 
-        public PoolService(IPoolRepository poolRepository, IUnitOfWork unitOfWork, Common.Interfaces.ILogger logger)
+        public PoolService(IPoolRepository poolRepository, IUnitOfWork unitOfWork, ILogger logger)
         {
             _poolRepository = poolRepository;
             _unitOfWork = unitOfWork;
             _logger = logger;
         }
 
-        public IEnumerable<Pool> GetAllPools()
+        public IEnumerable<PoolViewModel> GetAllPools()
         {
             try
             {
-                return _poolRepository.All();
+                return _poolRepository.All().ToPoolViewModel();
             }
             catch (Exception ex)
             {
                 _logger.Log(ex);
-                return new Pool[0];
+                return new PoolViewModel[0];
             }
         }
 
-        public Pool GetPoolById(int id)
+        public PoolViewModel GetPoolById(int id)
         {
             try
             {
-                return _poolRepository.Get(id);
+                return _poolRepository.Get(id).ToPoolViewModel();
 
             }
             catch (Exception ex)
             {
-                return new Pool();
+                _logger.Log(ex);
+                return new PoolViewModel();
             }
         }
 
-        public void CreatePool(Pool pool)
+        public PoolViewModel CreatePool(PoolViewModel poolViewModel)
         {
             try
             {
-                _poolRepository.Add(pool);
+                var pool = _poolRepository.Add(poolViewModel.ToPoolModel());
                 _unitOfWork.SaveChanges();
+                return pool.ToPoolViewModel();
             }
             catch (Exception ex)
             {
                 _logger.Log(ex);
-            }
-
-        }
-
-        public void UpdatePool(Pool pool)
-        {
-            try
-            {
-                //var updatePool = _poolRepository.Get(pool.Id);
-
-                _poolRepository.Update(pool);
-                _unitOfWork.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                _logger.Log(ex);
+                return null;
             }
         }
 
-        public void DeletePool(Pool pool)
+        public void UpdatePool(PoolViewModel poolViewModel)
         {
             try
             {
-                var deletePool = _poolRepository.Get(pool.Id);
-                _poolRepository.Delete(deletePool);
+                _poolRepository.Update(poolViewModel.ToPoolModel());
                 _unitOfWork.SaveChanges();
             }
             catch (Exception ex)
@@ -91,11 +77,37 @@ namespace Hunter.Services.Concrete
             }
         }
 
-        public bool IsPoolExists(string name)
+        public void DeletePool(int id)
         {
             try
             {
-                return _poolRepository.All().Select(p => p.Name == name).Any();
+                _poolRepository.Delete(_poolRepository.Get(id));
+                _unitOfWork.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+            }
+        }
+
+        public bool IsPoolNameExist(string name)
+        {
+            try
+            {
+                return _poolRepository.All().Any(p => string.Equals(p.Name, name, StringComparison.CurrentCultureIgnoreCase));
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return false;
+            }
+        }
+
+        public bool IsPoolExist(int id)
+        {
+            try
+            {
+                return _poolRepository.All().Any(p => p.Id == id);
             }
             catch (Exception ex)
             {
