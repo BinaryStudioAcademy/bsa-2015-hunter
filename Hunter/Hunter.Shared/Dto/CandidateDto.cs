@@ -40,5 +40,11 @@ namespace Hunter.Shared
         public List<Card> Cards { get; set; }
 
         public List<Pool> Pools { get; set; }
+
+        public int Origin { get; set; }
+
+        public int Resolution { get; set; }
+
+        public bool ShortListed { get; set; }
     }
 }

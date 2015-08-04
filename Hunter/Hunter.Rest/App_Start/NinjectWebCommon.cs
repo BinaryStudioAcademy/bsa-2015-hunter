@@ -57,15 +57,11 @@
 //                kernel.Bind<IUserStore<User, int>>().To<HunterUserStore>();
 //                kernel.Bind<ApplicationUserManager>().ToSelf().InRequestScope();
 
-<<<<<<< HEAD
-                kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-                kernel.Bind<IDatabaseFactory>().To<DatabaseFactory>().InRequestScope();
-                kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
-=======
+
 //                kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 //                kernel.Bind<IDatabaseFactory>().To<DatabaseFactory>().InSingletonScope();
 //                kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InSingletonScope();
->>>>>>> origin/develop
+
 
                 
 
@@ -85,9 +81,9 @@
 //                kernel.Bind<IVacancyRepository>().To<VacancyRepository>();
 //                #endregion
                 
-
-                kernel.Bind<ICandidateRepository>().To<CandidateRepository>();
-                kernel.Bind<ICandidateService>().To<CandidateService>();
+//
+//                kernel.Bind<ICandidateRepository>().To<CandidateRepository>();
+//                kernel.Bind<ICandidateService>().To<CandidateService>();
 
 //                #region Services
 //                kernel.Bind<IUserService>().To<UserService>();

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Db;
 using Hunter.DataAccess.Interface;
 using Hunter.Shared;
@@ -10,54 +12,110 @@ namespace Hunter.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICandidateRepository _candidateRepository;
+        private readonly ILogger _logger ;
 
-        public CandidateService(IUnitOfWork unitOfWork, ICandidateRepository candidateRepository)
+        public CandidateService(IUnitOfWork unitOfWork, ICandidateRepository candidateRepository, ILogger logger)
         {
             _unitOfWork = unitOfWork;
             _candidateRepository = candidateRepository;
+            _logger = logger;
         }
 
         public IEnumerable<Candidate> GetAll()
         {
-            return _candidateRepository.All();
+            try
+            {
+                return _candidateRepository.All();
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return null;
+            }
         }
 
         public IEnumerable<CandidateDto> GetAllInfo()
-        {
-            return _candidateRepository.All().Select(x=>x.ToCandidateDto());
+        { 
+            try
+            {
+                return _candidateRepository.All().Select(x => x.ToCandidateDto());
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return null;
+            }
         }
 
         public Candidate Get(int id)
         {
-            return _candidateRepository.Get(id);
+            try
+            {
+                return _candidateRepository.Get(id);
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return null;
+            }
         }
 
         public CandidateDto GetInfo(int id)
         {
-            var candidate = _candidateRepository.Get(id);
-            if (candidate == null)
+            try
             {
+                var candidate = _candidateRepository.Get(id);
+                if (candidate == null)
+                {
+                    return null;
+                }
+                return candidate.ToCandidateDto();
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
                 return null;
             }
-            return candidate.ToCandidateDto();
+
         }
 
         public void Add(Candidate candidate)
         {
-            _candidateRepository.Add(candidate);
-            _unitOfWork.SaveChanges();
+            try
+            {
+                _candidateRepository.Add(candidate);
+                _unitOfWork.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+            }
         }
 
         public void Delete(Candidate candidate)
         {
-            _candidateRepository.Delete(candidate);
-            _unitOfWork.SaveChanges();
+            try
+            {
+                _candidateRepository.Delete(candidate);
+                _unitOfWork.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+            }
         }
 
         public void Update(Candidate candidate)
         {
-            _candidateRepository.Update(candidate);
-            _unitOfWork.SaveChanges();
+            try
+            {
+                _candidateRepository.Update(candidate);
+                _unitOfWork.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+            }
         }
     }
 }

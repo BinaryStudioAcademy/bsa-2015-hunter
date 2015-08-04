@@ -48,15 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="Classes\CandidateService.cs" />
     <Compile Include="Interfaces\ICandidateService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
-=======
     <Compile Include="Concrete\PoolService.cs" />
     <Compile Include="Interfaces\IPoolService.cs" />
-    <Compile Include="IUserService.cs" />
->>>>>>> origin/develop
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\UserService.cs" />
   </ItemGroup>
@@ -90,7 +86,6 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
-
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

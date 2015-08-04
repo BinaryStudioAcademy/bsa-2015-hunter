@@ -64,7 +64,7 @@ namespace Hunter.Rest
             #region Services
             kernel.Bind<IUserService>().To<UserService>();
             kernel.Bind<IPoolService>().To<PoolService>();
-
+            kernel.Bind<ICandidateService>().To<CandidateService>();
             #endregion
 
             kernel.Bind<Common.Interfaces.ILogger>().To<Logger>();

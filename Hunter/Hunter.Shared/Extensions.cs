@@ -28,9 +28,39 @@ namespace Hunter.Shared
                 AddedByProfileId = candidate.AddedByProfileId,
                 Cards = candidate.Card.ToList(),
                 Pools = candidate.Pool.ToList(),
-                Photo = candidate.Photo
+                Photo = candidate.Photo,
+                Resolution = candidate.Resolution,
+                ShortListed = candidate.Shortlisted,
+                Origin = candidate.Origin
             };
             return dto;
+        }
+
+        static public Candidate ToCandidateModel(this CandidateDto dto)
+        {
+            var model = new Candidate()
+            {
+                Id = dto.Id,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Email = dto.Email,
+                CurrentPosition = dto.CurrentPosition,
+                Company = dto.Company,
+                Location = dto.Location,
+                Skype = dto.Skype,
+                Phone = dto.Phone,
+                Salary = dto.Salary,
+                YearsOfExperience = dto.YearsOfExperience,
+                ResumeId = dto.ResumeId,
+                AddedByProfileId = dto.AddedByProfileId,
+                Card = dto.Cards.ToList(),
+                Pool = dto.Pools.ToList(),
+                Photo = dto.Photo,
+                Resolution = dto.Resolution,
+                Shortlisted = dto.ShortListed,
+                Origin = dto.Origin
+            };
+            return model;
         }
     }
 }
