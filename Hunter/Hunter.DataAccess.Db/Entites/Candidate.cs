@@ -12,6 +12,9 @@ namespace Hunter.DataAccess.Db
         {
             Card = new HashSet<Card>();
             Pool = new HashSet<Pool>();
+            Origin = (int)OriginEnum.Sourced;
+            Resoultion = (int)ResoultionEnum.None;
+            Shortlisted = false;
         }
 
         public int Id { get; set; }
@@ -56,6 +59,12 @@ namespace Hunter.DataAccess.Db
         public virtual Resume Resume { get; set; }
 
         public virtual UserProfile UserProfile { get; set; }
+
+        public int Origin { get; set; }
+
+        public int Resoultion { get; set; }
+
+        public bool Shortlisted { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Card> Card { get; set; }

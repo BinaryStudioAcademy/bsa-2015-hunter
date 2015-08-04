@@ -17,7 +17,11 @@ using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Interface.Pattern.Classes;
 using Hunter.DataAccess.Interface.Repositories.Classes;
 using Hunter.Services;
+using Hunter.Services.Concrete;
+using Hunter.Services.Interfaces;
+using Microsoft.Owin.Logging;
 using Ninject.Web.Common;
+using Hunter.Common.Concrete;
 
 [assembly: OwinStartup(typeof(Hunter.Rest.Startup))]
 
@@ -31,11 +35,8 @@ namespace Hunter.Rest
             ConfigureOAuthToken(app);
         }
 
-
-
         public static StandardKernel CreateKernel()
         {
-
             var kernel = new StandardKernel();
             kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
             kernel.Load(Assembly.GetExecutingAssembly());
@@ -60,15 +61,13 @@ namespace Hunter.Rest
             kernel.Bind<IVacancyRepository>().To<VacancyRepository>();
             #endregion
 
-
-
             #region Services
             kernel.Bind<IUserService>().To<UserService>();
-
+            kernel.Bind<IPoolService>().To<PoolService>();
 
             #endregion
 
-
+            kernel.Bind<Common.Interfaces.ILogger>().To<Logger>();
 
             return kernel;
         }
