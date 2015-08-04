@@ -28,6 +28,7 @@ namespace Hunter.Rest
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            ConfigureOAuthToken(app);
         }
 
 
