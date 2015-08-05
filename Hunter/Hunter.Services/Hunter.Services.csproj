@@ -49,18 +49,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\ActivityDto.cs" />
+    <Compile Include="Dto\VacancyDto.cs" />
     <Compile Include="Extensions\HunterValidation.cs" />
+    <Compile Include="Extensions\ActivityExtension.cs" />
     <Compile Include="Extensions\PoolExtentions.cs" />
     <Compile Include="Dto\PoolViewModel.cs" />
     <Compile Include="Dto\CandidateDto.cs" />
     <Compile Include="Extensions\CandidateExtensions.cs" />
+    <Compile Include="Extensions\VacancyExtensions.cs" />
+    <Compile Include="Services\ActivityService.cs" />
     <Compile Include="Services\CandidateService.cs" />
+    <Compile Include="Services\Interfaces\IActivityService.cs" />
     <Compile Include="Services\Interfaces\ICandidateService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Interfaces\IPoolService.cs" />
     <Compile Include="Services\Interfaces\IUserService.cs" />
+    <Compile Include="Services\Interfaces\IVacancyService.cs" />
     <Compile Include="Services\PoolService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="Services\VacancyService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hunter.Common\Hunter.Common.csproj">

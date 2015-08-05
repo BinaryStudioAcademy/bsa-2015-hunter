@@ -78,6 +78,10 @@
     <Compile Include="Migrations\201508032045121_AddOriginResoultionShortlistedFieldsInCandidateTable.Designer.cs">
       <DependentUpon>201508032045121_AddOriginResoultionShortlistedFieldsInCandidateTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508051046015_ChangeNameOfFieldsInCandidates.cs" />
+    <Compile Include="Migrations\201508051046015_ChangeNameOfFieldsInCandidates.Designer.cs">
+      <DependentUpon>201508051046015_ChangeNameOfFieldsInCandidates.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entites\Resume.cs" />
@@ -98,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508032045121_AddOriginResoultionShortlistedFieldsInCandidateTable.resx">
       <DependentUpon>201508032045121_AddOriginResoultionShortlistedFieldsInCandidateTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508051046015_ChangeNameOfFieldsInCandidates.resx">
+      <DependentUpon>201508051046015_ChangeNameOfFieldsInCandidates.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
