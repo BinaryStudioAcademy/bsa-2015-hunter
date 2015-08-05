@@ -1,8 +1,7 @@
 ﻿using System;
-using Hunter.DataAccess.Db;
-using Hunter.Services.Dto;
+using Hunter.DataAccess.Entities;
 
-namespace Hunter.Services.Infrastructure
+namespace Hunter.Services
 {
     public static class ActivityExtension
     {

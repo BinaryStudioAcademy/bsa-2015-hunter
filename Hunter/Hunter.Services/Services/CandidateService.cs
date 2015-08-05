@@ -4,6 +4,7 @@ using System.Linq;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Db;
 using Hunter.DataAccess.Interface;
+using Hunter.DataAccess.Entities;
 
 namespace Hunter.Services
 {

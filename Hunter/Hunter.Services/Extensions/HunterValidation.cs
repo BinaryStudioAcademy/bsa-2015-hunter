@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Hunter.Services.Services.Interfaces;
 
-namespace Hunter.Services.Extensions
+namespace Hunter.Services
 {
     public class HunterValidation
     {

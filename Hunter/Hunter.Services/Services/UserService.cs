@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Hunter.DataAccess.Db;
 using Hunter.DataAccess.Interface;
-using Hunter.Services.Services.Interfaces;
+using Hunter.DataAccess.Entities;
 
-namespace Hunter.Services.Services
+namespace Hunter.Services
 {
     public class UserService : IUserService
     {

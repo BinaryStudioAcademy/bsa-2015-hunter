@@ -34,6 +34,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Hunter.DataAccess.Db">
+      <HintPath>..\Hunter.DataAccess.Db\bin\Debug\Hunter.DataAccess.Db.dll</HintPath>
+    </Reference>
+    <Reference Include="Hunter.DataAccess.Entities">
+      <HintPath>..\Hunter.DataAccess.Entities\bin\Debug\Hunter.DataAccess.Entities.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
       <Private>True</Private>
@@ -74,10 +80,6 @@
     <ProjectReference Include="..\Hunter.Common\Hunter.Common.csproj">
       <Project>{e541870a-0b8f-4699-ab3c-d34dfe630586}</Project>
       <Name>Hunter.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Hunter.DataAccess.Db\Hunter.DataAccess.Db.csproj">
-      <Project>{6293AEEB-7108-49A2-8300-4EA40D4222D0}</Project>
-      <Name>Hunter.DataAccess.Db</Name>
     </ProjectReference>
     <ProjectReference Include="..\Hunter.DataAccess.Interface\Hunter.DataAccess.Interface.csproj">
       <Project>{870a30fe-6780-4b1c-81f5-1eaf8bd8f50c}</Project>

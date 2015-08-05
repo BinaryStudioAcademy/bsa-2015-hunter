@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Hunter.DataAccess.Interface;
-using Hunter.Services.Dto;
-using Hunter.Services.Infrastructure;
 
 namespace Hunter.Services
 {

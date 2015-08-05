@@ -42,6 +42,12 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Hunter.DataAccess.Entities">
+      <HintPath>..\Hunter.DataAccess.Entities\bin\Debug\Hunter.DataAccess.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Hunter.DataAccess.Interface">
+      <HintPath>..\Hunter.DataAccess.Interface\bin\Debug\Hunter.DataAccess.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
       <Private>True</Private>
@@ -59,53 +65,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entites\Activity.cs" />
-    <Compile Include="Entites\Candidate.cs" />
-    <Compile Include="Entites\Card.cs" />
-    <Compile Include="Entites\Enums\OriginEnum.cs" />
-    <Compile Include="Entites\Enums\ResoultionEnum.cs" />
-    <Compile Include="Entites\Feedback.cs" />
-    <Compile Include="Entites\IEntity.cs" />
-    <Compile Include="Entites\Interview.cs" />
-    <Compile Include="HunterDbContext.cs" />
-    <Compile Include="Entites\Pool.cs" />
-    <Compile Include="HunterDbInitializer.cs" />
-    <Compile Include="Migrations\201508032033226_InitialCreate.cs" />
-    <Compile Include="Migrations\201508032033226_InitialCreate.Designer.cs">
-      <DependentUpon>201508032033226_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201508032045121_AddOriginResoultionShortlistedFieldsInCandidateTable.cs" />
-    <Compile Include="Migrations\201508032045121_AddOriginResoultionShortlistedFieldsInCandidateTable.Designer.cs">
-      <DependentUpon>201508032045121_AddOriginResoultionShortlistedFieldsInCandidateTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201508051046015_ChangeNameOfFieldsInCandidates.cs" />
-    <Compile Include="Migrations\201508051046015_ChangeNameOfFieldsInCandidates.Designer.cs">
-      <DependentUpon>201508051046015_ChangeNameOfFieldsInCandidates.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="PatternRepository\DatabaseFactory.cs" />
+    <Compile Include="PatternRepository\Disposable.cs" />
+    <Compile Include="PatternRepository\Repository.cs" />
+    <Compile Include="PatternRepository\UnitOfWork.cs" />
+    <Compile Include="PatternRepository\UnitOfWorkFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Entites\Resume.cs" />
-    <Compile Include="Entites\SpecialNote.cs" />
-    <Compile Include="Entites\Test.cs" />
-    <Compile Include="Entites\UserProfile.cs" />
-    <Compile Include="Entites\UserRole.cs" />
-    <Compile Include="Entites\User.cs" />
-    <Compile Include="Entites\Vacancy.cs" />
+    <Compile Include="Repositories\ActivityRepository.cs" />
+    <Compile Include="Repositories\CandidateRepository.cs" />
+    <Compile Include="Repositories\CardRepository.cs" />
+    <Compile Include="Repositories\FeedbackRepository.cs" />
+    <Compile Include="Repositories\InterviewRepository.cs" />
+    <Compile Include="Repositories\PoolRepository.cs" />
+    <Compile Include="Repositories\ResumeRepository.cs" />
+    <Compile Include="Repositories\SpecialNoteRepository.cs" />
+    <Compile Include="Repositories\TestRepository.cs" />
+    <Compile Include="Repositories\UserProfileRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\UserRoleRepository.cs" />
+    <Compile Include="Repositories\VacancyRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201508032033226_InitialCreate.resx">
-      <DependentUpon>201508032033226_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508032045121_AddOriginResoultionShortlistedFieldsInCandidateTable.resx">
-      <DependentUpon>201508032045121_AddOriginResoultionShortlistedFieldsInCandidateTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508051046015_ChangeNameOfFieldsInCandidates.resx">
-      <DependentUpon>201508051046015_ChangeNameOfFieldsInCandidates.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

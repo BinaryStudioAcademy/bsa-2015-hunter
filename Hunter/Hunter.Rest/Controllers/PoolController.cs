@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Hunter.Services;
+using System.Collections.Generic;
 using System.Web.Http;
-using Hunter.Services.Dto;
-using Hunter.Services.Services.Interfaces;
 
-namespace Hunter.Rest.Controllers
+namespace Hunter.Rest
 {
     public class PoolController : ApiController
     {
