@@ -13,7 +13,7 @@ namespace Hunter.DataAccess.Entities
             Card = new HashSet<Card>();
             Pool = new HashSet<Pool>();
             Origin = (int)OriginEnum.Sourced;
-            Resolution = (int)ResoultionEnum.None;
+            Resolution = (int)ResolutionEnum.None;
             Shortlisted = false;
         }
 
@@ -60,9 +60,9 @@ namespace Hunter.DataAccess.Entities
 
         public virtual UserProfile UserProfile { get; set; }
 
-        public int Origin { get; set; }
+        public OriginEnum Origin { get; set; }
 
-        public int Resolution { get; set; }
+        public ResolutionEnum Resolution { get; set; }
 
         public bool Shortlisted { get; set; }
 

@@ -58,7 +58,7 @@
     <Compile Include="Entites\Candidate.cs" />
     <Compile Include="Entites\Card.cs" />
     <Compile Include="Entites\Enums\OriginEnum.cs" />
-    <Compile Include="Entites\Enums\ResoultionEnum.cs" />
+    <Compile Include="Entites\Enums\ResolutionEnum.cs" />
     <Compile Include="Entites\Feedback.cs" />
     <Compile Include="Entites\IEntity.cs" />
     <Compile Include="Entites\Interview.cs" />

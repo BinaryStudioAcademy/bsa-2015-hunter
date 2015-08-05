@@ -30,9 +30,9 @@ namespace Hunter.Services
                 Cards = candidate.Card.ToList(),
                 Pools = candidate.Pool.ToList(),
                 Photo = candidate.Photo,
-                Resolution = candidate.Resolution,
+                Resolution = (int)candidate.Resolution,
                 ShortListed = candidate.Shortlisted,
-                Origin = candidate.Origin
+                Origin = (int)candidate.Origin
             };
             return dto;
         }
@@ -57,9 +57,9 @@ namespace Hunter.Services
                 Card = dto.Cards.ToList(),
                 Pool = dto.Pools.ToList(),
                 Photo = dto.Photo,
-                Resolution = dto.Resolution,
+                Resolution = (ResolutionEnum)dto.Resolution,
                 Shortlisted = dto.ShortListed,
-                Origin = dto.Origin
+                Origin = (OriginEnum)dto.Origin
             };
             return model;
         }
