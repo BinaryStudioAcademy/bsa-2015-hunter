@@ -3,7 +3,7 @@ using System.Linq;
 using Hunter.DataAccess.Db;
 using Hunter.Services.Dto;
 
-namespace Hunter.Services.Extentions
+namespace Hunter.Services.Extensions
 {
     public static class PoolExtentions
     {

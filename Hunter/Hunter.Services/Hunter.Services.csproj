@@ -50,8 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Services\PoolService.cs" />
-    <Compile Include="Extentions\HunterValidation.cs" />
-    <Compile Include="Extentions\PoolExtentions.cs" />
+    <Compile Include="Extensions\HunterValidation.cs" />
+    <Compile Include="Extensions\PoolExtentions.cs" />
     <Compile Include="Dto\PoolViewModel.cs" />
     <Compile Include="Services\Interfaces\IPoolService.cs" />
     <Compile Include="Services\Interfaces\IUserService.cs" />
