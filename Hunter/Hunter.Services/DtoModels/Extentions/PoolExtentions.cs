@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Hunter.DataAccess.Db;
-using Hunter.Rest.DtoModels.Models;
+using Hunter.Services.DtoModels.Models;
 
-namespace Hunter.Rest.DtoModels.Extentions
+namespace Hunter.Services.DtoModels.Extentions
 {
     public static class PoolExtentions
     {
