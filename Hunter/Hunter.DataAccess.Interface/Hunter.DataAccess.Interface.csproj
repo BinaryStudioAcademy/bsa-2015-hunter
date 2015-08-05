@@ -60,10 +60,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PatternRepository\IDatabaseFactory.cs" />
-    <Compile Include="PatternRepository\IRepository.cs" />
-    <Compile Include="PatternRepository\IUnitOfWork.cs" />
-    <Compile Include="PatternRepository\IUnitOfWorkFactory.cs" />
+    <Compile Include="Base\IDatabaseFactory.cs" />
+    <Compile Include="Base\IRepository.cs" />
+    <Compile Include="Base\IUnitOfWork.cs" />
+    <Compile Include="Base\IUnitOfWorkFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ICandidateRepository.cs" />
     <Compile Include="Repositories\IActivityRepository.cs" />

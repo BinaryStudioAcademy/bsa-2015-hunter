@@ -1,4 +1,4 @@
-﻿namespace Hunter.DataAccess.Interface
+﻿namespace Hunter.DataAccess.Interface.Base
 {
     public interface IUnitOfWorkFactory
     {

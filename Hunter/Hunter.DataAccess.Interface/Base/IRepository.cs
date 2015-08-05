@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Hunter.DataAccess.Interface
+namespace Hunter.DataAccess.Interface.Base
 {
     public interface IRepository<T> where T : class//, IEntity
     {

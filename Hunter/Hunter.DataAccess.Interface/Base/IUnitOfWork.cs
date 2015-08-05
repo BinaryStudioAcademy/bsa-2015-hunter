@@ -1,7 +1,4 @@
-﻿using Hunter.DataAccess.Db;
-using System;
-
-namespace Hunter.DataAccess.Interface
+﻿namespace Hunter.DataAccess.Interface.Base
 {
     public interface IUnitOfWork //: IDisposable
     {
