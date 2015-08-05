@@ -7,6 +7,7 @@ using Hunter.DataAccess.Interface;
 using NSubstitute;
 using NUnit.Framework;
 using Hunter.Services;
+using Hunter.DataAccess.Entities;
 
 namespace Hunter.Tests.Services
 {

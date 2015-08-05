@@ -1,19 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6293AEEB-7108-49A2-8300-4EA40D4222D0}</ProjectGuid>
+    <ProjectGuid>{778686CA-F03E-49A6-BBEA-47A84D2A9514}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hunter.DataAccess.Db</RootNamespace>
-    <AssemblyName>Hunter.DataAccess.Db</AssemblyName>
+    <RootNamespace>Hunter.DataAccess.Entities</RootNamespace>
+    <AssemblyName>Hunter.DataAccess.Entities</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,7 +22,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>5</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,55 +33,70 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Hunter.DataAccess.Entities">
-      <HintPath>..\Hunter.DataAccess.Entities\bin\Debug\Hunter.DataAccess.Entities.dll</HintPath>
-    </Reference>
-    <Reference Include="Hunter.DataAccess.Interface">
-      <HintPath>..\Hunter.DataAccess.Interface\bin\Debug\Hunter.DataAccess.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PatternRepository\DatabaseFactory.cs" />
-    <Compile Include="PatternRepository\Disposable.cs" />
-    <Compile Include="PatternRepository\Repository.cs" />
-    <Compile Include="PatternRepository\UnitOfWork.cs" />
-    <Compile Include="PatternRepository\UnitOfWorkFactory.cs" />
+    <Compile Include="Entites\Activity.cs" />
+    <Compile Include="Entites\Candidate.cs" />
+    <Compile Include="Entites\Card.cs" />
+    <Compile Include="Entites\Enums\OriginEnum.cs" />
+    <Compile Include="Entites\Enums\ResoultionEnum.cs" />
+    <Compile Include="Entites\Feedback.cs" />
+    <Compile Include="Entites\IEntity.cs" />
+    <Compile Include="Entites\Interview.cs" />
+    <Compile Include="Entites\Pool.cs" />
+    <Compile Include="Entites\Resume.cs" />
+    <Compile Include="Entites\SpecialNote.cs" />
+    <Compile Include="Entites\Test.cs" />
+    <Compile Include="Entites\User.cs" />
+    <Compile Include="Entites\UserProfile.cs" />
+    <Compile Include="Entites\UserRole.cs" />
+    <Compile Include="Entites\Vacancy.cs" />
+    <Compile Include="HunterDbContext.cs" />
+    <Compile Include="HunterDbInitializer.cs" />
+    <Compile Include="Migrations\201508032033226_InitialCreate.cs" />
+    <Compile Include="Migrations\201508032033226_InitialCreate.Designer.cs">
+      <DependentUpon>201508032033226_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508032045121_AddOriginResoultionShortlistedFieldsInCandidateTable.cs" />
+    <Compile Include="Migrations\201508032045121_AddOriginResoultionShortlistedFieldsInCandidateTable.Designer.cs">
+      <DependentUpon>201508032045121_AddOriginResoultionShortlistedFieldsInCandidateTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508051046015_ChangeNameOfFieldsInCandidates.cs" />
+    <Compile Include="Migrations\201508051046015_ChangeNameOfFieldsInCandidates.Designer.cs">
+      <DependentUpon>201508051046015_ChangeNameOfFieldsInCandidates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\ActivityRepository.cs" />
-    <Compile Include="Repositories\CandidateRepository.cs" />
-    <Compile Include="Repositories\CardRepository.cs" />
-    <Compile Include="Repositories\FeedbackRepository.cs" />
-    <Compile Include="Repositories\InterviewRepository.cs" />
-    <Compile Include="Repositories\PoolRepository.cs" />
-    <Compile Include="Repositories\ResumeRepository.cs" />
-    <Compile Include="Repositories\SpecialNoteRepository.cs" />
-    <Compile Include="Repositories\TestRepository.cs" />
-    <Compile Include="Repositories\UserProfileRepository.cs" />
-    <Compile Include="Repositories\UserRepository.cs" />
-    <Compile Include="Repositories\UserRoleRepository.cs" />
-    <Compile Include="Repositories\VacancyRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201508032033226_InitialCreate.resx">
+      <DependentUpon>201508032033226_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508032045121_AddOriginResoultionShortlistedFieldsInCandidateTable.resx">
+      <DependentUpon>201508032045121_AddOriginResoultionShortlistedFieldsInCandidateTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508051046015_ChangeNameOfFieldsInCandidates.resx">
+      <DependentUpon>201508051046015_ChangeNameOfFieldsInCandidates.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

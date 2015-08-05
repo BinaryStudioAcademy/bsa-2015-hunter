@@ -1,8 +1,9 @@
 ﻿using System;
 using Hunter.DataAccess.Db;
 using System.Data.Entity;
+using Hunter.DataAccess.Interface;
 
-namespace Hunter.DataAccess.Interface
+namespace Hunter.DataAccess.Db
 {
     public class UnitOfWork : IUnitOfWork
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hunter.DataAccess.Interface.Pattern.Classes
+namespace Hunter.DataAccess.Db
 {
     public class Disposable : IDisposable
     {

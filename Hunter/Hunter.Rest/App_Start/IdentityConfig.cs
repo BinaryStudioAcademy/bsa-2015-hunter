@@ -12,6 +12,7 @@ using System.Web.WebPages;
 using Hunter.Services;
 using Microsoft.Owin.Security.DataProtection;
 using Ninject;
+using Hunter.DataAccess.Entities;
 
 namespace Hunter.Rest
 {

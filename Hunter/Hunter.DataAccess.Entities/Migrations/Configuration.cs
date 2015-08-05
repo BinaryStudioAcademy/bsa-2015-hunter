@@ -5,7 +5,7 @@ namespace Hunter.DataAccess.Db.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Hunter.DataAccess.Db.HunterDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Hunter.DataAccess.Entities.HunterDbContext>
     {
         public Configuration()
         {
@@ -13,7 +13,7 @@ namespace Hunter.DataAccess.Db.Migrations
             ContextKey = "Hunter.DataAccess.Db.HunterDbContext";
         }
 
-        protected override void Seed(Hunter.DataAccess.Db.HunterDbContext context)
+        protected override void Seed(Hunter.DataAccess.Entities.HunterDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

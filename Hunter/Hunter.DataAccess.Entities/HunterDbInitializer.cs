@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 
-namespace Hunter.DataAccess.Db
+namespace Hunter.DataAccess.Entities
 {
     internal class HunterDbInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<HunterDbContext>
     //internal class HunterDbInitializer : System.Data.Entity.CreateDatabaseIfNotExists<HunterDbContext>

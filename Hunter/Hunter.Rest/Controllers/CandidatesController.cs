@@ -8,6 +8,7 @@ using System.Web.Http;
 using Hunter.DataAccess.Db;
 using Hunter.DataAccess.Interface;
 using Hunter.Services;
+using Hunter.DataAccess.Entities;
 
 namespace Hunter.Rest.Controllers
 {

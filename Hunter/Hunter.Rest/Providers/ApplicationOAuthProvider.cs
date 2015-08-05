@@ -11,6 +11,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Hunter.Rest.Models;
 using Hunter.DataAccess.Db;
+using Hunter.DataAccess.Entities;
 
 namespace Hunter.Rest.Providers
 {

@@ -17,6 +17,7 @@ using Hunter.Rest.Models;
 using Hunter.Rest.Providers;
 using Hunter.Rest.Results;
 using Hunter.DataAccess.Db;
+using Hunter.DataAccess.Entities;
 
 namespace Hunter.Rest.Controllers
 {

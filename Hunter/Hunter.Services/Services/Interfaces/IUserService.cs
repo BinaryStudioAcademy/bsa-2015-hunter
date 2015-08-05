@@ -1,5 +1,5 @@
+using Hunter.DataAccess.Entities;
 using System.Collections.Generic;
-using Hunter.DataAccess.Db;
 
 namespace Hunter.Services
 {

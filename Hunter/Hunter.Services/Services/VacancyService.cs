@@ -1,5 +1,4 @@
-﻿using Hunter.DataAccess.Db;
-using Hunter.DataAccess.Interface;
+﻿using Hunter.DataAccess.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;

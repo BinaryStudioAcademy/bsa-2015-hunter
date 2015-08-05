@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Hunter.DataAccess.Db
+namespace Hunter.DataAccess.Entities
 {
     [Table("Candidate")]
     public partial class Candidate : IEntity

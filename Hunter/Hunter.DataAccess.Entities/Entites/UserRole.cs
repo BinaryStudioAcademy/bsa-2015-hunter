@@ -2,27 +2,24 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Hunter.DataAccess.Db
+namespace Hunter.DataAccess.Entities
 {
-    [Table("Resume")]
-    public partial class Resume : IEntity
+    [Table("UserRole")]
+    public partial class UserRole : IEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Resume()
+        public UserRole()
         {
-            Candidate = new HashSet<Candidate>();
+            Users = new HashSet<User>();
         }
 
         public int Id { get; set; }
 
         [Required]
-        public byte[] FileStream { get; set; }
-
-        [Required]
-        [StringLength(255)]
-        public string FileName { get; set; }
+        [StringLength(100)]
+        public string Name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Candidate> Candidate { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

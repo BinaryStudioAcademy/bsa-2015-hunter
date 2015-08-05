@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hunter.DataAccess.Db
+namespace Hunter.DataAccess.Entities
 {
     public interface IEntity
     {

@@ -1,4 +1,4 @@
-namespace Hunter.DataAccess.Db
+namespace Hunter.DataAccess.Entities
 {
     using System;
     using System.Data.Entity;

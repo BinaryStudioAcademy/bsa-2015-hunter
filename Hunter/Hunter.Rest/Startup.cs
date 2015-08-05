@@ -14,12 +14,11 @@ using Microsoft.Owin.Security.OAuth;
 using Microsoft.AspNet.Identity;
 using Hunter.DataAccess.Db;
 using Hunter.DataAccess.Interface;
-using Hunter.DataAccess.Interface.Pattern.Classes;
-using Hunter.DataAccess.Interface.Repositories.Classes;
 using Hunter.Services;
 using Microsoft.Owin.Logging;
 using Ninject.Web.Common;
 using Hunter.Common.Concrete;
+using Hunter.DataAccess.Entities;
 
 [assembly: OwinStartup(typeof(Hunter.Rest.Startup))]
 
