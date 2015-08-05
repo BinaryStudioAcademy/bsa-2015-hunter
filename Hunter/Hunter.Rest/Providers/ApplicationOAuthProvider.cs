@@ -30,6 +30,7 @@ namespace Hunter.Rest.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
+
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
             User user = await userManager.FindAsync(context.UserName, context.Password);

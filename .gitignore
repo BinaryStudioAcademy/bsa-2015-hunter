@@ -54,3 +54,4 @@ OpenCover/
 # JS
 node_modules/
 bower_components/
+/Hunter/.vs/config/applicationhost.config
