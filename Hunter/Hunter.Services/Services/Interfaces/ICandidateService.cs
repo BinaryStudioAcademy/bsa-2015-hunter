@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hunter.DataAccess.Db;
-using Hunter.Shared;
 
 namespace Hunter.Services
 {

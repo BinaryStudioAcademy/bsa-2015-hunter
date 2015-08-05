@@ -273,8 +273,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PoolController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="DtoModels\Extentions\PoolExtentions.cs" />
-    <Compile Include="DtoModels\Models\PoolViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -371,10 +369,6 @@
     <ProjectReference Include="..\Hunter.Services\Hunter.Services.csproj">
       <Project>{7cb1e630-4503-4083-ba17-a17fa6fb74ab}</Project>
       <Name>Hunter.Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Hunter.Shared\Hunter.Shared.csproj">
-      <Project>{806b5c79-4bff-442d-9e9c-ed5ec4c1b4a0}</Project>
-      <Name>Hunter.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

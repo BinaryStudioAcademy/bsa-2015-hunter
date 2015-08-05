@@ -48,13 +48,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\CandidateService.cs" />
-    <Compile Include="Interfaces\ICandidateService.cs" />
-    <Compile Include="Interfaces\IUserService.cs" />
-    <Compile Include="Concrete\PoolService.cs" />
-    <Compile Include="Interfaces\IPoolService.cs" />
+    <Compile Include="Dto\CandidateDto.cs" />
+    <Compile Include="Extensions\CandidateExtensions.cs" />
+    <Compile Include="Services\CandidateService.cs" />
+    <Compile Include="Services\Interfaces\ICandidateService.cs" />
+    <Compile Include="Services\Interfaces\IUserService.cs" />
+    <Compile Include="Services\PoolService.cs" />
+    <Compile Include="Services\Interfaces\IPoolService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Classes\UserService.cs" />
+    <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hunter.Common\Hunter.Common.csproj">
@@ -68,10 +70,6 @@
     <ProjectReference Include="..\Hunter.DataAccess.Interface\Hunter.DataAccess.Interface.csproj">
       <Project>{870a30fe-6780-4b1c-81f5-1eaf8bd8f50c}</Project>
       <Name>Hunter.DataAccess.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Hunter.Shared\Hunter.Shared.csproj">
-      <Project>{806b5c79-4bff-442d-9e9c-ed5ec4c1b4a0}</Project>
-      <Name>Hunter.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
