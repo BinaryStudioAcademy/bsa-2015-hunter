@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Hunter.Services.Dto;
 
-namespace Hunter.Services.Services.Interfaces
+namespace Hunter.Services
 {
     public interface IPoolService
     {

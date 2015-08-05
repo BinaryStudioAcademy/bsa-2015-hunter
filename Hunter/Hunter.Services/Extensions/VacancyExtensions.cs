@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hunter.Services.Extensions
+namespace Hunter.Services
 {
     public static class VacancyExtersion
     {

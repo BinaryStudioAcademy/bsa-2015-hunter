@@ -42,6 +42,9 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Hunter.DataAccess.Interface">
+      <HintPath>..\Hunter.Rest\bin\Hunter.DataAccess.Interface.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
       <Private>True</Private>
@@ -83,6 +86,11 @@
       <DependentUpon>201508051046015_ChangeNameOfFieldsInCandidates.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="PatternRepository\DatabaseFactory.cs" />
+    <Compile Include="PatternRepository\Disposable.cs" />
+    <Compile Include="PatternRepository\Repository.cs" />
+    <Compile Include="PatternRepository\UnitOfWork.cs" />
+    <Compile Include="PatternRepository\UnitOfWorkFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entites\Resume.cs" />
     <Compile Include="Entites\SpecialNote.cs" />
@@ -91,6 +99,19 @@
     <Compile Include="Entites\UserRole.cs" />
     <Compile Include="Entites\User.cs" />
     <Compile Include="Entites\Vacancy.cs" />
+    <Compile Include="Repositories\ActivityRepository.cs" />
+    <Compile Include="Repositories\CandidateRepository.cs" />
+    <Compile Include="Repositories\CardRepository.cs" />
+    <Compile Include="Repositories\FeedbackRepository.cs" />
+    <Compile Include="Repositories\InterviewRepository.cs" />
+    <Compile Include="Repositories\PoolRepository.cs" />
+    <Compile Include="Repositories\ResumeRepository.cs" />
+    <Compile Include="Repositories\SpecialNoteRepository.cs" />
+    <Compile Include="Repositories\TestRepository.cs" />
+    <Compile Include="Repositories\UserProfileRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\UserRoleRepository.cs" />
+    <Compile Include="Repositories\VacancyRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

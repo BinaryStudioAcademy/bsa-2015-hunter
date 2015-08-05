@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.WebPages;
 using Hunter.Services;
-using Hunter.Services.Services.Interfaces;
 using Microsoft.Owin.Security.DataProtection;
 using Ninject;
 

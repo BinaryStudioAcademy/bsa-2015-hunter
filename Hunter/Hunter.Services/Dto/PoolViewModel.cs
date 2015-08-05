@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Hunter.Services.Dto
+namespace Hunter.Services
 {
     public class PoolViewModel
     {

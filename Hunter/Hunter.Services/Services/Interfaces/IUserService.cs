@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Hunter.DataAccess.Db;
 
-namespace Hunter.Services.Services.Interfaces
+namespace Hunter.Services
 {
     public interface IUserService
     {

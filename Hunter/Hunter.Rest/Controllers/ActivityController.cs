@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Web.Http;
 using Hunter.DataAccess.Db;
 using Hunter.Services;
-using Hunter.Services.Dto;
 
 namespace Hunter.Rest.Controllers
 {
