@@ -5,6 +5,8 @@ using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Db;
 using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Interface.Base;
+using Hunter.DataAccess.Interface.Repositories;
 
 namespace Hunter.Services
 {
