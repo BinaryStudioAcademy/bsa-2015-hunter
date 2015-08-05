@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Hunter.Services.DtoModels.Extentions;
 
-namespace Hunter.Services.DtoModels.Models
+namespace Hunter.Services.Dto
 {
     public class PoolViewModel
     {

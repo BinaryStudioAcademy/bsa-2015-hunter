@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using Hunter.Services.DtoModels.Models;
-using Hunter.Services.Interfaces;
+using Hunter.Services.Dto;
+using Hunter.Services.Services.Interfaces;
 
 namespace Hunter.Rest.Controllers
 {

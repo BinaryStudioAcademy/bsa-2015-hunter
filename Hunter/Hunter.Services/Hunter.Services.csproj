@@ -49,14 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Concrete\PoolService.cs" />
-    <Compile Include="DtoModels\Extentions\HunterValidation.cs" />
-    <Compile Include="DtoModels\Extentions\PoolExtentions.cs" />
-    <Compile Include="DtoModels\Models\PoolViewModel.cs" />
-    <Compile Include="Interfaces\IPoolService.cs" />
-    <Compile Include="IUserService.cs" />
+    <Compile Include="Services\PoolService.cs" />
+    <Compile Include="Extentions\HunterValidation.cs" />
+    <Compile Include="Extentions\PoolExtentions.cs" />
+    <Compile Include="Dto\PoolViewModel.cs" />
+    <Compile Include="Services\Interfaces\IPoolService.cs" />
+    <Compile Include="Services\Interfaces\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserService.cs" />
+    <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hunter.Common\Hunter.Common.csproj">
@@ -84,7 +84,6 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
-
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

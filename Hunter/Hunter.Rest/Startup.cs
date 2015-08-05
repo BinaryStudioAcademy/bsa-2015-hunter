@@ -17,11 +17,11 @@ using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Interface.Pattern.Classes;
 using Hunter.DataAccess.Interface.Repositories.Classes;
 using Hunter.Services;
-using Hunter.Services.Concrete;
-using Hunter.Services.Interfaces;
 using Microsoft.Owin.Logging;
 using Ninject.Web.Common;
 using Hunter.Common.Concrete;
+using Hunter.Services.Services;
+using Hunter.Services.Services.Interfaces;
 
 [assembly: OwinStartup(typeof(Hunter.Rest.Startup))]
 

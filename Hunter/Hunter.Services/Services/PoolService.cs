@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Interface;
-using Hunter.Services.DtoModels.Extentions;
-using Hunter.Services.DtoModels.Models;
-using Hunter.Services.Interfaces;
+using Hunter.Services.Dto;
+using Hunter.Services.Extentions;
+using Hunter.Services.Services.Interfaces;
 
-namespace Hunter.Services.Concrete
+namespace Hunter.Services.Services
 {
     public class PoolService : IPoolService
     {

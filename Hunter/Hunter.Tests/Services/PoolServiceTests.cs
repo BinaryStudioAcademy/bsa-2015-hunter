@@ -4,11 +4,11 @@ using System.Linq;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Db;
 using Hunter.DataAccess.Interface;
-using Hunter.Services.Concrete;
-using Hunter.Services.Interfaces;
+using Hunter.Services.Dto;
+using Hunter.Services.Services;
 using NSubstitute;
 using NUnit.Framework;
-using Hunter.Services.DtoModels.Models;
+using Hunter.Services.Services.Interfaces;
 
 namespace Hunter.Tests.Services
 {
