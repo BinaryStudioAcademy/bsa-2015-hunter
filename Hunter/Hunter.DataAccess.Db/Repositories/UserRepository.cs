@@ -1,11 +1,7 @@
-﻿using Hunter.DataAccess.Entities;
-using Hunter.DataAccess.Interface;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Hunter.DataAccess.Db.Base;
+using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Interface.Base;
+using Hunter.DataAccess.Interface.Repositories;
 
 namespace Hunter.DataAccess.Db
 {
