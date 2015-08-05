@@ -7,7 +7,7 @@ using Hunter.DataAccess.Db;
 
 namespace Hunter.Services
 {
-    static public class Extensions
+    static public class CandidateExtensions
     {
         static public CandidateDto ToCandidateDto(this Candidate candidate)
         {
