@@ -13,7 +13,7 @@ namespace Hunter.DataAccess.Db
             Card = new HashSet<Card>();
             Pool = new HashSet<Pool>();
             Origin = (int)OriginEnum.Sourced;
-            Resoultion = (int)ResoultionEnum.None;
+            Resolution = (int)ResoultionEnum.None;
             Shortlisted = false;
         }
 
@@ -62,7 +62,7 @@ namespace Hunter.DataAccess.Db
 
         public int Origin { get; set; }
 
-        public int Resoultion { get; set; }
+        public int Resolution { get; set; }
 
         public bool Shortlisted { get; set; }
 
