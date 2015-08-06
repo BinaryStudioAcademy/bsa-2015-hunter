@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('hunter-handlers', [])
+        .module('hunter-app')
         .factory('HttpHandler', HttpHandler);
 
     HttpHandler.$inject = [
@@ -47,6 +47,7 @@
                 .catch(failedRequest);
 
             function successfulRequest(response) {
+
                 if (httpObject.successMessageToUser) {
                     alertify.success(httpObject.successMessageToUser);
                 }
@@ -85,8 +86,9 @@
             if (typeof type !== 'string' || !type) {
                 console.log('HTTP REQUEST ERROR: HTTP REQUEST TYPE DOES NOT SPECIFIED');
                 alertify.error('Action Failed');
-                return;
+                return false;
             }
+            return true;
         }
 
         return handler;

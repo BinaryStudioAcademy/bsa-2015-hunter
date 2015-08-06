@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link type="text/css" rel="stylesheet"  href="@Url.Content("~/Content/MyStyle.css")"/>
+    <link type="text/css" rel="stylesheet" href="@Url.Content("~/Content/MyStyle.css")"/>
+    <link type="text/css" rel="stylesheet" href="@Url.Content("~/Content/bootstrap.min.css")" />
     @RenderSection("css", false)
 </head>
 <body>
@@ -12,12 +13,17 @@
         <ul class="main-menu">
             <li><a href="#">Home</a></li>
             <li>
-                <a href="#">Candidates</a>
+                <a href="#/candidate">Candidates</a>
                 <ul class="sub-menu">
                     <li><a href="#1">Add new</a></li>
                 </ul>
             </li>
-            <li><a href="#">Campaigns</a></li>
+            <li>
+                <a href="#/vacancy">Vacancy</a>
+                <ul class="sub-menu">
+                    <li><a href="#1">Add new</a></li>
+                </ul>
+            </li>
             <li><a href="#">Statistics</a></li>
             <li><a href="#">Files</a></li>
             <li>

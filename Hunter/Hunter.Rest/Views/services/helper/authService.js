@@ -20,6 +20,7 @@
                     return false;
                 }
             */
+            return true;
         }
 
         return service;

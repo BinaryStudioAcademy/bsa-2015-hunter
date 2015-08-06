@@ -76,3 +76,86 @@ li{
 	border-radius: 7px;
 	text-align: center;
 }
+
+
+
+/*Long list*/
+.longlist-wrapper{
+	margin-top: 25px;
+}
+
+.list-pagination{
+	margin: 0;
+}
+
+.filter-settings{
+	border: 1px solid #ddd;
+}
+
+.filter-settings>ul{
+	list-style: none;
+	padding-left: 20px;
+}
+
+.filter-settings>ul ul{
+	margin-left: 20px;
+}
+
+/*Candidate page*/
+.candidate-info{
+/*	margin-left: 170px;*/
+}
+
+.personal-info{
+	font-size: 20px;
+	border: 1px solid #ddd;
+	padding: 15px 15px;
+}
+
+.candidate-name{
+	font-size: 30px;
+	padding: 5px;
+}
+
+.filter-settings, .personal-info, .note-info-conteiner, .note-info-nav li{
+	border: 1px solid #ddd;	
+}
+
+.salary-wrapper, .candidate-name, .note-info-nav .active, .note-info-nav li:hover{
+	background:  #ddd;
+}
+
+.salary-wrapper{
+	font-size: 30px;
+	text-align: center;
+}
+.btn-veiw-resume{
+	margin-top: 30px;
+}
+
+.notes-table{
+	width: 100%;
+    margin-bottom: 20px;
+}
+
+.notes-table td{
+	padding: 4px;
+	border-bottom: 10px solid #FFF;
+}
+
+.passed td{
+	background: rgba(0, 255, 0, 0.5);
+}
+
+.failed td{
+	background: rgba(255, 0, 0, 0.3);
+}
+
+
+.note-info-nav{
+	margin: 25px -15px;
+}
+
+.note-info-nav li{
+    padding: 8px;	
+}
