@@ -9,6 +9,11 @@
                     controllerAs: 'candidatesCtrl'
                 })
                 //result on Latest activity button click (slide 1 and menu item on slide 3)
+                .when('/login', {
+                    templateUrl: '',
+                    controller: 'loginController',
+                    controllerAs: 'loginCtrl'
+                })
                 .when('/news', {
                     templateUrl: '',
                     controller: 'newsController',
@@ -75,4 +80,8 @@
                     controllerAs: 'testworkCtrl'
                 });
         }
-    ]);
+    ]).config(function ($httpProvider) {
+        $httpProvider.interceptors.push('authInterceptorService');
+    }).run(['authService', function (authService) {
+    authService.fillAuthData();
+}]);

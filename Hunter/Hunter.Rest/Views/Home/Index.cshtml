@@ -6,11 +6,17 @@
 
 <script src='../../bower_components/angular/angular.js'></script>
 <script src='../../bower_components/angular-route/angular-route.js'></script>
+<script src="../../bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
 @*<script src='../../Scripts/app.js'></script>*@
 <script src='../../Views/app/app.js'></script>
+<script src="../../Views/services/authInterceptorService.js"></script>
+<script src="../../Views/services/authService.js"></script>
 
 <h2>Index</h2>
 <div ng-view></div>
+
+
+<script src="../../Views/controllers/LoginController.js"></script>
 <script>
     angular.bootstrap(document, ['hunter-app']);
 </script>
