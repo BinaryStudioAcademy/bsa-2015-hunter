@@ -617,9 +617,10 @@
     <Content Include="Views\services\candidate\candidatesHttpService.js" />
     <Content Include="Views\services\helper\authService.js" />
     <Content Include="Views\services\helper\httpHandler.js" />
+    <Content Include="Views\Vacancy\list\vacancyListController.js" />
     <Content Include="Views\Vacancy\longlist.html" />
     <Content Include="Views\Vacancy\edit.html" />
-    <Content Include="Views\Vacancy\list.html" />
+    <Content Include="Views\Vacancy\list\list.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
