@@ -440,7 +440,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="log4net.xml" />
-    <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -610,10 +609,12 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Views\app\app.js" />
-    <Content Include="Views\Candidate\datails.html" />
-    <Content Include="Views\Candidate\edit.html" />
-    <Content Include="Views\Candidate\list.html" />
-    <Content Include="Views\Candidate\profile.html" />
+    <Content Include="Views\candidate\addEdit\addEdit.html" />
+    <Content Include="Views\candidate\addEdit\candidateAddEditController.js" />
+    <Content Include="Views\candidate\list\list.html" />
+    <Content Include="Views\candidate\profile\profile.html" />
+    <Content Include="Views\services\candidate\addEdit\addEditService.js" />
+    <Content Include="Views\services\candidate\candidatesHttpService.js" />
     <Content Include="Views\services\helper\httpHandler.js" />
     <Content Include="Views\Vacancy\longlist.html" />
     <Content Include="Views\Vacancy\edit.html" />
