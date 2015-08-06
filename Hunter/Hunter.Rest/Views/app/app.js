@@ -20,54 +20,60 @@
             // TODO make similar for other entities (naming, routing)
             $routeProvider
                 .when('/vacancy', {
-                    templateUrl: viewPath + 'Vacancy/list.html',
-                    controller: 'vacancyListCtrl',
+                    templateUrl: viewPath + 'Vacancy/list/list.html',
+                    controller:  "VacancyListtController",
+                    controllerAs: 'vacancyListCtrl',
                     reloadOnSearch: false
                 })
                 .when('/vacancy/:id', {
-                    templateUrl: viewPath + 'Vacancy/longlist.html',
-                    controller: 'vacancyListCtrl'
+                    templateUrl: viewPath + 'Vacancy/list/list.html',
+                    controller:  "VacancyAddEditController",
+                    controllerAs: 'vacancyAddEditCtrl'
                 })
                 .when('/vacancy/add', {
-                    templateUrl: viewPath + 'Vacancy/edit.html',
-                    controller: 'vacancyEditCtrl'
+                    templateUrl: viewPath + 'Vacancy/addEdite/addEdite.html',
+                    controller: "VacancyAddEditController",
+                    controllerAs: 'vacancyAddEditCtrl'
                 })
                 .when('/vacancy/edit/:id', {
-                    templateUrl: viewPath + 'Vacancy/edit.html',
-                    controller: 'vacancyEditCtrl'
+                    templateUrl: viewPath + 'Vacancy/addEdite/addEdite.html',
+                    controller: "VacancyAddEditController",
+                    controllerAs: 'vacancyAddEditCtrl'
                 });
 
             $routeProvider
                 .when('/candidate', {
-                    templateUrl: viewPath + 'Candidate/list.html',
-                    controller: 'candidateListCtrl',
+                    templateUrl: viewPath + 'candidate/list/list.html',
+                    controller: 'CandidateListController',
+                    controllerAs: 'candidateListCtrl',
                     reloadOnSearch: false
                 })
                 .when('/candidate/:cid', {
-                    templateUrl: viewPath + 'Candidate/profile.html',
-                    controller: 'candidateCtrl'
+                    templateUrl: viewPath + 'Candidate/profile/profile.html',
+                    controller: 'CandidateController',
+                    controllerAs: 'candidateCtrl'
                 })
                 .when('/vacancy/:vid/candidate/:cid', {
-                    templateUrl: viewPath + 'Candidate/profile.html',
+                    templateUrl: viewPath + 'Candidate/profile/profile.html',
                     controller: 'candidateCtrl'
                 })
                 .when('/candidate/add', {
-                    templateUrl: viewPath + 'Candidate/edit.html',
-                    controller: 'candidateEditCtrl'
+                    templateUrl: viewPath + 'candidate/addEdite/addEdite.html',
+                    controller: 'CandidateAddEditController',
+                    controllerAs: 'candidateAddEditCtrl'
                 })
                 .when('/candidate/edit/:id', {
-                    templateUrl: viewPath + 'Candidate/edit.html',
+                    templateUrl: viewPath + 'Candidate/addEdite/addEdit.html',
                     controller: 'vacancyEditCtrl'
                 });
 
 
             //result on statistics button click (slide 1)
-            $routeProvider
-                .when('/statistics', {
-                    templateUrl: '',
-                    controller: 'statisticsController',
-                    controllerAs: 'statisticsCtrl'
-                })
+            $routeProvider.when('/statistics', {
+                templateUrl: viewPath + 'Statistics/list.html',
+                controller: 'StatisticsController',
+                controllerAs: 'statisticsCtrl'
+            })
                     //slide 2
                     .when('/candidates/viewprofile/:profileId', {
                         templateUrl: '',

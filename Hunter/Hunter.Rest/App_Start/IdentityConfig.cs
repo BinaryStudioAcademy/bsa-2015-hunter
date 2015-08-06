@@ -157,7 +157,7 @@ namespace Hunter.Rest
                 RequiredLength = 6,
                 RequireNonLetterOrDigit = false,
                 RequireDigit = true,
-                RequireLowercase = true,
+                RequireLowercase = false,
                 RequireUppercase = false,
             };
 

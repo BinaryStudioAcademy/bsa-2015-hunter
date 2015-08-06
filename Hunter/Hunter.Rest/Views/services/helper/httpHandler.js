@@ -29,7 +29,7 @@
             if (!checkUrl(httpObject.url)) {
                 return;
             }
-            if (!checkRequestType(httpObject.verb)) {
+            if (!checkRequestType(httpObject.url)) {
                 return;
             }
 
@@ -44,6 +44,7 @@
                 .catch(failedRequest);
 
             function successfulRequest(response) {
+
                 if (httpObject.successMessageToUser) {
                     alertify.success(httpObject.successMessageToUser);
                 }
@@ -51,12 +52,12 @@
                 if (httpObject.successCallback && typeof httpObject.successCallback === 'function') {
                     httpObject.successCallback(response);
                 }
-            }
+                }
 
             function failedRequest(error) {
                 if (httpObject.errorMessageToDev) {
                     console.log(httpObject.errorMessageToDev);
-                }
+        }
 
                 if (httpObject.errorMessageToUser) {
                     alertify.error(errorMessageToUser);

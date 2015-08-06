@@ -29,7 +29,8 @@ namespace Hunter.Services.Extensions
                 Photo = candidate.Photo,
                 Resolution = (int)candidate.Resolution,
                 ShortListed = candidate.Shortlisted,
-                Origin = (int)candidate.Origin
+                Origin = (int)candidate.Origin,
+                DateOfBirth = candidate.DateOfBirth
             };
             return dto;
         }
@@ -56,7 +57,8 @@ namespace Hunter.Services.Extensions
                 Photo = dto.Photo,
                 Resolution = (Resolution)dto.Resolution,
                 Shortlisted = dto.ShortListed,
-                Origin = (Origin)dto.Origin
+                Origin = (Origin)dto.Origin,
+                DateOfBirth = dto.DateOfBirth
             };
             return model;
         }
