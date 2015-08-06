@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('hunter-handlers', [])
+        .module('hunter-app')
         .factory('HttpHandler', HttpHandler);
 
     HttpHandler.$inject = [
@@ -39,7 +39,7 @@
             var config = {
                 'method': httpObject.verb.toUpperCase(),
                 'url': httpObject.url,
-                'body': httpObject.body
+                'data': httpObject.body
             };
 
             $http(config)
@@ -48,7 +48,8 @@
 
             function successfulRequest(response) {
                 if (httpObject.successMessageToUser) {
-                    alertify.success(httpObject.successMessageToUser);
+                    //alertify.success(httpObject.successMessageToUser);
+                    alert(httpObject.successMessageToUser);
                 }
 
                 if (httpObject.successCallback && typeof httpObject.successCallback === 'function') {
@@ -62,7 +63,8 @@
                 }
 
                 if (httpObject.errorMessageToUser) {
-                    alertify.error(errorMessageToUser);
+                    //alertify.error(errorMessageToUser);
+                    alert(errorMessageToUser);
                 }
 
                 if (httpObject.errorCallback && typeof httpObject.errorCallback === 'function') {
@@ -74,7 +76,8 @@
         function checkUrl(url) {
             if (!url) {
                 console.log('HTTP REQUEST ERROR: URL DOES NOT SPECIFIED');
-                alertify.error('Action Failed');
+                //alertify.error('Action Failed');
+                alert('Action Failed');
                 return false;
             }
 
@@ -84,11 +87,11 @@
         function checkRequestType(type) {
             if (typeof type !== 'string' || !type) {
                 console.log('HTTP REQUEST ERROR: HTTP REQUEST TYPE DOES NOT SPECIFIED');
-                alertify.error('Action Failed');
+                //alertify.error('Action Failed');
+                alert('Action Failed');
                 return false;
             }
             return true;
-
         }
 
         return handler;

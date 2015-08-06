@@ -38,6 +38,11 @@
                     controllerAs: 'candidateAddEditCtrl',
                     reloadOnSearch: false
                 })
+                .when('/candidate/add', {
+                    templateUrl: viewPath + 'Candidate/addEdit/addEdit.html',
+                    controller: 'CandidateAddEditController',
+                    controllerAs: 'candidateAddEditCtrl'
+                })
                 .when('/candidate/:cid', {
                     templateUrl: viewPath + 'Candidate/profile.html',
                     controller: 'candidateCtrl'
@@ -46,14 +51,9 @@
                     templateUrl: viewPath + 'Candidate/profile.html',
                     controller: 'candidateCtrl'
                 })
-                .when('/candidate/:id', {
-                    templateUrl: viewPath + 'Candidate/edit.html',
-                    controller: 'CandidateAddEditController',
-                    controllerAs: 'candidateAddEditCtrl'
-                })
                 .when('/candidate/edit/:id', {
-                    templateUrl: viewPath + 'Candidate/edit.html',
-                    controller: 'vacancyEditCtrl'
+                    templateUrl: viewPath + 'Candidate/addEdit/addEdit.html',
+                    controller: 'CandidateAddEditController'
                 });
 
 

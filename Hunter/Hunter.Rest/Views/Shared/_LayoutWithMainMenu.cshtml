@@ -6,7 +6,6 @@
     <title>@ViewBag.Title</title>
     <link type="text/css" rel="stylesheet"  href="@Url.Content("~/Content/MyStyle.css")"/>
     <link type="text/css" rel="stylesheet" href="@Url.Content("~/bower_components/bootstrap/dist/css/bootstrap.css")" />
-
     @RenderSection("css", false)
 </head>
 <body>
@@ -22,7 +21,7 @@
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="">Candidates<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Add new</a></li>
+                                <li><a href="#candidate/add">Add new</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

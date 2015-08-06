@@ -13,6 +13,7 @@
         };
 
         function isLoggedIn() {
+            return true; //mock
             /*
                 if (some) {
                     return true;

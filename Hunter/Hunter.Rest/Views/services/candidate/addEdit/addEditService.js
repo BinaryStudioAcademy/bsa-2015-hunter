@@ -8,22 +8,22 @@
     AddEditService.$inject = [];
 
     function AddEditService() {
-        var serivce = {
+        var service = {
             validateData: validateData
         };
 
         function validateData(data, errorObject) {
-            var noError = true;
+            var noErrors = true;
             if (!data) {
                 return false;
             }
 
-            if (!data.someField) {
-                errorObject.someField = true;
-                noErrors = false;
-            } else {
-                errorObject.someField = false;
-            }
+//            if (!data.someField) {
+//                errorObject.someField = true;
+//                noErrors = false;
+//            } else {
+//                errorObject.someField = false;
+//            }
 
             return noErrors;
         }

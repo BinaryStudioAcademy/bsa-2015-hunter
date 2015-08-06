@@ -8,8 +8,15 @@
 <script src='../../bower_components/angular-route/angular-route.js'></script>
 @*<script src='../../Scripts/app.js'></script>*@
 <script src='../../Views/app/app.js'></script>
+<script src="~/Views/Candidate/addEdit/candidateAddEditController.js"></script>
+<script src="~/Views/services/candidate/candidatesHttpService.js"></script>
+<script src="~/Views/services/candidate/addEdit/addEditService.js"></script>
+<script src="~/Views/services/helper/httpHandler.js"></script>
+<script src="~/Views/services/helper/authService.js"></script>
+<script src="~/Views/services/pool/poolsHttpService.js"></script>
 
 <h2>Index</h2>
+<a href="#candidate/edit/1">Go to edit candidate page (id=1)</a>
 <div ng-view></div>
 <script>
     angular.bootstrap(document, ['hunter-app']);
