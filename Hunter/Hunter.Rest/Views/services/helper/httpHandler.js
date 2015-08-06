@@ -12,51 +12,81 @@
     function HttpHandler($http) {
 
         var handler = {
-            'send': sendRequest
+            sendRequest: sendRequest
         };
-
-        function sendRequest(url, verb, successCall, errorCall) {
-            if (!checkUrl(url)) {
+        /**
+         * 
+         * @param  httpObject {
+            url: STRING,
+            verb: STRING,
+            body: JSON OBJECT,
+            successCallback: FUNCTION,
+            errorCallback: FUNCTION,
+            errorMessageToUser: STRING,
+            errorMessageToDev: STRING,
+            successMessageToUser: STRING
+         * }
+         * @returns {} 
+         */
+        function sendRequest(httpObject) {
+            if (!checkUrl(httpObject.url)) {
+                return;
+            }
+            if (!checkRequestType(httpObject.url)) {
                 return;
             }
 
-            verb = (!verb) ? 'GET' : verb;
-
             var config = {
-                'method': verb,
-                'url': url
+                'method': httpObject.verb.toUpperCase(),
+                'url': httpObject.url,
+                'body': httpObject.body
             };
 
-            $http(config).then(
-                function(response) {
-                    processResult(response, successCall);
-                },
-                function(reason) {
-                    processResult(reason, errorCall);
+            $http(config)
+                .then(successfulRequest)
+                .catch(failedRequest);
+
+            function successfulRequest(response) {
+                if (httpObject.successMessageToUser) {
+                    alertify.success(httpObject.successMessageToUser);
                 }
-            );
-        }
 
-        function processResult(response, callBack) {
-            var result = {
-                'responseData': response.data,
-                'statusCode': response.status
-            };
+                if (httpObject.successCallback && typeof httpObject.successCallback === 'function') {
+                    httpObject.successCallback(response);
+                }
+            }
 
-            callBack(result);
+            function failedRequest(error) {
+                if (httpObject.errorMessageToDev) {
+                    console.log(httpObject.errorMessageToDev);
+                }
+
+                if (httpObject.errorMessageToUser) {
+                    alertify.error(errorMessageToUser);
+                }
+
+                if (httpObject.errorCallback && typeof httpObject.errorCallback === 'function') {
+                    httpObject.errorCallback(error);
+                }
+            }
         }
 
         function checkUrl(url) {
-            if (url == undefined) {
-                console.log('url does not specified');
-                processResult({ 'data': 'url does not specified', 'status': 0 });
-
+            if (!url) {
+                console.log('HTTP REQUEST ERROR: URL DOES NOT SPECIFIED');
+                alertify.error('Action Failed');
                 return false;
             }
 
             return true;
         }
 
-        return handler;
+        function checkRequestType(type) {
+            if (typeof type !== 'string' || !type) {
+                console.log('HTTP REQUEST ERROR: HTTP REQUEST TYPE DOES NOT SPECIFIED');
+                alertify.error('Action Failed');
+                return;
+            }
+        }
     }
 })();
