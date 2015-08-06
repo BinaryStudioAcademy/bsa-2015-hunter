@@ -8,34 +8,39 @@
     @RenderSection("css", false)
 </head>
 <body>
-    <header class="top-header">
-        <ul class="main-menu">
-            <li><a href="#">Home</a></li>
-            <li>
-                <a href="#">Candidates</a>
-                <ul class="sub-menu">
-                    <li><a href="#1">Add new</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Campaigns</a></li>
-            <li><a href="#">Statistics</a></li>
-            <li><a href="#">Files</a></li>
-            <li>
-                <a href="#">Settings</a>
-                <ul class="sub-menu">
-                    <li><a href="#">Pools</a></li>
-                    <li><a href="#">Users</a></li>
-                    <li><a href="#">Roles</a></li>
-                </ul>
-            </li>
-        </ul>
-        <div class="block-activity">
-            Activity
-            <span class="activity-number">
-                20
-            </span>
-            <div style="clear:both;"></div>
-        </div>
+    <header class="container">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Hanter</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li class="popdown">
+                            <a class="popdown-toggle" href="./LongList.html">Candidates</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Add new</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Campaigns</a></li>
+                        <li><a href="#">Statistics</a></li>
+                        <li><a href="#">Fiels</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="">Settings<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Pools</a></li>
+                                <li><a href="#">Users</a></li>
+                                <li><a href="#">Rolse</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Activity<span class="badge">14</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </header>
     @RenderBody()
     @Scripts.Render("~/bundles/jquery")
