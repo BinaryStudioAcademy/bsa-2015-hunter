@@ -89,10 +89,6 @@
                 return false;
             }
             return true;
-<<<<<<< HEAD
-
-=======
->>>>>>> candidate
         }
 
         return handler;

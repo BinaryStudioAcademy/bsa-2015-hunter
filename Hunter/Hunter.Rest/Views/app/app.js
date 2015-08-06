@@ -14,21 +14,25 @@
             // TODO make similar for other entities (naming, routing)
             $routeProvider
                 .when('/vacancy', {
-                    templateUrl: viewPath + 'Vacancy/list.html',
-                    controller: 'vacancyListCtrl',
+                    templateUrl: viewPath + 'Vacancy/list/list.html',
+                    controller:  "VacancyListtController",
+                    controllerAs: 'vacancyListCtrl',
                     reloadOnSearch: false
                 })
                 .when('/vacancy/:id', {
-                    templateUrl: viewPath + 'Vacancy/longlist.html',
-                    controller: 'vacancyListCtrl'
+                    templateUrl: viewPath + 'Vacancy/list/list.html',
+                    controller:  "VacancyAddEditController",
+                    controllerAs: 'vacancyAddEditCtrl'
                 })
                 .when('/vacancy/add', {
-                    templateUrl: viewPath + 'Vacancy/edit.html',
-                    controller: 'vacancyEditCtrl'
+                    templateUrl: viewPath + 'Vacancy/addEdite/addEdite.html',
+                    controller: "VacancyAddEditController",
+                    controllerAs: 'vacancyAddEditCtrl'
                 })
                 .when('/vacancy/edit/:id', {
-                    templateUrl: viewPath + 'Vacancy/edit.html',
-                    controller: 'vacancyEditCtrl'
+                    templateUrl: viewPath + 'Vacancy/addEdite/addEdite.html',
+                    controller: "VacancyAddEditController",
+                    controllerAs: 'vacancyAddEditCtrl'
                 });
 
             $routeProvider
@@ -47,76 +51,76 @@
                     templateUrl: viewPath + 'Candidate/profile/profile.html',
                     controller: 'candidateCtrl'
                 })
-                .when('/candidate/:id', {
-                    templateUrl: viewPath + 'Candidate/edit.html',
+                .when('/candidate/add', {
+                    templateUrl: viewPath + 'candidate/addEdite/addEdite.html',
                     controller: 'CandidateAddEditController',
                     controllerAs: 'candidateAddEditCtrl'
                 })
                 .when('/candidate/edit/:id', {
-                    templateUrl: viewPath + 'Candidate/edit.html',
+                    templateUrl: viewPath + 'Candidate/addEdite/addEdit.html',
                     controller: 'vacancyEditCtrl'
                 });
 
 
             //result on statistics button click (slide 1)
             $routeProvider.when('/statistics', {
-                templateUrl: '',
-                controller: 'statisticsController',
+                templateUrl: viewPath + 'Statistics/list.html',
+                controller: 'StatisticsController',
                 controllerAs: 'statisticsCtrl'
             })
-                    //slide 2
-                    .when('/candidates/viewprofile/:profileId', {
-                        templateUrl: '',
-                        controller: 'profileController',
-                        controllerAs: 'profileCtrl'
-                    })
-                    //slide 3
-                    .when('/add', {
-                        templateUrl: '',
-                        controller: 'createCandidateController',
-                        controllerAs: 'createCandidateCtrl'
-                    })
-                    //slide 4 5
-                    .when('/candidates/:profileId', {
-                        templateUrl: '',
-                        controller: 'profileController',
-                        controllerAs: 'profileCtrl'
-                    })
-                    //slide 6
-                    .when('/candidates/:profileId/specnotes', {
-                        templateUrl: '',
-                        controller: 'specnotesController',
-                        controllerAs: 'specnotesCtrl',
-                    })
-                    //slide 6 (history bitton click result)
-                    .when('/candidates/:profileId/specnotes/history', {
-                        templateUrl: '',
-                        controller: 'specnotesController',
-                        controllerAs: 'specnotesCtrl'
-                    })
-                    //slide 8
-                    .when('/candidates/:profileId/interview', {
-                        templateUrl: '',
-                        controller: 'interviewController',
-                        controllerAs: 'interviewCtrl'
-                    })
-                    //slide 8 (history bitton click result)
-                    .when('/candidates/:profileId/interview/history', {
-                        templateUrl: '',
-                        controller: 'interviewController',
-                        controllerAs: 'interviewCtrl'
-                    })
-                    //slide 7
-                    .when('/candidates/:profileId/testwork', {
-                        templateUrl: '',
-                        controller: 'testworkController',
-                        controllerAs: 'testworkCtrl'
-                    })
-                    //slide 7 (history bitton click result)
-                    .when('/candidates/:profileId/testwork/history', {
-                        templateUrl: '',
-                        controller: 'testworkController',
-                        controllerAs: 'testworkCtrl'
-                    });
+            //slide 2
+            .when('/candidates/viewprofile/:profileId', {
+                templateUrl: '',
+                controller: 'profileController',
+                controllerAs: 'profileCtrl'
+            })
+            //slide 3
+            .when('/add', {
+                templateUrl: '',
+                controller: 'createCandidateController',
+                controllerAs: 'createCandidateCtrl'
+            })
+            //slide 4 5
+            .when('/candidates/:profileId', {
+                templateUrl: '',
+                controller: 'profileController',
+                controllerAs: 'profileCtrl'
+            })
+            //slide 6
+            .when('/candidates/:profileId/specnotes', {
+                templateUrl: '',
+                controller: 'specnotesController',
+                controllerAs: 'specnotesCtrl',
+            })
+            //slide 6 (history bitton click result)
+            .when('/candidates/:profileId/specnotes/history', {
+                templateUrl: '',
+                controller: 'specnotesController',
+                controllerAs: 'specnotesCtrl'
+            })
+            //slide 8
+            .when('/candidates/:profileId/interview', {
+                templateUrl: '',
+                controller: 'interviewController',
+                controllerAs: 'interviewCtrl'
+            })
+            //slide 8 (history bitton click result)
+            .when('/candidates/:profileId/interview/history', {
+                templateUrl: '',
+                controller: 'interviewController',
+                controllerAs: 'interviewCtrl'
+            })
+            //slide 7
+            .when('/candidates/:profileId/testwork', {
+                templateUrl: '',
+                controller: 'testworkController',
+                controllerAs: 'testworkCtrl'
+            })
+            //slide 7 (history bitton click result)
+            .when('/candidates/:profileId/testwork/history', {
+                templateUrl: '',
+                controller: 'testworkController',
+                controllerAs: 'testworkCtrl'
+            });
         }
     ]);
