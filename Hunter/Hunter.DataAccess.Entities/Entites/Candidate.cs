@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -22,6 +23,9 @@ namespace Hunter.DataAccess.Entities
 
         [Column(TypeName = "image")]
         public byte[] Photo { get; set; }
+
+        [Column(TypeName="date")]
+        public DateTime DateOfBirth { get; set; }
 
         [Required]
         [StringLength(300)]

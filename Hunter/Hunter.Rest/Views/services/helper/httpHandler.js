@@ -85,8 +85,10 @@
             if (typeof type !== 'string' || !type) {
                 console.log('HTTP REQUEST ERROR: HTTP REQUEST TYPE DOES NOT SPECIFIED');
                 alertify.error('Action Failed');
-                return;
+                return false;
             }
+            return true;
+
         }
 
         return handler;
