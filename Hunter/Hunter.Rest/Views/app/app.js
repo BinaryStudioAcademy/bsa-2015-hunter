@@ -1,8 +1,7 @@
 ﻿angular.module('hunter-app', ['ngRoute'])
     .config([
         '$routeProvider', function ($routeProvider) {
-            var baseUrl = window.globalVars.baseUrl;
-            var viewPath = baseUrl + "Views/";
+            var viewPath = "/Views/";
             $routeProvider
                 //result on Latest activity button click (slide 1 and menu item on slide 3)
                 .when('/news', {
