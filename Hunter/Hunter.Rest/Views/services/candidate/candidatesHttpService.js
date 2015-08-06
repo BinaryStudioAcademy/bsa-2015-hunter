@@ -15,7 +15,7 @@
         };
 
         function updateCandidate(body, successCallback) {
-            httpHandler({
+            httpHandler.sendRequest({
                 type: 'GET',
                 url: '/api/candidate/',
                 body: body,

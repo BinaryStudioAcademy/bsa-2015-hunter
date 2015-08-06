@@ -88,5 +88,7 @@
                 return;
             }
         }
+
+        return handler;
     }
 })();
