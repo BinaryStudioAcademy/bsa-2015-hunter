@@ -33,17 +33,18 @@
 
             $routeProvider
                 .when('/candidate', {
-                    templateUrl: viewPath + 'Candidate/list.html',
-                    controller: 'CandidateAddEditController',
-                    controllerAs: 'candidateAddEditCtrl',
+                    templateUrl: viewPath + 'candidate/list/list.html',
+                    controller: 'CandidateListController',
+                    controllerAs: 'candidateListCtrl',
                     reloadOnSearch: false
                 })
                 .when('/candidate/:cid', {
-                    templateUrl: viewPath + 'Candidate/profile.html',
-                    controller: 'candidateCtrl'
+                    templateUrl: viewPath + 'Candidate/profile/profile.html',
+                    controller: 'CandidateController',
+                    controllerAs: 'candidateCtrl'
                 })
                 .when('/vacancy/:vid/candidate/:cid', {
-                    templateUrl: viewPath + 'Candidate/profile.html',
+                    templateUrl: viewPath + 'Candidate/profile/profile.html',
                     controller: 'candidateCtrl'
                 })
                 .when('/candidate/:id', {

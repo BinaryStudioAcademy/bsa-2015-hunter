@@ -8,7 +8,7 @@
     AddEditService.$inject = [];
 
     function AddEditService() {
-        var serivce = {
+        var service = {
             validateData: validateData
         };
 

@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('hunter-handlers', [])
+        .module('hunter-app')
         .factory('HttpHandler', HttpHandler);
 
     HttpHandler.$inject = [
@@ -47,6 +47,7 @@
                 .catch(failedRequest);
 
             function successfulRequest(response) {
+
                 if (httpObject.successMessageToUser) {
                     alertify.success(httpObject.successMessageToUser);
                 }
@@ -88,7 +89,10 @@
                 return false;
             }
             return true;
+<<<<<<< HEAD
 
+=======
+>>>>>>> candidate
         }
 
         return handler;
