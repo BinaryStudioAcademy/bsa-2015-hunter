@@ -45,8 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PersonInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublicPageInfo.cs" />
+    <Compile Include="PublicPageParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

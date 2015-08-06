@@ -5,77 +5,60 @@ using HtmlAgilityPack;
 
 namespace Hunter.Tools.LinkedIn
 {
-    public class PersonInformation
+    public class PublicPageParser
     {
-        public string Name { get; set; }
-        public string Headline { get; set; }
-        public string Location { get; set; }
-        public string Industry { get; set; }
-        public IEnumerable<string> Summary { get; set; }
-        public string Skills { get; set; }
-        public string Img { get; set; }
-        public string ExperienceTime { get; set; }
-        public IEnumerable<string> Experience { get; set; }
-        public IEnumerable<string> Courses { get; set; }
-        public IEnumerable<string> Projects { get; set; }
-        public IEnumerable<string> Certifications { get; set; }
-        public IEnumerable<string> Languages { get; set; }
-        public IEnumerable<string> Education { get; set; }
-
         private string Url { get; set; }
         private HtmlDocument Document { get; set; }
 
-        public PersonInformation(string url)
+        public PublicPageInfo GetPageInfo(string url)
         {
             var web = new HtmlWeb();
             Url = url;
             Document = web.Load(Url);
-            Parsing();
+
+            PublicPageInfo info = new PublicPageInfo();
+
+            info.ExperienceTime = GetExperience();
+
+            info.Img = GetImg();
+
+            info.Name = SmallInfo("//span[@class='full-name']");
+
+            info.Location = SmallInfo("//span[@class='locality']");
+
+            info.Industry = SmallInfo("//dd[@class='industry']");
+
+            info.Headline = SmallInfo("//div[@id='headline']");
+
+            //var summary = Document.DocumentNode.SelectNodes("//p[@class='description']");
+            info.Summary = Summary("//p[@class='description']");
+
+            info.Skills = GetSkills();
+
+            info.Experience = MoreInfo("experience");
+
+            info.Courses = MoreInfo("courses");
+
+            info.Projects = MoreInfo("projects");
+
+            info.Certifications = MoreInfo("certifications");
+
+            info.Languages = Languages("//div[@id='background-languages']");
+
+            info.Education = MoreInfo("education");
+
+            //other info we can get "interests",
+            //"patents","publications","honors","test-scores","organizations","volunteering"
+            return info;
         }
 
-
-
-
-        private void Parsing()
-        {
-            ExperienceTime = GetExperience();
-
-            Img = GetImg();
-
-            //var name = Document.DocumentNode.SelectNodes("//span[@class='full-name']").Nodes();
-            Name = SmallInfo("//span[@class='full-name']");
-            //var location = Document.DocumentNode.SelectNodes("//span[@class='locality']").Nodes();
-            Location = SmallInfo("//span[@class='locality']");
-            //var industry = Document.DocumentNode.SelectNodes("//dd[@class='industry']").Nodes();
-            Industry = SmallInfo("//dd[@class='industry']");
-            //var headline = Document.DocumentNode.SelectNodes("//div[@id='headline']").Nodes();
-            Headline = SmallInfo("//div[@id='headline']");
-            var summary = Document.DocumentNode.SelectNodes("//p[@class='description']");
-            Summary = Save(summary);
-
-            Skills = GetSkills();
-
-            Experience = MoreInfo("experience");
-
-            Courses = MoreInfo("courses");
-
-            Projects = MoreInfo("projects");
-
-            Certifications = MoreInfo("certifications");
-
-            Languages = MoreInfo("languages");
-
-            Education = MoreInfo("education");
-
-            string[] values = new string[] {"experience", "courses","projects","certifications", "languages", "education","interests",
-            "patents","publications","honors","test-scores","organizations","volunteering"};
-        }
 
         private IEnumerable<string> Save(IEnumerable<HtmlNode> obj)
         {
             try
             {
-                return obj.ToList().Select(x => x.InnerText.Replace("&#8211;", "-").Replace("&#39;", "'").Replace("&amp;", "&"));
+                return obj.ToList().Select(x => x.InnerText.Replace("&#8211;", "-").Replace("&#39;", "'").Replace("&amp;", "&")
+                    .Replace("&#x2019;","'"));
             }
             catch (Exception)
             {
@@ -105,7 +88,7 @@ namespace Hunter.Tools.LinkedIn
                 var inf = Save(items);
                 if (inf.Count() == 2 && inf.LastOrDefault().Length == 0 || inf.Count() == 0)
                     return null;
-                return inf;
+                return inf.ToList();
             }
             catch (Exception)
             {
@@ -124,16 +107,16 @@ namespace Hunter.Tools.LinkedIn
                 return null;
             }
         }
-        private string GetSkills()
+        private IEnumerable<string> GetSkills()
         {
             //get all skills into one string, if exist
             try
             {
                 var skills = Document.DocumentNode.SelectNodes("//span[@class='skill-pill']");
-                var skillsList = String.Empty;
-                Save(skills).ToList().ForEach(x => skillsList += String.Format("{0}, ", x));
-                skillsList = skillsList.Remove(skillsList.LastIndexOf(","));
-                return skillsList;
+                //var skillsList = String.Empty;
+                return Save(skills).ToList();//.ForEach(x => skillsList += String.Format("{0}, ", x));
+                //skillsList = skillsList.Remove(skillsList.LastIndexOf(","));
+                //return skillsList;
             }
             catch (Exception)
             {
@@ -214,5 +197,38 @@ namespace Hunter.Tools.LinkedIn
 
             return String.Format("{0} {1}", yearOutput, monthOutput);
         }
+
+
+        private string Languages(string xPath)
+        {
+            try
+            {
+                var obj = Document.DocumentNode.SelectNodes(xPath).Nodes();
+                return obj.ToList().Select(x => x.InnerText).LastOrDefault();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
+
+        private string Summary(string xPath)
+        {
+            try
+            {
+                var obj = Document.DocumentNode.SelectNodes(xPath);
+                var summaryList = String.Empty;
+                Save(obj).ToList().ForEach(x => summaryList += String.Format("{0} ", x));
+                return summaryList.Replace("\n"," ");
+                //return obj.ToList().Select(x => x.InnerText).LastOrDefault();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
+
     }
 }
