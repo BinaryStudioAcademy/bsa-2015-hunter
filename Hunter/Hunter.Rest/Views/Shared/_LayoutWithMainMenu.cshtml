@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link type="text/css" rel="stylesheet"  href="@Url.Content("~/Content/MyStyle.css")"/>
+    <link type="text/css" rel="stylesheet" href="@Url.Content("~/bower_components/bootstrap/dist/css/bootstrap.css")" />
+
     @RenderSection("css", false)
 </head>
 <body>
@@ -17,13 +19,18 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Home</a></li>
-                        <li class="popdown">
-                            <a class="popdown-toggle" href="./LongList.html">Candidates</a>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="">Candidates<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Add new</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Campaigns</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="">Vacancies<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Add new</a></li>
+                            </ul>
+                        </li>
                         <li><a href="#">Statistics</a></li>
                         <li><a href="#">Fiels</a></li>
                         <li class="dropdown">
@@ -36,15 +43,16 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Activity<span class="badge">14</span></a></li>
+                        <li><a href="#">Activity<span class="badge">20</span></a></li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
     @RenderBody()
+    
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/bower_components/bootstrap/dist/js/bootstrap.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
