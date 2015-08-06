@@ -19,7 +19,7 @@ namespace Hunter.Rest.Controllers
             _activityService = activityService;
         }
 
-        [Authorize]
+       
         [HttpGet]
         [Route("")]
         public HttpResponseMessage GetActivities()
