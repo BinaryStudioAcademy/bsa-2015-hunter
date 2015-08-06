@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Hunter.DataAccess.Entities;
 
 namespace Hunter.Services.Dto
@@ -42,5 +43,7 @@ namespace Hunter.Services.Dto
         public int Resolution { get; set; }
 
         public bool ShortListed { get; set; }
+
+        public DateTime DateOfBirth {get; set; } 
     }
 }

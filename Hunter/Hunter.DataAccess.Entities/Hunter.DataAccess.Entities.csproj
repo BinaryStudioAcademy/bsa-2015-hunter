@@ -84,6 +84,10 @@
     <Compile Include="Migrations\201508051046015_ChangeNameOfFieldsInCandidates.Designer.cs">
       <DependentUpon>201508051046015_ChangeNameOfFieldsInCandidates.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508061314289_Added_DateOfBirth_field_to_Candidate.cs" />
+    <Compile Include="Migrations\201508061314289_Added_DateOfBirth_field_to_Candidate.Designer.cs">
+      <DependentUpon>201508061314289_Added_DateOfBirth_field_to_Candidate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -96,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508051046015_ChangeNameOfFieldsInCandidates.resx">
       <DependentUpon>201508051046015_ChangeNameOfFieldsInCandidates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508061314289_Added_DateOfBirth_field_to_Candidate.resx">
+      <DependentUpon>201508061314289_Added_DateOfBirth_field_to_Candidate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
