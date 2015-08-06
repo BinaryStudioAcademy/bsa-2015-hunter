@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hunter.DataAccess.Db;
+﻿using System.Linq;
 using Hunter.DataAccess.Entities;
 using Hunter.DataAccess.Entities.Enums;
+using Hunter.Services.Dto;
 
-namespace Hunter.Services
+namespace Hunter.Services.Extensions
 {
     static public class CandidateExtensions
     {

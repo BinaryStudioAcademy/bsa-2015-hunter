@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Hunter.Common.Interfaces;
-using Hunter.DataAccess.Db;
 using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Entities;
 using Hunter.DataAccess.Interface.Base;
-using Hunter.DataAccess.Interface.Repositories;
+using Hunter.Services.Dto;
+using Hunter.Services.Extensions;
+using Hunter.Services.Interfaces;
 
 namespace Hunter.Services
 {
