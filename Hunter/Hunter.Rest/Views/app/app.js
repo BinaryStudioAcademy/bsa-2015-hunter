@@ -35,7 +35,8 @@
             $routeProvider
                 .when('/candidate', {
                     templateUrl: viewPath + 'Candidate/list.html',
-                    controller: 'candidateListCtrl',
+                    controller: 'CandidateAddEditController',
+                    controllerAs: 'candidateAddEditCtrl',
                     reloadOnSearch: false
                 })
                 .when('/candidate/:cid', {
@@ -46,9 +47,10 @@
                     templateUrl: viewPath + 'Candidate/profile.html',
                     controller: 'candidateCtrl'
                 })
-                .when('/candidate/add', {
+                .when('/candidate/:id', {
                     templateUrl: viewPath + 'Candidate/edit.html',
-                    controller: 'candidateEditCtrl'
+                    controller: 'CandidateAddEditController',
+                    controllerAs: 'candidateAddEditCtrl'
                 })
                 .when('/candidate/edit/:id', {
                     templateUrl: viewPath + 'Candidate/edit.html',
