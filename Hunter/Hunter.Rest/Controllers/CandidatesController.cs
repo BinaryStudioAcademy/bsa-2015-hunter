@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
-using Hunter.DataAccess.Db;
-using Hunter.DataAccess.Interface;
-using Hunter.Services;
 using Hunter.DataAccess.Entities;
+using Hunter.Services.Interfaces;
 
 namespace Hunter.Rest.Controllers
 {

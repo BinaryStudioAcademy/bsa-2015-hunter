@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hunter.DataAccess.Db;
+﻿using System.Linq;
 using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Entities.Enums;
+using Hunter.Services.Dto;
 
-namespace Hunter.Services
+namespace Hunter.Services.Extensions
 {
     static public class CandidateExtensions
     {
@@ -57,9 +54,9 @@ namespace Hunter.Services
                 Card = dto.Cards.ToList(),
                 Pool = dto.Pools.ToList(),
                 Photo = dto.Photo,
-                Resolution = (ResolutionEnum)dto.Resolution,
+                Resolution = (Resolution)dto.Resolution,
                 Shortlisted = dto.ShortListed,
-                Origin = (OriginEnum)dto.Origin
+                Origin = (Origin)dto.Origin
             };
             return model;
         }

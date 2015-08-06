@@ -1,13 +1,8 @@
-﻿using Hunter.DataAccess.Entities;
-using Hunter.DataAccess.Interface;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
+using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Interface.Base;
 
-namespace Hunter.DataAccess.Db
+namespace Hunter.DataAccess.Db.Base
 {
     public class DatabaseFactory : Disposable, IDatabaseFactory
     {

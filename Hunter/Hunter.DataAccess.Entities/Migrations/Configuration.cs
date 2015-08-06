@@ -1,11 +1,8 @@
-namespace Hunter.DataAccess.Db.Migrations
-{
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Hunter.DataAccess.Entities.HunterDbContext>
+namespace Hunter.DataAccess.Entities.Migrations
+{
+    internal sealed class Configuration : DbMigrationsConfiguration<Entities.HunterDbContext>
     {
         public Configuration()
         {

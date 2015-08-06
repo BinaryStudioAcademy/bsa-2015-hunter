@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Interface.Base;
+using Hunter.DataAccess.Interface.Repositories;
 
 namespace Hunter.Services
 {

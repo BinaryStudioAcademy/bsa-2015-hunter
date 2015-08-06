@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Hunter.DataAccess.Entities.Enums;
 
 namespace Hunter.DataAccess.Entities
 {
@@ -12,8 +13,8 @@ namespace Hunter.DataAccess.Entities
         {
             Card = new HashSet<Card>();
             Pool = new HashSet<Pool>();
-            Origin = (int)OriginEnum.Sourced;
-            Resolution = (int)ResolutionEnum.None;
+            Origin = (int)Origin.Sourced;
+            Resolution = (int)Resolution.None;
             Shortlisted = false;
         }
 
@@ -60,9 +61,9 @@ namespace Hunter.DataAccess.Entities
 
         public virtual UserProfile UserProfile { get; set; }
 
-        public OriginEnum Origin { get; set; }
+        public Origin Origin { get; set; }
 
-        public ResolutionEnum Resolution { get; set; }
+        public Resolution Resolution { get; set; }
 
         public bool Shortlisted { get; set; }
 

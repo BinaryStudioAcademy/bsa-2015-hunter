@@ -1,6 +1,6 @@
-﻿namespace Hunter.DataAccess.Entities
+﻿namespace Hunter.DataAccess.Entities.Enums
 {
-    public enum ResolutionEnum
+    public enum Resolution
     {
         None,
         Available,

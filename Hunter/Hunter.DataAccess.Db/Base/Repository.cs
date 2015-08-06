@@ -1,11 +1,11 @@
-﻿using Hunter.DataAccess.Entities;
-using Hunter.DataAccess.Interface;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Interface.Base;
 
-namespace Hunter.DataAccess.Db
+namespace Hunter.DataAccess.Db.Base
 {
     public abstract class Repository<T> : IRepository<T> where T : class, IEntity,new()
     {

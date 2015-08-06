@@ -65,11 +65,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PatternRepository\DatabaseFactory.cs" />
-    <Compile Include="PatternRepository\Disposable.cs" />
-    <Compile Include="PatternRepository\Repository.cs" />
-    <Compile Include="PatternRepository\UnitOfWork.cs" />
-    <Compile Include="PatternRepository\UnitOfWorkFactory.cs" />
+    <Compile Include="Base\DatabaseFactory.cs" />
+    <Compile Include="Base\Disposable.cs" />
+    <Compile Include="Base\Repository.cs" />
+    <Compile Include="Base\UnitOfWork.cs" />
+    <Compile Include="Base\UnitOfWorkFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ActivityRepository.cs" />
     <Compile Include="Repositories\CandidateRepository.cs" />

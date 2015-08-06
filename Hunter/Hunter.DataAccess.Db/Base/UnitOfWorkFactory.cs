@@ -1,4 +1,4 @@
-﻿namespace Hunter.DataAccess.Db
+﻿namespace Hunter.DataAccess.Db.Base
 {
     //public class UnitOfWorkFactory : IUnitOfWorkFactory
     //{

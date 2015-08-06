@@ -34,9 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Hunter.DataAccess.Db">
-      <HintPath>..\Hunter.DataAccess.Db\bin\Debug\Hunter.DataAccess.Db.dll</HintPath>
-    </Reference>
     <Reference Include="Hunter.DataAccess.Entities">
       <HintPath>..\Hunter.DataAccess.Entities\bin\Debug\Hunter.DataAccess.Entities.dll</HintPath>
     </Reference>
