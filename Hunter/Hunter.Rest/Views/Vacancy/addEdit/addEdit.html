@@ -1,52 +1,57 @@
 ﻿<div class="container">
     <h3>{{vacancyAddEditCtrl.controllerName}}</h3>
-    <div ng-submit="submitVacancy()">
-        <input hidden name="Id" />
-        <div class="row">
-            <div class="col-md-3">
-                Name
-                <input ng-model="vacancyAddEditCtrl.newVacancy.Name" type="text" name="Name" size="50" maxlength="300" ng-required />
-            </div>
+    <input hidden name="Id" />
+    <div class="row">
+        <div class="col-md-3">
+            <label>Name</label>
+            <input ng-model="vacancyAddEditCtrl.newVacancy.Name" type="text" name="Name" class="form-control" size="50" maxlength="300" ng-required />
         </div>
-        <div class="row">
-            <div class="col-md-3">
-                Status
-                <select ng-model="vacancyAddEditCtrl.newVacancy.Status" name="Status">
-                    <option value="0">Open</option>
-                    <option value="1">In Archive</option>
-                </select>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <label>Start Date</label>
+            <input type="date" ng-model="vacancyAddEditCtrl.newVacancy.StartDate" name="StartDate" class="form-control" />
         </div>
-        <div class="row">
-            <div class="col-md-3">
-                Start Date
-                <input type="date" ng-model="vacancyAddEditCtrl.newVacancy.StartDate" name="StartDate" />
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <label>End Date</label>
+            <input type="date" ng-model="vacancyAddEditCtrl.newVacancy.EndDate" name="EndDate" class="form-control" value="" />
         </div>
-        <div class="row">
-            <div class="col-md-3">
-                End Date
-                <input type="date" ng-model="vacancyAddEditCtrl.newVacancy.EndDate" name="EndDate" value="" />
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <label>Location</label>
+            <input type="text" ng-model="vacancyAddEditCtrl.newVacancy.Location" name="Location" class="form-control" value="" />
         </div>
-        <div class="row">
-            <div class="col-md-3">
-                Description
-                <textarea ng-model="vacancyAddEditCtrl.newVacancy.Description" name="Description" maxlength="4000" cols="50" rows="10"></textarea>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <label>Status</label>
+            <select ng-model="vacancyAddEditCtrl.newVacancy.Status" name="Status">
+                <option value="0">Opened</option>
+                <option value="1">Draft</option>
+                <option value="2">Closed</option>
+            </select>
         </div>
-        <div class="row">
-            <div class="col-md-3">
-                Pool
-                <select ng-model="vacancyAddEditCtrl.newVacancy.PoolId" name="PoolId">
-                    <option ng-repeat="pool in vacancyAddEditCtrl.pools" value="{{pool.id}}">{{pool.name}}</option>
-                </select>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <label>Pool</label>
+            <select ng-model="vacancyAddEditCtrl.newVacancy.PoolId" name="PoolId">
+                <option ng-repeat="pool in vacancyAddEditCtrl.pools" value="{{pool.id}}">{{pool.name}}</option>
+            </select>
         </div>
-        <div class="row">
-            <div class="col-md-3">
-                <input type="submit" id="submit" value="Done" />
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <label>Note</label>
+            <textarea ng-model="vacancyAddEditCtrl.newVacancy.Description" name="Description" class="form-control" maxlength="4000" cols="50" rows="3"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <input class="btn btn-default" type="submit" id="submit" value="Done" ng-click="vacancyAddEditCtrl.submitVacancy()" />
         </div>
     </div>
 </div>

@@ -9,11 +9,10 @@
         '$location',
         'AuthService',
         'VacancyHttpService',
-        'AddEditService',
         'PoolsHttpService'
     ];
 
-    function VacancyAddEditController($location, authService, vacancyHttpService, addEditService, poolsHttpService) {
+    function VacancyAddEditController($location, authService, vacancyHttpService, poolsHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
 
@@ -21,9 +20,10 @@
         vm.selectedPool = null;
         vm.newVacancy = {
             Name: 'New vacancy',
-            Status: 0,
-            StartDate: Date.Now,
+            StartDate: new Date(),
             EndDate: null,
+            Location: '',
+            Status: 'Open',
             Description: 'Description of vacancy',
             PoolId: 0
         };
@@ -33,9 +33,10 @@
         }, null);
 
         vm.submitVacancy = function () {
-            if (addEditService.validateData)
-                addEditService.addData(vm.newVacancy);
-            $location.url('/vacancy');
+            if (vacancyHttpService.validateVacancy(vm.newVacancy)) {
+                vacancyHttpService.addVacancy(vm.newVacancy);
+                $location.url('/vacancy/list');
+            }
         };
         //Here we should write all signatures for user actions callback method, for example,
 

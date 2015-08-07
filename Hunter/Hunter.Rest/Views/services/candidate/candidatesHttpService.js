@@ -13,8 +13,8 @@
         var service = {
             updateCandidate: updateCandidate,
             getCandidate: getCandidate,
-            getCandidateList: getCandidateList
-            addCandidate: addCandidate,
+            getCandidateList: getCandidateList,
+            addCandidate: addCandidate
         };
 
         function updateCandidate(body, successCallback, id) {
