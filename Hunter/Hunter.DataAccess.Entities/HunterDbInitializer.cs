@@ -20,13 +20,13 @@ namespace Hunter.DataAccess.Entities
             #endregion
 
             #region USERS
-            var recruiter1 = new User() { Login = "recruiter1", UserName = "Roxana Belinda", RoleId = 1, State = 0, PasswordHash = "245060e2a30d730c21b20ea15b1b7b27c18787871a2dd2dc87eba23861eff4010c7e0ca5b387731afaecf8e5b8e2e7286fa00e593832c103beb1dc0894e20175" };
+            var recruiter1 = new User() { Login = "recruiter@local.com", RoleId = 1, State = 0, PasswordHash = "AL1osj2Akgj8ezBwxcAnj+sn8jQxNU5xJfpkLQl9PKswryRZhwldGQOqFOntmG0zDQ==" };
             var recruiter2 = new User() { Login = "recruiter2", UserName = "Heaven Hayden", RoleId = 1, State = 0, PasswordHash = "4272d77a88d418148b10545a86f2d094c75e747aedd224294054db7b9bd4b930e03406cd5ef60b5905d5272dd93f318f55a55da7ca087550e783a2dd3829d866" };
             var recruiter3 = new User() { Login = "recruiter3", UserName = "Chantel Sherley", RoleId = 1, State = 0, PasswordHash = "e27f3ead50aa12b2a50b1ddf7ad619aeb69f37ca22ad50e834962c6f384f2ba5587d451cf1a2d8cdffe1f12ba9479d7bc62b2b85b28e0a6895c20cfba16903f8" };
-            var techspec1 = new User() { Login = "techspec1", UserName = "Edward Lennie", RoleId = 2, State = 0, PasswordHash = "9cdc19d8f9b2146dd580582fc9761b53456cd451dabd270f6cbe830c41892e99d15f02b694b077d881bfd528527bd3ba9afc46f8ee908ae375d16897a2c834f4" };
+            var techspec1 = new User() { Login = "techspec@local.com", RoleId = 2, State = 0, PasswordHash = "AL2W1658IHoHGMrIYZn00YgBhIQ9tN00wAkdLDrHLDtpfQq7bkjfwkxTyshYa5G4tQ==" };
             var techspec2 = new User() { Login = "techspec1", UserName = "Colin Tobias", RoleId = 2, State = 0, PasswordHash = "7ab8123c7ff047f3e556a5a2b3e2a8502944b54f4f62089635b3850ded96b3f700026af0684ba794bcafec70433ccce5a10368fdb2dcf1ac5658c37b422e6a04" };
             var techspec3 = new User() { Login = "techspec1", UserName = "Maddox Fulton", RoleId = 2, State = 0, PasswordHash = "fd088e4d0ead7cc5d1c2cfe385c3e9b763aeba92ac77ef2307fbb59604e14a896f706ac9d7f6788c9a99f7ee6175a0f46004eab324a5ef2ec93284276767c7a0" };
-            var admin = new User() { Login = "admin", UserName = "Walt Maynard", RoleId = 3, State = 0, PasswordHash = "c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd472634dfac71cd34ebc35d16ab7fb8a90c81f975113d6c7538dc69dd8de9077ec" };
+            var admin = new User() { Login = "admin@local.com", RoleId = 3, State = 0, PasswordHash = "AO+POAp4pSwtxgaOu74yRWoYALimtAjpWgsy1746KKw+NkKG+aFUB8UWLS89Jc98VQ==" };
 
             var users = new List<User> { recruiter1, recruiter2, recruiter3, techspec1, techspec2, techspec3, admin };
             users.ForEach(user => context.User.Add(user));
