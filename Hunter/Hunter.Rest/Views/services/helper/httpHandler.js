@@ -39,7 +39,7 @@
             var config = {
                 'method': httpObject.verb.toUpperCase(),
                 'url': httpObject.url,
-                'body': httpObject.body
+                'data': httpObject.body
             };
 
             $http(config)
