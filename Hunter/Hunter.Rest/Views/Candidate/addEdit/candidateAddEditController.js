@@ -10,11 +10,11 @@
         '$routeParams',
         'AuthService',
         'CandidateHttpService',
-        'AddEditService',
+        'CandidateAddEditService',
         'PoolsHttpService'
     ];
 
-    function CandidateAddEditController($location,$routeParams, authService, candidateHttpService, addEditService, poolsHttpService) {
+    function CandidateAddEditController($location, $routeParams, authService, candidateHttpService, candidateAddEditService, poolsHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         //vm.categories = [{ name: 'Select Candidate Category' }]; // .NET, JS, PHP
@@ -40,7 +40,7 @@
 
         (function () {
             // This is function for initialization actions, for example checking auth
-            if (authService.isLoggedIn()) {
+            if (true) {
                 if ($routeParams.id) {
                     id = $routeParams.id;
                     initializeFields();
@@ -60,14 +60,14 @@
 
             var candidate = createCandidateRequestBody();
             if (candidate && candidate.Id!=null) {
-                if (addEditService.validateData(candidate, vm.errorObject)) {
+                if (candidateAddEditService.validateData(candidate, vm.errorObject)) {
                     candidateHttpService.updateCandidate(candidate, successAddEditCandidate, candidate.Id);
                 } else {
                     //alertify.error('Some Fields Are Incorrect');
                     alert('Some Fields Are Incorrect');
                 }
             } else if (candidate) {
-                if (addEditService.validateData(candidate, vm.errorObject)) {
+                if (candidateAddEditService.validateData(candidate, vm.errorObject)) {
                     candidateHttpService.addCandidate(candidate, successAddEditCandidate);
                 } else {
                     //alertify.error('Some Fields Are Incorrect');
