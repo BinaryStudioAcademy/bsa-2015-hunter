@@ -3,9 +3,9 @@
 
     angular
         .module('hunter-app')
-        .controller('VacancyListtController', VacancyListtController);
+        .controller('VacancyListController', VacancyListController);
 
-    VacancyListtController.$inject = [
+    VacancyListController.$inject = [
         '$location',
         'AuthService',
         'CandidateHttpService'
@@ -13,7 +13,7 @@
 
     ];
 
-    function VacancyListtController($location, authService, candidateHttpService) {
+    function VacancyListController($location, authService, candidateHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         vm.someVariable = 'This is list vacancy page';
