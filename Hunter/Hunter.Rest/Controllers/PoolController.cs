@@ -50,14 +50,14 @@ namespace Hunter.Rest
         [System.Web.Mvc.HttpPut]
         public IHttpActionResult Put(int id, [FromBody] PoolViewModel poolViewModel)
         {
-            if (!_poolService.IsPoolExist(id))
+            if (!_poolService.IsPoolExist(id) || poolViewModel == null)
             {
                 return NotFound();
             }
-            
+
             poolViewModel.Id = id;
             _poolService.UpdatePool(poolViewModel);
-            
+
             return Ok(poolViewModel);
         }
 
