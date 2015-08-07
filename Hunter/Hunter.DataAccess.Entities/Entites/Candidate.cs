@@ -53,6 +53,9 @@ namespace Hunter.DataAccess.Entities
         public string Phone { get; set; }
 
         [StringLength(300)]
+        public string Linkedin { get; set; }
+
+        [StringLength(300)]
         public string Salary { get; set; }
 
         public double? YearsOfExperience { get; set; }

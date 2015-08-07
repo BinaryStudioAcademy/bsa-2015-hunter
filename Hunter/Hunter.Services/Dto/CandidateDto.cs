@@ -26,6 +26,8 @@ namespace Hunter.Services.Dto
 
         public string Phone { get; set; }
 
+        public string Linkedin { get; set; }
+
         public string Salary { get; set; }
 
         public double? YearsOfExperience { get; set; }
