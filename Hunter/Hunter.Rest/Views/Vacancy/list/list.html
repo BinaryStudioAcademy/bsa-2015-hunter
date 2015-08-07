@@ -1,4 +1,4 @@
-﻿456<!--should includ MyStyle.css -->
+﻿<!--should includ MyStyle.css -->
 <div class="container">
 
     <div class="row margin-bottom">
@@ -113,7 +113,7 @@
                         <th>Shortlisted</th>
                         <th>Added By</th>
                     </tr>
-                    <tr ng-repeat="vacancy in VacancyListCtrl.vacancies">
+                    <!--<tr ng-repeat="vacancy in VacancyListCtrl.vacancies">
                         <td>
                             <input type="checkbox">
                         </td>
@@ -124,8 +124,22 @@
                         <td>{{vacancy.endDate | date:'dd-MM-yyyy'}}</td>
                         <td>{{vacancy.countCandidates}}</td>
                         <td>{{vacancy.countShortListed}}</td>
-                        <td>Ulyana</td>
+                        <td>{{vacancy.addedByName}}</td>
+                    </tr> -->
+                    <tr dir-paginate="vacancy in VacancyListCtrl.vacancies | filter:q | itemsPerPage: VacancyListCtrl.pageSize" current-page="VacancyListCtrl.currentPage">
+                        <td>
+                            <input type="checkbox">
+                        </td>
+                        <td>
+                            <a href="#">{{vacancy.name}}</a>
+                        </td>
+                        <td>{{vacancy.startDate | date:'dd-MM-yyyy'}}</td>
+                        <td>{{vacancy.endDate | date:'dd-MM-yyyy'}}</td>
+                        <td>{{vacancy.countCandidates}}</td>
+                        <td>{{vacancy.countShortListed}}</td>
+                        <td>{{vacancy.addedByName}}</td>
                     </tr>
+                    
                 </table>
             </div>
             <div class="col-md-2">
@@ -141,17 +155,17 @@
         </form>
     </div>
 
+    
+
+
     <div class="row">
         <div class="text-center">
-            <ul class="pagination">
-                <li class="disabled"><a href="#">&laquo;</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&raquo;</a></li>
-            </ul>
+            <div ng-controller="OtherController" class="other-controller">
+                <small>this is in "OtherController"</small>
+                <div class="text-center">
+                    <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Views/vacancy/list/dirPagination.tpl.html"></dir-pagination-controls>
+                </div>
+            </div>
         </div>
     </div>
 </div>

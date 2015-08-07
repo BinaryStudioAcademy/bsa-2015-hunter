@@ -21,7 +21,8 @@ namespace Hunter.Services
                 Description = vacancy.Description,
                 PoolId = vacancy.PoolId,
                 CountCandidates = vacancy.Card.Count(),
-                CountShortListed = vacancy.Card.Where(e=>e.Candidate.Shortlisted == true).Count()
+                CountShortListed = vacancy.Card.Where(e=>e.Candidate.Shortlisted == true).Count(),
+                AddedByName = vacancy.User.Login
             };
             return v;
         }
