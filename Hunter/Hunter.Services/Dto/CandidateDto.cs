@@ -38,7 +38,7 @@ namespace Hunter.Services.Dto
 
         public List<Card> Cards { get; set; }
 
-        public List<Pool> Pools { get; set; }
+        public List<string> PoolNames { get; set; }
 
         public int Origin { get; set; }
 

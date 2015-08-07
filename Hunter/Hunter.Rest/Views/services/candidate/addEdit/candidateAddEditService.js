@@ -24,7 +24,14 @@
 //            } else {
 //                errorObject.someField = false;
 //            }
-
+            if (!data.FirstName) {
+                errorObject.message += ' First name; ';
+                noErrors = false;
+            }
+            if (!data.LastName) {
+                errorObject.message += ' Last name; ';
+                noErrors = false;
+            }
             return noErrors;
         }
 

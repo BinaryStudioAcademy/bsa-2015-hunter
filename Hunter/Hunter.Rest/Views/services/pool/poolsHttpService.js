@@ -3,20 +3,27 @@
         .factory('PoolsHttpService', PoolsHttpService);
     
     PoolsHttpService.$inject = [
-    'HttpHandler'
+    'HttpHandler',
+    '$q'
     ];
-    function PoolsHttpService(httpHandler) {
+    function PoolsHttpService(httpHandler, $q) {
         var service = {
             getAllPools : getAllPools
         }
 
-        function getAllPools(successCallback,body) {
+        function getAllPools() {
+            var deferred = $q.defer();
             httpHandler.sendRequest({
                 verb: 'GET',
                 url: '/api/pool',
-                body: body,
-                successCallback: successCallback,
+                successCallback: function(result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback:function(status) {
+                    console.log("get pools error " + status);
+                }
             });
+            return deferred.promise;
         }
 
         return service;

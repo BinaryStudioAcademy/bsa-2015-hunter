@@ -635,7 +635,7 @@
     <Content Include="Views\app\app.js" />
     <Content Include="Views\candidate\addEdit\addEdit.html" />
     <Content Include="Views\candidate\addEdit\candidateAddEditController.js" />
-    <Content Include="Views\candidate\list\candidateListtController.js" />
+    <Content Include="Views\candidate\list\candidateListController.js" />
     <Content Include="Views\candidate\list\list.html" />
     <Content Include="Views\candidate\profile\candidateController.js" />
     <Content Include="Views\candidate\profile\profile.html" />

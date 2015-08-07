@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Hunter.DataAccess.Entities;
+using Hunter.Services.Dto;
 using Hunter.Services.Interfaces;
 
 namespace Hunter.Rest.Controllers
@@ -60,7 +61,7 @@ namespace Hunter.Rest.Controllers
 
         [HttpPost]
         [Route("")]
-        public HttpResponseMessage Post(Candidate candidate)
+        public HttpResponseMessage Post(CandidateDto candidate)
         {
             if (ModelState.IsValid)
             {
@@ -75,7 +76,7 @@ namespace Hunter.Rest.Controllers
 
         [HttpPut]
         [Route("{id:int}")]
-        public HttpResponseMessage Put(int id, Candidate candidate)
+        public HttpResponseMessage Put(int id, CandidateDto candidate)
         {
             if (ModelState.IsValid && id == candidate.Id)
             {

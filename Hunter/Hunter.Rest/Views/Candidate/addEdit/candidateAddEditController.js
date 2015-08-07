@@ -14,24 +14,28 @@
         'PoolsHttpService'
     ];
 
-    function CandidateAddEditController($location, $routeParams, authService, candidateHttpService, candidateAddEditService, poolsHttpService) {
+    function CandidateAddEditController($location, $routeParams, authService,
+        candidateHttpService, candidateAddEditService, poolsHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         //vm.categories = [{ name: 'Select Candidate Category' }]; // .NET, JS, PHP
+
+        vm.nameInTitle = '';
         vm.origins = [{ name: 'Sourced', value: 0 }, { name: 'Applied', value: 1 }];
         vm.resolutions = [
             { name: 'None', value: 0 }, { name: 'Available', value: 1 }, { name: 'Not interested', value: 2 },
             { name: 'Hired', value: 3 }, { name: 'Unfit', value: 4 }, { name: 'Now now', value: 5 }
         ];
-        vm.pools = null;
+        vm.pools = [];
         vm.candidate = null;
         vm.errorObject = {
-            emptyCategoryError: false
+            emptyCategoryError: false,
+            message :''
         }
 
         vm.selectedOrigin = vm.origins[0];
         vm.selectedResolution = vm.resolutions[0];
-        vm.selectedPools = null;
+        vm.selectedPools = [];
         var id = null;
         var Pools = [];
 
@@ -40,15 +44,12 @@
 
         (function () {
             // This is function for initialization actions, for example checking auth
-            if (true) {
-                if ($routeParams.id) {
-                    id = $routeParams.id;
+            if (true) { // todo : add checking auth
+                poolsHttpService.getAllPools().then(function(data) {
+                    vm.pools = data;
                     initializeFields();
-                }
-                poolsHttpService.getAllPools(function (response) {
-                    vm.pools = response.data;
-                }, null);
-
+                });
+                
                 // Can Make Here Any Actions For Data Initialization, for example, http queries, etc.
             } else {
                 $location.url('/login');
@@ -64,16 +65,17 @@
                     candidateHttpService.updateCandidate(candidate, successAddEditCandidate, candidate.Id);
                 } else {
                     //alertify.error('Some Fields Are Incorrect');
-                    alert('Some Fields Are Incorrect');
+                    alert('Some Fields Are Incorrect : ' + vm.errorObject.message);
                 }
             } else if (candidate) {
                 if (candidateAddEditService.validateData(candidate, vm.errorObject)) {
                     candidateHttpService.addCandidate(candidate, successAddEditCandidate);
                 } else {
                     //alertify.error('Some Fields Are Incorrect');
-                    alert('Some Fields Are Incorrect');
+                    alert('Some Fields Are Incorrect : ' + vm.errorObject.message);
                 }
             }
+            vm.errorObject.message = '';
         }
 
         // not user-event functions
@@ -84,17 +86,20 @@
 
             Pools = [];
             for (var i = 0; i<vm.selectedPools.length; i++) {
-                var pool = { id: vm.selectedPools[i].id, name: vm.selectedPools[i].name };
-                Pools.push(pool);
+//                var pool = { id: vm.selectedPools[i].id, name: vm.selectedPools[i].name };
+                Pools.push(vm.selectedPools[i].name);
             }
-            var DateOfBirth = vm.DateOfBirth;
-
-            // taking offset to account, otherwise a wrong date might be saved to database
-            if (DateOfBirth.getTimezoneOffset > 0) {
-                DateOfBirth.setMinutes(DateOfBirth.getMinutes() + DateOfBirth.getTimezoneOffset());
-            } else {
-                DateOfBirth.setMinutes(DateOfBirth.getMinutes() - DateOfBirth.getTimezoneOffset());
+            
+            if (vm.DateOfBirth) {
+                var DateOfBirth = vm.DateOfBirth;
+                // taking offset to account, otherwise a wrong date might be saved to database
+                if (DateOfBirth.getTimezoneOffset > 0) {
+                    DateOfBirth.setMinutes(DateOfBirth.getMinutes() + DateOfBirth.getTimezoneOffset());
+                } else {
+                    DateOfBirth.setMinutes(DateOfBirth.getMinutes() - DateOfBirth.getTimezoneOffset());
+                }
             }
+              
            
             var candidate = {
                 FirstName: vm.FirstName,
@@ -104,6 +109,7 @@
                 Company: vm.Company,
                 Location: vm.Location,
                 Skype: vm.Skype,
+                Linkedin : vm.LinkedIn,
                 Phone: vm.Phone,
                 Salary: vm.Salary,
                 ResumeId: 1,
@@ -111,7 +117,7 @@
                 Resolution: Resolution,
                 ShortListed: vm.Shortlisted,
                 DateOfBirth: DateOfBirth,
-                Pools : Pools
+                PoolNames : Pools
             }
             if (id != null) {
                 candidate.Id = id;
@@ -120,6 +126,11 @@
         }
 
         function initializeFields() {
+            if ($routeParams.id) {
+                id = $routeParams.id;
+            } else {
+                return;
+            }   
             candidateHttpService.getCandidate(id, function(response) {
                 vm.FirstName = response.data.firstName;
                 vm.LastName = response.data.lastName;
@@ -129,17 +140,27 @@
                 vm.Location = response.data.location;
                 vm.Skype = response.data.skype;
                 vm.Phone = response.data.phone;
+                vm.LinkedIn = response.data.linkedin;
                 vm.Salary = response.data.salary;
                 vm.selectedOrigin = vm.origins[response.data.origin];
                 vm.selectedResolution = vm.resolutions[response.data.resolution];
-                vm.selectedPools = response.data.pools;
                 vm.ShortListed = response.data.shortlisted;
                 vm.DateOfBirth = new Date(response.data.dateOfBirth);
+
+                //getting already selected pools
+                for (var i = 0; i < response.data.poolNames.length; i++)
+                    for (var j = 0; j < vm.pools.length; j++) {
+                        if (response.data.poolNames[i] == vm.pools[j].name) {
+                            vm.selectedPools.push(vm.pools[j]);
+                        }
+                    }
+
+                vm.nameInTitle = response.data.firstName + " " + response.data.lastName;
             });
         }
 
         function successAddEditCandidate(data) {
-            //            $location.url('/cadidates/list');
+            $location.url('/candidate/list');
         }
     }
 })();

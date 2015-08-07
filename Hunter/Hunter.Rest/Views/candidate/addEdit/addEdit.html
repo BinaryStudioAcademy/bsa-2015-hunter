@@ -5,7 +5,7 @@
 </head>
 <body>
 <div ng-controller='CandidateAddEditController as ctrl'>
-    <h1>Add/edit candidate : {{ctrl.FirstName}} {{ctrl.LastName}}</h1>
+    <h1>Add/edit candidate : {{ctrl.nameInTitle}}</h1>
     <div class="row">
         <div class="col-md-4">
             <h3>General</h3><hr/>
@@ -40,6 +40,10 @@
             <div>
                 Skype
                 <input type="text" class="form-control" ng-model="ctrl.Skype"/>
+            </div>
+            <div>
+                LinkedIn
+                <input type="text" class="form-control" ng-model="ctrl.LinkedIn"/>
             </div>
             <div>
                 Phone
@@ -94,7 +98,7 @@
     </div>
     <div class="button-done">
         <button class="btn-lg" ng-click="ctrl.addEditCandidate()">DONE</button>
-        </div>
+    </div>
 </div>
 </body>
 </html>
