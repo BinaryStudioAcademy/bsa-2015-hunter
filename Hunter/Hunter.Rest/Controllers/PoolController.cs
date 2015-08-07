@@ -54,10 +54,10 @@ namespace Hunter.Rest
             {
                 return NotFound();
             }
-            
+
             poolViewModel.Id = id;
             _poolService.UpdatePool(poolViewModel);
-            
+
             return Ok(poolViewModel);
         }
 
