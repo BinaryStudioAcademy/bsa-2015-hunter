@@ -19,7 +19,9 @@ namespace Hunter.Services
                 StartDate = vacancy.StartDate,
                 EndDate = vacancy.EndDate,
                 Description = vacancy.Description,
-                PoolId = vacancy.PoolId
+                PoolId = vacancy.PoolId,
+                CountCandidates = vacancy.Card.Count(),
+                CountShortListed = vacancy.Card.Where(e=>e.Candidate.Shortlisted == true).Count()
             };
             return v;
         }
@@ -34,6 +36,7 @@ namespace Hunter.Services
                 EndDate = vacancy.EndDate,
                 Description = vacancy.Description,
                 PoolId = vacancy.PoolId
+                
             };
             return v;
         }
