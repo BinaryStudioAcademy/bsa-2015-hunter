@@ -16,6 +16,7 @@
         var vm = this;
 
         VacancyHttpService.getVacancies().then(function (result) {
+            console.log(result);
             vm.vacancies = result;
         });
     }

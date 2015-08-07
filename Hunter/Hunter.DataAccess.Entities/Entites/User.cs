@@ -1,4 +1,5 @@
 using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
@@ -9,6 +10,10 @@ namespace Hunter.DataAccess.Entities
     [Table("User")]
     public class User : IUser<int>, IEntity
     {
+        public User()
+        { 
+            Vacancy = new HashSet<Vacancy>();
+        }
         public int Id { get; set; }
 
         [Required]
@@ -24,6 +29,8 @@ namespace Hunter.DataAccess.Entities
         public int RoleId { get; set; }
 
         public virtual UserRole UserRole { get; set; }
+
+        public virtual ICollection<Vacancy> Vacancy { get; set; }
 
         [NotMapped]
         public string UserName
