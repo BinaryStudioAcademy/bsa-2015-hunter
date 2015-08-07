@@ -6,10 +6,13 @@
         .controller('vacancyListCtrl', vacancyListCtrl);
 
     vacancyListCtrl.$inject = [
-        '$scope'
+        '$scope',
+        'VacancyHttpService'
     ];
 
-    function vacancyListCtrl($scope) {
-        $scope.vacancy = "junior QA";
+    function vacancyListCtrl($scope, VacancyHttpService) {
+        VacancyHttpService.getVacancies().then(function (result) {
+            $scope.vacancies = result;
+        });
     }
 })();

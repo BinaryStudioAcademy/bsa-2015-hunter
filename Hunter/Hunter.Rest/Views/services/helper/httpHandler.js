@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('hunter-handlers', [])
+        .module('hunter-app')
         .factory('HttpHandler', HttpHandler);
 
     HttpHandler.$inject = [

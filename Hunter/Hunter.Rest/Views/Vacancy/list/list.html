@@ -113,41 +113,15 @@
                         <th>Shortlisted</th>
                         <th>Added By</th>
                     </tr>
-                    <tr>
+                    <tr ng-repeat="vacancy in vacancies">
                         <td>
                             <input type="checkbox">
                         </td>
                         <td>
-                            <a href="#">Junior .net</a>
+                            <a href="#">{{vacancy.name}}</a>
                         </td>
-                        <td>01.08.2015</td>
-                        <td>20.08.2015</td>
-                        <td>15</td>
-                        <td>4</td>
-                        <td>Kate</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                        <td>
-                            <a href="#">Junior php</a>
-                        </td>
-                        <td>10.07.2015</td>
-                        <td>01.08.2015</td>
-                        <td>6</td>
-                        <td>2</td>
-                        <td>Ulyana</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                        <td>
-                            <a href="#">{{vacancy}}</a>
-                        </td>
-                        <td>10.07.2015</td>
-                        <td>01.08.2015</td>
+                        <td>{{vacancy.startDate | date:'dd-MM-yyyy'}}</td>
+                        <td>{{vacancy.endDate | date:'dd-MM-yyyy'}}</td>
                         <td>6</td>
                         <td>2</td>
                         <td>Ulyana</td>
