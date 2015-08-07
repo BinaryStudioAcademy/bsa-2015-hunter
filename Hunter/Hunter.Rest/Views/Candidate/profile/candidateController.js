@@ -17,14 +17,14 @@
         var vm = this;
 
 
-        (function() {
-            // This is function for initialization actions, for example checking auth
-            if (authService.isLoggedIn()) {
-            // Can Make Here Any Actions For Data Initialization, for example, http queries, etc.
-            } else {
-                $location.url('/login');
-            }
-        })();
+        //(function() {
+        //    // This is function for initialization actions, for example checking auth
+        //    if (authService.isLoggedIn()) {
+        //    // Can Make Here Any Actions For Data Initialization, for example, http queries, etc.
+        //    } else {
+        //        $location.url('/login');
+        //    }
+        //})();
 
         vm.candidate;
         candidateHttpService.getCandidate(getCandidateID($location.path()), function (data) {

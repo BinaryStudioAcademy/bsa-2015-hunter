@@ -21,9 +21,14 @@
             $routeProvider
                 .when('/vacancy/list', {
                     templateUrl: viewPath + 'vacancy/list/list.html',
-                    controller:  "VacancyListtController",
+                    controller: "vacancyListCtrl",
                     controllerAs: 'vacancyListCtrl',
                     reloadOnSearch: false
+                })
+                .when('/vacancy/edit', {
+                    templateUrl: viewPath + 'vacancy/addEdit/addEdit.html',
+                    controller: "VacancyAddEditController",
+                    controllerAs: 'vacancyAddEditCtrl'
                 })
                 .when('/vacancy/:id', {
                     templateUrl: viewPath + 'vacancy/profile/profile.html',
@@ -42,6 +47,11 @@
                     controller: 'CandidateListController',
                     controllerAs: 'candidateListCtrl',
                     reloadOnSearch: false
+                })
+                .when('/candidate/edit', {
+                    templateUrl: viewPath + 'candidate/addEdit/addEdit.html',
+                    controller: 'CandidateAddEditController',
+                    controllerAs: 'candidateAddEditCtrl'
                 })
                 .when('/candidate/:cid', {
                     templateUrl: viewPath + 'candidate/profile/profile.html',
