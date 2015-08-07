@@ -60,14 +60,14 @@
 
             var candidate = createCandidateRequestBody();
             if (candidate && candidate.Id!=null) {
-                if (addEditService.validateData(candidate, vm.errorObject)) {
+                if (candidateAddEditService.validateData(candidate, vm.errorObject)) {
                     candidateHttpService.updateCandidate(candidate, successAddEditCandidate, candidate.Id);
                 } else {
                     //alertify.error('Some Fields Are Incorrect');
                     alert('Some Fields Are Incorrect');
                 }
             } else if (candidate) {
-                if (addEditService.validateData(candidate, vm.errorObject)) {
+                if (candidateAddEditService.validateData(candidate, vm.errorObject)) {
                     candidateHttpService.addCandidate(candidate, successAddEditCandidate);
                 } else {
                     //alertify.error('Some Fields Are Incorrect');
