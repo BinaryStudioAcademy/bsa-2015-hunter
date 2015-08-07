@@ -1,10 +1,12 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-    <meta charset="utf-8" />
-</head>
-<body>
-    <h1>Pool list</h1>
-</body>
-</html>
+﻿<div class="container" >
+    <ul class="column_data">
+        <li ng-repeat="pool in poolCtrl.poolsList">
+            <p>
+                <strong>Name: </strong>{{pool.name}} (id {{pool.id}}) <a href="../../#/pool/edit/{{pool.id}}">Edit</a>
+            </p>
+        </li>
+    </ul>
+    
+    
+</div>
+

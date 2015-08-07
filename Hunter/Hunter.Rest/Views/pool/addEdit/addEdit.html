@@ -1,10 +1,9 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-	<meta charset="utf-8" />
-</head>
-<body>
-    <h1>Pool add / edit</h1>
-</body>
-</html>
+﻿<div class="container">
+    <form name="editForm">
+        <h4>Edit a Pool</h4>
+        <input ng-model="poolAddEditCtrl.pool.name" title="Name" type="text" />
+        <input type="submit" value="Edit Pool" ng-click="poolAddEditCtrl.PoolEdit()"/><a href="../../#/pool">Cancel</a>
+    </form>
+
+</div>
+
