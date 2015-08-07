@@ -40,7 +40,7 @@
 
         (function () {
             // This is function for initialization actions, for example checking auth
-            if (authService.isLoggedIn()) {
+            if (true) {
                 if ($routeParams.id) {
                     id = $routeParams.id;
                     initializeFields();
