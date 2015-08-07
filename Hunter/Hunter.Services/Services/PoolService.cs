@@ -93,7 +93,7 @@ namespace Hunter.Services
         {
             try
             {
-                return _poolRepository.All().Any(p => string.Equals(p.Name, name, StringComparison.CurrentCultureIgnoreCase));
+                return _poolRepository.Query().Any(p => string.Equals(p.Name, name, StringComparison.CurrentCultureIgnoreCase));
             }
             catch (Exception ex)
             {
@@ -106,7 +106,7 @@ namespace Hunter.Services
         {
             try
             {
-                return _poolRepository.All().Any(p => p.Id == id);
+                return _poolRepository.Query().Any(p => p.Id == id);
             }
             catch (Exception ex)
             {

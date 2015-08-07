@@ -9,15 +9,15 @@
         "$location",
         "AuthService",
         "HttpHandler",
-        "$routeParams"
+        "$routeParams",
     ];
 
     function PoolAddEditController($location, AuthService, HttpHandler, $routeParams) {
         var vm = this;
-        vm.poolUrl = '/api/pool/' + $routeParams.id;
+        vm.poolUrl = "/api/pool/" + $routeParams.id;
         HttpHandler.sendRequest({
             url: vm.poolUrl,
-            verb: 'GET',
+            verb: "GET",
             successCallback: function (result) {
                 console.log(result.data);
                 vm.pool = result.data;
@@ -28,9 +28,9 @@
         vm.PoolEdit = function () {
             //console.log("bingo" + vm.poolUrl + " " + vm.pool.name);
             HttpHandler.sendRequest({
-                url:"/api/pool/1",
+                url: vm.poolUrl,
                 verb: "PUT",
-                body: JSON.stringify({ "id": 1, "name": "test" }),
+                body: JSON.stringify(vm.pool),
                 //body: { "id": 1, "name": "test1" }
                 successCallback: function (result) {
                     console.log(result);
@@ -38,10 +38,17 @@
                 },
                 errorCallback: function (result) { console.log(result); }
             });
+
+            // vm.RedirectToPool();
         };
 
-        vm.PoolEdit();
+        //vm.PoolEdit();
 
+        vm.RedirectToPool = function() {
+            $location.path("http://localhost:53147/#/pool");
+        }
+
+        
     }
 
 
