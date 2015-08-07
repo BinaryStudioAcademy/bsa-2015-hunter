@@ -14,18 +14,18 @@
             // TODO make similar for other entities (naming, routing)
             $routeProvider
                 .when('/vacancy/list', {
-                    templateUrl: viewPath + 'Vacancy/list/list.html',
+                    templateUrl: viewPath + 'vacancy/list/list.html',
                     controller:  "VacancyListtController",
                     controllerAs: 'vacancyListCtrl',
                     reloadOnSearch: false
                 })
                 .when('/vacancy/:id', {
-                    templateUrl: viewPath + 'Vacancy/profile/profile.html',
+                    templateUrl: viewPath + 'vacancy/profile/profile.html',
                     controller:  "VacancyController",
                     controllerAs: 'vacancyCtrl'
                 })
                 .when('/vacancy/edit/:id', {
-                    templateUrl: viewPath + 'Vacancy/addEdit/addEdit.html',
+                    templateUrl: viewPath + 'vacancy/addEdit/addEdit.html',
                     controller: "VacancyAddEditController",
                     controllerAs: 'vacancyAddEditCtrl'
                 });
@@ -38,12 +38,12 @@
                     reloadOnSearch: false
                 })
                 .when('/candidate/:cid', {
-                    templateUrl: viewPath + 'Candidate/profile/profile.html',
+                    templateUrl: viewPath + 'candidate/profile/profile.html',
                     controller: 'CandidateController',
                     controllerAs: 'candidateCtrl'
                 })
                 .when('/vacancy/:vid/candidate/:cid', {
-                    templateUrl: viewPath + 'Candidate/profile/profile.html',
+                    templateUrl: viewPath + 'candidate/profile/profile.html',
                     controller: 'CandidateController',
                     controllerAs: 'candidateCtrl'
                 })
@@ -53,10 +53,21 @@
                     controllerAs: 'candidateAddEditCtrl'
                 });
 
+            $routeProvider
+               .when('/pools/list', {
+                   templateUrl: viewPath + 'pool/list/list.html'
+               })
+               .when('/pools/:id', {
+                   templateUrl: viewPath + 'pool/profile/profile.html'
+               })
+               .when('/pools/edit/:id', {
+                   templateUrl: viewPath + 'pool/addEdit/addEdit.html'
+
+               });
 
             //result on statistics button click (slide 1)
             $routeProvider.when('/statistics', {
-                templateUrl: viewPath + 'Statistics/list.html',
+                templateUrl: viewPath + 'statistics/list.html',
                 controller: 'StatisticsController',
                 controllerAs: 'statisticsCtrl'
             })
