@@ -57,6 +57,20 @@
                     controller: 'vacancyEditCtrl'
                 });
 
+            $routeProvider
+                .when('/pool', {
+                    templateUrl: viewPath + 'pool/list/list.html',
+                    controller: 'PoolListController',
+                    controllerAs: 'poolCtrl'
+                    //reloadOnSearch: false
+                });
+
+            $routeProvider
+                .when("/pool/edit/:id", {
+                    templateUrl: viewPath + "pool/addEdit/addEdit.html",
+                    controller: "PoolAddEditController",
+                    controllerAs: "poolAddEditCtrl"
+                });
 
             //result on statistics button click (slide 1)
             $routeProvider.when('/statistics', {
