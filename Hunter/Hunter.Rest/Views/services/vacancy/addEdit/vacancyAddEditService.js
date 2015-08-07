@@ -5,11 +5,11 @@
         .module('hunter-app')
         .factory('VacancyAddEditService', VacancyAddEditService);
 
-    AddEditService.$inject = [
+    VacancyAddEditService.$inject = [
         'HttpHandler'
     ];
 
-    function AddEditService(httpHandler) {
+    function VacancyAddEditService(httpHandler) {
         var service = {
             validateData: validateData,
             addData: addData

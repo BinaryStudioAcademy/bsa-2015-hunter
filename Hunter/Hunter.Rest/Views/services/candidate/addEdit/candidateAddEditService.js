@@ -5,9 +5,9 @@
         .module('hunter-app')
         .factory('CandidateAddEditService', CandidateAddEditService);
 
-    AddEditService.$inject = [];
+    CandidateAddEditService.$inject = [];
 
-    function AddEditService() {
+    function CandidateAddEditService() {
         var service = {
             validateData: validateData
         };
