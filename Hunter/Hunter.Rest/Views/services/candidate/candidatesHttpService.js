@@ -1,4 +1,4 @@
-﻿(function() {
+﻿(function () {
     'use strict';
 
     angular
@@ -14,16 +14,24 @@
             updateCandidate: updateCandidate,
             getCandidate: getCandidate,
             getCandidateList: getCandidateList
+            addCandidate: addCandidate,
         };
 
-        function updateCandidate(body, successCallback) {
+        function updateCandidate(body, successCallback, id) {
             httpHandler.sendRequest({
-                verb: 'GET',
-                url: '/api/candidate/',
+                verb: 'PUT',
+                url: '/api/candidates/'+id,
                 body: body,
-                successCallback: successCallback,
-                errorMessageToDev: 'UPDATE CANDIDATE INFO ERROR: ',
-                errorMessageToUser: 'Update Failed'
+                successCallback: successCallback
+            });
+        }
+
+        function addCandidate(body, successCallback) {
+            httpHandler.sendRequest({
+                verb: 'POST',
+                url: 'api/candidates/',
+                body: body,
+                successCallback: successCallback
             });
         }
 
