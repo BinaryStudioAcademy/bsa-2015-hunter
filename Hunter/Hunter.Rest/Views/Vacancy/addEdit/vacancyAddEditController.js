@@ -9,11 +9,11 @@
         '$location',
         'AuthService',
         'VacancyHttpService',
-        'AddEditService',
+        'VacancyAddEditService',
         'PoolsHttpService'
     ];
 
-    function VacancyAddEditController($location, authService, vacancyHttpService, addEditService, poolsHttpService) {
+    function VacancyAddEditController($location, authService, vacancyHttpService, vacancyAddEditService, poolsHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
 

@@ -10,11 +10,11 @@
         '$routeParams',
         'AuthService',
         'CandidateHttpService',
-        'AddEditService',
+        'CandidateAddEditService',
         'PoolsHttpService'
     ];
 
-    function CandidateAddEditController($location,$routeParams, authService, candidateHttpService, addEditService, poolsHttpService) {
+    function CandidateAddEditController($location, $routeParams, authService, candidateHttpService, candidateAddEditService, poolsHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         //vm.categories = [{ name: 'Select Candidate Category' }]; // .NET, JS, PHP

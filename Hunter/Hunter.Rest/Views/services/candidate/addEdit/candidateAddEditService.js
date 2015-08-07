@@ -3,7 +3,7 @@
 
     angular
         .module('hunter-app')
-        .factory('AddEditService', AddEditService);
+        .factory('CandidateAddEditService', CandidateAddEditService);
 
     AddEditService.$inject = [];
 
