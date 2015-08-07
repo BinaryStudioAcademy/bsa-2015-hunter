@@ -131,8 +131,8 @@
         }
     ])
     .config(['$httpProvider', function ($httpProvider) {
-        $httpProvider.interceptors.push('authInterceptorService');
+        $httpProvider.interceptors.push('AuthInterceptorService');
     }])
-    .run(['authService', function (authService) {
-        authService.fillAuthData();
+    .run(['AuthService', function (AuthService) {
+        AuthService.fillAuthData();
     }]);

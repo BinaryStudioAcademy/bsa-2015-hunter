@@ -1,6 +1,12 @@
 ﻿(function () {
 'use strict';
-angular.module('hunter-app').factory('authInterceptorService', ['$q', '$injector', '$location', 'localStorageService', function ($q, $injector, $location, localStorageService) {
+    angular
+        .module('hunter-app')
+        .factory('AuthInterceptorService', AuthInterceptorService);
+
+    AuthInterceptorService.$inject = ['$q', '$injector', '$location', 'localStorageService'];
+
+    function AuthInterceptorService($q, $injector, $location, localStorageService) {
 
     var authInterceptorServiceFactory = {};
 
@@ -12,13 +18,12 @@ angular.module('hunter-app').factory('authInterceptorService', ['$q', '$injector
         if (authData) {
             config.headers.Authorization = 'Bearer ' + authData.token;
         }
-
         return config;
     }
 
     var _responseError = function (rejection) {
         if (rejection.status === 401) {
-            var authService = $injector.get('authService');
+            var authService = $injector.get('AuthService');
             
             authService.logOut();
             $location.path('/login');
@@ -30,5 +35,5 @@ angular.module('hunter-app').factory('authInterceptorService', ['$q', '$injector
     authInterceptorServiceFactory.responseError = _responseError;
 
     return authInterceptorServiceFactory;
-}]);
+}
 })();

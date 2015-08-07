@@ -1,27 +1,33 @@
 ﻿(function () {
     'use strict';
-    angular.module('hunter-app')
-        .controller('loginController', ['$scope', '$location', 'authService', 'HttpHandler', function ($scope, $location, authService, HttpHandler) {
+    angular
+        .module('hunter-app')
+        .controller('loginController', loginController);
 
-            $scope.loginData = {
-                userName: "",
-                password: ""
-            };
+    loginController.$inject = ['$scope', '$location', 'AuthService', 'HttpHandler'];
 
-            $scope.message = "";
 
-            $scope.login = function () {
+    function loginController($scope, $location, AuthService, HttpHandler) {
 
-                authService.login($scope.loginData).then(function (response) {
+        $scope.loginData = {
+            userName: "",
+            password: ""
+        };
 
-                    $location.path('/');
+        $scope.message = "";
 
-                },
-                 function (err) {
-                     $scope.message = err.error_description;
-                 });
-            };
+        $scope.login = function () {
 
-         
-        }]);
+            AuthService.login($scope.loginData).then(function (response) {
+
+                $location.path('/');
+
+            },
+             function (err) {
+                 $scope.message = err.error_description;
+             });
+        };
+
+
+    };
 })();

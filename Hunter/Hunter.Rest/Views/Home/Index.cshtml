@@ -9,6 +9,7 @@
 <script src="../../bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
 @*<script src='../../Scripts/app.js'></script>*@
 <script src='../../Views/app/app.js'></script>
+<script src="../../Views/services/helper/authInterceptorService.js"></script>
 <script src="../../Views/services/helper/authService.js"></script>
 <script src="../../Views/services/helper/httpHandler.js"></script>
 <script src="../../Views/services/candidate/candidatesHttpService.js"></script>
@@ -19,14 +20,11 @@
 <script src="../../Views/Vacancy/addEdit/vacancyAddEditController.js"></script>
 <script src="../../Views/Vacancy/list/vacancyListtController.js"></script>
 <script src="../../Views/Statistics/statisticsController.js"></script>
+<script src="../../Views/login/loginController.js"></script>
 
-<script src="../../Views/services/authInterceptorService.js"></script>
-<script src="../../Views/services/authService.js"></script>
-<script src="../../Views/services/helper/httpHandler.js"></script>
 <div ng-view></div>
 
 
-<script src="../../Views/login/loginController.js"></script>
 <script>
     angular.bootstrap(document, ['hunter-app']);
 </script>
