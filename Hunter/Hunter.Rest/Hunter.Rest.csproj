@@ -360,6 +360,7 @@
     <Content Include="Views\services\vacancy\vacancyHttpService.js" />
     <Content Include="Views\Vacancy\list\vacancyListController.js" />
     <Content Include="Views\Vacancy\list\list.html" />
+    <Content Include="Views\services\pool\poolsHttpService.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

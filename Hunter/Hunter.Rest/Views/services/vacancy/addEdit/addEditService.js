@@ -5,11 +5,14 @@
         .module('hunter-app')
         .factory('AddEditService', AddEditService);
 
-    AddEditService.$inject = [];
+    AddEditService.$inject = [
+        'HttpHandler'
+    ];
 
-    function AddEditService() {
+    function AddEditService(httpHandler) {
         var service = {
-            validateData: validateData
+            validateData: validateData,
+            addData: addData
         };
 
         function validateData(data, errorObject) {
@@ -26,6 +29,14 @@
             }
 
             return noErrors;
+        }
+
+        function addData(data) {
+            httpHandler.sendRequest({
+                verb: 'POST',
+                url: '/api/vacancy',
+                body: data
+            });
         }
 
         return service;

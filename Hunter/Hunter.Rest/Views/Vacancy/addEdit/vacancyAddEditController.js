@@ -8,17 +8,35 @@
     VacancyAddEditController.$inject = [
         '$location',
         'AuthService',
-        'CandidateHttpService',
-        'AddEditService'
-
+        'VacancyHttpService',
+        'AddEditService',
+        'PoolsHttpService'
     ];
 
-    function VacancyAddEditController($location, authService, candidateHttpService, addEditService) {
+    function VacancyAddEditController($location, authService, vacancyHttpService, addEditService, poolsHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
 
-        vm.someVariable = 'This is add / edit vacancy page';
+        vm.controllerName = 'Add / Edit Vacancy';
+        vm.selectedPool = null;
+        vm.newVacancy = {
+            Name: 'New vacancy',
+            Status: 0,
+            StartDate: Date.Now,
+            EndDate: null,
+            Description: 'Description of vacancy',
+            PoolId: 0
+        };
+        vm.pools = [];
+        poolsHttpService.getAllPools(function (response) {
+            vm.pools = response.data;
+        }, null);
 
+        vm.submitVacancy = function () {
+            if (addEditService.validateData)
+                addEditService.addData(vm.newVacancy);
+            $location.url('/vacancy');
+        };
         //Here we should write all signatures for user actions callback method, for example,
 
         //(function() {
