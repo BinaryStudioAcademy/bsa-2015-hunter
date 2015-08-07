@@ -9,7 +9,6 @@
         '$location',
         'AuthService',
         'VacancyHttpService',
-        'VacancyAddEditService',
         'PoolsHttpService'
     ];
 
