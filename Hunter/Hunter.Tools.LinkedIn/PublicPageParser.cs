@@ -79,7 +79,7 @@ namespace Hunter.Tools.LinkedIn
             }
 
         }
-        private IEnumerable<string> MoreInfo(string value)
+        private IList<string> MoreInfo(string value)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace Hunter.Tools.LinkedIn
                 return null;
             }
         }
-        private IEnumerable<string> GetSkills()
+        private IList<string> GetSkills()
         {
             //get all skills into one string, if exist
             try
