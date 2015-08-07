@@ -46,7 +46,6 @@ namespace Hunter.Rest
             {
                 TokenEndpointPath = new PathString("/Token"),
                 Provider = new ApplicationOAuthProvider(PublicClientId),
-                AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 AccessTokenFormat = new HunterJwtFormat("http://localhost:53147/"),
                 // In production mode set AllowInsecureHttp = false
@@ -65,11 +64,9 @@ namespace Hunter.Rest
 
         private void ConfigureOAuthToken(IAppBuilder app)
         {
-
-            var issuer = "http://localhost:59822";
+            var issuer = "http://localhost:53147/";
             string audienceId = ConfigurationManager.AppSettings["as:AudienceId"];
             byte[] audienceSecret = TextEncodings.Base64Url.Decode(ConfigurationManager.AppSettings["as:AudienceSecret"]);
-
            
             app.UseJwtBearerAuthentication(
                 new JwtBearerAuthenticationOptions

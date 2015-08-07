@@ -7,11 +7,19 @@ namespace Hunter.Tests.Tools
     [TestFixture]
     class LinkedInAccessTests
     {
+        private PublicPageParser _parser;
+
+        [SetUp]
+        public void TestSetup()
+        {
+            _parser = new PublicPageParser();
+        }
+
         [Test]
         public void Should_give_correct_name_When_set_url()
         {
             // Arrange
-            var info = new PersonInformation("https://ua.linkedin.com/pub/myroslav-dmytrus/b7/a02/436");
+            var info = _parser.GetPageInfo("https://ua.linkedin.com/pub/myroslav-dmytrus/b7/a02/436");
             // Act
             var name = info.Name;
 
@@ -23,7 +31,7 @@ namespace Hunter.Tests.Tools
         public void Should_give_correct_time_on_work_name_When_no_history_of_work_on_page()
         {
             // Arrange
-            var info = new PersonInformation("https://ua.linkedin.com/pub/myroslav-dmytrus/b7/a02/436");
+            var info = _parser.GetPageInfo("https://ua.linkedin.com/pub/myroslav-dmytrus/b7/a02/436");
             // Act
             var time = info.ExperienceTime;
 
@@ -35,7 +43,7 @@ namespace Hunter.Tests.Tools
         public void Should_give_null_on_every_property_When_bad_url()
         {
             // Arrange
-            var info = new PersonInformation("https://www.linkedin.com/profile/view?id=417544170");
+            var info = _parser.GetPageInfo("https://www.linkedin.com/profile/view?id=417544170");
             // Act
 
             // Assert
@@ -48,7 +56,7 @@ namespace Hunter.Tests.Tools
         public void Should_give_correct_education_When_set_url()
         {
             // Arrange
-            var info = new PersonInformation("https://ua.linkedin.com/pub/myroslav-dmytrus/b7/a02/436");
+            var info = _parser.GetPageInfo("https://ua.linkedin.com/pub/myroslav-dmytrus/b7/a02/436");
             // Act
             var edu = info.Education;
             List<string> checkEdu = new List<string>()
@@ -65,7 +73,7 @@ namespace Hunter.Tests.Tools
         public void Should_give_correct_location_When_set_url()
         {
             // Arrange
-            var info = new PersonInformation("https://ua.linkedin.com/pub/myroslav-dmytrus/b7/a02/436");
+            var info = _parser.GetPageInfo("https://ua.linkedin.com/pub/myroslav-dmytrus/b7/a02/436");
             // Act
             var loc = info.Location;
             var checkLoc = "Ukraine";
@@ -79,7 +87,7 @@ namespace Hunter.Tests.Tools
         public void Should_give_correct_img_url_When_set_url()
         {
             // Arrange
-            var info = new PersonInformation("https://ua.linkedin.com/pub/myroslav-dmytrus/b7/a02/436");
+            var info = _parser.GetPageInfo("https://ua.linkedin.com/pub/myroslav-dmytrus/b7/a02/436");
             // Act
             var img = info.Img;
             var checkImg =
@@ -94,10 +102,10 @@ namespace Hunter.Tests.Tools
         public void Should_give_correct_skills_When_set_url()
         {
             // Arrange
-            var info = new PersonInformation("https://ua.linkedin.com/pub/myroslav-dmytrus/b7/a02/436");
+            var info = _parser.GetPageInfo("https://ua.linkedin.com/pub/myroslav-dmytrus/b7/a02/436");
             // Act
             var skills = info.Skills;
-            var checkSkill = "C#, .NET, ASP.NET MVC, SQL, JavaScript, HTML, Microsoft Office";
+            var checkSkill = new List<string>() {"C#",".NET","ASP.NET MVC","SQL","JavaScript","HTML","Microsoft Office"};
 
             // Assert
             Assert.AreEqual(checkSkill, skills);
@@ -108,13 +116,11 @@ namespace Hunter.Tests.Tools
         public void Should_give_correct_languages_When_set_url()
         {
             // Arrange
-            var info = new PersonInformation("https://ua.linkedin.com/pub/myroslav-dmytrus/b7/a02/436");
+            var info = _parser.GetPageInfo("https://ua.linkedin.com/pub/myroslav-dmytrus/b7/a02/436");
             // Act
             var lang = info.Languages;
-            var checkLeng = new List<string>()
-            {
-            "UkrainianNative or bilingual proficiencyEnglishProfessional working proficiencyRussianFull professional proficiency"
-            };
+            var checkLeng = 
+            "UkrainianNative or bilingual proficiencyEnglishProfessional working proficiencyRussianFull professional proficiency";
             // Assert
             Assert.AreEqual(checkLeng, lang);
         }
@@ -123,7 +129,7 @@ namespace Hunter.Tests.Tools
         public void Should_give_correct_time_expirience_When_set_url()
         {
             // Arrange
-            var info = new PersonInformation("https://ua.linkedin.com/pub/dmitriy-beseda/a4/742/497/en");
+            var info = _parser.GetPageInfo("https://ua.linkedin.com/pub/dmitriy-beseda/a4/742/497/en");
             // Act
             var time = info.ExperienceTime;
             var checkTime = " 11 months";
@@ -136,7 +142,7 @@ namespace Hunter.Tests.Tools
         public void Should_give_correct_expirience_When_set_url()
         {
             // Arrange
-            var info = new PersonInformation("https://ua.linkedin.com/pub/dmitriy-beseda/a4/742/497/en");
+            var info = _parser.GetPageInfo("https://ua.linkedin.com/pub/dmitriy-beseda/a4/742/497/en");
             // Act
             var work = info.Experience;
             List<string> checkWork = new List<string>()
@@ -146,6 +152,19 @@ namespace Hunter.Tests.Tools
 
             // Assert
             Assert.AreEqual(checkWork, work);
+        }
+
+        [Test]
+        public void Should_give_correct_summary_When_set_url()
+        {
+            // Arrange
+            var info = _parser.GetPageInfo("https://ua.linkedin.com/pub/yuriy-simashkevych/7a/194/7a1");
+            // Act
+            var summary = info.Summary;
+            var checkSummary = "Thank you for viewing my profile.  I have over 1.5 year of experience in software industry. Being involved in a few projects I have carried out and got experience in requirements analysis, test case creation and execution, defects reporting and tracking. I am open-minded and goal-oriented with good interpersonal and communication skills. Also I'm willing to learn and grow.  You can always contact me by e-mail: yuriy.simashkevych@yahoo.com ";
+
+            // Assert
+            Assert.AreEqual(checkSummary, summary);
         }
     }
 }

@@ -15,7 +15,6 @@
 
     function CandidateAddEditController($location, authService, candidateHttpService, addEditService) {
         var vm = this;
-
         //Here we should write all vm variables default values. For Example:
         vm.categories = [{ name: 'Select Candidate Category' }]; // .NET, JS, PHP
         vm.errorObject = {
