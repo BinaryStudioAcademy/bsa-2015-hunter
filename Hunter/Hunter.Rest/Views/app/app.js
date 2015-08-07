@@ -14,9 +14,8 @@
             // TODO make similar for other entities (naming, routing)
             $routeProvider
                 .when('/vacancy', {
-                    templateUrl: viewPath + 'vacancy/list/list.html',
-                    controller:  "VacancyListController",
-                    controllerAs: 'vacancyListCtrl',
+                    templateUrl: viewPath + 'Vacancy/list/list.html',
+                    controller: 'vacancyListCtrl',
                     reloadOnSearch: false
                 })
                 .when('/vacancy/:id', {

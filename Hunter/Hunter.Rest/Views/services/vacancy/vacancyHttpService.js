@@ -6,23 +6,30 @@
         .factory('VacancyHttpService', VacancyHttpService);
 
     VacancyHttpService.$inject = [
+        '$q',
         'HttpHandler'
     ];
 
-    function VacancyHttpService(httpHandler) {
+    function VacancyHttpService($q,HttpHandler) {
         var service = {
-            updateVacancy: updateVacancy
-        };
+            getVacancies: getVacancies
+        }
 
-        function updateVacancy(body, successCallback) {
-            httpHandler.sendRequest({
-                type: 'GET',
-                url: '/api/vacancy/',
-                body: body,
-                successCallback: successCallback,
-                errorMessageToDev: 'UPDATE VACANCY INFO ERROR: ',
-                errorMessageToUser: 'Update Failed'
+        function getVacancies(){
+            var deferred = $q.defer();
+            HttpHandler.sendRequest({
+                url: '/api/vacancy',
+                verb: 'get',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("error");
+                    console.log(status);
+                }
             });
+            return deferred.promise;
+            
         }
 
         return service;
