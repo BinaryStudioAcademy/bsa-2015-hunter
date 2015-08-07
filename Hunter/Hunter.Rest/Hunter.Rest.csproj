@@ -350,6 +350,7 @@
     <Content Include="Views\services\helper\authInterceptorService.js" />
     <Content Include="Views\services\helper\authService.js" />
     <Content Include="Views\services\helper\httpHandler.js" />
+<<<<<<< HEAD
     <Content Include="Views\services\vacancy\addEdit\addEditService.js" />
     <Content Include="Views\Statistics\list.html" />
     <Content Include="Views\Statistics\statisticsController.js" />
@@ -360,6 +361,12 @@
     <Content Include="Views\services\vacancy\vacancyHttpService.js" />
     <Content Include="Views\Vacancy\list\vacancyListController.js" />
     <Content Include="Views\Vacancy\list\list.html" />
+=======
+    <Content Include="Views\services\pool\poolsHttpService.js" />
+    <Content Include="Views\Vacancy\longlist.html" />
+    <Content Include="Views\Vacancy\edit.html" />
+    <Content Include="Views\Vacancy\list.html" />
+>>>>>>> origin/develop-allow-add-new-candidate
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
