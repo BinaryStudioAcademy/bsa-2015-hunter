@@ -13,30 +13,25 @@
             // sample of all needed routes for entity
             // TODO make similar for other entities (naming, routing)
             $routeProvider
-                .when('/vacancy', {
+                .when('/vacancy/list', {
                     templateUrl: viewPath + 'Vacancy/list/list.html',
                     controller:  "VacancyListtController",
                     controllerAs: 'vacancyListCtrl',
                     reloadOnSearch: false
                 })
                 .when('/vacancy/:id', {
-                    templateUrl: viewPath + 'Vacancy/list/list.html',
-                    controller:  "VacancyAddEditController",
-                    controllerAs: 'vacancyAddEditCtrl'
-                })
-                .when('/vacancy/add', {
-                    templateUrl: viewPath + 'Vacancy/addEdite/addEdite.html',
-                    controller: "VacancyAddEditController",
-                    controllerAs: 'vacancyAddEditCtrl'
+                    templateUrl: viewPath + 'Vacancy/profile/profile.html',
+                    controller:  "VacancyController",
+                    controllerAs: 'vacancyCtrl'
                 })
                 .when('/vacancy/edit/:id', {
-                    templateUrl: viewPath + 'Vacancy/addEdite/addEdite.html',
+                    templateUrl: viewPath + 'Vacancy/addEdit/addEdit.html',
                     controller: "VacancyAddEditController",
                     controllerAs: 'vacancyAddEditCtrl'
                 });
 
             $routeProvider
-                .when('/candidate', {
+                .when('/candidate/list', {
                     templateUrl: viewPath + 'candidate/list/list.html',
                     controller: 'CandidateListController',
                     controllerAs: 'candidateListCtrl',
@@ -49,16 +44,13 @@
                 })
                 .when('/vacancy/:vid/candidate/:cid', {
                     templateUrl: viewPath + 'Candidate/profile/profile.html',
-                    controller: 'candidateCtrl'
-                })
-                .when('/candidate/add', {
-                    templateUrl: viewPath + 'candidate/addEdite/addEdite.html',
-                    controller: 'CandidateAddEditController',
-                    controllerAs: 'candidateAddEditCtrl'
+                    controller: 'CandidateController',
+                    controllerAs: 'candidateCtrl'
                 })
                 .when('/candidate/edit/:id', {
-                    templateUrl: viewPath + 'Candidate/addEdite/addEdit.html',
-                    controller: 'vacancyEditCtrl'
+                    templateUrl: viewPath + 'candidate/addEdit/addEdit.html',
+                    controller: 'CandidateAddEditController',
+                    controllerAs: 'candidateAddEditCtrl'
                 });
 
 
