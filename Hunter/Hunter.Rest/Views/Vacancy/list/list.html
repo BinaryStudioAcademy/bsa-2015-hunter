@@ -113,7 +113,7 @@
                         <th>Shortlisted</th>
                         <th>Added By</th>
                     </tr>
-                    <tr ng-repeat="vacancy in vacancies">
+                    <tr ng-repeat="vacancy in VacancyListCtrl.vacancies">
                         <td>
                             <input type="checkbox">
                         </td>
@@ -122,8 +122,8 @@
                         </td>
                         <td>{{vacancy.startDate | date:'dd-MM-yyyy'}}</td>
                         <td>{{vacancy.endDate | date:'dd-MM-yyyy'}}</td>
-                        <td>6</td>
-                        <td>2</td>
+                        <td>{{vacancy.countCandidates}}</td>
+                        <td>{{vacancy.countShortListed}}</td>
                         <td>Ulyana</td>
                     </tr>
                 </table>

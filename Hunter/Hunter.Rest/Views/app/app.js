@@ -21,8 +21,8 @@
             $routeProvider
                 .when('/vacancy/list', {
                     templateUrl: viewPath + 'vacancy/list/list.html',
-                    controller: "vacancyListCtrl",
-                    controllerAs: 'vacancyListCtrl',
+                    controller: "VacancyListController",
+                    controllerAs: "VacancyListCtrl",
                     reloadOnSearch: false
                 })
                 .when('/vacancy/edit', {
