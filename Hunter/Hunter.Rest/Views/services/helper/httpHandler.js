@@ -1,13 +1,10 @@
 ﻿(function() {
     'use strict';
-
     angular
         .module('hunter-app')
         .factory('HttpHandler', HttpHandler);
 
-    HttpHandler.$inject = [
-        '$http'
-    ];
+    HttpHandler.$inject = ['$http'];
 
     function HttpHandler($http) {
 
@@ -55,12 +52,12 @@
                 if (httpObject.successCallback && typeof httpObject.successCallback === 'function') {
                     httpObject.successCallback(response);
                 }
-            }
+                }
 
             function failedRequest(error) {
                 if (httpObject.errorMessageToDev) {
                     console.log(httpObject.errorMessageToDev);
-                }
+        }
 
                 if (httpObject.errorMessageToUser) {
                     alertify.error(errorMessageToUser);

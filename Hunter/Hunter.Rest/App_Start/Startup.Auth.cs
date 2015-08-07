@@ -5,7 +5,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.DataHandler;
 using Microsoft.Owin.Security.DataHandler.Encoder;
 using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.Jwt;
@@ -47,13 +46,13 @@ namespace Hunter.Rest
                 TokenEndpointPath = new PathString("/Token"),
                 Provider = new ApplicationOAuthProvider(PublicClientId),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
-                AccessTokenFormat = new HunterJwtFormat("http://localhost:53147/"),
+               //AccessTokenFormat = new HunterJwtFormat("http://localhost:53147/"),
                 // In production mode set AllowInsecureHttp = false
                 AllowInsecureHttp = true
             };
 
             // Enable the application to use bearer tokens to authenticate users
-            //app.UseOAuthBearerTokens(OAuthOptions);
+            app.UseOAuthBearerTokens(OAuthOptions);
             app.UseOAuthAuthorizationServer(OAuthOptions);
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseLinkedInAuthentication(
