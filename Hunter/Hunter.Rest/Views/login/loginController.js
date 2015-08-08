@@ -4,10 +4,10 @@
         .module('hunter-app')
         .controller('loginController', loginController);
 
-    loginController.$inject = ['$scope', '$location', 'AuthService', 'HttpHandler'];
+    loginController.$inject = ['$scope', '$location', 'AuthService'];
 
 
-    function loginController($scope, $location, AuthService, HttpHandler) {
+    function loginController($scope, $location, AuthService) {
 
         $scope.loginData = {
             userName: "",
@@ -17,7 +17,6 @@
         $scope.message = "";
 
         $scope.login = function () {
-
             AuthService.login($scope.loginData).then(function (response) {
 
                 $location.path('/');

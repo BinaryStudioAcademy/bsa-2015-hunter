@@ -38,7 +38,7 @@ namespace Hunter.DataAccess.Db.Base
 
         public IQueryable<T> Query()
         {
-            return _dataSet;
+            return _dataSet.AsQueryable();
         }
 
         public IEnumerable<T> All()
