@@ -294,8 +294,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\candidate.css" />
-    <Content Include="Content\img\arrows_close.png" />
-    <Content Include="Content\img\arrows_left.png" />
+    <Content Include="Content\Images\arrows_close.png" />
+    <Content Include="Content\Images\arrows_left.png" />
+    <Content Include="Content\Images\arrows_right.png" />
     <Content Include="Content\MyStyle.css" />
     <Content Include="Content\pool.css" />
     <Content Include="favicon.ico" />

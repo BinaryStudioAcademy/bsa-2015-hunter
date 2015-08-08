@@ -9,10 +9,11 @@
         "$location",
         "AuthService",
         "HttpHandler",
-        "$routeParams"
+        "$routeParams",
+        "$timeout"
     ];
 
-    function PoolAddEditController($location, AuthService, HttpHandler, $routeParams) {
+    function PoolAddEditController($location, AuthService, HttpHandler, $routeParams, $timeout) {
         var vm = this;
         vm.pageConfig = {};
         vm.id = 0;
@@ -47,7 +48,7 @@
                     errorCallback: function (result) { console.log(result); }
                 });
 
-                $location.url("/pool");
+                $timeout(function() { $location.url("/pool") }, 300);
             };
 
             vm.poolDelete = function () {
@@ -60,7 +61,7 @@
                     errorCallback: function (result) { console.log(result); }
                 });
 
-                $location.url("/pool");
+                $timeout(function () { $location.url("/pool") }, 300);
             };
         }
         // add - post
@@ -92,8 +93,7 @@
                     errorCallback: function (result) { console.log(result); }
                 });
 
-                //vm.RedirectToPool();
-                $location.url("/pool");
+                $timeout(function () { $location.url("/pool") }, 300);
             }
         }
 
@@ -106,12 +106,11 @@
             for (var i = 0; i < vm.parent.childNodes.length - 1; i++) {
                 vm.parent.childNodes[i].className = "pool_colors_inactive";
             }
-            console.log(vm.parent);
+            
             vm.currentChild.className = "pool_colors_active";
 
-            console.log($event.currentTarget);
-           
-
+            //console.log(vm.parent);
+            //console.log($event.currentTarget);
         }
     }
 })();
