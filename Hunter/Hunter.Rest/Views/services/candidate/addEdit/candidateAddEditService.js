@@ -32,6 +32,11 @@
                 errorObject.message += ' Last name; ';
                 noErrors = false;
             }
+
+            if (!data.DateOfBirth) {            
+                    errorObject.message += ' Date of birth; ';
+                    noErrors = false;
+            }
             return noErrors;
         }
 
