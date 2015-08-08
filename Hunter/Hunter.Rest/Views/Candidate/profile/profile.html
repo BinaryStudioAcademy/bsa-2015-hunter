@@ -16,7 +16,7 @@
                     </div>
                     <div>current/past: {{candidateCtrl.candidate.currentPosition}}</div>
                     <div>company/location: {{candidateCtrl.candidate.company+","+candidateCtrl.candidate.localion}}</div>
-                    <div>emaile: {{candidateCtrl.candidate.emaile}}</div>
+                    <div>emaile: {{candidateCtrl.candidate.email}}</div>
                     <div>skype: {{candidateCtrl.candidate.skype}}</div>
                     <div>phone: {{candidateCtrl.candidate.phone}}</div>
                 </div>
@@ -42,7 +42,7 @@
             <div class="col-md-3">
                 <div class="salary-wrapper">900</div>
                 <input class="btn-veiw-resume btn btn-default btn-block" type="button" value="Veiw Resume">
-                <input class="btn-veiw-resume btn btn-default btn-block" type="button" value="Edite Profile">
+                <a class="btn btn-default btn-block" href="#/candidate/edit/{{candidateCtrl.candidate.id}}">Edite Profile</a>
             </div>
         </div>
         <dic class="candidate-notes row">
