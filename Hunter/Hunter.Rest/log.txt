@@ -482,3 +482,10 @@ System.ArgumentException: Ќеверное количество аргументов, заданных дл€ вызова ме
    в System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
    в System.Linq.Queryable.Any[TSource](IQueryable`1 source, Expression`1 predicate)
    в Hunter.Services.PoolService.IsPoolNameExist(String name) в d:\projects\bsa-2015-hunter\Hunter\Hunter.Services\Services\PoolService.cs:строка 96
+2015-08-08 23:10:34,971 [5] ERROR Hunter [(null)] - Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+System.Data.Entity.Validation.DbEntityValidationException: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   в System.Data.Entity.Internal.InternalContext.SaveChanges()
+   в System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   в System.Data.Entity.DbContext.SaveChanges()
+   в Hunter.DataAccess.Db.Base.UnitOfWork.SaveChanges() в d:\projects\bsa-2015-hunter\Hunter\Hunter.DataAccess.Db\Base\UnitOfWork.cs:строка 32
+   в Hunter.Services.PoolService.CreatePool(PoolViewModel poolViewModel) в d:\projects\bsa-2015-hunter\Hunter\Hunter.Services\Services\PoolService.cs:строка 56

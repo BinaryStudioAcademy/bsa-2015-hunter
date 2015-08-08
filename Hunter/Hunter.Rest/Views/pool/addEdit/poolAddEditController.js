@@ -16,6 +16,7 @@
         var vm = this;
         vm.pageConfig = {};
         vm.id = 0;
+        vm.pool = {};
 
         //edit - put
         if ($routeParams.id > 0) {
@@ -97,7 +98,6 @@
         }
 
         vm.setColor = function ($event, code) {
-            vm.pool.poolbackground.color = code;
 
             vm.currentChild = $event.currentTarget;
             vm.parent = $event.currentTarget.parentNode;
@@ -105,11 +105,11 @@
             for (var i = 0; i < vm.parent.childNodes.length - 1; i++) {
                 vm.parent.childNodes[i].className = "pool_colors_inactive";
             }
-            console.log(vm.parent   );
+            console.log(vm.parent);
             vm.currentChild.className = "pool_colors_active";
 
             console.log($event.currentTarget);
-            console.log(vm.pool.poolbackground.color);
+           
 
         }
     }
