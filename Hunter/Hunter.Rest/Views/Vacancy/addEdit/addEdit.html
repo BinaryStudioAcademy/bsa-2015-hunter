@@ -2,32 +2,26 @@
     <h3>{{vacancyAddEditCtrl.controllerName}}</h3>
     <input hidden name="Id" />
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
+            <h3>General</h3><hr />
             <label>Name</label>
             <input ng-model="vacancyAddEditCtrl.newVacancy.Name" type="text" name="Name" class="form-control" size="50" maxlength="300" ng-required />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
             <label>Start Date</label>
             <input type="date" ng-model="vacancyAddEditCtrl.newVacancy.StartDate" name="StartDate" class="form-control" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
             <label>End Date</label>
             <input type="date" ng-model="vacancyAddEditCtrl.newVacancy.EndDate" name="EndDate" class="form-control" value="" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
             <label>Location</label>
             <input type="text" ng-model="vacancyAddEditCtrl.newVacancy.Location" name="Location" class="form-control" value="" />
         </div>
+        <div class="col-md-4">
+            <h3>Note</h3><hr />
+            <textarea ng-model="vacancyAddEditCtrl.newVacancy.Description" name="Description" class="form-control" maxlength="4000" cols="50" rows="3"></textarea>
+        </div>
     </div>
     <div class="row">
-        <div class="col-md-3">
-            <label>Status</label>
+        <div class="col-md-4">
+            <h3>Status</h3><hr />
+            <label>State</label>
             <select ng-model="vacancyAddEditCtrl.newVacancy.Status" name="Status">
                 <option value="0">Opened</option>
                 <option value="1">Draft</option>
@@ -36,22 +30,14 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3">
-            <label>Pool</label>
+        <div class="col-md-4">
+            <h3>Pool</h3><hr />
             <select ng-model="vacancyAddEditCtrl.newVacancy.PoolId" name="PoolId">
                 <option ng-repeat="pool in vacancyAddEditCtrl.pools" value="{{pool.id}}">{{pool.name}}</option>
             </select>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <label>Note</label>
-            <textarea ng-model="vacancyAddEditCtrl.newVacancy.Description" name="Description" class="form-control" maxlength="4000" cols="50" rows="3"></textarea>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <input class="btn btn-default" type="submit" id="submit" value="Done" ng-click="vacancyAddEditCtrl.submitVacancy()" />
+        <div class="col-md-4">
+            <input class="btn btn-default" type="submit" value="Done" ng-click="vacancyAddEditCtrl.submitVacancy()" />
         </div>
     </div>
 </div>
