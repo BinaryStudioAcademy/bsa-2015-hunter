@@ -1,9 +1,20 @@
 ﻿<div class="container">
-    <form name="editForm">
-        <h4>Edit a Pool</h4>
-        <input ng-model="poolAddEditCtrl.pool.name" title="Name" type="text" />
-        <input type="submit" value="Edit Pool" ng-click="poolAddEditCtrl.PoolEdit()"/><a href="../../#/pool">Cancel</a>
-    </form>
+    <div class="pool_container">
+        <div class="pool_title">
+            <div><a href="../../#/pool">Back</a></div>
+            <h3>{{poolAddEditCtrl.pageConfig.pageTitle}}</h3>
+            <div><a href="../../#/pool">Close</a></div>
+        </div>
 
+        <div class="pool_form">
+            <form name="editForm">
+                <div>Name:</div>
+                <input class="form-control" ng-model="poolAddEditCtrl.pool.name" title="Pool name" type="text" autofocus />
+                <div>Select color:</div>
+                <input class="btn" type="submit" value="{{poolAddEditCtrl.pageConfig.postPutButtonValue}}" ng-click="poolAddEditCtrl.poolPostPut()" />
+                <input class="btn" type="submit" value="Delete pool" ng-click="poolAddEditCtrl.poolDelete()" ng-show="{{poolAddEditCtrl.pageConfig.deleteButton}}" />
+            </form>
+        </div>
+    </div>
 </div>
 

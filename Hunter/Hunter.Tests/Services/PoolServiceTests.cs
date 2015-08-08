@@ -37,6 +37,12 @@ namespace Hunter.Tests.Services
                 new Pool(){Id = 2, Name = "Pool name #2"},
                 new Pool(){Id = 3, Name = "Pool name #3"}
             });
+            _repository.Query().Returns(new List<Pool>()
+            {
+                new Pool(){Id = 1, Name = "Pool name #1"},
+                new Pool(){Id = 2, Name = "Pool name #2"},
+                new Pool(){Id = 3, Name = "Pool name #3"}
+            }.AsQueryable());
         }
 
         [Test]

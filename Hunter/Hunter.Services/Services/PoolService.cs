@@ -106,7 +106,8 @@ namespace Hunter.Services
         {
             try
             {
-                return _poolRepository.Query().Any(p => p.Id == id);
+                var res = _poolRepository.Query().Any(p => p.Id == id);
+                return res;
             }
             catch (Exception ex)
             {

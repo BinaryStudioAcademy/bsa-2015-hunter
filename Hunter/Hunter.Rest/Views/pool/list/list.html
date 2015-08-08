@@ -1,4 +1,26 @@
-﻿<div class="container" >
+﻿<div class="container">
+    <div class="pool_container">
+        <div class="pool_title">
+            <div></div>
+            <h3>Pools</h3>
+            <div><a href="../../#/pool">Close</a>
+            </div>
+        </div>
+        <div class="pool_list">
+            <div><input autofocus ng-model="searchPool" class="form-control" ng-model="poolAddEditCtrl.pool.name" title="Pool name" type="text" placeholder="Search..." /></div>
+            <ul class="column_data">
+                <li ng-repeat="pool in poolCtrl.poolsList | filter:searchPool">
+                    <p>{{pool.name}}</p><a href="../../#/pool/edit/{{pool.id}}">Edit</a>
+                </li>
+            </ul>
+            <a class="btn" href="../../#/pool/edit/0">Create New Pool</a>
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="container">
+    <h3>Pools</h3>
     <ul class="column_data">
         <li ng-repeat="pool in poolCtrl.poolsList">
             <p>
@@ -6,7 +28,6 @@
             </p>
         </li>
     </ul>
-    
-    
-</div>
+    <a href="../../#/pool/edit/0">Add pool</a>
+</div>-->
 

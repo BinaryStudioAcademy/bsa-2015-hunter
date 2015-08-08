@@ -294,7 +294,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\candidate.css" />
+    <Content Include="Content\img\arrows_close.png" />
+    <Content Include="Content\img\arrows_left.png" />
     <Content Include="Content\MyStyle.css" />
+    <Content Include="Content\pool.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -347,6 +350,7 @@
     <Content Include="Views\pool\list\poolListController.js" />
     <Content Include="Views\services\candidate\addEdit\addEditService.js" />
     <Content Include="Views\services\candidate\candidatesHttpService.js" />
+    <Content Include="Views\services\directive\autofocus.js" />
     <Content Include="Views\services\helper\authInterceptorService.js" />
     <Content Include="Views\services\helper\authService.js" />
     <Content Include="Views\services\helper\httpHandler.js" />
