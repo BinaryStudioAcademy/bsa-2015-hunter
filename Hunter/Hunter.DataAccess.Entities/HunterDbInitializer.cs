@@ -412,6 +412,18 @@ namespace Hunter.DataAccess.Entities
             vacancies.ForEach(vacancy => context.Vacancy.Add(vacancy));
             context.SaveChanges();
             #endregion
+
+            #region ACTIVITY
+            var activity1 = new Activity() { Message = "Add new user to Pool", Tag = "add user", Time = DateTime.Now, UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
+            var activity2 = new Activity() { Message = "Create new Vacancy Junior PHP Developer", Tag = "create Vacancy", Time = DateTime.Now, UserLogin = "recruiter2", Url = "http://binary-studio.com/" };
+            var activity3 = new Activity() { Message = "Add new Feedback to Hollis Sefton", Tag = "add Feedback", Time = DateTime.Now, UserLogin = "techspec1", Url = "http://binary-studio.com/" };
+            var activity4 = new Activity() { Message = "Add new Feedback to Jennie Charlie", Tag = "add Feedback", Time = DateTime.Now, UserLogin = "techspec@local.com", Url = "http://binary-studio.com/" };
+            var activity5 = new Activity() { Message = "Add new user Lon Abner to Pool", Tag = "add user", Time = DateTime.Now, UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
+
+            var activities = new List<Activity> { activity1, activity2, activity3, activity4, activity5 };
+            activities.ForEach(x => context.Activity.Add(x));
+            context.SaveChanges();
+            #endregion
         }
 
         private static byte[] ToByteArray(string sqlVarBinary)

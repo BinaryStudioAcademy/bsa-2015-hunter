@@ -1,4 +1,5 @@
-﻿angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.directives.dirPagination'])
+﻿
+angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.directives.dirPagination'])
     .config([
         '$routeProvider', function ($routeProvider) {
            
@@ -82,7 +83,12 @@
                     controller: "PoolAddEditController",
                     controllerAs: "poolAddEditCtrl"
                 });
-
+            $routeProvider
+                .when('/activity', {
+                    templateUrl: viewPath + 'activity/list/list.html',
+                    controller: "ActivityListController",
+                    controllerAs: "ActivityListCtrl"
+                });
             $routeProvider
                 .when('/files', {
                     templateUrl: viewPath + 'files/list/list.html',
