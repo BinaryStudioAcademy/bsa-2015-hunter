@@ -7,7 +7,7 @@ using Hunter.DataAccess.Entities.Enums;
 namespace Hunter.DataAccess.Entities
 {
     [Table("Candidate")]
-    public partial class Candidate : IEntity
+    public partial class Candidate : BaseSoftDeleteEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Candidate()
@@ -18,8 +18,6 @@ namespace Hunter.DataAccess.Entities
             Resolution = (int)Resolution.None;
             Shortlisted = false;
         }
-
-        public int Id { get; set; }
 
         [Column(TypeName = "image")]
         public byte[] Photo { get; set; }

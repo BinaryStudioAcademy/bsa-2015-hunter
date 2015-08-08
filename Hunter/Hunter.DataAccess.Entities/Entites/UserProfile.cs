@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Hunter.DataAccess.Entities
 {
     [Table("UserProfile")]
-    public partial class UserProfile : IEntity
+    public partial class UserProfile : BaseSoftDeleteEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UserProfile()
@@ -15,9 +15,7 @@ namespace Hunter.DataAccess.Entities
             Card = new HashSet<Card>();
             Feedback = new HashSet<Feedback>();
         }
-
-        public int Id { get; set; }
-
+        
         [Required]
         [StringLength(50)]
         public string Position { get; set; }
@@ -29,8 +27,6 @@ namespace Hunter.DataAccess.Entities
         public string UserLogin { get; set; }
 
         public DateTime Added { get; set; }
-
-        public int Status { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Candidate> Candidate { get; set; }

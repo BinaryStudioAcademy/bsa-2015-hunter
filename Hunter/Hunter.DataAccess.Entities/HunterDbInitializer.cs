@@ -4,9 +4,10 @@ using Hunter.Common.Concrete;
 
 namespace Hunter.DataAccess.Entities
 {
-    internal class HunterDbInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<HunterDbContext>
-    //internal class HunterDbInitializer : System.Data.Entity.CreateDatabaseIfNotExists<HunterDbContext>
-    //DropCreateDatabaseIfModelChanges<HunterDbContext>
+    internal class HunterDbInitializer : 
+                    //System.Data.Entity.DropCreateDatabaseIfModelChanges<HunterDbContext>
+                    System.Data.Entity.CreateDatabaseIfNotExists<HunterDbContext>
+                    //DropCreateDatabaseIfModelChanges<HunterDbContext>
     {
         protected override void Seed(HunterDbContext context)
         {
@@ -23,16 +24,26 @@ namespace Hunter.DataAccess.Entities
                 #endregion
 
                 #region USERS
-                var recruiter1 = new User() { Login = "recruiter@local.com", RoleId = 1, State = 0, PasswordHash = "AL1osj2Akgj8ezBwxcAnj+sn8jQxNU5xJfpkLQl9PKswryRZhwldGQOqFOntmG0zDQ==" };
-                var recruiter2 = new User() { Login = "recruiter2", UserName = "Heaven Hayden", RoleId = 1, State = 0, PasswordHash = "4272d77a88d418148b10545a86f2d094c75e747aedd224294054db7b9bd4b930e03406cd5ef60b5905d5272dd93f318f55a55da7ca087550e783a2dd3829d866" };
-                var recruiter3 = new User() { Login = "recruiter3", UserName = "Chantel Sherley", RoleId = 1, State = 0, PasswordHash = "e27f3ead50aa12b2a50b1ddf7ad619aeb69f37ca22ad50e834962c6f384f2ba5587d451cf1a2d8cdffe1f12ba9479d7bc62b2b85b28e0a6895c20cfba16903f8" };
-                var techspec1 = new User() { Login = "techspec@local.com", RoleId = 2, State = 0, PasswordHash = "AL2W1658IHoHGMrIYZn00YgBhIQ9tN00wAkdLDrHLDtpfQq7bkjfwkxTyshYa5G4tQ==" };
-                var techspec2 = new User() { Login = "techspec1", UserName = "Colin Tobias", RoleId = 2, State = 0, PasswordHash = "7ab8123c7ff047f3e556a5a2b3e2a8502944b54f4f62089635b3850ded96b3f700026af0684ba794bcafec70433ccce5a10368fdb2dcf1ac5658c37b422e6a04" };
-                var techspec3 = new User() { Login = "techspec1", UserName = "Maddox Fulton", RoleId = 2, State = 0, PasswordHash = "fd088e4d0ead7cc5d1c2cfe385c3e9b763aeba92ac77ef2307fbb59604e14a896f706ac9d7f6788c9a99f7ee6175a0f46004eab324a5ef2ec93284276767c7a0" };
-                var admin = new User() { Login = "admin@local.com", RoleId = 3, State = 0, PasswordHash = "AO+POAp4pSwtxgaOu74yRWoYALimtAjpWgsy1746KKw+NkKG+aFUB8UWLS89Jc98VQ==" };
+                var recruiter1 = new User() { Login = "recruiter@local.com", RoleId = 1, PasswordHash = "AL1osj2Akgj8ezBwxcAnj+sn8jQxNU5xJfpkLQl9PKswryRZhwldGQOqFOntmG0zDQ==" };
+                var recruiter2 = new User() { Login = "recruiter2", UserName = "Heaven Hayden", RoleId = 1,  PasswordHash = "4272d77a88d418148b10545a86f2d094c75e747aedd224294054db7b9bd4b930e03406cd5ef60b5905d5272dd93f318f55a55da7ca087550e783a2dd3829d866" };
+                var recruiter3 = new User() { Login = "recruiter3", UserName = "Chantel Sherley", RoleId = 1,  PasswordHash = "e27f3ead50aa12b2a50b1ddf7ad619aeb69f37ca22ad50e834962c6f384f2ba5587d451cf1a2d8cdffe1f12ba9479d7bc62b2b85b28e0a6895c20cfba16903f8" };
+                var techspec1 = new User() { Login = "techspec@local.com", RoleId = 2, PasswordHash = "AL2W1658IHoHGMrIYZn00YgBhIQ9tN00wAkdLDrHLDtpfQq7bkjfwkxTyshYa5G4tQ==" };
+                var techspec2 = new User() { Login = "techspec1", UserName = "Colin Tobias", RoleId = 2, PasswordHash = "7ab8123c7ff047f3e556a5a2b3e2a8502944b54f4f62089635b3850ded96b3f700026af0684ba794bcafec70433ccce5a10368fdb2dcf1ac5658c37b422e6a04" };
+                var techspec3 = new User() { Login = "techspec1", UserName = "Maddox Fulton", RoleId = 2,  PasswordHash = "fd088e4d0ead7cc5d1c2cfe385c3e9b763aeba92ac77ef2307fbb59604e14a896f706ac9d7f6788c9a99f7ee6175a0f46004eab324a5ef2ec93284276767c7a0" };
+                var admin = new User() { Login = "admin@local.com", RoleId = 3, PasswordHash = "AO+POAp4pSwtxgaOu74yRWoYALimtAjpWgsy1746KKw+NkKG+aFUB8UWLS89Jc98VQ==" };
 
                 var users = new List<User> { recruiter1, recruiter2, recruiter3, techspec1, techspec2, techspec3, admin };
                 users.ForEach(user => context.User.Add(user));
+                context.SaveChanges();
+                #endregion
+
+                #region USER Profiles
+                var uProfile1 = new UserProfile() { Alias = "UF", UserLogin = "ulyana@bs.com", Position = "HR Manager", Added = new DateTime(2015, 07, 01, 10, 10, 10, DateTimeKind.Utc), };
+                var uProfile2 = new UserProfile() { Alias = "KP", UserLogin = "kate@bs.com", Position = "HR Manager", Added = new DateTime(2015, 07, 02, 10, 10, 10, DateTimeKind.Utc), };
+                var uProfile3 = new UserProfile() { Alias = "IS", UserLogin = "irina@bs.com", Position = "Event Manager", Added = new DateTime(2015, 07, 03, 10, 10, 10, DateTimeKind.Utc), };
+
+                var uProfiles = new List<UserProfile> { uProfile1, uProfile2, uProfile3 };
+                uProfiles.ForEach(pr => context.UserProfile.Add(pr));
                 context.SaveChanges();
                 #endregion
 
