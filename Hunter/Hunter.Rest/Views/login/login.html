@@ -1,7 +1,11 @@
-﻿<div>
-    <input type="text" ng-model="loginCtrl.loginData.userName"/>
-    <input type="password" ng-model="loginCtrl.loginData.password"/>
-    <button ng-click="loginCtrl.login()" >Login</button>
-    
-
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <label>Login</label>
+            <input type="text" class="form-control" ng-model="loginCtrl.loginData.userName" />
+            <label>Password</label>
+            <input type="password" class="form-control" ng-model="loginCtrl.loginData.password" /><br />
+            <button class="btn btn-default" ng-click="loginCtrl.login()">Login</button>
+        </div>
+    </div>
 </div>
