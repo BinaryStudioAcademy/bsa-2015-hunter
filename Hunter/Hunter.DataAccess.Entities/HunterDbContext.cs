@@ -4,11 +4,15 @@ namespace Hunter.DataAccess.Entities
 
     public partial class HunterDbContext : DbContext
     {
+        static HunterDbContext()
+        {
+            Database.SetInitializer(new HunterDbInitializer());
+        }
+
         public HunterDbContext()
             //: base("Hunter")
             : base("name=HunterDb")
         {
-            Database.SetInitializer(new HunterDbInitializer());
         }
 
         public virtual DbSet<Activity> Activity { get; set; }
