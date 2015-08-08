@@ -9,11 +9,11 @@
         '$location',
         'AuthService',
         'CandidateHttpService',
-        'AddEditService'
+        'CandidateAddEditService'
 
     ];
 
-    function CandidateController($location, authService, candidateHttpService, addEditService) {
+    function CandidateController($location, authService, candidateHttpService, candidateAddEditService) {
         var vm = this;
 
 

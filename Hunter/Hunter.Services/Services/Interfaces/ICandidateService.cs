@@ -10,8 +10,8 @@ namespace Hunter.Services.Interfaces
         Candidate Get(int id);
         IEnumerable<CandidateDto> GetAllInfo();
         CandidateDto GetInfo(int id);
-        void Add(Candidate candidate);
+        void Add(CandidateDto candidate);
         void Delete(Candidate candidate);
-        void Update(Candidate candidate);
+        void Update(CandidateDto candidate);
     }
 }

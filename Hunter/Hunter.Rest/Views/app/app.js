@@ -1,4 +1,5 @@
-﻿angular.module('hunter-app', ['ngRoute', 'LocalStorageModule'])
+﻿
+angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.directives.dirPagination'])
     .config([
         '$routeProvider', function ($routeProvider) {
 
@@ -12,7 +13,7 @@
                 })
                 .when('/register', {
                     templateUrl: viewPath + 'register/register.html',
-                    controller: 'registerController',
+                    controller: 'RegisterController',
                     controllerAs: 'registerCtrl'
                 })
                 .when('/news', {
@@ -26,8 +27,8 @@
             $routeProvider
                 .when('/vacancy/list', {
                     templateUrl: viewPath + 'vacancy/list/list.html',
-                    controller: "vacancyListCtrl",
-                    controllerAs: 'vacancyListCtrl',
+                    controller: "VacancyListController",
+                    controllerAs: "VacancyListCtrl",
                     reloadOnSearch: false
                 })
                 .when('/vacancy/edit', {
@@ -79,7 +80,6 @@
                     templateUrl: viewPath + 'pool/list/list.html',
                     controller: 'PoolListController',
                     controllerAs: 'poolCtrl'
-                    //reloadOnSearch: false
                 });
 
             $routeProvider
@@ -87,6 +87,62 @@
                     templateUrl: viewPath + "pool/addEdit/addEdit.html",
                     controller: "PoolAddEditController",
                     controllerAs: "poolAddEditCtrl"
+                });
+            $routeProvider
+                .when('/activity', {
+                    templateUrl: viewPath + 'activity/list/list.html',
+                    controller: "ActivityListController",
+                    controllerAs: "ActivityListCtrl"
+                });
+            $routeProvider
+                .when('/files', {
+                    templateUrl: viewPath + 'files/list/list.html',
+                    controller: 'FileListController',
+                    controllerAs: 'fileListCtrl'
+                });
+
+            $routeProvider
+                .when('/role', {
+                    templateUrl: viewPath + 'role/list/list.html',
+                    controller: 'RoleListController',
+                    controllerAs: 'roleListCtrl'
+                })
+                .when('/role/edit', {
+                    templateUrl: viewPath + 'role/addEdit/addEdit.html',
+                    controller: 'UserAddEditController',
+                    controllerAs: 'userAddEditCtrl'
+                })
+                .when('/role/edit/:id', {
+                    templateUrl: viewPath + 'role/addEdit/addEdit.html',
+                    controller: 'UserAddEditController',
+                    controllerAs: 'userAddEditCtrl'
+                })
+                .when('/role/:id', {
+                    templateUrl: viewPath + 'role/profile/profile.html',
+                    controller: 'RoleController',
+                    controllerAs: 'roleCtrl'
+                });
+
+            $routeProvider
+                .when('/user', {
+                    templateUrl: viewPath + 'user/list/list.html',
+                    controller: 'UserListController',
+                    controllerAs: 'userListCtrl'
+                })
+                .when('/user/edit', {
+                    templateUrl: viewPath + 'user/addEdit/addEdit.html',
+                    controller: 'UserAddEditController',
+                    controllerAs: 'userAddEditCtrl'
+                })
+                .when('/user/edit/:id', {
+                    templateUrl: viewPath + 'user/addEdit/addEdit.html',
+                    controller: 'UserAddEditController',
+                    controllerAs: 'userAddEditCtrl'
+                })
+                .when('/user/:id', {
+                    templateUrl: viewPath + 'user/profile/profile.html',
+                    controller: 'UserController',
+                    controllerAs: 'userCtrl'
                 });
 
             //result on statistics button click (slide 1)

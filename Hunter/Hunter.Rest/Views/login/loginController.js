@@ -8,22 +8,22 @@
 
 
     function loginController($scope, $location, AuthService) {
-
-        $scope.loginData = {
+        var vm = this;
+        vm.loginData = {
             userName: "",
             password: ""
         };
 
-        $scope.message = "";
+        vm.message = "";
 
-        $scope.login = function () {
-            AuthService.login($scope.loginData).then(function (response) {
+        vm.login = function () {
+            AuthService.login(vm.loginData).then(function (response) {
 
                 $location.path('/');
 
             },
              function (err) {
-                 $scope.message = err.error_description;
+                 vm.message = err.error_description;
              });
         };
 

@@ -1,27 +1,32 @@
 ﻿(function () {
     'use strict';
+
     angular
         .module('hunter-app')
-        .controller('registerController', registerController);
+        .controller('RegisterController', RegisterController);
 
-    registerController.$inject = ['$scope', 'AuthService', 'UserRoleHttpService'];
+    RegisterController.$inject = [
+        '$scope',
+        'AuthService',
+        'UserRoleHttpService'
+    ];
 
 
-    function registerController($scope, AuthService, UserRoleHttpService) {
+    function RegisterController($scope, AuthService, UserRoleHttpService) {
+        var vm = this;
+        // $scope.roles = [];
 
-       // $scope.roles = [];
-
-        $scope.states = [
+        vm.states = [
             { id: 0, name: 'State1' },
             { id: 1, name: 'State2' }
         ];
 
         UserRoleHttpService.getUserRoles().then(function (result) {
-            $scope.roles = result;
+            vm.roles = result;
         });
 
 
-        $scope.newUser = {
+        vm.newUser = {
             email: '',
             password: '',
             confirmPassword: '',
@@ -29,9 +34,9 @@
             roleId: 0
         }
 
-        $scope.register = function () {
+        vm.register = function () {
             console.log('asada');
-            AuthService.saveRegistration($scope.newUser);
+            AuthService.saveRegistration(vm.newUser);
         }
 
     };

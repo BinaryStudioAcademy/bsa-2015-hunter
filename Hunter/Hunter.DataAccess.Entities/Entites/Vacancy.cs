@@ -31,9 +31,13 @@ namespace Hunter.DataAccess.Entities
 
         public int PoolId { get; set; }
 
+        public int? UserId { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Card> Card { get; set; }
 
         public virtual Pool Pool { get; set; }
+
+        public virtual User User { get; set; }
     }
 }
