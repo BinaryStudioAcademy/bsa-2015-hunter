@@ -639,12 +639,16 @@
     <Content Include="Views\candidate\list\list.html" />
     <Content Include="Views\candidate\profile\candidateController.js" />
     <Content Include="Views\candidate\profile\profile.html" />
+    <Content Include="Views\files\list\fileListController.js" />
+    <Content Include="Views\files\list\list.html" />
     <Content Include="Views\login\login.html" />
     <Content Include="Views\login\loginController.js" />
     <Content Include="Views\pool\addEdit\addEdit.html" />
     <Content Include="Views\pool\addEdit\poolAddEditController.js" />
     <Content Include="Views\pool\list\list.html" />
     <Content Include="Views\pool\list\poolListController.js" />
+    <Content Include="Views\role\list\list.html" />
+    <Content Include="Views\role\list\roleListController.js" />
     <Content Include="Views\services\candidate\addEdit\candidateAddEditService.js" />
     <Content Include="Views\services\candidate\candidatesHttpService.js" />
     <Content Include="Views\services\helper\authInterceptorService.js" />
@@ -652,6 +656,8 @@
     <Content Include="Views\services\helper\httpHandler.js" />
     <Content Include="Views\Statistics\list.html" />
     <Content Include="Views\Statistics\statisticsController.js" />
+    <Content Include="Views\user\list\list.html" />
+    <Content Include="Views\user\list\userListController.js" />
     <Content Include="Views\vacancy\addEdit\addEdit.html" />
     <Content Include="Views\vacancy\addEdit\vacancyAddEditController.js" />
     <Content Include="Views\vacancy\list\dirPagination.tpl.html" />
@@ -680,6 +686,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\role\addEdit\" />
+    <Folder Include="Views\role\profile\" />
+    <Folder Include="Views\user\addEdit\" />
+    <Folder Include="Views\user\profile\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

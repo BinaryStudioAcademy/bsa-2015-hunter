@@ -1,21 +1,20 @@
-﻿(function() {
+﻿(function () {
     'use strict';
 
     angular
         .module('hunter-app')
-        .controller('StatisticsController', StatisticsController);
+        .controller('RoleListController', RoleListController);
 
-    StatisticsController.$inject = [
+    RoleListController.$inject = [
         '$location',
         'AuthService',
-        'CandidateHttpService'
-
+        'CandidateHttpService' //change on your service
     ];
 
-    function StatisticsController($location, authService, candidateHttpService) {
+    function RoleListController($location, authService, candidateHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
-        vm.controllerName = 'This is statistics page';
+        vm.controllerName = 'This is roles page';
 
         //(function() {
         //    // This is function for initialization actions, for example checking auth

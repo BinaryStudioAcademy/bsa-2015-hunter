@@ -74,7 +74,6 @@
                     templateUrl: viewPath + 'pool/list/list.html',
                     controller: 'PoolListController',
                     controllerAs: 'poolCtrl'
-                    //reloadOnSearch: false
                 });
 
             $routeProvider
@@ -82,6 +81,57 @@
                     templateUrl: viewPath + "pool/addEdit/addEdit.html",
                     controller: "PoolAddEditController",
                     controllerAs: "poolAddEditCtrl"
+                });
+
+            $routeProvider
+                .when('/files', {
+                    templateUrl: viewPath + 'files/list/list.html',
+                    controller: 'FileListController',
+                    controllerAs: 'fileListCtrl'
+                });
+
+            $routeProvider
+                .when('/role', {
+                    templateUrl: viewPath + 'role/list/list.html',
+                    controller: 'RoleListController',
+                    controllerAs: 'roleListCtrl'
+                })
+                .when('/role/edit', {
+                    templateUrl: viewPath + 'role/addEdit/addEdit.html',
+                    controller: 'UserAddEditController',
+                    controllerAs: 'userAddEditCtrl'
+                })
+                .when('/role/edit/:id', {
+                    templateUrl: viewPath + 'role/addEdit/addEdit.html',
+                    controller: 'UserAddEditController',
+                    controllerAs: 'userAddEditCtrl'
+                })
+                .when('/role/:id', {
+                    templateUrl: viewPath + 'role/profile/profile.html',
+                    controller: 'RoleController',
+                    controllerAs: 'roleCtrl'
+                });
+
+            $routeProvider
+                .when('/user', {
+                    templateUrl: viewPath + 'user/list/list.html',
+                    controller: 'UserListController',
+                    controllerAs: 'userListCtrl'
+                })
+                .when('/user/edit', {
+                    templateUrl: viewPath + 'user/addEdit/addEdit.html',
+                    controller: 'UserAddEditController',
+                    controllerAs: 'userAddEditCtrl'
+                })
+                .when('/user/edit/:id', {
+                    templateUrl: viewPath + 'user/addEdit/addEdit.html',
+                    controller: 'UserAddEditController',
+                    controllerAs: 'userAddEditCtrl'
+                })
+                .when('/user/:id', {
+                    templateUrl: viewPath + 'user/profile/profile.html',
+                    controller: 'UserController',
+                    controllerAs: 'userCtrl'
                 });
 
             //result on statistics button click (slide 1)
