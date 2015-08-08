@@ -83,7 +83,12 @@
                     controller: "PoolAddEditController",
                     controllerAs: "poolAddEditCtrl"
                 });
-
+            $routeProvider
+                .when('/activity', {
+                    templateUrl: viewPath + 'activity/list/list.html',
+                    controller: "ActivityListController",
+                    controllerAs: "ActivityListCtrl"
+                });
             //result on statistics button click (slide 1)
             $routeProvider.when('/statistics', {
                 templateUrl: viewPath + 'statistics/list.html',
