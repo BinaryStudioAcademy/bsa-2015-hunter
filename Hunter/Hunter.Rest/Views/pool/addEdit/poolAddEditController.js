@@ -98,6 +98,7 @@
         }
 
         vm.setColor = function ($event, code) {
+            vm.pool.color = code;
 
             vm.currentChild = $event.currentTarget;
             vm.parent = $event.currentTarget.parentNode;

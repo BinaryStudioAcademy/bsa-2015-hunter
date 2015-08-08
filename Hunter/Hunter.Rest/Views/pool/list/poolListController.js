@@ -8,10 +8,11 @@
     PoolListController.$inject = [
         "$location",
         "AuthService",
-        "HttpHandler"
+        "HttpHandler",
+        "$timeout"
     ];
 
-    function PoolListController($location, AuthService, HttpHandler) {
+    function PoolListController($location, AuthService, HttpHandler, $timeout) {
         var vm = this;
         
         HttpHandler.sendRequest({

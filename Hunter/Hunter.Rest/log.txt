@@ -489,3 +489,7 @@ System.Data.Entity.Validation.DbEntityValidationException: Validation failed for
    в System.Data.Entity.DbContext.SaveChanges()
    в Hunter.DataAccess.Db.Base.UnitOfWork.SaveChanges() в d:\projects\bsa-2015-hunter\Hunter\Hunter.DataAccess.Db\Base\UnitOfWork.cs:строка 32
    в Hunter.Services.PoolService.CreatePool(PoolViewModel poolViewModel) в d:\projects\bsa-2015-hunter\Hunter\Hunter.Services\Services\PoolService.cs:строка 56
+2015-08-08 23:19:15,517 [5] ERROR Hunter [(null)] - Ссылка на объект не указывает на экземпляр объекта.
+System.NullReferenceException: Ссылка на объект не указывает на экземпляр объекта.
+   в Hunter.Services.Extensions.PoolExtentions.ToPoolViewModel(Pool pool) в d:\projects\bsa-2015-hunter\Hunter\Hunter.Services\Extensions\PoolExtentions.cs:строка 12
+   в Hunter.Services.PoolService.GetPoolById(Int32 id) в d:\projects\bsa-2015-hunter\Hunter\Hunter.Services\Services\PoolService.cs:строка 41
