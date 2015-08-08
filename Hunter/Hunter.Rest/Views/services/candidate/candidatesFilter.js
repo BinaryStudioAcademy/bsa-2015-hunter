@@ -19,7 +19,7 @@
         return arr;
     }
 
-    angular
+    angular	
         .module('hunter-app')
         .filter('CandidatesFilter', CandidatesFilter);
 
