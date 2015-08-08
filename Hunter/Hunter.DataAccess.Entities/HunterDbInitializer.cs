@@ -64,11 +64,12 @@ namespace Hunter.DataAccess.Entities
             #endregion
 
             #region POOLS
-            var jsPool = new Pool() { Name = "JavaScript" };
-            var netPool = new Pool { Name = ".Net" };
-            var phpPool = new Pool { Name = "PHP" };
+            var jsPool = new Pool { Name = "JavaScript", Color = "rgb(44,201,99)" };
+            var netPool = new Pool { Name = ".Net", Color = "rgb(293,250,85)" };
+            var phpPool = new Pool { Name = "PHP", Color = "rgb(240,88,88)" };
+            var qaPool = new Pool { Name = "QA", Color = "rgb(245,122,14)" };
 
-            var pools = new List<Pool>() { jsPool, netPool, phpPool };
+            var pools = new List<Pool> { jsPool, netPool, phpPool, qaPool };
             pools.ForEach(pool => context.Pool.Add(pool));
             context.SaveChanges();
             #endregion

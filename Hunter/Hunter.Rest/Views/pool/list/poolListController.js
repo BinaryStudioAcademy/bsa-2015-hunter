@@ -15,10 +15,10 @@
         var vm = this;
         
         HttpHandler.sendRequest({
-                    url: '/api/pool',
-                    verb: 'GET',
+                    url: "/api/pool",
+                    verb: "GET",
                     successCallback: function(result) {
-                        //console.log(result.data);
+                        console.log(result.data);
                         vm.poolsList = result.data;
                     },
                     errorCallback: function (result) { console.log(result); }

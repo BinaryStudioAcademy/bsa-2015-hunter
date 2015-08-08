@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Hunter.DataAccess.Entities.Enums;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Hunter.Services
 {
@@ -13,5 +15,11 @@ namespace Hunter.Services
         // [CustomValidation(typeof(HunterValidation), "ValidateIsPoolNameExist")]
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
+
+        [JsonProperty(PropertyName = "color")]
+        public string Color { get; set; }
+
+        [JsonProperty(PropertyName = "poolbackground")]
+        public ICollection<PoolBackground> PoolBackground { get; set; }
     }
 }

@@ -31,10 +31,15 @@ namespace Hunter.Rest
         [System.Web.Mvc.HttpPost]
         public IHttpActionResult Post([FromBody] PoolViewModel poolViewModel)
         {
-            if (_poolService.IsPoolNameExist(poolViewModel.Name))
+            if (poolViewModel == null || _poolService.IsPoolNameExist(poolViewModel.Name))
             {
-                return BadRequest("Pool name alreafy exists!");
+                return BadRequest("Pool name empty or alreafy exists!");
             }
+
+            //if (_poolService.IsPoolNameExist(poolViewModel.Name))
+            //{
+            //    return BadRequest("Pool name alreafy exists!");
+            //}
 
             poolViewModel = _poolService.CreatePool(poolViewModel);
 

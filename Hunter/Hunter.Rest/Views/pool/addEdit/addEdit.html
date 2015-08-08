@@ -8,11 +8,29 @@
 
         <div class="pool_form">
             <form name="editForm">
-                <div>Name:</div>
-                <input class="form-control" ng-model="poolAddEditCtrl.pool.name" title="Pool name" type="text" autofocus />
-                <div>Select color:</div>
-                <input class="btn" type="submit" value="{{poolAddEditCtrl.pageConfig.postPutButtonValue}}" ng-click="poolAddEditCtrl.poolPostPut()" />
-                <input class="btn" type="submit" value="Delete pool" ng-click="poolAddEditCtrl.poolDelete()" ng-show="{{poolAddEditCtrl.pageConfig.deleteButton}}" />
+                <div class="pool_form_element">
+                    <div>Name:</div>
+                    <input class="form-control" title="Pool name" type="text"
+                           ng-model="poolAddEditCtrl.pool.name" />
+                </div>
+                <div class="pool_form_element">
+                    <div>Select color:</div>
+                    <div class="pool_colors">
+                        <div ng-repeat="color in poolAddEditCtrl.poolColors"
+                             ng-click="poolAddEditCtrl.setColor($event, color.code)"
+                             style="background-color: {{color.code}}" title="{{color.color}}"
+                             ng-class="'{{color.code}}' === '{{poolAddEditCtrl.pool.color}}' ? 'pool_colors_active' : ''">
+                            <input type="checkbox" id="{{color.code}}" />
+                        </div>
+                    </div>
+                </div>
+                <div class="pool_form_element">
+                    <input class="btn" type="submit" value="{{poolAddEditCtrl.pageConfig.postPutButtonValue}}"
+                           ng-click="poolAddEditCtrl.poolPostPut()" />
+                    <input class="btn" type="submit" value="Delete pool"
+                           ng-click="poolAddEditCtrl.poolDelete()"
+                           ng-show="{{poolAddEditCtrl.pageConfig.deleteButton}}" />
+                </div>
             </form>
         </div>
     </div>
