@@ -19,20 +19,27 @@
         vm.name = "Candidates";
 
         var pools = {
-            '.NET': true,
-            'JS': true,
+            '.NET': false,
+            'JS': false,
             'PHP': false,
             'QA': false
         };
 
+        var statuses = {
+            'New': false,
+            'InRreview': false,
+            'Hired': false
+        };
+
         var inviters = [
-            { 'name': 'Ulyana', 'id': 1, 'isChecked': true },
-            { 'name': 'Kate', 'id': 2, 'isChecked': true }
+            { 'name': 'Ulyana', 'id': 1, 'isChecked': false },
+            { 'name': 'Kate', 'id': 2, 'isChecked': false }
         ];
 
         var options = {
             'poolFilters': pools,
-            'inviterFilters': inviters
+            'inviterFilters': inviters,
+            'statusFilters': statuses
         };
 
         vm.filterOptions = options;
@@ -64,6 +71,11 @@
             //inviter fake
             vm.candidateList[0].addedByProfileId = 1;
             vm.candidateList[1].addedByProfileId = 2;
+
+            //statuses fake
+            vm.candidateList[0].resolutionString = 'New';
+            vm.candidateList[1].resolutionString = 'InRreview';
+            vm.candidateList[2].resolutionString = 'Hired';
         }
     }
 })();
