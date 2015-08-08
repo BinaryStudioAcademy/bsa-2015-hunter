@@ -55,7 +55,7 @@
                     <th>City</th>
                     <th>Salary</th>
                 </tr>
-                <tr ng-repeat="item in candidateListCtrl.candidateList">
+                <tr ng-repeat="item in candidateListCtrl.candidateList | CandidatesFilter:candidateListCtrl.filterOptions">
                     <td><input type="checkbox" ng-model="item.shortListed"></td>
                     <td><a href="#/candidate/{{item.id}}">{{item.firstName + " " + item.lastName}}</a></td>
                     <td>none</td>
