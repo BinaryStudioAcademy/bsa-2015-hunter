@@ -58,7 +58,6 @@
 
             if (statusFilters[resolution]) {
                 filtered.push(candidate);
-                wasPushed = true;
             }
         });
 

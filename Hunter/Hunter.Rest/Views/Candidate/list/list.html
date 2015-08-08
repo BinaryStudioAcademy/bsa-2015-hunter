@@ -17,26 +17,36 @@
                     <li>
                         Pool
                         <ul>
-                            <li><input type="checkbox"> .Net</li>
-                            <li><input type="checkbox"> JS</li>
-                            <li><input type="checkbox"> PHP</li>
-                            <li><input type="checkbox"> QA</li>
+                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
+       ng-model="candidateListCtrl.filterOptions.poolFilters['.NET']"> .Net</li>
+                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
+       ng-model="candidateListCtrl.filterOptions.poolFilters['JS']"> JS</li>
+                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
+       ng-model="candidateListCtrl.filterOptions.poolFilters['PHP']"> PHP</li>
+                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
+       ng-model="candidateListCtrl.filterOptions.poolFilters['QA']"> QA</li>
                         </ul>
                     </li>
                     <li>
                         Status
                         <ul>
-                            <li><input type="checkbox"> New</li>
-                            <li><input type="checkbox"> In Review</li>
-                            <li><input type="checkbox"> Hired</li>
+                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
+       ng-model="candidateListCtrl.filterOptions.statusFilters['New']"> New</li>
+                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
+       ng-model="candidateListCtrl.filterOptions.statusFilters['InReview']"> In Review</li>
+                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
+       ng-model="candidateListCtrl.filterOptions.statusFilters['Hired']"> Hired</li>
                         </ul>
                     </li>
                     <li>
                         Added by
                         <ul>
-                            <li><input type="checkbox"> Ulyana</li>
-                            <li><input type="checkbox"> Kate</li>
-                            <li><input type="checkbox"> Ira</li>
+                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
+       ng-model="candidateListCtrl.filterOptions.inviterFilters[0].isChecked"> Ulyana</li>
+                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
+       ng-model="candidateListCtrl.filterOptions.inviterFilters[1].isChecked"> Kate</li>
+                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
+       ng-model="candidateListCtrl.filterOptions.inviterFilters[2].isChecked"> Ira</li>
                         </ul>
                     </li>
                 </ul>
