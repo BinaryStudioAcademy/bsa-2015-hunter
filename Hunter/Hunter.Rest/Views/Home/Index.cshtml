@@ -4,30 +4,53 @@
     Layout = "~/Views/Shared/_LayoutWithMainMenu.cshtml";
 }
 
+<!-- Start bower components -->
 <script src="~/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="~/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src='~/bower_components/angular/angular.js'></script>
 <script src='~/bower_components/angular-route/angular-route.js'></script>
 <script src="~/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
 <script src="~/bower_components/angular-utils-pagination/dirPagination.js"></script>
+<!-- End bower components -->
+
+<!-- Start app -->
 <script src='~/Views/app/app.js'></script>
+<!-- End app -->
+
+<!-- Start helpers -->
 <script src="~/Views/services/helper/authService.js"></script>
 <script src="~/Views/services/helper/httpHandler.js"></script>
 <script src="~/Views/services/helper/authInterceptorService.js"></script>
+<!-- End helpers -->
+
+<!-- Start Candidates -->
 <script src="~/Views/services/candidate/candidatesHttpService.js"></script>
 <script src="~/Views/candidate/addEdit/candidateAddEditController.js"></script>
 <script src="~/Views/services/candidate/addEdit/candidateAddEditService.js"></script>
 <script src="~/Views/candidate/profile/candidateController.js"></script>
 <script src="~/Views/candidate/list/candidateListController.js"></script>
+<!-- End Candidates -->
+
+<!-- Start Vacancies -->
 <script src="~/Views/vacancy/addEdit/vacancyAddEditController.js"></script>
 <script src="~/Views/vacancy/list/vacancyListController.js"></script>
 <script src="~/Views/vacancy/profile/vacancyController.js"></script>
 <script src="~/Views/services/vacancy/vacancyHttpService.js"></script>
+<!-- End Vacancies -->
+
+<!-- Start Statistics -->
 <script src="~/Views/Statistics/statisticsController.js"></script>
+<!-- End Statistics -->
+
+<!-- Start Login -->
 <script src="../../Views/login/loginController.js"></script>
+<!-- End Login -->
+
+<!-- Start Pools -->
 <script src="../../Views/pool/list/poolListController.js"></script>
 <script src="../../Views/pool/addEdit/poolAddEditController.js"></script>
 <script src="~/Views/services/pool/poolsHttpService.js"></script>
+<!-- End Pools -->
 
 <div ng-view></div>
 
