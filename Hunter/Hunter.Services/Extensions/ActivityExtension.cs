@@ -13,7 +13,8 @@ namespace Hunter.Services
                 Message = activity.Message,
                 Tag = activity.Tag,
                 UserLogin = activity.UserLogin,
-                Url = activity.Url
+                Url = activity.Url,
+                Time = activity.Time
             };
 
             return activityDto;
@@ -27,7 +28,8 @@ namespace Hunter.Services
                 Message = activityDto.Message,
                 Tag = activityDto.Tag,
                 UserLogin = activityDto.UserLogin,
-                Url = activityDto.Url
+                Url = activityDto.Url,
+                Time = activityDto.Time
             };
 
             return activity;
