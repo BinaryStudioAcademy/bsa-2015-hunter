@@ -28,9 +28,9 @@
             PoolId: 0
         };
         vm.pools = [];
-        poolsHttpService.getAllPools(function (response) {
-            vm.pools = response.data;
-        }, null);
+        poolsHttpService.getAllPools().then(function (data) {
+            vm.pools = data;
+        });
 
         vm.submitVacancy = function () {
             if (vacancyHttpService.validateVacancy(vm.newVacancy)) {
