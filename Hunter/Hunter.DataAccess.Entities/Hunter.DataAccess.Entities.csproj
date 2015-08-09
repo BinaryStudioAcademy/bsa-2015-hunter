@@ -101,6 +101,10 @@
     <Compile Include="Migrations\201508081006215_Add_Time_field_to_Activity.Designer.cs">
       <DependentUpon>201508081006215_Add_Time_field_to_Activity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508081123021_AddBackgroundColorForPool.cs" />
+    <Compile Include="Migrations\201508081123021_AddBackgroundColorForPool.Designer.cs">
+      <DependentUpon>201508081123021_AddBackgroundColorForPool.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -125,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508081006215_Add_Time_field_to_Activity.resx">
       <DependentUpon>201508081006215_Add_Time_field_to_Activity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508081123021_AddBackgroundColorForPool.resx">
+      <DependentUpon>201508081123021_AddBackgroundColorForPool.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
