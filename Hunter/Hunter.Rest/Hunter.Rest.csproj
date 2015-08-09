@@ -279,6 +279,8 @@
     <Compile Include="Controllers\PoolController.cs" />
     <Compile Include="Controllers\UserRoleController.cs" />
     <Compile Include="Controllers\VacancyController.cs" />
+    <Compile Include="Filters\CheckModelForNullAttribute.cs" />
+    <Compile Include="Filters\ValidateModelStateAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
