@@ -115,7 +115,7 @@
                 ResumeId: 1,
                 Origin: Origin,
                 Resolution: Resolution,
-                ShortListed: vm.Shortlisted,
+                ShortListed: vm.ShortListed,
                 DateOfBirth: DateOfBirth,
                 PoolNames : Pools
             }
@@ -144,7 +144,7 @@
                 vm.Salary = response.data.salary;
                 vm.selectedOrigin = vm.origins[response.data.origin];
                 vm.selectedResolution = vm.resolutions[response.data.resolution];
-                vm.ShortListed = response.data.shortlisted;
+                vm.ShortListed = response.data.shortListed;
                 vm.DateOfBirth = new Date(response.data.dateOfBirth);
 
                 //getting already selected pools
