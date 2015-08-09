@@ -303,6 +303,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="log4net.xml" />
+    <Content Include="resources\arrows_close.png" />
+    <Content Include="resources\arrows_left.png" />
+    <Content Include="resources\arrows_right.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />

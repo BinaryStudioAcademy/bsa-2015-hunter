@@ -31,8 +31,12 @@
     margin: 0px;
     width: 70%;  
 }
-.pool_title a {
-    background-image: url(Images/arrows_close.png);
+.pool_title .close {
+    background-image: url(../resources/arrows_close.png);
+}
+
+.pool_title .back {
+    background-image: url(../resources/arrows_left.png);
 }
 
 .pool_form {
