@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Entities.Enums;
 
 namespace Hunter.Services.Extensions
 {
@@ -11,7 +12,9 @@ namespace Hunter.Services.Extensions
             return new PoolViewModel()
             {
                 Id = pool.Id,
-                Name = pool.Name
+                Name = pool.Name,
+                Color = pool.Color,
+                PoolBackground = PoolBackground.BgColors
             };
         }
 
@@ -19,16 +22,20 @@ namespace Hunter.Services.Extensions
         {
             return pools.Select(p => new PoolViewModel()
             {
-                Id = p.Id, Name = p.Name
+                Id = p.Id,
+                Name = p.Name,
+                Color = p.Color,
+                PoolBackground = PoolBackground.BgColors
             }).ToList();
         }
 
         public static Pool ToPoolModel(this PoolViewModel poolView)
         {
-            return new Pool()
+            return new Pool
             {
                 Id = poolView.Id,
                 Name = poolView.Name,
+                Color = poolView.Color,
                 Vacancy = new List<Vacancy>(),
                 Candidate = new List<Candidate>()
             };
