@@ -9,11 +9,10 @@
         "$location",
         "AuthService",
         "HttpHandler",
-        "$routeParams",
-        "$timeout"
+        "$routeParams"
     ];
 
-    function PoolAddEditController($location, AuthService, HttpHandler, $routeParams, $timeout) {
+    function PoolAddEditController($location, AuthService, HttpHandler, $routeParams) {
         var vm = this;
         vm.pageConfig = {};
         vm.id = 0;
@@ -44,12 +43,10 @@
                     body: JSON.stringify(vm.pool),
                     successCallback: function (result) {
                         //console.log(result);
-                        $location.url("/pool");
+                        $location.url("/pool")
                     },
                     errorCallback: function (result) { console.log(result); }
                 });
-
-                
             };
 
             vm.poolDelete = function () {
@@ -58,11 +55,10 @@
                     verb: "DELETE",
                     successCallback: function (result) {
                         //console.log(result);
+                        $location.url("/pool")
                     },
                     errorCallback: function (result) { console.log(result); }
                 });
-
-                $timeout(function () { $location.url("/pool") }, 300);
             };
         }
         // add - post
@@ -90,11 +86,10 @@
                     body: JSON.stringify(vm.pool),
                     successCallback: function (result) {
                         console.log(result);
+                        $location.url('/pool');
                     },
                     errorCallback: function (result) { console.log(result); }
                 });
-
-                $timeout(function () { $location.url("/pool") }, 300);
             }
         }
 
