@@ -44,11 +44,12 @@
                     body: JSON.stringify(vm.pool),
                     successCallback: function (result) {
                         //console.log(result);
+                        $location.url("/pool");
                     },
                     errorCallback: function (result) { console.log(result); }
                 });
 
-                $timeout(function() { $location.url("/pool") }, 300);
+                
             };
 
             vm.poolDelete = function () {

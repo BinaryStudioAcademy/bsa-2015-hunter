@@ -4,6 +4,7 @@ using System.Web.Http;
 
 namespace Hunter.Rest
 {
+    [Authorize]
     public class PoolController : ApiController
     {
         private readonly IPoolService _poolService;
@@ -58,6 +59,11 @@ namespace Hunter.Rest
             if (!_poolService.IsPoolExist(id) || poolViewModel == null)
             {
                 return NotFound();
+            }
+
+            if (_poolService.IsPoolNameExist(poolViewModel.Name))
+            {
+                return BadRequest("Pool name alreafy exists!");
             }
 
             poolViewModel.Id = id;
