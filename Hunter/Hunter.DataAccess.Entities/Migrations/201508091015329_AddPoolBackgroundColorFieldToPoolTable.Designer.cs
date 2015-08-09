@@ -7,13 +7,13 @@ namespace Hunter.DataAccess.Entities.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddBackgroundColorForPool : IMigrationMetadata
+    public sealed partial class AddPoolBackgroundColorFieldToPoolTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddBackgroundColorForPool));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddPoolBackgroundColorFieldToPoolTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "201508081123021_AddBackgroundColorForPool"; }
+            get { return "201508091015329_AddPoolBackgroundColorFieldToPoolTable"; }
         }
         
         string IMigrationMetadata.Source

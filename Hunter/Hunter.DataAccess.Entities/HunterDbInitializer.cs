@@ -64,6 +64,11 @@ namespace Hunter.DataAccess.Entities
             #endregion
 
             #region POOLS
+            //var jsPool = new Pool { Name = "JavaScript" };
+            //var netPool = new Pool { Name = ".Net" };
+            //var phpPool = new Pool { Name = "PHP" };
+            //var qaPool = new Pool { Name = "QA" };
+
             var jsPool = new Pool { Name = "JavaScript", Color = "rgb(44,201,99)" };
             var netPool = new Pool { Name = ".Net", Color = "rgb(293,250,85)" };
             var phpPool = new Pool { Name = "PHP", Color = "rgb(240,88,88)" };

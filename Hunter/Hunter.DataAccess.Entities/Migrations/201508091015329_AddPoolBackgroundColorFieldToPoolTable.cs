@@ -3,7 +3,7 @@ namespace Hunter.DataAccess.Entities.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddBackgroundColorForPool : DbMigration
+    public partial class AddPoolBackgroundColorFieldToPoolTable : DbMigration
     {
         public override void Up()
         {
