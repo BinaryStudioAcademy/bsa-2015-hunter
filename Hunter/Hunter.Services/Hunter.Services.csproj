@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\ActivityDto.cs" />
+    <Compile Include="Dto\UserRoleDto.cs" />
     <Compile Include="Dto\VacancyDto.cs" />
     <Compile Include="Extensions\HunterValidation.cs" />
     <Compile Include="Extensions\ActivityExtension.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Dto\PoolViewModel.cs" />
     <Compile Include="Dto\CandidateDto.cs" />
     <Compile Include="Extensions\CandidateExtensions.cs" />
+    <Compile Include="Extensions\UserRoleExtention.cs" />
     <Compile Include="Extensions\VacancyExtensions.cs" />
     <Compile Include="Services\ActivityService.cs" />
     <Compile Include="Services\CandidateService.cs" />
@@ -73,6 +75,8 @@
     <Compile Include="Services\Interfaces\IPoolService.cs" />
     <Compile Include="Services\Interfaces\IUserService.cs" />
     <Compile Include="Services\Interfaces\IVacancyService.cs" />
+    <Compile Include="Services\Interfaces\IUserRoleService.cs" />
+    <Compile Include="Services\UserRoleService.cs" />
     <Compile Include="Services\PoolService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\VacancyService.cs" />

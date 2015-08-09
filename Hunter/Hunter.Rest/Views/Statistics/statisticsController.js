@@ -8,15 +8,14 @@
     StatisticsController.$inject = [
         '$location',
         'AuthService',
-        'CandidateHttpService',
-        'AddEditService'
+        'CandidateHttpService'
 
     ];
 
-    function StatisticsController($location, authService, candidateHttpService, addEditService) {
+    function StatisticsController($location, authService, candidateHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
-        vm.someVariable = 'This is statistics page';
+        vm.controllerName = 'This is statistics page';
 
         //(function() {
         //    // This is function for initialization actions, for example checking auth

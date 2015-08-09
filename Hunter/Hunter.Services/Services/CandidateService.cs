@@ -16,12 +16,15 @@ namespace Hunter.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICandidateRepository _candidateRepository;
         private readonly ILogger _logger ;
+        private readonly IPoolRepository _poolRepository;
 
-        public CandidateService(IUnitOfWork unitOfWork, ICandidateRepository candidateRepository, ILogger logger)
+        public CandidateService(IUnitOfWork unitOfWork, ICandidateRepository candidateRepository,
+            IPoolRepository poolRepository, ILogger logger)
         {
             _unitOfWork = unitOfWork;
             _candidateRepository = candidateRepository;
             _logger = logger;
+            _poolRepository = poolRepository;
         }
 
         public IEnumerable<Candidate> GetAll()
@@ -82,8 +85,14 @@ namespace Hunter.Services
 
         }
 
-        public void Add(Candidate candidate)
+        public void Add(CandidateDto dto)
         {
+            var candidate = new Candidate();
+            dto.ToCandidateModel(candidate);
+            foreach (var item in dto.PoolNames)
+            {
+                candidate.Pool.Add(_poolRepository.Get(x => x.Name == item));
+            }
             try
             {
                 _candidateRepository.Add(candidate);
@@ -108,8 +117,15 @@ namespace Hunter.Services
             }
         }
 
-        public void Update(Candidate candidate)
+        public void Update(CandidateDto dto)
         {
+            var candidate = _candidateRepository.Get(dto.Id);
+            dto.ToCandidateModel(candidate);
+            candidate.Pool.Clear();
+            foreach (var item in dto.PoolNames)
+            {
+                candidate.Pool.Add(_poolRepository.Get(x=>x.Name==item));
+            }
             try
             {
                 _candidateRepository.Update(candidate);

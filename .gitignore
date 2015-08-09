@@ -55,3 +55,4 @@ OpenCover/
 node_modules/
 bower_components/
 /Hunter/.vs/config/applicationhost.config
+/Hunter/Hunter.Rest/log.txt

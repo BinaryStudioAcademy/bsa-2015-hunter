@@ -1,10 +1,96 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-	<meta charset="utf-8" />
-</head>
-<body>
-    {{candidateAddEditCtrl.someVariable}}
-</body>
-</html>
+﻿<div class="container" ng-controller="CandidateAddEditController as ctrl">
+    <h3>Add / Edit candidate : {{ctrl.nameInTitle}}</h3>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>General</h3><hr/>
+            <div>
+                <label>First Name</label>
+                <input type="text" class="form-control" ng-model="ctrl.FirstName"/>
+            </div>
+            <div>
+                <label>Last Name</label>
+                <input type="text" class="form-control" ng-model="ctrl.LastName"/>
+            </div>
+            <div>
+                <label>Birth Date</label>
+                <input type="date" class="form-control" ng-model="ctrl.DateOfBirth"/>
+            </div>
+            <div>
+                <label>Location</label>
+                <input type="text" class="form-control" ng-model="ctrl.Location"/>
+            </div>
+            <div>
+                <label>Position</label>
+                <input type="text" class="form-control" ng-model="ctrl.Position"/>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <h3>Contacts</h3><hr/>
+            <div>
+                <label>Email</label>
+                <input type="text" class="form-control" ng-model="ctrl.Email"/>
+            </div>
+            <div>
+                <label>Skype</label>
+                <input type="text" class="form-control" ng-model="ctrl.Skype"/>
+            </div>
+            <div>
+                <label>LinkedIn</label>
+                <input type="text" class="form-control" ng-model="ctrl.LinkedIn"/>
+            </div>
+            <div>
+                <label>Phone</label>
+                <input type="text" class="form-control" ng-model="ctrl.Phone"/>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <h3>Salary</h3><hr/>
+            <input type="text" class="form-control" ng-model="ctrl.Salary"/>
+            <button>View Resume</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Status</h3><hr/>
+            <div>
+                <label>Shortlisted: </label><input type="checkbox" ng-model="ctrl.Shortlisted"/>
+            </div>
+            <div>
+                <label>Origin:</label><select class="form-control" ng-model="ctrl.selectedOrigin" ng-options="orgn.name for orgn in ctrl.origins">
+                </select>
+            </div>
+            <div>
+                <label>Resolution:</label><select class="form-control" ng-model="ctrl.selectedResolution" ng-options="res.name for res in ctrl.resolutions">
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h3>Photo</h3><hr/>
+            <button>Upload Picture</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Pools</h3><hr/>
+            <select multiple ng-model="ctrl.selectedPools" ng-options="pool.name for pool in ctrl.pools">
+                <!-- <option>.Net</option>-->
+                <!-- <option>QA</option>-->
+                <!-- <option>PHP</option>-->
+                <!-- <option>JS</option>-->
+            </select>
+        </div>
+        <div class="col-md-4">
+            <h3>Resume</h3><hr/>
+            <button>Upload Resume</button>
+        </div>
+        <div class="col-md-4">
+            <h3>Note</h3><hr/>
+            <input type="text" class="form-control"/>
+        </div>
+    </div>
+    <div class="button-done">
+        <button class="btn-lg" ng-click="ctrl.addEditCandidate()">DONE</button>
+    </div>
+</div>

@@ -4,38 +4,74 @@
     Layout = "~/Views/Shared/_LayoutWithMainMenu.cshtml";
 }
 
+<!-- Start bower components -->
 <script src="~/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="~/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src='~/bower_components/angular/angular.js'></script>
 <script src='~/bower_components/angular-route/angular-route.js'></script>
 <script src="~/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+<script src="~/bower_components/angular-utils-pagination/dirPagination.js"></script>
+<!-- End bower components -->
+
+<!-- Start app -->
 <script src='~/Views/app/app.js'></script>
+<!-- End app -->
+
+<!-- Start helpers -->
 <script src="~/Views/services/helper/authService.js"></script>
 <script src="~/Views/services/helper/httpHandler.js"></script>
 <script src="~/Views/services/helper/authInterceptorService.js"></script>
+<!-- End helpers -->
+
+<!-- Start Candidates -->
 <script src="~/Views/services/candidate/candidatesHttpService.js"></script>
 <script src="~/Views/candidate/addEdit/candidateAddEditController.js"></script>
-<script src="~/Views/services/candidate/addEdit/addEditService.js"></script>
+<script src="~/Views/services/candidate/addEdit/candidateAddEditService.js"></script>
 <script src="~/Views/candidate/profile/candidateController.js"></script>
-<script src="~/Views/candidate/list/candidateListtController.js"></script>
+<script src="~/Views/candidate/list/candidateListController.js"></script>
+<!-- End Candidates -->
+
+<!-- Start Vacancies -->
 <script src="~/Views/vacancy/addEdit/vacancyAddEditController.js"></script>
 <script src="~/Views/vacancy/list/vacancyListController.js"></script>
 <script src="~/Views/vacancy/profile/vacancyController.js"></script>
-<script src="~/Views/services/vacancy/addEdit/addEditService.js"></script>
 <script src="~/Views/services/vacancy/vacancyHttpService.js"></script>
+<!-- End Vacancies -->
+
+<!-- Start Statistics -->
 <script src="~/Views/Statistics/statisticsController.js"></script>
-<script src="../../Views/login/loginController.js"></script>
+
+<!-- End Statistics -->
+
+<!-- Start Login -->
+<script src="~/Views/login/loginController.js"></script>
+<script src="~/Views/register/registerController.js"></script>
+<!-- End Login -->
+
+<!-- Start Pools -->
 <script src="~/Views/pool/list/poolListController.js"></script>
 <script src="~/Views/pool/addEdit/poolAddEditController.js"></script>
-<script src="~/Views/services/directive/autofocus.js"></script>
+<script src="~/Views/services/pool/poolsHttpService.js"></script>
+<!-- End Pools -->
+<!-- Start Activities -->
+<script src="~/Views/services/activity/activitiesHttpService.js"></script>
+<script src="~/Views/Activity/list/activityListController.js"></script>
+<!-- End Activities -->
 
+<!-- Start Files -->
+<script src="~/Views/files/list/fileListController.js"></script>
+<!-- End Files -->
 
-<script src="~/Views/services/helper/httpHandler.js"></script>
-<script src="~/Views/services/vacancy/vacancyHttpService.js"></script>
-<script src="~/Views/Vacancy/list/vacancyListController.js"></script>
+<!-- Start Users -->
+<script src="~/Views/user/list/userListController.js"></script>
+<!-- End Users -->
+
+<!-- Start Roles -->
+<script src="~/Views/role/list/roleListController.js"></script>
+<script src="~/Views/services/userRole/userRoleHttpService.js"></script>
+<!-- End Roles -->
 
 <div ng-view></div>
-
 
 <script>
     angular.bootstrap(document, ['hunter-app']);
