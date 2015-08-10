@@ -11,6 +11,7 @@
         var handler = {
             sendRequest: sendRequest
         };
+
         /**
          * 
          * @param  httpObject {
@@ -52,12 +53,12 @@
                 if (httpObject.successCallback && typeof httpObject.successCallback === 'function') {
                     httpObject.successCallback(response);
                 }
-                }
+            }
 
             function failedRequest(error) {
                 if (httpObject.errorMessageToDev) {
                     console.log(httpObject.errorMessageToDev);
-        }
+                }
 
                 if (httpObject.errorMessageToUser) {
                     alertify.error(errorMessageToUser);

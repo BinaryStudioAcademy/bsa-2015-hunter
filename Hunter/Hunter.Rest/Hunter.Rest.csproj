@@ -240,7 +240,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
-    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -645,6 +644,7 @@
     <Content Include="Views\candidate\addEdit\addEdit.html" />
     <Content Include="Views\candidate\addEdit\candidateAddEditController.js" />
     <Content Include="Views\candidate\list\candidateListController.js" />
+    <Content Include="Views\candidate\list\dirPagination.tpl.html" />
     <Content Include="Views\candidate\list\list.html" />
     <Content Include="Views\candidate\profile\candidateController.js" />
     <Content Include="Views\candidate\profile\profile.html" />
@@ -705,6 +705,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\fontAwesome\" />
     <Folder Include="Views\role\addEdit\" />
     <Folder Include="Views\role\profile\" />
     <Folder Include="Views\user\addEdit\" />
