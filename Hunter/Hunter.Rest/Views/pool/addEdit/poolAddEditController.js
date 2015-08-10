@@ -3,23 +3,32 @@
 
     angular
         .module("hunter-app")
-        .controller("PoolAddEditController", PoolAddEditController);
+        .controller("PoolAddEditController", PoolAddEditController)
+        .service("PoolAddEditService", PoolAddEditService);
 
     PoolAddEditController.$inject = [
         "$location",
         "AuthService",
         "HttpHandler",
-        "$routeParams"
+        "$routeParams",
+        "PoolAddEditService"
     ];
 
-    function PoolAddEditController($location, AuthService, HttpHandler, $routeParams) {
+    function PoolAddEditController($location, AuthService, HttpHandler, $routeParams, PoolAddEditService) {
         var vm = this;
         vm.pageConfig = {};
         vm.id = 0;
         vm.pool = {};
+        vm.poolColors = {};
+        vm.poolUrl = "";
+        vm.addEditFlag = $routeParams.id;
 
+        PoolAddEditService(addEditFlag);
+    }
+
+    function PoolAddEditService(addEditFlag) {
         //edit - put
-        if ($routeParams.id > 0) {
+        if (addEditFlag > 0) {
             vm.pageConfig.deleteButton = true;
             vm.pageConfig.pageTitle = "Edit a pool";
             vm.pageConfig.postPutButtonValue = "Edit Pool";
@@ -104,9 +113,6 @@
             }
             
             vm.currentChild.className = "pool_colors_active";
-
-            //console.log(vm.parent);
-            //console.log($event.currentTarget);
         }
     }
 })();
