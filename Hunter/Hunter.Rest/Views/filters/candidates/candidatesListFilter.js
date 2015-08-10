@@ -87,7 +87,8 @@
         var patern = RegExp('^' + nameFilter.toLowerCase());
 
         candidates.forEach(function(candidate) {
-            if (patern.test(candidate.firstName.toLowerCase()) || patern.test(candidate.lastName.toLowerCase())) {
+            if (patern.test(candidate.firstName.toLowerCase()) || patern.test(candidate.lastName.toLowerCase()) ||
+                patern.test(candidate.firstName.toLowerCase() + ' ' + candidate.lastName.toLowerCase())) {
                 filtered.push(candidate);
             }
         });
