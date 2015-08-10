@@ -34,7 +34,7 @@ namespace Hunter.Rest
         {
             if (poolViewModel == null || _poolService.IsPoolNameExist(poolViewModel.Name))
             {
-                return BadRequest("Pool name empty or alreafy exists!");
+                return BadRequest("Pool name empty or already exists!");
             }
 
             //if (_poolService.IsPoolNameExist(poolViewModel.Name))
@@ -59,6 +59,11 @@ namespace Hunter.Rest
             if (!_poolService.IsPoolExist(id) || poolViewModel == null)
             {
                 return NotFound();
+            }
+
+            if (_poolService.IsPoolNameExistExceptCurrentPool(poolViewModel))
+            {
+                return BadRequest("Cann't update. Another pool with same name alreafy exists!");
             }
 
             poolViewModel.Id = id;

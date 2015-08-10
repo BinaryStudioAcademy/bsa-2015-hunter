@@ -115,5 +115,18 @@ namespace Hunter.Services
                 return false;
             }
         }
+        
+        public bool IsPoolNameExistExceptCurrentPool(PoolViewModel pool)
+        {
+            try
+            {
+                return _poolRepository.Query().Any(p => (p.Name.ToLower() == pool.Name.ToLower() && p.Id != pool.Id));
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return false;
+            }
+        }
     }
 }
