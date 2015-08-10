@@ -4,7 +4,7 @@ using System.Web.Http;
 
 namespace Hunter.Rest
 {
-    [Authorize]
+    //[Authorize]
     public class PoolController : ApiController
     {
         private readonly IPoolService _poolService;

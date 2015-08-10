@@ -7,37 +7,82 @@
 
     VacancyAddEditController.$inject = [
         '$location',
+        '$routeParams',
         'AuthService',
         'VacancyHttpService',
         'PoolsHttpService'
     ];
 
-    function VacancyAddEditController($location, authService, vacancyHttpService, poolsHttpService) {
+    function VacancyAddEditController($location, $routeParams, authService, vacancyHttpService, poolsHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
 
         vm.controllerName = 'Add / Edit Vacancy';
         vm.selectedPool = null;
-        vm.newVacancy = {
+        vm.isNewVacancy = true;
+        vm.currentVacancy = {
+            id: 0,
             Name: 'New vacancy',
             StartDate: new Date(),
             EndDate: null,
             Location: '',
-            Status: 'Open',
+            Status: 0,
             Description: 'Description of vacancy',
-            PoolId: 0
+            PoolId: 1
         };
         vm.pools = [];
         poolsHttpService.getAllPools().then(function (data) {
             vm.pools = data;
+            initializeFields($routeParams);
         });
 
         vm.submitVacancy = function () {
-            if (vacancyHttpService.validateVacancy(vm.newVacancy)) {
-                vacancyHttpService.addVacancy(vm.newVacancy);
-                $location.url('/vacancy/list');
+            if (vacancyHttpService.validateVacancy(vm.currentVacancy)) {
+                if (vm.isNewVacancy)
+                {
+                    vacancyHttpService.addVacancy(vm.currentVacancy);
+                } else {
+                    vacancyHttpService.updateVacancy(vm.currentVacancy, vm.currentVacancy.id);
+                }
+                //$location.url('/vacancy/list');
             }
         };
+
+        function initializeFields($routeParams) {
+            var id = -1;
+            if ($routeParams.id) {
+                id = $routeParams.id;
+            } else {
+                return;
+            }
+            vacancyHttpService.getVacancy(id).then(function (data) {
+                vm.isNewVacancy = false;
+                vm.currentVacancy = {
+                    id: id,
+                    Name: data.name,
+                    StartDate: new Date(data.startDate),
+                    EndDate: new Date(data.endDate),
+                    Location: data.location,
+                    Status: data.status,
+                    Description: data.description,
+                    PoolId: data.poolId
+                };
+            });
+            //if (vacancy != null) {
+            //    console.log(vacancy.data);
+            //    vm.isNewVacancy = false;
+            //    vm.currentVacancy = {
+            //        id: id,
+            //        Name: vacancy.Name,
+            //        StartDate: vacancy.StartDate,
+            //        EndDate: vacancy.EndDate,
+            //        Location: vacancy.Location,
+            //        Status: vacancy.Status,
+            //        Description: vacancy.Description,
+            //        PoolId: vacancy.PoolId
+            //    };
+            //};
+        }
         //Here we should write all signatures for user actions callback method, for example,
 
         //(function() {
