@@ -31,7 +31,7 @@
             password: '',
             confirmPassword: '',
             state: 0,
-            roleId: 0
+            roleId: 1
         }
 
         vm.register = function () {
