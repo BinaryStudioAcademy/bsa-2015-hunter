@@ -24,5 +24,7 @@ namespace Hunter.Services
         [Required]
         [StringLength(2000)]
         public string Url { get; set; }
+
+        public DateTime Time { get; set; }
     }
 }

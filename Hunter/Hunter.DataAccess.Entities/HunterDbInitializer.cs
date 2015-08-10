@@ -55,15 +55,29 @@ namespace Hunter.DataAccess.Entities
                 var techspec3 = new User() { Login = "techspec1", UserName = "Maddox Fulton", RoleId = 2, PasswordHash = "fd088e4d0ead7cc5d1c2cfe385c3e9b763aeba92ac77ef2307fbb59604e14a896f706ac9d7f6788c9a99f7ee6175a0f46004eab324a5ef2ec93284276767c7a0" };
                 var admin = new User() { Login = "admin@local.com", RoleId = 3, PasswordHash = "AO+POAp4pSwtxgaOu74yRWoYALimtAjpWgsy1746KKw+NkKG+aFUB8UWLS89Jc98VQ==" };
 
-                var users = new List<User> { recruiter1, recruiter2, recruiter3, techspec1, techspec2, techspec3, admin };
-                users.ForEach(user => context.User.Add(user));
-                context.SaveChanges();
-                #endregion
+            #region POOLS
+            //var jsPool = new Pool { Name = "JavaScript" };
+            //var netPool = new Pool { Name = ".Net" };
+            //var phpPool = new Pool { Name = "PHP" };
+            //var qaPool = new Pool { Name = "QA" };
 
-                #region USER Profiles
+            var jsPool = new Pool { Name = "JavaScript", Color = "rgb(44,201,99)" };
+            var netPool = new Pool { Name = ".Net", Color = "rgb(293,250,85)" };
+            var phpPool = new Pool { Name = "PHP", Color = "rgb(240,88,88)" };
+            var qaPool = new Pool { Name = "QA", Color = "rgb(245,122,14)" };
+
+            var pools = new List<Pool> { jsPool, netPool, phpPool, qaPool };
+            pools.ForEach(pool => context.Pool.Add(pool));
+            context.SaveChanges();
+            #endregion
+            #region USER Profiles
                 var uProfile1 = new UserProfile() { Alias = "UF", UserLogin = "ulyana@bs.com", Position = "HR Manager", Added = new DateTime(2015, 07, 01, 10, 10, 10, DateTimeKind.Utc), };
                 var uProfile2 = new UserProfile() { Alias = "KP", UserLogin = "kate@bs.com", Position = "HR Manager", Added = new DateTime(2015, 07, 02, 10, 10, 10, DateTimeKind.Utc), };
                 var uProfile3 = new UserProfile() { Alias = "IS", UserLogin = "irina@bs.com", Position = "Event Manager", Added = new DateTime(2015, 07, 03, 10, 10, 10, DateTimeKind.Utc), };
+            #endregion
+
+
+
 
                 var uProfiles = new List<UserProfile> { uProfile1, uProfile2, uProfile3 };
                 uProfiles.ForEach(pr => context.UserProfile.Add(pr));
@@ -151,14 +165,14 @@ namespace Hunter.DataAccess.Entities
                                 We are a growing business with lots of opportunity and believe that our team is our success."
                 };
 
-                var vacancy2 = new Vacancy()
-                {
-                    Name = "PHP Developer - Magento Lead",
-                    Status = 0,
-                    UserId = 1,
-                    StartDate = new DateTime(2015, 8, 2),
-                    Pool = phpPool,
-                    Description = @"Company Description:
+            var vacancy2 = new Vacancy()
+            {
+                Name = "PHP Developer - Magento Lead",
+                Status = 0,
+                UserId = 2,
+                StartDate = new DateTime(2015, 8, 2),
+                Pool = phpPool,
+                Description = @"Company Description:
                                For two decades Guidance Solutions has stood at the forefront of eCommerce innovation. We are based in beautiful Marina del Rey, CA just steps from the beach where we develop customized eCommerce strategy for our clients. Using social commerce and the best of Web 2.0 we offer clients a range of services from Information Architecture, User Experience, and Web Design to Development, Hosting, eMarketing and Mobile App Development.
                                We believe in hiring the best so we can deliver the best. We are passionate about the work we do and believe it is possible to do great work and have fun at the same time. We have been voted one of the Best Places to Work, by the LA Business Journal. We offer a relaxed, casual environment where passion, commitment, and excellence reign.
 
@@ -167,14 +181,14 @@ namespace Hunter.DataAccess.Entities
                                We are a leader in the eCommerce industry, and work with high profile clients such as: Foot Locker, Behr Paint, and Burlington Coat Factory. We believe in being passionate about work, having fun at work, and delivering the best. We have been named one of the BEST PLACES TO WORK in LA. We enjoy great pay and benefits, a casual, relaxed work style and a friendly, collaborative environment. We are proud to be environmentally and socially conscious. If you are looking for the opportunity to stand out from the crowd come join us at the BEACH. COME PLAY WITH THE BEST As our php-Magento Developer/Architect you will develop web solutions and custom applications for our high-profile clients with rich media user experiences. Responsibilities:Develop overall technical strategy for external client projects from technical requirementsCommunicate with external clients on a regular basis regarding progress, challenges, timelines and end results of client projectsDirect and oversee more junior developers including off-shore developers in performing Magento technical programming which needs to be accomplishedConduct technical estimations for sales presentationsPresent technical strategy to clients and gather technical requirements as neededDevelop technical documentationCreate and update both design and functional documentsIdentify and troubleshoot issues as needed, documenting developmentPerform a mix of maintenance, enhancements and new development as requiredImplement project applications according to specificationsResearch technical issues and provide recommendations to enhance client web sitesWork independently and as part of a team to create cutting edge E-commerce & mobile sitesTest sites to ensure optimal usabilityJuggle multiple projects and shifting prioritiesMeet stipulated deadlines Qualifications:10+ years developing Front End and user interface code for Web sitesProficient in OOP8+ years of experience coding in DHTML, JavaScript, CSS, Ajax, jQuery8+ years of PHP 4/56 years hands-on experience with Magento6 years E-commerce experienceExperience with Zend FrameworkBasic to intermediate understanding of LinuxBasic to intermediate understanding of MS-SQL and/or MySQLAbility to address and quickly fix HTML, CSS and Scripting compatibility issues between different browsers and platformsGood understanding of Web analytics and SEO techniquesExperience extending or customizing existing products/frameworks such as Drupal, Magento, WordPress, or OS CommerceExperience using Version Control such as SVN or CVS (is a plus)B.S. in Computer Science or equivalent preferredProblem solving and time management skillsAbility to work in both an individual and team based environmentAbility to organize, prioritize and perform multiple job tasks simultaneouslyProven ability to work creatively and analytically in a problem-solving environment."
                 };
 
-                var vacancy3 = new Vacancy()
-                {
-                    Name = "Senior PHP Developer",
-                    Status = 0,
-                    UserId = 1,
-                    StartDate = new DateTime(2015, 8, 3),
-                    Pool = phpPool,
-                    Description = @"Company Description:
+            var vacancy3 = new Vacancy()
+            {
+                Name = "Senior PHP Developer",
+                Status = 0,
+                UserId = 3,
+                StartDate = new DateTime(2015, 8, 3),
+                Pool = phpPool,
+                Description = @"Company Description:
                                 A Santa Monica-based pre-IPO tech company; CallFire is a voice and text platform, with technologies that fit with today mobile lifestyle. We work with major brands, including Public Storage, Dominoes Pizza, AllState, Pepsi and many others. We are a tight knit group of professionals who are passionate about our mission.
 
                                 Job Description:
@@ -234,14 +248,14 @@ namespace Hunter.DataAccess.Entities
                                 Take time off when you need it. Embrace the flow. Control your schedule!"
                 };
 
-                var vacancy5 = new Vacancy()
-                {
-                    Name = "Software engineer (JavaScript, AngularJS)",
-                    Status = 0,
-                    UserId = 1,
-                    StartDate = new DateTime(2015, 8, 2),
-                    Pool = jsPool,
-                    Description = @"We are looking for the best and brightest minds in Web Development. Someone who is truly passionate about creating beautiful innovative next generation UIs using bleeding edge technologies.
+            var vacancy5 = new Vacancy()
+            {
+                Name = "Software engineer (JavaScript, AngularJS)",
+                Status = 0,
+                UserId = 2,
+                StartDate = new DateTime(2015, 8, 2),
+                Pool = jsPool,
+                Description = @"We are looking for the best and brightest minds in Web Development. Someone who is truly passionate about creating beautiful innovative next generation UIs using bleeding edge technologies.
                                 
                                 As a member of a SCRUM team, you are asked to deliver the following:
                                 Implement requirements from design mockups on the UI and integrate them with the backend services.
@@ -268,14 +282,14 @@ namespace Hunter.DataAccess.Entities
                                 Founded in 1991 and headquartered in Amsterdam, we have 4,000 employees worldwide and sell our products in over 36 countries."
                 };
 
-                var vacancy6 = new Vacancy()
-                {
-                    Name = "Senior JavaScript Developer",
-                    Status = 0,
-                    StartDate = new DateTime(2015, 8, 3),
-                    Pool = jsPool,
-                    UserId = 1,
-                    Description = @"Job Description
+            var vacancy6 = new Vacancy()
+            {
+                Name = "Senior JavaScript Developer",
+                Status = 0,
+                StartDate = new DateTime(2015, 8, 3),
+                Pool = jsPool,
+                UserId = 3,
+                Description = @"Job Description
                                 As Senior JavaScript Developer you will be working on our most challenging and important TV projects and products. You will have a core role in our team of experienced developers, designers, project managers.
                                 Most TV platforms are web-based, so you will make heavy use of your skills in JavaScript, CSS and HTML. The central pillar of much of our software is our AppCore: a JavaScript library which allows us to easily write TV apps once and deploy them to many different TV platforms easily.
                                 
@@ -362,14 +376,14 @@ namespace Hunter.DataAccess.Entities
                                 This is a growing regional company with 21 branches and 18 years in business. We lead the industry in our use of technology. The IT team is small and autonomous with direct line to Executive Leadership of the company. Nice benefit package."
                 };
 
-                var vacancy8 = new Vacancy()
-                {
-                    Name = ".Net Developer",
-                    Status = 0,
-                    UserId = 1,
-                    StartDate = new DateTime(2015, 8, 2),
-                    Pool = netPool,
-                    Description = @"Job Description
+            var vacancy8 = new Vacancy()
+            {
+                Name = ".Net Developer",
+                Status = 0,
+                UserId = 2,
+                StartDate = new DateTime(2015, 8, 2),
+                Pool = netPool,
+                Description = @"Job Description
 
                                 We are an innovative software company who produce awesome casino and bingo gaming content in an agile manner and using best practice techniques and approaches.
                                 We are looking to expand our .NET team in­line with other areas of our business. The current team is a good mix of graduate, mid, and senior level developers ­ we are specifically looking at those who have commercial exposure to .NET for this role. We also want people who are passionate about producing good quality code and keen to contribute positively to the productive and fun working environment we've established at Bede.
@@ -400,14 +414,14 @@ namespace Hunter.DataAccess.Entities
                                 Bede Gaming delivers state of the art technology solution for online gaming partners.  Cross device support is a key differentiator from our competitors, and we're seeking to grow an even stronger .Net development team."
                 };
 
-                var vacancy9 = new Vacancy()
-                {
-                    Name = "Backend .Net Web Developer",
-                    Status = 0,
-                    UserId = 1,
-                    StartDate = new DateTime(2015, 8, 2),
-                    Pool = netPool,
-                    Description = @"Job Description
+            var vacancy9 = new Vacancy()
+            {
+                Name = "Backend .Net Web Developer",
+                Status = 0,
+                UserId = 3,
+                StartDate = new DateTime(2015, 8, 2),
+                Pool = netPool,
+                Description = @"Job Description
 
                                 Whether you’re fresh out of college or an experienced professional, if you love working with .Net, APIs and MongoDB, GAN Integrity Solutions (GAN) would like to hear from you.
                                 GAN is an international consultancy and IT services company headquartered in Copenhagen, Denmark. We help shape how companies manage compliance and regulatory risks through innovative cloud-based solutions, delivered as Software as a Service (SaaS).
@@ -444,12 +458,31 @@ namespace Hunter.DataAccess.Entities
                 };
 
 
-                var vacancies = new List<Vacancy>() { vacancy1, vacancy2, vacancy3, vacancy4, vacancy5, vacancy6, vacancy7, vacancy8, vacancy9 };
-                vacancies.ForEach(vacancy => context.Vacancy.Add(vacancy));
-                context.SaveChanges();
-                #endregion
-            }
-            catch (Exception ex)
+            var vacancies = new List<Vacancy>() { vacancy1, vacancy2, vacancy3, vacancy4, vacancy5, vacancy6, vacancy7, vacancy8, vacancy9 };
+            vacancies.ForEach(vacancy => context.Vacancy.Add(vacancy));
+            context.SaveChanges();
+            #endregion
+
+            #region ACTIVITY
+            var activity1 = new Activity() { Message = "Add new user to Pool", Tag = "add user", Time = DateTime.Now, UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
+            var activity2 = new Activity() { Message = "Create new Vacancy Junior PHP Developer", Tag = "create Vacancy", Time = DateTime.Now, UserLogin = "recruiter2", Url = "http://binary-studio.com/" };
+            var activity3 = new Activity() { Message = "Add new Feedback to Hollis Sefton", Tag = "add Feedback", Time = DateTime.Now, UserLogin = "techspec1", Url = "http://binary-studio.com/" };
+            var activity4 = new Activity() { Message = "Add new Feedback to Jennie Charlie", Tag = "add Feedback", Time = DateTime.Now, UserLogin = "techspec@local.com", Url = "http://binary-studio.com/" };
+            var activity5 = new Activity() { Message = "Add new user Lon Abner to Pool", Tag = "add user", Time = DateTime.Now, UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
+
+            var activities = new List<Activity> { activity1, activity2, activity3, activity4, activity5 };
+            activities.ForEach(x => context.Activity.Add(x));
+            context.SaveChanges();
+            #endregion
+        }
+
+        private static byte[] ToByteArray(string sqlVarBinary)
+        {
+            List<byte> byteList = new List<byte>();
+
+            string hexPart = sqlVarBinary.Substring(2);
+
+            for (int i = 0; i < hexPart.Length / 2; i++)
             {
                 Logger.Instance.Log(ex);
                 throw;

@@ -4,6 +4,7 @@ using System.Web.Http;
 
 namespace Hunter.Rest
 {
+    //[Authorize]
     public class PoolController : ApiController
     {
         private readonly IPoolService _poolService;
@@ -31,10 +32,15 @@ namespace Hunter.Rest
         [System.Web.Mvc.HttpPost]
         public IHttpActionResult Post([FromBody] PoolViewModel poolViewModel)
         {
-            if (_poolService.IsPoolNameExist(poolViewModel.Name))
+            if (poolViewModel == null || _poolService.IsPoolNameExist(poolViewModel.Name))
             {
-                return BadRequest("Pool name alreafy exists!");
+                return BadRequest("Pool name empty or already exists!");
             }
+
+            //if (_poolService.IsPoolNameExist(poolViewModel.Name))
+            //{
+            //    return BadRequest("Pool name alreafy exists!");
+            //}
 
             poolViewModel = _poolService.CreatePool(poolViewModel);
 
@@ -53,6 +59,11 @@ namespace Hunter.Rest
             if (!_poolService.IsPoolExist(id) || poolViewModel == null)
             {
                 return NotFound();
+            }
+
+            if (_poolService.IsPoolNameExistExceptCurrentPool(poolViewModel))
+            {
+                return BadRequest("Cann't update. Another pool with same name alreafy exists!");
             }
 
             poolViewModel.Id = id;

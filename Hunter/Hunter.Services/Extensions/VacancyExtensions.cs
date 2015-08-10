@@ -22,7 +22,7 @@ namespace Hunter.Services
                 PoolId = vacancy.PoolId,
                 CountCandidates = vacancy.Card.Count(),
                 CountShortListed = vacancy.Card.Where(e=>e.Candidate.Shortlisted == true).Count(),
-                AddedByName = vacancy.User.Login
+                AddedByName = vacancy.User != null ? vacancy.User.Login : "noname"
             };
             return v;
         }

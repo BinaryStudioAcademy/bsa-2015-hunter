@@ -240,7 +240,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
-    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -278,7 +277,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Controllers\PoolController.cs" />
+    <Compile Include="Controllers\UserRoleController.cs" />
     <Compile Include="Controllers\VacancyController.cs" />
+    <Compile Include="Filters\CheckModelForNullAttribute.cs" />
+    <Compile Include="Filters\ValidateModelStateAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -448,10 +450,14 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\candidate.css" />
     <Content Include="Content\MyStyle.css" />
+    <Content Include="Content\pool.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="log4net.xml" />
+    <Content Include="resources\arrows_close.png" />
+    <Content Include="resources\arrows_left.png" />
+    <Content Include="resources\arrows_right.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -633,15 +639,20 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\Activity\list\activityListController.js" />
+    <Content Include="Views\Activity\list\list.html" />
     <Content Include="Views\app\app.js" />
     <Content Include="Views\candidate\addEdit\addEdit.html" />
     <Content Include="Views\candidate\addEdit\candidateAddEditController.js" />
     <Content Include="Views\candidate\list\candidateListController.js" />
+    <Content Include="Views\candidate\list\dirPagination.tpl.html" />
     <Content Include="Views\candidate\list\list.html" />
     <Content Include="Views\candidate\profile\candidateController.js" />
     <Content Include="Views\candidate\profile\profile.html" />
     <Content Include="Views\files\list\fileListController.js" />
     <Content Include="Views\files\list\list.html" />
+    <Content Include="Views\filters\vacancies\vacanciesListFilter.js" />
+    <Content Include="Views\filters\candidates\candidatesListFilter.js" />
     <Content Include="Views\login\login.html" />
     <Content Include="Views\login\loginController.js" />
     <Content Include="Views\pool\addEdit\addEdit.html" />
@@ -650,11 +661,19 @@
     <Content Include="Views\pool\list\poolListController.js" />
     <Content Include="Views\role\list\list.html" />
     <Content Include="Views\role\list\roleListController.js" />
+    <Content Include="Views\services\activity\activitiesHttpService.js" />
     <Content Include="Views\services\candidate\addEdit\candidateAddEditService.js" />
+    <Content Include="Views\register\register.html" />
+    <Content Include="Views\register\registerController.js" />
+    <Content Include="Views\services\candidate\addEdit\addEditService.js" />
+    <Content Include="Views\services\candidate\candidatesFilter.js" />
     <Content Include="Views\services\candidate\candidatesHttpService.js" />
+    <Content Include="Views\services\directive\autofocus.js" />
     <Content Include="Views\services\helper\authInterceptorService.js" />
     <Content Include="Views\services\helper\authService.js" />
     <Content Include="Views\services\helper\httpHandler.js" />
+    <Content Include="Views\services\userRole\userRoleHttpService.js" />
+    <Content Include="Views\services\vacancy\addEdit\addEditService.js" />
     <Content Include="Views\Statistics\list.html" />
     <Content Include="Views\Statistics\statisticsController.js" />
     <Content Include="Views\user\list\list.html" />
@@ -669,7 +688,9 @@
     <Content Include="Views\Vacancy\list\vacancyListController.js" />
     <Content Include="Views\Vacancy\list\list.html" />
     <Content Include="Views\services\pool\poolsHttpService.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -688,6 +709,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\fontAwesome\" />
     <Folder Include="Views\role\addEdit\" />
     <Folder Include="Views\role\profile\" />
     <Folder Include="Views\user\addEdit\" />

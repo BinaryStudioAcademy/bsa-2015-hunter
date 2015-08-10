@@ -58,6 +58,7 @@
     <Compile Include="Entites\Candidate.cs" />
     <Compile Include="Entites\Card.cs" />
     <Compile Include="Entites\Enums\Origin.cs" />
+    <Compile Include="Entites\Enums\PoolBackground.cs" />
     <Compile Include="Entites\Enums\Resolution.cs" />
     <Compile Include="Entites\Feedback.cs" />
     <Compile Include="Entites\IEntity.cs" />
@@ -96,6 +97,10 @@
     <Compile Include="Migrations\201508071306594_Add field to Vacancy.Designer.cs">
       <DependentUpon>201508071306594_Add field to Vacancy.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508081006215_Add_Time_field_to_Activity.cs" />
+    <Compile Include="Migrations\201508081006215_Add_Time_field_to_Activity.Designer.cs">
+      <DependentUpon>201508081006215_Add_Time_field_to_Activity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201508081627270_AddDeletedFlagToCandidateAndUserProfile.cs" />
     <Compile Include="Migrations\201508081627270_AddDeletedFlagToCandidateAndUserProfile.Designer.cs">
       <DependentUpon>201508081627270_AddDeletedFlagToCandidateAndUserProfile.cs</DependentUpon>
@@ -103,6 +108,10 @@
     <Compile Include="Migrations\201508081632306_UserProfileStatusRemoved.cs" />
     <Compile Include="Migrations\201508081632306_UserProfileStatusRemoved.Designer.cs">
       <DependentUpon>201508081632306_UserProfileStatusRemoved.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508091015329_AddPoolBackgroundColorFieldToPoolTable.cs" />
+    <Compile Include="Migrations\201508091015329_AddPoolBackgroundColorFieldToPoolTable.Designer.cs">
+      <DependentUpon>201508091015329_AddPoolBackgroundColorFieldToPoolTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -126,11 +135,11 @@
     <EmbeddedResource Include="Migrations\201508071306594_Add field to Vacancy.resx">
       <DependentUpon>201508071306594_Add field to Vacancy.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508081627270_AddDeletedFlagToCandidateAndUserProfile.resx">
-      <DependentUpon>201508081627270_AddDeletedFlagToCandidateAndUserProfile.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201508081006215_Add_Time_field_to_Activity.resx">
+      <DependentUpon>201508081006215_Add_Time_field_to_Activity.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508081632306_UserProfileStatusRemoved.resx">
-      <DependentUpon>201508081632306_UserProfileStatusRemoved.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201508091015329_AddPoolBackgroundColorFieldToPoolTable.resx">
+      <DependentUpon>201508091015329_AddPoolBackgroundColorFieldToPoolTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

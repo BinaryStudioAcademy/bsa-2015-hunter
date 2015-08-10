@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using Hunter.Rest.Filters;
 
 namespace Hunter.Rest
 {

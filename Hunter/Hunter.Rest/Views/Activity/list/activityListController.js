@@ -1,22 +1,22 @@
-﻿(function() {
+﻿(function () {
     'use strict';
 
     angular
         .module('hunter-app')
-        .controller('CandidateListController', CandidateListController);
+        .controller('ActivityListController', ActivityListController);
 
-    CandidateListController.$inject = [
+    ActivityListController.$inject = [
         '$location',
         'AuthService',
-        'CandidateHttpService'
-        
+        'ActivityHttpService'
+
 
     ];
 
-    function CandidateListController($location, authService, candidateHttpService) {
+    function ActivityListController($location, authService, activityHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
-        vm.name = "Candidates";
+        vm.name = "Activity";
 
         //(function() {
         //    // This is function for initialization actions, for example checking auth
@@ -27,10 +27,10 @@
         //    }
         //})();
 
-        vm.candidateList;
+        vm.activityList;
         // Here we should write any functions we need, for example, body of user actions methods.
-        candidateHttpService.getCandidateList(function (data) {
-            vm.candidateList = data.data;
+        activityHttpService.getActivityList(function (data) {
+            vm.activityList = data.data;
             console.log(data.data);
         });
     }

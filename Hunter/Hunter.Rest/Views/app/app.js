@@ -1,7 +1,8 @@
-﻿angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.directives.dirPagination'])
+﻿
+angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.directives.dirPagination'])
     .config([
         '$routeProvider', function ($routeProvider) {
-           
+
             var viewPath = "/Views/";
             $routeProvider
                 //result on Latest activity button click (slide 1 and menu item on slide 3)
@@ -9,6 +10,11 @@
                     templateUrl: viewPath + 'login/login.html',
                     controller: 'loginController',
                     controllerAs: 'loginCtrl'
+                })
+                .when('/register', {
+                    templateUrl: viewPath + 'register/register.html',
+                    controller: 'RegisterController',
+                    controllerAs: 'registerCtrl'
                 })
                 .when('/news', {
                     templateUrl: '',
@@ -32,7 +38,7 @@
                 })
                 .when('/vacancy/:id', {
                     templateUrl: viewPath + 'vacancy/profile/profile.html',
-                    controller:  "VacancyController",
+                    controller: "VacancyController",
                     controllerAs: 'vacancyCtrl'
                 })
                 .when('/vacancy/edit/:id', {
@@ -82,7 +88,12 @@
                     controller: "PoolAddEditController",
                     controllerAs: "poolAddEditCtrl"
                 });
-
+            $routeProvider
+                .when('/activity', {
+                    templateUrl: viewPath + 'activity/list/list.html',
+                    controller: "ActivityListController",
+                    controllerAs: "ActivityListCtrl"
+                });
             $routeProvider
                 .when('/files', {
                     templateUrl: viewPath + 'files/list/list.html',
@@ -131,61 +142,62 @@
                 });
 
             //result on statistics button click (slide 1)
-            $routeProvider.when('/statistics', {
-                templateUrl: viewPath + 'statistics/list.html',
-                controller: 'StatisticsController',
-                controllerAs: 'statisticsCtrl'
-            })
-                    //slide 2
-                    .when('/candidates/viewprofile/:profileId', {
+            $routeProvider
+                .when('/statistics', {
+                    templateUrl: viewPath + 'statistics/list.html',
+                    controller: 'StatisticsController',
+                    controllerAs: 'statisticsCtrl'
+                })
+                //slide 2
+                .when('/candidates/viewprofile/:profileId', {
                         templateUrl: '',
                         controller: 'profileController',
                         controllerAs: 'profileCtrl'
                     })
-                    //slide 3
-                    .when('/add', {
+                //slide 3
+                .when('/add', {
                         templateUrl: '',
                         controller: 'createCandidateController',
                         controllerAs: 'createCandidateCtrl'
                     })
-                    //slide 4 5
-                    .when('/candidates/:profileId', {
+                //slide 4 5
+                .when('/candidates/:profileId', {
                         templateUrl: '',
                         controller: 'profileController',
                         controllerAs: 'profileCtrl'
                     })
-                    //slide 6
-                    .when('/candidates/:profileId/specnotes', {
+                //slide 6
+                .when('/candidates/:profileId/specnotes', {
                         templateUrl: '',
                         controller: 'specnotesController',
                         controllerAs: 'specnotesCtrl',
                     })
-                    //slide 6 (history bitton click result)
-                    .when('/candidates/:profileId/specnotes/history', {
+                //slide 6 (history bitton click result)
+                .when('/candidates/:profileId/specnotes/history', {
                         templateUrl: '',
                         controller: 'specnotesController',
                         controllerAs: 'specnotesCtrl'
                     })
-                    //slide 8
-                    .when('/candidates/:profileId/interview', {
+                //slide 8
+                .when('/candidates/:profileId/interview', {
                         templateUrl: '',
                         controller: 'interviewController',
                         controllerAs: 'interviewCtrl'
                     })
-                    //slide 8 (history bitton click result)
-                    .when('/candidates/:profileId/interview/history', {
+                //slide 8 (history bitton click result)
+                .when('/candidates/:profileId/interview/history', {
                         templateUrl: '',
                         controller: 'interviewController',
                         controllerAs: 'interviewCtrl'
                     })
-                    //slide 7
-                    .when('/candidates/:profileId/testwork', {
+                //slide 7
+                .when('/candidates/:profileId/testwork', {
                         templateUrl: '',
                         controller: 'testworkController',
                         controllerAs: 'testworkCtrl'
                     })
-                    //slide 7 (history bitton click result)
-                    .when('/candidates/:profileId/testwork/history', {
+                //slide 7 (history bitton click result)
+                .when('/candidates/:profileId/testwork/history', {
                         templateUrl: '',
                         controller: 'testworkController',
                         controllerAs: 'testworkCtrl'

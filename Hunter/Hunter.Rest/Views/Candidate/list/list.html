@@ -4,12 +4,12 @@
             <h3>Candidates (general pool)</h3>
         </div>
     </div>
-    <div clas="row">
+    <div class="row">
         <div class="filte-form-wrapper col-md-3">
             
                 <div class="form-group">
                     <label>Filter</label>
-                    <input type="search" class="form-control">
+                    <input type="search" class="form-control" ng-model="candidateCtrl.filterOptions.nameFilter">
                 </div>
             
             <div class="filter-settings">
@@ -17,26 +17,36 @@
                     <li>
                         Pool
                         <ul>
-                            <li><input type="checkbox"> .Net</li>
-                            <li><input type="checkbox"> JS</li>
-                            <li><input type="checkbox"> PHP</li>
-                            <li><input type="checkbox"> QA</li>
+                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
+       ng-model="candidateListCtrl.filterOptions.poolFilters['.NET']"> .Net</li>
+                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
+       ng-model="candidateListCtrl.filterOptions.poolFilters['JS']"> JS</li>
+                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
+       ng-model="candidateListCtrl.filterOptions.poolFilters['PHP']"> PHP</li>
+                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
+       ng-model="candidateListCtrl.filterOptions.poolFilters['QA']"> QA</li>
                         </ul>
                     </li>
                     <li>
                         Status
                         <ul>
-                            <li><input type="checkbox"> New</li>
-                            <li><input type="checkbox"> In Review</li>
-                            <li><input type="checkbox"> Hired</li>
+                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
+       ng-model="candidateListCtrl.filterOptions.statusFilters['New']"> New</li>
+                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
+       ng-model="candidateListCtrl.filterOptions.statusFilters['InReview']"> In Review</li>
+                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
+       ng-model="candidateListCtrl.filterOptions.statusFilters['Hired']"> Hired</li>
                         </ul>
                     </li>
                     <li>
                         Added by
                         <ul>
-                            <li><input type="checkbox"> Ulyana</li>
-                            <li><input type="checkbox"> Kate</li>
-                            <li><input type="checkbox"> Ira</li>
+                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
+       ng-model="candidateListCtrl.filterOptions.inviterFilters[0].isChecked"> Ulyana</li>
+                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
+       ng-model="candidateListCtrl.filterOptions.inviterFilters[1].isChecked"> Kate</li>
+                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
+       ng-model="candidateListCtrl.filterOptions.inviterFilters[2].isChecked"> Ira</li>
                         </ul>
                     </li>
                 </ul>
@@ -55,7 +65,8 @@
                     <th>City</th>
                     <th>Salary</th>
                 </tr>
-                <tr ng-repeat="item in candidateListCtrl.candidateList">
+                <tr dir-paginate="item in candidateListCtrl.candidateList | CandidatesFilter:candidateListCtrl.filterOptions | itemsPerPage: candidateListCtrl.pageSize" current-page="candidateListCtrl.currentPage">
+                    <!--<tr ng-repeat="item in candidateListCtrl.candidateList">-->
                     <td><input type="checkbox" ng-model="item.shortListed"></td>
                     <td><a href="#/candidate/{{item.id}}">{{item.firstName + " " + item.lastName}}</a></td>
                     <td>none</td>
@@ -97,36 +108,8 @@
                         <button class="btn btn-default" type="button">Ok</button>
                     </div>
                     <div class="col-md-4 col-md-offset-1">
-                        <ul class="pagination list-pagination">
-                            <li>
-                                <span>
-                                    <span aria-hidden="true">&laquo;</span>
-                                </span>
-                            </li>
-                            <li class="active">
-                                <span>1 <span class="sr-only">(current)</span></span>
-                            </li>
-                            <li>
-                                <span>2</span>
-                            </li>
-                            <li>
-                                <span>3</span>
-                            </li>
-                            <li>
-                                <span>4</span>
-                            </li>
-                            <li>
-                                <span>5</span>
-                            </li>
-                            <li>
-                                <span>
-                                    <span aria-hidden="true">&raquo;</span>
-                                </span>
-                            </li>
-                        </ul>
+                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Views/candidate/list/dirPagination.tpl.html"></dir-pagination-controls>
                     </div>
-
-
                 </div>
             </nav>
         </div>

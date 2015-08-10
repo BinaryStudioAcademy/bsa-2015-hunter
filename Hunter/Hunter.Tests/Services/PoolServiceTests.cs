@@ -37,6 +37,12 @@ namespace Hunter.Tests.Services
                 new Pool(){Id = 2, Name = "Pool name #2"},
                 new Pool(){Id = 3, Name = "Pool name #3"}
             });
+            _repository.Query().Returns(new List<Pool>()
+            {
+                new Pool(){Id = 1, Name = "Pool name #1"},
+                new Pool(){Id = 2, Name = "Pool name #2"},
+                new Pool(){Id = 3, Name = "Pool name #1"}
+            }.AsQueryable());
         }
 
         [Test]
@@ -137,6 +143,18 @@ namespace Hunter.Tests.Services
 
             // Act
             var result = _service.IsPoolExist(1);
+
+            // Assert
+            Assert.True(result);
+        }
+
+        [Test]
+        public void Should_return_true_When_another_pool_with_same_name_exists()
+        {
+            // Arrange
+
+            // Act
+            var result = _service.IsPoolNameExistExceptCurrentPool(new PoolViewModel() { Id = 1, Name = "Pool name #1" });
 
             // Assert
             Assert.True(result);

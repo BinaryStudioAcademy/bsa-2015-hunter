@@ -119,6 +119,13 @@ li{
     text-decoration: none;
 }
 
+ .submenu > li > a:hover,
+.submenu > li > a:focus {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #b0b0b0;
+}
+
 /*Long list*/
 .longlist-wrapper{
 	margin-top: 25px;
