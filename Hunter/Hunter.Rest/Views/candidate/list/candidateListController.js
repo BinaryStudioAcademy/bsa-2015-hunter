@@ -17,7 +17,8 @@
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         vm.name = "Candidates";
-
+        vm.currentPage = 1;
+        vm.pageSize = 10;
         //(function() {
         //    // This is function for initialization actions, for example checking auth
         //    if (authService.isLoggedIn()) {
