@@ -36,7 +36,7 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("{id:int}")]
         [ResponseType(typeof(VacancyDto))]
         public HttpResponseMessage Get(int id)
         {
@@ -71,8 +71,8 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpPut]
-        [Route("")]
-        public HttpResponseMessage Update(VacancyDto value)
+        [Route("{id:int}")]
+        public HttpResponseMessage Update(int id, VacancyDto value)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("{id:int}")]
         public HttpResponseMessage Delete(int id)
         {
             try
