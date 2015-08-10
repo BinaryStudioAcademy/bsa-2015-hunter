@@ -18,16 +18,16 @@
         //Here we should write all vm variables default values. For Example:
 
         vm.controllerName = 'Add / Edit Vacancy';
-        vm.selectedPool = null;
+        vm.statuses = [{ id: 0, name: 'Opened' }, { id: 1, name: 'Draft' }, { id: 2, name: 'Closed' }];
         vm.isNewVacancy = true;
         vm.currentVacancy = {
             id: 0,
-            Name: 'New vacancy',
+            Name: '',
             StartDate: new Date(),
             EndDate: null,
             Location: '',
             Status: 0,
-            Description: 'Description of vacancy',
+            Description: '',
             PoolId: 1
         };
         vm.pools = [];
@@ -44,7 +44,7 @@
                 } else {
                     vacancyHttpService.updateVacancy(vm.currentVacancy, vm.currentVacancy.id);
                 }
-                //$location.url('/vacancy/list');
+                $location.url('/vacancy/list');
             }
         };
 

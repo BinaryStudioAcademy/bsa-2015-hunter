@@ -30,8 +30,8 @@
             email: '',
             password: '',
             confirmPassword: '',
-            state: 1,
-            roleId: 1
+            state: 0,
+            roleId: 0
         }
 
         vm.register = function () {

@@ -11,5 +11,6 @@ namespace Hunter.Services
         void DeletePool(int id);
         bool IsPoolNameExist(string name);
         bool IsPoolExist(int id);
+        bool IsPoolNameExistExceptCurrentPool(PoolViewModel pool);
     }
 }
