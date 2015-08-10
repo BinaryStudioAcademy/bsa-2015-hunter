@@ -44,7 +44,7 @@
             });
         }
 
-        $scope.$watch(vm.page, vm.loadUsers);
+        $scope.$watch(function() {return vm.page;}, vm.loadUsers);
 
         //vm.watch('page', vm.loadUsers);
         
