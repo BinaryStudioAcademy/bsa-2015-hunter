@@ -39,7 +39,6 @@
             httpHandler.sendRequest({
                 verb: 'GET',
                 url: '/api/userprofile/' + id,
-//                body: body,
                 successCallback: onSuccess,
                 errorMessageToDev: 'GET USERPROFILE INFO ERROR: ',
                 errorMessageToUser: 'Failed'
