@@ -644,11 +644,13 @@
     <Content Include="Views\candidate\addEdit\addEdit.html" />
     <Content Include="Views\candidate\addEdit\candidateAddEditController.js" />
     <Content Include="Views\candidate\list\candidateListController.js" />
+    <Content Include="Views\candidate\list\dirPagination.tpl.html" />
     <Content Include="Views\candidate\list\list.html" />
     <Content Include="Views\candidate\profile\candidateController.js" />
     <Content Include="Views\candidate\profile\profile.html" />
     <Content Include="Views\files\list\fileListController.js" />
     <Content Include="Views\files\list\list.html" />
+    <Content Include="Views\filters\vacancies\vacanciesListFilter.js" />
     <Content Include="Views\login\login.html" />
     <Content Include="Views\login\loginController.js" />
     <Content Include="Views\pool\addEdit\addEdit.html" />
@@ -703,6 +705,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\fontAwesome\" />
     <Folder Include="Views\role\addEdit\" />
     <Folder Include="Views\role\profile\" />
     <Folder Include="Views\user\addEdit\" />

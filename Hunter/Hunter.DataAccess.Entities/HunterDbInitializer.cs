@@ -125,7 +125,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = "PHP Developer - Magento Lead",
                 Status = 0,
-                UserId = 1,
+                UserId = 2,
                 StartDate = new DateTime(2015, 8, 2),
                 Pool = phpPool,
                 Description = @"Company Description:
@@ -141,7 +141,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = "Senior PHP Developer",
                 Status = 0,
-                UserId = 1,
+                UserId = 3,
                 StartDate = new DateTime(2015, 8, 3),
                 Pool = phpPool,
                 Description = @"Company Description:
@@ -208,7 +208,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = "Software engineer (JavaScript, AngularJS)",
                 Status = 0,
-                UserId = 1,
+                UserId = 2,
                 StartDate = new DateTime(2015, 8, 2),
                 Pool = jsPool,
                 Description = @"We are looking for the best and brightest minds in Web Development. Someone who is truly passionate about creating beautiful innovative next generation UIs using bleeding edge technologies.
@@ -244,7 +244,7 @@ namespace Hunter.DataAccess.Entities
                 Status = 0,
                 StartDate = new DateTime(2015, 8, 3),
                 Pool = jsPool,
-                UserId = 1,
+                UserId = 3,
                 Description = @"Job Description
                                 As Senior JavaScript Developer you will be working on our most challenging and important TV projects and products. You will have a core role in our team of experienced developers, designers, project managers.
                                 Most TV platforms are web-based, so you will make heavy use of your skills in JavaScript, CSS and HTML. The central pillar of much of our software is our AppCore: a JavaScript library which allows us to easily write TV apps once and deploy them to many different TV platforms easily.
@@ -336,7 +336,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = ".Net Developer",
                 Status = 0,
-                UserId = 1,
+                UserId = 2,
                 StartDate = new DateTime(2015, 8, 2),
                 Pool = netPool,
                 Description = @"Job Description
@@ -374,7 +374,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = "Backend .Net Web Developer",
                 Status = 0,
-                UserId = 1,
+                UserId = 3,
                 StartDate = new DateTime(2015, 8, 2),
                 Pool = netPool,
                 Description = @"Job Description

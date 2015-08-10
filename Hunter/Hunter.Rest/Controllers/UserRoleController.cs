@@ -3,7 +3,6 @@ using System.Web.Http;
 using Hunter.Services;
 using Hunter.Services.Dto;
 
-
 namespace Hunter.Rest.Controllers
 {
     public class UserRoleController : ApiController
@@ -16,18 +15,21 @@ namespace Hunter.Rest.Controllers
         }
 
         // GET: api/Role
+        [HttpGet]
         public IEnumerable<UserRoleDto> Get()
         {
             return _userRoleService.GetAllUserRoles();
         }
 
         // GET: api/Role/5
+        [HttpGet]
         public UserRoleDto Get(int id)
         {
             return _userRoleService.GetUserRoleById(id);
         }
 
         // POST: api/Role
+        [HttpPost]
         public IHttpActionResult Post([FromBody]UserRoleDto userRoleDto)
         {
             if (_userRoleService.IsRoleExist(userRoleDto.Name))
@@ -40,6 +42,7 @@ namespace Hunter.Rest.Controllers
         }
 
         // PUT: api/Role/5
+        [HttpPut]
         public IHttpActionResult Put(int id, [FromBody]UserRoleDto userRoleDto)
         {
             if (!_userRoleService.IsRoleExist(id))
@@ -52,6 +55,7 @@ namespace Hunter.Rest.Controllers
         }
 
         // DELETE: api/Role/5
+        [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
             if (!_userRoleService.IsRoleExist(id))
