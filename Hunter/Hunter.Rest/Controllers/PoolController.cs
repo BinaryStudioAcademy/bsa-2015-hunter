@@ -61,11 +61,6 @@ namespace Hunter.Rest
                 return NotFound();
             }
 
-            if (_poolService.IsPoolNameExist(poolViewModel.Name))
-            {
-                return BadRequest("Pool name alreafy exists!");
-            }
-
             poolViewModel.Id = id;
             _poolService.UpdatePool(poolViewModel);
 
