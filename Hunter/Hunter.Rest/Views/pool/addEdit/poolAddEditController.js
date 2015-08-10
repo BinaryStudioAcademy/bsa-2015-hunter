@@ -3,18 +3,16 @@
 
     angular
         .module("hunter-app")
-        .controller("PoolAddEditController", PoolAddEditController)
-        .service("PoolAddEditService", PoolAddEditService);
+        .controller("PoolAddEditController", PoolAddEditController);
 
     PoolAddEditController.$inject = [
         "$location",
         "AuthService",
         "HttpHandler",
-        "$routeParams",
-        "PoolAddEditService"
+        "$routeParams"
     ];
 
-    function PoolAddEditController($location, AuthService, HttpHandler, $routeParams, PoolAddEditService) {
+    function PoolAddEditController($location, AuthService, HttpHandler, $routeParams) {
         var vm = this;
         vm.pageConfig = {};
         vm.id = 0;
@@ -23,12 +21,7 @@
         vm.poolUrl = "";
         vm.addEditFlag = $routeParams.id;
 
-        PoolAddEditService(addEditFlag);
-    }
-
-    function PoolAddEditService(addEditFlag) {
-        //edit - put
-        if (addEditFlag > 0) {
+        if (vm.addEditFlag > 0) {
             vm.pageConfig.deleteButton = true;
             vm.pageConfig.pageTitle = "Edit a pool";
             vm.pageConfig.postPutButtonValue = "Edit Pool";
