@@ -46,10 +46,11 @@
             });
         }
 
-        function getUserProfileList(successCallback) {
+        function getUserProfileList(page, successCallback) {
             httpHandler.sendRequest({
                 verb: 'GET',
                 url: '/api/userprofile/',
+                params: {'page': page},
                 successCallback: successCallback,
                 errorMessageToDev: 'GET USERPROFILE INFO ERROR: ',
                 errorMessageToUser: 'Failed'

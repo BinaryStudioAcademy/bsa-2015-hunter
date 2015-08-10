@@ -39,7 +39,7 @@
 
         vm.loadUsers = function () {
             $location.search('page', vm.page);
-            service.getUserProfileList(function (response) {
+            service.getUserProfileList(vm.page, function (response) {
                 vm.profilesList = response.data;
             });
         }
