@@ -15,26 +15,20 @@
         </div>
         <div class="col-md-4">
             <h3>Note</h3><hr />
-            <textarea ng-model="vacancyAddEditCtrl.currentVacancy.Description" name="Description" class="form-control" maxlength="4000" cols="50" rows="3"></textarea>
+            <textarea ng-model="vacancyAddEditCtrl.currentVacancy.Description" name="Description" class="form-control" maxlength="4000" cols="50" rows="11"></textarea>
         </div>
     </div>
     <div class="row">
         <div class="col-md-4">
             <h3>Status</h3><hr />
             <label>State</label>
-            <select ng-model="vacancyAddEditCtrl.currentVacancy.Status" name="Status">
-                <option value="0">Opened</option>
-                <option value="1">Draft</option>
-                <option value="2">Closed</option>
-            </select>
-        </div>
+            <select class="form-control" ng-model="vacancyAddEditCtrl.currentVacancy.Status" ng-options="state.id as state.name for state in vacancyAddEditCtrl.statuses" name="Status"></select>
+</div>
     </div>
     <div class="row">
         <div class="col-md-4">
             <h3>Pool</h3><hr />
-            <select ng-model="vacancyAddEditCtrl.currentVacancy.PoolId" name="PoolId">
-                <option ng-repeat="pool in vacancyAddEditCtrl.pools" value="{{pool.id}}" ng-selelected="{{vacancyAddEditCtrl.currentVacancy.PoolId == pool.id}}">{{pool.name}}</option>
-            </select>
+            <select class="form-control" ng-model="vacancyAddEditCtrl.currentVacancy.PoolId" name="PoolId" ng-options="pool.id as pool.name for pool in vacancyAddEditCtrl.pools"></select>
         </div>
         <div class="col-md-4">
             <input class="btn btn-primary pull-right" type="submit" value="Done" ng-click="vacancyAddEditCtrl.submitVacancy()" />
