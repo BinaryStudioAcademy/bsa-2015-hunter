@@ -47,10 +47,14 @@
         };
 
         vm.filterOptions = options;
-
+        $scope.$watchCollection(
+            'VacancyListCtrl.filterOptions',
+            function() {
+                $filter('VacanciesFilter')(vm.vacancies, vm.filterOptions);
+            });
 
         vm.currentPage = 1;
-        vm.pageSize = 20;//TODO change to 5
+        vm.pageSize = 5;
         vm.vacancies;
 
         VacancyHttpService.getVacancies().then(function (result) {
@@ -58,11 +62,6 @@
             vm.vacancies = result;
         });
 
-        function toggleCheckbox() {
-            $filter('VacanciesFilter')(vm.vacancies, vm.filterOptions);
-        }
-
-        vm.toggle = toggleCheckbox;
     }
 
     function OtherController() {
