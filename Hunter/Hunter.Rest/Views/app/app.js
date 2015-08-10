@@ -8,7 +8,7 @@ angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.dir
                 //result on Latest activity button click (slide 1 and menu item on slide 3)
                 .when('/login', {
                     templateUrl: viewPath + 'login/login.html',
-                    controller: 'loginController',
+                    controller: 'LoginController',
                     controllerAs: 'loginCtrl'
                 })
                 .when('/register', {
