@@ -19,20 +19,12 @@
         };
 
         function updateCandidate(body, successCallback, id) {
-            var deferred = $q.defer();
             httpHandler.sendRequest({
                 verb: 'PUT',
                 url: '/api/candidates/'+id,
                 body: body,
-                successCallback: function(response) {
-                    deferred.resolve(response);
-                },
-                errorCallback : function(status) {
-                    console.log("getting candidate error");
-                    console.log(status);
-                }
+                successCallback: successCallback
             });
-            return deferred.promise;
         }
 
         function addCandidate(body, successCallback) {
