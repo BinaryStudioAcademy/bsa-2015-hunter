@@ -12,6 +12,7 @@ namespace Hunter.DataAccess.Entities.Migrations
 
         protected override void Seed(Hunter.DataAccess.Entities.HunterDbContext context)
         {
+            //HunterDbInitializer.SeedWithData(context);
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

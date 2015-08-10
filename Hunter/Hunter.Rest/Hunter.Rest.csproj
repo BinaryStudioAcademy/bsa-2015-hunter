@@ -17,7 +17,7 @@
     <AssemblyName>Hunter.Rest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -276,6 +276,7 @@
     <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\CandidatesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Controllers\PoolController.cs" />
     <Compile Include="Controllers\VacancyController.cs" />
     <Compile Include="Global.asax.cs">
@@ -658,6 +659,7 @@
     <Content Include="Views\Statistics\statisticsController.js" />
     <Content Include="Views\user\list\list.html" />
     <Content Include="Views\user\list\userListController.js" />
+    <Content Include="Views\user\userProfileService.js" />
     <Content Include="Views\vacancy\addEdit\addEdit.html" />
     <Content Include="Views\vacancy\addEdit\vacancyAddEditController.js" />
     <Content Include="Views\vacancy\list\dirPagination.tpl.html" />
@@ -689,7 +691,6 @@
     <Folder Include="Views\role\addEdit\" />
     <Folder Include="Views\role\profile\" />
     <Folder Include="Views\user\addEdit\" />
-    <Folder Include="Views\user\profile\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -735,7 +736,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53147</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:1337/</IISUrl>
+          <IISUrl>http://localhost:8099/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

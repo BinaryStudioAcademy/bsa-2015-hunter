@@ -7,7 +7,7 @@ namespace Hunter.DataAccess.Db
 {
     public class VacancyRepository : Repository<Vacancy>, IVacancyRepository
     {
-        public VacancyRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
+        public VacancyRepository(DatabaseFactory databaseFactory) : base(databaseFactory)
         {
 
         }

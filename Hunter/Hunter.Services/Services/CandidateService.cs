@@ -95,8 +95,7 @@ namespace Hunter.Services
             }
             try
             {
-                _candidateRepository.Add(candidate);
-                _unitOfWork.SaveChanges();
+                _candidateRepository.UpdateAndCommit(candidate);
             }
             catch (Exception ex)
             {

@@ -10,7 +10,7 @@ namespace Hunter.Services
     {
         IEnumerable<VacancyDto> Get();
         VacancyDto Get(int id);
-        void Add(VacancyDto entity);
+        void Add(VacancyDto dto);
         void Update(VacancyDto entity);
         void Delete(int id);
     }

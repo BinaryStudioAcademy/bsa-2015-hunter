@@ -31,16 +31,14 @@ namespace Hunter.Services
                 return vacancy.ToVacancyDTO();
             return null;
         }
-        public void Add(VacancyDto entity)
+        public void Add(VacancyDto dto)
         {
-            if (entity == null) return;
-            _vacancyRepository.Add(entity.ToVacancy());
-            _unitOfWork.SaveChanges();
+            if (dto == null) return;
+            _vacancyRepository.UpdateAndCommit(dto.ToVacancy());
         }
         public void Update(VacancyDto entity)
         {
-            _vacancyRepository.Update(entity.ToVacancy());
-            _unitOfWork.SaveChanges();
+            _vacancyRepository.UpdateAndCommit(entity.ToVacancy());
         }
         public void Delete(int id)
         {

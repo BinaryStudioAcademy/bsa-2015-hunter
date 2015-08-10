@@ -32,22 +32,19 @@ namespace Hunter.Services
 
         public void AddActivity(ActivityDto entity)
         {
-            _activityRepository.Add(entity.ToActivity());
-            _unitOfWork.SaveChanges();
+            _activityRepository.UpdateAndCommit(entity.ToActivity());
         }
 
         public void UpdateActivity(ActivityDto entity)
         {
-            _activityRepository.Update(entity.ToActivity());
-            _unitOfWork.SaveChanges();
+            _activityRepository.UpdateAndCommit(entity.ToActivity());
         }
 
 
         public void DeleteActivityById(int id)
         {
             var activity = _activityRepository.Get(id);
-            _activityRepository.Delete(activity);
-            _unitOfWork.SaveChanges();
+            _activityRepository.DeleteAndCommit(activity);
         }
     }
 }

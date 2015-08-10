@@ -116,7 +116,8 @@
                 .when('/user', {
                     templateUrl: viewPath + 'user/list/list.html',
                     controller: 'UserListController',
-                    controllerAs: 'userListCtrl'
+                    controllerAs: 'userListCtrl',
+                    reloadOnSearch: false
                 })
                 .when('/user/edit', {
                     templateUrl: viewPath + 'user/addEdit/addEdit.html',
@@ -127,11 +128,6 @@
                     templateUrl: viewPath + 'user/addEdit/addEdit.html',
                     controller: 'UserAddEditController',
                     controllerAs: 'userAddEditCtrl'
-                })
-                .when('/user/:id', {
-                    templateUrl: viewPath + 'user/profile/profile.html',
-                    controller: 'UserController',
-                    controllerAs: 'userCtrl'
                 });
 
             //result on statistics button click (slide 1)

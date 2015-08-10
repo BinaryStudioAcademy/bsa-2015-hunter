@@ -19,4 +19,14 @@ namespace Hunter.DataAccess.Entities
 
         public bool IsDeleted { get; set; }
     }
+
+    public static class EntityExtension
+    {
+        public static long NotPersisted = 0;
+
+        public static bool IsNew(this IEntity entity)
+        {
+            return entity.Id == NotPersisted;
+        }
+    }
 }

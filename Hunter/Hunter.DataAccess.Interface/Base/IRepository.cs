@@ -8,11 +8,14 @@ namespace Hunter.DataAccess.Interface.Base
     {
         IQueryable<T> Query();
         IEnumerable<T> All();
-        T Get(Int32 id);
+        T Get(long id);
         T Get(Func<T, bool> predicate);
-        T Add(T entity);
+        //T Add(T entity);
         void Update(T entity);
+        void UpdateAndCommit(T entity);
+
         void Delete(T entity);
+        void DeleteAndCommit(T entity);
         //void SaveChanges();
     }
 }

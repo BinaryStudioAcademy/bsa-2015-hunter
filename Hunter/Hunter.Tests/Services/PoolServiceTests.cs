@@ -70,16 +70,18 @@ namespace Hunter.Tests.Services
             var counter = 0;
 
             // Act
-            _repository.When(r => r.Add(Arg.Any<Pool>()))
+            _repository.When(r => r.UpdateAndCommit(Arg.Any<Pool>()))
                 .Do(r => counter++);
-            _repository.When(r => r.Add(Arg.Any<Pool>()))
+            _repository.When(r => r.UpdateAndCommit(Arg.Any<Pool>()))
                 .Do(r => { throw new Exception(); });
 
             _service.CreatePool(new PoolViewModel() { Id = 1, Name = "Pool name" });
 
             // Assert
             Assert.AreEqual(1, counter);
-            Assert.DoesNotThrow(()=>_repository.Add(Arg.Any<Pool>()));
+            
+            // TODO we should not check repository logic here, only service
+            Assert.DoesNotThrow(()=>_repository.UpdateAndCommit(Arg.Any<Pool>()));
         }
 
         [Test]

@@ -60,7 +60,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\IDatabaseFactory.cs" />
     <Compile Include="Base\IRepository.cs" />
     <Compile Include="Base\IUnitOfWork.cs" />
     <Compile Include="Base\IUnitOfWorkFactory.cs" />

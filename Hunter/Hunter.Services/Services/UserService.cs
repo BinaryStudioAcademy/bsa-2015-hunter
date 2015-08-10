@@ -37,8 +37,7 @@ namespace Hunter.Services
 
         public void CreateUser(User user)
         {
-            _userRepository.Add(user);
-            _unitOfWork.SaveChanges();
+            _userRepository.UpdateAndCommit(user);
         }
 
         public void AddToRole(User user, string roleName)

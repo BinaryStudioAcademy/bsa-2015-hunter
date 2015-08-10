@@ -57,6 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\ActivityDto.cs" />
+    <Compile Include="Dto\ApiResults\ApiResult.cs" />
+    <Compile Include="Dto\User\EditUserProfileVm.cs" />
+    <Compile Include="Dto\User\UserProfileRowVm.cs" />
     <Compile Include="Dto\VacancyDto.cs" />
     <Compile Include="Extensions\HunterValidation.cs" />
     <Compile Include="Extensions\ActivityExtension.cs" />
@@ -73,9 +76,11 @@
     <Compile Include="Services\Interfaces\IPoolService.cs" />
     <Compile Include="Services\Interfaces\IUserService.cs" />
     <Compile Include="Services\Interfaces\IVacancyService.cs" />
+    <Compile Include="Services\UserProfileService.cs" />
     <Compile Include="Services\PoolService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\VacancyService.cs" />
+    <Compile Include="Services\Interfaces\IUserProfileService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hunter.Common\Hunter.Common.csproj">

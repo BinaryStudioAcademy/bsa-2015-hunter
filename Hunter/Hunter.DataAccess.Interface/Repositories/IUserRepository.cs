@@ -5,5 +5,6 @@ namespace Hunter.DataAccess.Interface.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {
+
     }
 }
