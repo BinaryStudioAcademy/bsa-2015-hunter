@@ -43,7 +43,7 @@
                     body: JSON.stringify(vm.pool),
                     successCallback: function (result) {
                         //console.log(result);
-                        $location.url("/pool")
+                        $location.url("/pool");
                     },
                     errorCallback: function (result) { console.log(result); }
                 });
@@ -55,7 +55,7 @@
                     verb: "DELETE",
                     successCallback: function (result) {
                         //console.log(result);
-                        $location.url("/pool")
+                        $location.url("/pool");
                     },
                     errorCallback: function (result) { console.log(result); }
                 });
