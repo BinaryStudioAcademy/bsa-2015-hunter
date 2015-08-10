@@ -30,7 +30,7 @@
             email: '',
             password: '',
             confirmPassword: '',
-            state: 0,
+            state: 1,
             roleId: 1
         }
 
