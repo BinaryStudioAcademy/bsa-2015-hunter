@@ -101,8 +101,8 @@ a.btn {
     background-image: url(../resources/arrows_right.png);
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    background-size: cover;
     opacity: .2;
+    background-size: cover;
 }
 
 .column_data a:hover {
