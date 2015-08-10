@@ -582,3 +582,34 @@ System.Data.SqlClient.SqlException (0x80131904): A network-related or instance-s
    at Hunter.Services.PoolService.GetAllPools() in C:\Users\serko\Source\Repos\bsa-2015-hunter\Hunter\Hunter.Services\Services\PoolService.cs:line 28
 ClientConnectionId:00000000-0000-0000-0000-000000000000
 Error Number:-1,State:0,Class:20
+2015-08-10 13:01:20,075 [6] ERROR Hunter [(null)] - Ќеверное количество аргументов, заданных дл€ вызова метода "Boolean Equals(System.String, System.String, System.StringComparison)"
+System.ArgumentException: Ќеверное количество аргументов, заданных дл€ вызова метода "Boolean Equals(System.String, System.String, System.StringComparison)"
+   в System.Linq.Expressions.Expression.GetMethodBasedBinaryOperator(ExpressionType binaryType, Expression left, Expression right, MethodInfo method, Boolean liftToNull)
+   в System.Linq.Expressions.Expression.Equal(Expression left, Expression right, Boolean liftToNull, MethodInfo method)
+   в System.Data.Entity.Core.Objects.ELinq.LinqExpressionNormalizer.VisitMethodCall(MethodCallExpression m)
+   в System.Linq.Expressions.EntityExpressionVisitor.Visit(Expression exp)
+   в System.Linq.Expressions.EntityExpressionVisitor.VisitLambda(LambdaExpression lambda)
+   в System.Linq.Expressions.EntityExpressionVisitor.Visit(Expression exp)
+   в System.Linq.Expressions.EntityExpressionVisitor.VisitUnary(UnaryExpression u)
+   в System.Linq.Expressions.EntityExpressionVisitor.Visit(Expression exp)
+   в System.Linq.Expressions.EntityExpressionVisitor.VisitExpressionList(ReadOnlyCollection`1 original)
+   в System.Linq.Expressions.EntityExpressionVisitor.VisitMethodCall(MethodCallExpression m)
+   в System.Data.Entity.Core.Objects.ELinq.LinqExpressionNormalizer.VisitMethodCall(MethodCallExpression m)
+   в System.Linq.Expressions.EntityExpressionVisitor.Visit(Expression exp)
+   в System.Data.Entity.Core.Objects.ELinq.ExpressionConverter..ctor(Funcletizer funcletizer, Expression expression)
+   в System.Data.Entity.Core.Objects.ELinq.ELinqQueryState.CreateExpressionConverter()
+   в System.Data.Entity.Core.Objects.ELinq.ELinqQueryState.GetExecutionPlan(Nullable`1 forMergeOption)
+   в System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass7.<GetResults>b__6()
+   в System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   в System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass7.<GetResults>b__5()
+   в System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   в System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   в System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   в System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   в System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   в System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__3[TResult](IEnumerable`1 sequence)
+   в System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   в System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   в System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   в System.Linq.Queryable.Any[TSource](IQueryable`1 source, Expression`1 predicate)
+   в Hunter.Services.UserRoleService.IsRoleExist(String name) в c:\MySoft\Academy\Hunter\bsa-2015-hunter\Hunter\Hunter.Services\Services\UserRoleService.cs:строка 97
