@@ -6,10 +6,11 @@
         .factory('CandidateHttpService', CandidateHttpService);
 
     CandidateHttpService.$inject = [
-        'HttpHandler'
+        'HttpHandler',
+        '$q'
     ];
 
-    function CandidateHttpService(httpHandler) {
+    function CandidateHttpService(httpHandler,$q) {
         var service = {
             updateCandidate: updateCandidate,
             getCandidate: getCandidate,
@@ -18,12 +19,20 @@
         };
 
         function updateCandidate(body, successCallback, id) {
+            var deferred = $q.defer();
             httpHandler.sendRequest({
                 verb: 'PUT',
                 url: '/api/candidates/'+id,
                 body: body,
-                successCallback: successCallback
+                successCallback: function(response) {
+                    deferred.resolve(response);
+                },
+                errorCallback : function(status) {
+                    console.log("getting candidate error");
+                    console.log(status);
+                }
             });
+            return deferred.promise;
         }
 
         function addCandidate(body, successCallback) {
@@ -35,26 +44,38 @@
             });
         }
 
-        function getCandidate(id, successCallback) {
+        function getCandidate(id) {
+            var deferred = $q.defer();
             httpHandler.sendRequest({
                 verb: 'GET',
-                url: '/api/Candidates/' + id,
+                url: '/api/candidates/' + id,
 //                body: body,
-                successCallback: successCallback,
-                errorMessageToDev: 'GET CANDIDATE INFO ERROR: ',
-                errorMessageToUser: 'Failed'
+                successCallback: function (response) {
+                    deferred.resolve(response);
+                },
+                errorCallback: function (status) {
+                    console.log("getting candidate error");
+                    console.log(status);
+                }
             });
+            return deferred.promise;
         }
 
-        function getCandidateList(successCallback) {
+        function getCandidateList() {
+            var deferred = $q.defer();
             httpHandler.sendRequest({
                 verb: 'GET',
-                url: '/api/Candidates/',
+                url: '/api/candidates/',
 //                body: body,
-                successCallback: successCallback,
-                errorMessageToDev: 'GET CANDIDATE INFO ERROR: ',
-                errorMessageToUser: 'Failed'
+                successCallback: function (response) {
+                    deferred.resolve(response);
+                },
+                errorCallback: function (status) {
+                    console.log("getting candidates error");
+                    console.log(status);
+                }
             });
+            return deferred.promise;
         }
 
         return service;

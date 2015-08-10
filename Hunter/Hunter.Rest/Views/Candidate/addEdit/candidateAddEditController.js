@@ -24,7 +24,7 @@
         vm.origins = [{ name: 'Sourced', value: 0 }, { name: 'Applied', value: 1 }];
         vm.resolutions = [
             { name: 'None', value: 0 }, { name: 'Available', value: 1 }, { name: 'Not interested', value: 2 },
-            { name: 'Hired', value: 3 }, { name: 'Unfit', value: 4 }, { name: 'Now now', value: 5 }
+            { name: 'Hired', value: 3 }, { name: 'Unfit', value: 4 }, { name: 'Not now', value: 5 }
         ];
         vm.pools = [];
         vm.candidate = null;
@@ -131,7 +131,7 @@
             } else {
                 return;
             }   
-            candidateHttpService.getCandidate(id, function(response) {
+            candidateHttpService.getCandidate(id).then(function(response) {
                 vm.FirstName = response.data.firstName;
                 vm.LastName = response.data.lastName;
                 vm.Email = response.data.email;
@@ -148,12 +148,14 @@
                 vm.DateOfBirth = new Date(response.data.dateOfBirth);
 
                 //getting already selected pools
-                for (var i = 0; i < response.data.poolNames.length; i++)
+                for (var i = 0; i < response.data.poolNames.length; i++) {
                     for (var j = 0; j < vm.pools.length; j++) {
                         if (response.data.poolNames[i] == vm.pools[j].name) {
                             vm.selectedPools.push(vm.pools[j]);
                         }
                     }
+                }
+                    
 
                 vm.nameInTitle = response.data.firstName + " " + response.data.lastName;
             });
