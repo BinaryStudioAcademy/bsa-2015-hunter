@@ -8,13 +8,14 @@
     CandidateListController.$inject = [
         '$location',
         '$filter',
+        '$scope',
         'AuthService',
         'CandidateHttpService'
         
 
     ];
 
-    function CandidateListController($location, $filter, authService, candidateHttpService) {
+    function CandidateListController($location, $filter, $scope, authService, candidateHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         vm.name = "Candidates";
@@ -41,10 +42,17 @@
         var options = {
             'poolFilters': pools,
             'inviterFilters': inviters,
-            'statusFilters': statuses
+            'statusFilters': statuses,
+            'nameFilter': ''
         };
 
         vm.filterOptions = options;
+        $scope.$watch(
+            'candidateCtrl.filterOptions.nameFilter',
+            function (newVal) {
+                vm.filterOptions.nameFilter = newVal;
+                $filter('CandidatesFilter')(vm.candidateList, vm.filterOptions);
+            });
 
         //(function() {
         //    // This is function for initialization actions, for example checking auth

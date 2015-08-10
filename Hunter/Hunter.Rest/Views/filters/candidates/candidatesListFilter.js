@@ -82,22 +82,41 @@
         return filtered;
     }
 
+    function filterCandidatesByName(candidates, nameFilter) {
+        var filtered = [];
+        var patern = RegExp('^' + nameFilter.toLowerCase());
+
+        candidates.forEach(function(candidate) {
+            if (patern.test(candidate.firstName.toLowerCase()) || patern.test(candidate.lastName.toLowerCase())) {
+                filtered.push(candidate);
+            }
+        });
+
+        return filtered;
+    }
+
     function CandidatesFilter() {
 
         return function (candidates, options) {
+            var result = candidates;
 
-            if (!checkOptions(options.poolFilters) &&
-                !checkOptions(options.statusFilters) &&
-                !checkOptions(options.inviterFilters))
-            {
-                return candidates;
+            if (checkOptions(options.poolFilters)) {
+                result = filterCandidatesByPool(result, options.poolFilters);
             }
 
-            var res = filterCandidatesByPool(candidates, options.poolFilters);
-            res = res.concat(filterCandidatesByInviter(candidates, options.inviterFilters));
-            res = res.concat(filterCandidatesByStatus(candidates, options.statusFilters));
+            if (checkOptions(options.statusFilters)) {
+                result = filterCandidatesByStatus(result, options.statusFilters);
+            }
 
-            return res.unique();
+            if (checkOptions(options.inviterFilters)) {
+                result = filterCandidatesByInviter(result, options.inviterFilters);
+            }
+
+            if (options.nameFilter != '' && options.nameFilter != undefined) {
+                result = filterCandidatesByName(result, options.nameFilter);
+            }
+
+            return result;
         }
     }
 
