@@ -650,6 +650,7 @@
     <Content Include="Views\candidate\profile\profile.html" />
     <Content Include="Views\files\list\fileListController.js" />
     <Content Include="Views\files\list\list.html" />
+    <Content Include="Views\filters\vacancies\vacanciesListFilter.js" />
     <Content Include="Views\login\login.html" />
     <Content Include="Views\login\loginController.js" />
     <Content Include="Views\pool\addEdit\addEdit.html" />

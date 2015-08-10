@@ -18,35 +18,41 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="searchFilter">Filter</label>
-                    <input type="text" class="form-control" id="searchFilter" placeholder="Search">
+                    <input type="text" class="form-control" id="searchFilter" placeholder="Search"
+                           ng-model="VacancyListCtrl.filterOptions.searchText"
+                           >
                 </div>
                 <h4>Pool</h4>
                 <ul>
                     <li>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> .NET
+                                <input type="checkbox" 
+                                       ng-model="VacancyListCtrl.filterOptions.poolFilters[1]"> JS
                             </label>
                         </div>
                     </li>
                     <li>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> PHP
+                                <input type="checkbox" 
+                                       ng-model="VacancyListCtrl.filterOptions.poolFilters[2]"> .NET
                             </label>
                         </div>
                     </li>
                     <li>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> JS
+                                <input type="checkbox" 
+                                       ng-model="VacancyListCtrl.filterOptions.poolFilters[3]"> PHP
                             </label>
                         </div>
                     </li>
                     <li>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> QA
+                                <input type="checkbox" 
+                                       ng-model="VacancyListCtrl.filterOptions.poolFilters[4]"> QA
                             </label>
                         </div>
                     </li>
@@ -57,21 +63,24 @@
                     <li>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Active
+                                <input type="checkbox" 
+                                   ng-model="VacancyListCtrl.filterOptions.statusFilters[0]"> Active
                             </label>
                         </div>
                     </li>
                     <li>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Closed
+                                <input type="checkbox" 
+                                   ng-model="VacancyListCtrl.filterOptions.statusFilters[1]"> Closed
                             </label>
                         </div>
                     </li>
                     <li>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Burning
+                                <input type="checkbox" 
+                                   ng-model="VacancyListCtrl.filterOptions.statusFilters[2]"> Burning
                             </label>
                         </div>
                     </li>
@@ -82,21 +91,24 @@
                     <li>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Ulyana
+                                <input type="checkbox" 
+                                       ng-model="VacancyListCtrl.filterOptions.adderFilters[0].isChecked"> Ulyana
                             </label>
                         </div>
                     </li>
                     <li>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Kate
+                                <input type="checkbox" 
+                                       ng-model="VacancyListCtrl.filterOptions.adderFilters[1].isChecked"> Kate
                             </label>
                         </div>
                     </li>
                     <li>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Ira
+                                <input type="checkbox" 
+                                       ng-model="VacancyListCtrl.filterOptions.adderFilters[2].isChecked"> Ira
                             </label>
                         </div>
                     </li>
@@ -126,7 +138,8 @@
                         <td>{{vacancy.countShortListed}}</td>
                         <td>{{vacancy.addedByName}}</td>
                     </tr> -->
-                    <tr dir-paginate="vacancy in VacancyListCtrl.vacancies | filter:q | itemsPerPage: VacancyListCtrl.pageSize" current-page="VacancyListCtrl.currentPage">
+ 
+                    <tr dir-paginate="vacancy in VacancyListCtrl.vacancies | VacanciesFilter:VacancyListCtrl.filterOptions | itemsPerPage: VacancyListCtrl.pageSize" current-page="VacancyListCtrl.currentPage">
                         <td>
                             <input type="checkbox">
                         </td>
