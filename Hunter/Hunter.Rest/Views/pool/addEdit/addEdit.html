@@ -1,9 +1,38 @@
 ﻿<div class="container">
-    <form name="editForm">
-        <h4>Edit a Pool</h4>
-        <input ng-model="poolAddEditCtrl.pool.name" title="Name" type="text" />
-        <input type="submit" value="Edit Pool" ng-click="poolAddEditCtrl.PoolEdit()"/><a href="../../#/pool">Cancel</a>
-    </form>
+    <div class="pool_container">
+        <div class="pool_title">
+            <div><a class="back" href="../../#/pool" title="Back"></a></div>
+            <h3>{{poolAddEditCtrl.pageConfig.pageTitle}}</h3>
+            <div><a class="close_back" href="../../#/pool" title="Close"></a></div>
+        </div>
 
+        <div class="pool_form">
+            <form name="editForm">
+                <div class="pool_form_element">
+                    <div>Name:</div>
+                    <input class="form-control" title="Pool name" type="text"
+                           ng-model="poolAddEditCtrl.pool.name" />
+                </div>
+                <div class="pool_form_element">
+                    <div>Select color:</div>
+                    <div class="pool_colors">
+                        <div ng-repeat="color in poolAddEditCtrl.poolColors"
+                             ng-click="poolAddEditCtrl.setColor($event, color.code)"
+                             style="background-color: {{color.code}}" title="{{color.color}}"
+                             ng-class="'{{color.code}}' === '{{poolAddEditCtrl.pool.color}}' ? 'pool_colors_active' : ''">
+                            <input type="checkbox" ng-model="poolAddEditCtrl.pool.color" />
+                        </div>
+                    </div>
+                </div>
+                <div class="pool_form_element">
+                    <input class="btn" type="submit" value="{{poolAddEditCtrl.pageConfig.postPutButtonValue}}"
+                           ng-click="poolAddEditCtrl.poolPostPut()" />
+                    <input class="btn" type="submit" value="Delete pool"
+                           ng-click="poolAddEditCtrl.poolDelete()"
+                           ng-show="{{poolAddEditCtrl.pageConfig.deleteButton}}" />
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 

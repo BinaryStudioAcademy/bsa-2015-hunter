@@ -5,16 +5,29 @@
 
     angular
         .module('hunter-app')
-        .controller('vacancyListCtrl', vacancyListCtrl);
+        .controller('VacancyListController', VacancyListController);
+    angular
+        .module('hunter-app')
+        .controller('OtherController', OtherController);
 
-    vacancyListCtrl.$inject = [
+    VacancyListController.$inject = [
         '$scope',
         'VacancyHttpService'
     ];
 
-    function vacancyListCtrl($scope, VacancyHttpService) {
+    function VacancyListController($scope, VacancyHttpService) {
+        var vm = this;
+
+        vm.currentPage = 1;
+        vm.pageSize = 5;
+
         VacancyHttpService.getVacancies().then(function (result) {
-            $scope.vacancies = result;
+            console.log(result);
+            vm.vacancies = result;
         });
+    }
+
+    function OtherController() {
+
     }
 })();

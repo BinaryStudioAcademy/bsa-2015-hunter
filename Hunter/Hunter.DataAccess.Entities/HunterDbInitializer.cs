@@ -64,11 +64,17 @@ namespace Hunter.DataAccess.Entities
             #endregion
 
             #region POOLS
-            var jsPool = new Pool() { Name = "JavaScript" };
-            var netPool = new Pool { Name = ".Net" };
-            var phpPool = new Pool { Name = "PHP" };
+            //var jsPool = new Pool { Name = "JavaScript" };
+            //var netPool = new Pool { Name = ".Net" };
+            //var phpPool = new Pool { Name = "PHP" };
+            //var qaPool = new Pool { Name = "QA" };
 
-            var pools = new List<Pool>() { jsPool, netPool, phpPool };
+            var jsPool = new Pool { Name = "JavaScript", Color = "rgb(44,201,99)" };
+            var netPool = new Pool { Name = ".Net", Color = "rgb(293,250,85)" };
+            var phpPool = new Pool { Name = "PHP", Color = "rgb(240,88,88)" };
+            var qaPool = new Pool { Name = "QA", Color = "rgb(245,122,14)" };
+
+            var pools = new List<Pool> { jsPool, netPool, phpPool, qaPool };
             pools.ForEach(pool => context.Pool.Add(pool));
             context.SaveChanges();
             #endregion
@@ -78,6 +84,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = "PHP Developer",
                 Status = 0,
+                UserId = 1,
                 StartDate = new DateTime(2015, 8, 2),
                 Pool = phpPool,
                 Description = @"Company Description:
@@ -118,6 +125,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = "PHP Developer - Magento Lead",
                 Status = 0,
+                UserId = 1,
                 StartDate = new DateTime(2015, 8, 2),
                 Pool = phpPool,
                 Description = @"Company Description:
@@ -133,6 +141,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = "Senior PHP Developer",
                 Status = 0,
+                UserId = 1,
                 StartDate = new DateTime(2015, 8, 3),
                 Pool = phpPool,
                 Description = @"Company Description:
@@ -166,6 +175,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = "Inventive JavaScript / Node.js Leader",
                 Status = 0,
+                UserId = 1,
                 StartDate = new DateTime(2015, 8, 2),
                 Pool = jsPool,
                 Description = @"About You:
@@ -198,6 +208,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = "Software engineer (JavaScript, AngularJS)",
                 Status = 0,
+                UserId = 1,
                 StartDate = new DateTime(2015, 8, 2),
                 Pool = jsPool,
                 Description = @"We are looking for the best and brightest minds in Web Development. Someone who is truly passionate about creating beautiful innovative next generation UIs using bleeding edge technologies.
@@ -233,6 +244,7 @@ namespace Hunter.DataAccess.Entities
                 Status = 0,
                 StartDate = new DateTime(2015, 8, 3),
                 Pool = jsPool,
+                UserId = 1,
                 Description = @"Job Description
                                 As Senior JavaScript Developer you will be working on our most challenging and important TV projects and products. You will have a core role in our team of experienced developers, designers, project managers.
                                 Most TV platforms are web-based, so you will make heavy use of your skills in JavaScript, CSS and HTML. The central pillar of much of our software is our AppCore: a JavaScript library which allows us to easily write TV apps once and deploy them to many different TV platforms easily.
@@ -275,6 +287,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = "Web Developer (Javascript/C#/.NET)",
                 Status = 0,
+                UserId = 1,
                 StartDate = new DateTime(2015, 8, 2),
                 Pool = netPool,
                 Description = @"Job Description
@@ -323,6 +336,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = ".Net Developer",
                 Status = 0,
+                UserId = 1,
                 StartDate = new DateTime(2015, 8, 2),
                 Pool = netPool,
                 Description = @"Job Description
@@ -360,6 +374,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = "Backend .Net Web Developer",
                 Status = 0,
+                UserId = 1,
                 StartDate = new DateTime(2015, 8, 2),
                 Pool = netPool,
                 Description = @"Job Description
@@ -401,6 +416,18 @@ namespace Hunter.DataAccess.Entities
 
             var vacancies = new List<Vacancy>() { vacancy1, vacancy2, vacancy3, vacancy4, vacancy5, vacancy6, vacancy7, vacancy8, vacancy9 };
             vacancies.ForEach(vacancy => context.Vacancy.Add(vacancy));
+            context.SaveChanges();
+            #endregion
+
+            #region ACTIVITY
+            var activity1 = new Activity() { Message = "Add new user to Pool", Tag = "add user", Time = DateTime.Now, UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
+            var activity2 = new Activity() { Message = "Create new Vacancy Junior PHP Developer", Tag = "create Vacancy", Time = DateTime.Now, UserLogin = "recruiter2", Url = "http://binary-studio.com/" };
+            var activity3 = new Activity() { Message = "Add new Feedback to Hollis Sefton", Tag = "add Feedback", Time = DateTime.Now, UserLogin = "techspec1", Url = "http://binary-studio.com/" };
+            var activity4 = new Activity() { Message = "Add new Feedback to Jennie Charlie", Tag = "add Feedback", Time = DateTime.Now, UserLogin = "techspec@local.com", Url = "http://binary-studio.com/" };
+            var activity5 = new Activity() { Message = "Add new user Lon Abner to Pool", Tag = "add user", Time = DateTime.Now, UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
+
+            var activities = new List<Activity> { activity1, activity2, activity3, activity4, activity5 };
+            activities.ForEach(x => context.Activity.Add(x));
             context.SaveChanges();
             #endregion
         }

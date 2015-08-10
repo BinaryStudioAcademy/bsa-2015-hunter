@@ -23,7 +23,6 @@ namespace Hunter.DataAccess.Db.Base
         //    _dataSet = dataContext.Set<T>();
         //}
 
-
         protected IDatabaseFactory DatabaseFactory
         {
             get;
@@ -38,20 +37,21 @@ namespace Hunter.DataAccess.Db.Base
 
         public IQueryable<T> Query()
         {
-            return _dataSet;
+            return _dataSet.AsQueryable();
         }
 
         public IEnumerable<T> All()
         {
             return _dataSet.ToList();
+            //return _dataSet.AsNoTracking().ToList();
         }
 
-        public T Get(Int32 id)
+        public T Get(int id)
         {
             return _dataSet.FirstOrDefault(x => x.Id == id);
         }
 
-        public T Get(Func<T, Boolean> predicate)
+        public T Get(Func<T, bool> predicate)
         {
             return _dataSet.FirstOrDefault(predicate);
         }

@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using Hunter.DataAccess.Entities;
 using Hunter.DataAccess.Entities.Enums;
 using Hunter.Services.Dto;
@@ -26,7 +28,7 @@ namespace Hunter.Services.Extensions
                 ResumeId = candidate.ResumeId,
                 AddedByProfileId = candidate.AddedByProfileId,
                 Cards = candidate.Card.ToList(),
-                Pools = candidate.Pool.ToList(),
+                PoolNames = candidate.Pool.Select(x=>x.Name).ToList(),
                 Photo = candidate.Photo,
                 Resolution = (int)candidate.Resolution,
                 ShortListed = candidate.Shortlisted,
@@ -36,33 +38,29 @@ namespace Hunter.Services.Extensions
             return dto;
         }
 
-        static public Candidate ToCandidateModel(this CandidateDto dto)
+        static public void ToCandidateModel(this CandidateDto dto, Candidate candidate)
         {
-            var model = new Candidate()
-            {
-                Id = dto.Id,
-                FirstName = dto.FirstName,
-                LastName = dto.LastName,
-                Email = dto.Email,
-                CurrentPosition = dto.CurrentPosition,
-                Company = dto.Company,
-                Location = dto.Location,
-                Skype = dto.Skype,
-                Phone = dto.Phone,
-                Linkedin = dto.Linkedin,
-                Salary = dto.Salary,
-                YearsOfExperience = dto.YearsOfExperience,
-                ResumeId = dto.ResumeId,
-                AddedByProfileId = dto.AddedByProfileId,
-                Card = dto.Cards.ToList(),
-                Pool = dto.Pools.ToList(),
-                Photo = dto.Photo,
-                Resolution = (Resolution)dto.Resolution,
-                Shortlisted = dto.ShortListed,
-                Origin = (Origin)dto.Origin,
-                DateOfBirth = dto.DateOfBirth
-            };
-            return model;
+                candidate.Id = dto.Id;
+                candidate.FirstName = dto.FirstName;
+                candidate.LastName = dto.LastName;
+                candidate.Email = dto.Email;
+                candidate.CurrentPosition = dto.CurrentPosition;
+                candidate.Company = dto.Company;
+                candidate.Location = dto.Location;
+                candidate.Skype = dto.Skype;
+                candidate.Phone = dto.Phone;
+                candidate.Linkedin = dto.Linkedin;
+                candidate.Salary = dto.Salary;
+                candidate.YearsOfExperience = dto.YearsOfExperience;
+                candidate.ResumeId = dto.ResumeId;
+                candidate.AddedByProfileId = dto.AddedByProfileId;
+//                Card = dto.Cards.ToList();
+//                Pool = new List<Pool>();
+                candidate.Photo = dto.Photo;
+                candidate.Resolution = (Resolution)dto.Resolution;
+                candidate.Shortlisted = dto.ShortListed;
+                candidate.Origin = (Origin)dto.Origin;
+            candidate.DateOfBirth = dto.DateOfBirth;
         }
     }
 }

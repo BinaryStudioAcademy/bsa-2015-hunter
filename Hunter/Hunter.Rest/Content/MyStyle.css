@@ -12,7 +12,6 @@ li{
 	list-style-type: none;
 }
 
-
 .top-header{
 	margin:0 auto;
 	width:80%;
@@ -120,6 +119,13 @@ li{
     text-decoration: none;
 }
 
+ .submenu > li > a:hover,
+.submenu > li > a:focus {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #b0b0b0;
+}
+
 /*Long list*/
 .longlist-wrapper{
 	margin-top: 25px;
@@ -149,7 +155,7 @@ li{
 
 .personal-info{
 	font-size: 20px;
-	border: 1px solid #ddd;
+	margin-bottom: 20px;
 	padding: 15px 15px;
 }
 
@@ -201,3 +207,12 @@ li{
     padding: 8px;	
 }
 
+=======
+.col-md-4 {
+    font: 13pt bold ;
+    margin-top: 10px;
+}
+
+.button-done {
+    text-align: right;
+}
