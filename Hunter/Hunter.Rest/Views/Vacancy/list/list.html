@@ -18,7 +18,9 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="searchFilter">Filter</label>
-                    <input type="text" class="form-control" id="searchFilter" placeholder="Search">
+                    <input type="text" class="form-control" id="searchFilter" placeholder="Search"
+                           ng-model="VacancyListCtrl.filterOptions.searchText"
+                           ng-click="VacancyListCtrl.toggle()">
                 </div>
                 <h4>Pool</h4>
                 <ul>
@@ -61,27 +63,24 @@
                     <li>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Active
-                                <!--<input type="checkbox" ng-click="VacancyListCtrl.toggle()"
-                                   ng-model="VacancyListCtrl.filterOptions.statusFilters[0]"> Active-->
+                                <input type="checkbox" ng-click="VacancyListCtrl.toggle()"
+                                   ng-model="VacancyListCtrl.filterOptions.statusFilters[0]"> Active
                             </label>
                         </div>
                     </li>
                     <li>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Closed
-                                <!--<input type="checkbox" ng-click="VacancyListCtrl.toggle()"
-                                   ng-model="VacancyListCtrl.filterOptions.statusFilters[1]"> Closed-->
+                                <input type="checkbox" ng-click="VacancyListCtrl.toggle()"
+                                   ng-model="VacancyListCtrl.filterOptions.statusFilters[1]"> Closed
                             </label>
                         </div>
                     </li>
                     <li>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Burning
-                                <!--<input type="checkbox" ng-click="VacancyListCtrl.toggle()"
-                                   ng-model="VacancyListCtrl.filterOptions.statusFilters[2]"> Burning-->
+                                <input type="checkbox" ng-click="VacancyListCtrl.toggle()"
+                                   ng-model="VacancyListCtrl.filterOptions.statusFilters[2]"> Burning
                             </label>
                         </div>
                     </li>
@@ -92,27 +91,24 @@
                     <li>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Ulyana
-                                <!--<input type="checkbox" ng-click="candidateListCtrl.toggle()"
-                               ng-model="candidateListCtrl.filterOptions.adderFilters[0].isChecked"> Ulyana-->
+                                <input type="checkbox" ng-click="candidateListCtrl.toggle()"
+                                       ng-model="VacancyListCtrl.filterOptions.adderFilters[0].isChecked"> Ulyana
                             </label>
                         </div>
                     </li>
                     <li>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Kate
-                                <!--<input type="checkbox" ng-click="candidateListCtrl.toggle()"
-                                   ng-model="candidateListCtrl.filterOptions.adderFilters[1].isChecked"> Kate-->
+                                <input type="checkbox" ng-click="candidateListCtrl.toggle()"
+                                       ng-model="VacancyListCtrl.filterOptions.adderFilters[1].isChecked"> Kate
                             </label>
                         </div>
                     </li>
                     <li>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Ira
-                                <!--<input type="checkbox" ng-click="candidateListCtrl.toggle()"
-                               ng-model="candidateListCtrl.filterOptions.adderFilters[2].isChecked"> Ira-->
+                                <input type="checkbox" ng-click="candidateListCtrl.toggle()"
+                                       ng-model="VacancyListCtrl.filterOptions.adderFilters[2].isChecked"> Ira
                             </label>
                         </div>
                     </li>
@@ -142,6 +138,7 @@
                         <td>{{vacancy.countShortListed}}</td>
                         <td>{{vacancy.addedByName}}</td>
                     </tr> -->
+ 
                     <tr dir-paginate="vacancy in VacancyListCtrl.vacancies | VacanciesFilter:VacancyListCtrl.filterOptions | itemsPerPage: VacancyListCtrl.pageSize" current-page="VacancyListCtrl.currentPage">
                         <td>
                             <input type="checkbox">

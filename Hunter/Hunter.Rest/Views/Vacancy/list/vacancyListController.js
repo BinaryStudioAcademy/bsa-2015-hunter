@@ -19,6 +19,7 @@
     function VacancyListController($scope, $filter, VacancyHttpService) {
         var vm = this;
 
+        var searchText = "";
         var pools = {
             1: false,
             2: false,
@@ -27,28 +28,29 @@
         };
 
         var statuses = {
-            'New': false,
-            'InReview': false,
-            'Hired': false
+            0: false,
+            1: false,
+            2: false
         };
 
-        var inviters = [
-            { 'name': 'Ulyana', 'id': 1, 'isChecked': false },
-            { 'name': 'Kate', 'id': 2, 'isChecked': false },
-            { 'name': 'Ira', 'id': 3, 'isChecked': false }
+        var adders = [
+            { 'name': "recruiter@local.com", 'isChecked': false },
+            { 'name': "Heaven Hayden", 'isChecked': false },
+            { 'name': "Chantel Sherley", 'isChecked': false }
         ];
 
         var options = {
             'poolFilters': pools,
-            'inviterFilters': inviters,
-            'statusFilters': statuses
+            'adderFilters': adders,
+            'statusFilters': statuses,
+            'searchText':searchText
         };
 
         vm.filterOptions = options;
 
 
         vm.currentPage = 1;
-        vm.pageSize = 5;
+        vm.pageSize = 20;//TODO change to 5
         vm.vacancies;
 
         VacancyHttpService.getVacancies().then(function (result) {

@@ -1,24 +1,6 @@
 ﻿(function () {
     'use strict';
 
-    Array.prototype.unique = function () {
-        var arr = this.concat();
-
-        if (arr.length == 0) {
-            return [];
-        }
-
-        for (var i = 0; i < arr.length - 1; i++) {
-            for (var j = i + 1; j < arr.length; j++) {
-                if (arr[i] === arr[j]) {
-                    arr.splice(j--, 1);
-                }
-            }
-        }
-
-        return arr;
-    }
-
     angular
         .module('hunter-app')
         .filter('VacanciesFilter', VacanciesFilter);
@@ -49,9 +31,9 @@
         }
 
         vacancies.forEach(function (vacancy) {
-            var resolution = vacancy.resolutionString;
+            var id = vacancy.status;
 
-            if (statusFilters[resolution]) {
+            if (statusFilters[id]) {
                 filtered.push(vacancy);
             }
         });
@@ -59,7 +41,7 @@
         return filtered;
     }
 
-    function filterVacanciesByAdder(vacancies, inviterFilters) {
+    function filterVacanciesByAdder(vacancies, adderFilters) {
         var filtered = [];
 
         if (vacancies == undefined) {
@@ -67,11 +49,29 @@
         }
 
         vacancies.forEach(function (vacancy) {
-            inviterFilters.forEach(function (inviter) {
-                if (inviter.id == vacancy.addedByProfileId && inviter.isChecked) {
+            adderFilters.forEach(function (adder) {
+                if (adder.name == vacancy.addedByName && adder.isChecked) {
                     filtered.push(vacancy);
                 }
             });
+        });
+
+        return filtered;
+    }
+
+    function filterVacanciesBySearch(vacancies, poolFilters) {
+        var filtered = [];
+
+        if (vacancies == undefined) {
+            return filtered;
+        }
+
+        vacancies.forEach(function (vacancy) {
+            var name = vacancy.name;
+
+            if (name.toLowerCase().includes(poolFilters.toLowerCase())) {
+                filtered.push(vacancy);
+            }
         });
 
         return filtered;
@@ -83,31 +83,47 @@
 
             if (!checkOptions(options.poolFilters) &&
                 !checkOptions(options.statusFilters) &&
-                !checkOptions(options.inviterFilters)) {
+                !checkOptions(options.adderFilters) &&
+                !checkOptions(options.searchText)) {
                 return vacancies;
             }
 
-            var res = filterVacanciesByPool(vacancies, options.poolFilters);
-            //res = res.concat(filterCandidatesByInviter(candidates, options.inviterFilters));
-            //res = res.concat(filterCandidatesByStatus(candidates, options.statusFilters));
+            var res = [];
 
+            if (checkOptions(options.poolFilters)) {
+                res = filterVacanciesByPool(vacancies, options.poolFilters);
+            } else {
+                res = vacancies;
+            }
+
+            if (checkOptions(options.adderFilters)) {
+                res = filterVacanciesByAdder(res, options.adderFilters);
+            }
+            if (checkOptions(options.statusFilters)) {
+                res = filterVacanciesByStatus(res, options.statusFilters);
+            }
+            if (checkOptions(options.searchText)) {
+                res = filterVacanciesBySearch(res, options.searchText);
+            }
             return res;
         }
     }
 
     function checkOptions(options) {
         var anyChecked = false;
-
+        if (typeof options === 'string' && options) {
+            return true;
+        }
         if (options instanceof Array) {
             for (var i in options) {
                 if (options[i].isChecked) {
-                    anyChecked = true;
+                    return true;
                 }
             }
         } else {
             for (var key in options) {
                 if (options[key]) {
-                    anyChecked = true;
+                    return true;
                 }
             }
         }
