@@ -17,113 +17,371 @@ namespace Hunter.DataAccess.Entities
             SeedWithData(context);
         }
 
-        private static byte[] ToByteArray(string sqlVarBinary)
-        {
-            List<byte> byteList = new List<byte>();
-
-            string hexPart = sqlVarBinary.Substring(2);
-
-            for (int i = 0; i < hexPart.Length / 2; i++)
-            {
-                string hexNumber = hexPart.Substring(i * 2, 2);
-                byteList.Add((byte)Convert.ToInt32(hexNumber, 16));
-            }
-
-            return byteList.ToArray();
-        }
-
         public static void SeedWithData(HunterDbContext context)
         {
             try
             {
                 #region USER ROLES
-                var recruiterRole = new UserRole() { Name = "Recruiter" };
-                var technicalRole = new UserRole() { Name = "Technical Specialist" };
-                var adminRole = new UserRole() { Name = "Admin" };
 
-                var userRoles = new List<UserRole> { recruiterRole, technicalRole, adminRole };
+                var recruiterRole = new UserRole() {Name = "Recruiter"};
+                var technicalRole = new UserRole() {Name = "Technical Specialist"};
+                var adminRole = new UserRole() {Name = "Admin"};
+
+                var userRoles = new List<UserRole> {recruiterRole, technicalRole, adminRole};
                 userRoles.ForEach(userRole => context.UserRole.Add(userRole));
                 context.SaveChanges();
+
                 #endregion
 
                 #region USERS
-                var recruiter1 = new User() { Login = "recruiter@local.com", RoleId = 1, PasswordHash = "AL1osj2Akgj8ezBwxcAnj+sn8jQxNU5xJfpkLQl9PKswryRZhwldGQOqFOntmG0zDQ==" };
-                var recruiter2 = new User() { Login = "recruiter2", UserName = "Heaven Hayden", RoleId = 1, PasswordHash = "4272d77a88d418148b10545a86f2d094c75e747aedd224294054db7b9bd4b930e03406cd5ef60b5905d5272dd93f318f55a55da7ca087550e783a2dd3829d866" };
-                var recruiter3 = new User() { Login = "recruiter3", UserName = "Chantel Sherley", RoleId = 1, PasswordHash = "e27f3ead50aa12b2a50b1ddf7ad619aeb69f37ca22ad50e834962c6f384f2ba5587d451cf1a2d8cdffe1f12ba9479d7bc62b2b85b28e0a6895c20cfba16903f8" };
-                var techspec1 = new User() { Login = "techspec@local.com", RoleId = 2, PasswordHash = "AL2W1658IHoHGMrIYZn00YgBhIQ9tN00wAkdLDrHLDtpfQq7bkjfwkxTyshYa5G4tQ==" };
-                var techspec2 = new User() { Login = "techspec1", UserName = "Colin Tobias", RoleId = 2, PasswordHash = "7ab8123c7ff047f3e556a5a2b3e2a8502944b54f4f62089635b3850ded96b3f700026af0684ba794bcafec70433ccce5a10368fdb2dcf1ac5658c37b422e6a04" };
-                var techspec3 = new User() { Login = "techspec1", UserName = "Maddox Fulton", RoleId = 2, PasswordHash = "fd088e4d0ead7cc5d1c2cfe385c3e9b763aeba92ac77ef2307fbb59604e14a896f706ac9d7f6788c9a99f7ee6175a0f46004eab324a5ef2ec93284276767c7a0" };
-                var admin = new User() { Login = "admin@local.com", RoleId = 3, PasswordHash = "AO+POAp4pSwtxgaOu74yRWoYALimtAjpWgsy1746KKw+NkKG+aFUB8UWLS89Jc98VQ==" };
 
-            #region POOLS
-            //var jsPool = new Pool { Name = "JavaScript" };
-            //var netPool = new Pool { Name = ".Net" };
-            //var phpPool = new Pool { Name = "PHP" };
-            //var qaPool = new Pool { Name = "QA" };
+                var recruiter1 = new User()
+                {
+                    Login = "recruiter@local.com",
+                    RoleId = 1,
+                    PasswordHash = "AL1osj2Akgj8ezBwxcAnj+sn8jQxNU5xJfpkLQl9PKswryRZhwldGQOqFOntmG0zDQ=="
+                };
+                var recruiter2 = new User()
+                {
+                    Login = "recruiter2",
+                    UserName = "Heaven Hayden",
+                    RoleId = 1,
+                    PasswordHash =
+                        "4272d77a88d418148b10545a86f2d094c75e747aedd224294054db7b9bd4b930e03406cd5ef60b5905d5272dd93f318f55a55da7ca087550e783a2dd3829d866"
+                };
+                var recruiter3 = new User()
+                {
+                    Login = "recruiter3",
+                    UserName = "Chantel Sherley",
+                    RoleId = 1,
+                    PasswordHash =
+                        "e27f3ead50aa12b2a50b1ddf7ad619aeb69f37ca22ad50e834962c6f384f2ba5587d451cf1a2d8cdffe1f12ba9479d7bc62b2b85b28e0a6895c20cfba16903f8"
+                };
+                var techspec1 = new User()
+                {
+                    Login = "techspec@local.com",
+                    RoleId = 2,
+                    PasswordHash = "AL2W1658IHoHGMrIYZn00YgBhIQ9tN00wAkdLDrHLDtpfQq7bkjfwkxTyshYa5G4tQ=="
+                };
+                var techspec2 = new User()
+                {
+                    Login = "techspec1",
+                    UserName = "Colin Tobias",
+                    RoleId = 2,
+                    PasswordHash =
+                        "7ab8123c7ff047f3e556a5a2b3e2a8502944b54f4f62089635b3850ded96b3f700026af0684ba794bcafec70433ccce5a10368fdb2dcf1ac5658c37b422e6a04"
+                };
+                var techspec3 = new User()
+                {
+                    Login = "techspec1",
+                    UserName = "Maddox Fulton",
+                    RoleId = 2,
+                    PasswordHash =
+                        "fd088e4d0ead7cc5d1c2cfe385c3e9b763aeba92ac77ef2307fbb59604e14a896f706ac9d7f6788c9a99f7ee6175a0f46004eab324a5ef2ec93284276767c7a0"
+                };
+                var admin = new User()
+                {
+                    Login = "admin@local.com",
+                    RoleId = 3,
+                    PasswordHash = "AO+POAp4pSwtxgaOu74yRWoYALimtAjpWgsy1746KKw+NkKG+aFUB8UWLS89Jc98VQ=="
+                };
 
-            var jsPool = new Pool { Name = "JavaScript", Color = "rgb(44,201,99)" };
-            var netPool = new Pool { Name = ".Net", Color = "rgb(293,250,85)" };
-            var phpPool = new Pool { Name = "PHP", Color = "rgb(240,88,88)" };
-            var qaPool = new Pool { Name = "QA", Color = "rgb(245,122,14)" };
-
-            var pools = new List<Pool> { jsPool, netPool, phpPool, qaPool };
-            pools.ForEach(pool => context.Pool.Add(pool));
-            context.SaveChanges();
-            #endregion
-            #region USER Profiles
-                var uProfile1 = new UserProfile() { Alias = "UF", UserLogin = "ulyana@bs.com", Position = "HR Manager", Added = new DateTime(2015, 07, 01, 10, 10, 10, DateTimeKind.Utc), };
-                var uProfile2 = new UserProfile() { Alias = "KP", UserLogin = "kate@bs.com", Position = "HR Manager", Added = new DateTime(2015, 07, 02, 10, 10, 10, DateTimeKind.Utc), };
-                var uProfile3 = new UserProfile() { Alias = "IS", UserLogin = "irina@bs.com", Position = "Event Manager", Added = new DateTime(2015, 07, 03, 10, 10, 10, DateTimeKind.Utc), };
-            #endregion
-
-
-
-
-                var uProfiles = new List<UserProfile> { uProfile1, uProfile2, uProfile3 };
-                uProfiles.ForEach(pr => context.UserProfile.Add(pr));
+                var users = new List<User> { recruiter1, recruiter2, recruiter3, techspec1, techspec2, techspec3, admin };
+                users.ForEach(user => context.User.Add(user));
                 context.SaveChanges();
-                #endregion
 
-                #region RESUMES
-                var resume = new Resume() { FileName = "Resume1", FileStream = new byte[0] };
-
-                context.Resume.Add(resume);
-                context.SaveChanges();
-                #endregion
-
-                #region CANDIDATES
-                var candidate1 = new Candidate() { FirstName = "Hollis", LastName = "Sefton", Email = "sefton@outlook.com", CurrentPosition = "Chief Tactics Planner", Company = "3D Me!", Location = "Winter Park", Skype = "sefton1052", Phone = "202-555-0160", Salary = "64K", YearsOfExperience = 12, ResumeId = 1 };
-                var candidate2 = new Candidate() { FirstName = "Porter", LastName = "Wystan", Email = "pwystan@yahoo.com", CurrentPosition = "Central Configuration Specialist", Company = "Acacia Group", Location = "Athens", Skype = "porter_9", Phone = "202-555-0141", Salary = "110K", YearsOfExperience = 7.8, ResumeId = 1 };
-                var candidate3 = new Candidate() { FirstName = "Gabe", LastName = "Raven", Email = "graven@gmail.com", CurrentPosition = "International Tactics Developer", Company = "AirSync", Location = "West Fargo", Skype = "gabe_raven_001", Phone = "202-555-0167", Salary = "78K", YearsOfExperience = 9, ResumeId = 1 };
-                var candidate4 = new Candidate() { FirstName = "Jack", LastName = "Sylvanus", Email = "jsylv@gmail.com", CurrentPosition = "Senior Brand Orchestrator", Company = "All Apps", Location = "Camp Hill", Skype = "jack_16", Phone = "202-555-0128", Salary = "94K", YearsOfExperience = 1.2, ResumeId = 1 };
-                var candidate5 = new Candidate() { FirstName = "Lindsay", LastName = "Darryl", Email = "lindsay@outlook.com", CurrentPosition = "Lead Mobility Agent", Company = "Bitrex", Location = "Princeton", Skype = "0lindsay0", Phone = "202-555-0196", Salary = "67K", YearsOfExperience = 4, ResumeId = 1 };
-                var candidate6 = new Candidate() { FirstName = "Jennie", LastName = "Charlie", Email = "jennie@gmail.com", CurrentPosition = "Lead Integration Analyst", Company = "Decratex", Location = "Oakland Gardens", Skype = "jen0140", Phone = "202-555-0198", Salary = "99K", YearsOfExperience = 3.10, ResumeId = 1 };
-                var candidate7 = new Candidate() { FirstName = "Gracelyn", LastName = "Moriah", Email = "grace@yahoo.com", CurrentPosition = "Dynamic Quality Assistant", Company = "DigestIT", Location = "Stafford", Skype = "moriah_99", Phone = "613-555-0115", Salary = "82K", YearsOfExperience = 2.1, ResumeId = 1 };
-                var candidate8 = new Candidate() { FirstName = "Elizabeth", LastName = "Rona", Email = "eliz@hotmail.com", CurrentPosition = "Dynamic Identity Supervisor", Company = "eCourt", Location = "Sterling", Skype = "lisy228", Phone = "01632 960277", Salary = "71K", YearsOfExperience = 5, ResumeId = 1 };
-                var candidate9 = new Candidate() { FirstName = "Sunny", LastName = "Fawn", Email = "fawn@gmail.com", CurrentPosition = "Division Assistant", Company = "Micromax", Location = "Windermere", Skype = "fawn322", Phone = "613-555-0104", Salary = "89K", YearsOfExperience = 4.4, ResumeId = 1 };
-                var candidate10 = new Candidate() { FirstName = "Christianne", LastName = "Diantha", Email = "diantha@outlook.com", CurrentPosition = "Senior Optimization Planner", Company = "ExoGame", Location = "Summerville", Skype = "diantha", Phone = "613-555-0160", Salary = "91K", YearsOfExperience = 15, ResumeId = 1 };
-                var candidate11 = new Candidate() { FirstName = "Allie", LastName = "Merideth", Email = "merideth@hotmail.com", CurrentPosition = "Division Architect", Company = "Future Technology", Location = "Canton", Skype = "merideth99", Phone = "01632 960813", Salary = "115K", YearsOfExperience = 0.9, ResumeId = 1 };
-                var candidate12 = new Candidate() { FirstName = "Kennedy", LastName = "Wardell", Email = "wardell@yahoo.com", CurrentPosition = "Product Functionality Consultant", Company = "Highway Cruise Lines", Location = "Pikesville", Skype = "ken1520", Phone = "613-555-0126", Salary = "80K", YearsOfExperience = 1.5, ResumeId = 1 };
-                var candidate13 = new Candidate() { FirstName = "Gloria", LastName = "Delma", Email = "glor@outlook.com", CurrentPosition = "District Creative Director", Company = "Karmalogic", Location = "Bristol", Skype = "gloria33", Phone = "613-555-0115", Salary = "99K", YearsOfExperience = 4, ResumeId = 1 };
-                var candidate14 = new Candidate() { FirstName = "Deanne", LastName = "Imogene", Email = "imogene@hotmail.com", CurrentPosition = "Global Creative Associate", Company = "Microluxe", Location = "Goose Creek", Skype = "deanne17", Phone = "01632 960437", Salary = "117K", YearsOfExperience = 2, ResumeId = 1 };
-                var candidate15 = new Candidate() { FirstName = "Lon", LastName = "Abner", Email = "lonabner@gmail.com", CurrentPosition = "Senior Web Analyst", Company = "KCS Design", Location = "Abingdon", Skype = "lon78", Phone = "613-555-0167", Salary = "102K", YearsOfExperience = 3, ResumeId = 1 };
-
-                var candidates = new List<Candidate>() { candidate1, candidate2, candidate3, candidate4, candidate5, candidate6, candidate7, candidate8, candidate9, candidate10, candidate11, candidate12, candidate13, candidate14, candidate15 };
-                candidates.ForEach(candidate => context.Candidate.Add(candidate));
-                context.SaveChanges();
                 #endregion
 
                 #region POOLS
-                var jsPool = new Pool() { Name = "JavaScript" };
-                var netPool = new Pool { Name = ".Net" };
-                var phpPool = new Pool { Name = "PHP" };
 
-                var pools = new List<Pool>() { jsPool, netPool, phpPool };
+                var jsPool = new Pool {Name = "JavaScript", Color = "rgb(44,201,99)"};
+                var netPool = new Pool {Name = ".Net", Color = "rgb(293,250,85)"};
+                var phpPool = new Pool {Name = "PHP", Color = "rgb(240,88,88)"};
+                var qaPool = new Pool {Name = "QA", Color = "rgb(245,122,14)"};
+
+                var pools = new List<Pool> {jsPool, netPool, phpPool, qaPool};
                 pools.ForEach(pool => context.Pool.Add(pool));
                 context.SaveChanges();
+
+                #endregion
+
+                #region USER Profiles
+
+                var uProfile1 = new UserProfile()
+                {
+                    Alias = "UF",
+                    UserLogin = "ulyana@bs.com",
+                    Position = "HR Manager",
+                    Added = new DateTime(2015, 07, 01, 10, 10, 10, DateTimeKind.Utc),
+                };
+                var uProfile2 = new UserProfile()
+                {
+                    Alias = "KP",
+                    UserLogin = "kate@bs.com",
+                    Position = "HR Manager",
+                    Added = new DateTime(2015, 07, 02, 10, 10, 10, DateTimeKind.Utc),
+                };
+                var uProfile3 = new UserProfile()
+                {
+                    Alias = "IS",
+                    UserLogin = "irina@bs.com",
+                    Position = "Event Manager",
+                    Added = new DateTime(2015, 07, 03, 10, 10, 10, DateTimeKind.Utc),
+                };
+
+                var uProfiles = new List<UserProfile> {uProfile1, uProfile2, uProfile3};
+                uProfiles.ForEach(pr => context.UserProfile.Add(pr));
+                context.SaveChanges();
+
+                #endregion
+
+                #region RESUMES
+
+                var resume = new Resume() {FileName = "Resume1", FileStream = new byte[0]};
+
+                context.Resume.Add(resume);
+                context.SaveChanges();
+
+                #endregion
+
+                #region CANDIDATES
+
+                var candidate1 = new Candidate()
+                {
+                    FirstName = "Hollis",
+                    LastName = "Sefton",
+                    Email = "sefton@outlook.com",
+                    CurrentPosition = "Chief Tactics Planner",
+                    Company = "3D Me!",
+                    Location = "Winter Park",
+                    Skype = "sefton1052",
+                    Phone = "202-555-0160",
+                    Salary = "64K",
+                    YearsOfExperience = 12,
+                    ResumeId = 1
+                };
+                var candidate2 = new Candidate()
+                {
+                    FirstName = "Porter",
+                    LastName = "Wystan",
+                    Email = "pwystan@yahoo.com",
+                    CurrentPosition = "Central Configuration Specialist",
+                    Company = "Acacia Group",
+                    Location = "Athens",
+                    Skype = "porter_9",
+                    Phone = "202-555-0141",
+                    Salary = "110K",
+                    YearsOfExperience = 7.8,
+                    ResumeId = 1
+                };
+                var candidate3 = new Candidate()
+                {
+                    FirstName = "Gabe",
+                    LastName = "Raven",
+                    Email = "graven@gmail.com",
+                    CurrentPosition = "International Tactics Developer",
+                    Company = "AirSync",
+                    Location = "West Fargo",
+                    Skype = "gabe_raven_001",
+                    Phone = "202-555-0167",
+                    Salary = "78K",
+                    YearsOfExperience = 9,
+                    ResumeId = 1
+                };
+                var candidate4 = new Candidate()
+                {
+                    FirstName = "Jack",
+                    LastName = "Sylvanus",
+                    Email = "jsylv@gmail.com",
+                    CurrentPosition = "Senior Brand Orchestrator",
+                    Company = "All Apps",
+                    Location = "Camp Hill",
+                    Skype = "jack_16",
+                    Phone = "202-555-0128",
+                    Salary = "94K",
+                    YearsOfExperience = 1.2,
+                    ResumeId = 1
+                };
+                var candidate5 = new Candidate()
+                {
+                    FirstName = "Lindsay",
+                    LastName = "Darryl",
+                    Email = "lindsay@outlook.com",
+                    CurrentPosition = "Lead Mobility Agent",
+                    Company = "Bitrex",
+                    Location = "Princeton",
+                    Skype = "0lindsay0",
+                    Phone = "202-555-0196",
+                    Salary = "67K",
+                    YearsOfExperience = 4,
+                    ResumeId = 1
+                };
+                var candidate6 = new Candidate()
+                {
+                    FirstName = "Jennie",
+                    LastName = "Charlie",
+                    Email = "jennie@gmail.com",
+                    CurrentPosition = "Lead Integration Analyst",
+                    Company = "Decratex",
+                    Location = "Oakland Gardens",
+                    Skype = "jen0140",
+                    Phone = "202-555-0198",
+                    Salary = "99K",
+                    YearsOfExperience = 3.10,
+                    ResumeId = 1
+                };
+                var candidate7 = new Candidate()
+                {
+                    FirstName = "Gracelyn",
+                    LastName = "Moriah",
+                    Email = "grace@yahoo.com",
+                    CurrentPosition = "Dynamic Quality Assistant",
+                    Company = "DigestIT",
+                    Location = "Stafford",
+                    Skype = "moriah_99",
+                    Phone = "613-555-0115",
+                    Salary = "82K",
+                    YearsOfExperience = 2.1,
+                    ResumeId = 1
+                };
+                var candidate8 = new Candidate()
+                {
+                    FirstName = "Elizabeth",
+                    LastName = "Rona",
+                    Email = "eliz@hotmail.com",
+                    CurrentPosition = "Dynamic Identity Supervisor",
+                    Company = "eCourt",
+                    Location = "Sterling",
+                    Skype = "lisy228",
+                    Phone = "01632 960277",
+                    Salary = "71K",
+                    YearsOfExperience = 5,
+                    ResumeId = 1
+                };
+                var candidate9 = new Candidate()
+                {
+                    FirstName = "Sunny",
+                    LastName = "Fawn",
+                    Email = "fawn@gmail.com",
+                    CurrentPosition = "Division Assistant",
+                    Company = "Micromax",
+                    Location = "Windermere",
+                    Skype = "fawn322",
+                    Phone = "613-555-0104",
+                    Salary = "89K",
+                    YearsOfExperience = 4.4,
+                    ResumeId = 1
+                };
+                var candidate10 = new Candidate()
+                {
+                    FirstName = "Christianne",
+                    LastName = "Diantha",
+                    Email = "diantha@outlook.com",
+                    CurrentPosition = "Senior Optimization Planner",
+                    Company = "ExoGame",
+                    Location = "Summerville",
+                    Skype = "diantha",
+                    Phone = "613-555-0160",
+                    Salary = "91K",
+                    YearsOfExperience = 15,
+                    ResumeId = 1
+                };
+                var candidate11 = new Candidate()
+                {
+                    FirstName = "Allie",
+                    LastName = "Merideth",
+                    Email = "merideth@hotmail.com",
+                    CurrentPosition = "Division Architect",
+                    Company = "Future Technology",
+                    Location = "Canton",
+                    Skype = "merideth99",
+                    Phone = "01632 960813",
+                    Salary = "115K",
+                    YearsOfExperience = 0.9,
+                    ResumeId = 1
+                };
+                var candidate12 = new Candidate()
+                {
+                    FirstName = "Kennedy",
+                    LastName = "Wardell",
+                    Email = "wardell@yahoo.com",
+                    CurrentPosition = "Product Functionality Consultant",
+                    Company = "Highway Cruise Lines",
+                    Location = "Pikesville",
+                    Skype = "ken1520",
+                    Phone = "613-555-0126",
+                    Salary = "80K",
+                    YearsOfExperience = 1.5,
+                    ResumeId = 1
+                };
+                var candidate13 = new Candidate()
+                {
+                    FirstName = "Gloria",
+                    LastName = "Delma",
+                    Email = "glor@outlook.com",
+                    CurrentPosition = "District Creative Director",
+                    Company = "Karmalogic",
+                    Location = "Bristol",
+                    Skype = "gloria33",
+                    Phone = "613-555-0115",
+                    Salary = "99K",
+                    YearsOfExperience = 4,
+                    ResumeId = 1
+                };
+                var candidate14 = new Candidate()
+                {
+                    FirstName = "Deanne",
+                    LastName = "Imogene",
+                    Email = "imogene@hotmail.com",
+                    CurrentPosition = "Global Creative Associate",
+                    Company = "Microluxe",
+                    Location = "Goose Creek",
+                    Skype = "deanne17",
+                    Phone = "01632 960437",
+                    Salary = "117K",
+                    YearsOfExperience = 2,
+                    ResumeId = 1
+                };
+                var candidate15 = new Candidate()
+                {
+                    FirstName = "Lon",
+                    LastName = "Abner",
+                    Email = "lonabner@gmail.com",
+                    CurrentPosition = "Senior Web Analyst",
+                    Company = "KCS Design",
+                    Location = "Abingdon",
+                    Skype = "lon78",
+                    Phone = "613-555-0167",
+                    Salary = "102K",
+                    YearsOfExperience = 3,
+                    ResumeId = 1
+                };
+
+                var candidates = new List<Candidate>()
+                {
+                    candidate1,
+                    candidate2,
+                    candidate3,
+                    candidate4,
+                    candidate5,
+                    candidate6,
+                    candidate7,
+                    candidate8,
+                    candidate9,
+                    candidate10,
+                    candidate11,
+                    candidate12,
+                    candidate13,
+                    candidate14,
+                    candidate15
+                };
+                candidates.ForEach(candidate => context.Candidate.Add(candidate));
+                context.SaveChanges();
+
                 #endregion
 
                 #region VACANCIES
+
                 var vacancy1 = new Vacancy()
                 {
                     Name = "PHP Developer",
@@ -165,14 +423,14 @@ namespace Hunter.DataAccess.Entities
                                 We are a growing business with lots of opportunity and believe that our team is our success."
                 };
 
-            var vacancy2 = new Vacancy()
-            {
-                Name = "PHP Developer - Magento Lead",
-                Status = 0,
-                UserId = 2,
-                StartDate = new DateTime(2015, 8, 2),
-                Pool = phpPool,
-                Description = @"Company Description:
+                var vacancy2 = new Vacancy()
+                {
+                    Name = "PHP Developer - Magento Lead",
+                    Status = 0,
+                    UserId = 2,
+                    StartDate = new DateTime(2015, 8, 2),
+                    Pool = phpPool,
+                    Description = @"Company Description:
                                For two decades Guidance Solutions has stood at the forefront of eCommerce innovation. We are based in beautiful Marina del Rey, CA just steps from the beach where we develop customized eCommerce strategy for our clients. Using social commerce and the best of Web 2.0 we offer clients a range of services from Information Architecture, User Experience, and Web Design to Development, Hosting, eMarketing and Mobile App Development.
                                We believe in hiring the best so we can deliver the best. We are passionate about the work we do and believe it is possible to do great work and have fun at the same time. We have been voted one of the Best Places to Work, by the LA Business Journal. We offer a relaxed, casual environment where passion, commitment, and excellence reign.
 
@@ -181,14 +439,14 @@ namespace Hunter.DataAccess.Entities
                                We are a leader in the eCommerce industry, and work with high profile clients such as: Foot Locker, Behr Paint, and Burlington Coat Factory. We believe in being passionate about work, having fun at work, and delivering the best. We have been named one of the BEST PLACES TO WORK in LA. We enjoy great pay and benefits, a casual, relaxed work style and a friendly, collaborative environment. We are proud to be environmentally and socially conscious. If you are looking for the opportunity to stand out from the crowd come join us at the BEACH. COME PLAY WITH THE BEST As our php-Magento Developer/Architect you will develop web solutions and custom applications for our high-profile clients with rich media user experiences. Responsibilities:Develop overall technical strategy for external client projects from technical requirementsCommunicate with external clients on a regular basis regarding progress, challenges, timelines and end results of client projectsDirect and oversee more junior developers including off-shore developers in performing Magento technical programming which needs to be accomplishedConduct technical estimations for sales presentationsPresent technical strategy to clients and gather technical requirements as neededDevelop technical documentationCreate and update both design and functional documentsIdentify and troubleshoot issues as needed, documenting developmentPerform a mix of maintenance, enhancements and new development as requiredImplement project applications according to specificationsResearch technical issues and provide recommendations to enhance client web sitesWork independently and as part of a team to create cutting edge E-commerce & mobile sitesTest sites to ensure optimal usabilityJuggle multiple projects and shifting prioritiesMeet stipulated deadlines Qualifications:10+ years developing Front End and user interface code for Web sitesProficient in OOP8+ years of experience coding in DHTML, JavaScript, CSS, Ajax, jQuery8+ years of PHP 4/56 years hands-on experience with Magento6 years E-commerce experienceExperience with Zend FrameworkBasic to intermediate understanding of LinuxBasic to intermediate understanding of MS-SQL and/or MySQLAbility to address and quickly fix HTML, CSS and Scripting compatibility issues between different browsers and platformsGood understanding of Web analytics and SEO techniquesExperience extending or customizing existing products/frameworks such as Drupal, Magento, WordPress, or OS CommerceExperience using Version Control such as SVN or CVS (is a plus)B.S. in Computer Science or equivalent preferredProblem solving and time management skillsAbility to work in both an individual and team based environmentAbility to organize, prioritize and perform multiple job tasks simultaneouslyProven ability to work creatively and analytically in a problem-solving environment."
                 };
 
-            var vacancy3 = new Vacancy()
-            {
-                Name = "Senior PHP Developer",
-                Status = 0,
-                UserId = 3,
-                StartDate = new DateTime(2015, 8, 3),
-                Pool = phpPool,
-                Description = @"Company Description:
+                var vacancy3 = new Vacancy()
+                {
+                    Name = "Senior PHP Developer",
+                    Status = 0,
+                    UserId = 3,
+                    StartDate = new DateTime(2015, 8, 3),
+                    Pool = phpPool,
+                    Description = @"Company Description:
                                 A Santa Monica-based pre-IPO tech company; CallFire is a voice and text platform, with technologies that fit with today mobile lifestyle. We work with major brands, including Public Storage, Dominoes Pizza, AllState, Pepsi and many others. We are a tight knit group of professionals who are passionate about our mission.
 
                                 Job Description:
@@ -248,14 +506,15 @@ namespace Hunter.DataAccess.Entities
                                 Take time off when you need it. Embrace the flow. Control your schedule!"
                 };
 
-            var vacancy5 = new Vacancy()
-            {
-                Name = "Software engineer (JavaScript, AngularJS)",
-                Status = 0,
-                UserId = 2,
-                StartDate = new DateTime(2015, 8, 2),
-                Pool = jsPool,
-                Description = @"We are looking for the best and brightest minds in Web Development. Someone who is truly passionate about creating beautiful innovative next generation UIs using bleeding edge technologies.
+                var vacancy5 = new Vacancy()
+                {
+                    Name = "Software engineer (JavaScript, AngularJS)",
+                    Status = 0,
+                    UserId = 2,
+                    StartDate = new DateTime(2015, 8, 2),
+                    Pool = jsPool,
+                    Description =
+                        @"We are looking for the best and brightest minds in Web Development. Someone who is truly passionate about creating beautiful innovative next generation UIs using bleeding edge technologies.
                                 
                                 As a member of a SCRUM team, you are asked to deliver the following:
                                 Implement requirements from design mockups on the UI and integrate them with the backend services.
@@ -282,14 +541,14 @@ namespace Hunter.DataAccess.Entities
                                 Founded in 1991 and headquartered in Amsterdam, we have 4,000 employees worldwide and sell our products in over 36 countries."
                 };
 
-            var vacancy6 = new Vacancy()
-            {
-                Name = "Senior JavaScript Developer",
-                Status = 0,
-                StartDate = new DateTime(2015, 8, 3),
-                Pool = jsPool,
-                UserId = 3,
-                Description = @"Job Description
+                var vacancy6 = new Vacancy()
+                {
+                    Name = "Senior JavaScript Developer",
+                    Status = 0,
+                    StartDate = new DateTime(2015, 8, 3),
+                    Pool = jsPool,
+                    UserId = 3,
+                    Description = @"Job Description
                                 As Senior JavaScript Developer you will be working on our most challenging and important TV projects and products. You will have a core role in our team of experienced developers, designers, project managers.
                                 Most TV platforms are web-based, so you will make heavy use of your skills in JavaScript, CSS and HTML. The central pillar of much of our software is our AppCore: a JavaScript library which allows us to easily write TV apps once and deploy them to many different TV platforms easily.
                                 
@@ -376,14 +635,14 @@ namespace Hunter.DataAccess.Entities
                                 This is a growing regional company with 21 branches and 18 years in business. We lead the industry in our use of technology. The IT team is small and autonomous with direct line to Executive Leadership of the company. Nice benefit package."
                 };
 
-            var vacancy8 = new Vacancy()
-            {
-                Name = ".Net Developer",
-                Status = 0,
-                UserId = 2,
-                StartDate = new DateTime(2015, 8, 2),
-                Pool = netPool,
-                Description = @"Job Description
+                var vacancy8 = new Vacancy()
+                {
+                    Name = ".Net Developer",
+                    Status = 0,
+                    UserId = 2,
+                    StartDate = new DateTime(2015, 8, 2),
+                    Pool = netPool,
+                    Description = @"Job Description
 
                                 We are an innovative software company who produce awesome casino and bingo gaming content in an agile manner and using best practice techniques and approaches.
                                 We are looking to expand our .NET team in­line with other areas of our business. The current team is a good mix of graduate, mid, and senior level developers ­ we are specifically looking at those who have commercial exposure to .NET for this role. We also want people who are passionate about producing good quality code and keen to contribute positively to the productive and fun working environment we've established at Bede.
@@ -414,14 +673,14 @@ namespace Hunter.DataAccess.Entities
                                 Bede Gaming delivers state of the art technology solution for online gaming partners.  Cross device support is a key differentiator from our competitors, and we're seeking to grow an even stronger .Net development team."
                 };
 
-            var vacancy9 = new Vacancy()
-            {
-                Name = "Backend .Net Web Developer",
-                Status = 0,
-                UserId = 3,
-                StartDate = new DateTime(2015, 8, 2),
-                Pool = netPool,
-                Description = @"Job Description
+                var vacancy9 = new Vacancy()
+                {
+                    Name = "Backend .Net Web Developer",
+                    Status = 0,
+                    UserId = 3,
+                    StartDate = new DateTime(2015, 8, 2),
+                    Pool = netPool,
+                    Description = @"Job Description
 
                                 Whether you’re fresh out of college or an experienced professional, if you love working with .Net, APIs and MongoDB, GAN Integrity Solutions (GAN) would like to hear from you.
                                 GAN is an international consultancy and IT services company headquartered in Copenhagen, Denmark. We help shape how companies manage compliance and regulatory risks through innovative cloud-based solutions, delivered as Software as a Service (SaaS).
@@ -458,22 +717,77 @@ namespace Hunter.DataAccess.Entities
                 };
 
 
-            var vacancies = new List<Vacancy>() { vacancy1, vacancy2, vacancy3, vacancy4, vacancy5, vacancy6, vacancy7, vacancy8, vacancy9 };
-            vacancies.ForEach(vacancy => context.Vacancy.Add(vacancy));
-            context.SaveChanges();
-            #endregion
+                var vacancies = new List<Vacancy>()
+                {
+                    vacancy1,
+                    vacancy2,
+                    vacancy3,
+                    vacancy4,
+                    vacancy5,
+                    vacancy6,
+                    vacancy7,
+                    vacancy8,
+                    vacancy9
+                };
+                vacancies.ForEach(vacancy => context.Vacancy.Add(vacancy));
+                context.SaveChanges();
 
-            #region ACTIVITY
-            var activity1 = new Activity() { Message = "Add new user to Pool", Tag = "add user", Time = DateTime.Now, UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
-            var activity2 = new Activity() { Message = "Create new Vacancy Junior PHP Developer", Tag = "create Vacancy", Time = DateTime.Now, UserLogin = "recruiter2", Url = "http://binary-studio.com/" };
-            var activity3 = new Activity() { Message = "Add new Feedback to Hollis Sefton", Tag = "add Feedback", Time = DateTime.Now, UserLogin = "techspec1", Url = "http://binary-studio.com/" };
-            var activity4 = new Activity() { Message = "Add new Feedback to Jennie Charlie", Tag = "add Feedback", Time = DateTime.Now, UserLogin = "techspec@local.com", Url = "http://binary-studio.com/" };
-            var activity5 = new Activity() { Message = "Add new user Lon Abner to Pool", Tag = "add user", Time = DateTime.Now, UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
+                #endregion
 
-            var activities = new List<Activity> { activity1, activity2, activity3, activity4, activity5 };
-            activities.ForEach(x => context.Activity.Add(x));
-            context.SaveChanges();
-            #endregion
+                #region ACTIVITY
+
+                var activity1 = new Activity()
+                {
+                    Message = "Add new user to Pool",
+                    Tag = "add user",
+                    Time = DateTime.Now,
+                    UserLogin = "recruiter@local.com",
+                    Url = "http://binary-studio.com/"
+                };
+                var activity2 = new Activity()
+                {
+                    Message = "Create new Vacancy Junior PHP Developer",
+                    Tag = "create Vacancy",
+                    Time = DateTime.Now,
+                    UserLogin = "recruiter2",
+                    Url = "http://binary-studio.com/"
+                };
+                var activity3 = new Activity()
+                {
+                    Message = "Add new Feedback to Hollis Sefton",
+                    Tag = "add Feedback",
+                    Time = DateTime.Now,
+                    UserLogin = "techspec1",
+                    Url = "http://binary-studio.com/"
+                };
+                var activity4 = new Activity()
+                {
+                    Message = "Add new Feedback to Jennie Charlie",
+                    Tag = "add Feedback",
+                    Time = DateTime.Now,
+                    UserLogin = "techspec@local.com",
+                    Url = "http://binary-studio.com/"
+                };
+                var activity5 = new Activity()
+                {
+                    Message = "Add new user Lon Abner to Pool",
+                    Tag = "add user",
+                    Time = DateTime.Now,
+                    UserLogin = "recruiter@local.com",
+                    Url = "http://binary-studio.com/"
+                };
+
+                var activities = new List<Activity> {activity1, activity2, activity3, activity4, activity5};
+                activities.ForEach(x => context.Activity.Add(x));
+                context.SaveChanges();
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Log(ex);
+                throw;
+            }
         }
 
         private static byte[] ToByteArray(string sqlVarBinary)
@@ -484,9 +798,11 @@ namespace Hunter.DataAccess.Entities
 
             for (int i = 0; i < hexPart.Length / 2; i++)
             {
-                Logger.Instance.Log(ex);
-                throw;
+                string hexNumber = hexPart.Substring(i * 2, 2);
+                byteList.Add((byte)Convert.ToInt32(hexNumber, 16));
             }
+
+            return byteList.ToArray();
         }
     }
 }

@@ -53,9 +53,9 @@ namespace Hunter.Services
         {
             try
             {
-                var pool = _userRoleRepository.Add(userRole.ToUserRole());
-                _unitOfWork.SaveChanges();
-                return pool.ToUserRoleDto();
+                var role = userRole.ToUserRole();
+                _userRoleRepository.UpdateAndCommit(role);
+                return role.ToUserRoleDto();
             }
             catch (Exception ex)
             {

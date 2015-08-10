@@ -138,6 +138,12 @@
     <EmbeddedResource Include="Migrations\201508081006215_Add_Time_field_to_Activity.resx">
       <DependentUpon>201508081006215_Add_Time_field_to_Activity.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508081627270_AddDeletedFlagToCandidateAndUserProfile.resx">
+      <DependentUpon>201508081627270_AddDeletedFlagToCandidateAndUserProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508081632306_UserProfileStatusRemoved.resx">
+      <DependentUpon>201508081632306_UserProfileStatusRemoved.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508091015329_AddPoolBackgroundColorFieldToPoolTable.resx">
       <DependentUpon>201508091015329_AddPoolBackgroundColorFieldToPoolTable.cs</DependentUpon>
     </EmbeddedResource>
