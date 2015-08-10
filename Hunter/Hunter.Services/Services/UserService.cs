@@ -3,6 +3,9 @@ using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Entities;
 using Hunter.DataAccess.Interface.Base;
 using Hunter.DataAccess.Interface.Repositories;
+using Hunter.Services.Dto;
+using Hunter.Services.Extensions;
+using System.Linq;
 
 namespace Hunter.Services
 {
@@ -23,7 +26,6 @@ namespace Hunter.Services
         {
             return _userRepository.All();
         }
-
 
         public User GetUserByName(string name)
         {
@@ -63,7 +65,10 @@ namespace Hunter.Services
             _userRepository.Update(user);
             _unitOfWork.SaveChanges();
         }
-       
 
+        public IEnumerable<UserDto> GetUsersByRole(string roleName)
+        {
+            return _userRepository.Query().Where(e => e.UserRole.Name.ToLower() == roleName.ToLower()).ToUsersDto();
+        }
     }
 }

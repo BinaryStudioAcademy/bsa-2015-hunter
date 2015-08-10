@@ -24,35 +24,10 @@
                 </div>
                 <h4>Pool</h4>
                 <ul>
-                    <li>
+                    <li ng-repeat="pool in VacancyListCtrl.pools">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" 
-                                       ng-model="VacancyListCtrl.filterOptions.poolFilters[1]"> JS
-                            </label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" 
-                                       ng-model="VacancyListCtrl.filterOptions.poolFilters[2]"> .NET
-                            </label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" 
-                                       ng-model="VacancyListCtrl.filterOptions.poolFilters[3]"> PHP
-                            </label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" 
-                                       ng-model="VacancyListCtrl.filterOptions.poolFilters[4]"> QA
+                                <input type="checkbox"> {{pool.name}}
                             </label>
                         </div>
                     </li>
@@ -64,7 +39,7 @@
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" 
-                                   ng-model="VacancyListCtrl.filterOptions.statusFilters[0]"> Active
+                                   ng-model="VacancyListCtrl.filterOptions.statusFilters[0]"> Sourced
                             </label>
                         </div>
                     </li>
@@ -72,15 +47,7 @@
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" 
-                                   ng-model="VacancyListCtrl.filterOptions.statusFilters[1]"> Closed
-                            </label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" 
-                                   ng-model="VacancyListCtrl.filterOptions.statusFilters[2]"> Burning
+                                   ng-model="VacancyListCtrl.filterOptions.statusFilters[1]"> Applied
                             </label>
                         </div>
                     </li>
@@ -88,27 +55,18 @@
                 <hr />
                 <h4>Added by</h4>
                 <ul>
-                    <li>
+                    <!--<li>
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" 
                                        ng-model="VacancyListCtrl.filterOptions.adderFilters[0].isChecked"> Ulyana
                             </label>
                         </div>
-                    </li>
-                    <li>
+                    </li> -->
+                    <li ng-repeat="user in VacancyListCtrl.users">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" 
-                                       ng-model="VacancyListCtrl.filterOptions.adderFilters[1].isChecked"> Kate
-                            </label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" 
-                                       ng-model="VacancyListCtrl.filterOptions.adderFilters[2].isChecked"> Ira
+                                <input type="checkbox"> {{user.name}}
                             </label>
                         </div>
                     </li>

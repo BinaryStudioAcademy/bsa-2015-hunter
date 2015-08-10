@@ -13,10 +13,12 @@
     VacancyListController.$inject = [
         '$scope',
         '$filter',
-        'VacancyHttpService'
+        'VacancyHttpService',
+        'PoolsHttpService',
+        'UserHttpService'
     ];
 
-    function VacancyListController($scope, $filter, VacancyHttpService) {
+    function VacancyListController($scope, $filter, VacancyHttpService, PoolsHttpService, UserHttpService) {
         var vm = this;
 
         var searchText = "";
@@ -29,8 +31,7 @@
 
         var statuses = {
             0: false,
-            1: false,
-            2: false
+            1: false
         };
 
         var adders = [
@@ -56,11 +57,24 @@
         vm.currentPage = 1;
         vm.pageSize = 5;
         vm.vacancies;
+        vm.pools;
+        vm.users;
 
         VacancyHttpService.getVacancies().then(function (result) {
-            console.log(result);
+            //console.log(result);
             vm.vacancies = result;
         });
+
+        PoolsHttpService.getAllPools().then(function (result) {
+            //console.log(result);
+            vm.pools = result;
+        });
+
+        UserHttpService.getUsersByRole('Recruiter').then(function (result) {
+            //console.log(result);
+            vm.users = result;
+        });
+
 
     }
 
