@@ -65,7 +65,7 @@
                 }
 
                 if (httpObject.errorMessageToUser) {
-                    alertify.error(errorMessageToUser);
+                    alertify.error(httpObject.errorMessageToUser);
                 }
 
                 if (httpObject.errorCallback && typeof httpObject.errorCallback === 'function') {
