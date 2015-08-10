@@ -644,6 +644,7 @@
     <Content Include="Views\candidate\addEdit\addEdit.html" />
     <Content Include="Views\candidate\addEdit\candidateAddEditController.js" />
     <Content Include="Views\candidate\list\candidateListController.js" />
+    <Content Include="Views\candidate\list\dirPagination.tpl.html" />
     <Content Include="Views\candidate\list\list.html" />
     <Content Include="Views\candidate\profile\candidateController.js" />
     <Content Include="Views\candidate\profile\profile.html" />
