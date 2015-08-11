@@ -26,7 +26,7 @@ namespace Hunter.Rest.Controllers
         {
             try
             {
-                var vacancies = _vacancyService.Get();
+                var vacancies = _vacancyService.Get().OrderByDescending(v => v.StartDate);
                 return Request.CreateResponse(HttpStatusCode.OK, vacancies);
             }
             catch (Exception ex)

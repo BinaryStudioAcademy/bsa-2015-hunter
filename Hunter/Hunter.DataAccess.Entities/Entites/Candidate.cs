@@ -68,6 +68,8 @@ namespace Hunter.DataAccess.Entities
 
         public virtual UserProfile UserProfile { get; set; }
 
+        public DateTime AddDate { get; set; }
+
         public Origin Origin { get; set; }
 
         public Resolution Resolution { get; set; }
