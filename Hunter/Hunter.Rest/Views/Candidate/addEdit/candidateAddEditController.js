@@ -11,11 +11,12 @@
         'AuthService',
         'CandidateHttpService',
         'CandidateAddEditService',
-        'PoolsHttpService'
+        'PoolsHttpService',
+        'FileUploadService'
     ];
 
     function CandidateAddEditController($location, $routeParams, authService,
-        candidateHttpService, candidateAddEditService, poolsHttpService) {
+        candidateHttpService, candidateAddEditService, poolsHttpService, fileUploadService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         //vm.categories = [{ name: 'Select Candidate Category' }]; // .NET, JS, PHP
@@ -42,6 +43,8 @@
         //Here we should write all signatures for user actions callback method, for example,
         vm.addEditCandidate = addEditCandidate;
 
+        vm.onFileSelect = fileUploadService.onFileSelect;
+
         (function () {
             // This is function for initialization actions, for example checking auth
             if (true) { // todo : add checking auth
@@ -58,11 +61,12 @@
 
         // Here we should write any functions we need, for example, body of user actions methods.
         function addEditCandidate() {
-
+            
             var candidate = createCandidateRequestBody();
             if (candidate && candidate.Id!=null) {
                 if (candidateAddEditService.validateData(candidate, vm.errorObject)) {
                     candidateHttpService.updateCandidate(candidate, successAddEditCandidate, candidate.Id);
+                    
                 } else {
                     //alertify.error('Some Fields Are Incorrect');
                     alert('Some Fields Are Incorrect : ' + vm.errorObject.message);
@@ -75,6 +79,7 @@
                     alert('Some Fields Are Incorrect : ' + vm.errorObject.message);
                 }
             }
+            fileUploadService.uploadResume(candidate);
             vm.errorObject.message = '';
         }
 
@@ -162,6 +167,8 @@
         }
 
         function successAddEditCandidate(data) {
+            console.log(data);
+            console.log(data);
             $location.url('/candidate/list');
         }
     }

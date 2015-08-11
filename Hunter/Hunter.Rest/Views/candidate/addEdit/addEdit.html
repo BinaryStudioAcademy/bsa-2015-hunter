@@ -83,7 +83,8 @@
         </div>
         <div class="col-md-4">
             <h3>Resume</h3><hr/>
-            <button>Upload Resume</button>
+            <!-- <button>Upload Resume</button>-->
+            <input type="file" ngf-select ngf-change="ctrl.onFileSelect($file)">
         </div>
         <div class="col-md-4">
             <h3>Note</h3><hr/>
@@ -91,6 +92,6 @@
         </div>
     </div>
     <div class="button-done">
-        <button class="btn btn-primary pull-right" ng-click="ctrl.addEditCandidate()">DONE</button>
+        <button class="btn btn-primary pull-right" ng-click="ctrl.addEditCandidate($file)">DONE</button>
     </div>
 </div>

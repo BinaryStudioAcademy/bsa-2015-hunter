@@ -36,6 +36,7 @@
     "alertifyjs": "~0.3.16",
     "angular-bootstrap": "~0.13.0",
     "angular-local-storage": "~0.2.2",
-    "angular-utils-pagination": "~0.8.3"
+    "angular-utils-pagination": "~0.8.3",
+    "ng-file-upload": "~6.0.4"
   }
 }

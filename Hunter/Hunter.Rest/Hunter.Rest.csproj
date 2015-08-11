@@ -274,6 +274,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\CandidatesController.cs" />
+    <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PoolController.cs" />
     <Compile Include="Controllers\UserRoleController.cs" />
@@ -443,6 +444,19 @@
     <Content Include="bower_components\jquery\src\var\support.js" />
     <Content Include="bower_components\jquery\src\var\toString.js" />
     <Content Include="bower_components\jquery\src\wrap.js" />
+    <Content Include="bower_components\ng-file-upload\161a70d3.favicon.ico" />
+    <Content Include="bower_components\ng-file-upload\favicon.ico" />
+    <Content Include="bower_components\ng-file-upload\FileAPI.flash.swf" />
+    <Content Include="bower_components\ng-file-upload\FileAPI.js" />
+    <Content Include="bower_components\ng-file-upload\FileAPI.min.js" />
+    <Content Include="bower_components\ng-file-upload\index.html" />
+    <Content Include="bower_components\ng-file-upload\ng-file-upload-all.js" />
+    <Content Include="bower_components\ng-file-upload\ng-file-upload-all.min.js" />
+    <Content Include="bower_components\ng-file-upload\ng-file-upload-shim.js" />
+    <Content Include="bower_components\ng-file-upload\ng-file-upload-shim.min.js" />
+    <Content Include="bower_components\ng-file-upload\ng-file-upload.js" />
+    <Content Include="bower_components\ng-file-upload\ng-file-upload.min.js" />
+    <Content Include="bower_components\ng-file-upload\robots.txt" />
     <Content Include="bower_components\underscore\underscore-min.js" />
     <Content Include="bower_components\underscore\underscore.js" />
     <Content Include="Content\bootstrap.css" />
@@ -627,6 +641,10 @@
     <Content Include="bower_components\underscore\LICENSE" />
     <Content Include="bower_components\underscore\README.md" />
     <Content Include="bower_components\underscore\underscore-min.map" />
+    <Content Include="bower_components\ng-file-upload\.bower.json" />
+    <Content Include="bower_components\ng-file-upload\bower.json" />
+    <Content Include="bower_components\ng-file-upload\LICENSE" />
+    <Content Include="bower_components\ng-file-upload\README.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -670,6 +688,7 @@
     <Content Include="Views\services\directive\autofocus.js" />
     <Content Include="Views\services\helper\authInterceptorService.js" />
     <Content Include="Views\services\helper\authService.js" />
+    <Content Include="Views\services\helper\fileUploadService.js" />
     <Content Include="Views\services\helper\httpHandler.js" />
     <Content Include="Views\services\userRole\userRoleHttpService.js" />
     <Content Include="Views\services\vacancy\addEdit\addEditService.js" />
