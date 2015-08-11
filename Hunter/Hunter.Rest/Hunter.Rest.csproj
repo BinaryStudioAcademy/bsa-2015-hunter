@@ -652,6 +652,7 @@
     <Content Include="Views\files\list\list.html" />
     <Content Include="Views\filters\vacancies\vacanciesListFilter.js" />
     <Content Include="Views\filters\candidates\candidatesListFilter.js" />
+    <Content Include="Views\Home\indexController.js" />
     <Content Include="Views\login\login.html" />
     <Content Include="Views\login\loginController.js" />
     <Content Include="Views\pool\addEdit\addEdit.html" />
@@ -671,6 +672,7 @@
     <Content Include="Views\services\helper\authInterceptorService.js" />
     <Content Include="Views\services\helper\authService.js" />
     <Content Include="Views\services\helper\httpHandler.js" />
+    <Content Include="Views\services\home\indexHttpService.js" />
     <Content Include="Views\services\userRole\userRoleHttpService.js" />
     <Content Include="Views\services\vacancy\addEdit\addEditService.js" />
     <Content Include="Views\Statistics\list.html" />
