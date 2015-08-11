@@ -15,21 +15,21 @@ namespace Hunter.Rest
         }
 
         // GET: api/Pool
-        [System.Web.Mvc.HttpGet]
+        [HttpGet]
         public IEnumerable<PoolViewModel> Get()
         {
             return _poolService.GetAllPools();
         }
 
         // GET: api/Pool/5
-        [System.Web.Mvc.HttpGet]
+        [HttpGet]
         public PoolViewModel Get(int id)
         {
             return _poolService.GetPoolById(id);
         }
 
         // POST: api/Pool
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         public IHttpActionResult Post([FromBody] PoolViewModel poolViewModel)
         {
             if (poolViewModel == null || _poolService.IsPoolNameExist(poolViewModel.Name))
@@ -53,7 +53,7 @@ namespace Hunter.Rest
         }
 
         // PUT: api/Pool/5
-        [System.Web.Mvc.HttpPut]
+        [HttpPut]
         public IHttpActionResult Put(int id, [FromBody] PoolViewModel poolViewModel)
         {
             if (!_poolService.IsPoolExist(id) || poolViewModel == null)
@@ -73,7 +73,7 @@ namespace Hunter.Rest
         }
 
         // DELETE: api/Pool/5
-        [System.Web.Mvc.HttpDelete]
+        [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
             if (!_poolService.IsPoolExist(id))
