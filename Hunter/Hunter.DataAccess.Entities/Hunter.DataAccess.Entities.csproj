@@ -109,6 +109,10 @@
     <Compile Include="Migrations\201508110630196_candidate_addDate.Designer.cs">
       <DependentUpon>201508110630196_candidate_addDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508111310206_ChangeCandidateSalaryDataType.cs" />
+    <Compile Include="Migrations\201508111310206_ChangeCandidateSalaryDataType.Designer.cs">
+      <DependentUpon>201508111310206_ChangeCandidateSalaryDataType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -139,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508110630196_candidate_addDate.resx">
       <DependentUpon>201508110630196_candidate_addDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508111310206_ChangeCandidateSalaryDataType.resx">
+      <DependentUpon>201508111310206_ChangeCandidateSalaryDataType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
