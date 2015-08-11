@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Hunter.Tools.LinkedIn;
 using NUnit.Framework;
 
@@ -36,7 +37,7 @@ namespace Hunter.Tests.Tools
             var time = info.ExperienceTime;
 
             // Assert
-            Assert.AreEqual(null, time);
+            Assert.AreEqual(TimeSpan.Zero, time);
         }
 
         [Test]
@@ -132,10 +133,10 @@ namespace Hunter.Tests.Tools
             var info = _parser.GetPageInfo("https://ua.linkedin.com/pub/dmitriy-beseda/a4/742/497/en");
             // Act
             var time = info.ExperienceTime;
-            var checkTime = " 11 months";
+            var checkTime = new TimeSpan(314,0,0,0);
 
             // Assert
-            Assert.AreEqual(checkTime, time);
+            Assert.AreEqual(checkTime.Days, time.Days);
         }
 
         [Test]
@@ -161,8 +162,7 @@ namespace Hunter.Tests.Tools
             var info = _parser.GetPageInfo("https://ua.linkedin.com/pub/yuriy-simashkevych/7a/194/7a1");
             // Act
             var summary = info.Summary;
-            var checkSummary = "Thank you for viewing my profile.  I have over 1.5 year of experience in software industry. Being involved in a few projects I have carried out and got experience in requirements analysis, test case creation and execution, defects reporting and tracking. I am open-minded and goal-oriented with good interpersonal and communication skills. Also I'm willing to learn and grow.  You can always contact me by e-mail: yuriy.simashkevych@yahoo.com ";
-
+            var checkSummary = "Thank you for viewing my profile.\n\nI have over 1.5 year of experience in software industry.\nBeing involved in a few projects I have carried out and got experience in requirements analysis, test case creation and execution, defects reporting and tracking.\nI am open-minded and goal-oriented with good interpersonal and communication skills. Also I'm willing to learn and grow.\n\nYou can always contact me by e-mail: yuriy.simashkevych@yahoo.com ";
             // Assert
             Assert.AreEqual(checkSummary, summary);
         }

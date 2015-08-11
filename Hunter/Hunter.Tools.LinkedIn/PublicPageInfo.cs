@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Hunter.Tools.LinkedIn
 {
@@ -11,7 +12,7 @@ namespace Hunter.Tools.LinkedIn
         public string Summary { get; set; }
         public IList<string> Skills { get; set; }
         public string Img { get; set; }
-        public string ExperienceTime { get; set; }
+        public TimeSpan ExperienceTime { get; set; }
         public IList<string> Experience { get; set; }
         public IList<string> Courses { get; set; }
         public IList<string> Projects { get; set; }
