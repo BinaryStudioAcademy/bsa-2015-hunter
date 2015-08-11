@@ -13,6 +13,6 @@ namespace Hunter.Services
         void AddToRole(User user, string roleName);
         void DeleteUser(User user);
         void UpdateUser(User user);
-        IEnumerable<UserDto> GetUsersByRole(string roleName);
+        FilterInfoDto GetFilterInfo(string roleName);
     }
 }

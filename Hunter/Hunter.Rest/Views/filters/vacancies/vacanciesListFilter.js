@@ -14,11 +14,10 @@
 
         vacancies.forEach(function (vacancy) {
             var id = vacancy.poolId;
-            poolFilters.forEach(function (pool) {
-                if (pool.id == vacancy.poolId && pool.isChecked) {
+
+                if (poolFilters[id]) {
                     filtered.push(vacancy);
                 }
-            });
         });
 
         return filtered;
@@ -80,25 +79,25 @@
 
     function VacanciesFilter() {
 
-        return function (vacancies, options, adderFilters, poolFilters) {
+        return function (vacancies, options) {
 
-            if (!checkOptions(poolFilters) &&
+            if (!checkOptions(options.poolFilters) &&
                 !checkOptions(options.statusFilters) &&
-                !checkOptions(adderFilters) &&
+                !checkOptions(options.adderFilters) &&
                 !checkOptions(options.searchText)) {
                 return vacancies;
             }
 
             var res = [];
 
-            if (checkOptions(poolFilters)) {
-                res = filterVacanciesByPool(vacancies, poolFilters);
+            if (checkOptions(options.poolFilters)) {
+                res = filterVacanciesByPool(vacancies, options.poolFilters);
             } else {
                 res = vacancies;
             }
 
-            if (checkOptions(adderFilters)) {
-                res = filterVacanciesByAdder(res, adderFilters);
+            if (checkOptions(options.adderFilters)) {
+                res = filterVacanciesByAdder(res, options.adderFilters);
             }
             if (checkOptions(options.statusFilters)) {
                 res = filterVacanciesByStatus(res, options.statusFilters);

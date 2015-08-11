@@ -276,7 +276,6 @@
     <Compile Include="Controllers\CandidatesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PoolController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserRoleController.cs" />
     <Compile Include="Controllers\VacancyController.cs" />
     <Compile Include="Filters\CheckModelForNullAttribute.cs" />
@@ -671,7 +670,6 @@
     <Content Include="Views\services\helper\authService.js" />
     <Content Include="Views\services\helper\httpHandler.js" />
     <Content Include="Views\services\userRole\userRoleHttpService.js" />
-    <Content Include="Views\services\user\userHttpService.js" />
     <Content Include="Views\services\vacancy\addEdit\addEditService.js" />
     <Content Include="Views\Statistics\list.html" />
     <Content Include="Views\Statistics\statisticsController.js" />

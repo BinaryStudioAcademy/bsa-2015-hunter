@@ -27,7 +27,7 @@
                     <li ng-repeat="pool in VacancyListCtrl.pools">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" ng-model="pool.isChecked"> {{pool.name}}
+                                <input type="checkbox"> {{pool.name}}
                             </label>
                         </div>
                     </li>
@@ -55,10 +55,18 @@
                 <hr />
                 <h4>Added by</h4>
                 <ul>
+                    <!--<li>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" 
+                                       ng-model="VacancyListCtrl.filterOptions.adderFilters[0].isChecked"> Ulyana
+                            </label>
+                        </div>
+                    </li> -->
                     <li ng-repeat="user in VacancyListCtrl.users">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" ng-model="user.isChecked"> {{user.name}}{{user.isChecked}}
+                                <input type="checkbox"> {{user.login}}
                             </label>
                         </div>
                     </li>
@@ -75,21 +83,8 @@
                         <th>Shortlisted</th>
                         <th>Added By</th>
                     </tr>
-                    <!--<tr ng-repeat="vacancy in VacancyListCtrl.vacancies">
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                        <td>
-                            <a href="#">{{vacancy.name}}</a>
-                        </td>
-                        <td>{{vacancy.startDate | date:'dd-MM-yyyy'}}</td>
-                        <td>{{vacancy.endDate | date:'dd-MM-yyyy'}}</td>
-                        <td>{{vacancy.countCandidates}}</td>
-                        <td>{{vacancy.countShortListed}}</td>
-                        <td>{{vacancy.addedByName}}</td>
-                    </tr> -->
-
-                    <tr dir-paginate="vacancy in VacancyListCtrl.vacancies | VacanciesFilter:VacancyListCtrl.filterOptions:VacancyListCtrl.users:VacancyListCtrl.pools | itemsPerPage: VacancyListCtrl.pageSize" current-page="VacancyListCtrl.currentPage">
+ 
+                    <tr dir-paginate="vacancy in VacancyListCtrl.vacancies | VacanciesFilter:VacancyListCtrl.filterOptions | itemsPerPage: VacancyListCtrl.pageSize" current-page="VacancyListCtrl.currentPage">
                         <td>
                             <input type="checkbox">
                         </td>

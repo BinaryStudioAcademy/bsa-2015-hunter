@@ -12,6 +12,7 @@ namespace Hunter.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IVacancyRepository _vacancyRepository;
+        
         public VacancyService(
             IVacancyRepository vacancyRepository,
             IUnitOfWork unitOfWork)
