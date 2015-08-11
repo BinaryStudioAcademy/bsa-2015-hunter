@@ -1,0 +1,89 @@
+﻿.ll_container * {
+    /*border: 1px solid green;*/
+}
+.ll_container {
+    width: 100%;
+    height: 500px;
+}
+
+.ll_main_wrap {
+    width: 60%;
+    height: 100%;
+    float: left;
+}
+
+.ll_preview {
+    width: 40%;
+    height: 100%;
+    float: right;
+}
+.ll_title {
+    float: left;
+    width: 100%;
+}
+.ll_title>* {
+    height: 100%;
+}
+.ll_title>h1 {
+    padding: 0;
+    margin: 0;
+    font-size: 25px;
+    width: 30%;
+    float: left;
+}
+.ll_control_buttons {
+    float: right;
+    width: 70%;
+}
+.ll_control_buttons .btn{
+    float: right;
+    background-color: rgb(221, 221, 221);
+    color: rgb(51, 51, 51);
+    width: auto;
+    margin-left: 5px;
+    font-size: 12px;
+    height: 28px;
+}
+
+.ll_main {
+    float: left;
+    width: 100%;
+}
+
+.ll_filter, .ll_list {
+    float: left;
+}
+.ll_filter {
+    width: 30%;
+}
+.ll_list {
+    width: 70%;
+    padding: 5px;
+    background-color: bisque;
+}
+.ll_filter>h2 {
+    width: 100%;
+    float: left;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+.ll_filter_input {
+    width: 100%;
+    float: left;
+          
+}
+.ll_filter_items {
+    width: 100%;
+    float: left;   
+}
+.ll_filter_input>input {
+    height: 25px;
+    margin: 5px 0;
+}
+.ll_filter_items>*{
+    height: 50px;
+    border-radius: 3px;
+    background-color: rgb(231, 231, 231);
+    margin-bottom: 5px;
+}

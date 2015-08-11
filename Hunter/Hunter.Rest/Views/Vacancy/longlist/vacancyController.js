@@ -1,22 +1,26 @@
 ﻿(function() {
-    'use strict';
+    "use strict";
 
     angular
-        .module('hunter-app')
-        .controller('VacancyController', VacancyController);
+        .module("hunter-app")
+        .controller("VacancyController", VacancyController);
 
     VacancyController.$inject = [
-        '$location',
-        'AuthService',
-        'CandidateHttpService',
-        'AddEditService'
-
+        "$location",
+        "CandidateHttpService",
+        "VacancyHttpService",
+        "$routeParams"
     ];
 
-    function VacancyController($location, authService, candidateHttpService, addEditService) {
+    function VacancyController($location, CandidateHttpService, VacancyHttpService, $routeParams) {
         var vm = this;
+
+        VacancyHttpService.getVacancy($routeParams.id).then(function (result) {
+            console.log(result);
+            vm.vacancy = result;
+        });
         //Here we should write all vm variables default values. For Example:
-        vm.someVariable = 'This is datailse vacancy page';
+        //vm.someVariable = "This is datailse vacancy page";
 
         //(function() {
         //    // This is function for initialization actions, for example checking auth
