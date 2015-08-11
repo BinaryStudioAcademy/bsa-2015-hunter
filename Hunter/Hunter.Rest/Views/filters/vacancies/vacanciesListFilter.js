@@ -14,10 +14,11 @@
 
         vacancies.forEach(function (vacancy) {
             var id = vacancy.poolId;
-
-                if (poolFilters[id]) {
+            poolFilters.forEach(function (pool) {
+                if (pool.id == vacancy.poolId && pool.isChecked) {
                     filtered.push(vacancy);
                 }
+            });
         });
 
         return filtered;
@@ -79,25 +80,25 @@
 
     function VacanciesFilter() {
 
-        return function (vacancies, options) {
+        return function (vacancies, options, adderFilters, poolFilters) {
 
-            if (!checkOptions(options.poolFilters) &&
+            if (!checkOptions(poolFilters) &&
                 !checkOptions(options.statusFilters) &&
-                !checkOptions(options.adderFilters) &&
+                !checkOptions(adderFilters) &&
                 !checkOptions(options.searchText)) {
                 return vacancies;
             }
 
             var res = [];
 
-            if (checkOptions(options.poolFilters)) {
-                res = filterVacanciesByPool(vacancies, options.poolFilters);
+            if (checkOptions(poolFilters)) {
+                res = filterVacanciesByPool(vacancies, poolFilters);
             } else {
                 res = vacancies;
             }
 
-            if (checkOptions(options.adderFilters)) {
-                res = filterVacanciesByAdder(res, options.adderFilters);
+            if (checkOptions(adderFilters)) {
+                res = filterVacanciesByAdder(res, adderFilters);
             }
             if (checkOptions(options.statusFilters)) {
                 res = filterVacanciesByStatus(res, options.statusFilters);
