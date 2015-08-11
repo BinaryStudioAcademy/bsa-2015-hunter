@@ -5,7 +5,7 @@ using Hunter.DataAccess.Entities;
 using Hunter.DataAccess.Entities.Enums;
 using Hunter.Services.Dto;
 
-namespace Hunter.Services.Extensions
+namespace Hunter.Services
 {
     static public class CandidateExtensions
     {
@@ -62,5 +62,24 @@ namespace Hunter.Services.Extensions
                 candidate.Origin = (Origin)dto.Origin;
             candidate.DateOfBirth = dto.DateOfBirth;
         }
+
+        public static CandidateLongListDto ToCandidateLongListDto(this Candidate candidate)
+        {
+            var dto = new CandidateLongListDto()
+            {
+                Id = candidate.Id,
+                FirstName = candidate.FirstName,
+                LastName = candidate.LastName,
+                Email = candidate.Email,
+                Company = candidate.Company,
+                Location = candidate.Location,
+                Salary = candidate.Salary,
+                YearsOfExperience = candidate.YearsOfExperience,
+                Photo = candidate.Photo,
+            };
+            
+            return dto;
+        }
+        
     }
 }
