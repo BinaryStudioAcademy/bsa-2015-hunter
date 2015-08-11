@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Interface.Base;
 
 namespace Hunter.Services
@@ -12,11 +13,21 @@ namespace Hunter.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IVacancyRepository _vacancyRepository;
+        private readonly ICandidateRepository _candidateRepository;
+        private readonly ICardRepository _cardRepository;
+        private readonly ILogger _logger;
+
         public VacancyService(
             IVacancyRepository vacancyRepository,
+            ICandidateRepository candidateRepository,
+            ICardRepository cardRepository,
+            ILogger logger,
             IUnitOfWork unitOfWork)
         {
             _vacancyRepository = vacancyRepository;
+            _candidateRepository = candidateRepository;
+            _cardRepository = cardRepository;
+            _logger = logger;
             _unitOfWork = unitOfWork;
         }
         public IEnumerable<VacancyDto> Get()
@@ -49,6 +60,41 @@ namespace Hunter.Services
             {
                 _vacancyRepository.Delete(vacancy);
                 _unitOfWork.SaveChanges();
+            }
+        }
+
+        public VacancyLongListDto GetLongList(int id)
+        {
+            try
+            {
+                var vacancyLongList = _vacancyRepository.Get(id).ToVacancyLongListDto();
+
+                //var candidates = _candidateRepository.All().Where(c => c.Card.Any(card => card.Vacancy.Id == id));
+                var cards = _cardRepository.All().Where(c => c.VacancyId == id).ToList();
+
+                var candidates = _candidateRepository.All().Where(c => c.Card.Any());
+
+                vacancyLongList.CandidateLongListDto = candidates.Select(c => c.ToCandidateLongListDto()).ToList();
+
+                return vacancyLongList;
+
+                /*
+                 var users = from work in _testWorks
+                        join test in _tests on work.TestName equals test.TestName
+                        where work.ResultMark >= test.PassMark
+                        select new
+                        {
+                            work.UserName,
+                            work.ResultMark,
+                            test.TestName,
+                            test.PassMark
+                        };
+                 */
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return new VacancyLongListDto();
             }
         }
     }
