@@ -68,6 +68,7 @@
     <Compile Include="Extensions\CandidateExtensions.cs" />
     <Compile Include="Extensions\UserRoleExtention.cs" />
     <Compile Include="Extensions\VacancyExtensions.cs" />
+    <Compile Include="FilterParams\VacancyFilterParams.cs" />
     <Compile Include="Services\ActivityService.cs" />
     <Compile Include="Services\CandidateService.cs" />
     <Compile Include="Services\Interfaces\IActivityService.cs" />

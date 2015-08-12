@@ -28,7 +28,7 @@ angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.dir
                 .when('/vacancy/list', {
                     templateUrl: viewPath + 'vacancy/list/list.html',
                     controller: "VacancyListController",
-                    controllerAs: "VacancyListCtrl",
+                    controllerAs: "vacancyListCtrl",
                     reloadOnSearch: false
                 })
                 .when('/vacancy/edit', {

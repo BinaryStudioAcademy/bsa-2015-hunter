@@ -13,55 +13,50 @@
     VacancyListController.$inject = [
         '$scope',
         '$filter',
-        'VacancyHttpService'
+        'VacancyHttpService',
+        'PoolsHttpService'
     ];
 
-    function VacancyListController($scope, $filter, VacancyHttpService) {
+    function VacancyListController($scope, $filter, vacancyHttpService, poolsHttpService) {
         var vm = this;
 
-        var searchText = "";
-        var pools = {
-            1: false,
-            2: false,
-            3: false,
-            4: false
+        vm.filterParams = {
+            page: 0,
+            pageSize: 5,
+            sortColumn: 'startDate',
+            reverceSort: true,
+            filter: '',
+            pool: [],
+            status: [],
+            addedBy: []
         };
 
-        var statuses = {
-            0: false,
-            1: false,
-            2: false
-        };
+        vm.pools = [];
+        poolsHttpService.getAllPools().then(function (data) {
+            vm.pools = data;
+        });
 
-        var adders = [
-            { 'name': "recruiter@local.com", 'isChecked': false },
-            { 'name': "Heaven Hayden", 'isChecked': false },
-            { 'name': "Chantel Sherley", 'isChecked': false }
-        ];
+        vm.statuses = [{ id: 0, name: 'Active' }, { id: 1, name: 'Closed' }, { id: 2, name: 'Burning' }];
+        vm.adders = ["recruiter@local.com", "Heaven Hayden", "Chantel Sherley"];
 
-        var options = {
-            'poolFilters': pools,
-            'adderFilters': adders,
-            'statusFilters': statuses,
-            'searchText':searchText
-        };
+        vm.vacancies = [];
 
-        vm.filterOptions = options;
-        $scope.$watchCollection(
-            'VacancyListCtrl.filterOptions',
-            function() {
-                $filter('VacanciesFilter')(vm.vacancies, vm.filterOptions);
-            });
-
-        vm.currentPage = 1;
-        vm.pageSize = 5;
-        vm.vacancies;
-
-        VacancyHttpService.getVacancies().then(function (result) {
+        vacancyHttpService.getFilteredVacancies(vm.filterParams).then(function (result) {
             console.log(result);
             vm.vacancies = result;
         });
 
+        vm.pushPopItem = function (item, collection) {
+            console.log(item);
+            console.log(collection);
+            if (collection == undefined) return;
+            var index = collection.indexOf(item);
+            if (index != -1) {
+                collection.push(item);
+            } else {
+                collection.splice(index, 1);
+            }
+        }
     }
 
     function OtherController() {
