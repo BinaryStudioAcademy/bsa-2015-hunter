@@ -69,7 +69,7 @@ namespace Hunter.Services
             return cards.Select(c => new CandidateLongListDto()
             {
                 Id = c.CandidateId,
-                Photo = c.Candidate != null ? c.Candidate.Photo : new Byte[64],
+                Photo = c.Candidate != null ? c.Candidate.Photo : new byte[64],
                 FirstName = c.Candidate != null ? c.Candidate.FirstName : "",
                 LastName = c.Candidate != null ? c.Candidate.LastName : "",
                 Email = c.Candidate != null ? c.Candidate.Email : "",
