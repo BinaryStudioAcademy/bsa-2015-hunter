@@ -48,10 +48,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Hunter.DataAccess.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Hunter.DataAccess.Entities\bin\Debug\Hunter.DataAccess.Entities.dll</HintPath>
-    </Reference>
     <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -778,6 +774,10 @@
     <ProjectReference Include="..\Hunter.DataAccess.Db\Hunter.DataAccess.Db.csproj">
       <Project>{6293aeeb-7108-49a2-8300-4ea40d4222d0}</Project>
       <Name>Hunter.DataAccess.Db</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hunter.DataAccess.Entities\Hunter.DataAccess.Entities.csproj">
+      <Project>{778686ca-f03e-49a6-bbea-47a84d2a9514}</Project>
+      <Name>Hunter.DataAccess.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\Hunter.DataAccess.Interface\Hunter.DataAccess.Interface.csproj">
       <Project>{870a30fe-6780-4b1c-81f5-1eaf8bd8f50c}</Project>

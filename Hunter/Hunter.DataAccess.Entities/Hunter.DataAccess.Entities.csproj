@@ -122,6 +122,10 @@
     <Compile Include="Migrations\201508111310206_ChangeCandidateSalaryDataType.Designer.cs">
       <DependentUpon>201508111310206_ChangeCandidateSalaryDataType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508122043415_Merge1.cs" />
+    <Compile Include="Migrations\201508122043415_Merge1.Designer.cs">
+      <DependentUpon>201508122043415_Merge1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -161,6 +165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508111310206_ChangeCandidateSalaryDataType.resx">
       <DependentUpon>201508111310206_ChangeCandidateSalaryDataType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508122043415_Merge1.resx">
+      <DependentUpon>201508122043415_Merge1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
