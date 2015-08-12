@@ -35,14 +35,5 @@ namespace Hunter.Services
 
             return activity;
         }
-
-        public static int GetAmountOfActualActivities(this IActivityService service, int lastId)
-        {
-            var activities = service.GetAllActivities().OrderByDescending(x => x.Time);
-
-            int actualActivitiesAmount = activities.SkipWhile(x => Convert.ToInt32(x.Id) != lastId).Count();
-
-            return actualActivitiesAmount;
-        }
     }
 }

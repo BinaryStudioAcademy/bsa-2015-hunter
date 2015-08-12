@@ -40,13 +40,14 @@ namespace Hunter.Rest.Controllers
 
         [HttpGet]
         [Route("amount")]
-        public IHttpActionResult GetActivitiesAmount(int userId)
+        public IHttpActionResult GetActivitiesAmount()
         {
             try
             {
-//                var profile = _userProfileService.GetUserProfile(userId);
-                //repair this
-                return Ok(_activityService.GetAllActivities().Count());
+                var login = RequestContext.Principal.Identity.Name;
+
+                var profile = _userProfileService.GetUserProfile(login);
+                return Ok(_activityService.GetAmountOfActualActivities(profile.LastViewedActivityId));
             }
             catch (Exception ex)
             {
@@ -56,10 +57,17 @@ namespace Hunter.Rest.Controllers
 
         [HttpPost]
         [Route("save/lastid")]
-        public IHttpActionResult SaveLastViewdActivityId([FromBody] int id)
+        public IHttpActionResult SaveLastViewdActivityId([FromBody] int lastActivityId)
         {
             try
             {
+                string login = RequestContext.Principal.Identity.Name;
+
+                var userProfile = _userProfileService.GetUserProfile(login);
+                userProfile.LastViewedActivityId = lastActivityId;
+
+                _userProfileService.UpdateUserProfile(userProfile);
+
                 return Ok();
             }
             catch (Exception ex)

@@ -58,7 +58,8 @@
 
             activityHttpService.saveLastActivityId(function(response) {
                 console.log(response.data);
-            }, lastViewdId);
+            }, 
+            lastViewdId);
         }
 
         function isNewActivityPresent(activityList) {

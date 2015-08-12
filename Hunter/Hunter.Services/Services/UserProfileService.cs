@@ -8,9 +8,9 @@ using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Interface.Base;
 using Hunter.Services.Services.Interfaces;
 
-namespace Hunter.Services.Services
+namespace Hunter.Services
 {
-    class UserProfileService : IUserProfileService
+    public class UserProfileService : IUserProfileService
     {
         private readonly IUserProfileRepository _userProfileRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -19,6 +19,11 @@ namespace Hunter.Services.Services
         {
             _userProfileRepository = repository;
             _unitOfWork = unitOfWork;
+        }
+
+        public IEnumerable<UserProfile> GetAllUsersProfiles()
+        {
+            return _userProfileRepository.All();
         }
 
         public UserProfile GetUserProfile(string userName)
@@ -34,6 +39,19 @@ namespace Hunter.Services.Services
         public void UpdateUserProfile(UserProfile newProfile)
         {
             _userProfileRepository.Update(newProfile);
+            _unitOfWork.SaveChanges();
+        }
+
+        public void AddUserProfile(UserProfile profile)
+        {
+            _userProfileRepository.Add(profile);
+            _unitOfWork.SaveChanges();
+        }
+
+        public void DeleteUserProfile(int id)
+        {
+            var activityToDelete = _userProfileRepository.Get(id);
+            _userProfileRepository.Delete(activityToDelete);
             _unitOfWork.SaveChanges();
         }
     }

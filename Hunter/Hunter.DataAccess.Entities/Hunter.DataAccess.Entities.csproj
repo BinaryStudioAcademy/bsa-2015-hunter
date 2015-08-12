@@ -105,6 +105,10 @@
     <Compile Include="Migrations\201508091015329_AddPoolBackgroundColorFieldToPoolTable.Designer.cs">
       <DependentUpon>201508091015329_AddPoolBackgroundColorFieldToPoolTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508111858022_Add_LastViewdActivityId_To_UserProfile.cs" />
+    <Compile Include="Migrations\201508111858022_Add_LastViewdActivityId_To_UserProfile.Designer.cs">
+      <DependentUpon>201508111858022_Add_LastViewdActivityId_To_UserProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -132,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508091015329_AddPoolBackgroundColorFieldToPoolTable.resx">
       <DependentUpon>201508091015329_AddPoolBackgroundColorFieldToPoolTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508111858022_Add_LastViewdActivityId_To_UserProfile.resx">
+      <DependentUpon>201508111858022_Add_LastViewdActivityId_To_UserProfile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
