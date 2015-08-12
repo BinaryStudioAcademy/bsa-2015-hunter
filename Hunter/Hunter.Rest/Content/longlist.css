@@ -1,0 +1,132 @@
+﻿.ll_container * {
+    /*border: 1px solid green;*/
+}
+.ll_container {
+    width: 100%;
+    height: 500px;
+}
+
+.ll_main_wrap {
+    width: 60%;
+    height: 100%;
+    float: left;
+}
+
+.ll_preview {
+    width: 40%;
+    height: 100%;
+    float: right;
+    background: aliceblue;
+}
+.ll_title {
+    float: left;
+    width: 100%;
+}
+.ll_title>* {
+    height: 100%;
+}
+.ll_title>h1 {
+    padding: 0;
+    margin: 0;
+    font-size: 25px;
+    width: 30%;
+    float: left;
+}
+.ll_control_buttons {
+    float: right;
+    width: 70%;
+}
+.ll_control_buttons .btn{
+    float: right;
+    background-color: rgb(221, 221, 221);
+    color: rgb(51, 51, 51);
+    width: auto;
+    margin-left: 5px;
+    font-size: 12px;
+    height: 28px;
+}
+
+.ll_main {
+    float: left;
+    width: 100%;
+    padding-top: 15px;
+}
+
+.ll_filter, .ll_list {
+    float: left;
+}
+.ll_filter {
+    width: 30%;
+}
+.ll_list {
+    width: 70%;
+    padding: 0 5px;
+}
+.ll_list>p {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.ll_filter>h2 {
+    width: 100%;
+    float: left;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+.ll_filter_input {
+    width: 100%;
+    float: left;
+          
+}
+.ll_filter_items {
+    width: 100%;
+    float: left;   
+}
+.ll_filter_input>input {
+    height: 25px;
+    margin: 5px 0;
+}
+.ll_filter_items>*{
+    height: 50px;
+    border-radius: 3px;
+    background-color: rgb(231, 231, 231);
+    margin-bottom: 5px;
+}
+.ll_candidate_item {
+    margin-bottom: 20px;
+    float: left;
+    width: 100%;
+    border: 1px solid white;
+}
+.ll_candidate_item:hover {
+    border: 1px solid black;
+    cursor: pointer;
+}
+.ll_candidate_item .ll_candidate_item_img {
+    position: relative;
+    padding: 5px;
+    max-width: 70px;
+}
+.ll_candidate_item_img img {
+    background-color: aliceblue;
+    border-radius: 30px;
+    border-style:none;
+    width: 60px;
+    height: 60px;
+    border: 0;
+}
+.ll_candidate_item_img>p {
+    position: absolute;
+    background: yellowgreen;
+    width: 25px;
+    height: 20px;
+    top: 0px;
+    right: 0px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 0;
+}
+.candidate_item_salary {
+    max-width: 70px; 
+}
