@@ -681,7 +681,7 @@
     <Content Include="Views\vacancy\addEdit\addEdit.html" />
     <Content Include="Views\vacancy\addEdit\vacancyAddEditController.js" />
     <Content Include="Views\vacancy\list\dirPagination.tpl.html" />
-    <Content Include="Views\vacancy\longlist\vacancyController.js" />
+    <Content Include="Views\vacancy\longlist\longListController.js" />
     <Content Include="Views\vacancy\longlist\longlist.html" />
     <Content Include="Views\services\vacancy\vacancyHttpService.js" />
     <Content Include="Views\Vacancy\list\vacancyListController.js" />

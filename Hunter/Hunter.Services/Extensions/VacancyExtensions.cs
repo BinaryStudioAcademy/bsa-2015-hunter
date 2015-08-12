@@ -51,7 +51,7 @@ namespace Hunter.Services
                 Name = vacancy.Name,
                 PoolId = vacancy.PoolId,
                 AddedByName = vacancy.User != null ? vacancy.User.Login : "noname",
-                CandidateLongListDto = null
+                Candidates = null
             };
             return vll;
         }

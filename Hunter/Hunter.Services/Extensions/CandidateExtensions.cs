@@ -68,14 +68,14 @@ namespace Hunter.Services
             var dto = new CandidateLongListDto()
             {
                 Id = candidate.Id,
+                Photo = candidate.Photo,
                 FirstName = candidate.FirstName,
                 LastName = candidate.LastName,
                 Email = candidate.Email,
                 Company = candidate.Company,
                 Location = candidate.Location,
                 Salary = candidate.Salary,
-                YearsOfExperience = candidate.YearsOfExperience,
-                Photo = candidate.Photo,
+                YearsOfExperience = candidate.YearsOfExperience
             };
             
             return dto;

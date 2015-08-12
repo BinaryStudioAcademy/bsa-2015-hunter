@@ -2,7 +2,7 @@
     <div class="ll_container">
         <div class="ll_main_wrap">
             <div class="ll_title">
-                <h1>{{vacancyCtrl.vacancy.name}}</h1>
+                <h1>{{longListCtrl.longList.name}}</h1>
                 <div class="ll_control_buttons">
                     <a class="btn" href="../../#">Add Candidate</a>
                     <a class="btn" href="../../#">Create New Candidate</a>
@@ -22,7 +22,22 @@
                         <div>Added by</div>
                     </div>
                 </aside>
-                <div class="ll_list">List</div>
+                <div class="ll_list">
+                    List of Candidates
+                    <div class="ll_candidate_item" ng-repeat="candidate in longListCtrl.longList.candidateLongListDto">
+                        <img src="" alt="" />
+                        <div>{{candidate.firstName}} {{candidate.lastName}}</div>
+                        <div>{{candidate.salary}}</div>
+                        <div>{{candidate.email}}<br />{{candidate.location}}</div>
+                    </div>
+
+
+                    <!--<li ng-repeat="pool in poolCtrl.poolsList | filter:searchPool">
+                        <p style="background-color: {{pool.color}}">{{pool.name}}</p><a href="../../#/pool/edit/{{pool.id}}" title="Edit"></a>
+                    </li>-->
+
+
+                </div>
             </div>
         </div>
         <div class="ll_preview">Preview</div>

@@ -1,14 +1,11 @@
-﻿using Hunter.DataAccess.Interface;
-using Hunter.Services;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hunter.Services.Interfaces;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Interface.Base;
+using Hunter.Services;
+using Hunter.Services.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -35,13 +32,16 @@ namespace Hunter.Tests.Services
         [SetUp]
         public void TestSetup()
         {
-            _vacancyRepository.Get(Arg.Any<int>()).Returns(new Vacancy { Id = 1, Name = "Vacancy name", Card = new List<Card> { new Card { Id = 1 }, new Card { Id = 2 } } });
+            var cardsList = new List<Card> { new Card { Id = 1, VacancyId = 1 }, new Card { Id = 2, VacancyId = 1} };
+
+            _vacancyRepository.Get(Arg.Any<int>()).Returns(new Vacancy { Id = 1, Name = "Vacancy name", Card = cardsList });
 
             _candidateRepository.All().Returns(new List<Candidate>()
             {
-                new Candidate { Id = 1, FirstName = "Name 1", Card = new List<Card> { new Card { Id = 1} , new Card { Id = 2 } } },
-                new Candidate { Id = 2, FirstName = "Name 2", Card = new List<Card> { new Card { Id = 1 } } },
-                new Candidate { Id = 3, FirstName = "Name 3", Card = new List<Card> { new Card { Id = 3 } } }
+                new Candidate { Id = 1, FirstName = "Name 1", Card = cardsList },
+                new Candidate { Id = 2, FirstName = "Name 2", Card = new List<Card> { cardsList[0] } },
+                new Candidate { Id = 3, FirstName = "Name 3", Card = new List<Card> { cardsList[1] } },
+                new Candidate { Id = 3, FirstName = "Name 3", Card = new List<Card> { new Card { Id = 3, VacancyId = 2} } }
             });
         }
 
@@ -51,10 +51,10 @@ namespace Hunter.Tests.Services
             // Arrange
 
             // Act
-            var vacancy = _vacancyService.GetLongList(1);
+            var result = _vacancyService.GetLongList(1);
 
             // Assert
-            Assert.AreEqual(1, vacancy.Id);
+            Assert.True(result.CandidateLongListDto.Count() == 3); 
         }
     }
 }

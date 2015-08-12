@@ -3,21 +3,22 @@
 
     angular
         .module("hunter-app")
-        .controller("VacancyController", VacancyController);
+        .controller("LongListController", LongListController);
 
-    VacancyController.$inject = [
+    LongListController.$inject = [
         "$location",
-        "CandidateHttpService",
         "VacancyHttpService",
         "$routeParams"
     ];
 
-    function VacancyController($location, CandidateHttpService, VacancyHttpService, $routeParams) {
+    function LongListController($location, VacancyHttpService, $routeParams) {
         var vm = this;
 
-        VacancyHttpService.getVacancy($routeParams.id).then(function (result) {
+        vm.longList;
+
+        VacancyHttpService.getLongList($routeParams.id).then(function (result) {
             console.log(result);
-            vm.vacancy = result;
+            vm.longList = result;
         });
         //Here we should write all vm variables default values. For Example:
         //vm.someVariable = "This is datailse vacancy page";

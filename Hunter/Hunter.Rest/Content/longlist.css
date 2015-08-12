@@ -87,3 +87,12 @@
     background-color: rgb(231, 231, 231);
     margin-bottom: 5px;
 }
+.ll_candidate_item {
+    margin-bottom: 20px;
+}
+.ll_candidate_item>img {
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    border-radius: 20px;
+}
