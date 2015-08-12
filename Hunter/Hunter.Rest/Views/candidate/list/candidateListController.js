@@ -68,7 +68,7 @@
 
         vm.candidateList;
         // Here we should write any functions we need, for example, body of user actions methods.
-        candidateHttpService.getCandidateList(function (data) {
+        candidateHttpService.getCandidateList().then(function (data) {
             vm.candidateList = data.data;
             console.log(data.data);
 

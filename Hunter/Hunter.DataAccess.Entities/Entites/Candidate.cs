@@ -14,8 +14,8 @@ namespace Hunter.DataAccess.Entities
         {
             Card = new HashSet<Card>();
             Pool = new HashSet<Pool>();
-            Origin = (int)Origin.Sourced;
-            Resolution = (int)Resolution.None;
+            Origin = Origin.Sourced;
+            Resolution = Resolution.None;
             Shortlisted = false;
         }
 
@@ -53,8 +53,7 @@ namespace Hunter.DataAccess.Entities
         [StringLength(300)]
         public string Linkedin { get; set; }
 
-        [StringLength(300)]
-        public string Salary { get; set; }
+        public double? Salary { get; set; }
 
         public double? YearsOfExperience { get; set; }
 
@@ -65,6 +64,8 @@ namespace Hunter.DataAccess.Entities
         public virtual Resume Resume { get; set; }
 
         public virtual UserProfile UserProfile { get; set; }
+
+        public DateTime AddDate { get; set; }
 
         public Origin Origin { get; set; }
 

@@ -27,9 +27,9 @@
         //})();
 
         vm.candidate;
-        candidateHttpService.getCandidate(getCandidateID($location.path()), function (data) {
-            vm.candidate = data.data;
-            console.log(data.data);
+        candidateHttpService.getCandidate(getCandidateID($location.path())).then(function (response) {
+            vm.candidate = response.data;
+            console.log(response.data);
         });
 
         function getCandidateID(url) {

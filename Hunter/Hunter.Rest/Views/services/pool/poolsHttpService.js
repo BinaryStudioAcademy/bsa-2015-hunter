@@ -20,7 +20,8 @@
                     deferred.resolve(result.data);
                 },
                 errorCallback:function(status) {
-                    console.log("get pools error " + status);
+                    console.log("get pools error ");
+                    console.log(status);
                 }
             });
             return deferred.promise;

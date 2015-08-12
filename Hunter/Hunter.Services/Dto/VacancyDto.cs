@@ -31,12 +31,7 @@ namespace Hunter.Services
 
         public int PoolId { get; set; }
 
-        public int CountCandidates { get; set; }
-
-        public int CountShortListed { get; set; }
-
-        public string AddedByName { get; set; }
-
+        public string StatusName { get; set; }
         //public virtual ICollection<CardDTO> Card { get; set; }
 
         //public virtual PoolDTO Pool { get; set; }

@@ -6,17 +6,16 @@
     angular
         .module('hunter-app')
         .controller('VacancyListController', VacancyListController);
-    angular
-        .module('hunter-app')
-        .controller('OtherController', OtherController);
 
     VacancyListController.$inject = [
         '$scope',
         '$filter',
-        'VacancyHttpService'
+        'VacancyHttpService',
+        'HttpHandler',
+        '$q'
     ];
 
-    function VacancyListController($scope, $filter, VacancyHttpService) {
+    function VacancyListController($scope, $filter, VacancyHttpService, HttpHandler,$q) {
         var vm = this;
 
         var searchText = "";
@@ -56,15 +55,33 @@
         vm.currentPage = 1;
         vm.pageSize = 5;
         vm.vacancies;
+        vm.pools;
+        vm.users;
 
         VacancyHttpService.getVacancies().then(function (result) {
             console.log(result);
             vm.vacancies = result;
         });
 
-    }
+        getFilterInfo('Recruiter').then(function (result) {
+            vm.pools = result.pools;
+            vm.users = result.users;
+        });
 
-    function OtherController() {
-
+        function getFilterInfo(roleName) {
+            var deferred = $q.defer();
+            HttpHandler.sendRequest({
+                url: '/api/vacancy/filterInfo/' + roleName,
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get filter data error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
     }
 })();

@@ -124,7 +124,7 @@ namespace Hunter.Tools.LinkedIn
             }
 
         }
-        private string GetExperience()
+        private TimeSpan GetExperience()
         {
             //get all dates
             IEnumerable<string> allDates;
@@ -134,7 +134,7 @@ namespace Hunter.Tools.LinkedIn
             }
             catch (Exception)
             {
-                return null;
+                return TimeSpan.Zero;
             }
             //get begin and finish work dates
             var firstDatesString = allDates.FirstOrDefault();
@@ -151,7 +151,14 @@ namespace Hunter.Tools.LinkedIn
             }
             else
             {
-                date1 = Convert.ToDateTime(firstDatesString);
+                try
+                {
+                    date1 = Convert.ToDateTime(firstDatesString);
+                }
+                catch (Exception)
+                {
+                    date1 = new DateTime(int.Parse(firstDatesString), 1, 1);
+                }
             }
             lastIndex = lastDatesString.IndexOf("&");
             lastDatesString = lastDatesString.Substring(0, lastIndex);
@@ -165,37 +172,36 @@ namespace Hunter.Tools.LinkedIn
                 date2 = new DateTime(int.Parse(lastDatesString), 1, 1);
             }
 
-            //count period of time
-            var countYear = (date1.Year - date2.Year);
-            var countMonth = (date1.Month - date2.Month + 1);
-            if (countMonth < 0)
-            {
-                countMonth += 12;
-                countYear--;
-            }
+            ////count period of time
+            //var countYear = (date1.Year - date2.Year);
+            //var countMonth = (date1.Month - date2.Month + 1);
+            //if (countMonth < 0)
+            //{
+            //    countMonth += 12;
+            //    countYear--;
+            //}
 
-            //put period in normal format
-            var yearOutput = String.Empty;
-            var monthOutput = String.Empty;
-            if (countYear == 1)
-            {
-                yearOutput = "1 year";
-            }
-            else if (countYear > 1)
-            {
-                yearOutput = String.Format("{0} years", countYear);
-            }
-            if (countMonth == 1)
-            {
-                monthOutput = "1 month";
-            }
-            else if (countMonth > 1)
-            {
-                monthOutput = String.Format("{0} months", countMonth);
-            }
-
-
-            return String.Format("{0} {1}", yearOutput, monthOutput);
+            ////put period in normal format
+            //var yearOutput = String.Empty;
+            //var monthOutput = String.Empty;
+            //if (countYear == 1)
+            //{
+            //    yearOutput = "1 year";
+            //}
+            //else if (countYear > 1)
+            //{
+            //    yearOutput = String.Format("{0} years", countYear);
+            //}
+            //if (countMonth == 1)
+            //{
+            //    monthOutput = "1 month";
+            //}
+            //else if (countMonth > 1)
+            //{
+            //    monthOutput = String.Format("{0} months", countMonth);
+            //}
+            //return String.Format("{0} {1}", yearOutput, monthOutput);
+            return date1 - date2;
         }
 
 
@@ -220,7 +226,7 @@ namespace Hunter.Tools.LinkedIn
                 var obj = Document.DocumentNode.SelectNodes(xPath);
                 var summaryList = String.Empty;
                 Save(obj).ToList().ForEach(x => summaryList += String.Format("{0} ", x));
-                return summaryList.Replace("\n"," ");
+                return summaryList;
                 //return obj.ToList().Select(x => x.InnerText).LastOrDefault();
             }
             catch (Exception)

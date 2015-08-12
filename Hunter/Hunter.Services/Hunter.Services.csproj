@@ -57,6 +57,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\ActivityDto.cs" />
+    <Compile Include="Dto\FilterInfoDto.cs" />
+    <Compile Include="Dto\UserProfileDto.cs" />
     <Compile Include="Dto\UserRoleDto.cs" />
     <Compile Include="Dto\CandidateDtoWithResolutionString.cs" />    <Compile Include="Dto\ApiResults\ApiResult.cs" />
     <Compile Include="Dto\User\EditUserProfileVm.cs" />
@@ -68,6 +70,7 @@
     <Compile Include="Dto\PoolViewModel.cs" />
     <Compile Include="Dto\CandidateDto.cs" />
     <Compile Include="Extensions\CandidateExtensions.cs" />
+    <Compile Include="Extensions\UserProfileExtension.cs" />
     <Compile Include="Extensions\UserRoleExtention.cs" />
     <Compile Include="Extensions\VacancyExtensions.cs" />
     <Compile Include="Services\ActivityService.cs" />
