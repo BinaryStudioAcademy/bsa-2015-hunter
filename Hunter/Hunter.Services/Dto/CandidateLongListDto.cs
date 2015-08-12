@@ -11,7 +11,7 @@ namespace Hunter.Services
         public string Email { get; set; }
         public string Company { get; set; }
         public string Location { get; set; }
-        public string Salary { get; set; }
+        public double? Salary { get; set; }
         public double? YearsOfExperience { get; set; }
         public int Stage { get; set; }
         public string Resolution { get; set; }

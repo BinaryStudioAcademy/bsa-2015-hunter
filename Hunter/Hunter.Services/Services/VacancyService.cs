@@ -3,6 +3,7 @@ using System.Linq;
 using Hunter.DataAccess.Interface;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Interface.Base;
+using System;
 
 namespace Hunter.Services
 {

@@ -3,6 +3,7 @@ using Hunter.DataAccess.Entities;
 using Hunter.DataAccess.Entities.Enums;
 using Hunter.Services.Dto;
 using System;
+using System.Collections.Generic;
 
 namespace Hunter.Services
 {
@@ -75,7 +76,7 @@ namespace Hunter.Services
                 Email = c.Candidate != null ? c.Candidate.Email : "",
                 Company = c.Candidate != null ? c.Candidate.Company : "",
                 Location = c.Candidate != null ? c.Candidate.Location : "",
-                Salary = c.Candidate != null ? c.Candidate.Salary : "",
+                Salary = c.Candidate != null ? c.Candidate.Salary : 0,
                 YearsOfExperience = c.Candidate != null ? c.Candidate.YearsOfExperience : 0,
                 Stage = c.Stage,
                 Resolution = c.Candidate != null ? c.Candidate.Resolution.ToString() : "",
