@@ -13,6 +13,9 @@
 <link href="../../Content/font-awesome.min.css" rel="stylesheet"/>
 <link href="~/Content/pool.css" rel="stylesheet" />
 
+
+<div ng-view></div>
+
 <!-- Start bower components -->
 <script src="~/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="~/bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -35,12 +38,11 @@
 <!-- End helpers -->
 
 <!-- Start Candidates -->
-<script src="~/Views/services/candidate/candidatesHttpService.js"></script>
+@*<script src="~/Views/services/candidate/candidatesHttpService.js"></script>
 <script src="~/Views/candidate/addEdit/candidateAddEditController.js"></script>
 <script src="~/Views/services/candidate/addEdit/candidateAddEditService.js"></script>
 <script src="~/Views/candidate/profile/candidateController.js"></script>
-<script src="~/Views/candidate/list/candidateListController.js"></script>
-<script src="~/Views/filters/candidates/candidatesListFilter.js"></script>
+<script src="~/Views/filters/candidates/candidatesListFilter.js"></script>*@
 <!-- End Candidates -->
 
 <!-- Start Vacancies -->
@@ -92,8 +94,6 @@
 <script src="~/Views/role/list/roleListController.js"></script>
 <script src="~/Views/services/userRole/userRoleHttpService.js"></script>
 <!-- End Roles -->
-
-<div ng-view></div>
 
 <script>
     angular.bootstrap(document, ['hunter-app']);

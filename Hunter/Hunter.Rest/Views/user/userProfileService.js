@@ -14,7 +14,7 @@
             updateUserProfile: updateUserProfile,
             getUserProfile: getUserProfile,
             getUserProfileList: getUserProfileList,
-            addUserProfile: addUserProfile
+            deleteUserProfile: deleteUserProfile
         };
 
         function updateUserProfile(body, onSuccess, id) {
@@ -24,16 +24,20 @@
                 body: body,
                 successCallback: onSuccess
             });
-        }
+        };
 
-        function addUserProfile(body, onSuccess) {
+        function deleteUserProfile(id, successCallback) {
             httpHandler.sendRequest({
-                verb: 'POST',
-                url: 'api/userprofile/',
-                body: body,
-                successCallback: onSuccess
+                verb: 'DELETE',
+                url: 'api/userprofile/' + id,
+                successCallback: successCallback,
+                successMessageToUser: "User with id " + id + "deleted",
+                errorCallback: function (status) {
+                    console.log("Delete vacancy error");
+                    console.log(status);
+                }
             });
-        }
+        };
 
         function getUserProfile(id, onSuccess) {
             httpHandler.sendRequest({
@@ -43,7 +47,7 @@
                 errorMessageToDev: 'GET USERPROFILE INFO ERROR: ',
                 errorMessageToUser: 'Failed'
             });
-        }
+        };
 
         function getUserProfileList(page, successCallback) {
             httpHandler.sendRequest({
@@ -54,7 +58,7 @@
                 errorMessageToDev: 'GET USERPROFILE INFO ERROR: ',
                 errorMessageToUser: 'Failed'
             });
-        }
+        };
 
         return service;
     }

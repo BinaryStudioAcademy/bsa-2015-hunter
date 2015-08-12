@@ -25,14 +25,16 @@
                            ng-model="userAddEditCtrl.entity.position" required />
                     <span ng-show="form.position.$error.required" class="help-block">Required</span>
                 </div>
-                <p class="text-info">
-                    <i>User added at {{userAddEditCtrl.entity.added}}</i>
+                <p class="text-info" ng-hide="userAddEditCtrl.entityId == 0">
+                    <i>Added at {{userAddEditCtrl.entity.added}}</i>
                 </p>
             </div>
         </div>
         <div class="row">
             <div class="col-md-3 text-left">
-                <button type="button" data-ng-click="save()" data-ng-disabled="!form.$valid" class="btn btn-primary">Save</button>
+                <button type="button" data-ng-click="userAddEditCtrl.save()" ng-show="userAddEditCtrl.entityId == 0" data-ng-disabled="!form.$valid" class="btn btn-warning">Add</button>
+                <button type="button" data-ng-click="userAddEditCtrl.save()" ng-hide="userAddEditCtrl.entityId == 0" data-ng-disabled="!form.$valid" class="btn btn-primary">Update</button>
+                <button type="button" data-ng-click="userAddEditCtrl.delete()" data-ng-disabled="!form.$valid" class="btn btn-danger">Delete</button>
             </div>
         </div>
     </div>
