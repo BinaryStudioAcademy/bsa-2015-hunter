@@ -26,7 +26,7 @@ namespace Hunter.Services.Dto.User
                 Login = user.UserLogin,
                 Position = user.Position,
                 Alias = user.Alias,
-                Added = user.Added.ToString("dd-MM-yy HH:mm:ss z"),
+                Added = user.Added.ToString("dd.MM.yy"),
             };
         }
 
