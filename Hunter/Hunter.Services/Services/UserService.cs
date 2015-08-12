@@ -83,16 +83,20 @@ namespace Hunter.Services
             //    .Select(e => _userProfileRepository.All().Where(up => up.UserLogin == e.Login).FirstOrDefault())
             //    .ToUserProfilesDto();
             var users = _userRepository.Query().Where(e => e.UserRole.Name.ToLower() == roleName.ToLower()).ToList();
-            IList<UserProfile> userProfile = new List<UserProfile>();
-            
+            IList<UserProfile> userProfiles = new List<UserProfile>();
+
             foreach (var user in users)
-                userProfile.Add(_userProfileRepository.Query().Where(e => e.UserLogin == user.UserName).FirstOrDefault());            
-            
+            {
+                var userProfile = _userProfileRepository.Query().Where(e => e.UserLogin == user.UserName).FirstOrDefault();
+                if (userProfile != null)
+                    userProfiles.Add(userProfile);
+            }
+                
             var pools = _poolService.GetAllPools();
 
             return new FilterInfoDto() 
             { 
-                Users = userProfile.ToUserProfilesDto(),
+                Users = userProfiles.ToUserProfilesDto(),
                 Pools = pools
             };
         }

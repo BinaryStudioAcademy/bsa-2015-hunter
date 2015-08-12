@@ -60,6 +60,7 @@
     <Compile Include="Entites\Enums\Origin.cs" />
     <Compile Include="Entites\Enums\PoolBackground.cs" />
     <Compile Include="Entites\Enums\Resolution.cs" />
+    <Compile Include="Entites\Enums\Status.cs" />
     <Compile Include="Entites\Feedback.cs" />
     <Compile Include="Entites\IEntity.cs" />
     <Compile Include="Entites\Interview.cs" />

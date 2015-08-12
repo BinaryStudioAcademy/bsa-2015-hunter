@@ -6,9 +6,6 @@
     angular
         .module('hunter-app')
         .controller('VacancyListController', VacancyListController);
-    angular
-        .module('hunter-app')
-        .controller('OtherController', OtherController);
 
     VacancyListController.$inject = [
         '$scope',
@@ -31,7 +28,8 @@
 
         var statuses = {
             0: false,
-            1: false
+            1: false,
+            2: false
         };
 
         var adders = [
@@ -61,7 +59,7 @@
         vm.users;
 
         VacancyHttpService.getVacancies().then(function (result) {
-            //console.log(result);
+            console.log(result);
             vm.vacancies = result;
         });
 
@@ -85,9 +83,5 @@
             });
             return deferred.promise;
         }
-    }
-
-    function OtherController() {
-
     }
 })();
