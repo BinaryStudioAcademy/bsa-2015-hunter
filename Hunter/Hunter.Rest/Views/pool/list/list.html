@@ -6,7 +6,7 @@
             <div><a class="close_back" href="../../#" title="Close"></a></div>
         </div>
         <div class="pool_list">
-            <div><input ng-model="searchPool" class="form-control" ng-model="poolAddEditCtrl.pool.name" title="Pool name" type="text" placeholder="Search..." /></div>
+            <div><input class="form-control" ng-model="poolAddEditCtrl.pool.name" title="Pool name" type="text" placeholder="Search..." /></div>
             <ul class="column_data">
                 <li ng-repeat="pool in poolCtrl.poolsList | filter:searchPool">
                     <p style="background-color: {{pool.color}}">{{pool.name}}</p><a href="../../#/pool/edit/{{pool.id}}" title="Edit"></a>

@@ -52,13 +52,21 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpGet]
-        //[Route("{/longlist/id:int}")]
+        [Route("longlist/{id:int}")]
         [ActionName("Longlist")]
         [ResponseType(typeof(VacancyLongListDto))]
         public HttpResponseMessage GetVacancyLongList(int id)
         {
-            var vacancy = _vacancyService.GetLongList(id);
-            return Request.CreateResponse(HttpStatusCode.OK, vacancy);
+            try
+            {
+                var vacancy = _vacancyService.GetLongList(id);
+
+                return Request.CreateResponse(HttpStatusCode.OK, vacancy);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }    
         }
 
         [HttpPost]

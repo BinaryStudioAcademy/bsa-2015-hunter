@@ -13,9 +13,9 @@ namespace Hunter.Services
         public string Location { get; set; }
         public string Salary { get; set; }
         public double? YearsOfExperience { get; set; }
-        public string Stage { get; set; }
-        public string Status { get; set; }
-        public string AddedByName { get; set; }
+        public int Stage { get; set; }
+        public string Resolution { get; set; }
+        public string UserAddsCard { get; set; }
         public DateTime AddDate { get; set; }
     }
 }

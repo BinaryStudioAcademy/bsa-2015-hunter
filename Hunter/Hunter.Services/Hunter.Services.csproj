@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\ActivityDto.cs" />
+    <Compile Include="Dto\CandidateLongListDetailsDto.cs" />
     <Compile Include="Dto\CandidateLongListDto.cs" />
     <Compile Include="Dto\VacancyLongListDto.cs" />
     <Compile Include="Dto\UserRoleDto.cs" />

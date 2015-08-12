@@ -14,9 +14,7 @@ namespace Hunter.Services
         [Required]
         [StringLength(300)]
         public string Name { get; set; }
-
-        public int PoolId { get; set; }
         public string AddedByName { get; set; }
-        public IEnumerable<CandidateLongListDto> Candidates { get; set; }
+        //public int PoolId { get; set; }
     }
 }

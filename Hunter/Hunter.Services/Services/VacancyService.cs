@@ -14,16 +14,19 @@ namespace Hunter.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IVacancyRepository _vacancyRepository;
         private readonly ICandidateRepository _candidateRepository;
+        //private readonly ICardRepository _cardRepository;
         private readonly ILogger _logger;
 
         public VacancyService(
             IVacancyRepository vacancyRepository,
             ICandidateRepository candidateRepository,
+            //ICardRepository cardRepository,
             ILogger logger,
             IUnitOfWork unitOfWork)
         {
             _vacancyRepository = vacancyRepository;
             _candidateRepository = candidateRepository;
+            //_cardRepository = cardRepository;
             _logger = logger;
             _unitOfWork = unitOfWork;
         }
@@ -66,20 +69,12 @@ namespace Hunter.Services
             {
                 var vacancyLongList = _vacancyRepository.Get(id).ToVacancyLongListDto();
 
-                var candidates = _candidateRepository.All().Where(c => c.Card.Any(card=>card.VacancyId==id));
-
-                //foreach (var catdidate in candidates)
-                //{
-                //    catdidate.
-                //}
-                vacancyLongList.Candidates = candidates.Select(c => c.ToCandidateLongListDto()).ToList();
-
-                foreach (var catdidate in candidates)
-                {
-                    catdidate.Card.Where(c=>c.CandidateId==). .AddDate = candidates. Where(c=>c.Id==catdidate.Id)
-                }
-
                 return vacancyLongList;
+
+                //var candidates = _candidateRepository.All().Where(c => c.Card.Any(card=>card.VacancyId==id));
+
+                
+                
             }
             catch (Exception ex)
             {

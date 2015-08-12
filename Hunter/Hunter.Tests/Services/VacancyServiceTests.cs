@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Entities;
 using Hunter.DataAccess.Interface;
@@ -54,7 +53,7 @@ namespace Hunter.Tests.Services
             var result = _vacancyService.GetLongList(1);
 
             // Assert
-            Assert.True(result.CandidateLongListDto.Count() == 3); 
+            Assert.AreEqual(1, result.Id); 
         }
     }
 }

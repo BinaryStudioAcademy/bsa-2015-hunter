@@ -13,5 +13,7 @@ namespace Hunter.Services.Interfaces
         void Add(CandidateDto candidate);
         void Delete(Candidate candidate);
         void Update(CandidateDto candidate);
+        IEnumerable<CandidateLongListDto> GetLongList(int id);
+        CandidateLongListDetailsDto GetLongListDetails(int id);
     }
 }

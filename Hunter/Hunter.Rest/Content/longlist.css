@@ -16,6 +16,7 @@
     width: 40%;
     height: 100%;
     float: right;
+    background: aliceblue;
 }
 .ll_title {
     float: left;
@@ -48,6 +49,7 @@
 .ll_main {
     float: left;
     width: 100%;
+    padding-top: 15px;
 }
 
 .ll_filter, .ll_list {
@@ -58,8 +60,12 @@
 }
 .ll_list {
     width: 70%;
-    padding: 5px;
-    background-color: bisque;
+    padding: 0 5px;
+}
+.ll_list>p {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
 }
 .ll_filter>h2 {
     width: 100%;
@@ -89,10 +95,38 @@
 }
 .ll_candidate_item {
     margin-bottom: 20px;
+    float: left;
+    width: 100%;
+    border: 1px solid white;
 }
-.ll_candidate_item>img {
-    width: 40px;
-    height: 40px;
-    background-color: red;
-    border-radius: 20px;
+.ll_candidate_item:hover {
+    border: 1px solid black;
+    cursor: pointer;
+}
+.ll_candidate_item .ll_candidate_item_img {
+    position: relative;
+    padding: 5px;
+    max-width: 70px;
+}
+.ll_candidate_item_img img {
+    background-color: aliceblue;
+    border-radius: 30px;
+    border-style:none;
+    width: 60px;
+    height: 60px;
+    border: 0;
+}
+.ll_candidate_item_img>p {
+    position: absolute;
+    background: yellowgreen;
+    width: 25px;
+    height: 20px;
+    top: 0px;
+    right: 0px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 0;
+}
+.candidate_item_salary {
+    max-width: 70px; 
 }

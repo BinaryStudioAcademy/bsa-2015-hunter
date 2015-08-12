@@ -2,7 +2,7 @@
     <div class="ll_container">
         <div class="ll_main_wrap">
             <div class="ll_title">
-                <h1>{{longListCtrl.longList.name}}</h1>
+                <h1>{{longListCtrl.vacancy.name}}</h1>
                 <div class="ll_control_buttons">
                     <a class="btn" href="../../#">Add Candidate</a>
                     <a class="btn" href="../../#">Create New Candidate</a>
@@ -13,7 +13,7 @@
                 <aside class="ll_filter">
                     <h2>Filter</h2>
                     <div class="ll_filter_input">
-                        <input class="form-control" type="text" placeholder="Search..." />
+                        <input ng-model="longListCtrl.candidates.name" class="form-control" type="text" placeholder="Search..." />
                     </div>
                     <div class="ll_filter_items">
                         <div>Shortlist</div>
@@ -23,23 +23,29 @@
                     </div>
                 </aside>
                 <div class="ll_list">
-                    List of Candidates
-                    <div class="ll_candidate_item" ng-repeat="candidate in longListCtrl.longList.candidateLongListDto">
-                        <img src="" alt="" />
-                        <div>{{candidate.firstName}} {{candidate.lastName}}</div>
-                        <div>{{candidate.salary}}</div>
-                        <div>{{candidate.email}}<br />{{candidate.location}}</div>
+                    <p>List of Candidates</p>
+                    <div class="ll_candidate_item" ng-repeat="candidate in longListCtrl.candidates" ng-click="longListCtrl.viewCandidateInfo(candidate.id)">
+                        <div class="ll_candidate_item_img col-md-4">
+                            <img src="" alt="" />
+                            <p>{{candidate.yearsOfExperience}}</p>
+                        </div>
+                        <div class="col-md-4">{{candidate.firstName}} {{candidate.lastName}}<br />{{candidate.addDate}}</div>
+                        <div class="col-md-4 candidate_item_salary">{{candidate.stage}}<br />{{candidate.salary}}</div>
+                        <div class="col-md-4">{{candidate.email}}<br />{{candidate.company}} / {{candidate.location}}</div>
                     </div>
-
-
-                    <!--<li ng-repeat="pool in poolCtrl.poolsList | filter:searchPool">
-                        <p style="background-color: {{pool.color}}">{{pool.name}}</p><a href="../../#/pool/edit/{{pool.id}}" title="Edit"></a>
-                    </li>-->
-
-
                 </div>
             </div>
         </div>
-        <div class="ll_preview">Preview</div>
+        <div class="ll_preview" ng-repeat="candidate in longListCtrl.candidates" ng-show="longListCtrl.tabIsSet(candidate.id)">
+            <h2>Preview</h2>
+            <div>
+                <div class="ll_candidate_detail_img">
+                    <img src="" alt=""/>
+                </div>
+                <div>{{longListCtrl.candidateDetails.firstName}} {{longListCtrl.candidateDetails.lastName}}</div>
+                <div>{{longListCtrl.candidateDetails.salary}}</div>
+                <a href="../../#/candidate/{{longListCtrl.candidateDetails.id}}" title="Full Profile">Full Profile</a>
+            </div>
+        </div>
     </div>
 </div>
