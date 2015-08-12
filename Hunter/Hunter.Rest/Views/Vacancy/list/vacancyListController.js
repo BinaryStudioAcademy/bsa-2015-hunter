@@ -37,26 +37,27 @@
         });
 
         vm.statuses = [{ id: 0, name: 'Active' }, { id: 1, name: 'Closed' }, { id: 2, name: 'Burning' }];
-        vm.adders = ["recruiter@local.com", "Heaven Hayden", "Chantel Sherley"];
+        vm.adders = ["recruiter@local.com", "recruiter2@local.com", "recruiter3@local.com"];
 
         vm.vacancies = [];
 
-        vacancyHttpService.getFilteredVacancies(vm.filterParams).then(function (result) {
-            console.log(result);
-            vm.vacancies = result;
-        });
+        vm.loadDataByParams = function () {
+            vacancyHttpService.getFilteredVacancies(vm.filterParams).then(function (result) {
+                vm.vacancies = result;
+            });
+        }
 
         vm.pushPopItem = function (item, collection) {
-            console.log(item);
-            console.log(collection);
             if (collection == undefined) return;
             var index = collection.indexOf(item);
-            if (index != -1) {
+            if (index == -1) {
                 collection.push(item);
             } else {
                 collection.splice(index, 1);
             }
         }
+
+        vm.loadDataByParams();
     }
 
     function OtherController() {
