@@ -17,9 +17,11 @@
         vm.pageConfig = {};
         vm.id = 0;
         vm.pool = {};
+        vm.poolColors = {};
+        vm.poolUrl = "";
+        vm.addEditFlag = $routeParams.id;
 
-        //edit - put
-        if ($routeParams.id > 0) {
+        if (vm.addEditFlag > 0) {
             vm.pageConfig.deleteButton = true;
             vm.pageConfig.pageTitle = "Edit a pool";
             vm.pageConfig.postPutButtonValue = "Edit Pool";
@@ -104,9 +106,6 @@
             }
             
             vm.currentChild.className = "pool_colors_active";
-
-            //console.log(vm.parent);
-            //console.log($event.currentTarget);
         }
     }
 })();

@@ -44,7 +44,8 @@ namespace Hunter.Services
         { 
             try
             {
-                return _candidateRepository.All().Select(x => x.ToCandidateDto());
+                var data = _candidateRepository.All().Select(x => x.ToCandidateDto());
+                return data;
             }
             catch (Exception ex)
             {
@@ -95,6 +96,7 @@ namespace Hunter.Services
             }
             try
             {
+                candidate.AddDate = DateTime.Now;
                 _candidateRepository.Add(candidate);
                 _unitOfWork.SaveChanges();
             }

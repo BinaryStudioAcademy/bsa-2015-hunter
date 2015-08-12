@@ -2,12 +2,12 @@
     'use strict';
     angular
         .module('hunter-app')
-        .controller('loginController', loginController);
+        .controller('LoginController', LoginController);
 
-    loginController.$inject = ['$scope', '$location', 'AuthService'];
+    LoginController.$inject = ['$scope', '$location', 'AuthService'];
 
 
-    function loginController($scope, $location, AuthService) {
+    function LoginController($scope, $location, AuthService) {
         var vm = this;
         vm.loginData = {
             userName: "",

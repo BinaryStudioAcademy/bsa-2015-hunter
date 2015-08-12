@@ -28,13 +28,17 @@ namespace Hunter.Services.Dto
 
         public string Linkedin { get; set; }
 
-        public string Salary { get; set; }
+        public double? Salary { get; set; }
 
         public double? YearsOfExperience { get; set; }
 
         public int ResumeId { get; set; }
 
         public int? AddedByProfileId { get; set; }
+
+        public string AddedBy { get; set; }
+
+        public DateTime AddDate { get; set; }
 
         public List<Card> Cards { get; set; }
 
