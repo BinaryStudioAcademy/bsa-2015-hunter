@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Hunter.DataAccess.Entities;
 
 namespace Hunter.Services
