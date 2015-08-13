@@ -23,6 +23,7 @@ using Microsoft.Owin.Logging;
 using Ninject.Web.Common;
 using Hunter.Common.Concrete;
 using Hunter.DataAccess.Entities;
+using Hunter.Services.Services.Interfaces;
 
 [assembly: OwinStartup(typeof(Hunter.Rest.Startup))]
 
@@ -69,6 +70,7 @@ namespace Hunter.Rest
             kernel.Bind<IActivityService>().To<ActivityService>();
             kernel.Bind<IVacancyService>().To<VacancyService>();
             kernel.Bind<IUserRoleService>().To<UserRoleService>();
+            kernel.Bind<IUserProfileService>().To<UserProfileService>();
             #endregion
 
             kernel.Bind<Common.Interfaces.ILogger>().To<Logger>();

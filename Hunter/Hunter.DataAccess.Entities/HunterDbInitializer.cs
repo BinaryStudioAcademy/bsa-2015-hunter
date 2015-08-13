@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hunter.DataAccess.Entities
 {
@@ -16,6 +17,7 @@ namespace Hunter.DataAccess.Entities
         {
 
             #region USER ROLES
+
             var recruiterRole = new UserRole() { Name = "Recruiter" };
             var technicalRole = new UserRole() { Name = "Technical Specialist" };
             var adminRole = new UserRole() { Name = "Admin" };
@@ -436,13 +438,14 @@ namespace Hunter.DataAccess.Entities
             #endregion
 
             #region ACTIVITY
-            var activity1 = new Activity() { Message = "Add new user to Pool", Tag = "add user", Time = DateTime.Now, UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
-            var activity2 = new Activity() { Message = "Create new Vacancy Junior PHP Developer", Tag = "create Vacancy", Time = DateTime.Now, UserLogin = "recruiter2", Url = "http://binary-studio.com/" };
-            var activity3 = new Activity() { Message = "Add new Feedback to Hollis Sefton", Tag = "add Feedback", Time = DateTime.Now, UserLogin = "techspec1", Url = "http://binary-studio.com/" };
-            var activity4 = new Activity() { Message = "Add new Feedback to Jennie Charlie", Tag = "add Feedback", Time = DateTime.Now, UserLogin = "techspec@local.com", Url = "http://binary-studio.com/" };
-            var activity5 = new Activity() { Message = "Add new user Lon Abner to Pool", Tag = "add user", Time = DateTime.Now, UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
+            var activity1 = new Activity() { Message = "Add new user to Pool", Tag = "add user", Time = DateTime.Parse("10.08.2015"), UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
+            var activity2 = new Activity() { Message = "Create new Vacancy Junior PHP Developer", Tag = "create Vacancy", Time = DateTime.Parse("11.08.2015"), UserLogin = "recruiter2", Url = "http://binary-studio.com/" };
+            var activity3 = new Activity() { Message = "Add new Feedback to Hollis Sefton", Tag = "add Feedback", Time = DateTime.Parse("12.08.2015"), UserLogin = "techspec1", Url = "http://binary-studio.com/" };
+            var activity4 = new Activity() { Message = "Add new Feedback to Jennie Charlie", Tag = "add Feedback", Time = DateTime.Parse("13.08.2015"), UserLogin = "techspec@local.com", Url = "http://binary-studio.com/" };
+            var activity5 = new Activity() { Message = "Add new user Lon Abner to Pool", Tag = "add user", Time = DateTime.Parse("14.08.2015"), UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
 
-            var activities = new List<Activity> { activity1, activity2, activity3, activity4, activity5 };
+            var activities = new List<Activity> {activity1, activity2, activity3, activity4, activity5};
+
             activities.ForEach(x => context.Activity.Add(x));
             context.SaveChanges();
             #endregion
