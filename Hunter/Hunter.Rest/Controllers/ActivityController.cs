@@ -11,6 +11,7 @@ using Hunter.Services.Services.Interfaces;
 namespace Hunter.Rest.Controllers
 {
     [RoutePrefix("api/activities")]
+    [Authorize]
     public class ActivityController : ApiController
     {
         private readonly IActivityService _activityService;
@@ -45,6 +46,11 @@ namespace Hunter.Rest.Controllers
             try
             {
                 var login = RequestContext.Principal.Identity.Name;
+
+                if (login == null)
+                {
+                    throw new Exception("Access denied");
+                }
 
                 var profile = _userProfileService.GetUserProfile(login);
                 return Ok(_activityService.GetAmountOfActualActivities(profile.LastViewedActivityId));
