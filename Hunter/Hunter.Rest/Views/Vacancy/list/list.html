@@ -6,12 +6,7 @@
             <span class="h2">Vacancies</span>
         </div>
         <div class="col-md-3 col-md-offset-1">
-            <select class="form-control">
-                <option ng-click="vacancyListCtrl.filterParams.sortColumn = 'startDate'; vacancyListCtrl.filterParams.reverseSort = true;">Add Date (new first)</option>
-                <option ng-click="vacancyListCtrl.filterParams.sortColumn = 'startDate'; vacancyListCtrl.filterParams.reverseSort = false;">Add Date (old first)</option>
-                <option ng-click="vacancyListCtrl.filterParams.sortColumn = 'name'; vacancyListCtrl.filterParams.reverseSort = false;">Name (A-Z)</option>
-                <option ng-click="vacancyListCtrl.filterParams.sortColumn = 'name'; vacancyListCtrl.filterParams.reverseSort = true;">Name (Z-A)</option>
-            </select>
+            <select class="form-control" ng-model="vacancyListCtrl.sortAction" ng-options="s.name for s in vacancyListCtrl.sortBy"></select>
         </div>
         <div class="col-md-2 col-md-offset-1">
             <a href="#/vacancy/edit" class="btn">
@@ -81,7 +76,8 @@
                         <td>{{vacancy.countShortListed}}</td>
                         <td>{{vacancy.addedByName}}</td>
                     </tr>
-                </table>
+                </table><br />
+                <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Views/candidate/list/dirPagination.tpl.html"></dir-pagination-controls>
             </div>
             <div class="col-md-2">
                 <select class="form-control">
