@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Hunter.DataAccess.Entities;
@@ -33,7 +35,7 @@ namespace Hunter.Rest.Controllers
         {
             try
             {
-                var data = _candidateService.GetAllInfo().OrderByDescending(c => c.AddDate);
+                var data = _candidateService.GetAllInfo().OrderByDescending(c => c.AddDate).ToList();
                 return Request.CreateResponse(HttpStatusCode.OK, data);
             }
             catch (Exception e)

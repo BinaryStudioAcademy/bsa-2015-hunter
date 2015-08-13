@@ -4,6 +4,7 @@ using Hunter.DataAccess.Entities.Enums;
 using Hunter.Services.Dto;
 using System;
 using System.Collections.Generic;
+using Hunter.Services.Extensions;
 
 namespace Hunter.Services
 {
@@ -29,7 +30,7 @@ namespace Hunter.Services
                 AddedByProfileId = candidate.AddedByProfileId,
                 AddedBy = candidate.AddedByProfileId.HasValue ? candidate.UserProfile.UserLogin : "",
                 AddDate = candidate.AddDate,
-                Cards = candidate.Card.ToList(),
+                Cards = candidate.Card.Select(x => x.ToCardDto()).ToList(),
                 PoolNames = candidate.Pool.Select(x => x.Name).ToList(),
                 Photo = candidate.Photo,
                 Resolution = (int) candidate.Resolution,
