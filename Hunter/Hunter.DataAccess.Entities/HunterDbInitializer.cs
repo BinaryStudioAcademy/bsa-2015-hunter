@@ -10,6 +10,12 @@ namespace Hunter.DataAccess.Entities
     {
         protected override void Seed(HunterDbContext context)
         {
+            SeedClearDb(context);
+        }
+
+        public static void SeedClearDb(HunterDbContext context)
+        {
+
             #region USER ROLES
 
             var recruiterRole = new UserRole() { Name = "Recruiter" };
@@ -546,7 +552,7 @@ namespace Hunter.DataAccess.Entities
                 }
             };
 
-            cards.ForEach(c=>context.Card.Add(c));
+            cards.ForEach(c => context.Card.Add(c));
             context.SaveChanges();
             #endregion
         }

@@ -3,20 +3,37 @@
 }
 .ll_container {
     width: 100%;
-    height: 500px;
+    overflow: hidden;
 }
 
 .ll_main_wrap {
-    width: 60%;
+    width: 65%;
     height: 100%;
     float: left;
+    padding-right: 10px;
+}
+.ll_container h2{
+    width: 100%;
+    float: left;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
 }
 
-.ll_preview {
-    width: 40%;
-    height: 100%;
+.ll_preview{
+    width: 35%;
     float: right;
-    background: aliceblue;
+    border: 1px solid gray;
+    border-radius: 3px;
+    padding: 5px;
+    position: relative;
+}
+.ll_preview h2{
+    padding: 10px 0;
+    font-weight: bold;
+    font-size: 18px;
+    border-bottom: 1px solid gray;
+    margin-bottom: 5px;
 }
 .ll_title {
     float: left;
@@ -60,19 +77,7 @@
 }
 .ll_list {
     width: 70%;
-    padding: 0 5px;
-}
-.ll_list>p {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-.ll_filter>h2 {
-    width: 100%;
-    float: left;
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
+    padding-left: 10px;
 }
 .ll_filter_input {
     width: 100%;
@@ -94,14 +99,23 @@
     margin-bottom: 5px;
 }
 .ll_candidate_item {
-    margin-bottom: 20px;
+    padding: 5px;
     float: left;
     width: 100%;
-    border: 1px solid white;
+    border: 1px solid grey;
+    border-radius: 3px;
+    margin-bottom: 5px;
+}
+.ll_candidate_item p {
+    margin: 0;
+}
+.ll_candidate_item p:first-child {
+    margin: 9px 0;
 }
 .ll_candidate_item:hover {
-    border: 1px solid black;
+    border: 4px solid grey;
     cursor: pointer;
+    padding: 2px;
 }
 .ll_candidate_item .ll_candidate_item_img {
     position: relative;
@@ -116,7 +130,7 @@
     height: 60px;
     border: 0;
 }
-.ll_candidate_item_img>p {
+.ll_candidate_item_img .years_of_experience{
     position: absolute;
     background: yellowgreen;
     width: 25px;
@@ -127,6 +141,93 @@
     border-radius: 5px;
     margin: 0;
 }
+.ll_candidate_item_img .candidate_bookmark {
+    position: absolute;
+    width: 25px;
+    height: 20px;
+    bottom: 0px;
+    right: 0px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 0;
+    font-size: 20px;
+}
 .candidate_item_salary {
     max-width: 70px; 
+}
+.ll_preview_info {
+    width: 100%;
+    float: left;
+}
+.ll_preview_info_img {
+    float: left;
+}
+.ll_preview_info_all {
+    float: left;
+    font-size: 26px;
+    margin-left: 10px;
+    max-width: 250px;
+}
+.ll_preview_info_all p {
+    margin: 0 0 5px;    
+}
+.ll_preview_info_all p:last-child {
+    font-size: 16px;
+}
+.ll_preview_info_all p:first-child {
+    font-weight: bold;
+}
+.ll_preview_info_img img {
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+    background-color: aliceblue;
+}
+.ll_preview_info_control {
+    margin-top: 10px;
+    float: left;
+    width: 100%;
+}
+.ll_preview_info_control .btn {
+    float: left;
+    background-color: rgb(221, 221, 221);
+    color: rgb(51, 51, 51);
+    width: auto;
+    margin-right: 5px;
+    font-size: 12px;
+    height: 28px;
+}
+.ll_close_button {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 14px;
+    top: 7px;
+    font-size: 25px;
+    opacity: .2;
+}
+.ll_close_button:hover {
+    cursor: pointer;
+    opacity: .5;
+}
+.ll_preview_info_comments {
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+    border: 1px solid gray;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.ll_preview_info_comments h3{
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+.ll_preview_info_comments p {
+    border-bottom: 1px solid gray;
+}
+.ll_preview_info_comments p:last-child {
+    border-bottom: none;
+    margin: 0;
 }

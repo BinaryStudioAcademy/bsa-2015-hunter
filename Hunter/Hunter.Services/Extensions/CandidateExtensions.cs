@@ -88,13 +88,19 @@ namespace Hunter.Services
 
         public static CandidateLongListDetailsDto ToCandidateLongListDetailsDto(this Candidate candidate)
         {
-            return new CandidateLongListDetailsDto()
+            var card = candidate.Card.FirstOrDefault(c => c.Id == candidate.Id);
+            
+            return new CandidateLongListDetailsDto
             {
                 Id = candidate.Id,
                 FirstName = candidate.FirstName,
                 LastName = candidate.LastName,
                 Photo = candidate.Photo,
-                Salary = candidate.Salary
+                Salary = candidate.Salary,
+                Resolution = Enum.GetName(typeof (Resolution), candidate.Resolution),
+                Stage = card != null ? Enum.GetName(typeof(Stage), card.Stage) : "-",
+                TestComment = card != null ? (card.Test.FirstOrDefault(t => t.Id == card.Id) != null ? card.Test.FirstOrDefault(t => t.Id == card.Id).Comment : "No test comment") : "No test comment",
+                SpecialNotes = card != null ? (card.SpecialNote.FirstOrDefault(n => n.Id == card.Id) != null ? card.SpecialNote.FirstOrDefault(n => n.Id == card.Id).Text : "No special note") : "No special note"
             };
         }
     }

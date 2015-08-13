@@ -65,7 +65,7 @@
     float: right;
 }
 
-.btn:hover {
+.pool_btn.btn:hover, .btn:hover {
     background-color: #66afe9;
     border: solid 1px #66afe9;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
@@ -74,7 +74,7 @@
 .pool_list {
     margin-top: 15px;
 }
-a.btn {
+.pool_btn.btn {
     width: 130px;
     background-color: rgb(221, 221, 221);
     color: rgb(51, 51, 51);

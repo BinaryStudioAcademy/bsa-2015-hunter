@@ -45,52 +45,15 @@
                 <a class="btn btn-default btn-block" href="#/candidate/edit/{{candidateCtrl.candidate.id}}">Edit Profile</a>
             </div>
         </div>
-        <dic class="candidate-notes row">
-            <div class="note-info-conteiner col-md-8">
-                <div class="note-info-title"><h3>Aplication Results</h3></div>
-                <div>
-                    <table class="notes-table">
-                        <tr class="passed">
-                            <td>PHP</td>
-                            <td>15/04/2016</td>
-                            <td>passed</td>
-                        </tr>
-                        <tr class="passed">
-                            <td>PHP</td>
-                            <td>21/09/2016</td>
-                            <td>passed</td>
-                        </tr>
-                        <tr class="failed">
-                            <td>JS</td>
-                            <td>7/05/2016</td>
-                            <td>failed(test)</td>
-                        </tr>
-                        <tr class="passed">
-                            <td>PHP</td>
-                            <td>12/03/2016</td>
-                            <td>passed</td>
-                        </tr>
-                        <tr class="passed">
-                            <td>PHP</td>
-                            <td>20/07/2016</td>
-                            <td>passed</td>
-                        </tr>
-                        <tr class="failed">
-                            <td>JS</td>
-                            <td>17/05/2016</td>
-                            <td>failed(test)</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+        <div class="note-info-container" ng-include='candidateCtrl.templateToShow'></div>
             <div class="note-info-nav col-md-4">
                 <ul class="nav">
-                    <li class="active">Aplications</li>
+                    <li ng-repeat="subItem in candidateCtrl.subMenuItems" ng-class="{active: subItem.isActive}" ng-click="candidateCtrl.changeTemplate(subItem.name)">{{subItem.name}}</li>
+                    <!--<li class="active" ng>Aplications</li>
                     <li>Spetial Notes</li>
                     <li>Tests</li>
-                    <li>Interviews</li>
+                    <li>Interviews</li>-->
                 </ul>
             </div>
-        </dic>
     </div>
 </div>
