@@ -22,7 +22,7 @@
                 verb: 'POST', //'PUT',
                 url: '/api/userprofile/',
                 body: body,
-                successMessageToUser: 'User profile updated',
+                successMessageToUser: 'User profile updated.',
                 successCallback: onSuccess,
                 errorCallback: function (error) {
                     alertify.error("Save profile error: " + error.data);
@@ -35,7 +35,7 @@
                 verb: 'DELETE',
                 url: 'api/userprofile/' + id,
                 successCallback: successCallback,
-                successMessageToUser: "User with id " + id + "deleted",
+                successMessageToUser: "User with id " + id + " deleted.",
                 errorCallback: function (error) {
                     console.log("Delete vacancy error. Status " + error);
                 }

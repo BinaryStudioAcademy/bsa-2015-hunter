@@ -1,17 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
-using System.Web.Http.Results;
-using Hunter.Common.Concrete;
-using Hunter.Services;
-using System.Collections.Generic;
 using System.Web.Http;
+using Hunter.Common.Concrete;
 using Hunter.Services.Dto.ApiResults;
 using Hunter.Services.Dto.User;
 using Hunter.Services.Interfaces;
 
-namespace Hunter.Rest
+namespace Hunter.Rest.Controllers
 {
+    [RoutePrefix("api/userprofile")]
     public class UserProfileController : ApiController
     {
         private readonly IUserProfileService _profileService;
@@ -21,29 +20,42 @@ namespace Hunter.Rest
             _profileService = profileService;
         }
 
+        // GET: api/userprofile
         // GET: api/userprofile?page=1
-        [System.Web.Mvc.HttpGet]
+        [HttpGet]
+        [Route("")]
         public IEnumerable<UserProfileRowVm> GetPage([FromUri(Name = "page")]int page = 1)
         {
             return _profileService.LoadPage(page);
         }
 
         // GET: api/userprofile/5
-        [System.Web.Mvc.HttpGet]
+        [HttpGet]
+        [Route("{id:int}")]
         public IHttpActionResult Get(int id)
         {
             return FromApiResult(() => _profileService.GetById(id));
         }
 
+        // GET: api/userprofile/page/1
+        [HttpGet]
+        [Route("page/{id:int}")]
+        public IEnumerable<UserProfileRowVm> GetPageV2(int id)
+        {
+            return _profileService.LoadPage(id);
+        }
+
         // POST: api/Pool - add new profile
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
+        [Route("")]
         public IHttpActionResult Post([FromBody] EditUserProfileVm profileVm)
         {
             return FromApiResult(() => _profileService.Save(profileVm));
         }
 
         // DELETE: api/Pool/5
-        [System.Web.Mvc.HttpDelete]
+        [HttpDelete]
+        [Route("{id:int}")]
         public IHttpActionResult Delete(int id)
         {
             return FromApiResult(() => _profileService.Delete(id));
