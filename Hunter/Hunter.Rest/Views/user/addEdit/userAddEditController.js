@@ -30,7 +30,7 @@
         }
 
         vm.save = function () {
-            service.updateUserProfile(vm.entity, function (response) {
+            service.updateUserProfile(vm.entity, function onSuccess(response) {
                 if (vm.entityId == 0) {
                     vm.entity = response.data;
                     vm.entityId = response.data.id;

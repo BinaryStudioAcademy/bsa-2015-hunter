@@ -8,7 +8,7 @@
                     <input type="text" name="Login" class="form-control"
                            id="Login" placeholder="Enter login"
                            ng-model="userAddEditCtrl.entity.login" required />
-                    <span ng-show="form.login.$error.required" class="help-block">Required</span>
+                    <span ng-show="form.Login.$error.required" class="help-block">Required</span>
                 </div>
 
                 <div class="form-group" ng-class="{'has-warning': !form.Alias.$valid}">
@@ -23,7 +23,7 @@
                     <input type="text" name="Position" class="form-control"
                            id="Position" placeholder="Enter position"
                            ng-model="userAddEditCtrl.entity.position" required />
-                    <span ng-show="form.position.$error.required" class="help-block">Required</span>
+                    <span ng-show="form.Position.$error.required" class="help-block">Required</span>
                 </div>
                 <p class="text-info" ng-hide="userAddEditCtrl.entityId == 0">
                     <i>Added at {{userAddEditCtrl.entity.added}}</i>

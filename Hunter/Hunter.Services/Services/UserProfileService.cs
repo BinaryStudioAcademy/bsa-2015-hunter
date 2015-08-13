@@ -57,15 +57,19 @@ namespace Hunter.Services
 
         public ApiResult Save(EditUserProfileVm editedUserProfile)
         {
+            if (string.IsNullOrEmpty(editedUserProfile.Login))
+                return Api.Conflict("Login is required to be a valid e-mail");
+            
             var profile = _profileRepo.Get(editedUserProfile.Id) ?? new UserProfile();
-            if (profile.IsNew())
+            if (!profile.IsNew())
             {
                 var same = _profileRepo.Get(pr => pr.UserLogin == editedUserProfile.Login);
-                if (same != null)
+                if (same != null && same.Id != profile.Id)
                     return Api.Conflict(string.Format("Profile with e-mail {0} already exists", editedUserProfile.Login));
             }
+
             editedUserProfile.Map(profile, _unitOfWork);
-            if (editedUserProfile.Id == 0)
+            if (profile.IsNew())
             {
                 profile.Added = DateTime.UtcNow;
             }

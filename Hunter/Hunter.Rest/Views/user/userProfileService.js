@@ -17,12 +17,16 @@
             deleteUserProfile: deleteUserProfile
         };
 
-        function updateUserProfile(body, onSuccess, id) {
+        function updateUserProfile(body, onSuccess) {
             httpHandler.sendRequest({
                 verb: 'POST', //'PUT',
-                url: '/api/userprofile/' + id,
+                url: '/api/userprofile/',
                 body: body,
-                successCallback: onSuccess
+                successMessageToUser: 'User profile updated',
+                successCallback: onSuccess,
+                errorCallback: function (error) {
+                    alertify.error("Save profile error: " + error.data);
+                }
             });
         };
 
@@ -32,9 +36,8 @@
                 url: 'api/userprofile/' + id,
                 successCallback: successCallback,
                 successMessageToUser: "User with id " + id + "deleted",
-                errorCallback: function (status) {
-                    console.log("Delete vacancy error");
-                    console.log(status);
+                errorCallback: function (error) {
+                    console.log("Delete vacancy error. Status " + error);
                 }
             });
         };

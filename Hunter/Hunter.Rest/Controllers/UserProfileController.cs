@@ -28,7 +28,7 @@ namespace Hunter.Rest
             return _profileService.LoadPage(page);
         }
 
-        // GET: api/Pool/5
+        // GET: api/userprofile/5
         [System.Web.Mvc.HttpGet]
         public IHttpActionResult Get(int id)
         {
