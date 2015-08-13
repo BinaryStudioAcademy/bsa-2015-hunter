@@ -62,8 +62,7 @@
                         <th>Shortlisted</th>
                         <th>Added By</th>
                     </tr>
-
-                    <tr ng-repeat="vacancy in vacancyListCtrl.vacancies">
+                    <tr dir-paginate="vacancy in vacancyListCtrl.vacancies | itemsPerPage: vacancyListCtrl.filterParams.pageSize" total-items="10" current-page="vacancyListCtrl.filterParams.page">
                         <td>
                             <input type="checkbox">
                         </td>
@@ -77,8 +76,11 @@
                         <td>{{vacancy.addedByName}}</td>
                     </tr>
                 </table><br />
-                <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Views/candidate/list/dirPagination.tpl.html"></dir-pagination-controls>
             </div>
+            <div class="text-center">
+                <dir-pagination-controls boundary-links="true" on-page-change="vacancyListCtrl.pageChangeHandler(newPageNumber)" template-url="/Views/vacancy/list/dirPagination.tpl.html"></dir-pagination-controls>
+            </div>
+
             <div class="col-md-2">
                 <select class="form-control">
                     <option>Close</option>
@@ -90,14 +92,5 @@
                 <button type="submit" class="btn btn-primary">Ok</button>
             </div>
         </form>
-    </div>
-    <div class="row">
-        <div class="text-center">
-            <div ng-controller="OtherController" class="other-controller">
-                <div class="text-center">
-                    <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Views/vacancy/list/dirPagination.tpl.html"></dir-pagination-controls>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

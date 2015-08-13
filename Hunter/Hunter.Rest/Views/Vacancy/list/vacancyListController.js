@@ -6,9 +6,6 @@
     angular
         .module('hunter-app')
         .controller('VacancyListController', VacancyListController);
-    angular
-        .module('hunter-app')
-        .controller('OtherController', OtherController);
 
     VacancyListController.$inject = [
         '$scope',
@@ -21,7 +18,7 @@
         var vm = this;
 
         vm.filterParams = {
-            page: 0,
+            page: 1,
             pageSize: 5,
             sortColumn: 'startDate',
             reverceSort: true,
@@ -52,6 +49,11 @@
 
         vm.vacancies = [];
 
+        vm.pageChangeHandler = function (pageIndex) {
+            vm.filterParams.page = pageIndex;
+            vm.loadDataByParams(vm.filterParams);
+        };
+
         vm.loadDataByParams = function () {
             vm.filterParams.sortColumn = vm.sortAction.sortColumn;
             vm.filterParams.reverceSort = vm.sortAction.reverseSort;
@@ -71,9 +73,5 @@
         }
 
         vm.loadDataByParams();
-    }
-
-    function OtherController() {
-
     }
 })();
