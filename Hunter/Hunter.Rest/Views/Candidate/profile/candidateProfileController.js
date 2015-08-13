@@ -7,6 +7,7 @@
 
     CandidateProfileController.$inject = [
         '$location',
+        '$routeParams',
         'AuthService',
         'CandidateHttpService',
         'CandidateAddEditService',
@@ -14,7 +15,7 @@
 
     ];
 
-    function CandidateProfileController($location, authService, candidateHttpService, candidateAddEditService, candidateService) {
+    function CandidateProfileController($location, $routeParams, authService, candidateHttpService, candidateAddEditService, candidateService) {
         var vm = this;
         vm.subMenuItems = [
             {
