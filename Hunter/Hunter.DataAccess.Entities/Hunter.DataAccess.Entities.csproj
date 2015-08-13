@@ -119,6 +119,10 @@
     <Compile Include="Migrations\201508131001202_AddLViewedActivityIdInUserProfile.Designer.cs">
       <DependentUpon>201508131001202_AddLViewedActivityIdInUserProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508131820562_AddEditDateInCandidate.cs" />
+    <Compile Include="Migrations\201508131820562_AddEditDateInCandidate.Designer.cs">
+      <DependentUpon>201508131820562_AddEditDateInCandidate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -155,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508131001202_AddLViewedActivityIdInUserProfile.resx">
       <DependentUpon>201508131001202_AddLViewedActivityIdInUserProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508131820562_AddEditDateInCandidate.resx">
+      <DependentUpon>201508131820562_AddEditDateInCandidate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
