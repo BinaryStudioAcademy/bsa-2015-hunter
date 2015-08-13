@@ -11,6 +11,7 @@ namespace Hunter.DataAccess.Entities
         protected override void Seed(HunterDbContext context)
         {
             #region USER ROLES
+
             var recruiterRole = new UserRole() { Name = "Recruiter" };
             var technicalRole = new UserRole() { Name = "Technical Specialist" };
             var adminRole = new UserRole() { Name = "Admin" };
@@ -22,16 +23,28 @@ namespace Hunter.DataAccess.Entities
 
             #region USERS
             var recruiter1 = new User() { Login = "recruiter@local.com", RoleId = 1, State = 0, PasswordHash = "AL1osj2Akgj8ezBwxcAnj+sn8jQxNU5xJfpkLQl9PKswryRZhwldGQOqFOntmG0zDQ==" };
-            var recruiter2 = new User() { Login = "recruiter2", UserName = "Heaven Hayden", RoleId = 1, State = 0, PasswordHash = "4272d77a88d418148b10545a86f2d094c75e747aedd224294054db7b9bd4b930e03406cd5ef60b5905d5272dd93f318f55a55da7ca087550e783a2dd3829d866" };
-            var recruiter3 = new User() { Login = "recruiter3", UserName = "Chantel Sherley", RoleId = 1, State = 0, PasswordHash = "e27f3ead50aa12b2a50b1ddf7ad619aeb69f37ca22ad50e834962c6f384f2ba5587d451cf1a2d8cdffe1f12ba9479d7bc62b2b85b28e0a6895c20cfba16903f8" };
+            var recruiter2 = new User() { Login = "recruiter2@local.com", RoleId = 1, State = 0, PasswordHash = "4272d77a88d418148b10545a86f2d094c75e747aedd224294054db7b9bd4b930e03406cd5ef60b5905d5272dd93f318f55a55da7ca087550e783a2dd3829d866" };
+            var recruiter3 = new User() { Login = "recruiter3@local.com", RoleId = 1, State = 0, PasswordHash = "e27f3ead50aa12b2a50b1ddf7ad619aeb69f37ca22ad50e834962c6f384f2ba5587d451cf1a2d8cdffe1f12ba9479d7bc62b2b85b28e0a6895c20cfba16903f8" };
             var techspec1 = new User() { Login = "techspec@local.com", RoleId = 2, State = 0, PasswordHash = "AL2W1658IHoHGMrIYZn00YgBhIQ9tN00wAkdLDrHLDtpfQq7bkjfwkxTyshYa5G4tQ==" };
-            var techspec2 = new User() { Login = "techspec1", UserName = "Colin Tobias", RoleId = 2, State = 0, PasswordHash = "7ab8123c7ff047f3e556a5a2b3e2a8502944b54f4f62089635b3850ded96b3f700026af0684ba794bcafec70433ccce5a10368fdb2dcf1ac5658c37b422e6a04" };
-            var techspec3 = new User() { Login = "techspec1", UserName = "Maddox Fulton", RoleId = 2, State = 0, PasswordHash = "fd088e4d0ead7cc5d1c2cfe385c3e9b763aeba92ac77ef2307fbb59604e14a896f706ac9d7f6788c9a99f7ee6175a0f46004eab324a5ef2ec93284276767c7a0" };
+            var techspec2 = new User() { Login = "techspec1@local.com", RoleId = 2, State = 0, PasswordHash = "7ab8123c7ff047f3e556a5a2b3e2a8502944b54f4f62089635b3850ded96b3f700026af0684ba794bcafec70433ccce5a10368fdb2dcf1ac5658c37b422e6a04" };
+            var techspec3 = new User() { Login = "techspec2@local.com", RoleId = 2, State = 0, PasswordHash = "fd088e4d0ead7cc5d1c2cfe385c3e9b763aeba92ac77ef2307fbb59604e14a896f706ac9d7f6788c9a99f7ee6175a0f46004eab324a5ef2ec93284276767c7a0" };
             var admin = new User() { Login = "admin@local.com", RoleId = 3, State = 0, PasswordHash = "AO+POAp4pSwtxgaOu74yRWoYALimtAjpWgsy1746KKw+NkKG+aFUB8UWLS89Jc98VQ==" };
 
             var users = new List<User> { recruiter1, recruiter2, recruiter3, techspec1, techspec2, techspec3, admin };
             users.ForEach(user => context.User.Add(user));
             context.SaveChanges();
+
+            context.UserProfile.AddRange(new List<UserProfile>()
+            {
+             new UserProfile() {Added = DateTime.Now, Position = "Recruter",Alias = "HR",UserLogin = "recruiter@local.com",Status = 1},
+             new UserProfile() {Added = DateTime.Now, Position = "Recruter",Alias = "HR",UserLogin = "recruiter1@local.com",Status = 1},
+             new UserProfile() {Added = DateTime.Now, Position = "Recruter",Alias = "HR",UserLogin = "recruiter2@local.com",Status = 1},
+             new UserProfile() {Added = DateTime.Now, Position = "Techspec",Alias = "TS",UserLogin = "techspec@local.com",Status = 1},
+             new UserProfile() {Added = DateTime.Now, Position = "Techspec",Alias = "TS",UserLogin = "techspec1@local.com",Status = 1},
+             new UserProfile() {Added = DateTime.Now, Position = "Techspec",Alias = "TS",UserLogin = "techspec2@local.com",Status = 1},
+             new UserProfile() {Added = DateTime.Now, Position = "Admin",Alias = "A",UserLogin = "admin@local.com",Status = 1},
+            });
+
             #endregion
 
             #region RESUMES
@@ -43,21 +56,21 @@ namespace Hunter.DataAccess.Entities
             #endregion
 
             #region CANDIDATES
-            var candidate1 = new Candidate() { FirstName = "Hollis", LastName = "Sefton", Email = "sefton@outlook.com", CurrentPosition = "Chief Tactics Planner", Company = "3D Me!", Location = "Winter Park", Skype = "sefton1052", Phone = "202-555-0160", Salary = "64K", YearsOfExperience = 12, ResumeId = 1 };
-            var candidate2 = new Candidate() { FirstName = "Porter", LastName = "Wystan", Email = "pwystan@yahoo.com", CurrentPosition = "Central Configuration Specialist", Company = "Acacia Group", Location = "Athens", Skype = "porter_9", Phone = "202-555-0141", Salary = "110K", YearsOfExperience = 7.8, ResumeId = 1 };
-            var candidate3 = new Candidate() { FirstName = "Gabe", LastName = "Raven", Email = "graven@gmail.com", CurrentPosition = "International Tactics Developer", Company = "AirSync", Location = "West Fargo", Skype = "gabe_raven_001", Phone = "202-555-0167", Salary = "78K", YearsOfExperience = 9, ResumeId = 1 };
-            var candidate4 = new Candidate() { FirstName = "Jack", LastName = "Sylvanus", Email = "jsylv@gmail.com", CurrentPosition = "Senior Brand Orchestrator", Company = "All Apps", Location = "Camp Hill", Skype = "jack_16", Phone = "202-555-0128", Salary = "94K", YearsOfExperience = 1.2, ResumeId = 1 };
-            var candidate5 = new Candidate() { FirstName = "Lindsay", LastName = "Darryl", Email = "lindsay@outlook.com", CurrentPosition = "Lead Mobility Agent", Company = "Bitrex", Location = "Princeton", Skype = "0lindsay0", Phone = "202-555-0196", Salary = "67K", YearsOfExperience = 4, ResumeId = 1 };
-            var candidate6 = new Candidate() { FirstName = "Jennie", LastName = "Charlie", Email = "jennie@gmail.com", CurrentPosition = "Lead Integration Analyst", Company = "Decratex", Location = "Oakland Gardens", Skype = "jen0140", Phone = "202-555-0198", Salary = "99K", YearsOfExperience = 3.10, ResumeId = 1 };
-            var candidate7 = new Candidate() { FirstName = "Gracelyn", LastName = "Moriah", Email = "grace@yahoo.com", CurrentPosition = "Dynamic Quality Assistant", Company = "DigestIT", Location = "Stafford", Skype = "moriah_99", Phone = "613-555-0115", Salary = "82K", YearsOfExperience = 2.1, ResumeId = 1 };
-            var candidate8 = new Candidate() { FirstName = "Elizabeth", LastName = "Rona", Email = "eliz@hotmail.com", CurrentPosition = "Dynamic Identity Supervisor", Company = "eCourt", Location = "Sterling", Skype = "lisy228", Phone = "01632 960277", Salary = "71K", YearsOfExperience = 5, ResumeId = 1 };
-            var candidate9 = new Candidate() { FirstName = "Sunny", LastName = "Fawn", Email = "fawn@gmail.com", CurrentPosition = "Division Assistant", Company = "Micromax", Location = "Windermere", Skype = "fawn322", Phone = "613-555-0104", Salary = "89K", YearsOfExperience = 4.4, ResumeId = 1 };
-            var candidate10 = new Candidate() { FirstName = "Christianne", LastName = "Diantha", Email = "diantha@outlook.com", CurrentPosition = "Senior Optimization Planner", Company = "ExoGame", Location = "Summerville", Skype = "diantha", Phone = "613-555-0160", Salary = "91K", YearsOfExperience = 15, ResumeId = 1 };
-            var candidate11 = new Candidate() { FirstName = "Allie", LastName = "Merideth", Email = "merideth@hotmail.com", CurrentPosition = "Division Architect", Company = "Future Technology", Location = "Canton", Skype = "merideth99", Phone = "01632 960813", Salary = "115K", YearsOfExperience = 0.9, ResumeId = 1 };
-            var candidate12 = new Candidate() { FirstName = "Kennedy", LastName = "Wardell", Email = "wardell@yahoo.com", CurrentPosition = "Product Functionality Consultant", Company = "Highway Cruise Lines", Location = "Pikesville", Skype = "ken1520", Phone = "613-555-0126", Salary = "80K", YearsOfExperience = 1.5, ResumeId = 1 };
-            var candidate13 = new Candidate() { FirstName = "Gloria", LastName = "Delma", Email = "glor@outlook.com", CurrentPosition = "District Creative Director", Company = "Karmalogic", Location = "Bristol", Skype = "gloria33", Phone = "613-555-0115", Salary = "99K", YearsOfExperience = 4, ResumeId = 1 };
-            var candidate14 = new Candidate() { FirstName = "Deanne", LastName = "Imogene", Email = "imogene@hotmail.com", CurrentPosition = "Global Creative Associate", Company = "Microluxe", Location = "Goose Creek", Skype = "deanne17", Phone = "01632 960437", Salary = "117K", YearsOfExperience = 2, ResumeId = 1 };
-            var candidate15 = new Candidate() { FirstName = "Lon", LastName = "Abner", Email = "lonabner@gmail.com", CurrentPosition = "Senior Web Analyst", Company = "KCS Design", Location = "Abingdon", Skype = "lon78", Phone = "613-555-0167", Salary = "102K", YearsOfExperience = 3, ResumeId = 1 };
+            var candidate1 = new Candidate()  { AddDate = new DateTime(2015, 8, 1),AddedByProfileId = 1, FirstName = "Hollis", LastName = "Sefton", Email = "sefton@outlook.com", CurrentPosition = "Chief Tactics Planner", Company = "3D Me!", Location = "Winter Park", Skype = "sefton1052", Phone = "202-555-0160", Salary = 64000, YearsOfExperience = 12, ResumeId = 1 };
+            var candidate2 = new Candidate()  { AddDate = new DateTime(2015, 8, 2),AddedByProfileId = 1, FirstName = "Porter", LastName = "Wystan", Email = "pwystan@yahoo.com", CurrentPosition = "Central Configuration Specialist", Company = "Acacia Group", Location = "Athens", Skype = "porter_9", Phone = "202-555-0141", Salary = 11000, YearsOfExperience = 7.8, ResumeId = 1 };
+            var candidate3 = new Candidate()  { AddDate = new DateTime(2015, 8, 3),AddedByProfileId = 1, FirstName = "Gabe", LastName = "Raven", Email = "graven@gmail.com", CurrentPosition = "International Tactics Developer", Company = "AirSync", Location = "West Fargo", Skype = "gabe_raven_001", Phone = "202-555-0167", Salary = 78000, YearsOfExperience = 9, ResumeId = 1 };
+            var candidate4 = new Candidate()  { AddDate = new DateTime(2015, 8, 4),AddedByProfileId = 2, FirstName = "Jack", LastName = "Sylvanus", Email = "jsylv@gmail.com", CurrentPosition = "Senior Brand Orchestrator", Company = "All Apps", Location = "Camp Hill", Skype = "jack_16", Phone = "202-555-0128", Salary = 94000, YearsOfExperience = 1.2, ResumeId = 1 };
+            var candidate5 = new Candidate()  { AddDate = new DateTime(2015, 8, 5),AddedByProfileId = 3, FirstName = "Lindsay", LastName = "Darryl", Email = "lindsay@outlook.com", CurrentPosition = "Lead Mobility Agent", Company = "Bitrex", Location = "Princeton", Skype = "0lindsay0", Phone = "202-555-0196", Salary = 67000, YearsOfExperience = 4, ResumeId = 1 };
+            var candidate6 = new Candidate()  { AddDate = new DateTime(2015, 8, 5),AddedByProfileId = 2, FirstName = "Jennie", LastName = "Charlie", Email = "jennie@gmail.com", CurrentPosition = "Lead Integration Analyst", Company = "Decratex", Location = "Oakland Gardens", Skype = "jen0140", Phone = "202-555-0198", Salary = 99000, YearsOfExperience = 3.10, ResumeId = 1 };
+            var candidate7 = new Candidate()  { AddDate = new DateTime(2015, 8, 6),AddedByProfileId = 3, FirstName = "Gracelyn", LastName = "Moriah", Email = "grace@yahoo.com", CurrentPosition = "Dynamic Quality Assistant", Company = "DigestIT", Location = "Stafford", Skype = "moriah_99", Phone = "613-555-0115", Salary = 82000, YearsOfExperience = 2.1, ResumeId = 1 };
+            var candidate8 = new Candidate()  { AddDate = new DateTime(2015, 8, 7),AddedByProfileId = 1, FirstName = "Elizabeth", LastName = "Rona", Email = "eliz@hotmail.com", CurrentPosition = "Dynamic Identity Supervisor", Company = "eCourt", Location = "Sterling", Skype = "lisy228", Phone = "01632 960277", Salary = 71000, YearsOfExperience = 5, ResumeId = 1 };
+            var candidate9 = new Candidate()  { AddDate = new DateTime(2015, 8, 8),AddedByProfileId = 3, FirstName = "Sunny", LastName = "Fawn", Email = "fawn@gmail.com", CurrentPosition = "Division Assistant", Company = "Micromax", Location = "Windermere", Skype = "fawn322", Phone = "613-555-0104", Salary = 89000, YearsOfExperience = 4.4, ResumeId = 1 };
+            var candidate10 = new Candidate() { AddDate = new DateTime(2015, 8, 10),AddedByProfileId = 2, FirstName = "Christianne", LastName = "Diantha", Email = "diantha@outlook.com", CurrentPosition = "Senior Optimization Planner", Company = "ExoGame", Location = "Summerville", Skype = "diantha", Phone = "613-555-0160", Salary = 91000, YearsOfExperience = 15, ResumeId = 1 };
+            var candidate11 = new Candidate() { AddDate = new DateTime(2015, 8, 6),AddedByProfileId = 1, FirstName = "Allie", LastName = "Merideth", Email = "merideth@hotmail.com", CurrentPosition = "Division Architect", Company = "Future Technology", Location = "Canton", Skype = "merideth99", Phone = "01632 960813", Salary = 115000, YearsOfExperience = 0.9, ResumeId = 1 };
+            var candidate12 = new Candidate() { AddDate = new DateTime(2015, 8, 15),AddedByProfileId = 2, FirstName = "Kennedy", LastName = "Wardell", Email = "wardell@yahoo.com", CurrentPosition = "Product Functionality Consultant", Company = "Highway Cruise Lines", Location = "Pikesville", Skype = "ken1520", Phone = "613-555-0126", Salary = 80000, YearsOfExperience = 1.5, ResumeId = 1 };
+            var candidate13 = new Candidate() { AddDate = new DateTime(2015, 8, 18),AddedByProfileId = 1, FirstName = "Gloria", LastName = "Delma", Email = "glor@outlook.com", CurrentPosition = "District Creative Director", Company = "Karmalogic", Location = "Bristol", Skype = "gloria33", Phone = "613-555-0115", Salary = 99000, YearsOfExperience = 4, ResumeId = 1 };
+            var candidate14 = new Candidate() { AddDate = new DateTime(2015, 8, 20),AddedByProfileId = 2, FirstName = "Deanne", LastName = "Imogene", Email = "imogene@hotmail.com", CurrentPosition = "Global Creative Associate", Company = "Microluxe", Location = "Goose Creek", Skype = "deanne17", Phone = "01632 960437", Salary = 117000, YearsOfExperience = 2, ResumeId = 1 };
+            var candidate15 = new Candidate() { AddDate = new DateTime(2015, 8, 30), AddedByProfileId = 3, FirstName = "Lon", LastName = "Abner", Email = "lonabner@gmail.com", CurrentPosition = "Senior Web Analyst", Company = "KCS Design", Location = "Abingdon", Skype = "lon78", Phone = "613-555-0167", Salary = 102000, YearsOfExperience = 3, ResumeId = 1 };
 
             var candidates = new List<Candidate>() { candidate1, candidate2, candidate3, candidate4, candidate5, candidate6, candidate7, candidate8, candidate9, candidate10, candidate11, candidate12, candidate13, candidate14, candidate15 };
             candidates.ForEach(candidate => context.Candidate.Add(candidate));
@@ -86,7 +99,8 @@ namespace Hunter.DataAccess.Entities
                 Name = "PHP Developer",
                 Status = 0,
                 UserId = 1,
-                StartDate = new DateTime(2015, 8, 2),
+                StartDate = new DateTime(2015, 8, 1),
+                EndDate = new DateTime(2015, 10, 5),
                 Pool = phpPool,
                 Description = @"Company Description:
                                 Brandastic is a fast expanding design company in Orange County, California specializing in custom web platforms, online marketing, and more.
@@ -128,6 +142,7 @@ namespace Hunter.DataAccess.Entities
                 Status = 0,
                 UserId = 2,
                 StartDate = new DateTime(2015, 8, 2),
+                EndDate = new DateTime(2015, 10, 5),
                 Pool = phpPool,
                 Description = @"Company Description:
                                For two decades Guidance Solutions has stood at the forefront of eCommerce innovation. We are based in beautiful Marina del Rey, CA just steps from the beach where we develop customized eCommerce strategy for our clients. Using social commerce and the best of Web 2.0 we offer clients a range of services from Information Architecture, User Experience, and Web Design to Development, Hosting, eMarketing and Mobile App Development.
@@ -144,6 +159,7 @@ namespace Hunter.DataAccess.Entities
                 Status = 0,
                 UserId = 3,
                 StartDate = new DateTime(2015, 8, 3),
+                EndDate = new DateTime(2015, 10, 5),
                 Pool = phpPool,
                 Description = @"Company Description:
                                 A Santa Monica-based pre-IPO tech company; CallFire is a voice and text platform, with technologies that fit with today mobile lifestyle. We work with major brands, including Public Storage, Dominoes Pizza, AllState, Pepsi and many others. We are a tight knit group of professionals who are passionate about our mission.
@@ -177,7 +193,7 @@ namespace Hunter.DataAccess.Entities
                 Name = "Inventive JavaScript / Node.js Leader",
                 Status = 0,
                 UserId = 1,
-                StartDate = new DateTime(2015, 8, 2),
+                StartDate = new DateTime(2015, 8, 4),
                 Pool = jsPool,
                 Description = @"About You:
                                 You're pretty much a master with Node.js (it's a long-term relationship but it still feels like you met yesterday).
@@ -210,7 +226,7 @@ namespace Hunter.DataAccess.Entities
                 Name = "Software engineer (JavaScript, AngularJS)",
                 Status = 0,
                 UserId = 2,
-                StartDate = new DateTime(2015, 8, 2),
+                StartDate = new DateTime(2015, 8, 5),
                 Pool = jsPool,
                 Description = @"We are looking for the best and brightest minds in Web Development. Someone who is truly passionate about creating beautiful innovative next generation UIs using bleeding edge technologies.
                                 
@@ -243,7 +259,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = "Senior JavaScript Developer",
                 Status = 0,
-                StartDate = new DateTime(2015, 8, 3),
+                StartDate = new DateTime(2015, 8, 6),
                 Pool = jsPool,
                 UserId = 3,
                 Description = @"Job Description
@@ -289,7 +305,7 @@ namespace Hunter.DataAccess.Entities
                 Name = "Web Developer (Javascript/C#/.NET)",
                 Status = 0,
                 UserId = 1,
-                StartDate = new DateTime(2015, 8, 2),
+                StartDate = new DateTime(2015, 8, 7),
                 Pool = netPool,
                 Description = @"Job Description
 
@@ -338,7 +354,7 @@ namespace Hunter.DataAccess.Entities
                 Name = ".Net Developer",
                 Status = 0,
                 UserId = 2,
-                StartDate = new DateTime(2015, 8, 2),
+                StartDate = new DateTime(2015, 8, 8),
                 Pool = netPool,
                 Description = @"Job Description
 
@@ -433,39 +449,6 @@ namespace Hunter.DataAccess.Entities
             context.SaveChanges();
             #endregion
 
-            #region USERPROFILE
-            var userprofile1 = new UserProfile
-            {
-                Added = DateTime.Now,
-                Alias = "R",
-                Position = "HR",
-                Status = 0,
-                LastViewedActivityId = 0,
-                UserLogin = "recruiter@local.com"
-            };
-            var userprofile2 = new UserProfile
-            {
-                Added = DateTime.Now,
-                Alias = "A",
-                UserLogin = "admin@local.com",
-                Position = "HR",
-                Status = 0,
-                LastViewedActivityId = 0
-            };
-            var userprofile3 = new UserProfile
-            {
-                Added = DateTime.Now,
-                Alias = "T",
-                UserLogin = "techspec@local.com",
-                Position = "SE",
-                Status = 0,
-                LastViewedActivityId = 0
-            };
-
-            var userProfiles = new List<UserProfile> {userprofile1, userprofile2, userprofile3};
-            userProfiles.ForEach(x => context.UserProfile.Add(x));
-            context.SaveChanges();
-            #endregion
         }
 
         private static byte[] ToByteArray(string sqlVarBinary)

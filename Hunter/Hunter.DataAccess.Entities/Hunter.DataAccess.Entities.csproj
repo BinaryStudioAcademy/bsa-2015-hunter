@@ -60,6 +60,7 @@
     <Compile Include="Entites\Enums\Origin.cs" />
     <Compile Include="Entites\Enums\PoolBackground.cs" />
     <Compile Include="Entites\Enums\Resolution.cs" />
+    <Compile Include="Entites\Enums\Status.cs" />
     <Compile Include="Entites\Feedback.cs" />
     <Compile Include="Entites\IEntity.cs" />
     <Compile Include="Entites\Interview.cs" />
@@ -105,9 +106,17 @@
     <Compile Include="Migrations\201508091015329_AddPoolBackgroundColorFieldToPoolTable.Designer.cs">
       <DependentUpon>201508091015329_AddPoolBackgroundColorFieldToPoolTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201508111858022_Add_LastViewdActivityId_To_UserProfile.cs" />
-    <Compile Include="Migrations\201508111858022_Add_LastViewdActivityId_To_UserProfile.Designer.cs">
-      <DependentUpon>201508111858022_Add_LastViewdActivityId_To_UserProfile.cs</DependentUpon>
+    <Compile Include="Migrations\201508110630196_candidate_addDate.cs" />
+    <Compile Include="Migrations\201508110630196_candidate_addDate.Designer.cs">
+      <DependentUpon>201508110630196_candidate_addDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508111310206_ChangeCandidateSalaryDataType.cs" />
+    <Compile Include="Migrations\201508111310206_ChangeCandidateSalaryDataType.Designer.cs">
+      <DependentUpon>201508111310206_ChangeCandidateSalaryDataType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508131001202_AddLViewedActivityIdInUserProfile.cs" />
+    <Compile Include="Migrations\201508131001202_AddLViewedActivityIdInUserProfile.Designer.cs">
+      <DependentUpon>201508131001202_AddLViewedActivityIdInUserProfile.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -137,8 +146,14 @@
     <EmbeddedResource Include="Migrations\201508091015329_AddPoolBackgroundColorFieldToPoolTable.resx">
       <DependentUpon>201508091015329_AddPoolBackgroundColorFieldToPoolTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508111858022_Add_LastViewdActivityId_To_UserProfile.resx">
-      <DependentUpon>201508111858022_Add_LastViewdActivityId_To_UserProfile.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201508110630196_candidate_addDate.resx">
+      <DependentUpon>201508110630196_candidate_addDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508111310206_ChangeCandidateSalaryDataType.resx">
+      <DependentUpon>201508111310206_ChangeCandidateSalaryDataType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508131001202_AddLViewedActivityIdInUserProfile.resx">
+      <DependentUpon>201508131001202_AddLViewedActivityIdInUserProfile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

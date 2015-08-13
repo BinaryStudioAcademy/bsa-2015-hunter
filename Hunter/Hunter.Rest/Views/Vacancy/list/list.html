@@ -11,6 +11,11 @@
                 Add new
             </a>
         </div>
+        <div class="col-md-2 col-md-offset-5">
+            <a href="#" class="btn">
+                Go to Archive
+            </a>
+        </div>
     </div>
 
     <div class="row">
@@ -19,41 +24,15 @@
                 <div class="form-group">
                     <label for="searchFilter">Filter</label>
                     <input type="text" class="form-control" id="searchFilter" placeholder="Search"
-                           ng-model="VacancyListCtrl.filterOptions.searchText"
-                           >
+                           ng-model="VacancyListCtrl.filterOptions.searchText">
                 </div>
                 <h4>Pool</h4>
                 <ul>
-                    <li>
+                    <li ng-repeat="pool in VacancyListCtrl.pools">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" 
-                                       ng-model="VacancyListCtrl.filterOptions.poolFilters[1]"> JS
-                            </label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" 
-                                       ng-model="VacancyListCtrl.filterOptions.poolFilters[2]"> .NET
-                            </label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" 
-                                       ng-model="VacancyListCtrl.filterOptions.poolFilters[3]"> PHP
-                            </label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" 
-                                       ng-model="VacancyListCtrl.filterOptions.poolFilters[4]"> QA
-                            </label>
+                                <input type="checkbox"> {{pool.name}}
+                            </label>        
                         </div>
                     </li>
                 </ul>
@@ -64,7 +43,7 @@
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" 
-                                   ng-model="VacancyListCtrl.filterOptions.statusFilters[0]"> Active
+                                   ng-model="VacancyListCtrl.filterOptions.statusFilters[0]"> Opened
                             </label>
                         </div>
                     </li>
@@ -79,8 +58,8 @@
                     <li>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" 
-                                   ng-model="VacancyListCtrl.filterOptions.statusFilters[2]"> Burning
+                                <input type="checkbox"
+                                       ng-model="VacancyListCtrl.filterOptions.statusFilters[2]"> Burning
                             </label>
                         </div>
                     </li>
@@ -88,92 +67,58 @@
                 <hr />
                 <h4>Added by</h4>
                 <ul>
-                    <li>
+                    <!--<li>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" 
+                                <input type="checkbox"
                                        ng-model="VacancyListCtrl.filterOptions.adderFilters[0].isChecked"> Ulyana
                             </label>
                         </div>
-                    </li>
-                    <li>
+                    </li> -->
+                    <li ng-repeat="user in VacancyListCtrl.users">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" 
-                                       ng-model="VacancyListCtrl.filterOptions.adderFilters[1].isChecked"> Kate
-                            </label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" 
-                                       ng-model="VacancyListCtrl.filterOptions.adderFilters[2].isChecked"> Ira
+                                <input type="checkbox"> {{user.login}}
                             </label>
                         </div>
                     </li>
                 </ul>
             </div>
             <div class="col-md-9">
-                <table class="table table-striped table-hover table-responsive">
-                    <tr>
-                        <th>checkbox  </th>
-                        <th>Title</th>
-                        <th>Start date</th>
-                        <th>End date</th>
-                        <th>Candidates</th>
-                        <th>Shortlisted</th>
-                        <th>Added By</th>
+                <table class="table table-striped table-hover table-responsive vacancy-list">
+                    <tr ng-repeat="vacancy in VacancyListCtrl.vacancies">
+                        <td>
+                            <div>{{vacancy.name}} &ndash; {{vacancy.statusName}}</div>
+                            <div>
+                                {{ vacancy.startDate == null ? 'no date' : vacancy.startDate | date:'dd-MM-yyyy' }} /
+                                {{ vacancy.endDate == null ? 'no date' : vacancy.endDate | date:'dd-MM-yyyy'}}
+                            </div>
+                            <div class="col-md-5">
+                                <a class="btn btn-default " href="#">Edit</a>
+                                <a class="btn btn-default " href="#">View</a>
+                            </div>
+                            
+
+                            <div class="col-md-1 col-lg-offset-4">
+                                <a class="btn btn-default " href="#">Archive</a>
+                            </div>
+                        </td>
                     </tr>
-                    <!--<tr ng-repeat="vacancy in VacancyListCtrl.vacancies">
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                        <td>
-                            <a href="#">{{vacancy.name}}</a>
-                        </td>
-                        <td>{{vacancy.startDate | date:'dd-MM-yyyy'}}</td>
-                        <td>{{vacancy.endDate | date:'dd-MM-yyyy'}}</td>
-                        <td>{{vacancy.countCandidates}}</td>
-                        <td>{{vacancy.countShortListed}}</td>
-                        <td>{{vacancy.addedByName}}</td>
-                    </tr> -->
- 
-                    <tr dir-paginate="vacancy in VacancyListCtrl.vacancies | VacanciesFilter:VacancyListCtrl.filterOptions | itemsPerPage: VacancyListCtrl.pageSize" current-page="VacancyListCtrl.currentPage">
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                        <td>
-                            <a href="#/vacancy/edit/{{vacancy.id}}">{{vacancy.name}}</a>
-                        </td>
-                        <td>{{vacancy.startDate | date:'dd-MM-yyyy'}}</td>
-                        <td>{{vacancy.endDate | date:'dd-MM-yyyy'}}</td>
-                        <td>{{vacancy.countCandidates}}</td>
-                        <td>{{vacancy.countShortListed}}</td>
-                        <td>{{vacancy.addedByName}}</td>
-                    </tr>
-                    
                 </table>
-            </div>
-            <div class="col-md-2">
-                <select class="form-control">
-                    <option>Close</option>
-                    <option>Edit</option>
-                    <option>Delete</option>
-                </select>
-            </div>
-            <div class="col-md-1">
-                <button type="submit" class="btn btn-primary">Ok</button>
+                <div>
+                    <div class="col-md-3">
+                        <select class="form-control">
+                            <option>Close</option>
+                            <option>Edit</option>
+                            <option>Delete</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="submit" class="btn btn-primary">Ok</button>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
-    <div class="row">
-        <div class="text-center">
-            <div ng-controller="OtherController" class="other-controller">
-                <div class="text-center">
-                    <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Views/vacancy/list/dirPagination.tpl.html"></dir-pagination-controls>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 </div>

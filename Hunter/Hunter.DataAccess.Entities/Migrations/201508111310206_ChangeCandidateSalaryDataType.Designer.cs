@@ -7,13 +7,13 @@ namespace Hunter.DataAccess.Entities.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Add_LastViewdActivityId_To_UserProfile : IMigrationMetadata
+    public sealed partial class ChangeCandidateSalaryDataType : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Add_LastViewdActivityId_To_UserProfile));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangeCandidateSalaryDataType));
         
         string IMigrationMetadata.Id
         {
-            get { return "201508111858022_Add_LastViewdActivityId_To_UserProfile"; }
+            get { return "201508111310206_ChangeCandidateSalaryDataType"; }
         }
         
         string IMigrationMetadata.Source

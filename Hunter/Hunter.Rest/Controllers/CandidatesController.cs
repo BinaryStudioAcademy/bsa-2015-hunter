@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Hunter.DataAccess.Entities;
+using System.Web.Http.Description;
 using Hunter.Services.Dto;
 using Hunter.Services.Interfaces;
 
@@ -24,11 +26,12 @@ namespace Hunter.Rest.Controllers
 
         [HttpGet]
         [Route("")]
+        [ResponseType(typeof(IEnumerable<CandidateDto>))]
         public HttpResponseMessage Get()
         {
             try
             {
-                var data = _candidateService.GetAllInfo();
+                var data = _candidateService.GetAllInfo().OrderByDescending(c => c.AddDate);
                 return Request.CreateResponse(HttpStatusCode.OK, data);
             }
             catch (Exception e)
@@ -40,6 +43,7 @@ namespace Hunter.Rest.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
+        [ResponseType(typeof(CandidateDto))]
         public HttpResponseMessage Get(int id)
         {
             try
