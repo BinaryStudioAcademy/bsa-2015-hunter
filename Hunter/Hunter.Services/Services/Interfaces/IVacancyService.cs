@@ -14,5 +14,6 @@ namespace Hunter.Services
         void Add(VacancyDto entity);
         void Update(VacancyDto entity);
         void Delete(int id);
+        VacancyLongListDto GetLongList(int id);
     }
 }

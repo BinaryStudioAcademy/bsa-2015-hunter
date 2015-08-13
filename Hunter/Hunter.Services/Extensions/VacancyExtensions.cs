@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Entities.Enums;
+
 
 namespace Hunter.Services
 {
@@ -16,9 +18,7 @@ namespace Hunter.Services
                 EndDate = vacancy.EndDate,
                 Description = vacancy.Description,
                 PoolId = vacancy.PoolId,
-                CountCandidates = vacancy.Card.Count(),
-                CountShortListed = vacancy.Card.Where(e=>e.Candidate.Shortlisted == true).Count(),
-                AddedByName = vacancy.User != null ? vacancy.User.Login : "noname"
+                StatusName = ((Status)vacancy.Status).ToString()
             };
             return v;
         }
@@ -37,6 +37,18 @@ namespace Hunter.Services
             };
             return v;
         }
-    }
 
+        public static VacancyLongListDto ToVacancyLongListDto(this Vacancy vacancy)
+        {
+            var vll = new VacancyLongListDto()
+            {
+               
+                Id = vacancy.Id,
+                Name = vacancy.Name,
+                AddedByName = vacancy.User != null ? vacancy.User.Login : "",
+                //PoolId = vacancy.PoolId
+            };
+            return vll;
+        }
+    }
 }

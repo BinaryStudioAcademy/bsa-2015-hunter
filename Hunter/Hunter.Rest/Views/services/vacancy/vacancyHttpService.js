@@ -18,7 +18,8 @@
             addVacancy: addVacancy,
             validateVacancy: validateVacancy,
             updateVacancy: updateVacancy,
-            deleteVacancy: deleteVacancy
+            deleteVacancy: deleteVacancy,
+            getLongList: getLongList
         }
 
         function getVacancies(){
@@ -126,6 +127,23 @@
             //}
             //return noErrors;
             return true;
+        }
+
+        function getLongList(id)
+        {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/vacancy/longlist/' + id,
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get vacancy long list error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
         }
 
         return service;

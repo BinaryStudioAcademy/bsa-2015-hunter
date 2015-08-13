@@ -8,7 +8,7 @@ namespace Hunter.DataAccess.Entities
             //: base("Hunter")
             : base("name=HunterDb")
         {
-            Database.SetInitializer(new HunterDbInitializer());
+            //Database.SetInitializer(new HunterDbInitializer());
         }
 
         public virtual DbSet<Activity> Activity { get; set; }

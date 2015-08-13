@@ -1,4 +1,5 @@
 using Hunter.DataAccess.Entities;
+using Hunter.Services.Dto;
 using System.Collections.Generic;
 
 namespace Hunter.Services
@@ -12,5 +13,6 @@ namespace Hunter.Services
         void AddToRole(User user, string roleName);
         void DeleteUser(User user);
         void UpdateUser(User user);
+        FilterInfoDto GetFilterInfo(string roleName);
     }
 }

@@ -15,14 +15,16 @@ namespace Hunter.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICandidateRepository _candidateRepository;
+        private readonly ICardRepository _cardRepository;
         private readonly ILogger _logger ;
         private readonly IPoolRepository _poolRepository;
 
-        public CandidateService(IUnitOfWork unitOfWork, ICandidateRepository candidateRepository,
+        public CandidateService(IUnitOfWork unitOfWork, ICandidateRepository candidateRepository, ICardRepository cardRepository,
             IPoolRepository poolRepository, ILogger logger)
         {
             _unitOfWork = unitOfWork;
             _candidateRepository = candidateRepository;
+            _cardRepository = cardRepository;
             _logger = logger;
             _poolRepository = poolRepository;
         }
@@ -84,6 +86,34 @@ namespace Hunter.Services
                 return null;
             }
 
+        }
+
+        public IEnumerable<CandidateLongListDto> GetLongList(int id)
+        {
+            try
+            {
+                var cardsLongList = _cardRepository.All().Where(card => card.VacancyId == id).ToCandidateLongListDto();
+                return cardsLongList;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return new List<CandidateLongListDto>();
+            }
+        }
+
+        public CandidateLongListDetailsDto GetLongListDetails(int id)
+        {
+            try
+            {
+                var candidate = _candidateRepository.Get(id).ToCandidateLongListDetailsDto();
+                return candidate;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return null;
+            }
         }
 
         public void Add(CandidateDto dto)

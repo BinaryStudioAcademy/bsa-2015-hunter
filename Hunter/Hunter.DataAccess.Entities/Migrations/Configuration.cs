@@ -6,12 +6,13 @@ namespace Hunter.DataAccess.Entities.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "Hunter.DataAccess.Db.HunterDbContext";
         }
 
         protected override void Seed(Hunter.DataAccess.Entities.HunterDbContext context)
         {
+            HunterDbInitializer.SeedClearDb(context);
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

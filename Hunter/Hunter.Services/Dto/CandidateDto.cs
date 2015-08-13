@@ -40,7 +40,7 @@ namespace Hunter.Services.Dto
 
         public DateTime AddDate { get; set; }
 
-        public List<Card> Cards { get; set; }
+        public List<CardDto> Cards { get; set; }
 
         public List<string> PoolNames { get; set; }
 

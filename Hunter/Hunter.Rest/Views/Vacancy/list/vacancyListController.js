@@ -38,7 +38,7 @@
             { id: 1, name: 'Closed' },
             { id: 2, name: 'Burning' }
         ];
-        vm.adders = ["recruiter@local.com", "recruiter2@local.com", "recruiter3@local.com"];
+        //vm.adders = ["recruiter@local.com", "recruiter2@local.com", "recruiter3@local.com"];
         vm.sortBy = [
             { name: "Add Date (new first)", reverseSort: true, sortColumn: "startDate" },
             { name: "Add Date (old first)", reverseSort: false, sortColumn: "startDate" },
@@ -73,5 +73,26 @@
         }
 
         vm.loadDataByParams();
+
+        getFilterInfo('Recruiter').then(function (result) {
+            vm.pools = result.pools;
+            vm.adders = result.users;
+        });
+
+        function getFilterInfo(roleName) {
+            var deferred = $q.defer();
+            HttpHandler.sendRequest({
+                url: '/api/vacancy/filterInfo/' + roleName,
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get filter data error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
     }
 })();

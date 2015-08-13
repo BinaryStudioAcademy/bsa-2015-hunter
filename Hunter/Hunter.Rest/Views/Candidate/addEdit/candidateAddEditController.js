@@ -44,7 +44,7 @@
 
         (function () {
             // This is function for initialization actions, for example checking auth
-            if (true) { // todo : add checking auth
+            if (true) {
                 poolsHttpService.getAllPools().then(function(data) {
                     vm.pools = data;
                     initializeFields();
