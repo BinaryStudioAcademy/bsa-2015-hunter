@@ -9,5 +9,7 @@ namespace Hunter.Services
         void AddActivity(ActivityDto entitiy);
         void UpdateActivity(ActivityDto entity);
         void DeleteActivityById(int id);
+
+        int GetAmountOfActualActivities(int lastViewdId);
     }
 }

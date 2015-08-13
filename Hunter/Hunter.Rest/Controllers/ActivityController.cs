@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Hunter.DataAccess.Db;
 using Hunter.Services;
+using Hunter.Services.Services.Interfaces;
 
 namespace Hunter.Rest.Controllers
 {
@@ -13,10 +14,12 @@ namespace Hunter.Rest.Controllers
     public class ActivityController : ApiController
     {
         private readonly IActivityService _activityService;
+        private readonly IUserProfileService _userProfileService;
 
-        public ActivityController(IActivityService activityService)
+        public ActivityController(IActivityService activityService, IUserProfileService userProfileService)
         {
             _activityService = activityService;
+            _userProfileService = userProfileService;
         }
 
        
@@ -32,6 +35,44 @@ namespace Hunter.Rest.Controllers
             catch (Exception ex)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("amount")]
+        public IHttpActionResult GetActivitiesAmount()
+        {
+            try
+            {
+                var login = RequestContext.Principal.Identity.Name;
+
+                var profile = _userProfileService.GetUserProfile(login);
+                return Ok(_activityService.GetAmountOfActualActivities(profile.LastViewedActivityId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("save/lastid")]
+        public IHttpActionResult SaveLastViewdActivityId([FromBody] int lastActivityId)
+        {
+            try
+            {
+                string login = RequestContext.Principal.Identity.Name;
+
+                var userProfile = _userProfileService.GetUserProfile(login);
+                userProfile.LastViewedActivityId = lastActivityId;
+
+                _userProfileService.UpdateUserProfile(userProfile);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
 

@@ -1,0 +1,7 @@
+﻿<div class="card-wrapper">
+    <div id="card-static"></div>
+    <div ng-repeat="tab in generalCardCtrl.tabs track by $index">
+        <div class="btn btn-default" ng-click="generalCardCtrl.changeTemplate(tab)">{{ tab }}</div>
+    </div>
+    <div id="card-dynamic" ng-include="generalCardCtrl.templateToShow"></div>
+</div>
