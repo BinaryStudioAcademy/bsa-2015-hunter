@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Web;
 using System.Web.Http;
 using Hunter.Services.Dto;
 using Hunter.Services.Interfaces;
+using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 
 namespace Hunter.Rest.Controllers
@@ -33,11 +36,9 @@ namespace Hunter.Rest.Controllers
 
         // POST api/<controller>
         [HttpPost]
-        public void Post()
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        public void Post(FileDto data)
         {
-//            HttpPostedFile httpPostedFile = HttpContext.Current.Request.Files["file"];
-            var data = JsonConvert.DeserializeObject<FileDto>(HttpContext.Current.Request.Form["data"]) ;
-            data.File = HttpContext.Current.Request.Files["file"];
             _fileService.Add(data);
         }
 

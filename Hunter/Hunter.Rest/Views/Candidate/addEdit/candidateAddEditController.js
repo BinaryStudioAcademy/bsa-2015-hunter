@@ -66,7 +66,7 @@
             if (candidate && candidate.Id!=null) {
                 if (candidateAddEditService.validateData(candidate, vm.errorObject)) {
                     candidateHttpService.updateCandidate(candidate, successAddEditCandidate, candidate.Id);
-                    
+                    fileUploadService.uploadResume(candidate);
                 } else {
                     //alertify.error('Some Fields Are Incorrect');
                     alert('Some Fields Are Incorrect : ' + vm.errorObject.message);
@@ -74,12 +74,13 @@
             } else if (candidate) {
                 if (candidateAddEditService.validateData(candidate, vm.errorObject)) {
                     candidateHttpService.addCandidate(candidate, successAddEditCandidate);
+                    fileUploadService.uploadWithLatenc(candidate);
                 } else {
                     //alertify.error('Some Fields Are Incorrect');
                     alert('Some Fields Are Incorrect : ' + vm.errorObject.message);
                 }
-            }
-            fileUploadService.uploadResume(candidate);
+            }          
+           
             vm.errorObject.message = '';
         }
 

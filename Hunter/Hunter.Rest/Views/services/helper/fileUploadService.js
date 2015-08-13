@@ -11,7 +11,8 @@
     function FileUploadService(upload) {
         var service = {
             onFileSelect: onFileSelect,
-            uploadResume: uploadResume
+            uploadResume: uploadResume,
+            uploadWithLatenc: uploadWithLatenc
         };
 
         var _file;
@@ -28,14 +29,23 @@
                     data: {
                         directory: "resume//",
                         id: candidate.Id,
-                        email: candidate.Email
+                        email: candidate.Email,
+                        FirstName: candidate.FirstName,
+                        LastName: candidate.LastName
+
             },
                     file: _file
                 })
                 .success(function (data){console.log(data)});
             }
-            
         }
+
+        function uploadWithLatenc(candidate) {
+            setTimeout(function() {
+                uploadResume(candidate);
+            }, 1000);
+        }
+
 
         return service;
     }

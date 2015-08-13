@@ -1,16 +1,17 @@
-﻿using System.Web;
+﻿using System.IO;
+using System.Web;
 using Newtonsoft.Json;
 
 namespace Hunter.Services.Dto
 {
     public class FileDto
     {
-        [JsonProperty]
         public string Directory { get; set; }
-        [JsonProperty]
         public int Id { get; set; }
-        [JsonProperty]
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
-        public HttpPostedFile File { get; set; }
+        public string FileExtation { get; set; }
+        public Stream File { get; set; }
     }
 }

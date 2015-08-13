@@ -281,6 +281,7 @@
     <Compile Include="Controllers\VacancyController.cs" />
     <Compile Include="Filters\CheckModelForNullAttribute.cs" />
     <Compile Include="Filters\ValidateModelStateAttribute.cs" />
+    <Compile Include="Formaters\UploadFormater.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -727,6 +728,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\fontAwesome\" />
+    <Folder Include="Views\File\" />
     <Folder Include="Views\role\addEdit\" />
     <Folder Include="Views\role\profile\" />
     <Folder Include="Views\user\addEdit\" />
