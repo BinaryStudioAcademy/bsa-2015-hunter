@@ -12,6 +12,7 @@ namespace Hunter.Services
     {
         public static CandidateDto ToCandidateDto(this Candidate candidate)
         {
+            double experiance = candidate.YearsOfExperience ?? 0;
             var dto = new CandidateDto()
             {
                 Id = candidate.Id,
@@ -25,7 +26,7 @@ namespace Hunter.Services
                 Phone = candidate.Phone,
                 Linkedin = candidate.Linkedin,
                 Salary = candidate.Salary,
-                YearsOfExperience = candidate.YearsOfExperience,
+                YearsOfExperience = Math.Round(experiance + candidate.CalculateYearsOfExperiance(), 1),
                 ResumeId = candidate.ResumeId,
                 AddedByProfileId = candidate.AddedByProfileId,
                 AddedBy = candidate.AddedByProfileId.HasValue ? candidate.UserProfile.UserLogin : "",
@@ -64,6 +65,7 @@ namespace Hunter.Services
             candidate.Shortlisted = dto.ShortListed;
             candidate.Origin = (Origin)dto.Origin;
             candidate.DateOfBirth = dto.DateOfBirth;
+            candidate.EditDate = DateTime.Now;
         }
 
         public static IEnumerable<CandidateLongListDto> ToCandidateLongListDto(this IEnumerable<Card> cards)

@@ -67,6 +67,9 @@ namespace Hunter.DataAccess.Entities
 
         public DateTime AddDate { get; set; }
 
+        [Column(TypeName = "date")]
+        public DateTime EditDate { get; set; }
+
         public Origin Origin { get; set; }
 
         public Resolution Resolution { get; set; }
@@ -78,5 +81,14 @@ namespace Hunter.DataAccess.Entities
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pool> Pool { get; set; }
+
+        public double CalculateYearsOfExperiance()
+        {
+            TimeSpan gap = DateTime.Now - EditDate;
+
+            double years = Math.Round(((double)gap.Days) / 365, 1);
+
+            return years;
+        }
     }
 }
