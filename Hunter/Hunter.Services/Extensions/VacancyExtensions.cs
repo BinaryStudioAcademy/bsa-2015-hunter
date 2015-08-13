@@ -37,6 +37,18 @@ namespace Hunter.Services
             };
             return v;
         }
-    }
 
+        public static VacancyLongListDto ToVacancyLongListDto(this Vacancy vacancy)
+        {
+            var vll = new VacancyLongListDto()
+            {
+               
+                Id = vacancy.Id,
+                Name = vacancy.Name,
+                AddedByName = vacancy.User != null ? vacancy.User.Login : "",
+                //PoolId = vacancy.PoolId
+            };
+            return vll;
+        }
+    }
 }

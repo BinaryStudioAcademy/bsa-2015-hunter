@@ -6,7 +6,7 @@ namespace Hunter.DataAccess.Entities.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "Hunter.DataAccess.Db.HunterDbContext";
         }
 

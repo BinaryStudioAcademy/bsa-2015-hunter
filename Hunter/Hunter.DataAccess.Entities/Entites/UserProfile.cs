@@ -28,6 +28,9 @@ namespace Hunter.DataAccess.Entities
 
         public DateTime Added { get; set; }
 
+        [Column("LViewedActivity")]
+        public int LastViewedActivityId { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Candidate> Candidate { get; set; }
 

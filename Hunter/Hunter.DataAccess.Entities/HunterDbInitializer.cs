@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hunter.DataAccess.Entities
 {
@@ -16,6 +17,7 @@ namespace Hunter.DataAccess.Entities
         public static void SeedClearDb(HunterDbContext context)
         {
             #region USER ROLES
+
             var recruiterRole = new UserRole() { Name = "Recruiter" };
             var technicalRole = new UserRole() { Name = "Technical Specialist" };
             var adminRole = new UserRole() { Name = "Admin" };
@@ -108,11 +110,6 @@ namespace Hunter.DataAccess.Entities
             #endregion
 
             #region POOLS
-            //var jsPool = new Pool { Name = "JavaScript" };
-            //var netPool = new Pool { Name = ".Net" };
-            //var phpPool = new Pool { Name = "PHP" };
-            //var qaPool = new Pool { Name = "QA" };
-
             var jsPool = new Pool { Name = "JavaScript", Color = "rgb(44,201,99)" };
             var netPool = new Pool { Name = ".Net", Color = "rgb(293,250,85)" };
             var phpPool = new Pool { Name = "PHP", Color = "rgb(240,88,88)" };
@@ -467,14 +464,121 @@ namespace Hunter.DataAccess.Entities
             #endregion
 
             #region ACTIVITY
-            var activity1 = new Activity() { Message = "Add new user to Pool", Tag = "add user", Time = DateTime.Now, UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
-            var activity2 = new Activity() { Message = "Create new Vacancy Junior PHP Developer", Tag = "create Vacancy", Time = DateTime.Now, UserLogin = "recruiter2", Url = "http://binary-studio.com/" };
-            var activity3 = new Activity() { Message = "Add new Feedback to Hollis Sefton", Tag = "add Feedback", Time = DateTime.Now, UserLogin = "techspec1", Url = "http://binary-studio.com/" };
-            var activity4 = new Activity() { Message = "Add new Feedback to Jennie Charlie", Tag = "add Feedback", Time = DateTime.Now, UserLogin = "techspec@local.com", Url = "http://binary-studio.com/" };
-            var activity5 = new Activity() { Message = "Add new user Lon Abner to Pool", Tag = "add user", Time = DateTime.Now, UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
+            var activity1 = new Activity() { Message = "Add new user to Pool", Tag = "add user", Time = DateTime.Parse("10.08.2015"), UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
+            var activity2 = new Activity() { Message = "Create new Vacancy Junior PHP Developer", Tag = "create Vacancy", Time = DateTime.Parse("11.08.2015"), UserLogin = "recruiter2", Url = "http://binary-studio.com/" };
+            var activity3 = new Activity() { Message = "Add new Feedback to Hollis Sefton", Tag = "add Feedback", Time = DateTime.Parse("12.08.2015"), UserLogin = "techspec1", Url = "http://binary-studio.com/" };
+            var activity4 = new Activity() { Message = "Add new Feedback to Jennie Charlie", Tag = "add Feedback", Time = DateTime.Parse("13.08.2015"), UserLogin = "techspec@local.com", Url = "http://binary-studio.com/" };
+            var activity5 = new Activity() { Message = "Add new user Lon Abner to Pool", Tag = "add user", Time = DateTime.Parse("14.08.2015"), UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
 
-            var activities = new List<Activity> { activity1, activity2, activity3, activity4, activity5 };
+            var activities = new List<Activity> {activity1, activity2, activity3, activity4, activity5};
+
             activities.ForEach(x => context.Activity.Add(x));
+            context.SaveChanges();
+            #endregion
+
+            #region CARD
+
+            var cards = new List<Card>
+            {
+                new Card
+                {
+                    CandidateId = 1,
+                    VacancyId = 1,
+                    Added = new DateTime(2015, 8, 1),
+                    Stage = 1,
+                    AddedByProfileId = 1
+                },
+                new Card
+                {
+                    CandidateId = 2,
+                    VacancyId = 1,
+                    Added = new DateTime(2015, 8, 1),
+                    Stage = 1,
+                    AddedByProfileId = 1
+                },
+                new Card
+                {
+                    CandidateId = 3,
+                    VacancyId = 1,
+                    Added = new DateTime(2015, 8, 1),
+                    Stage = 1,
+                    AddedByProfileId = 1
+                },
+                new Card
+                {
+                    CandidateId = 4,
+                    VacancyId = 1,
+                    Added = new DateTime(2015, 8, 1),
+                    Stage = 1,
+                    AddedByProfileId = 1
+                },
+                new Card
+                {
+                    CandidateId = 1,
+                    VacancyId = 2,
+                    Added = new DateTime(2015, 8, 1),
+                    Stage = 1,
+                    AddedByProfileId = 1
+                },
+                new Card
+                {
+                    CandidateId = 2,
+                    VacancyId = 3,
+                    Added = new DateTime(2015, 8, 1),
+                    Stage = 1,
+                    AddedByProfileId = 1
+                },
+                new Card
+                {
+                    CandidateId = 3,
+                    VacancyId = 4,
+                    Added = new DateTime(2015, 8, 1),
+                    Stage = 1,
+                    AddedByProfileId = 1
+                },
+                new Card
+                {
+                    CandidateId = 4,
+                    VacancyId = 5,
+                    Added = new DateTime(2015, 8, 1),
+                    Stage = 1,
+                    AddedByProfileId = 1
+                },
+                new Card
+                {
+                    CandidateId = 5,
+                    VacancyId = 6,
+                    Added = new DateTime(2015, 8, 1),
+                    Stage = 1,
+                    AddedByProfileId = 1
+                },
+                new Card
+                {
+                    CandidateId = 6,
+                    VacancyId = 7,
+                    Added = new DateTime(2015, 8, 1),
+                    Stage = 1,
+                    AddedByProfileId = 1
+                },
+                new Card
+                {
+                    CandidateId = 7,
+                    VacancyId = 8,
+                    Added = new DateTime(2015, 8, 1),
+                    Stage = 1,
+                    AddedByProfileId = 1
+                },
+                new Card
+                {
+                    CandidateId = 8,
+                    VacancyId = 9,
+                    Added = new DateTime(2015, 8, 1),
+                    Stage = 1,
+                    AddedByProfileId = 1
+        }
+            };
+
+            cards.ForEach(c => context.Card.Add(c));
             context.SaveChanges();
             #endregion
         }

@@ -1,10 +1,16 @@
-﻿using Hunter.Services;
+﻿using System;
+using Hunter.Services;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
+using System.Threading.Tasks;
 
 namespace Hunter.Rest
 {
     //[Authorize]
+    [RoutePrefix("api/pool")]
     public class PoolController : ApiController
     {
         private readonly IPoolService _poolService;
@@ -13,77 +19,115 @@ namespace Hunter.Rest
         {
             _poolService = poolService;
         }
-
+        
         // GET: api/Pool
-        [System.Web.Mvc.HttpGet]
-        public IEnumerable<PoolViewModel> Get()
+        [HttpGet]
+        [Route("")]
+        [ResponseType(typeof(IEnumerable<PoolViewModel>))]
+        public HttpResponseMessage Get()
         {
-            return _poolService.GetAllPools();
+            try
+            {
+                var pools = _poolService.GetAllPools();
+                return Request.CreateResponse(HttpStatusCode.OK, pools);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }   
         }
 
         // GET: api/Pool/5
-        [System.Web.Mvc.HttpGet]
-        public PoolViewModel Get(int id)
+        [HttpGet]
+        [Route("{id:int}")]
+        [ResponseType(typeof(PoolViewModel))]
+        public HttpResponseMessage Get(int id)
         {
-            return _poolService.GetPoolById(id);
+            try
+            {
+                var pool = _poolService.GetPoolById(id);
+                return Request.CreateResponse(HttpStatusCode.OK, pool);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
         }
 
         // POST: api/Pool
-        [System.Web.Mvc.HttpPost]
-        public IHttpActionResult Post([FromBody] PoolViewModel poolViewModel)
+        [HttpPost]
+        [Route("")]
+        [ResponseType(typeof(PoolViewModel))]
+        public HttpResponseMessage Post([FromBody] PoolViewModel poolViewModel)
         {
-            if (poolViewModel == null || _poolService.IsPoolNameExist(poolViewModel.Name))
+            try
             {
-                return BadRequest("Pool name empty or already exists!");
+                if (poolViewModel == null || _poolService.IsPoolNameExist(poolViewModel.Name))
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Pool name empty or already exists!");
+                }
+
+                poolViewModel = _poolService.CreatePool(poolViewModel);
+
+                return poolViewModel != null ? Request.CreateResponse(HttpStatusCode.OK, poolViewModel) : Request.CreateResponse(HttpStatusCode.InternalServerError);
             }
-
-            //if (_poolService.IsPoolNameExist(poolViewModel.Name))
-            //{
-            //    return BadRequest("Pool name alreafy exists!");
-            //}
-
-            poolViewModel = _poolService.CreatePool(poolViewModel);
-
-            if (poolViewModel != null)
+            catch (Exception ex)
             {
-                return Created(Request.RequestUri + poolViewModel.Id.ToString(), poolViewModel);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
-
-            return InternalServerError();
+            
         }
 
         // PUT: api/Pool/5
-        [System.Web.Mvc.HttpPut]
-        public IHttpActionResult Put(int id, [FromBody] PoolViewModel poolViewModel)
+        [HttpPut]
+        [Route("{id:int}")]
+        [ResponseType(typeof(PoolViewModel))]
+        public HttpResponseMessage Put(int id, [FromBody] PoolViewModel poolViewModel)
         {
-            if (!_poolService.IsPoolExist(id) || poolViewModel == null)
+            try
             {
-                return NotFound();
-            }
+                if (!_poolService.IsPoolExist(id) || poolViewModel == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
 
-            if (_poolService.IsPoolNameExistExceptCurrentPool(poolViewModel))
+                if (_poolService.IsPoolNameExistExceptCurrentPool(poolViewModel))
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Cann't update. Another pool with same name alreafy exists!");
+                }
+
+                poolViewModel.Id = id;
+                _poolService.UpdatePool(poolViewModel);
+
+                return Request.CreateResponse(HttpStatusCode.OK, poolViewModel);
+            }
+            catch (Exception ex)
             {
-                return BadRequest("Cann't update. Another pool with same name alreafy exists!");
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
-
-            poolViewModel.Id = id;
-            _poolService.UpdatePool(poolViewModel);
-
-            return Ok(poolViewModel);
         }
 
         // DELETE: api/Pool/5
-        [System.Web.Mvc.HttpDelete]
-        public IHttpActionResult Delete(int id)
+        [HttpDelete]
+        [Route("{id:int}")]
+        [ResponseType(typeof(int))]
+        public HttpResponseMessage Delete(int id)
         {
-            if (!_poolService.IsPoolExist(id))
+            try
             {
-                return NotFound();
+                if (!_poolService.IsPoolExist(id))
+                {
+                    Request.CreateResponse(HttpStatusCode.NotFound, id);
+                }
+
+                _poolService.DeletePool(id);
+
+                return Request.CreateResponse(HttpStatusCode.OK, id);
             }
-
-            _poolService.DeletePool(id);
-
-            return Ok(id);
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }   
         }
     }
 }

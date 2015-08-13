@@ -46,5 +46,10 @@ namespace Hunter.Services
             var activity = _activityRepository.Get(id);
             _activityRepository.DeleteAndCommit(activity);
         }
+
+        public int GetAmountOfActualActivities(int lastViewdId)
+        {
+            return _activityRepository.ActualActivityAmount(lastViewdId);
+        }
     }
 }

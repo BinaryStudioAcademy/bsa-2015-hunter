@@ -1,0 +1,51 @@
+﻿<div class="card-wrapper container">
+    <div id="card-static">
+        <div class="candidate-info">
+            <div class="candidate-personal-info row">
+                <div class="image col-md-2">
+                    <img class="img-circle" src="http://www.glaz.tv/images/logos/webcams/big/panda.jpg" alt="">
+                </div>
+                <div class="col-md-5">
+                    <div class="personal-info">
+                        <div>
+                            <span class="candidate-name">{{generalCardCtrl.candidate.firstName+" "+generalCardCtrl.candidate.lastName}}</span>
+                        </div>
+                        <div>current/past: {{generalCardCtrl.candidate.currentPosition}}</div>
+                        <div>company/location: {{generalCardCtrl.candidate.company+","+candidateCtrl.candidate.localion}}</div>
+                        <div>emaile: {{generalCardCtrl.candidate.email}}</div>
+                        <div>skype: {{generalCardCtrl.candidate.skype}}</div>
+                        <div>phone: {{generalCardCtrl.candidate.phone}}</div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Origin</label>
+                        <input type="text" class="candidate-origin form-control" disabled="disabled" placeholder="Sourced">
+                    </div>
+                    <div class="candidate-resolution form-group">
+                        <label>Resolution</label>
+                        <select class="form-control" name="resolution">
+                            <option selected="selected">None</option>
+                            <option>Available</option>
+                            <option>NotInterested</option>
+                            <option>Hired</option>
+                            <option>Unfit</option>
+                            <option>NotNow</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="salary-wrapper">900</div>
+                    <input class="btn-veiw-resume btn btn-default btn-block" type="button" value="Veiw Resume">
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="inline">
+        <li class="pull-left" ng-repeat="tab in generalCardCtrl.tabs track by $index">
+            <div class="btn btn-default" ng-click="generalCardCtrl.changeTemplate(tab)">{{ tab }}</div>
+        </li>
+    </ul>
+
+    <div id="card-dynamic" ng-include="generalCardCtrl.templateToShow"></div>
+</div>

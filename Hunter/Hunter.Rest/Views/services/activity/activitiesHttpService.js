@@ -11,7 +11,8 @@
 
     function ActivityHttpService(httpHandler) {
         var service = {
-            getActivityList: getActivityList
+            getActivityList: getActivityList,
+            saveLastActivityId: saveActivityId
         };
 
         function getActivityList(successCallback, body) {
@@ -22,6 +23,17 @@
                 successCallback: successCallback,
                 errorMessageToDev: 'GET ACTIVITY INFO ERROR: ',
                 errorMessageToUser: 'Failed'
+            });
+        }
+
+        function saveActivityId(successCallback, body) {
+            httpHandler.sendRequest({
+                'verb': 'POST',
+                'url': 'api/activities/save/lastid',
+                'body': body,
+                'successCallback': successCallback,
+                'errorMessageToDev': 'POST ACTIVITY_ID ERROR',
+                'errorMessageToUser': 'Failed'
             });
         }
 

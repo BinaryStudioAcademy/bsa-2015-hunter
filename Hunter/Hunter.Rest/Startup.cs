@@ -23,6 +23,7 @@ using Microsoft.Owin.Logging;
 using Ninject.Web.Common;
 using Hunter.Common.Concrete;
 using Hunter.DataAccess.Entities;
+using Hunter.Services.Services.Interfaces;
 
 [assembly: OwinStartup(typeof(Hunter.Rest.Startup))]
 

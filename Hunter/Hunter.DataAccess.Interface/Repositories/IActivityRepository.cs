@@ -5,5 +5,6 @@ namespace Hunter.DataAccess.Interface
 {
     public interface IActivityRepository : IRepository<Activity>
     {
+        int ActualActivityAmount(int lastViewd);
     }
 }

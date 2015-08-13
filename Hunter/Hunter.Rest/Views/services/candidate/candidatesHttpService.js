@@ -15,7 +15,9 @@
             updateCandidate: updateCandidate,
             getCandidate: getCandidate,
             getCandidateList: getCandidateList,
-            addCandidate: addCandidate
+            addCandidate: addCandidate,
+            getLongList: getLongList,
+            getLongListDetails: getLongListDetails
         };
 
         function updateCandidate(body, successCallback, id) {
@@ -64,6 +66,38 @@
                 },
                 errorCallback: function (status) {
                     console.log("getting candidates error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
+
+        function getLongList(id) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/candidates/longlist/' + id,
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get candidates long list error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
+
+        function getLongListDetails(id) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/candidates/candidatelonglist/' + id,
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get candidates long list error");
                     console.log(status);
                 }
             });

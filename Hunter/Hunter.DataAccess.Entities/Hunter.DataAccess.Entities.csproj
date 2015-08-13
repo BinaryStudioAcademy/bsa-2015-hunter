@@ -60,6 +60,7 @@
     <Compile Include="Entites\Enums\Origin.cs" />
     <Compile Include="Entites\Enums\PoolBackground.cs" />
     <Compile Include="Entites\Enums\Resolution.cs" />
+    <Compile Include="Entites\Enums\Stage.cs" />
     <Compile Include="Entites\Enums\Status.cs" />
     <Compile Include="Entites\Feedback.cs" />
     <Compile Include="Entites\IEntity.cs" />
@@ -122,9 +123,9 @@
     <Compile Include="Migrations\201508111310206_ChangeCandidateSalaryDataType.Designer.cs">
       <DependentUpon>201508111310206_ChangeCandidateSalaryDataType.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201508122043415_Merge1.cs" />
-    <Compile Include="Migrations\201508122043415_Merge1.Designer.cs">
-      <DependentUpon>201508122043415_Merge1.cs</DependentUpon>
+    <Compile Include="Migrations\201508131001202_AddLViewedActivityIdInUserProfile.cs" />
+    <Compile Include="Migrations\201508131001202_AddLViewedActivityIdInUserProfile.Designer.cs">
+      <DependentUpon>201508131001202_AddLViewedActivityIdInUserProfile.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -166,8 +167,8 @@
     <EmbeddedResource Include="Migrations\201508111310206_ChangeCandidateSalaryDataType.resx">
       <DependentUpon>201508111310206_ChangeCandidateSalaryDataType.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508122043415_Merge1.resx">
-      <DependentUpon>201508122043415_Merge1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201508131001202_AddLViewedActivityIdInUserProfile.resx">
+      <DependentUpon>201508131001202_AddLViewedActivityIdInUserProfile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
