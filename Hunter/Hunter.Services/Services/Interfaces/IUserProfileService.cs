@@ -8,7 +8,6 @@ namespace Hunter.Services.Interfaces
     {
         IList<UserProfileRowVm> LoadPage(int page);
         ResourceApiResult<EditUserProfileVm> GetById(long userProfileId);
-        EditUserProfileVm GetByLogin(long userLogin);
         ApiResult Save(EditUserProfileVm userProfile);
         IdApiResult Delete(long userProfileId);
     }

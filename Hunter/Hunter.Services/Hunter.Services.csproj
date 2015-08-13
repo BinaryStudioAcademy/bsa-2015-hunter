@@ -81,6 +81,8 @@
     <Compile Include="Extensions\VacancyExtensions.cs" />
     <Compile Include="Services\ActivityService.cs" />
     <Compile Include="Services\CandidateService.cs" />
+    <Compile Include="Services\ActivityPostService.cs" />
+    <Compile Include="Services\Interfaces\IActivityPostService.cs" />
     <Compile Include="Services\Interfaces\IActivityService.cs" />
     <Compile Include="Services\Interfaces\ICandidateService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

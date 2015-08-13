@@ -16,15 +16,15 @@ namespace Hunter.Services
     public class UserProfileService : IUserProfileService
     {
         private const int _ItemsPerPage = 15;
+        private readonly IActivityPostService _activityPost;
         private readonly IUserProfileRepository _profileRepo;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger _logger;
 
-        public UserProfileService(IUserProfileRepository profileRepo, IUnitOfWork unitOfWork, ILogger logger)
+        public UserProfileService(IActivityPostService activityPost, IUserProfileRepository profileRepo, IUnitOfWork unitOfWork)
         {
+            _activityPost = activityPost;
             _profileRepo = profileRepo;
             _unitOfWork = unitOfWork;
-            _logger = logger;
         }
 
         public IList<UserProfileRowVm> LoadPage(int page)
@@ -55,23 +55,16 @@ namespace Hunter.Services
             return Api.Details(userProfileId, EditUserProfileVm.Create(profile));
         }
 
-        public EditUserProfileVm GetByLogin(long userLogin)
-        {
-            throw new NotImplementedException();
-        }
-
         public ApiResult Save(EditUserProfileVm editedUserProfile)
         {
             if (string.IsNullOrEmpty(editedUserProfile.Login))
                 return Api.Conflict("Login is required to be a valid e-mail");
 
             var profile = _profileRepo.Get(editedUserProfile.Id) ?? new UserProfile();
-            if (!profile.IsNew())
-            {
-                var same = _profileRepo.Get(pr => pr.UserLogin == editedUserProfile.Login);
-                if (same != null && same.Id != profile.Id)
-                    return Api.Conflict(string.Format("Profile with e-mail {0} already exists", editedUserProfile.Login));
-            }
+
+            var same = _profileRepo.Get(pr => pr.UserLogin == editedUserProfile.Login);
+            if (same != null && same.Id != profile.Id)
+                return Api.Conflict(string.Format("Profile with e-mail {0} already exists", editedUserProfile.Login));
 
             editedUserProfile.Map(profile, _unitOfWork);
             if (profile.IsNew())
@@ -79,6 +72,10 @@ namespace Hunter.Services
                 profile.Added = DateTime.UtcNow;
             }
             _profileRepo.UpdateAndCommit(profile);
+            if (editedUserProfile.Id == 0)
+            {
+                _activityPost.Post(string.Format("{0} joined Hunter", profile.UserLogin), ActivityTypes.UserAdded, new Uri("/user/edit/" + profile.Id, UriKind.Relative));
+            }
             return editedUserProfile.Id == 0 ? Api.Added(profile.Id, EditUserProfileVm.Create(profile)) : Api.Updated(profile.Id);
         }
 
