@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Hunter.Services
+namespace Hunter.Services.Interfaces
 {
     public interface IActivityService
     {
@@ -10,6 +10,7 @@ namespace Hunter.Services
         void UpdateActivity(ActivityDto entity);
         void DeleteActivityById(int id);
 
-        int GetAmountOfActualActivities(int lastViewdId);
+        int GetUnreadActivitiesForUser(string login);
+        void UpdateLastSeenActivity(string login, int lastSeenActivityId);
     }
 }

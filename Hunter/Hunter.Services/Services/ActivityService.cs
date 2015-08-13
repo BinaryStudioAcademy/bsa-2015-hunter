@@ -2,18 +2,19 @@
 using System.Linq;
 using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Interface.Base;
+using Hunter.Services.Interfaces;
 
 namespace Hunter.Services
 {
     public class ActivityService : IActivityService
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly IActivityRepository _activityRepository;
+        private readonly IUserProfileRepository _userProfileRepository;
 
-        public ActivityService(IActivityRepository activityRepository, IUnitOfWork unitOfWork)
+        public ActivityService(IActivityRepository activityRepository, IUserProfileRepository userProfileRepository)
         {
             _activityRepository = activityRepository;
-            _unitOfWork = unitOfWork;
+            _userProfileRepository = userProfileRepository;
         }
 
         public IEnumerable<ActivityDto> GetAllActivities()
@@ -47,9 +48,21 @@ namespace Hunter.Services
             _activityRepository.DeleteAndCommit(activity);
         }
 
-        public int GetAmountOfActualActivities(int lastViewdId)
+        public int GetUnreadActivitiesForUser(string login)
         {
-            return _activityRepository.ActualActivityAmount(lastViewdId);
+            var user = _userProfileRepository.Get(login);
+
+            return _activityRepository.GetCountOfActivitiesSince(user.LastViewedActivityId);
+        }
+
+        public void UpdateLastSeenActivity(string login, int lastSeenActivityId)
+        {
+            var userProfile = _userProfileRepository.Get(login);
+            if (userProfile != null && userProfile.LastViewedActivityId < lastSeenActivityId)
+            {
+                userProfile.LastViewedActivityId = lastSeenActivityId;
+                _userProfileRepository.UpdateAndCommit(userProfile);
+            }
         }
     }
 }

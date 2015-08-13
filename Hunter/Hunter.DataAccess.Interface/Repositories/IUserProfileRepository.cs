@@ -7,6 +7,6 @@ namespace Hunter.DataAccess.Interface
 {
     public interface IUserProfileRepository : IRepository<UserProfile>
     {
-
+        UserProfile Get(string login);
     }
 }

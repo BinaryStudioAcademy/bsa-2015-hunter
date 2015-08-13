@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Hunter.DataAccess.Db;
 using Hunter.Services;
-using Hunter.Services.Services.Interfaces;
+using Hunter.Services.Interfaces;
 
 namespace Hunter.Rest.Controllers
 {
@@ -15,12 +12,10 @@ namespace Hunter.Rest.Controllers
     public class ActivityController : ApiController
     {
         private readonly IActivityService _activityService;
-        private readonly IUserProfileService _userProfileService;
 
-        public ActivityController(IActivityService activityService, IUserProfileService userProfileService)
+        public ActivityController(IActivityService activityService)
         {
             _activityService = activityService;
-            _userProfileService = userProfileService;
         }
 
        
@@ -49,11 +44,11 @@ namespace Hunter.Rest.Controllers
 
                 if (login == null)
                 {
+                    // todo how it could be if we already authorized
                     throw new Exception("Access denied");
                 }
 
-                var profile = _userProfileService.GetUserProfile(login);
-                return Ok(_activityService.GetAmountOfActualActivities(profile.LastViewedActivityId));
+                return Ok(_activityService.GetUnreadActivitiesForUser(login));
             }
             catch (Exception ex)
             {
@@ -68,11 +63,7 @@ namespace Hunter.Rest.Controllers
             try
             {
                 string login = RequestContext.Principal.Identity.Name;
-
-                var userProfile = _userProfileService.GetUserProfile(login);
-                userProfile.LastViewedActivityId = lastActivityId;
-
-                _userProfileService.UpdateUserProfile(userProfile);
+                _activityService.UpdateLastSeenActivity(login, lastActivityId);
 
                 return Ok();
             }

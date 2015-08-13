@@ -11,5 +11,10 @@ namespace Hunter.DataAccess.Db
         {
 
         }
+
+        public UserProfile Get(string login)
+        {
+            return Get(u=>u.UserLogin == login);
+        }
     }
 }

@@ -64,7 +64,8 @@
     <Compile Include="Dto\UserProfileDto.cs" />
     <Compile Include="Dto\VacancyLongListDto.cs" />
     <Compile Include="Dto\UserRoleDto.cs" />
-    <Compile Include="Dto\CandidateDtoWithResolutionString.cs" />    <Compile Include="Dto\ApiResults\ApiResult.cs" />
+    <Compile Include="Dto\CandidateDtoWithResolutionString.cs" />
+    <Compile Include="Dto\ApiResults\ApiResult.cs" />
     <Compile Include="Dto\User\EditUserProfileVm.cs" />
     <Compile Include="Dto\User\UserProfileRowVm.cs" />
     <Compile Include="Dto\VacancyDto.cs" />
@@ -90,11 +91,9 @@
     <Compile Include="Services\Interfaces\IUserRoleService.cs" />
     <Compile Include="Services\UserProfileService.cs" />
     <Compile Include="Services\UserRoleService.cs" />
-    <Compile Include="Services\UserProfileService.cs" />
     <Compile Include="Services\PoolService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\VacancyService.cs" />
-    <Compile Include="Services\Interfaces\IUserProfileService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hunter.Common\Hunter.Common.csproj">
