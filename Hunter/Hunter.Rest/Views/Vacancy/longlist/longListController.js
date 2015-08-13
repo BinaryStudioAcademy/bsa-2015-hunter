@@ -39,8 +39,11 @@
             return vm.tab === checkTab;
             //return false;
         };
-        vm.viewCandidateInfo = function (id) {
+        vm.tabSet = function(id) {
             vm.tab = id;
+        }
+        vm.viewCandidateInfo = function (id) {
+            vm.tabSet(id);
 
             CandidateHttpService.getLongListDetails(id).then(function (result) {
                 console.log(result);
