@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutWithMainMenu.cshtml";
 }
 
-<link href="../../fonts/FontAwesome.otf" rel="stylesheet"/>
+<link href="../../fonts/FontAwesome.otf" rel="MIME"/>
 <link href="../../fonts/fontawesome-webfont.eot" rel="MIME"/>
 <link href="../../fonts/fontawesome-webfont.svg" rel="MIME"/>
 <link href="../../fonts/fontawesome-webfont.ttf" rel="MIME"/>
@@ -37,9 +37,14 @@
 <script src="~/Views/services/candidate/candidatesHttpService.js"></script>
 <script src="~/Views/candidate/addEdit/candidateAddEditController.js"></script>
 <script src="~/Views/services/candidate/addEdit/candidateAddEditService.js"></script>
-<script src="~/Views/candidate/profile/candidateController.js"></script>
+<script src="~/Views/candidate/profile/candidateProfileController.js"></script>
+<script src="~/Views/candidate/profile/profileApplicationsController.js"></script>
+<script src="~/Views/candidate/profile/profileSpecialNotesController.js"></script>
+<script src="~/Views/candidate/profile/profileTestsController.js"></script>
+<script src="~/Views/candidate/profile/profileInterviewsController.js"></script>
 <script src="~/Views/candidate/list/candidateListController.js"></script>
 <script src="~/Views/filters/candidates/candidatesListFilter.js"></script>
+<script src="~/Views/candidate/candidateService.js"></script>
 <!-- End Candidates -->
 
 <!-- Start Vacancies -->
@@ -89,6 +94,16 @@
 <script src="~/Views/role/list/roleListController.js"></script>
 <script src="~/Views/services/userRole/userRoleHttpService.js"></script>
 <!-- End Roles -->
+
+<!-- Candidate Vacancy Card -->
+<script src="~/Views/candidate/card/generalCardController.js"></script>
+<script src="~/Views/candidate/card/cardHrIterviewController.js"></script>
+<script src="~/Views/candidate/card/cardOverviewController.js"></script>
+<script src="~/Views/candidate/card/cardSpecialNotesController.js"></script>
+<script src="~/Views/candidate/card/cardTechnicalInterviewController.js"></script>
+<script src="~/Views/candidate/card/cardTestController.js"></script>
+<script src="~/Views/candidate/card/cardService.js"></script>
+<!-- End Candidate Vacancy Card-->
 
 <div ng-view></div>
 
