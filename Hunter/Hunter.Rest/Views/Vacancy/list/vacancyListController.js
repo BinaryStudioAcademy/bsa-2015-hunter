@@ -72,12 +72,12 @@
             }
         }
 
-        vm.loadDataByParams();
-
         getFilterInfo('Recruiter').then(function (result) {
-            vm.pools = result.pools;
+            //vm.pools = result.pools;
             vm.adders = result.users;
         });
+
+        vm.loadDataByParams();
 
         function getFilterInfo(roleName) {
             var deferred = $q.defer();
