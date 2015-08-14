@@ -17,6 +17,7 @@
         var vm = this;
         vm.templateToShow = '';
         vm.tabs = ['Overview', 'Special Notes', 'HR Interview', 'Technical Interview', 'Test'];
+        vm.currentTabName = vm.tabs[0];
         vm.candidate;
         vm.origins = enumConstants.origins;
         vm.resolutions = enumConstants.resolutions;
@@ -32,9 +33,10 @@
         
 
         vm.changeTemplate = function (tab) {
+            vm.currentTabName = tab;
             vm.templateToShow = cardService.changeTemplate(tab);
-            
         };
 
+        vm.changeTemplate(vm.tabs[0]);
     }
 })();

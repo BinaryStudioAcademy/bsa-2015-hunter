@@ -24,7 +24,7 @@
                     </div>
                     <div class="candidate-resolution form-group">
                         <label>Resolution</label>
-                        <select class="form-control" name="resolution" >
+                        <select class="form-control" name="resolution">
                             <option ng-repeat="item in generalCardCtrl.resolutions">{{item.name}}</option>
                             <!-- <option selected="selected">None</option>-->
                             <!-- <option>Available</option>-->
@@ -36,7 +36,7 @@
                     </div>
                     <div class="candidate-resolution form-group">
                         <label>Substatus</label>
-                        <select class="form-control" name="substatuse" >
+                        <select class="form-control" name="substatuse">
                             <option ng-repeat="item in generalCardCtrl.substatuses">{{item.name}}</option>
                         </select>
                     </div>
@@ -49,14 +49,20 @@
             </div>
         </div>
     </div>
-    <div class="card_overview container">
-        <div class="card_overview_note col-md-8">
-            <div id="card-dynamic" ng-include="generalCardCtrl.templateToShow"></div>
+        <div class="row">
+            <div class="col-md-9">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">{{generalCardCtrl.currentTabName}}</div>
+                        <div class="panel-body" id="card-dynamic" ng-include="generalCardCtrl.templateToShow"></div>
+                    </div>
+            </div>
+            <div class="col-md-3 list-group">
+                <a class="list-group-item"
+                   ng-class="{active: generalCardCtrl.currentTabName == tab}"
+                   ng-repeat="tab in generalCardCtrl.tabs track by $index"
+                   ng-click="generalCardCtrl.changeTemplate(tab)">
+                    {{ tab }}
+                </a>
+            </div>
         </div>
-        <ul class="col-md-4">
-            <li ng-repeat="tab in generalCardCtrl.tabs track by $index">
-                <div class="btn btn-default" ng-click="generalCardCtrl.changeTemplate(tab)">{{ tab }}</div>
-            </li>
-        </ul>
-    </div>
 </div>
