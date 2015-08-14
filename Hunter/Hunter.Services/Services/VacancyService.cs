@@ -31,7 +31,7 @@ namespace Hunter.Services
         }
         public IList<VacancyRowDto> Get()
         {
-            var vacancies = _vacancyRepository.QueryIncluding(v=> v.Pool).OrderByDescending(v => v.StartDate);
+            var vacancies = _vacancyRepository.QueryIncluding(v=> v.Pool).OrderByDescending(v => v.StartDate).ToList();
             return vacancies.Select(item => item.ToRowDto()).ToList();
         }
         public VacancyDto Get(int id)

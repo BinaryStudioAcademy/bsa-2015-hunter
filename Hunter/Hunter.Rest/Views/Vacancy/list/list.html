@@ -97,6 +97,11 @@
                                 </a>
                             </th>
                             <th>
+                                <a href="">
+                                    Pool
+                                </a>
+                            </th>
+                            <th>
                                 <a href="" ng-click="sortType = 'startDate'; sortReverse = !sortReverse">
                                     Start date
                                     <span ng-show="sortType == 'startDate' && !sortReverse" class="fa fa-caret-down"></span>
@@ -136,11 +141,10 @@
                             <td>
                                 <a href="#/vacancy/{{vacancy.id}}/longlist">{{vacancy.name}}</a>
                             </td>
+                            <td>{{vacancy.poolName}}</td>
                             <td>{{ vacancy.startDate == null ? 'no date' : vacancy.startDate | date:'dd-MM-yyyy' }}</td>
                             <td>{{ vacancy.endDate == null ? 'no date' : vacancy.endDate | date:'dd-MM-yyyy'}}</td>
                             <td>{{vacancy.countCandidates}}</td>
-                            /t
-                            <!--<td>{{vacancy.countShortListed}}</td>-->
                             <td>{{vacancy.addedByName}}</td>
                             <td class="rowlink-skip">
                                 <a href="#/vacancy/edit/{{vacancy.id}}" tooltip="Edit Vacancy"><i class="fa fa-pencil"></i></a>
