@@ -9,7 +9,7 @@
             
                 <div class="form-group">
                     <label>Filter</label>
-                    <input type="search" class="form-control" ng-model="candidateCtrl.filterOptions.nameFilter">
+                    <input type="search" class="form-control" ng-model="candidateListCtrl.filter.search">
                 </div>
             
             <div class="filter-settings">
@@ -25,12 +25,9 @@
                     <li>
                         Status
                         <ul>
-                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
-       ng-model="candidateListCtrl.filterOptions.statusFilters['New']"> New</li>
-                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
-       ng-model="candidateListCtrl.filterOptions.statusFilters['InReview']"> In Review</li>
-                            <li><input type="checkbox" ng-click="candidateListCtrl.toggle()"
-       ng-model="candidateListCtrl.filterOptions.statusFilters['Hired']"> Hired</li>
+                            <li ng-repeat="status in candidateListCtrl.statuses">
+                                <input type="checkbox" checklist-model="candidateListCtrl.filter.statuses" checklist-value="status.id"> {{status.name}}
+                            </li> 
                         </ul>
                     </li>
                     <li>
@@ -64,7 +61,13 @@
                         </a>
                     </th>
                     <th>
+                        
+                        <a href="" ng-click="candidateListCtrl.sort('Resolution')">
                         Status
+                            <span ng-show="candidateListCtrl.order.field == 'Resolution' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
+                            <span ng-show="candidateListCtrl.order.field == 'Resolution' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
+                        </a>
+
                     </th>
                     <th>
                         <a href="" ng-click="candidateListCtrl.sort('Email')">
@@ -110,8 +113,8 @@
                         <img ng-switch-default src="data:image/jpg;base64, {{item.photo}}"/>
                     </td>
                     <td><a href="#/candidate/{{item.id}}">{{item.firstName + " " + item.lastName}}</a></td>
-                    <td>none</td>
-                    <td>none</td>
+                    <td>{{item.addedBy}}</td>
+                    <td>{{candidateListCtrl.statuses[item.resolution].name}}</td>
                     <td>{{item.email}}</td>
                     <td>{{item.yearsOfExperience}}</td>
                     <td>{{item.company}}</td>

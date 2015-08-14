@@ -19,7 +19,7 @@
             vacancyStates: [
                 { id: 0, name: 'Open' },
                 { id: 1, name: 'Closed' },
-                { id: 1, name: 'Burning123' }
+                { id: 2, name: 'Burning' }
             ],
             substatuses: [
                 { id: 0, name: 'Test Failed' },

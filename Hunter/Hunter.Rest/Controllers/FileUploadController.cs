@@ -1,8 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using Hunter.DataAccess.Entities;
+using Hunter.Services;
 using Hunter.Services.Dto;
 using Hunter.Services.Interfaces;
 using Microsoft.AspNet.Identity;
@@ -14,24 +21,80 @@ namespace Hunter.Rest.Controllers
     public class FileUploadController : ApiController
     {
         private IFileService _fileService;
+        private ICandidateService _candidateService;
 
-        public FileUploadController(IFileService fileService)
+        public FileUploadController(IFileService fileService, ICandidateService candidateService)
         {
             _fileService = fileService;
+            _candidateService = candidateService;
         }
 
         [HttpGet]
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        [Route("pictures/{id:int}")]
+        public HttpResponseMessage GetPicture(int id)
         {
-            return new string[] { "value1", "value2" };
+            var array = _candidateService.Get(id).Photo;
+            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+            if (array != null)
+            {
+                result.Content = new ByteArrayContent(array);
+                result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
+            }
+            else
+            {
+                result.StatusCode = HttpStatusCode.NotFound;
+            }
+            return result;
         }
 
-        // GET api/<controller>/5
-        [HttpGet]
-        public string Get(int id)
+
+        [HttpPost]
+        [Route("pictures/{id:int}")]
+        public async Task<HttpResponseMessage> PostPicture(int id)
         {
-            return "value";
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+
+            var provider = new MultipartMemoryStreamProvider();
+
+            try
+            {
+                await Request.Content.ReadAsMultipartAsync(provider);
+
+                byte[] ms = await provider.Contents[0].ReadAsByteArrayAsync();
+                var candidate = _candidateService.Get(id);
+
+                candidate.Photo = ms;
+                _candidateService.Update(candidate.ToCandidateDto());
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+
+        [HttpDelete]
+        [Route("pictures/{id:int}")]
+        public HttpResponseMessage DeletePicture(int id)
+        {
+            var candidate = _candidateService.Get(id);
+            if (candidate == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+            try
+            {
+                candidate.Photo = null;
+                _candidateService.Update(candidate.ToCandidateDto());
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
         }
 
         // POST api/<controller>
@@ -40,16 +103,6 @@ namespace Hunter.Rest.Controllers
         public void Post(FileDto data)
         {
             _fileService.Add(data);
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
         }
     }
 }
