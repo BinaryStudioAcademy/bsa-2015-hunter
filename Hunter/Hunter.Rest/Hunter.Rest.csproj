@@ -736,6 +736,7 @@
     <Content Include="Views\services\candidate\addEdit\addEditService.js" />
     <Content Include="Views\services\candidate\candidatesFilter.js" />
     <Content Include="Views\services\candidate\candidatesHttpService.js" />
+    <Content Include="Views\services\constants\enumConstants.js" />
     <Content Include="Views\services\directive\autofocus.js" />
     <Content Include="Views\services\helper\authInterceptorService.js" />
     <Content Include="Views\services\helper\authService.js" />
