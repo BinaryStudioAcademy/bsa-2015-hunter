@@ -36,7 +36,7 @@ namespace Hunter.Rest.Controllers
 
         // POST api/<controller>
         [HttpPost]
-        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [Route("")]
         public void Post(FileDto data)
         {
             _fileService.Add(data);

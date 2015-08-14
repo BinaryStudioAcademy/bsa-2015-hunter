@@ -17,7 +17,7 @@
     <AssemblyName>Hunter.Rest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -270,6 +270,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\CandidatesController.cs" />
+    <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Controllers\PoolController.cs" />
@@ -277,6 +278,7 @@
     <Compile Include="Controllers\VacancyController.cs" />
     <Compile Include="Filters\CheckModelForNullAttribute.cs" />
     <Compile Include="Filters\ValidateModelStateAttribute.cs" />
+    <Compile Include="Formaters\UploadFormater.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -454,6 +456,19 @@
     <Content Include="bower_components\jquery\src\var\support.js" />
     <Content Include="bower_components\jquery\src\var\toString.js" />
     <Content Include="bower_components\jquery\src\wrap.js" />
+    <Content Include="bower_components\ng-file-upload\161a70d3.favicon.ico" />
+    <Content Include="bower_components\ng-file-upload\favicon.ico" />
+    <Content Include="bower_components\ng-file-upload\FileAPI.flash.swf" />
+    <Content Include="bower_components\ng-file-upload\FileAPI.js" />
+    <Content Include="bower_components\ng-file-upload\FileAPI.min.js" />
+    <Content Include="bower_components\ng-file-upload\index.html" />
+    <Content Include="bower_components\ng-file-upload\ng-file-upload-all.js" />
+    <Content Include="bower_components\ng-file-upload\ng-file-upload-all.min.js" />
+    <Content Include="bower_components\ng-file-upload\ng-file-upload-shim.js" />
+    <Content Include="bower_components\ng-file-upload\ng-file-upload-shim.min.js" />
+    <Content Include="bower_components\ng-file-upload\ng-file-upload.js" />
+    <Content Include="bower_components\ng-file-upload\ng-file-upload.min.js" />
+    <Content Include="bower_components\ng-file-upload\robots.txt" />
     <Content Include="bower_components\underscore\underscore-min.js" />
     <Content Include="bower_components\underscore\underscore.js" />
     <Content Include="Content\bootstrap.css" />
@@ -673,6 +688,10 @@
     <Content Include="bower_components\jasny-bootstrap\test-infra\s3_cache.py" />
     <Content Include="bower_components\jasny-bootstrap\test-infra\sauce_browsers.yml" />
     <Content Include="bower_components\jasny-bootstrap\test-infra\uncached-npm-install.sh" />
+    <Content Include="bower_components\ng-file-upload\.bower.json" />
+    <Content Include="bower_components\ng-file-upload\bower.json" />
+    <Content Include="bower_components\ng-file-upload\LICENSE" />
+    <Content Include="bower_components\ng-file-upload\README.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -739,9 +758,11 @@
     <Content Include="Views\services\directive\autofocus.js" />
     <Content Include="Views\services\helper\authInterceptorService.js" />
     <Content Include="Views\services\helper\authService.js" />
+    <Content Include="Views\services\helper\fileUploadService.js" />
     <Content Include="Views\services\helper\httpHandler.js" />
     <Content Include="Views\services\home\indexHttpService.js" />
     <Content Include="Views\services\userRole\userRoleHttpService.js" />
+    <Content Include="Views\services\user\userHttpService.js" />
     <Content Include="Views\services\vacancy\addEdit\addEditService.js" />
     <Content Include="Views\Statistics\list.html" />
     <Content Include="Views\Statistics\statisticsController.js" />
@@ -832,7 +853,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53147</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:8099/</IISUrl>
+          <IISUrl>http://localhost:53147/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
