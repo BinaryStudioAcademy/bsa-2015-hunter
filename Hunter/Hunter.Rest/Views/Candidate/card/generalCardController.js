@@ -18,7 +18,7 @@
         vm.tabs = ['Overview', 'Special Notes', 'HR Interview', 'Technical Interview', 'Test'];
         vm.candidate;
 
-        vm.changeTemplate = changeTemplate;
+        vm.changeTemplate = vm.tabs[0];
 
         console.log("rout",$routeParams);
 
@@ -28,8 +28,10 @@
         });
 
 
-        function changeTemplate(templateName) {
-            vm.templateToShow = cardService.changeTemplate(templateName);
-        }
+        $scope.$watch('generalCardCtrl.changeTemplate', function () {
+            vm.templateToShow = cardService.changeTemplate(vm.changeTemplate);
+            
+        });
+
     }
 })();

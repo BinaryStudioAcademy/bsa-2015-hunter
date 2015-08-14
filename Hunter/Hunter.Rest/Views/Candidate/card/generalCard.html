@@ -41,11 +41,18 @@
             </div>
         </div>
     </div>
-    <ul class="inline">
-        <li class="pull-left" ng-repeat="tab in generalCardCtrl.tabs track by $index">
-            <div class="btn btn-default" ng-click="generalCardCtrl.changeTemplate(tab)">{{ tab }}</div>
-        </li>
-    </ul>
 
-    <div id="card-dynamic" ng-include="generalCardCtrl.templateToShow"></div>
+    <div class="row">
+        
+    <div class="col-lg-10" id="card-dynamic" ng-include="generalCardCtrl.templateToShow"></div>
+
+    <div  class="btn-group-vertical col-lg-2">
+        <label ng-repeat="tab in generalCardCtrl.tabs track by $index"
+               class="btn btn-primary"
+               ng-model="generalCardCtrl.changeTemplate" 
+               btn-radio="tab">{{ tab }}</label>
+    </div>
+    
+
+    </div>
 </div>
