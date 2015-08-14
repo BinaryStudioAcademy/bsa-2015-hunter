@@ -89,7 +89,8 @@
 .card_overview_note{
     min-height: 250px;
     border: 3px solid grey;
-    border-radius: 3px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 .card_overview>ul{
     padding-left: 0;

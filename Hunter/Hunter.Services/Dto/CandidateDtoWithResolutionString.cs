@@ -29,7 +29,6 @@ namespace Hunter.Services.Dto
             AddedByProfileId = candidate.AddedByProfileId;
             Cards = candidate.Cards;
             PoolNames = candidate.PoolNames;
-            Photo = candidate.Photo;
             Resolution = candidate.Resolution;
             ShortListed = candidate.ShortListed;
             Origin = candidate.Origin;
