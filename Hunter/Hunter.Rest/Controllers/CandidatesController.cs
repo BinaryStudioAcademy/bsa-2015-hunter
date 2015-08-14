@@ -7,6 +7,9 @@ using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.OData;
+using System.Web.Http.OData.Extensions;
+using System.Web.Http.OData.Query;
 using Hunter.DataAccess.Entities;
 using Hunter.Services.Dto;
 using Hunter.Services.Interfaces;
@@ -44,6 +47,20 @@ namespace Hunter.Rest.Controllers
             }
             
         }
+
+        [HttpGet]
+        [Route("odata")]
+        public IHttpActionResult GetOdata(ODataQueryOptions<CandidateDto> options)
+        {
+            IQueryable results = options.ApplyTo(_candidateService.GetAllInfo().OrderByDescending(c => c.AddDate).AsQueryable());
+            var result = new PageResult<CandidateDto>(
+                results as IEnumerable<CandidateDto>,
+                Request.ODataProperties().NextLink,
+                Request.ODataProperties().TotalCount);
+            return Ok(result);
+        }
+
+
 
         [HttpGet]
         [Route("{id:int}")]
