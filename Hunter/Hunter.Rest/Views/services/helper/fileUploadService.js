@@ -17,9 +17,8 @@
 
         var _file;
 
-        function onFileSelect(file) {
-            console.log(file);
-            _file = file;
+        function onFileSelect($file) {
+            _file = $file;
         }
 
         function uploadResume(candidate) {

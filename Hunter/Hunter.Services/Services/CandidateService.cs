@@ -69,11 +69,11 @@ namespace Hunter.Services
             }
         }
 
-        public Candidate Get(Func<Candidate, bool> predicat)
+        public Candidate Get(Func<Candidate, bool> predicate)
         {
             try
             {
-                return _candidateRepository.Get(predicat);
+                return _candidateRepository.Get(predicate);
             }
             catch (Exception ex)
             {

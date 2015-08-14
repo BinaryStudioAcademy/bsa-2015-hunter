@@ -73,7 +73,7 @@ namespace Hunter.Services
 
         private int GetCandidateId(FileDto file)
         {
-            return _candidateService.Get(i => i.FirstName.Equals(file.FirstName) && i.LastName.Equals(file.LastName) && i.Email.Equals(file.Email)).Id;
+            return _candidateService.Get(i=>i.FirstName.Equals(file.FirstName) && i.LastName.Equals(file.LastName) && i.Email.Equals(file.Email)).Id;
         }
     }
 }

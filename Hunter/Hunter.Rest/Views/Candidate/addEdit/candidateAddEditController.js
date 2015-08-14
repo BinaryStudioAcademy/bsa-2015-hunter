@@ -44,6 +44,8 @@
         vm.addEditCandidate = addEditCandidate;
         vm.onFileSelect = fileUploadService.onFileSelect;
 
+        vm.onFileSelect = fileUploadService.onFileSelect;
+
         (function () {
             // This is function for initialization actions, for example checking auth
             if (true) {
@@ -60,7 +62,7 @@
 
         // Here we should write any functions we need, for example, body of user actions methods.
         function addEditCandidate() {
-
+            
             var candidate = createCandidateRequestBody();
             if (candidate && candidate.Id!=null) {
                 if (candidateAddEditService.validateData(candidate, vm.errorObject)) {
@@ -78,7 +80,8 @@
                     //alertify.error('Some Fields Are Incorrect');
                     alert('Some Fields Are Incorrect : ' + vm.errorObject.message);
                 }
-            }
+            }          
+           
             vm.errorObject.message = '';
         }
 
@@ -166,6 +169,8 @@
         }
 
         function successAddEditCandidate(data) {
+            console.log(data);
+            console.log(data);
             $location.url('/candidate/list');
         }
     }
