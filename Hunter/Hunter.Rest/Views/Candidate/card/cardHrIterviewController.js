@@ -9,6 +9,7 @@
 
     function CardHrInterviewController() {
         var vm = this;
+
         vm.templateName = 'HR Interview';
     }
 })();
