@@ -35,7 +35,9 @@ namespace Hunter.Rest
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             config.Formatters.JsonFormatter.SerializerSettings.Formatting = Formatting.Indented;
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+          
             config.Formatters.Add(new UploadFormater());
+
 
             config.Filters.Add(new HandleErrorAttribute());
         }
