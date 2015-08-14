@@ -69,6 +69,19 @@ namespace Hunter.Services
             }
         }
 
+        public Candidate Get(Func<Candidate, bool> predicat)
+        {
+            try
+            {
+                return _candidateRepository.Get(predicat);
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return null;
+            }
+        }
+
         public CandidateDto GetInfo(int id)
         {
             try
