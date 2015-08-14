@@ -1,4 +1,4 @@
-﻿(function() {
+﻿(function () {
     'use strict';
 
     angular
@@ -12,11 +12,13 @@
         'AuthService',
         '$odataresource',
         'PoolsHttpService',
-        '$odata'
+        '$odata',
+        'EnumConstants'
+
 
     ];
 
-    function CandidateListController($location, $filter, $scope, authService, $odataresource, PoolsHttpService, $odata) {
+    function CandidateListController($location, $filter, $scope, authService, $odataresource, PoolsHttpService, $odata, EnumConstants) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         vm.name = "Candidates";
@@ -27,7 +29,7 @@
         vm.skip = 0;
         vm.order = {
             field: 'FirstName',
-            dir:'asc'
+            dir: 'asc'
         }
 
         vm.pools = [];
@@ -37,15 +39,12 @@
 
         vm.filter = {
             pools: [],
-            inviters: []
-
+            inviters: [],
+            statuses: [],
+            search: ''
         };
 
-        var statuses = {
-            'New': false,
-            'InReview': false,
-            'Hired': false
-        };
+        vm.statuses = EnumConstants.resolutions;
 
         vm.inviters = [
             { 'name': 'Ulyana', 'email': 'recruiter@local.com' },
@@ -63,14 +62,14 @@
                                 .take(vm.pageSize)
                                 .skip(vm.skip)
                                 .filter(predicate)
-                                .orderBy(vm.order.field,vm.order.dir)
+                                .orderBy(vm.order.field, vm.order.dir)
                                 .query(function () {
                                     vm.candidateList = cands.items;
                                     vm.totalItems = cands.count;
                                 });
         }
 
-        vm.sort = function(field) {
+        vm.sort = function (field) {
             vm.order.field = field;
             vm.order.dir = vm.order.dir == 'desc' ? 'asc' : 'desc';
             vm.getCandidates();
@@ -83,7 +82,7 @@
             if (vm.filter.pools.length > 0) {
                 var poolPred = [];
                 angular.forEach(vm.filter.pools, function (value, key) {
-                    poolPred.push(new $odata.Predicate( new $odata.Property('PoolNames/any(p: p eq \'' + value +'\' )'), true));
+                    poolPred.push(new $odata.Predicate(new $odata.Property('PoolNames/any(p: p eq \'' + value + '\' )'), true));
                 });
 
                 poolPred = $odata.Predicate.or(poolPred);
@@ -98,6 +97,25 @@
 
                 invPred = $odata.Predicate.or(invPred);
                 filt.push(invPred);
+            }
+
+            if (vm.filter.statuses.length > 0) {
+                var stPred = [];
+                angular.forEach(vm.filter.statuses, function (value, key) {
+                    stPred.push(new $odata.Predicate('Resolution', value));
+                });
+
+                stPred = $odata.Predicate.or(stPred);
+                filt.push(stPred);
+            }
+
+            if (vm.filter.search.length > 0) {
+                var pred = $odata.Predicate.or([
+                    new $odata.Func('substringof', new $odata.Property('tolower(\'' + vm.filter.search + '\')'), new $odata.Property('tolower(FirstName)')),
+                    new $odata.Func('substringof', new $odata.Property('tolower(\'' + vm.filter.search + '\')'), new $odata.Property('tolower(LastName)'))
+                ]);
+
+                filt.push(pred);
             }
 
             if (filt.length > 0) {
@@ -116,5 +134,5 @@
 
         vm.getCandidates();
     }
-    
+
 })();
