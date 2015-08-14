@@ -581,6 +581,44 @@ namespace Hunter.DataAccess.Entities
             cards.ForEach(c => context.Card.Add(c));
             context.SaveChanges();
             #endregion
+            #region FEEDBACK
+            var feedbacks = new List<Feedback>
+            {
+                new Feedback
+                {
+                    CardId = 1,
+                    ProfileId = 1,
+                    Text = "HR Feedback English comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = 0,
+                    Status = 1
+                },
+                new Feedback
+                {
+                    CardId = 1,
+                    ProfileId = 1,
+                    Text = "HR feedback Personal comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = 1,
+                    Status = 1
+                },
+                new Feedback
+                {
+                    CardId = 1,
+                    ProfileId = 1,
+                    Text = "HR Feedback Expertise comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = 2,
+                    Status = 1
+                }
+            };
+            feedbacks.ForEach(f => context.Feedback.Add(f));
+            context.SaveChanges();
+
+    #endregion
         }
 
         private static byte[] ToByteArray(string sqlVarBinary)
