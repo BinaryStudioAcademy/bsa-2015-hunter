@@ -12,11 +12,12 @@
         'CandidateHttpService',
         'CandidateAddEditService',
         'PoolsHttpService',
-        'UploadResumeService'
+        'UploadResumeService',
+        'UploadPhotoService'
     ];
 
     function CandidateAddEditController($location, $routeParams, authService,
-        candidateHttpService, candidateAddEditService, poolsHttpService, uploadResumeService) {
+        candidateHttpService, candidateAddEditService, poolsHttpService, uploadResumeService, uploadPhotoService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         //vm.categories = [{ name: 'Select Candidate Category' }]; // .NET, JS, PHP
@@ -40,9 +41,13 @@
         var id = null;
         var Pools = [];
 
+        vm.photoLoaded = true;
+        vm.picture = null;
+        vm.pictureUrl = '';
+
         //Here we should write all signatures for user actions callback method, for example,
         vm.addEditCandidate = addEditCandidate;
-
+        vm.previewSelected = previewSelected;
         vm.onFileSelect = uploadResumeService.onFileSelect;
 
         (function () {
@@ -80,6 +85,13 @@
             }          
            
             vm.errorObject.message = '';
+        }
+
+        function previewSelected($file) {
+            if (uploadPhotoService.validatePicture($file)) {
+                vm.photoLoaded = false;
+                vm.picture = $file;
+            }
         }
 
         // not user-event functions
@@ -160,7 +172,12 @@
                     }
                 }
                     
-
+                candidateHttpService.getPictureUrl(id).then(function (response) {
+                    if (response.status != 204) {
+                        vm.pictureUrl = response.data;
+                        vm.photoLoaded = true;
+                    }
+                });
                 vm.nameInTitle = response.data.firstName + " " + response.data.lastName;
             });
         }
@@ -168,6 +185,7 @@
         function successAddEditCandidate(data) {
             debugger;
             uploadResumeService.uploadResume(data.data);
+            uploadPhotoService.uploadPicture(vm.picture, data.data.id);
             $location.url('/candidate/list');
         }
     }
