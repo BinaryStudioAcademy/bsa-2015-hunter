@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Hunter.Services.Interfaces;
 
 namespace Hunter.Rest.Controllers
 {
@@ -23,12 +24,12 @@ namespace Hunter.Rest.Controllers
 
         [HttpGet]
         [Route("")]
-        [ResponseType(typeof(IEnumerable<VacancyDto>))]
+        [ResponseType(typeof(IList<VacancyRowDto>))]
         public HttpResponseMessage Get()
         {
             try
             {
-                var vacancies = _vacancyService.Get().OrderByDescending(v => v.StartDate);
+                var vacancies = _vacancyService.Get();
                 return Request.CreateResponse(HttpStatusCode.OK, vacancies);
             }
             catch (Exception ex)
