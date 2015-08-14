@@ -3,10 +3,10 @@
     public enum Resolution
     {
         None,
-        Available,
-        NotInterested,
         Hired,
-        Unfit,
-        NotNow
+        Available,
+        NotNow,
+        NotInterested,
+        Unfit
     }
 }

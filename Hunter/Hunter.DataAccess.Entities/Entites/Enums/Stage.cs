@@ -12,6 +12,8 @@ namespace Hunter.DataAccess.Entities
         TestDone,
         Interviewed,
         Failed,
+        TestFailed,
+        InterviewFailed,
         Passed
     }
 }
