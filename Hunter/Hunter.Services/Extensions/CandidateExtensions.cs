@@ -33,7 +33,6 @@ namespace Hunter.Services
                 AddDate = candidate.AddDate,
                 Cards = candidate.Card.Select(x => x.ToCardDto()).ToList(),
                 PoolNames = candidate.Pool.Select(x => x.Name).ToList(),
-                Photo = candidate.Photo,
                 Resolution = (int) candidate.Resolution,
                 ShortListed = candidate.Shortlisted,
                 Origin = (int) candidate.Origin,
@@ -60,7 +59,6 @@ namespace Hunter.Services
             candidate.AddedByProfileId = dto.AddedByProfileId;
             //Card = dto.Cards.ToList();
             //Pool = new List<Pool>();
-            candidate.Photo = dto.Photo;
             candidate.Resolution = (Resolution)dto.Resolution;
             candidate.Shortlisted = dto.ShortListed;
             candidate.Origin = (Origin)dto.Origin;

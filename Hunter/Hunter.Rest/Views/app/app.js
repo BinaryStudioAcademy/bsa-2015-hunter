@@ -1,5 +1,5 @@
 ﻿
-angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.directives.dirPagination'])
+angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.directives.dirPagination', 'ui.bootstrap', 'ngFileUpload', 'ODataResources', 'checklist-model'])
     .config([
         '$routeProvider', function ($routeProvider) {
 
@@ -36,7 +36,7 @@ angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.dir
                     controller: "VacancyAddEditController",
                     controllerAs: 'vacancyAddEditCtrl'
                 })
-                .when('/vacancy/:id', {
+                .when('/vacancy/:id/longlist', {
                     templateUrl: viewPath + 'vacancy/longlist/longlist.html',
                     controller: "LongListController",
                     controllerAs: 'longListCtrl'

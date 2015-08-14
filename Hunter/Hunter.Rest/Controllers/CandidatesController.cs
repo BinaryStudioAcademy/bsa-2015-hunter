@@ -7,6 +7,9 @@ using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.OData;
+using System.Web.Http.OData.Extensions;
+using System.Web.Http.OData.Query;
 using Hunter.DataAccess.Entities;
 using Hunter.Services.Dto;
 using Hunter.Services.Interfaces;
@@ -44,6 +47,20 @@ namespace Hunter.Rest.Controllers
             }
             
         }
+
+        [HttpGet]
+        [Route("odata")]
+        public IHttpActionResult GetOdata(ODataQueryOptions<CandidateDto> options)
+        {
+            IQueryable results = options.ApplyTo(_candidateService.GetAllInfo().OrderByDescending(c => c.AddDate).AsQueryable());
+            var result = new PageResult<CandidateDto>(
+                results as IEnumerable<CandidateDto>,
+                Request.ODataProperties().NextLink,
+                Request.ODataProperties().TotalCount);
+            return Ok(result);
+        }
+
+
 
         [HttpGet]
         [Route("{id:int}")]
@@ -109,6 +126,25 @@ namespace Hunter.Rest.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("{id:int}/photo")]
+        public HttpResponseMessage GetPhotoUrl(int id)
+        {
+            if (_candidateService.Get(id) == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+
+            if (_candidateService.Get(id).Photo != null)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, "api/fileupload/pictures/" + id);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.NoContent);
+            }
+        }
+
         [HttpPost]
         [Route("")]
         public HttpResponseMessage Post(CandidateDto candidate)
@@ -116,7 +152,7 @@ namespace Hunter.Rest.Controllers
             if (ModelState.IsValid)
             {
                 _candidateService.Add(candidate);
-                return Request.CreateResponse(HttpStatusCode.Created, candidate);
+                return Request.CreateResponse(HttpStatusCode.Created, _candidateService.Get(i=>i.Email.Equals(candidate.Email)));
             }
             else
             {
@@ -140,7 +176,7 @@ namespace Hunter.Rest.Controllers
                     return Request.CreateResponse(HttpStatusCode.NotFound, e.Message);
                 }
 
-                return Request.CreateResponse(HttpStatusCode.OK);
+                return Request.CreateResponse(HttpStatusCode.OK, candidate);
             }
             else
             {

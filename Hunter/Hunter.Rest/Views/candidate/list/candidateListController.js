@@ -1,4 +1,4 @@
-﻿(function() {
+﻿(function () {
     'use strict';
 
     angular
@@ -6,149 +6,133 @@
         .controller('CandidateListController', CandidateListController);
 
     CandidateListController.$inject = [
-        '$location',
+       '$location',
         '$filter',
         '$scope',
         'AuthService',
-        'CandidateHttpService'
-        
+        '$odataresource',
+        'PoolsHttpService',
+        '$odata',
+        'EnumConstants'
+
 
     ];
 
-    function CandidateListController($location, $filter, $scope, authService, candidateHttpService) {
+    function CandidateListController($location, $filter, $scope, authService, $odataresource, PoolsHttpService, $odata, EnumConstants) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         vm.name = "Candidates";
 
         vm.currentPage = 1;
-        vm.pageSize = 10;
+        vm.pageSize = 5;
+        vm.totalItems = 0;
+        vm.skip = 0;
+        vm.order = {
+            field: 'FirstName',
+            dir: 'asc'
+        }
 
-        var pools = {
-            '.NET': false,
-            'JS': false,
-            'PHP': false,
-            'QA': false
-        };
-
-        var statuses = {
-            'New': false,
-            'InReview': false,
-            'Hired': false
-        };
-
-        var inviters = [
-            { 'name': 'Ulyana', 'id': 1, 'isChecked': false },
-            { 'name': 'Kate', 'id': 2, 'isChecked': false },
-            { 'name': 'Ira', 'id': 3, 'isChecked': false }
-        ];
-
-        var options = {
-            'poolFilters': pools,
-            'inviterFilters': inviters,
-            'statusFilters': statuses,
-            'nameFilter': ''
-        };
-
-        vm.filterOptions = options;
-        $scope.$watch(
-            'candidateCtrl.filterOptions.nameFilter',
-            function (newVal) {
-                vm.filterOptions.nameFilter = newVal;
-                $filter('CandidatesFilter')(vm.candidateList, vm.filterOptions);
-            });
-
-        //(function() {
-        //    // This is function for initialization actions, for example checking auth
-        //    if (authService.isLoggedIn()) {
-        //    // Can Make Here Any Actions For Data Initialization, for example, http queries, etc.
-        //    } else {
-        //        $location.url('/login');
-        //    }
-        //})();
-
-        vm.candidateList;
-        // Here we should write any functions we need, for example, body of user actions methods.
-        candidateHttpService.getCandidateList().then(function (data) {
-            vm.candidateList = data.data;
-            console.log(data.data);
-
-            fake();
+        vm.pools = [];
+        PoolsHttpService.getAllPools().then(function (result) {
+            vm.pools = result;
         });
 
-        function toggleCheckbox() {
-            $filter('CandidatesFilter')(vm.candidateList, vm.filterOptions);
+        vm.filter = {
+            pools: [],
+            inviters: [],
+            statuses: [],
+            search: ''
+        };
+
+        vm.statuses = EnumConstants.resolutions;
+
+        vm.inviters = [
+            { 'name': 'Ulyana', 'email': 'recruiter@local.com' },
+            { 'name': 'Kate', 'email': 'recruiter2@local.com' },
+            { 'name': 'Ira', 'email': 'recruiter3@local.com' }
+        ];
+
+        var predicate;
+
+        var Candidates = $odataresource('/api/Candidates/odata');
+
+        vm.getCandidates = function () {
+            var cands = Candidates.odata()
+                                .withInlineCount()
+                                .take(vm.pageSize)
+                                .skip(vm.skip)
+                                .filter(predicate)
+                                .orderBy(vm.order.field, vm.order.dir)
+                                .query(function () {
+                                    vm.candidateList = cands.items;
+                                    vm.totalItems = cands.count;
+                                });
         }
 
-        vm.toggle = toggleCheckbox;
-
-        function fake() {
-            //pool fake
-            vm.candidateList[0].poolNames.push({ 'name': '.NET' });
-            vm.candidateList[1].poolNames.push({ 'name': '.NET' });
-            vm.candidateList[2].poolNames.push({ 'name': '.NET' });
-            vm.candidateList[3].poolNames.push({ 'name': 'JS' });
-            vm.candidateList[4].poolNames.push({ 'name': 'JS' });
-            vm.candidateList[5].poolNames.push({ 'name': 'JS' });
-            vm.candidateList[6].poolNames.push({ 'name': 'PHP' });
-            vm.candidateList[7].poolNames.push({ 'name': 'PHP' });
-            vm.candidateList[8].poolNames.push({ 'name': 'PHP' });
-            vm.candidateList[9].poolNames.push({ 'name': 'QA' });
-            vm.candidateList[10].poolNames.push({ 'name': 'QA' });
-            vm.candidateList[11].poolNames.push({ 'name': 'QA' });
-            vm.candidateList[12].poolNames.push({ 'name': '.NET' });
-            vm.candidateList[13].poolNames.push({ 'name': '.NET' });
-            vm.candidateList[14].poolNames.push({ 'name': '.NET' });
-
-            //results:
-            //.NET -> Hollis Sefton; Porter Wystan; Gabe Raven; Gloria Delma; Deanne Imogene; Lon Abner;
-            //JS -> Jack Sylvanus; Lindsay Darryl; Jennie Charlie
-            //PHP -> Gracelyn Moriah; Elizabeth Rona; Sunny Fawn
-            //QA -> Christianne Diantha; Allie Marideth; Kennedy Wardell
-
-
-            //inviter fake
-            vm.candidateList[0].addedByProfileId = 1;
-            vm.candidateList[1].addedByProfileId = 2;
-            vm.candidateList[2].addedByProfileId = 3;
-            vm.candidateList[3].addedByProfileId = 1;
-            vm.candidateList[4].addedByProfileId = 1;
-            vm.candidateList[5].addedByProfileId = 1;
-            vm.candidateList[6].addedByProfileId = 2;
-            vm.candidateList[7].addedByProfileId = 2;
-            vm.candidateList[8].addedByProfileId = 2;
-            vm.candidateList[9].addedByProfileId = 3;
-            vm.candidateList[10].addedByProfileId = 3;
-            vm.candidateList[11].addedByProfileId = 3;
-            vm.candidateList[12].addedByProfileId = 3;
-            vm.candidateList[13].addedByProfileId = 3;
-            vm.candidateList[14].addedByProfileId = 3;
-
-            //results:
-            //Ulyana -> Hollis Sefton; Jack Sylvanus; Lindsay Darryl; Jennie Charlie
-            //Kate -> Porter Wystan; Gracelyn Moriah; Elizabeth Rona; Sunny Fawn
-            //Ira -> Gabe Raven; Christianne Diantha; Allie Marideth; Kennedy Wardell; Gloria Delma; Deanne Imogene; Lon Abner;
-
-            //statuses fake
-            vm.candidateList[0].resolutionString = 'New';
-            vm.candidateList[1].resolutionString = 'New';
-            vm.candidateList[2].resolutionString = 'New';
-            vm.candidateList[3].resolutionString = 'New';
-            vm.candidateList[4].resolutionString = 'New';
-            vm.candidateList[5].resolutionString = 'Hired';
-            vm.candidateList[6].resolutionString = 'Hired';
-            vm.candidateList[7].resolutionString = 'Hired';
-            vm.candidateList[8].resolutionString = 'Hired';
-            vm.candidateList[9].resolutionString = 'Hired';
-            vm.candidateList[10].resolutionString = 'InReview';
-            vm.candidateList[11].resolutionString = 'InReview';
-            vm.candidateList[12].resolutionString = 'InReview';
-            vm.candidateList[13].resolutionString = 'InReview';
-            vm.candidateList[14].resolutionString = 'InReview';
-
-            //result:
-            //New -> Hollis Sefton; Porter Wystan; Gabe Raven; Jack Sylvanus; Lindsay Darryl;
-            //Hired -> Jennie Charlie; Gracelyn Moriah; Elizabeth Rona; Sunny Fawn; Christianne Diantha;
-            //InReview -> Allie Marideth; Kennedy Wardell; Gloria Delma; Deanne Imogene; Lon Abner;
+        vm.sort = function (field) {
+            vm.order.field = field;
+            vm.order.dir = vm.order.dir == 'desc' ? 'asc' : 'desc';
+            vm.getCandidates();
         }
+
+
+        $scope.$watch('candidateListCtrl.filter', function () {
+            var filt = [];
+
+            if (vm.filter.pools.length > 0) {
+                var poolPred = [];
+                angular.forEach(vm.filter.pools, function (value, key) {
+                    poolPred.push(new $odata.Predicate(new $odata.Property('PoolNames/any(p: p eq \'' + value + '\' )'), true));
+                });
+
+                poolPred = $odata.Predicate.or(poolPred);
+                filt.push(poolPred);
+            }
+
+            if (vm.filter.inviters.length > 0) {
+                var invPred = [];
+                angular.forEach(vm.filter.inviters, function (value, key) {
+                    invPred.push(new $odata.Predicate("AddedBy", value));
+                });
+
+                invPred = $odata.Predicate.or(invPred);
+                filt.push(invPred);
+            }
+
+            if (vm.filter.statuses.length > 0) {
+                var stPred = [];
+                angular.forEach(vm.filter.statuses, function (value, key) {
+                    stPred.push(new $odata.Predicate('Resolution', value));
+                });
+
+                stPred = $odata.Predicate.or(stPred);
+                filt.push(stPred);
+            }
+
+            if (vm.filter.search.length > 0) {
+                var pred = $odata.Predicate.or([
+                    new $odata.Func('substringof', new $odata.Property('tolower(\'' + vm.filter.search + '\')'), new $odata.Property('tolower(FirstName)')),
+                    new $odata.Func('substringof', new $odata.Property('tolower(\'' + vm.filter.search + '\')'), new $odata.Property('tolower(LastName)'))
+                ]);
+
+                filt.push(pred);
+            }
+
+            if (filt.length > 0) {
+                predicate = $odata.Predicate.and(filt);
+            } else {
+                predicate = undefined;
+            }
+            vm.getCandidates();
+        }, true);
+
+
+        $scope.$watch('candidateListCtrl.currentPage', function () {
+            vm.skip = (vm.currentPage - 1) * vm.pageSize;
+            vm.getCandidates();
+        });
+
+        vm.getCandidates();
     }
+
 })();
