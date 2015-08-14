@@ -12,6 +12,7 @@ using System.Net.Http.Headers;
 using Hunter.Rest.Formaters;
 using Hunter.Services.Dto;
 
+
 namespace Hunter.Rest
 {
     public static class WebApiConfig
@@ -37,7 +38,6 @@ namespace Hunter.Rest
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
           
             config.Formatters.Add(new UploadFormater());
-
 
             config.Filters.Add(new HandleErrorAttribute());
         }

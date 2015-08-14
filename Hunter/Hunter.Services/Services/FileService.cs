@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Web;
+using System.Linq;
 using Hunter.Common.Interfaces;
 using Hunter.Services.Dto;
 using Hunter.Services.Interfaces;

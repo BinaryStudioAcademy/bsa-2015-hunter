@@ -42,6 +42,7 @@
 
         //Here we should write all signatures for user actions callback method, for example,
         vm.addEditCandidate = addEditCandidate;
+        vm.onFileSelect = fileUploadService.onFileSelect;
 
         vm.onFileSelect = fileUploadService.onFileSelect;
 
