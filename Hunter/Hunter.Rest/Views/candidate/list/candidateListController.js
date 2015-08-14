@@ -116,5 +116,5 @@
 
         vm.getCandidates();
     }
-    }
+    
 })();
