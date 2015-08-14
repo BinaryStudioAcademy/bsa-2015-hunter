@@ -12,11 +12,11 @@
         'CandidateHttpService',
         'CandidateAddEditService',
         'PoolsHttpService',
-        'FileUploadService'
+        'UploadResumeService'
     ];
 
     function CandidateAddEditController($location, $routeParams, authService,
-        candidateHttpService, candidateAddEditService, poolsHttpService, fileUploadService) {
+        candidateHttpService, candidateAddEditService, poolsHttpService, uploadResumeService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         //vm.categories = [{ name: 'Select Candidate Category' }]; // .NET, JS, PHP
@@ -42,9 +42,8 @@
 
         //Here we should write all signatures for user actions callback method, for example,
         vm.addEditCandidate = addEditCandidate;
-        vm.onFileSelect = fileUploadService.onFileSelect;
 
-        vm.onFileSelect = fileUploadService.onFileSelect;
+        vm.onFileSelect = uploadResumeService.onFileSelect;
 
         (function () {
             // This is function for initialization actions, for example checking auth
@@ -67,7 +66,6 @@
             if (candidate && candidate.Id!=null) {
                 if (candidateAddEditService.validateData(candidate, vm.errorObject)) {
                     candidateHttpService.updateCandidate(candidate, successAddEditCandidate, candidate.Id);
-                    fileUploadService.uploadResume(candidate);
                 } else {
                     //alertify.error('Some Fields Are Incorrect');
                     alert('Some Fields Are Incorrect : ' + vm.errorObject.message);
@@ -75,7 +73,6 @@
             } else if (candidate) {
                 if (candidateAddEditService.validateData(candidate, vm.errorObject)) {
                     candidateHttpService.addCandidate(candidate, successAddEditCandidate);
-                    fileUploadService.uploadWithLatenc(candidate);
                 } else {
                     //alertify.error('Some Fields Are Incorrect');
                     alert('Some Fields Are Incorrect : ' + vm.errorObject.message);
@@ -169,8 +166,8 @@
         }
 
         function successAddEditCandidate(data) {
-            console.log(data);
-            console.log(data);
+            debugger;
+            uploadResumeService.uploadResume(data.data);
             $location.url('/candidate/list');
         }
     }

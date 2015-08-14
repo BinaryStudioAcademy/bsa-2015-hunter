@@ -116,7 +116,7 @@ namespace Hunter.Rest.Controllers
             if (ModelState.IsValid)
             {
                 _candidateService.Add(candidate);
-                return Request.CreateResponse(HttpStatusCode.Created, candidate);
+                return Request.CreateResponse(HttpStatusCode.Created, _candidateService.Get(i=>i.Email.Equals(candidate.Email)));
             }
             else
             {
@@ -140,7 +140,7 @@ namespace Hunter.Rest.Controllers
                     return Request.CreateResponse(HttpStatusCode.NotFound, e.Message);
                 }
 
-                return Request.CreateResponse(HttpStatusCode.OK);
+                return Request.CreateResponse(HttpStatusCode.OK, candidate);
             }
             else
             {
