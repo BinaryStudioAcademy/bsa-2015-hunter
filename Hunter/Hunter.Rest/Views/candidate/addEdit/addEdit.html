@@ -83,7 +83,7 @@
         </div>
         <div class="col-md-4">
             <h3>Resume</h3><hr/>
-            <button>Upload Resume</button>
+            <input name="file" type="file" ngf-select ngf-change="candidateAddEditCtrl.onFileSelect($file)">
         </div>
         <div class="col-md-4">
             <h3>Note</h3><hr/>

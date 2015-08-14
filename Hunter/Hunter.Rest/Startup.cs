@@ -62,6 +62,7 @@ namespace Hunter.Rest
             kernel.Bind<IUserRoleService>().To<UserRoleService>();
             kernel.Bind<IUserProfileService>().To<UserProfileService>();
             kernel.Bind<IActivityPostService>().To<ActivityPostService>();
+            kernel.Bind<IFileService>().To<FileService>();
             #endregion
 
             kernel.Bind<Common.Interfaces.ILogger>().To<Logger>();
