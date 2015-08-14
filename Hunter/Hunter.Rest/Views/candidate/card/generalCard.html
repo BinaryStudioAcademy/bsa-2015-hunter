@@ -24,19 +24,27 @@
                     </div>
                     <div class="candidate-resolution form-group">
                         <label>Resolution</label>
-                        <select class="form-control" name="resolution">
-                            <option selected="selected">None</option>
-                            <option>Available</option>
-                            <option>NotInterested</option>
-                            <option>Hired</option>
-                            <option>Unfit</option>
-                            <option>NotNow</option>
+                        <select class="form-control" name="resolution" >
+                            <option ng-repeat="item in generalCardCtrl.resolutions">{{item.name}}</option>
+                            <!-- <option selected="selected">None</option>-->
+                            <!-- <option>Available</option>-->
+                            <!-- <option>NotInterested</option>-->
+                            <!-- <option>Hired</option>-->
+                            <!-- <option>Unfit</option>-->
+                            <!-- <option>NotNow</option>-->
+                        </select>
+                    </div>
+                    <div class="candidate-resolution form-group">
+                        <label>Substatus</label>
+                        <select class="form-control" name="substatuse" >
+                            <option ng-repeat="item in generalCardCtrl.substatuses">{{item.name}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="salary-wrapper">900</div>
-                    <input class="btn-veiw-resume btn btn-default btn-block" type="button" value="Veiw Resume">
+                    <div class="salary-wrapper">{{generalCardCtrl.candidate.salary}}</div>
+                    <a class="btn-veiw-resume btn btn-default btn-block" href="#">Veiw Resume</a>
+                    <a class="btn btn-default btn-block" href="#">View Full Profile</a>
                 </div>
             </div>
         </div>
@@ -45,8 +53,8 @@
         <div class="card_overview_note col-md-8">
             <div id="card-dynamic" ng-include="generalCardCtrl.templateToShow"></div>
         </div>
-        <ul class="inline col-md-4">
-            <li class="pull-left" ng-repeat="tab in generalCardCtrl.tabs track by $index">
+        <ul class="col-md-4">
+            <li ng-repeat="tab in generalCardCtrl.tabs track by $index">
                 <div class="btn btn-default" ng-click="generalCardCtrl.changeTemplate(tab)">{{ tab }}</div>
             </li>
         </ul>

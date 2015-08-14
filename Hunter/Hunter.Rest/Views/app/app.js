@@ -1,5 +1,5 @@
 ﻿
-angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.directives.dirPagination', 'ui.bootstrap', 'ngFileUpload'])
+angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.directives.dirPagination', 'ui.bootstrap', 'ngFileUpload', 'ODataResources', 'checklist-model'])
     .config([
         '$routeProvider', function ($routeProvider) {
 
