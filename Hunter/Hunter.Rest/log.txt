@@ -101,3 +101,33 @@ System.Data.Entity.Migrations.Infrastructure.AutomaticMigrationsDisabledExceptio
    at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
    at Hunter.DataAccess.Db.Base.Repository`1.All() in d:\GitRepos\bsa-2015-hunter\Hunter\Hunter.DataAccess.Db\Base\Repository.cs:line 45
    at Hunter.Services.PoolService.GetAllPools() in d:\GitRepos\bsa-2015-hunter\Hunter\Hunter.Services\Services\PoolService.cs:line 28
+2015-08-14 10:36:59,571 [6] ERROR Hunter [(null)] - Операция была отменена.
+System.OperationCanceledException: Операция была отменена.
+   в System.Threading.CancellationToken.ThrowOperationCanceledException()
+   в System.Threading.CancellationToken.ThrowIfCancellationRequested()
+   в System.Web.Http.HostAuthenticationFilter.<AuthenticateAsync>d__0.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   в System.Web.Http.Controllers.AuthenticationFilterResult.<ExecuteAsync>d__0.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в System.Web.Http.Controllers.ExceptionFilterResult.<ExecuteAsync>d__0.MoveNext()
+2015-08-14 10:36:59,887 [6] ERROR Hunter [(null)] - Операция была отменена.
+System.OperationCanceledException: Операция была отменена.
+   в System.Threading.CancellationToken.ThrowOperationCanceledException()
+   в System.Threading.CancellationToken.ThrowIfCancellationRequested()
+   в System.Web.Http.HostAuthenticationFilter.<AuthenticateAsync>d__0.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   в System.Web.Http.Controllers.AuthenticationFilterResult.<ExecuteAsync>d__0.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в System.Web.Http.Controllers.ExceptionFilterResult.<ExecuteAsync>d__0.MoveNext()
