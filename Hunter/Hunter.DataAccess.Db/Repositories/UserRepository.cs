@@ -7,7 +7,7 @@ namespace Hunter.DataAccess.Db
 {
     public class UserRepository : Repository<User>, IUserRepository
     {
-        public UserRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
+        public UserRepository(DatabaseFactory databaseFactory) : base(databaseFactory)
         {
 
         }

@@ -14,11 +14,12 @@
                 Add new
             </a>
         </div>
-        <div class="col-md-2 col-md-offset-5">
+        <div class="col-md-2 col-md-offset-1">
             <a href="#" class="btn">
+                <span class="fa fa-archive"></span>
                 Go to Archive
             </a>
-        </div>
+    </div>
     </div>
     <div class="row">
         <form role="form">
@@ -31,7 +32,7 @@
                 <ul>
                     <li ng-repeat="pool in vacancyListCtrl.pools">
                         <div class="checkbox">
-                            <label><input type="checkbox" ng-click="vacancyListCtrl.pushPopItem(vacancyListCtrl.pools[$index], vacancyListCtrl.filterParams.pool)">{{pool.name}}</label>
+                            <label><input type="checkbox" ng-click="vacancyListCtrl.pushPopItem(vacancyListCtrl.pools[$index].id, vacancyListCtrl.filterParams.pool)">{{pool.name}}</label>
                         </div>
                     </li>
                 </ul>
@@ -40,16 +41,16 @@
                 <ul>
                     <li ng-repeat="status in vacancyListCtrl.statuses">
                         <div class="checkbox">
-                            <label><input type="checkbox" ng-click="vacancyListCtrl.pushPopItem(vacancyListCtrl.statuses[$index], vacancyListCtrl.filterParams.status)">{{status.name}}</label>
+                            <label><input type="checkbox" ng-click="vacancyListCtrl.pushPopItem(vacancyListCtrl.statuses[$index].id, vacancyListCtrl.filterParams.status)">{{status.name}}</label>
                         </div>
                     </li>
                 </ul>
                 <hr />
-                <h4>Added by</h4>123
+                <h4>Added by</h4>
                 <ul>
                     <li ng-repeat="adder in vacancyListCtrl.adders">
                         <div class="checkbox">
-                            <label><input type="checkbox" ng-click="vacancyListCtrl.pushPopItem(vacancyListCtrl.adders[$index], vacancyListCtrl.filterParams.addedBy)">{{adder}}</label>
+                            <label><input type="checkbox" ng-click="vacancyListCtrl.pushPopItem(vacancyListCtrl.adders[$index].login, vacancyListCtrl.filterParams.addedBy)">{{adder.login}}</label>
                         </div>
                     </li>
                 </ul>
@@ -58,15 +59,6 @@
             </div>
             <div class="col-md-9">
                 <table class="table table-striped table-hover table-responsive">
-                    <tr>
-                        <th>checkbox  </th>
-                        <th>Title</th>
-                        <th>Start date</th>
-                        <th>End date</th>
-                        <th>Candidates</th>
-                        <th>Shortlisted</th>
-                        <th>Added By</th>
-                    </tr>
                     <tr dir-paginate="vacancy in vacancyListCtrl.vacancies | itemsPerPage: vacancyListCtrl.filterParams.pageSize" total-items="10" current-page="vacancyListCtrl.filterParams.page">
                         <td>
                             <input type="checkbox">
@@ -79,9 +71,9 @@
                             </div>
                             <div class="col-md-5">
                                 <a class="btn btn-default " href="#">Edit</a>
-                                <a class="btn btn-default " href="#/vacancy/{{vacancy.id}}">View</a>
+                                <a class="btn btn-default " href="#/vacancy/{{vacancy.id}}/longlist">View</a>
                             </div>
-                            
+ 
 
                             <div class="col-md-1 col-lg-offset-4">
                                 <a class="btn btn-default " href="#">Archive</a>
@@ -89,21 +81,19 @@
                         </td>
                     </tr>
                 </table><br />
+                <div class="text-center">
+                    <dir-pagination-controls boundary-links="true" on-page-change="vacancyListCtrl.pageChangeHandler(newPageNumber)" template-url="/Views/vacancy/list/dirPagination.tpl.html"></dir-pagination-controls>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control">
+                        <option>Close</option>
+                        <option>Edit</option>
+                        <option>Delete</option>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary">Ok</button>
+                </div>
             </div>
-            <div class="text-center">
-                <dir-pagination-controls boundary-links="true" on-page-change="vacancyListCtrl.pageChangeHandler(newPageNumber)" template-url="/Views/vacancy/list/dirPagination.tpl.html"></dir-pagination-controls>
-            </div>
-
-            <div class="col-md-2">
-                <select class="form-control">
-                    <option>Close</option>
-                    <option>Edit</option>
-                    <option>Delete</option>
-                </select>
-            </div>
-            <div class="col-md-1">
-                <button type="submit" class="btn btn-primary">Ok</button>
-            </div>
-        </form>
     </div>
 </div>

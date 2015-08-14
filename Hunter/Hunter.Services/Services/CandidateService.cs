@@ -69,6 +69,19 @@ namespace Hunter.Services
             }
         }
 
+        public Candidate Get(Func<Candidate, bool> predicate)
+        {
+            try
+            {
+                return _candidateRepository.Get(predicate);
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return null;
+            }
+        }
+
         public CandidateDto GetInfo(int id)
         {
             try
@@ -127,8 +140,7 @@ namespace Hunter.Services
             try
             {
                 candidate.AddDate = DateTime.Now;
-                _candidateRepository.Add(candidate);
-                _unitOfWork.SaveChanges();
+                _candidateRepository.UpdateAndCommit(candidate);
             }
             catch (Exception ex)
             {

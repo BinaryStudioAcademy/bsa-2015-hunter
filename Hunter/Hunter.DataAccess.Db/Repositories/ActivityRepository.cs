@@ -3,7 +3,6 @@ using System.Linq;
 using Hunter.DataAccess.Db.Base;
 using Hunter.DataAccess.Entities;
 using Hunter.DataAccess.Interface;
-using Hunter.DataAccess.Interface.Base;
 
 namespace Hunter.DataAccess.Db
 {
@@ -13,16 +12,15 @@ namespace Hunter.DataAccess.Db
         {
         }
 
-        public int ActualActivityAmount(int lastViewd)
+        public int GetCountOfActivitiesSince(int userLastSeenActivity)
         {
-            var res = DataContext.Set<Activity>().Count(x => x.Id > lastViewd);
-
+            var res = DataContext.Set<Activity>().Count(x => x.Id > userLastSeenActivity);
             return res;
         }
 
-        public IEnumerable<Activity> All()
+        public IList<Activity> GetLatestActivities()
         {
-            return base.All().OrderByDescending(x => x.Time);
+            return Query().OrderByDescending(x => x.Time).ToList();
         }
     }
 }

@@ -1,29 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Hunter.DataAccess.Db.Base;
+﻿using Hunter.DataAccess.Db.Base;
 using Hunter.DataAccess.Interface.Base;
 using Hunter.DataAccess.Interface.Repositories;
 using Hunter.Services.Interfaces;
 using Microsoft.Owin;
 using Owin;
-using System.Web.Http;
-using Ninject.Web.Common.OwinHost;
 using Ninject;
 using System.Reflection;
 using System.Web;
-using Ninject.Web.WebApi.OwinHost;
-using Ninject.Extensions.Conventions;
-using Microsoft.Owin.Security.OAuth;
 using Microsoft.AspNet.Identity;
 using Hunter.DataAccess.Db;
 using Hunter.DataAccess.Interface;
 using Hunter.Services;
-using Microsoft.Owin.Logging;
 using Ninject.Web.Common;
 using Hunter.Common.Concrete;
 using Hunter.DataAccess.Entities;
-using Hunter.Services.Services.Interfaces;
 
 [assembly: OwinStartup(typeof(Hunter.Rest.Startup))]
 
@@ -71,6 +61,8 @@ namespace Hunter.Rest
             kernel.Bind<IVacancyService>().To<VacancyService>();
             kernel.Bind<IUserRoleService>().To<UserRoleService>();
             kernel.Bind<IUserProfileService>().To<UserProfileService>();
+            kernel.Bind<IActivityPostService>().To<ActivityPostService>();
+            kernel.Bind<IFileService>().To<FileService>();
             #endregion
 
             kernel.Bind<Common.Interfaces.ILogger>().To<Logger>();

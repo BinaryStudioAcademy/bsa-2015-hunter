@@ -11,10 +11,11 @@
         '$scope',
         '$filter',
         'VacancyHttpService',
-        'PoolsHttpService'
+        'PoolsHttpService',
+        'EnumConstants'
     ];
 
-    function VacancyListController($scope, $filter, vacancyHttpService, poolsHttpService) {
+    function VacancyListController($scope, $filter, vacancyHttpService, poolsHttpService, enumConstants) {
         var vm = this;
 
         vm.filterParams = {
@@ -33,12 +34,8 @@
             vm.pools = data;
         });
 
-        vm.statuses = [
-            { id: 0, name: 'Active' },
-            { id: 1, name: 'Closed' },
-            { id: 2, name: 'Burning' }
-        ];
-        //vm.adders = ["recruiter@local.com", "recruiter2@local.com", "recruiter3@local.com"];
+        vm.statuses = enumConstants.vacancyStates;
+
         vm.sortBy = [
             { name: "Add Date (new first)", reverseSort: true, sortColumn: "startDate" },
             { name: "Add Date (old first)", reverseSort: false, sortColumn: "startDate" },
@@ -64,35 +61,22 @@
 
         vm.pushPopItem = function (item, collection) {
             if (collection == undefined) return;
+            console.log(collection);
             var index = collection.indexOf(item);
+            console.log(index);
             if (index == -1) {
                 collection.push(item);
             } else {
+                console.log("splice");
                 collection.splice(index, 1);
             }
         }
 
-        getFilterInfo('Recruiter').then(function (result) {
+        vacancyHttpService.getFilterInfo('Recruiter').then(function (result) {
             //vm.pools = result.pools;
             vm.adders = result.users;
         });
 
         vm.loadDataByParams();
-
-        function getFilterInfo(roleName) {
-            var deferred = $q.defer();
-            HttpHandler.sendRequest({
-                url: '/api/vacancy/filterInfo/' + roleName,
-                verb: 'GET',
-                successCallback: function (result) {
-                    deferred.resolve(result.data);
-                },
-                errorCallback: function (status) {
-                    console.log("Get filter data error");
-                    console.log(status);
-                }
-            });
-            return deferred.promise;
-        }
     }
 })();

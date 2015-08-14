@@ -6,7 +6,11 @@ namespace Hunter.Common.Concrete
 {
     public class Logger : ILogger
     {
-        public static readonly ILog _log = LogManager.GetLogger("Hunter");
+        private static readonly Lazy<ILogger> _instance = new Lazy<ILogger>(() => new Logger());
+
+        public static ILogger Instance { get { return _instance.Value; } }
+
+        private readonly ILog _log = LogManager.GetLogger("Hunter");
 
         public void Log(Exception ex)
         {

@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
-using Hunter.DataAccess.Entities;
+using Hunter.Services.Dto.ApiResults;
+using Hunter.Services.Dto.User;
 
-namespace Hunter.Services.Services.Interfaces
+namespace Hunter.Services.Interfaces
 {
     public interface IUserProfileService
     {
-        IEnumerable<UserProfile> GetAllUsersProfiles();
-        UserProfile GetUserProfile(string userName);
-        UserProfile GetUserProfile(int userId);
-        void UpdateUserProfile(UserProfile newProfile);
-        void AddUserProfile(UserProfile profile);
-        void DeleteUserProfile(int id);
+        IList<UserProfileRowVm> LoadPage(int page);
+        ResourceApiResult<EditUserProfileVm> GetById(long userProfileId);
+        ApiResult Save(EditUserProfileVm userProfile);
+        IdApiResult Delete(long userProfileId);
     }
 }

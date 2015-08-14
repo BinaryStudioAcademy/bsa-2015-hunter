@@ -1,5 +1,5 @@
 ﻿
-angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.directives.dirPagination'])
+angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.directives.dirPagination', 'ui.bootstrap', 'ngFileUpload', 'ODataResources', 'checklist-model'])
     .config([
         '$routeProvider', function ($routeProvider) {
 
@@ -36,7 +36,7 @@ angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.dir
                     controller: "VacancyAddEditController",
                     controllerAs: 'vacancyAddEditCtrl'
                 })
-                .when('/vacancy/:id', {
+                .when('/vacancy/:id/longlist', {
                     templateUrl: viewPath + 'vacancy/longlist/longlist.html',
                     controller: "LongListController",
                     controllerAs: 'longListCtrl'
@@ -128,7 +128,8 @@ angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.dir
                 .when('/user', {
                     templateUrl: viewPath + 'user/list/list.html',
                     controller: 'UserListController',
-                    controllerAs: 'userListCtrl'
+                    controllerAs: 'userListCtrl',
+                    reloadOnSearch: false
                 })
                 .when('/user/edit', {
                     templateUrl: viewPath + 'user/addEdit/addEdit.html',
@@ -139,11 +140,6 @@ angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.dir
                     templateUrl: viewPath + 'user/addEdit/addEdit.html',
                     controller: 'UserAddEditController',
                     controllerAs: 'userAddEditCtrl'
-                })
-                .when('/user/:id', {
-                    templateUrl: viewPath + 'user/profile/profile.html',
-                    controller: 'UserController',
-                    controllerAs: 'userCtrl'
                 });
 
             //result on statistics button click (slide 1)

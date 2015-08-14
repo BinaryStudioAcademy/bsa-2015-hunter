@@ -16,6 +16,7 @@
          * 
          * @param  httpObject {
             url: STRING,
+            params: JSON OBJECT,
             verb: STRING,
             body: JSON OBJECT,
             successCallback: FUNCTION,
@@ -39,6 +40,9 @@
                 'url': httpObject.url,
                 'data': httpObject.body
             };
+            if (typeof httpObject.params == 'object') {
+                config.params = httpObject.params;
+            }
 
             $http(config)
                 .then(successfulRequest)
@@ -61,7 +65,7 @@
                 }
 
                 if (httpObject.errorMessageToUser) {
-                    alertify.error(errorMessageToUser);
+                    alertify.error(httpObject.errorMessageToUser);
                 }
 
                 if (httpObject.errorCallback && typeof httpObject.errorCallback === 'function') {

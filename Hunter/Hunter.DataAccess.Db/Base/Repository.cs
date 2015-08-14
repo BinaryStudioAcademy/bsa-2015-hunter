@@ -11,27 +11,18 @@ namespace Hunter.DataAccess.Db.Base
     {
         private  DbContext _dataContext;
         private readonly DbSet<T> _dataSet;
+        private IDatabaseFactory _databaseFactory;
+
         protected Repository(IDatabaseFactory databaseFactory)
         {
-            DatabaseFactory = databaseFactory;
-            _dataSet = DataContext.Set<T>();
-        }
-
-        //public Repository(DbContext dataContext)
-        //{
-        //    _dataContext = dataContext;
-        //    _dataSet = dataContext.Set<T>();
-        //}
-
-        protected IDatabaseFactory DatabaseFactory
-        {
-            get;
-            private set;
+            _databaseFactory = databaseFactory;
+            _dataContext = _databaseFactory.Get();
+            _dataSet = _dataContext.Set<T>();
         }
 
         protected DbContext DataContext
         {
-            get { return _dataContext ?? (_dataContext = DatabaseFactory.Get()); }
+            get { return _dataContext; }
         }
 
 
@@ -46,25 +37,34 @@ namespace Hunter.DataAccess.Db.Base
             //return _dataSet.AsNoTracking().ToList();
         }
 
-        public T Get(int id)
+        public T Get(long id)
         {
             return _dataSet.FirstOrDefault(x => x.Id == id);
         }
 
         public T Get(Func<T, bool> predicate)
         {
-            return _dataSet.FirstOrDefault(predicate);
-        }
-
-        public T Add(T entity)
-        {
-            entity = _dataSet.Add(entity);
-            return entity;
+            return _dataContext.Set<T>().FirstOrDefault(predicate);
         }
 
         public void Delete(T entity)
         {
-            _dataSet.Remove(entity);
+            var softDelete = entity as ISoftDeleteEntity;
+            if (softDelete != null)
+            {
+                softDelete.IsDeleted = true;
+                Update(entity);
+            }
+            else
+            {
+                _dataContext.Set<T>().Remove(entity);
+            }
+        }
+
+        public void DeleteAndCommit(T entity)
+        {
+            Delete(entity);
+            _dataContext.SaveChanges();
         }
 
         //public void SaveChanges()
@@ -74,8 +74,27 @@ namespace Hunter.DataAccess.Db.Base
 
         public void Update(T entity)
         {
-            _dataSet.Attach(entity);
-            _dataContext.Entry(entity).State = EntityState.Modified;
+            BeforeSave(entity);
+            if (_dataContext.Entry(entity).State == EntityState.Detached)
+            {
+                _dataContext.Set<T>().Attach(entity);
+                _dataContext.Entry(entity).State = entity.IsNew() ? EntityState.Added: EntityState.Modified;
+            }
+        }
+
+        public void UpdateAndCommit(T entity)
+        {
+            Update(entity);
+            _dataContext.SaveChanges();
+        }
+
+
+        /// <summary>
+        /// Method is executed before calling Save and SaveAndCommit.
+        /// </summary>
+        /// <param name="entity"></param>
+        public virtual void BeforeSave(T entity)
+        {
         }
     }
 }

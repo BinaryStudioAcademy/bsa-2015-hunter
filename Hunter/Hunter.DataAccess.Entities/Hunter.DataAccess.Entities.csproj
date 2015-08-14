@@ -103,6 +103,14 @@
     <Compile Include="Migrations\201508081006215_Add_Time_field_to_Activity.Designer.cs">
       <DependentUpon>201508081006215_Add_Time_field_to_Activity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508081627270_AddDeletedFlagToCandidateAndUserProfile.cs" />
+    <Compile Include="Migrations\201508081627270_AddDeletedFlagToCandidateAndUserProfile.Designer.cs">
+      <DependentUpon>201508081627270_AddDeletedFlagToCandidateAndUserProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508081632306_UserProfileStatusRemoved.cs" />
+    <Compile Include="Migrations\201508081632306_UserProfileStatusRemoved.Designer.cs">
+      <DependentUpon>201508081632306_UserProfileStatusRemoved.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201508091015329_AddPoolBackgroundColorFieldToPoolTable.cs" />
     <Compile Include="Migrations\201508091015329_AddPoolBackgroundColorFieldToPoolTable.Designer.cs">
       <DependentUpon>201508091015329_AddPoolBackgroundColorFieldToPoolTable.cs</DependentUpon>
@@ -118,6 +126,14 @@
     <Compile Include="Migrations\201508131001202_AddLViewedActivityIdInUserProfile.cs" />
     <Compile Include="Migrations\201508131001202_AddLViewedActivityIdInUserProfile.Designer.cs">
       <DependentUpon>201508131001202_AddLViewedActivityIdInUserProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508131820562_AddEditDateInCandidate.cs" />
+    <Compile Include="Migrations\201508131820562_AddEditDateInCandidate.Designer.cs">
+      <DependentUpon>201508131820562_AddEditDateInCandidate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508131846061_Merge_15_08_13.cs" />
+    <Compile Include="Migrations\201508131846061_Merge_15_08_13.Designer.cs">
+      <DependentUpon>201508131846061_Merge_15_08_13.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -144,6 +160,12 @@
     <EmbeddedResource Include="Migrations\201508081006215_Add_Time_field_to_Activity.resx">
       <DependentUpon>201508081006215_Add_Time_field_to_Activity.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508081627270_AddDeletedFlagToCandidateAndUserProfile.resx">
+      <DependentUpon>201508081627270_AddDeletedFlagToCandidateAndUserProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508081632306_UserProfileStatusRemoved.resx">
+      <DependentUpon>201508081632306_UserProfileStatusRemoved.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508091015329_AddPoolBackgroundColorFieldToPoolTable.resx">
       <DependentUpon>201508091015329_AddPoolBackgroundColorFieldToPoolTable.cs</DependentUpon>
     </EmbeddedResource>
@@ -156,10 +178,22 @@
     <EmbeddedResource Include="Migrations\201508131001202_AddLViewedActivityIdInUserProfile.resx">
       <DependentUpon>201508131001202_AddLViewedActivityIdInUserProfile.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508131820562_AddEditDateInCandidate.resx">
+      <DependentUpon>201508131820562_AddEditDateInCandidate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508131846061_Merge_15_08_13.resx">
+      <DependentUpon>201508131846061_Merge_15_08_13.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hunter.Common\Hunter.Common.csproj">
+      <Project>{E541870A-0B8F-4699-AB3C-D34DFE630586}</Project>
+      <Name>Hunter.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

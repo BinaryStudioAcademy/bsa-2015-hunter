@@ -52,9 +52,11 @@ namespace Hunter.Services
         {
             try
             {
-                var pool = _poolRepository.Add(poolViewModel.ToPoolModel());
-                _unitOfWork.SaveChanges();
-                return pool.ToPoolViewModel();
+                // TODO seems like redundant conversions here
+                var entity = poolViewModel.ToPoolModel();
+                _poolRepository.UpdateAndCommit(entity);
+
+                return entity.ToPoolViewModel();
             }
             catch (Exception ex)
             {
@@ -63,12 +65,12 @@ namespace Hunter.Services
             }
         }
 
+        // TODO think of join add and edit methods
         public void UpdatePool(PoolViewModel poolViewModel)
         {
             try
             {
-                _poolRepository.Update(poolViewModel.ToPoolModel());
-                _unitOfWork.SaveChanges();
+                _poolRepository.UpdateAndCommit(poolViewModel.ToPoolModel());
             }
             catch (Exception ex)
             {
@@ -80,8 +82,7 @@ namespace Hunter.Services
         {
             try
             {
-                _poolRepository.Delete(_poolRepository.Get(id));
-                _unitOfWork.SaveChanges();
+                _poolRepository.DeleteAndCommit(_poolRepository.Get(id));
             }
             catch (Exception ex)
             {
