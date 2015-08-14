@@ -491,11 +491,13 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\candidate.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\hrInterview.css" />
     <Content Include="Content\longlist.css" />
     <Content Include="Content\MyStyle.css" />
     <Content Include="Content\pool.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="log4net.xml" />
@@ -710,6 +712,11 @@
     <Content Include="bower_components\ng-file-upload\bower.json" />
     <Content Include="bower_components\ng-file-upload\LICENSE" />
     <Content Include="bower_components\ng-file-upload\README.md" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
