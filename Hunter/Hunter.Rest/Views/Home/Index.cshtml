@@ -12,7 +12,9 @@
 <link href="../../fonts/fontawesome-webfont.woff2" rel="MIME"/>
 <link href="../../Content/font-awesome.min.css" rel="stylesheet"/>
 <link href="~/Content/pool.css" rel="stylesheet"/>
-<link href="~/Content/longlist.css" rel="stylesheet" />
+<link href="~/Content/longlist.css" rel="stylesheet"/>
+<link href="~/Content/hrInterview.css" rel="stylesheet"/>
+<link href="~/Content/candidate.css" rel="stylesheet" />
 
 
 <div ng-view></div>
@@ -26,6 +28,8 @@
 <script src="~/bower_components/angular-utils-pagination/dirPagination.js"></script>
 <script src="~/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
 <script src="~/bower_components/alertifyjs/dist/js/alertify.js"></script>
+<script src="~/bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+<script src="~/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
 <!-- End bower components -->
 
 <!-- Start app -->
@@ -36,6 +40,7 @@
 <script src="~/Views/services/helper/authService.js"></script>
 <script src="~/Views/services/helper/httpHandler.js"></script>
 <script src="~/Views/services/helper/authInterceptorService.js"></script>
+<script src="~/Views/services/helper/fileUploadService.js"></script>
 <!-- End helpers -->
 
 <!-- Start constants -->
@@ -46,6 +51,7 @@
 <script src="~/Views/services/candidate/candidatesHttpService.js"></script>
 <script src="~/Views/candidate/addEdit/candidateAddEditController.js"></script>
 <script src="~/Views/services/candidate/addEdit/candidateAddEditService.js"></script>
+<script src="~/Views/candidate/list/candidateListController.js"></script>
 <script src="~/Views/candidate/profile/candidateProfileController.js"></script>
 <script src="~/Views/candidate/profile/profileApplicationsController.js"></script>
 <script src="~/Views/candidate/profile/profileSpecialNotesController.js"></script>
@@ -54,6 +60,7 @@
 <script src="~/Views/candidate/list/candidateListController.js"></script>
 <script src="~/Views/filters/candidates/candidatesListFilter.js"></script>
 <script src="~/Views/candidate/candidateService.js"></script>
+<script src="~/Views/candidate/list/candidateListController.js"></script>
 <!-- End Candidates -->
 
 <!-- Start Vacancies -->
