@@ -18,7 +18,6 @@
         vm.tabs = ['Overview', 'Special Notes', 'HR Interview', 'Technical Interview', 'Test'];
         vm.candidate;
 
-
         console.log("rout",$routeParams);
 
         candidateHttpService.getCandidate($routeParams["cid"]).then(function (response) {

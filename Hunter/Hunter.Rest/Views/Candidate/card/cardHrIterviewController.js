@@ -5,11 +5,20 @@
         .module('hunter-app')
         .controller('CardHrInterviewController', CardHrInterviewController);
 
-    CardHrInterviewController.$inject = [];
+    CardHrInterviewController.$inject = [
+        "VacancyHttpService",
+        "$routeParams"
+    ];
 
-    function CardHrInterviewController() {
+    function CardHrInterviewController(VacancyHttpService, $routeParams) {
         var vm = this;
 
         vm.templateName = 'HR Interview';
+        vm.vacancy;
+
+        VacancyHttpService.getLongList($routeParams.vid).then(function (result) {
+            console.log(result);
+            vm.vacancy = result;
+        });
     }
 })();
