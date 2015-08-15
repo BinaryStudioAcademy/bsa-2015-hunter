@@ -19,7 +19,8 @@ namespace Hunter.Services.Extensions
                 Comment = test.Comment,
                 FeedbackId = test.FeedbackId,
                 FileId = test.FileId,
-                Url = test.Url
+                Url = test.Url,
+                File = test.File.ToFileDto()
             };
         }
 
@@ -31,6 +32,7 @@ namespace Hunter.Services.Extensions
             test.FeedbackId = testDto.FeedbackId;
             test.FileId = testDto.FileId;
             test.Url = testDto.Url;
+            testDto.File.ToFile(test.File = new File());
         }
     }
 }

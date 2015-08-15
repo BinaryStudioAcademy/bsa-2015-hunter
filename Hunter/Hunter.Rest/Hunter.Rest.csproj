@@ -289,6 +289,7 @@
     <Compile Include="Controllers\CardController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Controllers\PoolController.cs" />
     <Compile Include="Controllers\UserRoleController.cs" />
@@ -884,7 +885,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53147</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
