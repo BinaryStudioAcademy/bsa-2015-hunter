@@ -4,11 +4,11 @@
 
     angular
         .module('hunter-app')
-        .factory("FileUploadService", FileUploadService);
+        .factory("UploadResumeService", UploadResumeService);
 
-    FileUploadService.$inject = ['Upload'];
+    UploadResumeService.$inject = ['Upload'];
 
-    function FileUploadService(upload) {
+    function UploadResumeService(upload) {
         var service = {
             onFileSelect: onFileSelect,
             uploadResume: uploadResume,
@@ -28,10 +28,10 @@
                     method: "POST",
                     data: {
                         directory: "resume//",
-                        id: candidate.Id,
-                        email: candidate.Email,
-                        FirstName: candidate.FirstName,
-                        LastName: candidate.LastName
+                        id: candidate.id,
+                        email: candidate.imail,
+                        FirstName: candidate.firstName,
+                        LastName: candidate.lastName
 
             },
                     file: _file

@@ -17,7 +17,8 @@
             getCandidateList: getCandidateList,
             addCandidate: addCandidate,
             getLongList: getLongList,
-            getLongListDetails: getLongListDetails
+            getLongListDetails: getLongListDetails,
+            getPictureUrl: getPictureUrl
         };
 
         function updateCandidate(body, successCallback, id) {
@@ -104,6 +105,21 @@
             return deferred.promise;
         }
 
+        function getPictureUrl(id) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                verb: 'GET',
+                url: '/api/candidates/' + id + '/photo',
+                successCallback: function (response) {
+                    deferred.resolve(response);
+                },
+                errorCallback: function (status) {
+                    console.log("getting photo url error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
         return service;
     }
 })();

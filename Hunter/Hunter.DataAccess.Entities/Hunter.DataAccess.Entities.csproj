@@ -63,6 +63,7 @@
     <Compile Include="Entites\Enums\Stage.cs" />
     <Compile Include="Entites\Enums\Status.cs" />
     <Compile Include="Entites\Feedback.cs" />
+    <Compile Include="Entites\File.cs" />
     <Compile Include="Entites\IEntity.cs" />
     <Compile Include="Entites\Interview.cs" />
     <Compile Include="Entites\Pool.cs" />
@@ -135,6 +136,10 @@
     <Compile Include="Migrations\201508131846061_Merge_15_08_13.Designer.cs">
       <DependentUpon>201508131846061_Merge_15_08_13.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508151033223_AddTableFileAndRemoveFieldsFromResumeAndTest.cs" />
+    <Compile Include="Migrations\201508151033223_AddTableFileAndRemoveFieldsFromResumeAndTest.Designer.cs">
+      <DependentUpon>201508151033223_AddTableFileAndRemoveFieldsFromResumeAndTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -183,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508131846061_Merge_15_08_13.resx">
       <DependentUpon>201508131846061_Merge_15_08_13.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508151033223_AddTableFileAndRemoveFieldsFromResumeAndTest.resx">
+      <DependentUpon>201508151033223_AddTableFileAndRemoveFieldsFromResumeAndTest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
