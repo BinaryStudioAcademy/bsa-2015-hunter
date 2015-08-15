@@ -9,27 +9,34 @@
         '$routeParams',
         '$scope',
         'CandidateHttpService',
-        'CardService'
+        'CardService',
+        'EnumConstants'
     ];
 
-    function GeneralCardController($routeParams, $scope, candidateHttpService, cardService) {
+    function GeneralCardController($routeParams, $scope, candidateHttpService, cardService, enumConstants) {
         var vm = this;
         vm.templateToShow = '';
         vm.tabs = ['Overview', 'Special Notes', 'HR Interview', 'Technical Interview', 'Test'];
+        vm.currentTabName = vm.tabs[0];
         vm.candidate;
-
+        vm.origins = enumConstants.origins;
+        vm.resolutions = enumConstants.resolutions;
+        vm.substatuses = enumConstants.substatuses;
 
         console.log("rout",$routeParams);
-
-        candidateHttpService.getCandidate($routeParams["cid"]).then(function (response) {
-            vm.candidate = response.data;
-            console.log(response.data);
-        });
+        (function() {
+            candidateHttpService.getCandidate($routeParams["cid"]).then(function (response) {
+                vm.candidate = response.data;
+                console.log(response.data);
+            });
+        })();
+        
 
         vm.changeTemplate = function (tab) {
+            vm.currentTabName = tab;
             vm.templateToShow = cardService.changeTemplate(tab);
-            
         };
 
+        vm.changeTemplate(vm.tabs[0]);
     }
 })();

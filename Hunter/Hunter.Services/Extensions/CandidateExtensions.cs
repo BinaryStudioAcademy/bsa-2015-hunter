@@ -27,13 +27,12 @@ namespace Hunter.Services
                 Linkedin = candidate.Linkedin,
                 Salary = candidate.Salary,
                 YearsOfExperience = Math.Round(experiance + candidate.CalculateYearsOfExperiance(), 1),
-                ResumeId = candidate.ResumeId,
+                ResumeId = candidate.ResumeId != null ? (int)candidate.ResumeId : 0,
                 AddedByProfileId = candidate.AddedByProfileId,
                 AddedBy = candidate.AddedByProfileId.HasValue ? candidate.UserProfile.UserLogin : "",
                 AddDate = candidate.AddDate,
                 Cards = candidate.Card.Select(x => x.ToCardDto()).ToList(),
                 PoolNames = candidate.Pool.Select(x => x.Name).ToList(),
-                Photo = candidate.Photo,
                 Resolution = (int) candidate.Resolution,
                 ShortListed = candidate.Shortlisted,
                 Origin = (int) candidate.Origin,
@@ -60,7 +59,6 @@ namespace Hunter.Services
             candidate.AddedByProfileId = dto.AddedByProfileId;
             //Card = dto.Cards.ToList();
             //Pool = new List<Pool>();
-            candidate.Photo = dto.Photo;
             candidate.Resolution = (Resolution)dto.Resolution;
             candidate.Shortlisted = dto.ShortListed;
             candidate.Origin = (Origin)dto.Origin;

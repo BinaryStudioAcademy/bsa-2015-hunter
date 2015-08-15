@@ -27,10 +27,6 @@ namespace Hunter.Services
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
 
-            if (fileContext.Id == 0)
-                fileContext.Id = GetCandidateId(fileContext);
-
-
             string foolPath = path +
                               String.Format("{0}##{1}##{2}_{3}{4}", fileContext.Id, DateTime.Now.Date.ToShortDateString(), fileContext.FirstName, fileContext.LastName, Path.GetExtension(fileContext.FileExtation));
 
@@ -70,10 +66,5 @@ namespace Hunter.Services
             throw new NotImplementedException();
         }
 
-
-        private int GetCandidateId(FileDto file)
-        {
-            return _candidateService.Get(i=>i.FirstName.Equals(file.FirstName) && i.LastName.Equals(file.LastName) && i.Email.Equals(file.Email)).Id;
-        }
     }
 }

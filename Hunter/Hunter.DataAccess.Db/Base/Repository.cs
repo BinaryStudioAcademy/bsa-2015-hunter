@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using Hunter.DataAccess.Entities;
 using Hunter.DataAccess.Interface.Base;
 
@@ -29,6 +30,19 @@ namespace Hunter.DataAccess.Db.Base
         public IQueryable<T> Query()
         {
             return _dataSet.AsQueryable();
+        }
+
+        public IQueryable<T> QueryIncluding<TProperty>(params Expression<Func<T, TProperty>>[] includes)
+        {
+            var query = Query();
+            if (includes != null && includes.Length > 0)
+            {
+                foreach (var include in includes)
+                {
+                    query = query.Include(include);
+                }
+            }
+            return query;
         }
 
         public IEnumerable<T> All()

@@ -22,6 +22,21 @@ namespace Hunter.Services
             };
             return v;
         }
+
+        public static VacancyRowDto ToRowDto(this Vacancy vacancy)
+        {
+            var v = new VacancyRowDto
+            {
+                Id = vacancy.Id,
+                Name = vacancy.Name,
+                Status = vacancy.Status,
+                StartDate = vacancy.StartDate,
+                EndDate = vacancy.EndDate,
+                PoolName = vacancy.Pool.Name
+            };
+            return v;
+        }
+
         public static Vacancy ToVacancy(this VacancyDto vacancy)
         {
             var v = new Vacancy

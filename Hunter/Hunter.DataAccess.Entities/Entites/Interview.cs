@@ -13,11 +13,10 @@ namespace Hunter.DataAccess.Entities
 
         public DateTime StartTime { get; set; }
 
-        [StringLength(10)]
-        public string Comments { get; set; }
+        [StringLength(3000)]
+        public string Comment { get; set; }
 
-        [StringLength(10)]
-        public string FeedbackId { get; set; }
+        public int? FeedbackId { get; set; }
 
         public virtual Card Card { get; set; }
     }

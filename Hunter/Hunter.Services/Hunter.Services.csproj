@@ -61,10 +61,10 @@
     <Compile Include="Dto\CandidateLongListDetailsDto.cs" />
     <Compile Include="Dto\CandidateLongListDto.cs" />
     <Compile Include="Dto\CardDto.cs" />
+    <Compile Include="Dto\FileDto.cs" />
     <Compile Include="Dto\FilterInfoDto.cs" />
     <Compile Include="Dto\UserProfileDto.cs" />
     <Compile Include="Dto\VacancyLongListDto.cs" />
-    <Compile Include="Dto\FileDto.cs" />
     <Compile Include="Dto\UserRoleDto.cs" />
     <Compile Include="Dto\CandidateDtoWithResolutionString.cs" />
     <Compile Include="Dto\ApiResults\ApiResult.cs" />

@@ -1,5 +1,51 @@
 ﻿<div ng-controller="CardHrInterviewController as hrInterviewCtrl">
     <div class="hrInterview_wrap">
-        <h2>{{hrInterviewCtrl.templateName}}</h2>
+        <div class="btn btn-default" ng-click="generalCardCtrl.changeTemplate(tab)">{{hrInterviewCtrl.vacancy.name}}</div>
+        <!--<div class="btn btn-default" ng-click="generalCardCtrl.changeTemplate(tab)">All Feedbacks</div>
+        <div class="btn btn-default" ng-click="generalCardCtrl.changeTemplate(tab)">My Feedbacks</div>-->
+        <div class="hrInterview_comments">
+            <div class="hrInterview_form">
+                <form>
+                    <div>
+                        <div>
+                            <h3>English</h3>
+                            <span>Name at Date</span>
+                        </div>
+                        <textarea name="text">TEST</textarea>
+                    </div>
+                    <div>
+                        <input class="btn" type="submit" value="Edit/save">
+                    </div>
+                </form>
+            </div>
+            <div class="hrInterview_form">
+                <form>
+                    <div>
+                        <div>
+                            <h3>Personal</h3>
+                            <span>Name at Date</span>
+                        </div>
+                        <textarea name="text">TEST</textarea>
+                    </div>
+                    <div>
+                        <input class="btn" type="submit" value="Edit/save">
+                    </div>
+                </form>
+            </div>
+            <div class="hrInterview_form">
+                <form>
+                    <div>
+                        <div>
+                            <h3>Expertise</h3>
+                            <span>Name at Date</span>
+                        </div>
+                        <textarea name="text">TEST</textarea>
+                    </div>
+                    <div>
+                        <input class="btn" type="submit" value="Edit/save">
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>

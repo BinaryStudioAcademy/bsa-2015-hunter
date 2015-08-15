@@ -18,7 +18,6 @@
 
 <link href="~/Content/card/cardTest.css" rel="stylesheet"/>
 
-
 <div ng-view></div>
 
 <!-- Start bower components -->
@@ -32,6 +31,8 @@
 <script src="~/bower_components/alertifyjs/dist/js/alertify.js"></script>
 <script src="~/bower_components/ng-file-upload/ng-file-upload.min.js"></script>
 <script src="~/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script src="~/bower_components/checklist-model/checklist-model.js"></script>
+<script src="~/Scripts/odataresources.js"></script>
 <!-- End bower components -->
 
 <!-- Start app -->
@@ -42,7 +43,6 @@
 <script src="~/Views/services/helper/authService.js"></script>
 <script src="~/Views/services/helper/httpHandler.js"></script>
 <script src="~/Views/services/helper/authInterceptorService.js"></script>
-<script src="~/Views/services/helper/fileUploadService.js"></script>
 <!-- End helpers -->
 
 <!-- Start constants -->
@@ -95,6 +95,8 @@
 
 <!-- Start Files -->
 <script src="~/Views/files/list/fileListController.js"></script>
+<script src="~/Views/services/files/uploadResumeService.js"></script>
+<script src="~/Views/services/files/uploadPhotoService.js"></script>
 <!-- End Files -->
 
 <!-- Start Users -->

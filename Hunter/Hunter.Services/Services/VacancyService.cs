@@ -4,6 +4,7 @@ using Hunter.DataAccess.Interface;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Interface.Base;
 using System;
+using Hunter.Services.Interfaces;
 
 namespace Hunter.Services
 {
@@ -28,10 +29,10 @@ namespace Hunter.Services
             _logger = logger;
             _unitOfWork = unitOfWork;
         }
-        public IEnumerable<VacancyDto> Get()
+        public IList<VacancyRowDto> Get()
         {
-            var vacancies = _vacancyRepository.All();
-            return vacancies.Select(item => item.ToVacancyDTO()).ToList();
+            var vacancies = _vacancyRepository.QueryIncluding(v=> v.Pool).OrderByDescending(v => v.StartDate).ToList();
+            return vacancies.Select(item => item.ToRowDto()).ToList();
         }
         public VacancyDto Get(int id)
         {
