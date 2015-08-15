@@ -27,7 +27,7 @@ namespace Hunter.Services
                 Linkedin = candidate.Linkedin,
                 Salary = candidate.Salary,
                 YearsOfExperience = Math.Round(experiance + candidate.CalculateYearsOfExperiance(), 1),
-                ResumeId = candidate.ResumeId,
+                ResumeId = candidate.ResumeId != null ? (int)candidate.ResumeId : 0,
                 AddedByProfileId = candidate.AddedByProfileId,
                 AddedBy = candidate.AddedByProfileId.HasValue ? candidate.UserProfile.UserLogin : "",
                 AddDate = candidate.AddDate,

@@ -11,10 +11,8 @@ namespace Hunter.DataAccess.Entities
         [StringLength(2000)]
         public string Url { get; set; }
 
-        [StringLength(255)]
-        public string FileName { get; set; }
+        public int? FileId { get; set; }
 
-        public byte[] FileStream { get; set; }
 
         [StringLength(3000)]
         public string Comment { get; set; }
@@ -24,6 +22,8 @@ namespace Hunter.DataAccess.Entities
         public int? FeedbackId { get; set; }
 
         public virtual Card Card { get; set; }
+
+        public virtual File File { get; set; }
 
         public virtual Feedback Feedback { get; set; }
     }
