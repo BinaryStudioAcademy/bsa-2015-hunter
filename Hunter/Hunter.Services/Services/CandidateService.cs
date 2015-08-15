@@ -173,7 +173,11 @@ namespace Hunter.Services
             candidate.Pool.Clear();
             foreach (var item in dto.PoolNames)
             {
-                candidate.Pool.Add(_poolRepository.Get(x => x.Name == item));
+                var pool = _poolRepository.Get(x => x.Name == item);
+                if (pool != null)
+                {
+                    candidate.Pool.Add(pool);
+                }
             }
             try
             {
