@@ -7,7 +7,7 @@ namespace Hunter.DataAccess.Db
 {
     public class TestRepository : Repository<Test>, ITestRepository
     {
-        public TestRepository(DatabaseFactory databaseFactory) : base(databaseFactory)
+        public TestRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
         {
 
         }

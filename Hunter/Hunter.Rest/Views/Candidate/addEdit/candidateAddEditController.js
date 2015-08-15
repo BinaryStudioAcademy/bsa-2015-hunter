@@ -183,7 +183,6 @@
         }
 
         function successAddEditCandidate(data) {
-            debugger;
             uploadResumeService.uploadResume(data.data);
             uploadPhotoService.uploadPicture(vm.picture, data.data.id);
             $location.url('/candidate/list');

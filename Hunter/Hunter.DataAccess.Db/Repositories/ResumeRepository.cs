@@ -7,7 +7,7 @@ namespace Hunter.DataAccess.Db
 {
     public class ResumeRepository : Repository<Resume>, IResumeRepository
     {
-        public ResumeRepository(DatabaseFactory databaseFactory) : base(databaseFactory)
+        public ResumeRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
         {
 
         }

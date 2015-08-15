@@ -7,7 +7,7 @@ namespace Hunter.DataAccess.Db
 {
     public class PoolRepository : Repository<Pool>, IPoolRepository
     {
-        public PoolRepository(DatabaseFactory databaseFactory) : base(databaseFactory)
+        public PoolRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
         {
 
         }
