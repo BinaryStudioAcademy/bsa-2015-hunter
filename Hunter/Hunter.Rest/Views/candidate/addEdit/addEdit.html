@@ -76,12 +76,13 @@
     <div class="row">
         <div class="col-md-4">
             <h3>Pools</h3><hr/>
-            <select multiple ng-model="candidateAddEditCtrl.selectedPools" ng-options="pool.name for pool in candidateAddEditCtrl.pools">
-                <!-- <option>.Net</option>-->
-                <!-- <option>QA</option>-->
-                <!-- <option>PHP</option>-->
-                <!-- <option>JS</option>-->
-            </select>
+            <ul>
+                <li ng-repeat="pool in candidateAddEditCtrl.pools">
+                    <input type="checkbox" checklist-model="candidateAddEditCtrl.selectedPools" checklist-value="pool.name"> {{pool.name}}
+                </li>
+            </ul>
+            <!--<select multiple ng-model="candidateAddEditCtrl.selectedPools" ng-options="pool.name for pool in candidateAddEditCtrl.pools">
+            </select>-->
         </div>
         <div class="col-md-4">
             <h3>Resume</h3><hr/>

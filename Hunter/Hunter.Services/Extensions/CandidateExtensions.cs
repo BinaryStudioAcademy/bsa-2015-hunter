@@ -55,7 +55,7 @@ namespace Hunter.Services
             candidate.Linkedin = dto.Linkedin;
             candidate.Salary = dto.Salary;
             candidate.YearsOfExperience = dto.YearsOfExperience;
-            candidate.ResumeId = dto.ResumeId;
+            candidate.ResumeId = dto.ResumeId == 0? (int?)null: dto.ResumeId;
             candidate.AddedByProfileId = dto.AddedByProfileId;
             //Card = dto.Cards.ToList();
             //Pool = new List<Pool>();
