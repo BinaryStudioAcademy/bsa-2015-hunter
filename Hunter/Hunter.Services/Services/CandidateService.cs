@@ -16,7 +16,7 @@ namespace Hunter.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICandidateRepository _candidateRepository;
         private readonly ICardRepository _cardRepository;
-        private readonly ILogger _logger ;
+        private readonly ILogger _logger;
         private readonly IPoolRepository _poolRepository;
 
         public CandidateService(IUnitOfWork unitOfWork, ICandidateRepository candidateRepository, ICardRepository cardRepository,
@@ -43,7 +43,7 @@ namespace Hunter.Services
         }
 
         public IEnumerable<CandidateDto> GetAllInfo()
-        { 
+        {
             try
             {
                 var data = _candidateRepository.All().Select(x => x.ToCandidateDto());
@@ -135,7 +135,11 @@ namespace Hunter.Services
             dto.ToCandidateModel(candidate);
             foreach (var item in dto.PoolNames)
             {
-                candidate.Pool.Add(_poolRepository.Get(x => x.Name == item));
+                var pool = _poolRepository.Get(x => x.Name == item);
+                if (pool != null)
+                {
+                    candidate.Pool.Add(pool);
+                }
             }
             try
             {
@@ -145,6 +149,7 @@ namespace Hunter.Services
             catch (Exception ex)
             {
                 _logger.Log(ex);
+                throw new Exception("Database save error!"); 
             }
         }
 
@@ -168,7 +173,7 @@ namespace Hunter.Services
             candidate.Pool.Clear();
             foreach (var item in dto.PoolNames)
             {
-                candidate.Pool.Add(_poolRepository.Get(x=>x.Name==item));
+                candidate.Pool.Add(_poolRepository.Get(x => x.Name == item));
             }
             try
             {
