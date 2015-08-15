@@ -113,5 +113,19 @@ namespace Hunter.Services
                 return new VacancyLongListDto();
             }
         }
+
+
+        IEnumerable<VacancyDto> IVacancyService.Get()
+        {
+            try
+            {
+                return _vacancyRepository.All().Select(v => v.ToVacancyDTO());
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return new VacancyDto[0];
+            }
+        }
     }
 }
