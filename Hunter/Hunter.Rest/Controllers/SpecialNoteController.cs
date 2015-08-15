@@ -64,12 +64,12 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("user/{login}")]
-        public HttpResponseMessage GetSpecialNoteForUser(string login)
+        [Route("user/{login}/{vid}/{cid}")]
+        public HttpResponseMessage GetSpecialNoteForUser(string login,int vid, int cid)
         {
             try
             {
-                var specialNotes = _specialNoteService.GetSpecialNotesForUser(login);
+                var specialNotes = _specialNoteService.GetSpecialNotesForUser(login, vid, cid);
                 return Request.CreateResponse(HttpStatusCode.OK, specialNotes);
             }
             catch (Exception ex)
@@ -94,14 +94,17 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpPost]
-        [Route("")]
-        public HttpResponseMessage PostSpecialNote(SpecialNoteDto model)
+        [Route("{vid}/{cid}")]
+        public HttpResponseMessage PostSpecialNote(int vid, int cid, [FromBody] SpecialNoteDto model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _specialNoteService.AddSpecialNote(model);
+                    var login = RequestContext.Principal.Identity.Name;
+                    model.UserLogin = login;
+                    model.LastEdited = DateTime.Now;
+                    _specialNoteService.AddSpecialNote(model,vid,cid);
                     return Request.CreateResponse(HttpStatusCode.OK, "Ok");
                 }
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid model state");
@@ -113,13 +116,14 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpPut]
-        [Route("")]
-        public HttpResponseMessage UpdateSpecialNote(SpecialNoteDto model)
+        [Route("{id}")]
+        public HttpResponseMessage UpdateSpecialNote(int id,[FromBody] SpecialNoteDto model)
         {
             try
             {
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && id == model.Id)
                 {
+                    model.LastEdited = DateTime.Now;
                     _specialNoteService.UpdateSpecialNote(model);
                     return Request.CreateResponse(HttpStatusCode.OK, "Ok");
                 }

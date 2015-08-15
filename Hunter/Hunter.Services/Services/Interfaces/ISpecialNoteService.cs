@@ -14,13 +14,13 @@ namespace Hunter.Services.Services.Interfaces
 
         SpecialNoteDto GetSpecialNoteById(int id);
 
-        void AddSpecialNote(SpecialNoteDto entity);
+        void AddSpecialNote(SpecialNoteDto entity, int vid, int cid);
 
         void UpdateSpecialNote(SpecialNoteDto entity);
 
         void DeleteSpecialNoteById(int id);
 
-        IEnumerable<SpecialNoteDto> GetSpecialNotesForUser(string login);
+        IEnumerable<SpecialNoteDto> GetSpecialNotesForUser(string login, int vacancyId, int candidateId);
 
         IEnumerable<SpecialNoteDto> GetSpecialNotesForCandidate(int candidateId);
 

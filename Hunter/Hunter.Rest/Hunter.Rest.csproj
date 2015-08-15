@@ -493,10 +493,10 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\candidate.css" />
     <Content Include="Content\hrInterview.css" />
+    <Content Include="Content\hrSpecialNote.css" />
     <Content Include="Content\longlist.css" />
     <Content Include="Content\MyStyle.css" />
     <Content Include="Content\pool.css" />
-    <Content Include="Content\SpecialNotes.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -776,6 +776,7 @@
     <Content Include="Views\services\candidate\addEdit\addEditService.js" />
     <Content Include="Views\services\candidate\candidatesFilter.js" />
     <Content Include="Views\services\candidate\candidatesHttpService.js" />
+    <Content Include="Views\services\candidate\specialNote\specialNoteHttpService.js" />
     <Content Include="Views\services\constants\enumConstants.js" />
     <Content Include="Views\services\directive\autofocus.js" />
     <Content Include="Views\services\files\uploadPhotoService.js" />

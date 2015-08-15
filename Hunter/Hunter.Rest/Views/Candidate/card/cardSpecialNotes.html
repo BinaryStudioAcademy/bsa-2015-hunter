@@ -1,3 +1,42 @@
 ﻿<div ng-controller="CardSpecialNotesController as specialNotesCtrl">
-    <h2>{{specialNotesCtrl.templateName}}</h2>
+    <div class="hrSpecialNote_wrap">
+        <ul class="nav nav-pills">
+            <li class="active">
+                <a data-toggle="pill" ng-click="specialNotesCtrl.cardNoteShow()">
+                    {{specialNotesCtrl.vacancy.name}}
+                </a>
+            </li>
+            <li><a data-toggle="pill" ng-click="specialNotesCtrl.candidateNoteShow()">All Notes</a></li>
+            <li><a data-toggle="pill" ng-click="specialNotesCtrl.userNoteShow()">My Notes</a></li>
+        </ul>
+        <div class="hrSpecialNote_comments">
+            <div class="hrSpecialNote_form" ng-repeat="item in specialNotesCtrl.specialNote">
+                <form>
+                    <div>
+                        <div>
+                            <span>{{item.userLogin}} at {{item.lastEdited | date:'medium'}}</span>
+                        </div>
+                        <textarea name="text" ng-model="item.text">{{item.text}}</textarea>
+                    </div>
+                    <div>
+                        <input class="btn" type="submit" value="Edit" ng-click="specialNotesCtrl.saveOldNote(item)"
+                               ng-show="item.userLogin == specialNotesCtrl.userName">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="hrSpecialNote_form_edit">
+            <form>
+                <div class="row">
+                    <div class="col-md-10">
+                        <textarea name="text" ng-model="specialNotesCtrl.newNoteText"></textarea>
+                    </div>
+                    <div class="col-md-2">
+                        <input class="btn bottom-Done" type="submit" value="Done" ng-click="specialNotesCtrl.saveNewNote(specialNotesCtrl.newNoteText)">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </div>
