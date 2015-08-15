@@ -63,6 +63,7 @@
     <Compile Include="Dto\CardDto.cs" />
     <Compile Include="Dto\FileDto.cs" />
     <Compile Include="Dto\FilterInfoDto.cs" />
+    <Compile Include="Dto\SpecialNoteDto.cs" />
     <Compile Include="Dto\UserProfileDto.cs" />
     <Compile Include="Dto\VacancyLongListDto.cs" />
     <Compile Include="Dto\UserRoleDto.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Dto\PoolViewModel.cs" />
     <Compile Include="Dto\CandidateDto.cs" />
     <Compile Include="Extensions\CandidateExtensions.cs" />
+    <Compile Include="Extensions\SpecialNoteExtension.cs" />
     <Compile Include="Extensions\UserProfileExtension.cs" />
     <Compile Include="Extensions\UserRoleExtention.cs" />
     <Compile Include="Extensions\VacancyExtensions.cs" />
@@ -91,10 +93,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Interfaces\IFileService.cs" />
     <Compile Include="Services\Interfaces\IPoolService.cs" />
+    <Compile Include="Services\Interfaces\ISpecialNoteService.cs" />
     <Compile Include="Services\Interfaces\IUserProfileService.cs" />
     <Compile Include="Services\Interfaces\IUserService.cs" />
     <Compile Include="Services\Interfaces\IVacancyService.cs" />
     <Compile Include="Services\Interfaces\IUserRoleService.cs" />
+    <Compile Include="Services\SpecialNoteService.cs" />
     <Compile Include="Services\UserProfileService.cs" />
     <Compile Include="Services\UserRoleService.cs" />
     <Compile Include="Services\PoolService.cs" />

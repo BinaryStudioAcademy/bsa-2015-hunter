@@ -14,6 +14,8 @@ using Hunter.Services;
 using Ninject.Web.Common;
 using Hunter.Common.Concrete;
 using Hunter.DataAccess.Entities;
+using Hunter.Services.Services;
+using Hunter.Services.Services.Interfaces;
 
 [assembly: OwinStartup(typeof(Hunter.Rest.Startup))]
 
@@ -63,6 +65,7 @@ namespace Hunter.Rest
             kernel.Bind<IUserProfileService>().To<UserProfileService>();
             kernel.Bind<IActivityPostService>().To<ActivityPostService>();
             kernel.Bind<IFileService>().To<FileService>();
+            kernel.Bind<ISpecialNoteService>().To<SpecialNoteService>();
             #endregion
 
             kernel.Bind<Common.Interfaces.ILogger>().To<Logger>();
