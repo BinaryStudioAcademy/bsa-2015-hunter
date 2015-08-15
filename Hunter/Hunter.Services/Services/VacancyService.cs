@@ -65,8 +65,13 @@ namespace Hunter.Services
             else
                 vacancies = vacancies.OrderByDescending(v => v.StartDate);
 
+            var countRecords = vacancies.Count();
+
             vacancies = vacancies.Skip((filterParams.Page - 1) * filterParams.PageSize).Take(filterParams.PageSize);
-            return vacancies.Select(item => item.ToVacancyDTO()).ToList();
+            var list = vacancies.Select(item => item.ToVacancyDTO()).ToList();
+            if (list.Count() > 0)
+                list[0].TotalCount = countRecords;
+            return list;
         }
         public VacancyDto Get(int id)
         {

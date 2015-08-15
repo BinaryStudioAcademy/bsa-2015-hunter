@@ -29,6 +29,7 @@
             addedBy: []
         };
 
+        vm.totalCount = 0;
         vm.pools = [];
         poolsHttpService.getAllPools().then(function (data) {
             vm.pools = data;
@@ -56,18 +57,19 @@
             vm.filterParams.reverceSort = vm.sortAction.reverseSort;
             vacancyHttpService.getFilteredVacancies(vm.filterParams).then(function (result) {
                 vm.vacancies = result;
+                if (vm.vacancies.length > 0)
+                {
+                    vm.totalCount = vm.vacancies[0].totalCount;
+                }
             });
         }
 
         vm.pushPopItem = function (item, collection) {
             if (collection == undefined) return;
-            console.log(collection);
             var index = collection.indexOf(item);
-            console.log(index);
             if (index == -1) {
                 collection.push(item);
             } else {
-                console.log("splice");
                 collection.splice(index, 1);
             }
         }
