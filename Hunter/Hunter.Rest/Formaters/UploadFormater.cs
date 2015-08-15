@@ -53,8 +53,8 @@ namespace Hunter.Rest.Formaters
             var data = parts.Contents.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "\"data\"");
             var dataStr = await data.ReadAsStringAsync();
             fileDto = JsonConvert.DeserializeObject<FileDto>(dataStr);
-            fileDto.FileExtation = Path.GetExtension(fileContent.Headers.ContentDisposition.FileName.Replace("\"", ""));
-            fileDto.File = await fileContent.ReadAsStreamAsync();
+            //!!!fileDto.FileExtation = Path.GetExtension(fileContent.Headers.ContentDisposition.FileName.Replace("\"", ""));
+            //!!!fileDto.File = await fileContent.ReadAsStreamAsync();
             
             return fileDto;
 
