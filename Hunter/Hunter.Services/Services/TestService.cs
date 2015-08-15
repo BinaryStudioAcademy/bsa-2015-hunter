@@ -17,15 +17,15 @@ namespace Hunter.Services.Services
     public class TestService : ITestService
     {
         private readonly ITestRepository _testRepository;
-        private readonly IFileRepository _fileRepository;
+        private readonly ICardRepository _cardRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger _logger;
 
-        public TestService(ITestRepository testRepository, IFileRepository fileRepository, 
+        public TestService(ITestRepository testRepository, ICardRepository cardRepository, 
             IUnitOfWork unitOfWork,ILogger logger)
         {
             _testRepository = testRepository;
-            _fileRepository = fileRepository;
+            _cardRepository = cardRepository;
             _unitOfWork = unitOfWork;
             _logger = logger;
         }
@@ -35,7 +35,8 @@ namespace Hunter.Services.Services
             try
             {
                 var tests = _testRepository
-                    .All(x => x.Card.CandidateId == candidateId)
+                    .Query()
+                    .Where(x => x.Card.CandidateId == candidateId)
                     .Select(x => x.ToTestDto());
 
                 return tests;
@@ -47,10 +48,12 @@ namespace Hunter.Services.Services
             }
         }
 
-        public TestDto GetCandidateTest(int cardId)
+        public TestDto GetCandidateTest(int vacancyId, int candidateId)
         {
             try
             {
+                int cardId = findCardId(vacancyId, candidateId);
+
                 var test = _testRepository.Get(x => x.CardId == cardId);
 
                 if (test == null)
@@ -67,7 +70,7 @@ namespace Hunter.Services.Services
             }
         }
 
-        public void AddTest(TestDto newTestDto)
+        public int AddTest(TestDto newTestDto)
         {
             Test test = new Test();
             newTestDto.ToTest(test);
@@ -76,6 +79,8 @@ namespace Hunter.Services.Services
             {
                 _testRepository.UpdateAndCommit(test);
                 _unitOfWork.SaveChanges();
+
+                return test.Id;
             }
             catch (Exception ex)
             {
@@ -114,6 +119,15 @@ namespace Hunter.Services.Services
                 _logger.Log(ex);
                 throw ex;
             }
+        }
+
+        private int findCardId(int vacancyId, int candidateId)
+        {
+           return _cardRepository
+                .Query()
+                .Where(x => x.VacancyId == vacancyId && x.CandidateId == candidateId)
+                .Select(x => x.Id)
+                .FirstOrDefault();
         }
     }
 }

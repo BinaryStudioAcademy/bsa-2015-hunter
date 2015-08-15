@@ -1,9 +1,9 @@
 ﻿<div ng-controller="CardTestController as testCtrl">
 <!--    <h2>{{testCtrl.templateName}}</h2>-->
-    <div class="btn-group">
-        <label class="btn btn-primary ng-pristine ng-untouched ng-valid active" btn-checkbox>.NET</label>
-        <label class="btn btn-primary ng-pristine ng-untouched ng-valid" btn-checkbox>All</label>
-    </div>
+<!--    <div class="btn-group">-->
+<!--        <label class="btn btn-primary ng-pristine ng-untouched ng-valid active" btn-checkbox>.NET</label>-->
+<!--        <label class="btn btn-primary ng-pristine ng-untouched ng-valid" btn-checkbox>All</label>-->
+<!--    </div>-->
 
     <div class="workArea container">
         <div class="row workArea-row">
@@ -11,15 +11,15 @@
                 <div >
                     <h4 class="disableBottomMargins">Test</h4>
                     <ul class="disableBottomMargins">
-                        <li class="breakWords">Test: Task.zip</li>
+                        <li class="breakWords">Test: {{testCtrl.test.file.fileName}}</li>
                         <li>Size: 1.2Mb</li>
-                        <li>Uploaded: 12.12.15</li>
+                        <li>Uploaded: {{testCtrl.test.file.added | date:'dd.MM.yyyy'}}</li>
                     </ul>
                     <button class="btn btn-default btn-block">Download</button>
                 </div>
                 <div>
                     <h4 class="disableBottomMargins">Test</h4>
-                    <a class="breakWords" hreg="http://google.com">http://google.com</a>
+                    <a class="breakWords" href="{{testCtrl.test.url}}">{{testCtrl.test.url}}</a>
                     <p>Added 12.12.15</p>
                 </div>
             </div>
@@ -45,39 +45,39 @@
                 </div>
 
                 <!--ngRepeat-->
-                <div class="row">
-                    <!--Feedback-->
-                    <div class="col-md-10 feedbacks">
-                        <div>
-                            <h4 class="disableBottomMargins">Feedback</h4>
-                            <p class="feedback-addedBy">Ulyana at 14.08.15</p>
-                            <div class="feedbackField form-control" contenteditable></div>
-                        </div>
-                    </div>
-                    <!--Buttons-->
-                    <div class="col-md-2">
-                        <button class="btn btn-primary btn-block">Edit</button>
-                        <div class="circleButton"><span class="glyphicon glyphicon-thumbs-up circleButton-icon"></span></div>
-                        <div class="circleButton"><span class="glyphicon glyphicon-thumbs-down circleButton-icon"></span></div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <!--Feedback-->
-                    <div class="col-md-10 feedbacks">
-                        <div>
-                            <h4 class="disableBottomMargins">Feedback</h4>
-                            <p class="feedback-addedBy">Ulyana at 14.08.15</p>
-                            <div class="feedbackField form-control" contenteditable></div>
-                        </div>
-                    </div>
-                    <!--Buttons-->
-                    <div class="col-md-2">
-                        <button class="btn btn-primary btn-block">Edit</button>
-                        <div class="circleButton"><span class="glyphicon glyphicon-thumbs-up circleButton-icon"></span></div>
-                        <div class="circleButton"><span class="glyphicon glyphicon-thumbs-down circleButton-icon"></span></div>
-                    </div>
-                </div>
+<!--                <div class="row">-->
+<!--                    $1$Feedback#1#-->
+<!--                    <div class="col-md-10 feedbacks">-->
+<!--                        <div>-->
+<!--                            <h4 class="disableBottomMargins">Feedback</h4>-->
+<!--                            <p class="feedback-addedBy">Ulyana at 14.08.15</p>-->
+<!--                            <div class="feedbackField form-control" contenteditable></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    $1$Buttons#1#-->
+<!--                    <div class="col-md-2">-->
+<!--                        <button class="btn btn-primary btn-block">Edit</button>-->
+<!--                        <div class="circleButton"><span class="glyphicon glyphicon-thumbs-up circleButton-icon"></span></div>-->
+<!--                        <div class="circleButton"><span class="glyphicon glyphicon-thumbs-down circleButton-icon"></span></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!---->
+<!--                <div class="row">-->
+<!--                    $1$Feedback#1#-->
+<!--                    <div class="col-md-10 feedbacks">-->
+<!--                        <div>-->
+<!--                            <h4 class="disableBottomMargins">Feedback</h4>-->
+<!--                            <p class="feedback-addedBy">Ulyana at 14.08.15</p>-->
+<!--                            <div class="feedbackField form-control" contenteditable></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    $1$Buttons#1#-->
+<!--                    <div class="col-md-2">-->
+<!--                        <button class="btn btn-primary btn-block">Edit</button>-->
+<!--                        <div class="circleButton"><span class="glyphicon glyphicon-thumbs-up circleButton-icon"></span></div>-->
+<!--                        <div class="circleButton"><span class="glyphicon glyphicon-thumbs-down circleButton-icon"></span></div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
             </div>
         </div>
@@ -85,8 +85,8 @@
     <div class="workArea container">
         <div class="row workArea-row">
             <div class="col-md-5">
-                <input type="text" class="form-control testLink" placeholder="Provide link to text"/>
-                <button class="btn btn-primary">Add</button>
+                <input type="text" class="form-control testLink" placeholder="Provide link to text" ng-model="testCtrl.testLink"/>
+                <button class="btn btn-primary" ng-click="testCtrl.uploadLink()">Add</button>
             </div>
             <div class="col-md-7">
                 <input class="form-control filePath" type="text" readonly placeholder="Pick the file with test"/>

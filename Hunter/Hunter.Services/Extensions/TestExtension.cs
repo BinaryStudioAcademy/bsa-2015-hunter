@@ -32,7 +32,9 @@ namespace Hunter.Services.Extensions
             test.FeedbackId = testDto.FeedbackId;
             test.FileId = testDto.FileId;
             test.Url = testDto.Url;
-            testDto.File.ToFile(test.File = new File());
+
+            if(test.FileId != null)
+                testDto.File.ToFile(test.File = new File());
         }
     }
 }

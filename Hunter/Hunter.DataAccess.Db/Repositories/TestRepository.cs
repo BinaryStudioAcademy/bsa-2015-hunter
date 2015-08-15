@@ -15,10 +15,5 @@ namespace Hunter.DataAccess.Db
         {
 
         }
-
-        public IEnumerable<Test> All(Expression<Func<Test, bool>> condition)
-        {
-            return QueryIncluding(x => x.File).Where(condition);
-        }
     }
 }

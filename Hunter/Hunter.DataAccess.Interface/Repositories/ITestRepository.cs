@@ -9,6 +9,5 @@ namespace Hunter.DataAccess.Interface
 {
     public interface ITestRepository : IRepository<Test>
     {
-        IEnumerable<Test> All(Expression<Func<Test, bool>> condition);
     }
 }

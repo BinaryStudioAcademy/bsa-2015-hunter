@@ -21,11 +21,11 @@ namespace Hunter.Rest.Controllers
 
         [HttpGet]
         [Route("")]
-        public IHttpActionResult GetTest(int cardId)
+        public IHttpActionResult GetTest(int vacancyId, int candidateId)
         {
             try
             {
-                var test = _testService.GetCandidateTest(cardId);
+                var test = _testService.GetCandidateTest(vacancyId, candidateId);
                 return Ok(test);
             }
             catch (Exception ex)
@@ -50,12 +50,13 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpPost]
+        [Route("add")]
         public IHttpActionResult AddTest(TestDto test)
         {
             try
             {
-                _testService.AddTest(test);
-                return Ok();
+                int id = _testService.AddTest(test);
+                return Ok(id);
             }
             catch (Exception ex)
             {
