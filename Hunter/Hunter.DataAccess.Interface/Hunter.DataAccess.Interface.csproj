@@ -65,6 +65,7 @@
     <Compile Include="Repositories\IActivityRepository.cs" />
     <Compile Include="Repositories\ICardRepository.cs" />
     <Compile Include="Repositories\IFeedbackRepository.cs" />
+    <Compile Include="Repositories\IFileRepository.cs" />
     <Compile Include="Repositories\IInterviewRepository.cs" />
     <Compile Include="Repositories\IPoolRepository.cs" />
     <Compile Include="Repositories\IResumeRepository.cs" />

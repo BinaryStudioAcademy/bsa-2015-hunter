@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Hunter.Services.Interfaces;
 
 namespace Hunter.Rest.Controllers
 {
@@ -23,12 +25,39 @@ namespace Hunter.Rest.Controllers
 
         [HttpGet]
         [Route("")]
+        [ResponseType(typeof(IList<VacancyRowDto>))]
+        public HttpResponseMessage Get([FromUri] int page, int pageSize, string sortColumn, bool reverceSort, string filter, string pool, string status, string addedBy)
+        {
+            try
+            {
+                var filterParams = new VacancyFilterParams
+                {
+                    Page = page,
+                    PageSize = pageSize,
+                    SortColumn = sortColumn,
+                    ReverceSort = reverceSort,
+                    Filter = filter,
+                    Pool = pool,
+                    Status = status,
+                    AddedBy = addedBy
+                };
+                var vacancies = _vacancyService.Get(filterParams);
+                return Request.CreateResponse(HttpStatusCode.OK, vacancies);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("all")]
         [ResponseType(typeof(IEnumerable<VacancyDto>))]
         public HttpResponseMessage Get()
         {
             try
             {
-                var vacancies = _vacancyService.Get().OrderByDescending(v => v.StartDate);
+                var vacancies = _vacancyService.Get();
                 return Request.CreateResponse(HttpStatusCode.OK, vacancies);
             }
             catch (Exception ex)

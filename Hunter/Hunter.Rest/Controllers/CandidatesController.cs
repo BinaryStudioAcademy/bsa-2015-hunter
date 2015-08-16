@@ -149,14 +149,16 @@ namespace Hunter.Rest.Controllers
         [Route("")]
         public HttpResponseMessage Post(CandidateDto candidate)
         {
-            if (ModelState.IsValid)
+            try
             {
                 _candidateService.Add(candidate);
-                return Request.CreateResponse(HttpStatusCode.Created, _candidateService.Get(i=>i.Email.Equals(candidate.Email)));
+                return Request.CreateResponse(HttpStatusCode.Created, _candidateService.Get(i=>i.Email.Equals(candidate.Email)).ToCandidateDto());
+
             }
-            else
+            catch (Exception e)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, e.Message);
+
             }
         }
 

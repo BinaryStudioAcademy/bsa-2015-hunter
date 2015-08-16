@@ -29,6 +29,7 @@ namespace Hunter.DataAccess.Entities
         public virtual DbSet<UserRole> UserRole { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Vacancy> Vacancy { get; set; }
+        public virtual DbSet<File> File { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -63,11 +64,7 @@ namespace Hunter.DataAccess.Entities
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Interview>()
-                .Property(e => e.Comments)
-                .IsFixedLength();
-
-            modelBuilder.Entity<Interview>()
-                .Property(e => e.FeedbackId)
+                .Property(e => e.Comment)
                 .IsFixedLength();
 
             modelBuilder.Entity<Pool>()

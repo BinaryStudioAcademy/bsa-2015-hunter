@@ -27,7 +27,7 @@ namespace Hunter.Services
                 Linkedin = candidate.Linkedin,
                 Salary = candidate.Salary,
                 YearsOfExperience = Math.Round(experiance + candidate.CalculateYearsOfExperiance(), 1),
-                ResumeId = candidate.ResumeId,
+                ResumeId = candidate.ResumeId != null ? (int)candidate.ResumeId : 0,
                 AddedByProfileId = candidate.AddedByProfileId,
                 AddedBy = candidate.AddedByProfileId.HasValue ? candidate.UserProfile.UserLogin : "",
                 AddDate = candidate.AddDate,
@@ -55,7 +55,7 @@ namespace Hunter.Services
             candidate.Linkedin = dto.Linkedin;
             candidate.Salary = dto.Salary;
             candidate.YearsOfExperience = dto.YearsOfExperience;
-            candidate.ResumeId = dto.ResumeId;
+            candidate.ResumeId = dto.ResumeId == 0? (int?)null: dto.ResumeId;
             candidate.AddedByProfileId = dto.AddedByProfileId;
             //Card = dto.Cards.ToList();
             //Pool = new List<Pool>();

@@ -13,7 +13,10 @@ using Hunter.DataAccess.Interface;
 using Hunter.Services;
 using Ninject.Web.Common;
 using Hunter.Common.Concrete;
+using Hunter.DataAccess.Db.Repositories;
 using Hunter.DataAccess.Entities;
+using Hunter.Services.Services;
+using Hunter.Services.Services.Interfaces;
 
 [assembly: OwinStartup(typeof(Hunter.Rest.Startup))]
 
@@ -51,6 +54,7 @@ namespace Hunter.Rest
             kernel.Bind<IUserRepository>().To<UserRepository>();
             kernel.Bind<IUserRoleRepository>().To<UserRoleRepository>();
             kernel.Bind<IVacancyRepository>().To<VacancyRepository>();
+            kernel.Bind<IFileRepository>().To<FileRepository>();
             #endregion
 
             #region Services
@@ -64,6 +68,7 @@ namespace Hunter.Rest
             kernel.Bind<IActivityPostService>().To<ActivityPostService>();
             kernel.Bind<IFileService>().To<FileService>();
             kernel.Bind<IFeedbackService>().To<FeedbackService>();
+            kernel.Bind<ISpecialNoteService>().To<SpecialNoteService>();
             #endregion
 
             kernel.Bind<Common.Interfaces.ILogger>().To<Logger>();

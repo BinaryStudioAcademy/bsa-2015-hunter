@@ -13,18 +13,45 @@
     function VacancyHttpService($q, httpHandler) {
         var service = {
             getVacancies: getVacancies,
+            getFilteredVacancies : getFilteredVacancies,
             getVacancy: getVacancy,
             addVacancy: addVacancy,
             validateVacancy: validateVacancy,
             updateVacancy: updateVacancy,
             deleteVacancy: deleteVacancy,
-            getLongList: getLongList
+            getLongList: getLongList,
+            getFilterInfo: getFilterInfo
         }
 
         function getVacancies(){
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/vacancy',
+                url: '/api/vacancy/all',
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get vacancies error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
+
+        function getFilteredVacancies(filter) {
+            var requestUrl = '/api/vacancy/?' +
+                'page=' + filter.page + '&' +
+                'pageSize=' + filter.pageSize + '&' +
+                'sortColumn=' + filter.sortColumn + '&' +
+                'reverceSort=' + filter.reverceSort + '&' +
+                'filter="' + filter.filter + '"&' +
+                'pool="' + filter.pool.toString() + '"&' +
+                'status="' + filter.status.toString() + '"&' +
+                'addedBy="' + filter.addedBy.toString() + '"';
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: requestUrl,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -114,6 +141,22 @@
                 },
                 errorCallback: function (status) {
                     console.log("Get vacancy long list error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
+
+        function getFilterInfo(roleName) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/vacancy/filterInfo/' + roleName,
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get filter data error");
                     console.log(status);
                 }
             });

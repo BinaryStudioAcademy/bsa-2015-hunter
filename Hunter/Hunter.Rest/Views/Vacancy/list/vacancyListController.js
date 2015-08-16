@@ -11,77 +11,74 @@
         '$scope',
         '$filter',
         'VacancyHttpService',
-        'HttpHandler',
-        '$q'
+        'PoolsHttpService',
+        'EnumConstants'
     ];
 
-    function VacancyListController($scope, $filter, VacancyHttpService, HttpHandler,$q) {
+    function VacancyListController($scope, $filter, vacancyHttpService, poolsHttpService, enumConstants) {
         var vm = this;
 
-        var searchText = "";
-        var pools = {
-            1: false,
-            2: false,
-            3: false,
-            4: false
+        vm.filterParams = {
+            page: 1,
+            pageSize: 5,
+            sortColumn: 'startDate',
+            reverceSort: true,
+            filter: '',
+            pool: [],
+            status: [],
+            addedBy: []
         };
 
-        var statuses = {
-            0: false,
-            1: false,
-            2: false
-        };
+        vm.totalCount = 0;
+        vm.pools = [];
+        poolsHttpService.getAllPools().then(function (data) {
+            vm.pools = data;
+        });
 
-        var adders = [
-            { 'name': "recruiter@local.com", 'isChecked': false },
-            { 'name': "Heaven Hayden", 'isChecked': false },
-            { 'name': "Chantel Sherley", 'isChecked': false }
+        vm.statuses = enumConstants.vacancyStates;
+
+        vm.sortBy = [
+            { name: "Add Date (new first)", reverseSort: true, sortColumn: "startDate" },
+            { name: "Add Date (old first)", reverseSort: false, sortColumn: "startDate" },
+            { name: "Name (A-Z)", reverseSort: false, sortColumn: "name" },
+            { name: "Name (Z-A)", reverseSort: true, sortColumn: "name" },
         ];
+        vm.sortAction = vm.sortBy[0];
 
-        var options = {
-            'poolFilters': pools,
-            'adderFilters': adders,
-            'statusFilters': statuses,
-            'searchText':searchText
+        vm.vacancies = [];
+
+        vm.pageChangeHandler = function (pageIndex) {
+            vm.filterParams.page = pageIndex;
+            vm.loadDataByParams(vm.filterParams);
         };
 
-        vm.filterOptions = options;
-        $scope.$watchCollection(
-            'VacancyListCtrl.filterOptions',
-            function() {
-                $filter('VacanciesFilter')(vm.vacancies, vm.filterOptions);
-            });
-
-        vm.currentPage = 1;
-        vm.pageSize = 5;
-        vm.vacancies;
-        vm.pools;
-        vm.users;
-
-        VacancyHttpService.getVacancies().then(function (result) {
-            console.log(result);
-            vm.vacancies = result;
-        });
-
-        getFilterInfo('Recruiter').then(function (result) {
-            vm.pools = result.pools;
-            vm.users = result.users;
-        });
-
-        function getFilterInfo(roleName) {
-            var deferred = $q.defer();
-            HttpHandler.sendRequest({
-                url: '/api/vacancy/filterInfo/' + roleName,
-                verb: 'GET',
-                successCallback: function (result) {
-                    deferred.resolve(result.data);
-                },
-                errorCallback: function (status) {
-                    console.log("Get filter data error");
-                    console.log(status);
+        vm.loadDataByParams = function () {
+            vm.filterParams.sortColumn = vm.sortAction.sortColumn;
+            vm.filterParams.reverceSort = vm.sortAction.reverseSort;
+            vacancyHttpService.getFilteredVacancies(vm.filterParams).then(function (result) {
+                vm.vacancies = result;
+                if (vm.vacancies.length > 0)
+                {
+                    vm.totalCount = vm.vacancies[0].totalCount;
                 }
             });
-            return deferred.promise;
         }
+
+        vm.pushPopItem = function (item, collection) {
+            if (collection == undefined) return;
+            var index = collection.indexOf(item);
+            if (index == -1) {
+                collection.push(item);
+            } else {
+                collection.splice(index, 1);
+            }
+        }
+
+        vacancyHttpService.getFilterInfo('Recruiter').then(function (result) {
+            //vm.pools = result.pools;
+            vm.adders = result.users;
+        });
+
+        vm.loadDataByParams();
     }
 })();

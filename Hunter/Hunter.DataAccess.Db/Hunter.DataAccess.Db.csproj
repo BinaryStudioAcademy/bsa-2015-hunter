@@ -69,6 +69,7 @@
     <Compile Include="Repositories\CandidateRepository.cs" />
     <Compile Include="Repositories\CardRepository.cs" />
     <Compile Include="Repositories\FeedbackRepository.cs" />
+    <Compile Include="Repositories\FileRepository.cs" />
     <Compile Include="Repositories\InterviewRepository.cs" />
     <Compile Include="Repositories\PoolRepository.cs" />
     <Compile Include="Repositories\ResumeRepository.cs" />
