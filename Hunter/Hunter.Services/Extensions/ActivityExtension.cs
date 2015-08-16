@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Entities.Entites.Enums;
 
 namespace Hunter.Services
 {

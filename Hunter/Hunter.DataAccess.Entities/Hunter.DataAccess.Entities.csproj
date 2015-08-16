@@ -57,6 +57,7 @@
     <Compile Include="Entites\Activity.cs" />
     <Compile Include="Entites\Candidate.cs" />
     <Compile Include="Entites\Card.cs" />
+    <Compile Include="Entites\Enums\ActivityType.cs" />
     <Compile Include="Entites\Enums\Origin.cs" />
     <Compile Include="Entites\Enums\PoolBackground.cs" />
     <Compile Include="Entites\Enums\Resolution.cs" />
@@ -140,6 +141,10 @@
     <Compile Include="Migrations\201508151033223_AddTableFileAndRemoveFieldsFromResumeAndTest.Designer.cs">
       <DependentUpon>201508151033223_AddTableFileAndRemoveFieldsFromResumeAndTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508161627593_activity_type_enum.cs" />
+    <Compile Include="Migrations\201508161627593_activity_type_enum.Designer.cs">
+      <DependentUpon>201508161627593_activity_type_enum.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -191,6 +196,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508151033223_AddTableFileAndRemoveFieldsFromResumeAndTest.resx">
       <DependentUpon>201508151033223_AddTableFileAndRemoveFieldsFromResumeAndTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508161627593_activity_type_enum.resx">
+      <DependentUpon>201508161627593_activity_type_enum.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
