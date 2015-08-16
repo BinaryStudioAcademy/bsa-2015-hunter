@@ -105,14 +105,13 @@ namespace Hunter.Rest.Controllers
             }
         }
         [HttpGet]
-        [Route("{id:int}")]
+        [Route("download/{id:int}")]
         [ResponseType(typeof(FileDto))]
         public HttpResponseMessage DownloadFile(int id)
         {
             try
             {
                 var file = _fileService.DownloadFile(id);
-
                 return Request.CreateResponse(HttpStatusCode.OK, file);
             }
             catch (Exception ex)

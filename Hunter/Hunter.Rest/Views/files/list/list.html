@@ -1,3 +1,7 @@
 ﻿<div class="container">
     <h3>{{fileListCtrl.controllerName}}</h3>
+
+    <div class="row" ng-repeat="file in fileListCtrl.files">
+        {{file.fileName}}
+    </div>
 </div>

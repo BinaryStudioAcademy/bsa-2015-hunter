@@ -8,14 +8,18 @@
     FileListController.$inject = [
         '$location',
         'AuthService',
-        'CandidateHttpService' //change on your service
+        'FileHttpService' //change on your service
     ];
 
-    function FileListController($location, authService, candidateHttpService) {
+    function FileListController($location, authService, fileHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
-        vm.controllerName = 'This is files page';
+        vm.controllerName = 'Files list';
 
+        vm.files = [];
+        fileHttpService.getFiles().then(function (data) {
+            vm.files = data;
+        });
         //(function() {
         //    // This is function for initialization actions, for example checking auth
         //    if (authService.isLoggedIn()) {
