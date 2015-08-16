@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hunter.Services.Dto
 {
-    public class FeedbackHrInterviewDto
+    public class FeedbackDto
     {
         public int Id { get; set; }
         public int CardId { get; set; }

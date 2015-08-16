@@ -13,7 +13,9 @@
     function FeedbackHttpService($q, httpHandler) {
         var service = {
             getHrFeedback: getHrFeedback,
-            saveHrFeedback: saveHrFeedback
+            saveHrFeedback: saveHrFeedback,
+            getTechFeedback: getTechFeedback,
+            saveFeedback: saveFeedback
         }
 
         function getHrFeedback(vid, cid) {
@@ -47,6 +49,40 @@
             });
             return deferred.promise;
         };
+
+        function getTechFeedback(vacancyId, candidateId) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/feedback/tech/' + vacancyId + '/' + candidateId,
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get feedback error");
+                }
+            });
+            return deferred.promise;
+        }
+
+        function saveFeedback(feedback, vacancyId, candidateId) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/feedback/hr/save',
+                verb: 'POST',
+                body: JSON.stringify(feedback),
+                successCallback: function (result) {
+                    var newFeedback = getTechFeedback(vacancyId, candidateId);
+                    deferred.resolve(newFeedback);
+                },
+                errorCallback: function (result) {
+                    console.log("tech feedback update - error");
+                    console.log(result);
+                }
+            });
+            return deferred.promise;
+        };
+
 
         return service;
     }

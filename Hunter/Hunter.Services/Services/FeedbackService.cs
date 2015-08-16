@@ -9,6 +9,7 @@ using Hunter.DataAccess.Interface;
 using Hunter.Services.Dto;
 using Hunter.Services.Extensions;
 using Hunter.Services.Dto.ApiResults;
+using Hunter.DataAccess.Entities.Enums;
 
 namespace Hunter.Services
 {
@@ -27,7 +28,7 @@ namespace Hunter.Services
             _userProfileRepository = userProfileRepository;
         }
 
-        public IEnumerable<Dto.FeedbackHrInterviewDto> GetAllHrInterviews(int vid, int cid)
+        public IEnumerable<Dto.FeedbackDto> GetAllHrInterviews(int vid, int cid)
         {
 
             var card = _cardRepository.Query().SingleOrDefault(c => c.VacancyId == vid && c.CandidateId == cid);
@@ -42,15 +43,15 @@ namespace Hunter.Services
 
                 if (!feedbacks.Any(f => f.Type == 0))
                 {
-                    feedbacks.Add(new FeedbackHrInterviewDto { Id = 0, Type = 0, CardId = card.Id, Text = "", Date = "", UserName = "" });
+                    feedbacks.Add(new FeedbackDto { Id = 0, Type = 0, CardId = card.Id, Text = "", Date = "", UserName = "" });
                 }
                 if (!feedbacks.Any(f => f.Type == 1))
                 {
-                    feedbacks.Add(new FeedbackHrInterviewDto { Id = 0, Type = 1, CardId = card.Id, Text = "", Date = "", UserName = "" });
+                    feedbacks.Add(new FeedbackDto { Id = 0, Type = 1, CardId = card.Id, Text = "", Date = "", UserName = "" });
                 }
                 if (!feedbacks.Any(f => f.Type == 2))
                 {
-                    feedbacks.Add(new FeedbackHrInterviewDto { Id = 0, Type = 2, CardId = card.Id, Text = "", Date = "", UserName = "" });
+                    feedbacks.Add(new FeedbackDto { Id = 0, Type = 2, CardId = card.Id, Text = "", Date = "", UserName = "" });
                 }
 
                 return feedbacks.OrderBy(f => f.Type);
@@ -63,7 +64,32 @@ namespace Hunter.Services
 
         }
 
-        public IdApiResult SaveFeedback(FeedbackHrInterviewDto hrInterviewDto, string name)
+        public FeedbackDto GetTechInterview(int vacancyId, int candidateId)
+        {
+            int type = (int)FeedbackType.TechFeedback;
+            try
+            {
+                var card = _cardRepository
+                .Query()
+                .Where(e => e.VacancyId == vacancyId && e.CandidateId == candidateId)
+                .FirstOrDefault();
+
+                var feedback = card.Feedback
+                    .Where(e => e.Type == type)
+                    .FirstOrDefault();
+                if (feedback == null)
+                    return new FeedbackDto() { Id = 0, Type = type, CardId = card.Id, Text = "", Date = "", UserName = "" };
+                return feedback.ToFeedbackDto();
+            }
+            catch (Exception e)
+            {
+                _logger.Log(e);
+                return null;
+            }
+             
+        }
+
+        public IdApiResult SaveFeedback(FeedbackDto hrInterviewDto, string name)
         {
             Feedback feedback;
             var userProfile = _userProfileRepository.Get(u => u.UserLogin.ToLower() == name.ToLower());
