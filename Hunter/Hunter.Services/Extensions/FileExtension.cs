@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Hunter.DataAccess.Entities;
 using Hunter.Services.Dto;
 
-namespace Hunter.Services.Extensions
+namespace Hunter.Services
 {
     public static class FileExtension
     {
@@ -21,9 +21,20 @@ namespace Hunter.Services.Extensions
             };
         }
 
+        public static File ToFile(this FileDto fileDto)
+        {
+            var file = new File
+            {
+                //file.Id = fileDto.Id;
+                Path = fileDto.Path,
+                Added = fileDto.Added,
+                FileName = fileDto.FileName
+            };
+            return file;
+        }
         public static void ToFile(this FileDto fileDto, File file)
         {
-            file.Id = fileDto.Id;
+            //file.Id = fileDto.Id;
             file.Path = fileDto.Path;
             file.Added = fileDto.Added;
             file.FileName = fileDto.FileName;

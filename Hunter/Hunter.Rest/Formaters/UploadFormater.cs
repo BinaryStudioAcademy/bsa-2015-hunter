@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using Hunter.Services.Dto;
+using Hunter.Services;
 using Newtonsoft.Json;
 
 namespace Hunter.Rest.Formaters

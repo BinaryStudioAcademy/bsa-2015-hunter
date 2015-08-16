@@ -8,8 +8,9 @@ namespace Hunter.Services.Interfaces
     {
         void Add(FileDto file);
         void Update(FileDto file);
-        FileDto Get(string fileName);
-        IEnumerable<FileDto> GetAll();
-        void Delete(string fileName);
+        FileDto Get(int id);
+        IEnumerable<FileDto> Get();
+        void Delete(int id);
+        FileDto DownloadFile(int id);
     }
 }

@@ -73,6 +73,7 @@
     <Compile Include="Dto\User\UserProfileRowVm.cs" />
     <Compile Include="Dto\VacancyDto.cs" />
     <Compile Include="Extensions\CardExtension.cs" />
+    <Compile Include="Extensions\FileExtension.cs" />
     <Compile Include="Extensions\HunterValidation.cs" />
     <Compile Include="Extensions\ActivityExtension.cs" />
     <Compile Include="Extensions\PoolExtentions.cs" />
