@@ -39,7 +39,7 @@
 
 .feedbackField {
     width: 100%;
-    height: 180px;
+    height: 160px !important;
     margin-bottom: 5px;
 }
 
@@ -103,4 +103,8 @@ textarea {
     background: white;
     cursor: inherit;
     display: block;
+}
+
+.group-btn {
+    margin-top: 28px;
 }

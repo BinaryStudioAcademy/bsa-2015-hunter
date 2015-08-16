@@ -767,6 +767,7 @@
     <Content Include="Views\candidate\profile\profileSpecialNotesController.js" />
     <Content Include="Views\candidate\profile\profileTests.html" />
     <Content Include="Views\candidate\profile\profileTestsController.js" />
+    <Content Include="Views\directives\card\fileReadDirective.js" />
     <Content Include="Views\files\list\fileListController.js" />
     <Content Include="Views\files\list\list.html" />
     <Content Include="Views\filters\vacancies\vacanciesListFilter.js" />

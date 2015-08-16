@@ -33,12 +33,14 @@
                         <div>
                             <h4 class="disableBottomMargins">Feedback</h4>
                             <p class="feedback-addedBy">Ulyana at 14.08.15</p>
-                            <textarea class="feedbackField form-control"></textarea>
+                            <textarea class="feedbackField form-control"
+                                      ng-readonly="testCtrl.feedbackConfig.fieldReadonly" 
+                                      ng-model="testCtrl.test.feedback.text"></textarea>
                         </div>
                     </div>
                     <!--Buttons-->
-                    <div class="col-md-2">
-                        <button class="btn btn-primary btn-block">Save</button>
+                    <div class="col-md-2 group-btn">
+                        <button class="btn btn-primary btn-block">{{testCtrl.feedbackConfig.buttonText}}</button>
                         <div class="circleButton"><span class="glyphicon glyphicon-thumbs-up circleButton-icon"></span></div>
                         <div class="circleButton"><span class="glyphicon glyphicon-thumbs-down circleButton-icon"></span></div>
                     </div>
@@ -85,13 +87,13 @@
     <div class="workArea container">
         <div class="row workArea-row">
             <div class="col-md-5">
-                <input type="text" class="form-control testLink" placeholder="Provide link to text" ng-model="testCtrl.testLink"/>
+                <input type="text" class="form-control testLink" placeholder="Provide link to test" ng-model="testCtrl.testLink"/>
                 <button class="btn btn-primary" ng-click="testCtrl.uploadLink()">Add</button>
             </div>
             <div class="col-md-7">
                 <input class="form-control filePath" type="text" readonly placeholder="Pick the file with test"/>
                 <span class="file-input btn btn-primary btn-file">
-                    Browse… <input type="file" multiple="">
+                    Browse… <input type="file" multiple="" filread>
                 </span>
 
                 <button class="btn btn-primary">Upload</button>

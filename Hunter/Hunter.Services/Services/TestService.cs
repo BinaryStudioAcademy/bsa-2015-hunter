@@ -18,16 +18,18 @@ namespace Hunter.Services.Services
     {
         private readonly ITestRepository _testRepository;
         private readonly ICardRepository _cardRepository;
+        private readonly IFeedbackRepository _feedbackRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger _logger;
 
         public TestService(ITestRepository testRepository, ICardRepository cardRepository, 
-            IUnitOfWork unitOfWork,ILogger logger)
+            IFeedbackRepository feedbackRepository, IUnitOfWork unitOfWork,ILogger logger)
         {
             _testRepository = testRepository;
             _cardRepository = cardRepository;
             _unitOfWork = unitOfWork;
             _logger = logger;
+            _feedbackRepository = feedbackRepository;
         }
 
         public IEnumerable<TestDto> GetAllCandidatesTests(int candidateId)

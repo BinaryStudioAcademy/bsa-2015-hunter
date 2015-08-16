@@ -65,6 +65,7 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpPut]
+        [Route("update")]
         public IHttpActionResult UpdateTest(TestDto test)
         {
             try

@@ -15,7 +15,12 @@
         vm.templateName = 'Test';
         vm.candidateId = $routeParams.cid;
         vm.vacancyId = $routeParams.vid;
+
         vm.testLink = '';
+        vm.testFile = '';
+
+        //to check that feedbackText was changed
+        vm.prevFeedbackText = '';
 
         vm.lastUploadTestId;
         vm.uploadLink = function () {
@@ -36,8 +41,42 @@
         }
 
         vm.test;
+        vm.feedbackConfig;
         CardTestHttpService.getTest(vm.vacancyId, vm.candidateId, function(response) {
             vm.test = response.data;
+
+            if (vm.test.feedback != null && vm.test.feedback.text != '') {
+                vm.feedbackConfig = {
+                    'buttonText': 'Edit',
+                    'fieldReadonly': true
+                }
+            } else {
+                vm.feedbackConfig = {
+                    'buttonText': 'Save',
+                    'fieldReadonly': false
+                }
+            }
         });
+
+        vm.feedbackButtonToggle = function() {
+            toggleFeedbackConfig();
+
+            //if feedback text changed -> update test
+            if (vm.prevFeedbackText != vm.test.feedback.text) {
+                
+            }
+        }
+        
+        //change name of feedback button and readonly expression for textarea
+        function toggleFeedbackConfig() {
+            vm.feedbackConfig.fieldReadonly = !vm.feedbackConfig.fieldReadonly;
+
+            if (vm.feedbackConfig.fieldReadonly) {
+                vm.feedbackConfig.buttonText = 'Edit';
+            } else {
+                vm.feedbackConfig.buttonText = 'Save';
+                vm.prevFeedbackText = vm.test.feedback.text;
+            }
+        }
     }
 })();
