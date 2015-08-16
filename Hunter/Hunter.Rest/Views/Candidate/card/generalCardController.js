@@ -22,6 +22,7 @@
         vm.origins = enumConstants.origins;
         vm.resolutions = enumConstants.resolutions;
         vm.substatuses = enumConstants.substatuses;
+        vm.feedbackTypes = enumConstants.feedbackTypes;
 
         console.log("rout",$routeParams);
         (function() {

@@ -5,7 +5,7 @@ using Hunter.DataAccess.Entities.Enums;
 
 namespace Hunter.Services.Extensions
 {
-    public static class PoolExtentions
+    public static class PoolExtension
     {
         public static PoolViewModel ToPoolViewModel(this Pool pool)
         {

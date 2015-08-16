@@ -36,9 +36,9 @@
                 { id: 6, name: 'Passed' }
             ],
             feedbackTypes: [
-                { id: 0, name: 'HR Feedback English' },
-                { id: 1, name: 'HR feedback Personal' },
-                { id: 2, name: 'HR Feedback Expertise' },
+                { id: 0, name: 'English' },
+                { id: 1, name: 'Personal' },
+                { id: 2, name: 'Expertise' },
                 { id: 3, name: 'Tech Feedback' },
                 { id: 4, name: 'Test Feedback' }
             ],

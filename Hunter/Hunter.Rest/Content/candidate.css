@@ -105,3 +105,7 @@
     border-left: 0;
     width: 100%;
 }
+
+a.list-group-item:hover {
+    cursor: pointer;
+}
