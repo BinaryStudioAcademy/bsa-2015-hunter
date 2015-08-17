@@ -27,8 +27,7 @@ namespace Hunter.Services
         {
             file.Added = DateTime.Now;
 
-            if (!Directory.Exists(_localStorage))
-                Directory.CreateDirectory(_localStorage);
+
 
             var formatedFileName = FormatFileName(file);
             switch (file.FileType)
@@ -43,7 +42,12 @@ namespace Hunter.Services
                     file.Path = "Other\\";
                     break;
             }
-            string fileName = Path.Combine(_localStorage, file.Path, formatedFileName);
+            _localStorage = Path.Combine(_localStorage, file.Path);
+
+            if (!Directory.Exists(_localStorage))
+                Directory.CreateDirectory(_localStorage);
+
+            string fileName = Path.Combine(_localStorage, formatedFileName);
             try
             {
                 SaveFile(file.File, fileName);
