@@ -112,7 +112,7 @@ namespace Hunter.Rest.Controllers
             try
             {
                 var file = _fileService.DownloadFile(id);
-                return Request.CreateResponse(HttpStatusCode.OK, file);
+                return Request.CreateResponse(HttpStatusCode.OK, file.File);
             }
             catch (Exception ex)
             {
