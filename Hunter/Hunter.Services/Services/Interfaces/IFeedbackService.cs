@@ -10,7 +10,8 @@ namespace Hunter.Services
 {
     public interface IFeedbackService
     {
-        IEnumerable<FeedbackHrInterviewDto> GetAllHrInterviews(int vid, int cid);
-        IdApiResult SaveFeedback(FeedbackHrInterviewDto hrInterviewDto, string name);
+        IEnumerable<FeedbackDto> GetAllHrInterviews(int vid, int cid);
+        IdApiResult SaveFeedback(FeedbackDto hrInterviewDto, string name);
+        FeedbackDto GetTechInterview(int vacancyId, int candidateId);
     }
 }

@@ -36,7 +36,7 @@ namespace Hunter.Rest.Controllers
         [HttpGet]
         [Route("hr/{vid:int}/{cid:int}")]
         //[ActionName("HrInterview")]
-        [ResponseType(typeof(IEnumerable<FeedbackHrInterviewDto>))]
+        [ResponseType(typeof(IEnumerable<FeedbackDto>))]
         public HttpResponseMessage GetHrInterview(int vid, int cid)
         {
             try
@@ -51,6 +51,25 @@ namespace Hunter.Rest.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("tech/{vacancyId:int}/{candidateId:int}")]
+        [ResponseType(typeof(FeedbackDto))]
+        public HttpResponseMessage GetTechInterview(int vacancyId, int candidateId)
+        {
+            try
+            {
+                var interview = _feedbackService.GetTechInterview(vacancyId, candidateId);
+                if (interview == null)
+                    return Request.CreateResponse(HttpStatusCode.NoContent, "not technical interview");
+                return Request.CreateResponse(HttpStatusCode.OK, interview);
+            }
+            catch(Exception e) 
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
+            }
+            
+        }
+
         // GET: api/Feedback/5
         public string Get(int id)
         {
@@ -59,12 +78,12 @@ namespace Hunter.Rest.Controllers
 
         // POST: api/Feedback
         [HttpPost]
-        [Route("hr/save")]
-        public HttpResponseMessage Post([FromBody]FeedbackHrInterviewDto hrInterviewDto)
+        [Route("save")]
+        public HttpResponseMessage Post([FromBody]FeedbackDto FeedbackDto)
         {
             try
             {
-                _feedbackService.SaveFeedback(hrInterviewDto, User.Identity.Name);
+                _feedbackService.SaveFeedback(FeedbackDto, User.Identity.Name);
                 return Request.CreateResponse(HttpStatusCode.OK, "Feedback was edited/saved!");
             }
             catch (Exception ex)

@@ -12,35 +12,9 @@ namespace Hunter.Services.Extensions
 {
     public static class FeedbackExtension
     {
-//        public static FeedbackDto ToFeedbackDto(this Feedback feedback)
-//        {
-//            return new FeedbackDto
-//            {
-//                Added = feedback.Added,
-//                CardId = feedback.CardId,
-//                Edited = feedback.Edited,
-//                Id = feedback.Id,
-//                ProfileId = feedback.ProfileId,
-//                Status = feedback.Status,
-//                Text = feedback.Text,
-//                Type = feedback.Type
-//            };
-//        }
-//
-//        public static void ToFeedback(this FeedbackDto feedbackDto, Feedback feedback)
-//        {
-//            feedback.Id = feedbackDto.Id;
-//            feedback.CardId = feedbackDto.CardId;
-//            feedback.Edited = feedbackDto.Edited;
-//            feedback.ProfileId = feedbackDto.ProfileId;
-//            feedback.Status = feedbackDto.Status;
-//            feedback.Text = feedbackDto.Text;
-//            feedback.Type = feedbackDto.Type;
-//        }
-
-        public static IEnumerable<FeedbackHrInterviewDto> ToFeedbackHrInterviewDto(this IEnumerable<Feedback> feedbacks)
+        public static IEnumerable<FeedbackDto> ToFeedbacksDto(this IEnumerable<Feedback> feedbacks)
         {
-            return feedbacks.Select(f => new FeedbackHrInterviewDto()
+            return feedbacks.Select(f => new FeedbackDto()
             {
                 Id = f.Id,
                 CardId = f.CardId,
@@ -53,9 +27,9 @@ namespace Hunter.Services.Extensions
             }).OrderBy(f => f.Type);
         }
 
-        public static FeedbackHrInterviewDto ToFeedbackHrInterviewDto(this Feedback feedback)
+        public static FeedbackDto ToFeedbackDto(this Feedback feedback)
         {
-            return new FeedbackHrInterviewDto
+            return new FeedbackDto() 
             {
                 Id = feedback.Id,
                 CardId = feedback.CardId,
@@ -71,7 +45,7 @@ namespace Hunter.Services.Extensions
             };
         }
 
-        public static void ToFeedback(this FeedbackHrInterviewDto hrInterviewDto, Feedback feedback)
+        public static void ToFeedback(this FeedbackDto hrInterviewDto, Feedback feedback)
         {
             feedback.CardId = hrInterviewDto.CardId;
             feedback.Type = hrInterviewDto.Type;

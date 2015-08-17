@@ -15,6 +15,8 @@
             getHrFeedback: getHrFeedback,
             saveHrFeedback: saveHrFeedback,
             saveTestFeedback: saveTestFeedback
+            getTechFeedback: getTechFeedback,
+            saveFeedback: saveFeedback
         }
 
         function getHrFeedback(vid, cid) {
@@ -37,7 +39,7 @@
         function saveHrFeedback(feedback, vid, cid) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/feedback/hr/save',
+                url: '/api/feedback/save',
                 verb: 'POST',
                 body: JSON.stringify(feedback),
                 successCallback: function (result) {
@@ -58,6 +60,40 @@
                 'errorCallback': function(response) { console.log('Updating was failed') }
             });
         }
+
+        function getTechFeedback(vacancyId, candidateId) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/feedback/tech/' + vacancyId + '/' + candidateId,
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get feedback error");
+                }
+            });
+            return deferred.promise;
+        }
+
+        function saveFeedback(feedback, vacancyId, candidateId) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/feedback/save',
+                verb: 'POST',
+                body: JSON.stringify(feedback),
+                successCallback: function (result) {
+                    var newFeedback = getTechFeedback(vacancyId, candidateId);
+                    deferred.resolve(newFeedback);
+                },
+                errorCallback: function (result) {
+                    console.log("tech feedback update - error");
+                    console.log(result);
+                }
+            });
+            return deferred.promise;
+        };
+
 
         return service;
     }

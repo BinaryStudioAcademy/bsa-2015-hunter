@@ -8,7 +8,7 @@ namespace Hunter.Services.Dto.Feedback
 {
     public class TestFeedbackHrInterviewDto
     {
-        public FeedbackHrInterviewDto Feedback { get; set; }
+        public FeedbackDto Feedback { get; set; }
         public int TestId { get; set; }
     }
 }

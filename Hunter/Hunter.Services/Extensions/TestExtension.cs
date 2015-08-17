@@ -12,7 +12,7 @@ namespace Hunter.Services.Extensions
     {
         public static TestDto ToTestDto(this Test test)
         {
-            var feedbackDto = test.FeedbackId != null ? test.Feedback.ToFeedbackHrInterviewDto() : null;
+            var feedbackDto = test.FeedbackId != null ? test.Feedback.ToFeedbackDto() : null;
             FileDto file = test.File != null ? test.File.ToFileDto() : null;
 
             return new TestDto

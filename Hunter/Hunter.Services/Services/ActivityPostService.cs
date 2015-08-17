@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Entities.Entites.Enums;
 using Hunter.DataAccess.Interface;
 using Hunter.Services.Interfaces;
 
@@ -15,7 +16,7 @@ namespace Hunter.Services
             _activityRepository = activityRepository;
         }
 
-        public void Post(string message, string tag, Uri url = null)
+        public void Post(string message, ActivityType tag, Uri url = null)
         {
             var activity = new Activity
             {

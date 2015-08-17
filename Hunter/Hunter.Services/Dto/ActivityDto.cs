@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hunter.DataAccess.Entities.Entites.Enums;
 
 namespace Hunter.Services
 {
@@ -15,7 +16,7 @@ namespace Hunter.Services
         public string UserLogin { get; set; }
 
         [StringLength(150)]
-        public string Tag { get; set; }
+        public ActivityType Tag { get; set; }
 
         [Required]
         [StringLength(2000)]

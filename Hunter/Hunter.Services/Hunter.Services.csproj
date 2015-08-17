@@ -62,12 +62,11 @@
     <Compile Include="Dto\CandidateLongListDetailsDto.cs" />
     <Compile Include="Dto\CandidateLongListDto.cs" />
     <Compile Include="Dto\CardDto.cs" />
-    <Compile Include="Dto\FeedbackDto.cs" />
     <Compile Include="Dto\Feedback\TestFeedbackHrInterviewDto.cs" />
+    <Compile Include="Dto\Feedback\FeedbackDto.cs" />
     <Compile Include="Dto\FileDto.cs" />
     <Compile Include="Dto\FilterInfoDto.cs" />
     <Compile Include="Dto\TestDto.cs" />
-    <Compile Include="Dto\Feedback\FeedbackHrInterviewDto.cs" />
     <Compile Include="Dto\SpecialNoteDto.cs" />
     <Compile Include="Dto\UserProfileDto.cs" />
     <Compile Include="Dto\VacancyLongListDto.cs" />

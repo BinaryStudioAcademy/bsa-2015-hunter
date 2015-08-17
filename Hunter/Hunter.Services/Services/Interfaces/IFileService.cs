@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.Net.Http;
 using Hunter.Services.Dto;
 
 namespace Hunter.Services.Interfaces
@@ -11,5 +12,6 @@ namespace Hunter.Services.Interfaces
         FileDto Get(string fileName);
         IEnumerable<FileDto> GetAll();
         void Delete(string fileName);
+        ByteArrayContent GetPhoto(int id);
     }
 }

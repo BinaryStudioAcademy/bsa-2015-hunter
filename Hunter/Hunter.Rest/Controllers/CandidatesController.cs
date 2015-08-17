@@ -126,25 +126,6 @@ namespace Hunter.Rest.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("{id:int}/photo")]
-        public HttpResponseMessage GetPhotoUrl(int id)
-        {
-            if (_candidateService.Get(id) == null)
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound);
-            }
-
-            if (_candidateService.Get(id).Photo != null)
-            {
-                return Request.CreateResponse(HttpStatusCode.OK, "api/fileupload/pictures/" + id);
-            }
-            else
-            {
-                return Request.CreateResponse(HttpStatusCode.NoContent);
-            }
-        }
-
         [HttpPost]
         [Route("")]
         public HttpResponseMessage Post(CandidateDto candidate)

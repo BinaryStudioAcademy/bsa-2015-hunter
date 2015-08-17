@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hunter.DataAccess.Entities.Entites.Enums;
+using Hunter.DataAccess.Entities.Enums;
 
 namespace Hunter.DataAccess.Entities
 {
@@ -464,11 +466,11 @@ namespace Hunter.DataAccess.Entities
             #endregion
 
             #region ACTIVITY
-            var activity1 = new Activity() { Message = "Add new user to Pool", Tag = "add user", Time = DateTime.Parse("10.08.2015"), UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
-            var activity2 = new Activity() { Message = "Create new Vacancy Junior PHP Developer", Tag = "create Vacancy", Time = DateTime.Parse("11.08.2015"), UserLogin = "recruiter2", Url = "http://binary-studio.com/" };
-            var activity3 = new Activity() { Message = "Add new Feedback to Hollis Sefton", Tag = "add Feedback", Time = DateTime.Parse("12.08.2015"), UserLogin = "techspec1", Url = "http://binary-studio.com/" };
-            var activity4 = new Activity() { Message = "Add new Feedback to Jennie Charlie", Tag = "add Feedback", Time = DateTime.Parse("13.08.2015"), UserLogin = "techspec@local.com", Url = "http://binary-studio.com/" };
-            var activity5 = new Activity() { Message = "Add new user Lon Abner to Pool", Tag = "add user", Time = DateTime.Parse("14.08.2015"), UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
+            var activity1 = new Activity() { Message = "Add new user to Pool", Tag = ActivityType.User, Time = DateTime.Parse("10.08.2015"), UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
+            var activity2 = new Activity() { Message = "Create new Vacancy Junior PHP Developer", Tag = ActivityType.Vacancy, Time = DateTime.Parse("11.08.2015"), UserLogin = "recruiter2", Url = "http://binary-studio.com/" };
+            var activity3 = new Activity() { Message = "Add new Feedback to Hollis Sefton", Tag = ActivityType.Feedback, Time = DateTime.Parse("12.08.2015"), UserLogin = "techspec1", Url = "http://binary-studio.com/" };
+            var activity4 = new Activity() { Message = "Add new Feedback to Jennie Charlie", Tag = ActivityType.Feedback, Time = DateTime.Parse("13.08.2015"), UserLogin = "techspec@local.com", Url = "http://binary-studio.com/" };
+            var activity5 = new Activity() { Message = "Add new user Lon Abner to Pool", Tag = ActivityType.User, Time = DateTime.Parse("14.08.2015"), UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
 
             var activities = new List<Activity> {activity1, activity2, activity3, activity4, activity5};
 
@@ -581,6 +583,7 @@ namespace Hunter.DataAccess.Entities
             cards.ForEach(c => context.Card.Add(c));
             context.SaveChanges();
             #endregion
+
             #region FEEDBACK
             var feedbacks = new List<Feedback>
             {
@@ -621,7 +624,27 @@ namespace Hunter.DataAccess.Entities
                     Text = "Tech. spec feedback for test",
                     Added = DateTime.Now,
                     Edited = DateTime.Now,
-                    Type = 2,
+                    Type = 4,
+                    Status = 1
+                },
+                new Feedback()
+                {
+                    CardId = 1,
+                    ProfileId = 1,
+                    Text = "Technical Feedback Expertise comment",
+                    Added = new DateTime(2015,10,8),
+                    Edited = DateTime.Now,
+                    Type = (int)FeedbackType.TechFeedback,
+                    Status = 1
+                },
+                new Feedback()
+                {
+                    CardId = 2,
+                    ProfileId = 2,
+                    Text = "Technical Feedback Expertise comment",
+                    Added = new DateTime(2015,10,8),
+                    Edited = DateTime.Now,
+                    Type = (int)FeedbackType.TechFeedback,
                     Status = 1
                 }
             };

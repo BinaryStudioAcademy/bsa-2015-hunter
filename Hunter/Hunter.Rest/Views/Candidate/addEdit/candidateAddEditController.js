@@ -43,7 +43,7 @@
 
         vm.photoLoaded = true;
         vm.picture = null;
-        vm.pictureUrl = '';
+        vm.photoUrl = '';
 
         //Here we should write all signatures for user actions callback method, for example,
         vm.addEditCandidate = addEditCandidate;
@@ -162,22 +162,18 @@
                 vm.selectedResolution = vm.resolutions[response.data.resolution];
                 vm.ShortListed = response.data.shortListed;
                 vm.DateOfBirth = new Date(response.data.dateOfBirth);
+                vm.photoUrl = response.data.photoUrl;
 
                 //getting already selected pools
                 for (var i = 0; i < response.data.poolNames.length; i++) {
                     for (var j = 0; j < vm.pools.length; j++) {
                         if (response.data.poolNames[i] == vm.pools[j].name) {
-                            vm.selectedPools.push(vm.pools[j]);
+                            vm.selectedPools.push(vm.pools[j].name);
                         }
                     }
                 }
                     
-                candidateHttpService.getPictureUrl(id).then(function (response) {
-                    if (response.status != 204) {
-                        vm.pictureUrl = response.data;
-                        vm.photoLoaded = true;
-                    }
-                });
+                vm.photoLoaded = true;
                 vm.nameInTitle = response.data.firstName + " " + response.data.lastName;
             });
         }
