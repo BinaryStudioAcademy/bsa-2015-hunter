@@ -8,7 +8,7 @@ namespace Hunter.DataAccess.Interface.Base
     public interface IRepository<T> where T : class//, IEntity
     {
         IQueryable<T> Query();
-        IQueryable<T> QueryIncluding<TProperty>(params Expression<Func<T, TProperty>>[] includes);
+        IQueryable<T> QueryIncluding(params Expression<Func<T, object>>[] includes);
         IEnumerable<T> All();
         T Get(long id);
         T Get(Func<T, bool> predicate);

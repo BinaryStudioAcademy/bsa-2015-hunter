@@ -4,8 +4,8 @@ namespace Hunter.Services.Interfaces
 {
     public interface IVacancyService
     {
-        IEnumerable<VacancyDto> Get(VacancyFilterParams filterParams);
-        IEnumerable<VacancyDto> Get();
+        PageDto<VacancyRowDto> Get(VacancyFilterParams filterParams);
+        IList<VacancyRowDto> Get();
         VacancyDto Get(int id);
         void Add(VacancyDto dto);
         void Update(VacancyDto entity);

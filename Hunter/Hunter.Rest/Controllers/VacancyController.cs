@@ -51,22 +51,6 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("all")]
-        [ResponseType(typeof(IEnumerable<VacancyDto>))]
-        public HttpResponseMessage Get()
-        {
-            try
-            {
-                var vacancies = _vacancyService.Get();
-                return Request.CreateResponse(HttpStatusCode.OK, vacancies);
-            }
-            catch (Exception ex)
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
-            }
-        }
-
-        [HttpGet]
         [Route("{id:int}")]
         [ResponseType(typeof(VacancyDto))]
         public HttpResponseMessage Get(int id)
