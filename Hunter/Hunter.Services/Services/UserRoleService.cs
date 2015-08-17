@@ -26,7 +26,7 @@ namespace Hunter.Services
         {
             try
             {
-                return _userRoleRepository.All().ToUserRoleDtos();
+                return _userRoleRepository.Query().ToList().ToUserRoleDtos();
             }
             catch (Exception ex)
             {

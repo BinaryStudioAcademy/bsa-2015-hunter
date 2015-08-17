@@ -12,5 +12,10 @@ namespace Hunter.DataAccess.Db
         {
 
         }
+
+        public Card GetByCandidateAndVacancy(int candidateId, int vacancyId)
+        {
+            return Query().FirstOrDefault(x => x.CandidateId == candidateId && x.VacancyId == vacancyId);
+        }
     }
 }

@@ -2,6 +2,8 @@
 using System.Linq;
 using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Interface.Base;
+using Hunter.Services.Dto;
+using Hunter.Services.Extensions;
 using Hunter.Services.Interfaces;
 
 namespace Hunter.Services
@@ -19,7 +21,7 @@ namespace Hunter.Services
 
         public IEnumerable<ActivityDto> GetAllActivities()
         {
-            var activities = _activityRepository.All();
+            var activities = _activityRepository.Query();
 
             return activities.Select(item => item.ToActivityDto()).ToList();
         }

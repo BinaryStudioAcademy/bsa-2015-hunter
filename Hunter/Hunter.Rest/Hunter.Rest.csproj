@@ -312,6 +312,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\no_photo.png" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="bower_components\alertifyjs\dist\css\alertify-bootstrap-3.css" />
     <Content Include="bower_components\alertifyjs\dist\css\alertify-bootstrap.css" />
@@ -849,7 +850,6 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="bower_components\checklist-model\test\" />
     <Folder Include="Content\fontAwesome\" />
     <Folder Include="Views\role\addEdit\" />

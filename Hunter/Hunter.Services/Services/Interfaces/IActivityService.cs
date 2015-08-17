@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Hunter.Services.Dto;
 
 namespace Hunter.Services.Interfaces
 {

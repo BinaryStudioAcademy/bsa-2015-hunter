@@ -29,24 +29,11 @@ namespace Hunter.Services
             _poolRepository = poolRepository;
         }
 
-        public IQueryable<Candidate> GetAll()
-        {
-            try
-            {
-                return _candidateRepository.Query();
-            }
-            catch (Exception ex)
-            {
-                _logger.Log(ex);
-                return null;
-            }
-        }
-
         public IEnumerable<CandidateDto> GetAllInfo()
         {
             try
             {
-                var data = _candidateRepository.All().Select(x => x.ToCandidateDto());
+                var data = _candidateRepository.Query().ToList().Select(x => x.ToCandidateDto());
                 return data;
             }
             catch (Exception ex)
@@ -105,7 +92,10 @@ namespace Hunter.Services
         {
             try
             {
-                var cardsLongList = _cardRepository.All().Where(card => card.VacancyId == id).ToCandidateLongListDto();
+                var cardsLongList = _cardRepository.QueryIncluding(c=>c.Candidate, c=>c.UserProfile)
+                                                   .Where(card => card.VacancyId == id)
+                                                   .ToList()
+                                                   .ToDto();
                 return cardsLongList;
             }
             catch (Exception ex)

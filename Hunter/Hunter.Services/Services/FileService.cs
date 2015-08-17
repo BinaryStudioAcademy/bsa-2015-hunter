@@ -153,7 +153,7 @@ namespace Hunter.Services
 
         public IEnumerable<FileDto> Get()
         {
-            var files = _fileRepository.All().Select(f => f.ToFileDto());
+            var files = _fileRepository.Query().ToList().Select(f => f.ToFileDto());
             //foreach (var file in files)
             //    file.File = LoadFile(GetFullPath(file));
             return files;

@@ -67,7 +67,7 @@ namespace Hunter.Services
             candidate.EditDate = DateTime.Now;
         }
 
-        public static IEnumerable<CandidateLongListDto> ToCandidateLongListDto(this IEnumerable<Card> cards)
+        public static IEnumerable<CandidateLongListDto> ToDto(this IEnumerable<Card> cards)
         {
             return cards.Select(c => new CandidateLongListDto()
             {

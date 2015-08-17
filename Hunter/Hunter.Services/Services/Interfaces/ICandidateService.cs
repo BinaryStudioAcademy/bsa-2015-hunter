@@ -8,7 +8,6 @@ namespace Hunter.Services.Interfaces
 {
     public interface ICandidateService
     {
-        IQueryable<Candidate> GetAll();
         Candidate Get(int id);
         Candidate Get(Func<Candidate, bool> predicat);
         IEnumerable<CandidateDto> GetAllInfo();

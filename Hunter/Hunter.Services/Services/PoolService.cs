@@ -25,7 +25,7 @@ namespace Hunter.Services
         {
             try
             {
-                return _poolRepository.All().ToPoolViewModel();
+                return _poolRepository.Query().ToList().ToPoolViewModel();
             }
             catch (Exception ex)
             {
