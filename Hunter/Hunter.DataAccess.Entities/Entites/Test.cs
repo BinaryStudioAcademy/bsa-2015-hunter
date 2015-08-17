@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,6 +21,8 @@ namespace Hunter.DataAccess.Entities
         public int CardId { get; set; }
 
         public int? FeedbackId { get; set; }
+
+        public DateTime Added { get; set; }
 
         public virtual Card Card { get; set; }
 

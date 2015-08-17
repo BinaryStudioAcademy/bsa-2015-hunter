@@ -22,6 +22,7 @@ namespace Hunter.Services.Extensions
                 Comment = test.Comment,
                 FeedbackId = test.FeedbackId,
                 FileId = test.FileId,
+                Added = test.Added,
                 Url = test.Url,
                 File = file,
                 Feedback = feedbackDto
@@ -36,6 +37,7 @@ namespace Hunter.Services.Extensions
             test.FeedbackId = testDto.FeedbackId;
             test.FileId = testDto.FileId;
             test.Url = testDto.Url;
+            test.Added = testDto.Added;
 
             if(test.FileId != null)
                 testDto.File.ToFile(test.File = new File());

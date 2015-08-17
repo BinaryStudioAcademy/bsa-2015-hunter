@@ -5,7 +5,7 @@
                 <h3>{{generalCardCtrl.feedbackTypes[feedback.type].name}}</h3>
                 <span ng-hide="feedback.date == ''">{{feedback.userName}} at {{feedback.date}}</span>
             </div>
-            <textarea disabled name="text" ng-model="feedback.text">{{feedback.text}}</textarea>
+            <textarea disabled name="text" ng-model="feedback.text"></textarea>
         </div>
     </div>
     <div class="hrInterview_form">
@@ -13,6 +13,13 @@
             <h3>Tech Feedback</h3>
             <span ng-hide="overviewCtrl.techFeedback.date.length <= 0">{{overviewCtrl.techFeedback.userName}} at {{overviewCtrl.techFeedback.date}}</span>
         </div>
-        <textarea disabled name="text" ng-model="overviewCtrl.techFeedback.text">{{overviewCtrl.techFeedback.text}}</textarea>
+        <textarea disabled name="text" ng-model="overviewCtrl.techFeedback.text"></textarea>
+    </div>
+    <div class="hrInterview_form" ng-repeat="test in overviewCtrl.tests.tests">
+        <div>
+            <h3>Test Feedback</h3>
+            <span ng-hide="test.feedback.date.length <= 0">{{test.feedback.userName}} at {{test.feedback.date}}</span>
+        </div>
+        <textarea disabled name="text" ng-model="test.feedback.text"></textarea>
     </div>
 </div>

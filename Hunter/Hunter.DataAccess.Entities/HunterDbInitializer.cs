@@ -667,9 +667,9 @@ namespace Hunter.DataAccess.Entities
 
             #region TEST
 
-            var test1 = new Test {CardId = 1, Comment = "Test to get a job", FeedbackId = 4, Url = "http://goodwork.com", FileId = 1};
-            var test2 = new Test{CardId = 2, Comment = "Very hard test", FeedbackId = 4, Url = "http://test.com", FileId = 2};
-            var test3 = new Test{CardId = 3, Comment = "I very want this job", FeedbackId = 4, FileId = 3, Url = "http://testwork.ua"};
+            var test1 = new Test {CardId = 1, Comment = "Test to get a job", FeedbackId = 4, Url = "http://goodwork.com", FileId = 1, Added = DateTime.Now};
+            var test2 = new Test{CardId = 2, Comment = "Very hard test", FeedbackId = 4, Url = "http://test.com", FileId = 2, Added = DateTime.Now};
+            var test3 = new Test{CardId = 3, Comment = "I very want this job", FeedbackId = 4, FileId = 3, Url = "http://testwork.ua", Added = DateTime.Now};
 
             var tests = new List<Test> {test1, test2, test3};
             tests.ForEach(x => context.Test.Add(x));
