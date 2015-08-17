@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using System.Linq;
+using System.Net.Http;
 using Hunter.Common.Interfaces;
 using Hunter.Services.Dto;
 using Hunter.Services.Interfaces;
@@ -44,6 +45,20 @@ namespace Hunter.Services
                 _logger.Log(ex);
             }
             
+        }
+
+        public ByteArrayContent GetPhoto(int id)
+        {
+            var array = _candidateService.Get(id).Photo;
+            if (array != null)
+            {
+                return new ByteArrayContent(array);
+            }
+            else
+            {
+                array = File.ReadAllBytes(HttpContext.Current.Server.MapPath("~/App_Data/no_photo.png"));
+                return new ByteArrayContent(array);
+            }
         }
 
         public void Update(FileDto file)

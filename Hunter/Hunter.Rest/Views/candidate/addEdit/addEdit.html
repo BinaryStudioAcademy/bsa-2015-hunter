@@ -68,8 +68,8 @@
         </div>
         <div class="col-md-4">
             <h3>Photo</h3><hr/>
-            <img class="editPagePhoto" ng-if="!candidateAddEditCtrl.photoLoaded" ngf-src="candidateAddEditCtrl.picture"/>
-            <img class="editPagePhoto" ng-if="candidateAddEditCtrl.photoLoaded" src="{{candidateAddEditCtrl.pictureUrl}}"/>
+            <img class="edit-page-photo" ng-if="!candidateAddEditCtrl.photoLoaded" ngf-src="candidateAddEditCtrl.picture"/>
+            <img class="edit-page-photo" ng-if="candidateAddEditCtrl.photoLoaded" src="{{candidateAddEditCtrl.photoUrl}}"/>
             <button ngf-select ngf-multiple="false" ngf-change="candidateAddEditCtrl.previewSelected($file)">Upload Picture</button>
         </div>
     </div>
