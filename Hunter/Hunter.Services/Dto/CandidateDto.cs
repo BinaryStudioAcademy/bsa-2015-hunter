@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Hunter.DataAccess.Entities;
 
 namespace Hunter.Services.Dto
@@ -30,7 +31,7 @@ namespace Hunter.Services.Dto
 
         public double? YearsOfExperience { get; set; }
 
-        public int ResumeId { get; set; }
+        public int? ResumeId { get; set; }
 
         public int? AddedByProfileId { get; set; }
 
@@ -38,9 +39,9 @@ namespace Hunter.Services.Dto
 
         public DateTime AddDate { get; set; }
 
-        public List<CardDto> Cards { get; set; }
+        public IEnumerable<CardDto> Cards { get; set; }
 
-        public List<string> PoolNames { get; set; }
+        public IEnumerable<string> PoolNames { get; set; }
 
         public int Origin { get; set; }
 

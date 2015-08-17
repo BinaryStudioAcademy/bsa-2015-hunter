@@ -52,7 +52,10 @@ namespace Hunter.Rest.Controllers
         [Route("odata")]
         public IHttpActionResult GetOdata(ODataQueryOptions<CandidateDto> options)
         {
-            IQueryable results = options.ApplyTo(_candidateService.GetAllInfo().OrderByDescending(c => c.AddDate).AsQueryable());
+
+            var query = _candidateService.GetAll().ToCandidateDtoForQuery();
+          
+            IQueryable results = options.ApplyTo(query.OrderByDescending(c => c.AddDate));
             var result = new PageResult<CandidateDto>(
                 results as IEnumerable<CandidateDto>,
                 Request.ODataProperties().NextLink,
