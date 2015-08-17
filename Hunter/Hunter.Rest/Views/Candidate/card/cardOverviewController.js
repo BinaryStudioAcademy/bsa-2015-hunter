@@ -23,6 +23,7 @@
         });
 
         FeedbackHttpService.getTechFeedback($routeParams.vid, $routeParams.cid).then(function (result) {
+            console.log(result);
             vm.techFeedback = result;
         });
 
