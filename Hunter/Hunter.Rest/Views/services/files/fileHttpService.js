@@ -17,8 +17,7 @@
             getFile: getFile,
             addFile: addFile,
             updateFile: updateFile,
-            deleteFile: deleteFile,
-            downloadFile: downloadFile
+            deleteFile: deleteFile
         }
 
         function getFiles() {

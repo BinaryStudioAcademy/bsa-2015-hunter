@@ -118,7 +118,7 @@ namespace Hunter.Rest.Controllers
                 result.Content = new StreamContent(file.File);
                 result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                 result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
-                result.Content.Headers.ContentDisposition.FileName = file.FileName;
+                result.Content.Headers.ContentDisposition.FileName = file.OriginalFileName();
                 return result;
             }
             catch (Exception ex)

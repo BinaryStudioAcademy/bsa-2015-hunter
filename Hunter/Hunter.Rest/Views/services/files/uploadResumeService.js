@@ -6,13 +6,16 @@
         .module('hunter-app')
         .factory("UploadResumeService", UploadResumeService);
 
-    UploadResumeService.$inject = ['Upload', 'EnumConstants'];
+    UploadResumeService.$inject = [
+        'Upload',
+        'EnumConstants'
+    ];
 
     function UploadResumeService(upload, enumConstants) {
         var service = {
             onFileSelect: onFileSelect,
             uploadResume: uploadResume,
-            uploadWithLatenc: uploadWithLatenc
+            //uploadWithLatenc: uploadWithLatenc
         };
 
         var _file;
@@ -29,20 +32,20 @@
                     method: "POST",
                     data: {
                         fileType: enumConstants.fileType.Resume,
-                        fileName: candidate.firstName + '_' + candidate.lastName + '.' + _file.name.split('.')[1],
+                        fileName: _file.name,
                         candidateid: candidate.id
-            },
+                    },
                     file: _file
                 })
                 .success(function (data){console.log(data)});
             }
         }
 
-        function uploadWithLatenc(candidate) {
-            setTimeout(function() {
-                uploadResume(candidate);
-            }, 1000);
-        }
+        //function uploadWithLatenc(candidate) {
+        //    setTimeout(function() {
+        //        uploadResume(candidate);
+        //    }, 1000);
+        //}
 
 
         return service;

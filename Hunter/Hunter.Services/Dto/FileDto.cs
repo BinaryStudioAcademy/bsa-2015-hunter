@@ -21,5 +21,12 @@ namespace Hunter.Services
         public Stream File { get; set; }
         public int CandidateId { get; set; }
         public int VacancyId { get; set; }
+        public string OriginalFileName()
+        {
+            var parts = FileName.Split('#');
+            if (parts.Length == 5)
+                return parts[4];
+            return FileName;
+        }
     }
 }

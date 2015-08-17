@@ -53,6 +53,7 @@ namespace Hunter.Services
                 SaveFile(file.File, fileName);
                 
                 var newFile = file.ToFile();
+                newFile.FileName = formatedFileName;
                 _fileRepository.UpdateAndCommit(newFile);
                 return newFile.Id;
             }
@@ -126,8 +127,7 @@ namespace Hunter.Services
 
         private string GetFullPath(FileDto file)
         {
-            var formatedFileName = FormatFileName(file);
-            return _localStorage + file.Path + formatedFileName;
+            return _localStorage + file.Path + file.FileName;
         }
 
         public void Delete(int id)

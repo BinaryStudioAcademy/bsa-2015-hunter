@@ -68,9 +68,9 @@
         </div>
         <div class="col-md-4">
             <h3>Photo</h3><hr/>
-            <img class="editPagePhoto" ng-if="!candidateAddEditCtrl.photoLoaded" ng-src="candidateAddEditCtrl.picture"/>
+            <img class="editPagePhoto" ng-if="!candidateAddEditCtrl.photoLoaded" ngf-src="candidateAddEditCtrl.picture"/>
             <img class="editPagePhoto" ng-if="candidateAddEditCtrl.photoLoaded" src="{{candidateAddEditCtrl.pictureUrl}}"/>
-            <button ng-select ng-multiple="false" ng-change="candidateAddEditCtrl.previewSelected($file)">Upload Picture</button>
+            <button ngf-select ngf-multiple="false" ngf-change="candidateAddEditCtrl.previewSelected($file)">Upload Picture</button>
         </div>
     </div>
     <div class="row">
@@ -86,7 +86,7 @@
         </div>
         <div class="col-md-4">
             <h3>Resume</h3><hr/>
-            <input name="file" type="file" ng-select ng-change="candidateAddEditCtrl.onFileSelect($file)">
+            <input name="file" type="file" ngf-select ngf-change="candidateAddEditCtrl.onFileSelect($file)">
         </div>
         <div class="col-md-4">
             <h3>Note</h3><hr/>
