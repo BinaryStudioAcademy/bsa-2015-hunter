@@ -50,6 +50,11 @@
                 { id: 4, color: 'Aquamarine', colorCode: 'rgb(76, 222, 181)' },
                 { id: 5, color: 'Purple', colorCode: 'rgb(181, 60, 181)' },
                 { id: 6, color: 'Blue', colorCode: 'rgb(87, 166, 235)' }
-            ]
+            ],
+            fileType: {
+                Resume: 0,
+                Test: 1,
+                Other: 2
+            }
         });
 })();

@@ -1,21 +1,20 @@
-﻿(function() {
-    
+﻿(function () {
+
     'use strict';
 
     angular
         .module('hunter-app')
-        .factory("UploadResumeService", UploadResumeService);
+        .factory("UploadTestService", UploadTestService);
 
     UploadResumeService.$inject = [
         'Upload',
         'EnumConstants'
     ];
 
-    function UploadResumeService(upload, enumConstants) {
+    function UploadTestService(upload, enumConstants) {
         var service = {
             onFileSelect: onFileSelect,
             uploadResume: uploadResume,
-            //uploadWithLatenc: uploadWithLatenc
         };
 
         var _file;
@@ -24,29 +23,23 @@
             _file = $file;
         }
 
-        function uploadResume(candidate) {
+        function uploadTest(candidateId, vacancyId) {
             if (!!_file) {
                 console.log(_file.name);
                 upload.upload({
                     url: "api/fileupload",
                     method: "POST",
                     data: {
-                        fileType: enumConstants.fileType.Resume,
+                        fileType: enumConstants.fileType.Test,
                         fileName: _file.name,
-                        candidateid: candidate.id
+                        candidateid: candidateId,
+                        vacancyid: vacancyId
                     },
                     file: _file
                 })
-                .success(function (data){console.log(data)});
+                .success(function (data) { console.log(data) });
             }
         }
-
-        //function uploadWithLatenc(candidate) {
-        //    setTimeout(function() {
-        //        uploadResume(candidate);
-        //    }, 1000);
-        //}
-
 
         return service;
     }

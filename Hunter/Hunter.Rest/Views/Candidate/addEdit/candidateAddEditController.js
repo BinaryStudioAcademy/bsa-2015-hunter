@@ -13,11 +13,12 @@
         'CandidateAddEditService',
         'PoolsHttpService',
         'UploadResumeService',
-        'UploadPhotoService'
+        'UploadPhotoService',
+        'FileHttpService'
     ];
 
     function CandidateAddEditController($location, $routeParams, authService,
-        candidateHttpService, candidateAddEditService, poolsHttpService, uploadResumeService, uploadPhotoService) {
+        candidateHttpService, candidateAddEditService, poolsHttpService, uploadResumeService, uploadPhotoService, fileHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         //vm.categories = [{ name: 'Select Candidate Category' }]; // .NET, JS, PHP
@@ -43,7 +44,7 @@
 
         vm.photoLoaded = true;
         vm.picture = null;
-        vm.pictureUrl = '';
+        vm.photoUrl = '';
 
         //Here we should write all signatures for user actions callback method, for example,
         vm.addEditCandidate = addEditCandidate;
@@ -162,6 +163,7 @@
                 vm.selectedResolution = vm.resolutions[response.data.resolution];
                 vm.ShortListed = response.data.shortListed;
                 vm.DateOfBirth = new Date(response.data.dateOfBirth);
+                vm.photoUrl = response.data.photoUrl;
 
                 //getting already selected pools
                 for (var i = 0; i < response.data.poolNames.length; i++) {
@@ -172,12 +174,7 @@
                     }
                 }
                     
-                candidateHttpService.getPictureUrl(id).then(function (response) {
-                    if (response.status != 204) {
-                        vm.pictureUrl = response.data;
-                        vm.photoLoaded = true;
-                    }
-                });
+                vm.photoLoaded = true;
                 vm.nameInTitle = response.data.firstName + " " + response.data.lastName;
             });
         }

@@ -49,5 +49,7 @@ namespace Hunter.Services.Dto
         public bool ShortListed { get; set; }
 
         public DateTime DateOfBirth {get; set; } 
+
+        public string PhotoUrl { get; set; }
     }
 }
