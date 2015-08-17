@@ -25,13 +25,11 @@
         });
 
         FeedbackHttpService.getTechFeedback($routeParams.vid, $routeParams.cid).then(function (result) {
-            console.log(result);
             vm.techFeedback = result;
         });
 
-        CardTestHttpService.getTest($routeParams.vid, $routeParams.cid, function (response) {
-            vm.tests = response.data;
-            console.log(response);
+        CardTestHttpService.getTest($routeParams.vid, $routeParams.cid, function (result) {
+            vm.tests = result.data;
         });
     }
 })();
