@@ -13,13 +13,40 @@
                 <aside class="ll_filter">
                     <h2>Filter</h2>
                     <div class="ll_filter_input">
-                        <input ng-model="searchCandidate" class="form-control" type="text" placeholder="Search..." />
+                        <input type="search" class="form-control" ng-model="longListCtrl.filter.search">
+                        <!--<input ng-model="searchCandidate" class="form-control" type="text" placeholder="Search..."/>-->
                     </div>
                     <div class="ll_filter_items">
-                        <div>Shortlist</div>
+                        <!--<div>Shortlist</div>
                         <div>Stage</div>
                         <div>Resolution</div>
-                        <div>Added by</div>
+                        <div>Added by</div>-->
+                        <ul>
+                            <li>
+                                Pool
+                                <ul>
+                                    <li ng-repeat="pool in candidateListCtrl.pools">
+                                        <input type="checkbox" checklist-model="candidateListCtrl.filter.pools" checklist-value="pool.name"> {{pool.name}}
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                Status
+                                <ul>
+                                    <li ng-repeat="status in candidateListCtrl.statuses">
+                                        <input type="checkbox" checklist-model="candidateListCtrl.filter.statuses" checklist-value="status.id"> {{status.name}}
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                Added by
+                                <ul>
+                                    <li ng-repeat="inv in candidateListCtrl.inviters">
+                                        <input type="checkbox" checklist-model="candidateListCtrl.filter.inviters" checklist-value="inv.email"> {{inv.name}}
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </aside>
                 <div class="ll_list">

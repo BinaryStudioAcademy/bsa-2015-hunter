@@ -20,25 +20,23 @@
         vm.candidates;
         vm.candidateDetails;
 
+        // get vacancy info
         VacancyHttpService.getLongList($routeParams.id).then(function (result) {
             console.log(result);
             vm.vacancy = result;
         });
 
+        // get all vacancies candidates
         CandidateHttpService.getLongList($routeParams.id).then(function(result) {
             console.log(result);
             vm.candidates = result;
         });
 
-        //function tabIsSet() {
-        //    //return vm.tab === checkTab;
-        //    return true;
-        //}
-
+        // click on candidate item shows candidates preview
         vm.tabIsSet = function (checkTab) {
             return vm.tab === checkTab;
-            //return false;
         };
+
         vm.tabSet = function(id) {
             vm.tab = id;
         }
@@ -50,6 +48,19 @@
                 vm.candidateDetails = result;
             });
         }
+
+        // filtering candidates
+        vm.filter = {
+            search: '',
+            shortlist: [],
+            stages: [],
+            salary: [],
+            location: [],
+            inviters: []
+        };
+
+        // seatch filter
+
 
         //function setTab(setTab) {
         //    vm.tab = setTab;
