@@ -32,7 +32,9 @@ namespace Hunter.Services
                 Status = vacancy.Status,
                 StartDate = vacancy.StartDate,
                 EndDate = vacancy.EndDate,
-                PoolName = vacancy.Pool.Name
+                PoolName = vacancy.Pool.Name,
+                AddedByName = vacancy.User.UserName,
+                AddedById = vacancy.User.Id
             };
             return v;
         }

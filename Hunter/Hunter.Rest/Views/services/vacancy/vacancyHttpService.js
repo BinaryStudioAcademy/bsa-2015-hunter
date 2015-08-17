@@ -12,7 +12,6 @@
 
     function VacancyHttpService($q, httpHandler) {
         var service = {
-            getVacancies: getVacancies,
             getFilteredVacancies : getFilteredVacancies,
             getVacancy: getVacancy,
             addVacancy: addVacancy,
@@ -21,22 +20,6 @@
             deleteVacancy: deleteVacancy,
             getLongList: getLongList,
             getFilterInfo: getFilterInfo
-        }
-
-        function getVacancies(){
-            var deferred = $q.defer();
-            httpHandler.sendRequest({
-                url: '/api/vacancy/all',
-                verb: 'GET',
-                successCallback: function (result) {
-                    deferred.resolve(result.data);
-                },
-                errorCallback: function (status) {
-                    console.log("Get vacancies error");
-                    console.log(status);
-                }
-            });
-            return deferred.promise;
         }
 
         function getFilteredVacancies(filter) {

@@ -33,7 +33,6 @@ namespace Hunter.Services
 
         public string StatusName { get; set; }
 
-        public int TotalCount { get; set; }
         //public virtual ICollection<CardDTO> Card { get; set; }
 
         //public virtual PoolDTO Pool { get; set; }
@@ -52,5 +51,16 @@ namespace Hunter.Services
         public DateTime? EndDate { get; set; }
 
         public string PoolName { get; set; }
+
+        public string AddedByName { get; set; }
+
+        public int AddedById { get; set; }
+    }
+
+    public class PageDto<T> where T: class, new()
+    {
+        public int TotalCount { get; set; }
+
+        public IList<T> Rows { get; set; }
     }
 }

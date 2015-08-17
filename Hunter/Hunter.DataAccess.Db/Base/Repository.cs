@@ -32,7 +32,7 @@ namespace Hunter.DataAccess.Db.Base
             return _dataSet.AsQueryable();
         }
 
-        public IQueryable<T> QueryIncluding<TProperty>(params Expression<Func<T, TProperty>>[] includes)
+        public IQueryable<T> QueryIncluding(params Expression<Func<T, object>>[] includes)
         {
             var query = Query();
             if (includes != null && includes.Length > 0)
