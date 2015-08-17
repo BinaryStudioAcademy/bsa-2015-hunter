@@ -12,6 +12,9 @@ namespace Hunter.Services.Extensions
     {
         public static TestDto ToTestDto(this Test test)
         {
+            var feedbackDto = test.FeedbackId != null ? test.Feedback.ToFeedbackDto() : null;
+            FileDto file = test.File != null ? test.File.ToFileDto() : null;
+
             return new TestDto
             {
                 Id = test.Id,
@@ -19,7 +22,9 @@ namespace Hunter.Services.Extensions
                 Comment = test.Comment,
                 FeedbackId = test.FeedbackId,
                 FileId = test.FileId,
-                Url = test.Url
+                Url = test.Url,
+                File = file,
+                Feedback = feedbackDto
             };
         }
 
@@ -31,6 +36,12 @@ namespace Hunter.Services.Extensions
             test.FeedbackId = testDto.FeedbackId;
             test.FileId = testDto.FileId;
             test.Url = testDto.Url;
+
+            if(test.FileId != null)
+                testDto.File.ToFile(test.File = new File());
+
+            if (testDto.Feedback != null)
+                testDto.Feedback.ToFeedback((test.Feedback = new Feedback()));
         }
     }
 }
