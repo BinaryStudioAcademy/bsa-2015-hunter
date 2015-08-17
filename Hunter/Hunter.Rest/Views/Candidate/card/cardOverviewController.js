@@ -7,16 +7,18 @@
 
     CardOverviewController.$inject = [
         'FeedbackHttpService',
-        '$routeParams'
+        '$routeParams',
+        'CardTestHttpService'
     ];
 
-    function CardOverviewController(FeedbackHttpService, $routeParams) {
+    function CardOverviewController(FeedbackHttpService, $routeParams, CardTestHttpService) {
         var vm = this;
        
 
         vm.feedbacks;
         vm.newFeedback;
         vm.techFeedback;
+        vm.tests;
 
         FeedbackHttpService.getHrFeedback($routeParams.vid, $routeParams.cid).then(function (result) {
             vm.feedbacks = result;
@@ -27,5 +29,9 @@
             vm.techFeedback = result;
         });
 
+        CardTestHttpService.getTest($routeParams.vid, $routeParams.cid, function (response) {
+            vm.tests = response.data;
+            console.log(response);
+        });
     }
 })();
