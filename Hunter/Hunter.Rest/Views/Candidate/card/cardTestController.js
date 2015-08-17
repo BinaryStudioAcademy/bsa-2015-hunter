@@ -49,8 +49,9 @@
                 'url': vm.testLink,
                 'fileId': null,
                 'cardId': vm.test.cardId,
-                'feedbackId': null
-            }
+                'feedbackId': null,
+                'added': new Date()
+        }
 
             CardTestHttpService.sendTest(testSend, function(response) {
                 var lastUploadTestId = response.data;

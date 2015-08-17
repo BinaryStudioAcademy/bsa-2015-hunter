@@ -146,6 +146,10 @@
     <Compile Include="Migrations\201508161627593_activity_type_enum.Designer.cs">
       <DependentUpon>201508161627593_activity_type_enum.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508171149241_AddAddedFieldInTest.cs" />
+    <Compile Include="Migrations\201508171149241_AddAddedFieldInTest.Designer.cs">
+      <DependentUpon>201508171149241_AddAddedFieldInTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -200,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508161627593_activity_type_enum.resx">
       <DependentUpon>201508161627593_activity_type_enum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508171149241_AddAddedFieldInTest.resx">
+      <DependentUpon>201508171149241_AddAddedFieldInTest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
