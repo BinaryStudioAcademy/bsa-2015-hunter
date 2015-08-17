@@ -288,6 +288,7 @@
     <Compile Include="Controllers\CandidatesController.cs" />
     <Compile Include="Controllers\CardController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SpecialNoteController.cs" />
@@ -796,6 +797,7 @@
     <Content Include="Views\services\candidate\specialNote\specialNoteHttpService.js" />
     <Content Include="Views\services\constants\enumConstants.js" />
     <Content Include="Views\services\directive\autofocus.js" />
+    <Content Include="Views\services\files\fileHttpService.js" />
     <Content Include="Views\services\files\uploadPhotoService.js" />
     <Content Include="Views\services\helper\ActivityIconDirective.js" />
     <Content Include="Views\services\helper\authInterceptorService.js" />
