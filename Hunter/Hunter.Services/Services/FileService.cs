@@ -79,7 +79,7 @@ namespace Hunter.Services
             if (!File.Exists(fileName)) return null;
 
             Stream stream = null;
-            using (var fileStream = File.Open(fileName, FileMode.Open))
+            using (var fileStream = File.Open(fileName, FileMode.Open, FileAccess.Read))
             {
                 stream = new MemoryStream();
                 fileStream.CopyTo(stream);
@@ -147,6 +147,7 @@ namespace Hunter.Services
             {
                 var dto = entity.ToFileDto();
                 dto.File = LoadFile(GetFullPath(dto));
+                dto.File.Position = 0;
                 return dto;
             }
             return null;

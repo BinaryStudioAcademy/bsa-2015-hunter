@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Description;
 
@@ -104,6 +105,7 @@ namespace Hunter.Rest.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
         }
+
         [HttpGet]
         [Route("download/{id:int}")]
         [ResponseType(typeof(FileDto))]
@@ -112,7 +114,12 @@ namespace Hunter.Rest.Controllers
             try
             {
                 var file = _fileService.DownloadFile(id);
-                return Request.CreateResponse(HttpStatusCode.OK, file.File);
+                HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+                result.Content = new StreamContent(file.File);
+                result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
+                result.Content.Headers.ContentDisposition.FileName = file.FileName;
+                return result;
             }
             catch (Exception ex)
             {
