@@ -167,7 +167,7 @@
                 for (var i = 0; i < response.data.poolNames.length; i++) {
                     for (var j = 0; j < vm.pools.length; j++) {
                         if (response.data.poolNames[i] == vm.pools[j].name) {
-                            vm.selectedPools.push(vm.pools[j]);
+                            vm.selectedPools.push(vm.pools[j].name);
                         }
                     }
                 }
