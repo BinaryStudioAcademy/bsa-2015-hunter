@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Hunter.DataAccess.Entities.Entites.Enums;
+using Hunter.DataAccess.Entities.Enums;
 
 namespace Hunter.DataAccess.Entities
 {
@@ -582,6 +583,7 @@ namespace Hunter.DataAccess.Entities
             cards.ForEach(c => context.Card.Add(c));
             context.SaveChanges();
             #endregion
+
             #region FEEDBACK
             var feedbacks = new List<Feedback>
             {
@@ -613,6 +615,26 @@ namespace Hunter.DataAccess.Entities
                     Added = new DateTime(2015, 8, 1),
                     Edited = new DateTime(2015, 8, 1),
                     Type = 2,
+                    Status = 1
+                },
+                new Feedback()
+                {
+                    CardId = 1,
+                    ProfileId = 1,
+                    Text = "Technical Feedback Expertise comment",
+                    Added = new DateTime(2015,10,8),
+                    Edited = DateTime.Now,
+                    Type = (int)FeedbackType.TechFeedback,
+                    Status = 1
+                },
+                new Feedback()
+                {
+                    CardId = 2,
+                    ProfileId = 2,
+                    Text = "Technical Feedback Expertise comment",
+                    Added = new DateTime(2015,10,8),
+                    Edited = DateTime.Now,
+                    Type = (int)FeedbackType.TechFeedback,
                     Status = 1
                 }
             };

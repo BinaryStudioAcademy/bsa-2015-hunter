@@ -61,7 +61,7 @@
     <Compile Include="Dto\CandidateLongListDetailsDto.cs" />
     <Compile Include="Dto\CandidateLongListDto.cs" />
     <Compile Include="Dto\CardDto.cs" />
-    <Compile Include="Dto\Feedback\FeedbackHrInterviewDto.cs" />
+    <Compile Include="Dto\Feedback\FeedbackDto.cs" />
     <Compile Include="Dto\FileDto.cs" />
     <Compile Include="Dto\FilterInfoDto.cs" />
     <Compile Include="Dto\SpecialNoteDto.cs" />
