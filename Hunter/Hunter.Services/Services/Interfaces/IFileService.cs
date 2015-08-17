@@ -15,5 +15,6 @@ namespace Hunter.Services.Interfaces
         FileDto DownloadFile(int id);
         ByteArrayContent GetPhoto(int id);
         FileDto GetResumeFileDto(int resumeId);
+        void UploadPhotoFromUrl(string url, int candidateId);
     }
 }

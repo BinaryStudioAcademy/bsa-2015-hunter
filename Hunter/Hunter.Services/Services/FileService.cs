@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Entities;
@@ -205,6 +206,20 @@ namespace Hunter.Services
                 return dto;
             }
             return null;
+        }
+
+        public void UploadPhotoFromUrl(string source, int candidateId)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                var wr = WebRequest.Create(source);
+                var response = wr.GetResponse();
+                Stream stream = response.GetResponseStream();
+                stream.CopyTo(ms);
+                var candidate = _candidateService.Get(candidateId);
+                candidate.Photo = ms.ToArray();
+                _candidateService.Update(candidate.ToCandidateDto());
+            }        
         }
     }
 }

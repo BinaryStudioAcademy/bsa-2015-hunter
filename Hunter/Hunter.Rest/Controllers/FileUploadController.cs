@@ -75,6 +75,22 @@ namespace Hunter.Rest.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("pictures/fromUrl/{id:int}")]
+        public HttpResponseMessage PostPictureFromUrl(int id, [FromBody]string photoUrl)
+        {
+            try
+            {
+                _fileService.UploadPhotoFromUrl(photoUrl, id);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+            
+        }
+
         [HttpDelete]
         [Route("pictures/{id:int}")]
         public HttpResponseMessage DeletePicture(int id)

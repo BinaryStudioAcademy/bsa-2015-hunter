@@ -46,11 +46,14 @@
         vm.picture = null;
         vm.photoUrl = '';
         vm.resume = null;
+        vm.externalUrl = '';
+        var firstPreviewUrl = '';
 
         //Here we should write all signatures for user actions callback method, for example,
         vm.addEditCandidate = addEditCandidate;
         vm.previewSelected = previewSelected;
         vm.onFileSelect = uploadResumeService.onFileSelect;
+        vm.getFromUrl = getFromUrl;
 
         (function () {
             // This is function for initialization actions, for example checking auth
@@ -94,6 +97,17 @@
                 vm.photoLoaded = false;
                 vm.picture = $file;
             }
+        }
+
+        function getFromUrl() {
+            uploadPhotoService.validateUrl(vm.externalUrl).then(function(isImage) {
+                if (isImage) {
+                    vm.photoUrl = vm.externalUrl;     
+                } else {
+                    vm.externalUrl = '';
+                    vm.photoUrl = firstPreviewUrl;
+                }
+            });               
         }
 
         // not user-event functions
@@ -166,7 +180,7 @@
                 vm.DateOfBirth = new Date(response.data.dateOfBirth);
                 vm.photoUrl = response.data.photoUrl;
                 vm.resumeId = response.data.resumeId;
-
+                firstPreviewUrl = vm.photoUrl;
                 //getting already selected pools
                 for (var i = 0; i < response.data.poolNames.length; i++) {
                     for (var j = 0; j < vm.pools.length; j++) {
@@ -186,7 +200,13 @@
 
         function successAddEditCandidate(data) {
             uploadResumeService.uploadResume(data.data);
-            uploadPhotoService.uploadPicture(vm.picture, data.data.id);
+
+            if (vm.photoUrl == vm.externalUrl) {
+                uploadPhotoService.uploadFromUrl(vm.externalUrl, data.data.id);
+            } else {
+                uploadPhotoService.uploadPicture(vm.picture, data.data.id);
+            }
+            
             $location.url('/candidate/list');
         }
     }
