@@ -33,14 +33,14 @@
                                 {{test.feedback.userName}} at {{test.feedback.date}}
                             </p>
                             <textarea class="feedbackField form-control"
-                                      ng-readonly="testCtrl.feedbackConfig.fieldReadonly"
+                                      ng-readonly="test.feedbackConfig.fieldReadonly"
                                       ng-model="test.feedback.text"></textarea>
                         </div>
                     </div>
                     <!--Buttons-->
                     <div class="col-md-2 group-btn">
-                        <button class="btn btn-primary btn-block" ng-click="testCtrl.feedbackButtonToggle()">
-                            {{testCtrl.feedbackConfig.buttonText}}
+                        <button class="btn btn-primary btn-block" ng-click="testCtrl.feedbackButtonToggle(test)">
+                            {{test.feedbackConfig.buttonText}}
                         </button>
                         <div style="display: block">
                             <div class="circleButton" ng-click="testCtrl.vote(true)"><span class="glyphicon glyphicon-thumbs-up circleButton-icon"></span></div>

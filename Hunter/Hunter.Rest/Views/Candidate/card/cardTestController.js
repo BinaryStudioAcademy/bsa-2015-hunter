@@ -37,7 +37,7 @@
         //----
 
         //to check that feedbackText was changed
-        var prevFeedbackText = '';
+//        var prevFeedbackText = '';
 
 //        vm.lastUploadTestId;
         vm.uploadLink = function () {
@@ -60,55 +60,63 @@
         }
 
         vm.test;
-        vm.feedbackConfig;
+//        vm.feedbackConfig;
         CardTestHttpService.getTest(vacancyId, candidateId, function(response) {
             vm.test = response.data;
 
-            if (vm.test.feedback != null && vm.test.feedback.text != '') {
-                vm.feedbackConfig = {
-                    'buttonText': 'Edit',
-                    'fieldReadonly': true
-                }
-            } else {
-                vm.test.feedback = {
-                    'cardId': vm.test.cardId,
-                    'text': '',
-                    'date': '',
-                    'type': 4
-                };
+            vm.test.tests.forEach(function (test) {
+                var feedbackConfig;
+                if (test.feedback != null && test.feedback.text != '') {
+                    feedbackConfig = {
+                        'buttonText': 'Edit',
+                        'fieldReadonly': true
+                    }
+                } else {
+                    test.feedback = {
+                        'cardId': vm.test.cardId,
+                        'text': '',
+                        'date': '',
+                        'type': 4
+                    };
 
-                vm.feedbackConfig = {
-                    'buttonText': 'Save',
-                    'fieldReadonly': false
+                    feedbackConfig = {
+                        'buttonText': 'Save',
+                        'fieldReadonly': false
+                    }
                 }
-            }
 
-            prevFeedbackText = vm.test.feedback.text;
+                test.feedbackConfig = feedbackConfig;
+//                prevFeedbackText = vm.test.feedback.text;
+            });
         });
 
-        vm.feedbackButtonToggle = function () {
+        vm.feedbackButtonToggle = function (test) {
             if (vm.test.tests.length == 0) {
                 return;
             }
 
-            toggleFeedbackConfig();
+            toggleFeedbackConfig(test.feedbackConfig);
 
             //if feedback text changed -> update test
-            if (prevFeedbackText != vm.test.feedback.text) {
-                FeedbackHttpService.saveHrFeedback(vm.test.feedback, vacancyId, candidateId);
-                prevFeedbackText = vm.test.feedback.text;
-            }
+            //            if (prevFeedbackText != vm.test.feedback.text) {
+
+            if(test.feedbackConfig.fieldReadonly)
+                FeedbackHttpService.saveHrFeedback(test.feedback, vacancyId, candidateId);
+
+
+//                prevFeedbackText = vm.test.feedback.text;
+//            }
         }
         
         //change name of feedback button and readonly expression for textarea
-        function toggleFeedbackConfig() {
-            vm.feedbackConfig.fieldReadonly = !vm.feedbackConfig.fieldReadonly;
+        function toggleFeedbackConfig(config) {
+            config.fieldReadonly = !config.fieldReadonly;
 
-            if (vm.feedbackConfig.fieldReadonly) {
-                vm.feedbackConfig.buttonText = 'Edit';
+            if (config.fieldReadonly) {
+                config.buttonText = 'Edit';
             } else {
-                vm.feedbackConfig.buttonText = 'Save';
-                vm.prevFeedbackText = vm.test.feedback.text;
+                config.buttonText = 'Save';
+//                vm.prevFeedbackText = vm.test.feedback.text;
             }
         }
     }
