@@ -1,3 +1,22 @@
 ﻿<div ng-controller="CardTechnicalInterviewController as techInterviewCtrl">
-    <h2>{{techInterviewCtrl.templateName}}</h2>
+    <div class="hrInterview_wrap">
+        <div class="btn btn-default" ng-click="generalCardCtrl.changeTemplate(tab)">{{techInterviewCtrl.vacancy.name}}</div>
+        
+        <div class="hrInterview_comments">
+            <div class="hrInterview_form">
+                <form name="feedbackForm" ng-submit="techInterviewCtrl.saveFeedback(techInterviewCtrl.techFeedback.id, techInterviewCtrl.techFeedback.cardId, techInterviewCtrl.techFeedback.text, techInterviewCtrl.techFeedback.type)">
+                    <div>
+                        <div>
+                            <h3>Tech Feedback</h3>
+                            <span ng-hide="techInterviewCtrl.techFeedback.date == ''">{{techInterviewCtrl.techFeedback.userName}} at {{techInterviewCtrl.techFeedback.date}}</span>
+                        </div>
+                        <textarea name="text" ng-model="techInterviewCtrl.techFeedback.text">{{techInterviewCtrl.techFeedback.text}}</textarea>
+                    </div>
+                    <div>
+                        <input class="btn" type="submit" value="Save">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

@@ -10,9 +10,9 @@ namespace Hunter.Services.Extensions
 {
     public static class FeedbackExtension
     {
-        public static IEnumerable<FeedbackHrInterviewDto> ToFeedbackHrInterviewDto(this IEnumerable<Feedback> feedbacks)
+        public static IEnumerable<FeedbackDto> ToFeedbacksDto(this IEnumerable<Feedback> feedbacks)
         {
-            return feedbacks.Select(f => new FeedbackHrInterviewDto()
+            return feedbacks.Select(f => new FeedbackDto()
             {
                 Id = f.Id,
                 CardId = f.CardId,
@@ -25,7 +25,22 @@ namespace Hunter.Services.Extensions
             }).OrderBy(f => f.Type);
         }
 
-        public static void ToFeedback(this FeedbackHrInterviewDto hrInterviewDto, Feedback feedback)
+        public static FeedbackDto ToFeedbackDto(this Feedback feedback)
+        {
+            return new FeedbackDto() 
+            {
+                Id = feedback.Id,
+                CardId = feedback.CardId,
+                Type = feedback.Type,
+                Text = feedback.Text,
+                Date = feedback.Edited == null ? feedback.Added.ToString("dd.MM.yy") : feedback.Edited.Value.ToString("dd.MM.yy"),
+                UserName = feedback.UserProfile != null
+                    ? feedback.UserProfile.UserLogin.Substring(0, feedback.UserProfile.UserLogin.IndexOf("@"))
+                    : ""
+            };
+        }
+
+        public static void ToFeedback(this FeedbackDto hrInterviewDto, Feedback feedback)
         {
             feedback.CardId = hrInterviewDto.CardId;
             feedback.Type = hrInterviewDto.Type;
