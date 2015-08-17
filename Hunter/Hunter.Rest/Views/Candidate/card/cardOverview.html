@@ -1,3 +1,18 @@
 ﻿<div ng-controller="CardOverviewController as overviewCtrl">
-    <h2>{{overviewCtrl.templateName}}</h2>
+    <div class="hrInterview_form" ng-repeat="feedback in overviewCtrl.feedbacks">
+        <div>
+            <div>
+                <h3>{{generalCardCtrl.feedbackTypes[feedback.type].name}}</h3>
+                <span ng-hide="feedback.date == ''">{{feedback.userName}} at {{feedback.date}}</span>
+            </div>
+            <textarea disabled name="text" ng-model="feedback.text">{{feedback.text}}</textarea>
+        </div>
+    </div>
+    <div class="hrInterview_form">
+        <div>
+            <h3>Tech Feedback</h3>
+            <span ng-hide="techInterviewCtrl.techFeedback.date == ''">{{overviewCtrl.techFeedback.userName}} at {{overviewCtrl.techFeedback.date}}</span>
+        </div>
+        <textarea disabled name="text" ng-model="techInterviewCtrl.techFeedback.text">{{overviewCtrl.techFeedback.text}}</textarea>
+    </div>
 </div>
