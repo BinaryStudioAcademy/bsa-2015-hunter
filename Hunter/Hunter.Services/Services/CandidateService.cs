@@ -43,6 +43,19 @@ namespace Hunter.Services
             }
         }
 
+        public IQueryable<Candidate> Query()
+        {
+            try
+            {
+                return _candidateRepository.Query();
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return null;
+            }
+        }
+
         public Candidate Get(int id)
         {
             try

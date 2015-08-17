@@ -10,6 +10,7 @@ namespace Hunter.Services.Interfaces
     {
         Candidate Get(int id);
         Candidate Get(Func<Candidate, bool> predicat);
+        IQueryable<Candidate> Query();
         IEnumerable<CandidateDto> GetAllInfo();
         CandidateDto GetInfo(int id);
         void Add(CandidateDto candidate);

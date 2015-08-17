@@ -105,10 +105,9 @@ namespace Hunter.Services
             };
         }
 
-        public static IQueryable<CandidateDto> ToCandidateDtoForQuery(this IQueryable<Candidate> candidate)
+        public static IQueryable<CandidateDto> MapToDto(this IQueryable<Candidate> candidate)
         {
             return candidate.Select(c =>
-
 
                 new CandidateDto()
                 {
