@@ -87,6 +87,7 @@
         <div class="col-md-4">
             <h3>Resume</h3><hr/>
             <input name="file" type="file" ngf-select ngf-change="candidateAddEditCtrl.onFileSelect($file)">
+            <a href="api/file/download/{{candidateAddEditCtrl.resume.id}}">{{candidateAddEditCtrl.resume.fileName}}</a>
         </div>
         <div class="col-md-4">
             <h3>Note</h3><hr/>

@@ -53,6 +53,22 @@ namespace Hunter.Rest.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("resume/{id:int}")]
+        [ResponseType(typeof(FileDto))]
+        public HttpResponseMessage GetCandidateResume(int id)
+        {
+            try
+            {
+                var fileDto = _fileService.GetResumeFileDto(id);
+                return Request.CreateResponse(HttpStatusCode.OK, fileDto);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
         [HttpPost]
         [Route("")]
         public HttpResponseMessage Post([FromBody]FileDto value)

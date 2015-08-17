@@ -14,5 +14,6 @@ namespace Hunter.Services.Interfaces
         void Delete(int id);
         FileDto DownloadFile(int id);
         ByteArrayContent GetPhoto(int id);
+        FileDto GetResumeFileDto(int resumeId);
     }
 }

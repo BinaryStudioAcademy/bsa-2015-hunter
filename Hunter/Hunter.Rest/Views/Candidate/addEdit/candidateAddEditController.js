@@ -45,6 +45,7 @@
         vm.photoLoaded = true;
         vm.picture = null;
         vm.photoUrl = '';
+        vm.resume = null;
 
         //Here we should write all signatures for user actions callback method, for example,
         vm.addEditCandidate = addEditCandidate;
@@ -129,12 +130,12 @@
                 Linkedin : vm.LinkedIn,
                 Phone: vm.Phone,
                 Salary: vm.Salary,
-                ResumeId: 0,
                 Origin: Origin,
                 Resolution: Resolution,
                 ShortListed: vm.ShortListed,
                 DateOfBirth: DateOfBirth,
-                PoolNames : Pools
+                PoolNames: Pools,
+                ResumeId: vm.resumeId
             }
             if (id != null) {
                 candidate.Id = id;
@@ -164,6 +165,7 @@
                 vm.ShortListed = response.data.shortListed;
                 vm.DateOfBirth = new Date(response.data.dateOfBirth);
                 vm.photoUrl = response.data.photoUrl;
+                vm.resumeId = response.data.resumeId;
 
                 //getting already selected pools
                 for (var i = 0; i < response.data.poolNames.length; i++) {
@@ -173,9 +175,12 @@
                         }
                     }
                 }
-                    
+
                 vm.photoLoaded = true;
                 vm.nameInTitle = response.data.firstName + " " + response.data.lastName;
+                fileHttpService.getResume(vm.resumeId).then(function(data) {
+                    vm.resume = data;
+                });
             });
         }
 
