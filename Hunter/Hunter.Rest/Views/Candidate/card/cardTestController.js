@@ -55,6 +55,17 @@
             CardTestHttpService.sendTest(testSend, function(response) {
                 var lastUploadTestId = response.data;
                 testSend.id = lastUploadTestId;
+                testSend.feedback = {
+                    'cardId': vm.test.cardId,
+                    'text': '',
+                    'date': '',
+                    'type': 4
+                };
+                testSend.feedbackConfig = {
+                    'buttonText': 'Save',
+                    'fieldReadonly': false
+                }
+
                 vm.test.tests.push(testSend);
             });
         }
@@ -101,8 +112,10 @@
             //            if (prevFeedbackText != vm.test.feedback.text) {
 
             if(test.feedbackConfig.fieldReadonly)
-                FeedbackHttpService.saveHrFeedback(test.feedback, vacancyId, candidateId);
-
+                FeedbackHttpService.saveTestFeedback({
+                    'feedback': test.feedback,
+                    'testId': test.id
+                });
 
 //                prevFeedbackText = vm.test.feedback.text;
 //            }

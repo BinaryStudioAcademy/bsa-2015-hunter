@@ -13,7 +13,8 @@
     function FeedbackHttpService($q, httpHandler) {
         var service = {
             getHrFeedback: getHrFeedback,
-            saveHrFeedback: saveHrFeedback
+            saveHrFeedback: saveHrFeedback,
+            saveTestFeedback: saveTestFeedback
         }
 
         function getHrFeedback(vid, cid) {
@@ -47,6 +48,16 @@
             });
             return deferred.promise;
         };
+
+        function saveTestFeedback(feedbackObj) {
+            httpHandler.sendRequest({
+                'url': '/api/feedback/test/update',
+                'verb': 'PUT',
+                'body': feedbackObj,
+                'successCallback': function(response) { console.log('test feedback was successfuly updated') },
+                'errorCallback': function(response) { console.log('Updating was failed') }
+            });
+        }
 
         return service;
     }

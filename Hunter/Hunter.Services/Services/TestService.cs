@@ -115,6 +115,23 @@ namespace Hunter.Services.Services
             }
         }
 
+        public void UpdateFeedback(int testId, int feedbackId)
+        {
+            try
+            {
+                Test test = _testRepository.Get(testId);
+                test.FeedbackId = feedbackId;
+
+                _testRepository.Update(test);
+                _unitOfWork.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                throw ex;
+            }
+        }
+
         public void DeleteTestById(int testId)
         {
             try
