@@ -25,7 +25,7 @@
             });
         }
 
-        function uploadTest(body, succes) {
+        function uploadTest(body, success) {
             HttpHandler.sendRequest({
                 'verb': 'POST',
                 'url': '/api/test/add',

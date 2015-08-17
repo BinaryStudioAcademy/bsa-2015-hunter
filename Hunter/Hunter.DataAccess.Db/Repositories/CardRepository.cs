@@ -8,7 +8,7 @@ namespace Hunter.DataAccess.Db
 {
     public class CardRepository : Repository<Card>, ICardRepository
     {
-        public CardRepository(DatabaseFactory databaseFactory) : base(databaseFactory)
+        public CardRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
         {
 
         }

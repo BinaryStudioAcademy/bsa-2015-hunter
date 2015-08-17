@@ -25,8 +25,8 @@ namespace Hunter.Rest.Controllers
         {
             try
             {
-                var test = _testService.GetCandidateTest(vacancyId, candidateId);
-                return Ok(test);
+                var tests = _testService.GetCardTests(vacancyId, candidateId);
+                return Ok(tests);
             }
             catch (Exception ex)
             {

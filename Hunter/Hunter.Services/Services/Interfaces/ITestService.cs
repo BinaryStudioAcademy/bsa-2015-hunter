@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Hunter.Services.Dto;
+using Hunter.Services.Dto.ApiResults;
 
 namespace Hunter.Services.Services.Interfaces
 {
@@ -9,6 +10,6 @@ namespace Hunter.Services.Services.Interfaces
         int AddTest(TestDto newTestDto);
         void UpdateTest(TestDto newTestDto);
         void DeleteTestById(int testId);
-        TestDto GetCandidateTest(int vacancyId, int candidateID);
+        TestsResult GetCardTests(int vacancyId, int candidateId);
     }
 }

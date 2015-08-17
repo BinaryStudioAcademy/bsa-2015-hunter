@@ -15,6 +15,6 @@ namespace Hunter.Services.Dto
         public int CardId { get; set; }
         public int? FeedbackId { get; set; }
         public FileDto File { get; set; }
-        public FeedbackDto Feedback { get; set; }
+        public FeedbackHrInterviewDto Feedback { get; set; }
     }
 }

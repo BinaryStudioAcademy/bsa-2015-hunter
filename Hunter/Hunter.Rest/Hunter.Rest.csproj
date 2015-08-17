@@ -287,9 +287,11 @@
     <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\CandidatesController.cs" />
     <Compile Include="Controllers\CardController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\SpecialNoteController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Controllers\PoolController.cs" />
     <Compile Include="Controllers\UserRoleController.cs" />
@@ -496,6 +498,7 @@
     <Content Include="Content\card\cardTest.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\hrInterview.css" />
+    <Content Include="Content\hrSpecialNote.css" />
     <Content Include="Content\longlist.css" />
     <Content Include="Content\MyStyle.css" />
     <Content Include="Content\pool.css" />
@@ -789,6 +792,9 @@
     <Content Include="Views\services\candidate\candidatesFilter.js" />
     <Content Include="Views\services\candidate\candidatesHttpService.js" />
     <Content Include="Views\services\candidate\card\cardTestHttpService.js" />
+    <Content Include="Views\services\feedback\cardHrInterviewService.js" />
+    <Content Include="Views\services\feedback\feedbackHttpService.js" />
+    <Content Include="Views\services\candidate\specialNote\specialNoteHttpService.js" />
     <Content Include="Views\services\constants\enumConstants.js" />
     <Content Include="Views\services\directive\autofocus.js" />
     <Content Include="Views\services\files\uploadPhotoService.js" />

@@ -47,7 +47,7 @@ namespace Hunter.DataAccess.Db.Base
 
         public IEnumerable<T> All()
         {
-            return _dataSet.ToList();
+            return _dataSet.AsEnumerable();
             //return _dataSet.AsNoTracking().ToList();
         }
 

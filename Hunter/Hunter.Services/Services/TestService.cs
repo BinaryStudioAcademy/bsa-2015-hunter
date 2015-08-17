@@ -9,6 +9,7 @@ using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Interface.Base;
 using Hunter.DataAccess.Interface.Repositories;
 using Hunter.Services.Dto;
+using Hunter.Services.Dto.ApiResults;
 using Hunter.Services.Extensions;
 using Hunter.Services.Services.Interfaces;
 
@@ -50,20 +51,26 @@ namespace Hunter.Services.Services
             }
         }
 
-        public TestDto GetCandidateTest(int vacancyId, int candidateId)
+        public TestsResult GetCardTests(int vacancyId, int candidateId)
         {
             try
             {
                 int cardId = findCardId(vacancyId, candidateId);
 
-                var test = _testRepository.Get(x => x.CardId == cardId);
+                var data = _cardRepository
+                    .Query()
+                    .Where(x => x.Id == cardId)
+                    .Select(x => new {Tests = x.Test, Feedback = x.Feedback.FirstOrDefault(f => f.Type == 4)})
+                    .First();
 
-                if (test == null)
+                var tests = data.Tests.Select(x => x.ToTestDto());
+
+                return new TestsResult
                 {
-                    throw new Exception("Test not found");
-                }
-
-                return test.ToTestDto();
+                    Tests = tests,
+//                    Feedback = data.Feedback.ToFeedbackHrInterviewDto(),
+                    CardId = cardId
+                };
             }
             catch (Exception ex)
             {

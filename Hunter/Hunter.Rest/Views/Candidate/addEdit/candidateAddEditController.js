@@ -100,11 +100,11 @@
 
             var Resolution = vm.selectedResolution.value;
 
-            Pools = [];
-            for (var i = 0; i<vm.selectedPools.length; i++) {
-//                var pool = { id: vm.selectedPools[i].id, name: vm.selectedPools[i].name };
-                Pools.push(vm.selectedPools[i].name);
-            }
+            Pools = vm.selectedPools;
+//            for (var i = 0; i<vm.selectedPools.length; i++) {
+////                var pool = { id: vm.selectedPools[i].id, name: vm.selectedPools[i].name };
+//                Pools.push(vm.selectedPools[i].name);
+//            }
             
             if (vm.DateOfBirth) {
                 var DateOfBirth = vm.DateOfBirth;
@@ -128,7 +128,7 @@
                 Linkedin : vm.LinkedIn,
                 Phone: vm.Phone,
                 Salary: vm.Salary,
-                ResumeId: 1,
+                ResumeId: 0,
                 Origin: Origin,
                 Resolution: Resolution,
                 ShortListed: vm.ShortListed,
@@ -183,7 +183,6 @@
         }
 
         function successAddEditCandidate(data) {
-            debugger;
             uploadResumeService.uploadResume(data.data);
             uploadPhotoService.uploadPicture(vm.picture, data.data.id);
             $location.url('/candidate/list');

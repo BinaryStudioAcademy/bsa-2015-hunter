@@ -1,26 +1,23 @@
 ﻿<div ng-controller="CardTestController as testCtrl">
-<!--    <h2>{{testCtrl.templateName}}</h2>-->
-<!--    <div class="btn-group">-->
-<!--        <label class="btn btn-primary ng-pristine ng-untouched ng-valid active" btn-checkbox>.NET</label>-->
-<!--        <label class="btn btn-primary ng-pristine ng-untouched ng-valid" btn-checkbox>All</label>-->
-<!--    </div>-->
 
     <div class="workArea container">
-        <div class="row workArea-row">
+        <div class="row workArea-row" ng-repeat="test in testCtrl.test.tests">
             <div class="col-md-3 taskInfo">
-                <div >
-                    <h4 class="disableBottomMargins">Test</h4>
-                    <ul class="disableBottomMargins">
-                        <li class="breakWords">Test: {{testCtrl.test.file.fileName}}</li>
-                        <li>Size: 1.2Mb</li>
-                        <li>Uploaded: {{testCtrl.test.file.added | date:'dd.MM.yyyy'}}</li>
-                    </ul>
-                    <button class="btn btn-default btn-block">Download</button>
-                </div>
                 <div>
-                    <h4 class="disableBottomMargins">Test</h4>
-                    <a class="breakWords" href="{{testCtrl.test.url}}">{{testCtrl.test.url}}</a>
-                    <p>Added 12.12.15</p>
+                    <div ng-show="test.file != null">
+                        <h4 class="disableBottomMargins">Test</h4>
+                        <ul class="disableBottomMargins">
+                            <li class="breakWords">Test: {{test.file.fileName}}</li>
+                            <li>Size: 1.2Mb</li>
+                            <li>Uploaded: {{test.file.added | date:'dd.MM.yyyy'}}</li>
+                        </ul>
+                        <button class="btn btn-default btn-block">Download</button>
+                    </div>
+                    <div ng-hide="test.file != null">
+                        <h4 class="disableBottomMargins">Test</h4>
+                        <a class="breakWords" href="{{testCtrl.test.url}}">{{test.url}}</a>
+                        <p>Added 12.12.15</p>
+                    </div>
                 </div>
             </div>
 
@@ -32,68 +29,42 @@
                     <div class="col-md-10 feedbacks">
                         <div>
                             <h4 class="disableBottomMargins">Feedback</h4>
-                            <p class="feedback-addedBy">Ulyana at 14.08.15</p>
+                            <p class="feedback-addedBy" ng-show="testCtrl.test.feedback != undefined">
+                                {{test.feedback.userName}} at {{test.feedback.date}}
+                            </p>
                             <textarea class="feedbackField form-control"
-                                      ng-readonly="testCtrl.feedbackConfig.fieldReadonly" 
-                                      ng-model="testCtrl.test.feedback.text"></textarea>
+                                      ng-readonly="testCtrl.feedbackConfig.fieldReadonly"
+                                      ng-model="test.feedback.text"></textarea>
                         </div>
                     </div>
                     <!--Buttons-->
                     <div class="col-md-2 group-btn">
-                        <button class="btn btn-primary btn-block">{{testCtrl.feedbackConfig.buttonText}}</button>
-                        <div class="circleButton"><span class="glyphicon glyphicon-thumbs-up circleButton-icon"></span></div>
-                        <div class="circleButton"><span class="glyphicon glyphicon-thumbs-down circleButton-icon"></span></div>
+                        <button class="btn btn-primary btn-block" ng-click="testCtrl.feedbackButtonToggle()">
+                            {{testCtrl.feedbackConfig.buttonText}}
+                        </button>
+                        <div style="display: block">
+                            <div class="circleButton" ng-click="testCtrl.vote(true)"><span class="glyphicon glyphicon-thumbs-up circleButton-icon"></span></div>
+                            <span ng-show="testCtrl.like.count != 0">+{{testCtrl.like.count}}</span>
+                        </div>
+                        <div style="display: block">
+                            <div class="circleButton" ng-click="testCtrl.vote(false)"><span class="glyphicon glyphicon-thumbs-down circleButton-icon"></span></div>
+                            <span ng-show="testCtrl.dislike.count != 0">{{testCtrl.dislike.count}}</span>
+                        </div>
                     </div>
                 </div>
-
-                <!--ngRepeat-->
-<!--                <div class="row">-->
-<!--                    $1$Feedback#1#-->
-<!--                    <div class="col-md-10 feedbacks">-->
-<!--                        <div>-->
-<!--                            <h4 class="disableBottomMargins">Feedback</h4>-->
-<!--                            <p class="feedback-addedBy">Ulyana at 14.08.15</p>-->
-<!--                            <div class="feedbackField form-control" contenteditable></div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    $1$Buttons#1#-->
-<!--                    <div class="col-md-2">-->
-<!--                        <button class="btn btn-primary btn-block">Edit</button>-->
-<!--                        <div class="circleButton"><span class="glyphicon glyphicon-thumbs-up circleButton-icon"></span></div>-->
-<!--                        <div class="circleButton"><span class="glyphicon glyphicon-thumbs-down circleButton-icon"></span></div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!---->
-<!--                <div class="row">-->
-<!--                    $1$Feedback#1#-->
-<!--                    <div class="col-md-10 feedbacks">-->
-<!--                        <div>-->
-<!--                            <h4 class="disableBottomMargins">Feedback</h4>-->
-<!--                            <p class="feedback-addedBy">Ulyana at 14.08.15</p>-->
-<!--                            <div class="feedbackField form-control" contenteditable></div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    $1$Buttons#1#-->
-<!--                    <div class="col-md-2">-->
-<!--                        <button class="btn btn-primary btn-block">Edit</button>-->
-<!--                        <div class="circleButton"><span class="glyphicon glyphicon-thumbs-up circleButton-icon"></span></div>-->
-<!--                        <div class="circleButton"><span class="glyphicon glyphicon-thumbs-down circleButton-icon"></span></div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
             </div>
         </div>
     </div>
-    <div class="workArea container">
+    <div class="workArea without-border container">
         <div class="row workArea-row">
             <div class="col-md-5">
                 <input type="text" class="form-control testLink" placeholder="Provide link to test" ng-model="testCtrl.testLink"/>
                 <button class="btn btn-primary" ng-click="testCtrl.uploadLink()">Add</button>
             </div>
             <div class="col-md-7">
-                <input class="form-control filePath" type="text" readonly placeholder="Pick the file with test"/>
+                <input style="margin-left: 16px;" class="form-control filePath" type="text" readonly placeholder="Pick the file with test"/>
                 <span class="file-input btn btn-primary btn-file">
-                    Browse… <input type="file" multiple="" filread>
+                    Browse… <input type="file" multiple="" filread="testCtrl">
                 </span>
 
                 <button class="btn btn-primary">Upload</button>

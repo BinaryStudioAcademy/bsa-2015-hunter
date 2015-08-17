@@ -4,42 +4,14 @@
         <!--<div class="btn btn-default" ng-click="generalCardCtrl.changeTemplate(tab)">All Feedbacks</div>
         <div class="btn btn-default" ng-click="generalCardCtrl.changeTemplate(tab)">My Feedbacks</div>-->
         <div class="hrInterview_comments">
-            <div class="hrInterview_form">
-                <form>
+            <div class="hrInterview_form" ng-repeat="feedback in hrInterviewCtrl.feedbacks">
+                <form name="feedbackForm" ng-submit="hrInterviewCtrl.saveHrFeedback(feedback.id, feedback.cardId, feedback.type, feedback.text)">
                     <div>
                         <div>
-                            <h3>English</h3>
-                            <span>Name at Date</span>
+                            <h3>{{generalCardCtrl.feedbackTypes[feedback.type].name}}</h3>
+                            <span ng-hide="feedback.date == ''">{{feedback.userName}} at {{feedback.date}}</span>
                         </div>
-                        <textarea name="text">TEST</textarea>
-                    </div>
-                    <div>
-                        <input class="btn" type="submit" value="Edit/save">
-                    </div>
-                </form>
-            </div>
-            <div class="hrInterview_form">
-                <form>
-                    <div>
-                        <div>
-                            <h3>Personal</h3>
-                            <span>Name at Date</span>
-                        </div>
-                        <textarea name="text">TEST</textarea>
-                    </div>
-                    <div>
-                        <input class="btn" type="submit" value="Edit/save">
-                    </div>
-                </form>
-            </div>
-            <div class="hrInterview_form">
-                <form>
-                    <div>
-                        <div>
-                            <h3>Expertise</h3>
-                            <span>Name at Date</span>
-                        </div>
-                        <textarea name="text">TEST</textarea>
+                        <textarea name="text" ng-model="feedback.text">{{feedback.text}}</textarea>
                     </div>
                     <div>
                         <input class="btn" type="submit" value="Edit/save">

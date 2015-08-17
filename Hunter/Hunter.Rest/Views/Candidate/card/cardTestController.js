@@ -7,22 +7,39 @@
 
     CardTestController.$inject = [
         'CardTestHttpService',
-        '$routeParams'
+        '$routeParams',
+        'FeedbackHttpService'
     ];
 
-    function CardTestController(CardTestHttpService, $routeParams) {
+    function CardTestController(CardTestHttpService, $routeParams, FeedbackHttpService) {
         var vm = this;
         vm.templateName = 'Test';
-        vm.candidateId = $routeParams.cid;
-        vm.vacancyId = $routeParams.vid;
+        var candidateId = $routeParams.cid;
+        var vacancyId = $routeParams.vid;
 
         vm.testLink = '';
         vm.testFile = '';
 
-        //to check that feedbackText was changed
-        vm.prevFeedbackText = '';
+        //voting
+        vm.like = {'count': 0, 'wasClicked': false}
+        vm.dislike = { 'count': 0, 'wasClicked': false };
+        vm.vote = function(isLike) {
+            if (isLike && !vm.dislike.wasClicked) {
+                vm.like.count += vm.like.wasClicked ? -1 : 1;
+                vm.like.wasClicked = !vm.like.wasClicked;
+            }
 
-        vm.lastUploadTestId;
+            if (!isLike && !vm.like.wasClicked) {
+                vm.dislike.count -= vm.dislike.wasClicked ? -1 : 1;
+                vm.dislike.wasClicked = !vm.dislike.wasClicked;
+            }
+        }
+        //----
+
+        //to check that feedbackText was changed
+        var prevFeedbackText = '';
+
+//        vm.lastUploadTestId;
         vm.uploadLink = function () {
             if (vm.testLink == '') {
                 return;
@@ -36,13 +53,15 @@
             }
 
             CardTestHttpService.sendTest(testSend, function(response) {
-                vm.lastUploadTestId = response.data;
+                var lastUploadTestId = response.data;
+                testSend.id = lastUploadTestId;
+                vm.test.tests.push(testSend);
             });
         }
 
         vm.test;
         vm.feedbackConfig;
-        CardTestHttpService.getTest(vm.vacancyId, vm.candidateId, function(response) {
+        CardTestHttpService.getTest(vacancyId, candidateId, function(response) {
             vm.test = response.data;
 
             if (vm.test.feedback != null && vm.test.feedback.text != '') {
@@ -51,19 +70,33 @@
                     'fieldReadonly': true
                 }
             } else {
+                vm.test.feedback = {
+                    'cardId': vm.test.cardId,
+                    'text': '',
+                    'date': '',
+                    'type': 4
+                };
+
                 vm.feedbackConfig = {
                     'buttonText': 'Save',
                     'fieldReadonly': false
                 }
             }
+
+            prevFeedbackText = vm.test.feedback.text;
         });
 
-        vm.feedbackButtonToggle = function() {
+        vm.feedbackButtonToggle = function () {
+            if (vm.test.tests.length == 0) {
+                return;
+            }
+
             toggleFeedbackConfig();
 
             //if feedback text changed -> update test
-            if (vm.prevFeedbackText != vm.test.feedback.text) {
-                
+            if (prevFeedbackText != vm.test.feedback.text) {
+                FeedbackHttpService.saveHrFeedback(vm.test.feedback, vacancyId, candidateId);
+                prevFeedbackText = vm.test.feedback.text;
             }
         }
         
