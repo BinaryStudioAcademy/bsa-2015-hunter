@@ -10,7 +10,7 @@ namespace Hunter.Services.Extensions
 {
     public static class FeedbackExtension
     {
-        public static IEnumerable<FeedbackDto> ToFeedbackHrInterviewDto(this IEnumerable<Feedback> feedbacks)
+        public static IEnumerable<FeedbackDto> ToFeedbacksDto(this IEnumerable<Feedback> feedbacks)
         {
             return feedbacks.Select(f => new FeedbackDto()
             {

@@ -38,7 +38,7 @@
         function saveHrFeedback(feedback, vid, cid) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/feedback/hr/save',
+                url: '/api/feedback/save',
                 verb: 'POST',
                 body: JSON.stringify(feedback),
                 successCallback: function (result) {
@@ -68,7 +68,7 @@
         function saveFeedback(feedback, vacancyId, candidateId) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/feedback/hr/save',
+                url: '/api/feedback/save',
                 verb: 'POST',
                 body: JSON.stringify(feedback),
                 successCallback: function (result) {

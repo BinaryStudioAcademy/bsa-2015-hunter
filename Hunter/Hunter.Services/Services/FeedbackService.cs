@@ -39,7 +39,7 @@ namespace Hunter.Services
             {
                 var feedbacks = card.Feedback
                     .Where(f => (f.Type == 0 || f.Type == 1 || f.Type == 2))
-                    .ToFeedbackHrInterviewDto().ToList();
+                    .ToFeedbacksDto().ToList();
 
                 if (!feedbacks.Any(f => f.Type == 0))
                 {

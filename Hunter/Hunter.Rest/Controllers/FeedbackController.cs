@@ -74,7 +74,7 @@ namespace Hunter.Rest.Controllers
 
         // POST: api/Feedback
         [HttpPost]
-        [Route("hr/save")]
+        [Route("save")]
         public HttpResponseMessage Post([FromBody]FeedbackDto FeedbackDto)
         {
             try
