@@ -17,7 +17,8 @@
             getFile: getFile,
             addFile: addFile,
             updateFile: updateFile,
-            deleteFile: deleteFile
+            deleteFile: deleteFile,
+            getResume: getResume
         }
 
         function getFiles() {
@@ -46,6 +47,22 @@
                 },
                 errorCallback: function (status) {
                     console.log("Get file error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
+
+        function getResume(id) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/file/resume/' + id,
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get resume error");
                     console.log(status);
                 }
             });

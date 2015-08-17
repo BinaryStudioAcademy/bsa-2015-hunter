@@ -67,12 +67,21 @@ namespace Hunter.Services
 
                 if (file.FileType == FileType.Resume)
                 {
-                    var resume = new Resume() { FileId = newFile.Id };
-                    _resumeRepository.UpdateAndCommit(resume);
-
                     var candidate = _candidateService.Get(file.CandidateId);
-                    candidate.ResumeId = resume.Id;
-                    _candidateService.Update(candidate.ToCandidateDto());
+                    if (candidate.ResumeId != null)
+                    {
+                        var resume = _resumeRepository.Get((int)candidate.ResumeId);
+                        resume.FileId = newFile.Id;
+                        _resumeRepository.UpdateAndCommit(resume);
+                    }
+                    else
+                    {
+                        var resume = new Resume() { FileId = newFile.Id };
+                        _resumeRepository.UpdateAndCommit(resume); 
+                        candidate.ResumeId = resume.Id;
+                        _candidateService.Update(candidate.ToCandidateDto());
+                    }
+                                                               
                 }    
 
                 return newFile.Id;
@@ -124,6 +133,13 @@ namespace Hunter.Services
                 array = File.ReadAllBytes(HttpContext.Current.Server.MapPath("~/App_Data/no_photo.png"));
                 return new ByteArrayContent(array);
             }
+        }
+
+        public FileDto GetResumeFileDto(int resumeId)
+        {
+            var resume = _resumeRepository.Get(resumeId);
+            var fileDto = _fileRepository.Get((int)resume.FileId).ToFileDto();
+            return fileDto;
         }
 
         public void Update(FileDto file)
