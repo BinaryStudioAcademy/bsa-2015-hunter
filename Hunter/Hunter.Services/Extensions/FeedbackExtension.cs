@@ -1,3 +1,4 @@
+﻿﻿using System;
 ﻿using Hunter.Services.Dto;
 using System;
 using System.Collections.Generic;
@@ -5,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hunter.DataAccess.Entities;
+using Hunter.Services.Dto;
 
 namespace Hunter.Services.Extensions
 {
@@ -33,7 +35,10 @@ namespace Hunter.Services.Extensions
                 CardId = feedback.CardId,
                 Type = feedback.Type,
                 Text = feedback.Text,
-                Date = feedback.Edited == null ? feedback.Added.ToString("dd.MM.yy") : feedback.Edited.Value.ToString("dd.MM.yy"),
+                Date =
+                    feedback.Edited == null
+                        ? feedback.Added.ToString("dd.MM.yy")
+                        : feedback.Edited.Value.ToString("dd.MM.yy"),
                 UserName = feedback.UserProfile != null
                     ? feedback.UserProfile.UserLogin.Substring(0, feedback.UserProfile.UserLogin.IndexOf("@"))
                     : ""

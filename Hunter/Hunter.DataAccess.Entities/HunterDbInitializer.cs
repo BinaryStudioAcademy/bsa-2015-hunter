@@ -617,6 +617,16 @@ namespace Hunter.DataAccess.Entities
                     Type = 2,
                     Status = 1
                 },
+                new Feedback
+                {
+                    CardId = 1,
+                    ProfileId = 1,
+                    Text = "Tech. spec feedback for test",
+                    Added = DateTime.Now,
+                    Edited = DateTime.Now,
+                    Type = 4,
+                    Status = 1
+                },
                 new Feedback()
                 {
                     CardId = 1,
@@ -642,6 +652,30 @@ namespace Hunter.DataAccess.Entities
             context.SaveChanges();
 
     #endregion
+
+            #region FILE
+
+            var file1 = new File {Added = DateTime.Now, FileName = "testwork.zip", Path = "Root/Testworks"};
+            var file2 = new File {Added = DateTime.Now, FileName = "work.rar", Path = "Root/Testworks"};
+            var file3 = new File {Added = DateTime.Now, FileName = "test.rar", Path = "Root/Testworks"};
+
+            var files = new List<File> {file1, file2, file3};
+            files.ForEach(x => context.File.Add(x));
+            context.SaveChanges();
+
+            #endregion
+
+            #region TEST
+
+            var test1 = new Test {CardId = 1, Comment = "Test to get a job", FeedbackId = 4, Url = "http://goodwork.com", FileId = 1};
+            var test2 = new Test{CardId = 2, Comment = "Very hard test", FeedbackId = 4, Url = "http://test.com", FileId = 2};
+            var test3 = new Test{CardId = 3, Comment = "I very want this job", FeedbackId = 4, FileId = 3, Url = "http://testwork.ua"};
+
+            var tests = new List<Test> {test1, test2, test3};
+            tests.ForEach(x => context.Test.Add(x));
+            context.SaveChanges();
+
+            #endregion
         }
 
         private static byte[] ToByteArray(string sqlVarBinary)

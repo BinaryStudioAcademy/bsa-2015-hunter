@@ -7,6 +7,8 @@ using System.Web.Http;
 using Hunter.Services.Dto;
 using System.Web.Http.Description;
 using Hunter.Services;
+using Hunter.Services.Dto.Feedback;
+using Hunter.Services.Services.Interfaces;
 
 namespace Hunter.Rest.Controllers
 {
@@ -15,10 +17,12 @@ namespace Hunter.Rest.Controllers
     public class FeedbackController : ApiController
     {
         private readonly IFeedbackService _feedbackService;
+        private readonly ITestService _testService;
 
-        public FeedbackController(IFeedbackService feedbackService)
+        public FeedbackController(IFeedbackService feedbackService, ITestService testService)
         {
             _feedbackService = feedbackService;
+            _testService = testService;
         }
 
         // GET: api/Feedback
@@ -86,8 +90,23 @@ namespace Hunter.Rest.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
-            
+        }
 
+        [HttpPut]
+        [Route("test/update")]
+        public IHttpActionResult UpdateTestFeedback(TestFeedbackHrInterviewDto testFeedback)
+        {
+            try
+            {
+                var feedbackId =_feedbackService.SaveFeedback(testFeedback.Feedback, User.Identity.Name);
+                _testService.UpdateFeedback(testFeedback.TestId, (int)feedbackId.Id);
+                
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT: api/Feedback/5
