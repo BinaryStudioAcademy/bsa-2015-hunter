@@ -287,6 +287,7 @@
     <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\CandidatesController.cs" />
     <Compile Include="Controllers\CardController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -789,11 +790,14 @@
     <Content Include="Views\services\candidate\addEdit\addEditService.js" />
     <Content Include="Views\services\candidate\candidatesFilter.js" />
     <Content Include="Views\services\candidate\candidatesHttpService.js" />
+    <Content Include="Views\services\feedback\cardHrInterviewService.js" />
+    <Content Include="Views\services\feedback\feedbackHttpService.js" />
     <Content Include="Views\services\candidate\specialNote\specialNoteHttpService.js" />
     <Content Include="Views\services\constants\enumConstants.js" />
     <Content Include="Views\services\directive\autofocus.js" />
     <Content Include="Views\services\files\fileHttpService.js" />
     <Content Include="Views\services\files\uploadPhotoService.js" />
+    <Content Include="Views\services\helper\ActivityIconDirective.js" />
     <Content Include="Views\services\helper\authInterceptorService.js" />
     <Content Include="Views\services\helper\authService.js" />
     <Content Include="Views\services\files\uploadResumeService.js" />

@@ -4,6 +4,7 @@ using System.Linq;
 using Hunter.Common.Concrete;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Entities.Entites.Enums;
 using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Interface.Base;
 using Hunter.Services.Dto.ApiResults;
@@ -74,7 +75,7 @@ namespace Hunter.Services
             _profileRepo.UpdateAndCommit(profile);
             if (editedUserProfile.Id == 0)
             {
-                _activityPost.Post(string.Format("{0} joined Hunter", profile.UserLogin), ActivityTypes.UserAdded, new Uri("/user/edit/" + profile.Id, UriKind.Relative));
+                _activityPost.Post(string.Format("{0} joined Hunter", profile.UserLogin), ActivityType.User, new Uri("/user/edit/" + profile.Id, UriKind.Relative));
             }
             return editedUserProfile.Id == 0 ? Api.Added(profile.Id, EditUserProfileVm.Create(profile)) : Api.Updated(profile.Id);
         }

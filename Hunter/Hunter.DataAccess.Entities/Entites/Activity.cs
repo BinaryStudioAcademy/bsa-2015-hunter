@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Hunter.DataAccess.Entities.Entites.Enums;
 
 namespace Hunter.DataAccess.Entities
 {
@@ -12,8 +13,7 @@ namespace Hunter.DataAccess.Entities
         [StringLength(100)]
         public string UserLogin { get; set; }
 
-        [StringLength(150)]
-        public string Tag { get; set; }
+        public ActivityType Tag { get; set; }
 
         [Required]
         [StringLength(2000)]
