@@ -5,9 +5,12 @@ using System.Web;
 using System.Linq;
 using System.Net.Http;
 using Hunter.Common.Interfaces;
+using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Interface;
 using Hunter.Services.Dto;
 using Hunter.Services.Interfaces;
 using Hunter.DataAccess.Interface.Repositories;
+using File = System.IO.File;
 
 namespace Hunter.Services
 {
@@ -16,19 +19,24 @@ namespace Hunter.Services
         private IFileRepository _fileRepository;
         private readonly ILogger _logger;
         private ICandidateService _candidateService;
+        private IResumeRepository _resumeRepository;
 
         private string _localStorage = HttpContext.Current.Server.MapPath("~/App_Data/Hunter/Files/");
 
-        public FileService(IFileRepository fileRepository, ILogger logger, ICandidateService candidateService)
+        public FileService(IFileRepository fileRepository, ILogger logger, ICandidateService candidateService,
+            IResumeRepository resumeRepository)
         {
             _fileRepository = fileRepository;
             _logger = logger;
             _candidateService = candidateService;
+            _resumeRepository = resumeRepository;
         }
 
         public int Add(FileDto file)
         {
             file.Added = DateTime.Now;
+
+            //_logger.Log(string.Format("{0}, {1}", file.CandidateId, file.VacancyId));
 
             var formatedFileName = FormatFileName(file);
             switch (file.FileType)
@@ -56,6 +64,17 @@ namespace Hunter.Services
                 var newFile = file.ToFile();
                 newFile.FileName = formatedFileName;
                 _fileRepository.UpdateAndCommit(newFile);
+
+                if (file.FileType == FileType.Resume)
+                {
+                    var resume = new Resume() { FileId = newFile.Id };
+                    _resumeRepository.UpdateAndCommit(resume);
+
+                    var candidate = _candidateService.Get(file.CandidateId);
+                    candidate.ResumeId = resume.Id;
+                    _candidateService.Update(candidate.ToCandidateDto());
+                }    
+
                 return newFile.Id;
             }
             catch (Exception ex)
