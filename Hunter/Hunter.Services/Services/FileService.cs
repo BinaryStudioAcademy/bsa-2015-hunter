@@ -15,20 +15,20 @@ namespace Hunter.Services
     {
         private IFileRepository _fileRepository;
         private readonly ILogger _logger;
+        private ICandidateService _candidateService;
 
         private string _localStorage = HttpContext.Current.Server.MapPath("~/App_Data/Hunter/Files/");
 
-        public FileService(IFileRepository fileRepository, ILogger logger)
+        public FileService(IFileRepository fileRepository, ILogger logger, ICandidateService candidateService)
         {
             _fileRepository = fileRepository;
             _logger = logger;
+            _candidateService = candidateService;
         }
 
         public int Add(FileDto file)
         {
             file.Added = DateTime.Now;
-
-
 
             var formatedFileName = FormatFileName(file);
             switch (file.FileType)
