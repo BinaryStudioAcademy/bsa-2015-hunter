@@ -760,6 +760,8 @@
     <Content Include="Views\candidate\list\candidateListController.js" />
     <Content Include="Views\candidate\list\dirPagination.tpl.html" />
     <Content Include="Views\candidate\list\list.html" />
+    <Content Include="Views\candidate\profilePartial\candidatePartialController.js" />
+    <Content Include="Views\candidate\profilePartial\profilePartial.html" />
     <Content Include="Views\candidate\profile\candidateProfileController.js" />
     <Content Include="Views\candidate\profile\profile.html" />
     <Content Include="Views\candidate\profile\profileApplications.html" />

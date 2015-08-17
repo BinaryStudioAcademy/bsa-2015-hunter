@@ -9,6 +9,7 @@
        '$location',
         '$filter',
         '$scope',
+        '$rootScope',
         'AuthService',
         '$odataresource',
         'PoolsHttpService',
@@ -18,10 +19,15 @@
 
     ];
 
-    function CandidateListController($location, $filter, $scope, authService, $odataresource, PoolsHttpService, $odata, EnumConstants) {
+    function CandidateListController($location, $filter, $scope, $rootScope, authService, $odataresource, PoolsHttpService, $odata, EnumConstants) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         vm.name = "Candidates";
+
+        $rootScope.candidateDetails = {
+                        show: false,
+                        id: null
+                    };
 
         vm.currentPage = 1;
         vm.pageSize = 5;
@@ -133,6 +139,16 @@
         });
 
         vm.getCandidates();
+
+        vm.ShowDetails = function (id) {
+            if ($rootScope.candidateDetails.id === id && $rootScope.candidateDetails.show === true) {
+                $rootScope.candidateDetails.show = false;
+            } else {
+                $rootScope.candidateDetails.show = true;
+                $rootScope.candidateDetails.id = id;
+            }
+        }
+
     }
 
 })();
