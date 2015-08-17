@@ -88,22 +88,6 @@
             });
         }
 
-        function downloadFile(id) {
-            var deferred = $q.defer();
-            httpHandler.sendRequest({
-                verb: 'GET',
-                url: '/api/file/download/' + id,
-                successCallback: function (result) {
-                    deferred.resolve(result.data);
-                },
-                errorCallback: function (status) {
-                    console.log("Download file error");
-                    console.log(status);
-                }
-            });
-            return deferred.promise;
-        }
-
         return service;
     }
 })();

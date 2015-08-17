@@ -60,10 +60,10 @@ namespace Hunter.Rest.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _fileService.Add(value);
-                    return Request.CreateResponse(HttpStatusCode.OK, "Ok");
+                    var id = _fileService.Add(value);
+                    return Request.CreateResponse(HttpStatusCode.OK, id);
                 }
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid model state");
+                return Request.CreateResponse(HttpStatusCode.BadRequest, -1);
             }
             catch (Exception ex)
             {

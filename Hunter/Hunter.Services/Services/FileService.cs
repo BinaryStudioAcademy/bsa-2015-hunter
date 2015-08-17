@@ -23,7 +23,7 @@ namespace Hunter.Services
             _logger = logger;
         }
 
-        public void Add(FileDto file)
+        public int Add(FileDto file)
         {
             file.Added = DateTime.Now;
 
@@ -50,11 +50,13 @@ namespace Hunter.Services
                 
                 var newFile = file.ToFile();
                 _fileRepository.UpdateAndCommit(newFile);
+                return newFile.Id;
             }
             catch (Exception ex)
             {
                 _logger.Log(ex);
             }
+            return -1;
         }
 
         private string FormatFileName(FileDto file)
