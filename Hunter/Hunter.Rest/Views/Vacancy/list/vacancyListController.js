@@ -5,9 +5,9 @@
 
     angular
         .module('hunter-app')
-        .controller('VacancyListController', VacancyListController);
+        .controller('VacancyListController', vacancyListController);
 
-    VacancyListController.$inject = [
+    vacancyListController.$inject = [
         '$scope',
         '$filter',
         'VacancyHttpService',
@@ -15,7 +15,7 @@
         'EnumConstants'
     ];
 
-    function VacancyListController($scope, $filter, vacancyHttpService, poolsHttpService, enumConstants) {
+    function vacancyListController($scope, $filter, vacancyHttpService, poolsHttpService, enumConstants) {
         var vm = this;
 
         vm.filterParams = {
@@ -41,7 +41,7 @@
             { name: "Add Date (new first)", reverseSort: true, sortColumn: "startDate" },
             { name: "Add Date (old first)", reverseSort: false, sortColumn: "startDate" },
             { name: "Name (A-Z)", reverseSort: false, sortColumn: "name" },
-            { name: "Name (Z-A)", reverseSort: true, sortColumn: "name" },
+            { name: "Name (Z-A)", reverseSort: true, sortColumn: "name" }
         ];
         vm.sortAction = vm.sortBy[0];
 
@@ -56,10 +56,10 @@
             vm.filterParams.sortColumn = vm.sortAction.sortColumn;
             vm.filterParams.reverceSort = vm.sortAction.reverseSort;
             vacancyHttpService.getFilteredVacancies(vm.filterParams).then(function (result) {
-                vm.vacancies = result;
+                vm.vacancies = result.rows;
                 if (vm.vacancies.length > 0)
                 {
-                    vm.totalCount = vm.vacancies[0].totalCount;
+                    vm.totalCount = result.totalCount;
                 }
             });
         }

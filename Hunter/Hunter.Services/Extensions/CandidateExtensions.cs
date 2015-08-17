@@ -104,5 +104,50 @@ namespace Hunter.Services
                 SpecialNotes = card != null ? (card.SpecialNote.FirstOrDefault(n => n.Id == card.Id) != null ? card.SpecialNote.FirstOrDefault(n => n.Id == card.Id).Text : "No special note") : "No special note"
             };
         }
+
+        public static IQueryable<CandidateDto> ToCandidateDtoForQuery(this IQueryable<Candidate> candidate)
+        {
+            return candidate.Select(c =>
+
+
+                new CandidateDto()
+                {
+                    Id = c.Id,
+                    FirstName = c.FirstName,
+                    LastName = c.LastName,
+                    Email = c.Email,
+                    CurrentPosition = c.CurrentPosition,
+                    Company = c.Company,
+                    Location = c.Location,
+                    Skype = c.Skype,
+                    Phone = c.Phone,
+                    Linkedin = c.Linkedin,
+                    Salary = c.Salary,
+                    YearsOfExperience =  c.YearsOfExperience,
+                    ResumeId = c.ResumeId,
+                    AddedByProfileId = c.AddedByProfileId,
+                    AddedBy = c.AddedByProfileId.HasValue ? c.UserProfile.UserLogin : "",
+                    AddDate = c.AddDate,
+                    Cards = c.Card.Select(x =>
+                    new CardDto
+                    {
+                        Id = x.Id,
+                        VacancyId = x.VacancyId,
+                        CandidateId = x.CandidateId,
+                        Added = x.Added,
+                        AddedByProfileId = x.AddedByProfileId,
+                        Stage = x.Stage
+                    }
+                    ),
+                    PoolNames = c.Pool.Select(x => x.Name),
+                    Resolution = (int) c.Resolution,
+                    ShortListed = c.Shortlisted,
+                    Origin = (int) c.Origin,
+                    DateOfBirth = c.DateOfBirth,
+                    PhotoUrl = "api/fileupload/pictures/" + c.Id
+                }
+                );
+        }
+
     }
 }

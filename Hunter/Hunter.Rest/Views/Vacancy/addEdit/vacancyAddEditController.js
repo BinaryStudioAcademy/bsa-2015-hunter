@@ -10,15 +10,16 @@
         '$routeParams',
         'AuthService',
         'VacancyHttpService',
-        'PoolsHttpService'
+        'PoolsHttpService',
+        'EnumConstants'
     ];
 
-    function VacancyAddEditController($location, $routeParams, authService, vacancyHttpService, poolsHttpService) {
+    function VacancyAddEditController($location, $routeParams, authService, vacancyHttpService, poolsHttpService, enumConstants) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
 
         vm.controllerName = 'Add / Edit Vacancy';
-        vm.statuses = [{ id: 0, name: 'Opened' }, { id: 1, name: 'Draft' }, { id: 2, name: 'Closed' }];
+        vm.statuses = enumConstants.vacancyStates;
         vm.isNewVacancy = true;
         vm.currentVacancy = {
             id: 0,

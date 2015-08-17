@@ -29,11 +29,11 @@ namespace Hunter.Services
             _poolRepository = poolRepository;
         }
 
-        public IEnumerable<Candidate> GetAll()
+        public IQueryable<Candidate> GetAll()
         {
             try
             {
-                return _candidateRepository.All();
+                return _candidateRepository.Query();
             }
             catch (Exception ex)
             {
