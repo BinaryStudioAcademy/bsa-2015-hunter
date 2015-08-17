@@ -6,9 +6,9 @@
         .module('hunter-app')
         .factory("UploadResumeService", UploadResumeService);
 
-    UploadResumeService.$inject = ['Upload'];
+    UploadResumeService.$inject = ['Upload', 'EnumConstants'];
 
-    function UploadResumeService(upload) {
+    function UploadResumeService(upload, enumConstants) {
         var service = {
             onFileSelect: onFileSelect,
             uploadResume: uploadResume,
@@ -23,16 +23,14 @@
 
         function uploadResume(candidate) {
             if (!!_file) {
+                console.log(_file.name);
                 upload.upload({
                     url: "api/fileupload",
                     method: "POST",
                     data: {
-                        directory: "resume//",
-                        id: candidate.id,
-                        email: candidate.imail,
-                        FirstName: candidate.firstName,
-                        LastName: candidate.lastName
-
+                        fileType: enumConstants.fileType.Resume,
+                        fileName: candidate.firstName + '_' + candidate.lastName + '.' + _file.name.split('.')[1],
+                        candidateid: candidate.id
             },
                     file: _file
                 })
