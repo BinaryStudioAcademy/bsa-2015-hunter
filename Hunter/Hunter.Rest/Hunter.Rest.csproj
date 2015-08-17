@@ -799,6 +799,7 @@
     <Content Include="Views\services\directive\autofocus.js" />
     <Content Include="Views\services\files\fileHttpService.js" />
     <Content Include="Views\services\files\uploadPhotoService.js" />
+    <Content Include="Views\services\files\uploadTestService.js" />
     <Content Include="Views\services\helper\ActivityIconDirective.js" />
     <Content Include="Views\services\helper\authInterceptorService.js" />
     <Content Include="Views\services\helper\authService.js" />
