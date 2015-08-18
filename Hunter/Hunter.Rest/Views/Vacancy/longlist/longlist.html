@@ -39,8 +39,9 @@
                             <li>
                                 Added by
                                 <ul>
-                                    <li ng-repeat="dhr in longListCtrl.defaultHrs">
-                                        <input type="checkbox" checklist-model="longListCtrl.filter.hr" checklist-value="dhr.email"> {{dhr.name}}
+                                    <li ng-repeat="addedby in longListCtrl.addedByList">
+                                        <p ng-show="addedby.userLogin == ''"><input type="checkbox" checklist-model="longListCtrl.filter.hr" checklist-value="addedby.userLogin"> noname ({{addedby.countOfAddedCandidates}})</p>
+                                        <p ng-show="addedby.userLogin != ''"><input type="checkbox" checklist-model="longListCtrl.filter.hr" checklist-value="addedby.userLogin"> {{addedby.alias}} ({{addedby.countOfAddedCandidates}})</p>
                                     </li>
                                 </ul>
                             </li>

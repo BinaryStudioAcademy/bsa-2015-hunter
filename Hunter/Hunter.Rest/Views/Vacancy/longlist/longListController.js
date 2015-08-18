@@ -44,6 +44,13 @@
             vm.candidates = result;
         });
 
+        // get all Added by
+        vm.addedByList;
+        VacancyHttpService.getLongListAddedBy($routeParams.id).then(function(result) {
+            console.log(result);
+            vm.addedByList = result;
+        });
+
         // click on candidate item shows candidates preview
         vm.tabIsSet = function (checkTab) {
             return vm.tab === checkTab;
