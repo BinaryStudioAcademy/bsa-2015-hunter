@@ -105,7 +105,11 @@ namespace Hunter.Services
         {
             try
             {
-                var cardsLongList = _cardRepository.All().Where(card => card.VacancyId == vid).ToCandidateLongListDto().OrderByDescending(c => c.AddDate);
+                var cardsLongList =
+                    _cardRepository.QueryIncluding(c => c.Candidate, c => c.UserProfile)
+                        .Where(card => card.VacancyId == vid)
+                        .ToList()
+                        .ToDto();// All().Where(card => card.VacancyId == vid).ToCandidateLongListDto().OrderByDescending(c => c.AddDate);
                 return cardsLongList;
             }
             catch (Exception ex)

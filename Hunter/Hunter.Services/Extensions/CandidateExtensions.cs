@@ -83,7 +83,8 @@ namespace Hunter.Services
                 Resolution = c.Candidate != null ? c.Candidate.Resolution.ToString() : "",
                 AddedBy = c.UserProfile != null ? c.UserProfile.UserLogin : "",
                 AddDate = c.Added,
-                PhotoUrl = "api/fileupload/pictures/" + c.Id
+                PhotoUrl = "api/fileupload/pictures/" + c.Id,
+                Shortlisted = c.Candidate!=null && c.Candidate.Shortlisted
             });
         }
 
