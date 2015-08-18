@@ -84,6 +84,24 @@ namespace Hunter.Rest.Controllers
             }    
         }
 
+        [HttpGet]
+        [Route("longlist/{id:int}/addedby")]
+        [ActionName("LonglistAddedBy")]
+        [ResponseType(typeof(LongListAddedByDto))]
+        public HttpResponseMessage GetVacancyLongListAddedBy(int id)
+        {
+            try
+            {
+                var addedBy = _vacancyService.GetLongListAddedBy(id);
+
+                return Request.CreateResponse(HttpStatusCode.OK, addedBy);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
         [HttpPost]
         [Route("")]
         public HttpResponseMessage Post(VacancyDto value)

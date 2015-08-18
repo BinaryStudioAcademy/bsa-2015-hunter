@@ -86,26 +86,26 @@ namespace Hunter.Rest.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("longlist/{id:int}")]
-        [ActionName("Longlist")]
-        [ResponseType(typeof (CandidateLongListDto))]
-        public HttpResponseMessage GetCandidateLongList(int id)
-        {
-            try
-            {
-                var candidates = _candidateService.GetLongList(id);
-                if (candidates == null)
-                {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Vacancy has no candidates!");
-                }
-                return Request.CreateResponse(HttpStatusCode.OK, candidates);
-            }
-            catch (Exception ex)
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
-            }
-        }
+        //[HttpGet]
+        //[Route("longlist/{id:int}")]
+        //[ActionName("Longlist")]
+        //[ResponseType(typeof (CandidateLongListDto))]
+        //public HttpResponseMessage GetCandidateLongList(int id)
+        //{
+        //    try
+        //    {
+        //        var candidates = _candidateService.GetLongList(id);
+        //        if (candidates == null)
+        //        {
+        //            return Request.CreateResponse(HttpStatusCode.BadRequest, "Vacancy has no candidates!");
+        //        }
+        //        return Request.CreateResponse(HttpStatusCode.OK, candidates);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+        //    }
+        //}
 
         [HttpGet]
         [Route("longlist/{vid:int}/odata")]

@@ -11,5 +11,6 @@ namespace Hunter.Services.Interfaces
         void Update(VacancyDto entity);
         void Delete(int id);
         VacancyLongListDto GetLongList(int id);
+        IEnumerable<LongListAddedByDto> GetLongListAddedBy(int id);
     }
 }
