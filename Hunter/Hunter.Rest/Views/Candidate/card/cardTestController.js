@@ -8,14 +8,18 @@
     CardTestController.$inject = [
         'CardTestHttpService',
         '$routeParams',
-        'FeedbackHttpService'
+        'FeedbackHttpService',
+        'UploadTestService',
+        'localStorageService'
     ];
 
-    function CardTestController(CardTestHttpService, $routeParams, FeedbackHttpService) {
+    function CardTestController(CardTestHttpService, $routeParams,
+        FeedbackHttpService, UploadTestService, localStorageService) {
         var vm = this;
         vm.templateName = 'Test';
         var candidateId = $routeParams.cid;
         var vacancyId = $routeParams.vid;
+        var userName = localStorageService.get('authorizationData').userName;
 
         vm.testLink = '';
         vm.testFile = '';
@@ -34,12 +38,7 @@
                 vm.dislike.wasClicked = !vm.dislike.wasClicked;
             }
         }
-        //----
 
-        //to check that feedbackText was changed
-//        var prevFeedbackText = '';
-
-//        vm.lastUploadTestId;
         vm.uploadLink = function () {
             if (vm.testLink == '') {
                 return;
@@ -72,7 +71,6 @@
         }
 
         vm.test;
-//        vm.feedbackConfig;
         CardTestHttpService.getTest(vacancyId, candidateId, function(response) {
             vm.test = response.data;
 
@@ -98,7 +96,6 @@
                 }
 
                 test.feedbackConfig = feedbackConfig;
-//                prevFeedbackText = vm.test.feedback.text;
             });
         });
 
@@ -109,17 +106,16 @@
 
             toggleFeedbackConfig(test.feedbackConfig);
 
-            //if feedback text changed -> update test
-            //            if (prevFeedbackText != vm.test.feedback.text) {
-
-            if(test.feedbackConfig.fieldReadonly)
+            if(test.feedbackConfig.fieldReadonly){
                 FeedbackHttpService.saveTestFeedback({
                     'feedback': test.feedback,
                     'testId': test.id
                 });
 
-//                prevFeedbackText = vm.test.feedback.text;
-//            }
+                test.feedback.userName = userName;
+                test.feedback.date = new Date();
+            }
+
         }
         
         //change name of feedback button and readonly expression for textarea
@@ -130,8 +126,56 @@
                 config.buttonText = 'Edit';
             } else {
                 config.buttonText = 'Save';
-//                vm.prevFeedbackText = vm.test.feedback.text;
             }
+        }
+
+        vm.fileName;
+        var file;
+        vm.onFileChanged = function (event) {
+            file = event.currentTarget.files[0];
+            vm.fileName = file.name;
+            UploadTestService.onFileSelect(file);
+        }
+
+        vm.uploadFile = function() {
+            UploadTestService.uploadTest(candidateId, vacancyId, function(response) {
+                var fileId = response.data;
+
+                var test = {
+                    'url': '',
+                    'fileId': fileId,
+                    'cardId': vm.test.cardId,
+                    'feedbackId': null,
+                    'added': new Date()
+                };
+
+                CardTestHttpService.sendTest(test, function (response) {
+                    var testId = response.data;
+
+                    test.id = testId;
+                    test.feedback = {
+                        'cardId': vm.test.cardId,
+                        'text': '',
+                        'date': '',
+                        'type': 4
+                    };
+                    test.feedbackConfig = {
+                        'buttonText': 'Save',
+                        'fieldReadonly': false
+                    };
+                    test.file = {
+                        'id': fileId,
+                        'fileType': 4,
+                        'fileName': file.name,
+                        'added': new Date(),
+                        'candidateId': candidateId,
+                        'vacancyId': vacancyId,
+                        'size': file.size
+                    };
+
+                    vm.test.tests.push(test);
+                });
+            });
         }
     }
 })();
