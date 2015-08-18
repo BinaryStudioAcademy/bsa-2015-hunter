@@ -78,7 +78,7 @@ namespace Hunter.Services
                     else
                     {
                         var resume = new Resume() { FileId = newFile.Id };
-                        _resumeRepository.UpdateAndCommit(resume); 
+                        resumeRepository.UpdateAndCommit(resume);
                         candidate.ResumeId = resume.Id;
                         _candidateService.Update(candidate.ToCandidateDto());
                     }
