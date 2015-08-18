@@ -9,9 +9,9 @@
                     <div>
                         <div>
                             <h3>{{generalCardCtrl.feedbackTypes[feedback.type].name}}</h3>
-                            <span ng-hide="feedback.date == ''">{{feedback.userName}} at {{feedback.date}}</span>
+                            <span ng-hide="feedback.date == ''">Edited by {{feedback.userName}} at {{feedback.date}}</span>
                         </div>
-                        <textarea name="text" ng-model="feedback.text">{{feedback.text}}</textarea>
+                        <textarea name="text" ng-model="feedback.text" ng-auto-expand>{{feedback.text}}</textarea>
                     </div>
                     <div>
                         <input class="btn" type="submit" value="Edit/save">

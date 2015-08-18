@@ -14,29 +14,25 @@
         '$odataresource',
         'PoolsHttpService',
         '$odata',
-        'EnumConstants'
-
-
+        'EnumConstants',
+        'VacancyHttpService'
     ];
 
-    function CandidateListController($location, $filter, $scope, $rootScope, authService, $odataresource, PoolsHttpService, $odata, EnumConstants) {
+    function CandidateListController($location, $filter, $scope, $rootScope, authService, $odataresource, PoolsHttpService, $odata, EnumConstants, VacancyHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         vm.name = "Candidates";
 
         $rootScope.candidateDetails = {
-                        show: false,
-                        id: null
-                    };
+            show: false,
+            id: null
+        };
 
-        vm.currentPage = 1;
+       // vm.currentPage = 1;
         vm.pageSize = 5;
         vm.totalItems = 0;
         vm.skip = 0;
-        vm.order = {
-            field: 'FirstName',
-            dir: 'asc'
-        }
+        vm.order;
 
         vm.pools = [];
         PoolsHttpService.getAllPools().then(function (result) {
@@ -47,16 +43,38 @@
             pools: [],
             inviters: [],
             statuses: [],
-            search: ''
+            search: '',
+            currentPage: 1
         };
 
         vm.statuses = EnumConstants.resolutions;
 
-        vm.inviters = [
-            { 'name': 'Ulyana', 'email': 'recruiter@local.com' },
-            { 'name': 'Kate', 'email': 'recruiter2@local.com' },
-            { 'name': 'Ira', 'email': 'recruiter3@local.com' }
+        vm.inviters = [];
+
+        vm.sortOptions = [
+        { text: 'Name \u25BC', options: { field: 'FirstName', dir: 'asc' } },
+        { text: 'Name \u25B2', options: { field: 'FirstName', dir: 'desc' } },
+        { text: 'Added \u25BC', options: { field: 'AddedBy', dir: 'asc' } },
+        { text: 'Added \u25B2', options: { field: 'AddedBy', dir: 'desc' } },
+        { text: 'Status \u25BC', options: { field: 'Resolution', dir: 'asc' } },
+        { text: 'Status \u25B2', options: { field: 'Resolution', dir: 'desc' } },
+        { text: 'Email \u25BC', options: { field: 'Email', dir: 'asc' } },
+        { text: 'Email \u25B2', options: { field: 'Email', dir: 'desc' } },
+        { text: 'Years Of Experience \u25BC', options: { field: 'YearsOfExperience', dir: 'asc' } },
+        { text: 'Years Of Experience \u25B2', options: { field: 'YearsOfExperience', dir: 'desc' } },
+        { text: 'Company \u25BC', options: { field: 'Company', dir: 'asc' } },
+        { text: 'Company \u25B2', options: { field: 'Company', dir: 'desc' } },
+        { text: 'Location \u25BC', options: { field: 'Location', dir: 'asc' } },
+        { text: 'Location \u25B2', options: { field: 'Location', dir: 'desc' } },
+        { text: 'Salary \u25BC', options: { field: 'Salary', dir: 'asc' } },
+        { text: 'Salary \u25B2', options: { field: 'Salary', dir: 'desc' } }
         ];
+
+        vm.order = vm.sortOptions[0].options;
+
+        VacancyHttpService.getFilterInfo('Recruiter').then(function (result) {
+            vm.inviters = result.users;
+        });
 
         var predicate;
 
@@ -75,14 +93,7 @@
                                 });
         }
 
-        vm.sort = function (field) {
-            vm.order.field = field;
-            vm.order.dir = vm.order.dir == 'desc' ? 'asc' : 'desc';
-            vm.getCandidates();
-        }
-
-
-        $scope.$watch('candidateListCtrl.filter', function () {
+       $scope.$watch('candidateListCtrl.filter', function () {
             var filt = [];
 
             if (vm.filter.pools.length > 0) {
@@ -129,17 +140,11 @@
             } else {
                 predicate = undefined;
             }
+
+            vm.skip = (vm.filter.currentPage - 1) * vm.pageSize;
             vm.getCandidates();
         }, true);
-
-
-        $scope.$watch('candidateListCtrl.currentPage', function () {
-            vm.skip = (vm.currentPage - 1) * vm.pageSize;
-            vm.getCandidates();
-        });
-
-        vm.getCandidates();
-
+        
         vm.ShowDetails = function (id) {
             if ($rootScope.candidateDetails.id === id && $rootScope.candidateDetails.show === true) {
                 $rootScope.candidateDetails.show = false;
