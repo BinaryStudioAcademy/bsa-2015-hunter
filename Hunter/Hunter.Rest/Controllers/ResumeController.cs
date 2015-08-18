@@ -17,10 +17,12 @@ namespace Hunter.Rest.Controllers
         }
 
 
-        [Route("parse/{url}")]
+        [Route("parse")]
         [ResponseType(typeof(PublicPageInfo))]
-        public IHttpActionResult GetLinkedInInfo(string url)
+        public IHttpActionResult GetLinkedInInfo([FromUri]string url)
         {
+           // url = "https://ua.linkedin.com/in/ihorsyerkov";
+
             try
             {
                 var profile = _resumeService.GetLikenIdInfo(url);

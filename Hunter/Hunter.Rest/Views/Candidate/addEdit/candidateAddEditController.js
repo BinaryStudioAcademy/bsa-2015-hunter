@@ -54,6 +54,7 @@
         vm.previewSelected = previewSelected;
         vm.onFileSelect = uploadResumeService.onFileSelect;
         vm.getFromUrl = getFromUrl;
+        vm.parseUrl = parseUrl;
 
         (function () {
             // This is function for initialization actions, for example checking auth
@@ -91,6 +92,33 @@
            
             vm.errorObject.message = '';
         }
+
+        function parseUrl(url) {
+            candidateHttpService.parseLinkedIn(url).then(function (response) {
+                
+                vm.FirstName = response.name.split(' ')[0];
+                vm.LastName = response.name.split(' ')[1];
+                //vm.Email = response.data.email;
+                vm.Position = response.headline;
+                vm.YearsOfExperience = response.experienceTime.split('.')[0] / 365;
+                //vm.Company = response.data.company;
+                vm.Location = response.location;
+                //vm.Skype = response.data.skype;
+                //vm.Phone = response.data.phone;
+                vm.externalUrl = response.img;
+                //vm.Salary = response.data.salary;
+                //vm.selectedOrigin = vm.origins[response.data.origin];
+                //vm.selectedResolution = vm.resolutions[response.data.resolution];
+                //vm.ShortListed = response.data.shortListed;
+                //vm.DateOfBirth = new Date(response.data.dateOfBirth);
+                //vm.photoUrl = response.data.photoUrl;
+                //vm.resumeId = response.data.resumeId;
+                //firstPreviewUrl = vm.photoUrl;
+
+                //vm.photoLoaded = true;
+            });
+        }
+
 
         function previewSelected($file) {
             if (uploadPhotoService.validatePicture($file)) {
@@ -149,7 +177,8 @@
                 ShortListed: vm.ShortListed,
                 DateOfBirth: DateOfBirth,
                 PoolNames: Pools,
-                ResumeId: vm.resumeId
+                ResumeId: vm.resumeId,
+                YearsOfExperience:vm.YearsOfExperience
             }
             if (id != null) {
                 candidate.Id = id;
@@ -173,6 +202,7 @@
                 vm.Skype = response.data.skype;
                 vm.Phone = response.data.phone;
                 vm.LinkedIn = response.data.linkedin;
+                vm.YearsOfExperience = response.data.yearsOfExperience;
                 vm.Salary = response.data.salary;
                 vm.selectedOrigin = vm.origins[response.data.origin];
                 vm.selectedResolution = vm.resolutions[response.data.resolution];
