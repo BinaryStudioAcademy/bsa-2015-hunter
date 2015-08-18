@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Hunter.DataAccess.Entities;
 using Hunter.DataAccess.Entities.Enums;
 
@@ -33,8 +34,8 @@ namespace Hunter.Services
                 StartDate = vacancy.StartDate,
                 EndDate = vacancy.EndDate,
                 PoolName = vacancy.Pool.Name,
-                AddedByName = vacancy.User.UserName,
-                AddedById = vacancy.User.Id
+                AddedByName = vacancy.User != null ? vacancy.User.UserName : string.Empty,
+                AddedById = vacancy.User != null ? vacancy.User.Id : 0
             };
             return v;
         }

@@ -17,5 +17,6 @@ namespace Hunter.Services
         public string AddedBy { get; set; }
         public DateTime AddDate { get; set; }
         public string PhotoUrl { get; set; }
+        public bool Shortlisted { get; set; }
     }
 }

@@ -26,6 +26,7 @@
             { 'name': 'Ira', 'email': 'recruiter3@local.com' }
         ];
         vm.stages = EnumConstants.cardStages;
+        vm.shortlisted = true;
 
         vm.vacancy;
         // vm.candidates;
@@ -71,7 +72,7 @@
 
         vm.filter = {
             search: '',
-            shortlist: [],
+            shortlisted: false,
             stages: [],
             salary: [],
             location: '',
@@ -136,6 +137,16 @@
                 ]);
 
                 filt.push(locationPred);
+            }
+
+            if (vm.filter.shortlisted.length > 0) {
+                var slPred = [];
+                angular.forEach(vm.filter.shortlisted, function (value, key) {
+                    slPred.push(new $odata.Predicate('Shortlisted', value));
+                });
+
+                slPred = $odata.Predicate.or(slPred);
+                filt.push(slPred);
             }
 
             if (filt.length > 0) {
