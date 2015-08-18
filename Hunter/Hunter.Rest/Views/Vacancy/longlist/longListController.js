@@ -20,11 +20,7 @@
     function LongListController($location, VacancyHttpService, CandidateHttpService, $routeParams, $odataresource, $odata, $filter, $scope, EnumConstants) {
         var vm = this;
         vm.tab = 0;
-        vm.defaultHrs = [
-            { 'name': 'Ulyana', 'email': 'recruiter@local.com' },
-            { 'name': 'Kate', 'email': 'recruiter2@local.com' },
-            { 'name': 'Ira', 'email': 'recruiter3@local.com' }
-        ];
+
         vm.stages = EnumConstants.cardStages;
         vm.shortlisted = true;
 
@@ -33,20 +29,20 @@
         vm.candidateDetails;
 
         // get vacancy info
-        //VacancyHttpService.getLongList($routeParams.id).then(function (result) {
-        //    console.log(result);
-        //    vm.vacancy = result;
-        //});
+        VacancyHttpService.getLongList($routeParams.id).then(function (result) {
+            console.log(result);
+            vm.vacancy = result;
+        });
 
         // get all vacancies candidates
-        CandidateHttpService.getLongList($routeParams.id).then(function (result) {
-            console.log(result);
-            vm.candidates = result;
-        });
+        //CandidateHttpService.getLongList($routeParams.id).then(function (result) {
+        //    console.log(result);
+        //    vm.candidates = result;
+        //});
 
         // get all Added by
         vm.addedByList;
-        VacancyHttpService.getLongListAddedBy($routeParams.id).then(function(result) {
+        VacancyHttpService.getLongListAddedBy($routeParams.id).then(function (result) {
             console.log(result);
             vm.addedByList = result;
         });
@@ -68,14 +64,20 @@
             });
         }
 
-        // filtering candidates
+        // filtering/sorting candidates
         vm.pageSize = 5;
         vm.skip = 0;
         var predicate;
-        vm.order = {
-            field: 'FirstName',
-            dir: 'asc'
-        }
+        vm.order;
+
+        vm.sortOptions = [
+            { text: 'Added Date (new first)', options: { field: 'AddDate', dir: 'desc' } },
+            { text: 'Added Date (old first)', options: { field: 'AddDate', dir: 'asc' } },
+            { text: 'Name (A-Z)', options: { field: 'FirstName', dir: 'desc' } },
+            { text: 'Name (Z-A)', options: { field: 'FirstName', dir: 'asc' } }
+        ];
+
+        vm.order = vm.sortOptions[0].options;
 
         vm.filter = {
             search: '',
@@ -83,7 +85,8 @@
             stages: [],
             salary: [],
             location: '',
-            hr: []
+            hr: [],
+            currentPage: 1
         };
 
         vm.name = 'CandidatesForLongList';
@@ -97,7 +100,7 @@
                                             .take(vm.pageSize)
                                             .skip(vm.skip)
                                             .filter(predicate)
-                                            //.OrderBy(vm.order.field, vm.order.dir)
+                                            .orderBy(vm.order.field, vm.order.dir)
                                             .query(function () {
                                                 vm.candidatesList = cands.items;
                                                 vm.totalItems = cands.count;
@@ -120,7 +123,7 @@
 
             if (vm.filter.hr.length > 0) {
                 var hrPred = [];
-                angular.forEach(vm.filter.hr, function(value, key) {
+                angular.forEach(vm.filter.hr, function (value, key) {
                     hrPred.push(new $odata.Predicate('AddedBy', value));
                 });
 
@@ -161,6 +164,8 @@
             } else {
                 predicate = undefined;
             }
+
+            vm.skip = (vm.filter.currentPage - 1) * vm.pageSize;
 
             vm.getCandidatesForLongList();
         }, true);

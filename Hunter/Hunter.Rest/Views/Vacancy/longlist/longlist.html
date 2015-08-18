@@ -11,7 +11,7 @@
             </div>
             <div class="ll_main">
                 <aside class="ll_filter">
-                    <h2>Filter</h2>
+                    <h2>Filters</h2>
                     <div class="ll_filter_input">
                         <input type="search" class="form-control" ng-model="longListCtrl.filter.search">
                     </div>
@@ -40,8 +40,7 @@
                                 Added by
                                 <ul>
                                     <li ng-repeat="addedby in longListCtrl.addedByList">
-                                        <p ng-show="addedby.userLogin == ''"><input type="checkbox" checklist-model="longListCtrl.filter.hr" checklist-value="addedby.userLogin"> noname ({{addedby.countOfAddedCandidates}})</p>
-                                        <p ng-show="addedby.userLogin != ''"><input type="checkbox" checklist-model="longListCtrl.filter.hr" checklist-value="addedby.userLogin"> {{addedby.alias}} ({{addedby.countOfAddedCandidates}})</p>
+                                        <input type="checkbox" checklist-model="longListCtrl.filter.hr" checklist-value="addedby.userLogin"> {{addedby.userLogin == '' ? 'unknown' : addedby.alias}} ({{addedby.countOfAddedCandidates}})
                                     </li>
                                 </ul>
                             </li>
@@ -56,17 +55,32 @@
                             <p class="candidate_bookmark"><span class="glyphicon glyphicon-star-empty"></span></p>
                         </div>
                         <div class="col-md-4">
-                            <p><strong>{{candidate.firstName}} {{candidate.lastName}}</strong></p>
+                            <p>
+                                <strong>{{candidate.firstName}} {{candidate.lastName}}</strong>
+                            </p>
                             <p>{{candidate.addDate == null ? '' : candidate.addDate | date:'dd.MM.yyyy'}}</p>
                         </div>
                         <div class="col-md-4 candidate_item_salary">
-                            <p>{{candidate.stage}}</p><p><strong>{{candidate.salary}}</strong></p>
+                            <!--<p>{{candidate.stage}}</p>-->
+                            <p>{{longListCtrl.stages[candidate.stage].name}}</p>
+                            <p>
+                                <strong>{{candidate.salary}}</strong>
+                            </p>
                         </div>
                         <div class="col-md-4">
                             <p>{{candidate.email}}</p>
                             <p>{{candidate.company}} / {{candidate.location}}</p>
                         </div>
                     </div>
+                    <select class="form-control" ng-change="longListCtrl.getCandidatesForLongList()" ng-options="item.options as item.text for item in longListCtrl.sortOptions" ng-model="longListCtrl.order"></select>
+                    <pagination total-items="longListCtrl.totalItems"
+                                ng-model="longListCtrl.filter.currentPage"
+                                items-per-page="longListCtrl.pageSize"
+                                max-size="5"
+                                class="pagination-sm"
+                                boundary-links="true"
+                                template-url="../../Views/templates/pagination.html">
+                    </pagination>
                 </div>
             </div>
         </div>
@@ -80,7 +94,7 @@
                 <div class="ll_preview_info_all">
                     <p>{{longListCtrl.candidateDetails.firstName}} {{longListCtrl.candidateDetails.lastName}}</p>
                     <p>{{longListCtrl.candidateDetails.salary}}</p>
-                    <p>{{longListCtrl.candidateDetails.resolution}} / {{longListCtrl.candidateDetails.stage}}</p>
+                    <p>{{longListCtrl.candidateDetails.resolution}} / {{longListCtrl.stages[candidate.stage].name}}</p>
                 </div>
                 <div class="ll_preview_info_control">
                     <a class="btn" href="#/vacancy/{{longListCtrl.vacancy.id}}/candidate/{{longListCtrl.candidateDetails.id}}">Full Profile</a>
