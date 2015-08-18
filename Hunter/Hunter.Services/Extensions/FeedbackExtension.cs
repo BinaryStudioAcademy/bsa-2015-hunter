@@ -20,7 +20,7 @@ namespace Hunter.Services.Extensions
                 CardId = f.CardId,
                 Type = f.Type,
                 Text = f.Text,
-                Date = f.Edited == null ? f.Added.ToString("dd.MM.yy") : f.Edited.Value.ToString("dd.MM.yy"),
+                Date = f.Edited == null ? f.Added.ToString("dd.MM.yy HH:mm:ss") : f.Edited.Value.ToString("dd.MM.yy HH:mm:ss"),
                 UserName = f.UserProfile != null
                     ? f.UserProfile.UserLogin.Substring(0, f.UserProfile.UserLogin.IndexOf("@"))
                     : ""
