@@ -110,6 +110,8 @@
     <Compile Include="Services\Interfaces\IUserService.cs" />
     <Compile Include="Services\Interfaces\IVacancyService.cs" />
     <Compile Include="Services\Interfaces\IUserRoleService.cs" />
+    <Compile Include="Services\Interfaces\IResumeService.cs" />
+    <Compile Include="Services\ResumeService.cs" />
     <Compile Include="Services\TestService.cs" />
     <Compile Include="Services\SpecialNoteService.cs" />
     <Compile Include="Services\UserProfileService.cs" />
@@ -126,6 +128,10 @@
     <ProjectReference Include="..\Hunter.DataAccess.Interface\Hunter.DataAccess.Interface.csproj">
       <Project>{870a30fe-6780-4b1c-81f5-1eaf8bd8f50c}</Project>
       <Name>Hunter.DataAccess.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hunter.Tools.LinkedIn\Hunter.Tools.LinkedIn.csproj">
+      <Project>{3690d09c-b5b4-4a5a-a424-c1b33a7ad338}</Project>
+      <Name>Hunter.Tools.LinkedIn</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

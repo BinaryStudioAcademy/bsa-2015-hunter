@@ -17,7 +17,8 @@
             getCandidateList: getCandidateList,
             addCandidate: addCandidate,
             getLongList: getLongList,
-            getLongListDetails: getLongListDetails
+            getLongListDetails: getLongListDetails,
+            parseLinkedIn: parseLinkedIn
         };
 
         function updateCandidate(body, successCallback, id) {
@@ -92,6 +93,22 @@
             var deferred = $q.defer();
             httpHandler.sendRequest({
                 url: '/api/candidates/candidatelonglist/' + id,
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get candidates long list error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
+
+        function parseLinkedIn(url) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/resume/parse?url=' + url,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);

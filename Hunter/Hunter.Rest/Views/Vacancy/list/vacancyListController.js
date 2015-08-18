@@ -64,6 +64,14 @@
             });
         }
 
+        $scope.$watch('vacancyListCtrl.filterParams', function () {
+            vm.loadDataByParams();
+        }, true);
+
+        $scope.$watch('vacancyListCtrl.sortAction', function () {
+            vm.loadDataByParams();
+        }, true);
+
         vm.pushPopItem = function (item, collection) {
             if (collection == undefined) return;
             var index = collection.indexOf(item);
