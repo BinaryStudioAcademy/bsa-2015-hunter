@@ -15,10 +15,10 @@
         'PoolsHttpService',
         '$odata',
         'EnumConstants',
-        'VacancyHttpService'
+        'CandidateHttpService'
     ];
 
-    function CandidateListController($location, $filter, $scope, $rootScope, authService, $odataresource, PoolsHttpService, $odata, EnumConstants, VacancyHttpService) {
+    function CandidateListController($location, $filter, $scope, $rootScope, authService, $odataresource, PoolsHttpService, $odata, EnumConstants, CandidateHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         vm.name = 'Candidates';
@@ -72,8 +72,9 @@
 
         vm.order = vm.sortOptions[0].options;
 
-        VacancyHttpService.getFilterInfo('Recruiter').then(function (result) {
-            vm.inviters = result.users;
+
+        CandidateHttpService.getAddedByList().then(function (result) {
+            vm.inviters = result;
         });
 
         var predicate;

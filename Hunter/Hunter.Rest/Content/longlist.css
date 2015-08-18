@@ -91,6 +91,9 @@
     border-radius: 3px;
     padding: 5px;
 }
+.ll_filter_items p {
+    margin: 0;
+}
 .ll_filter_input>input {
     height: 25px;
     margin: 5px 0;

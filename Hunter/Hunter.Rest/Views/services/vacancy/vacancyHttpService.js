@@ -19,6 +19,7 @@
             updateVacancy: updateVacancy,
             deleteVacancy: deleteVacancy,
             getLongList: getLongList,
+            getLongListAddedBy: getLongListAddedBy,
             getFilterInfo: getFilterInfo
         }
 
@@ -124,6 +125,22 @@
                 },
                 errorCallback: function (status) {
                     console.log("Get vacancy long list error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
+
+        function getLongListAddedBy(vid) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/vacancy/longlist/' + vid + '/addedby',
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get vacancy long list Added by filter data error");
                     console.log(status);
                 }
             });

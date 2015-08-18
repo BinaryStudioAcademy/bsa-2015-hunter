@@ -34,7 +34,7 @@
                         Added by
                         <ul>
                             <li ng-repeat="inv in candidateListCtrl.inviters">
-                                <input type="checkbox" checklist-model="candidateListCtrl.filter.inviters" checklist-value="inv.login"> {{inv.login}}
+                                <input type="checkbox" checklist-model="candidateListCtrl.filter.inviters" checklist-value="inv.userLogin"> {{inv.alias}}({{inv.countOfAddedCandidates}})
                             </li>
                         </ul>
                     </li>
