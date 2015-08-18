@@ -39,7 +39,7 @@ namespace Hunter.Services
         }
         public PageDto<VacancyRowDto> Get(VacancyFilterParams filterParams)
         {
-            IQueryable<Vacancy> query = _vacancyRepository.QueryIncluding(v => v.Pool, v=>v.User);
+            IQueryable<Vacancy> query = _vacancyRepository.QueryIncluding(v => v.Pool, v => v.User);
 
             if (filterParams.Pools.Any())
             {
@@ -129,16 +129,26 @@ namespace Hunter.Services
                 var vacancyLongList = _vacancyRepository.Get(id).ToVacancyLongListDto();
 
                 return vacancyLongList;
-
-                //var candidates = _candidateRepository.All().Where(c => c.Card.Any(card=>card.VacancyId==id));
-
-
-
             }
             catch (Exception ex)
             {
                 _logger.Log(ex);
                 return new VacancyLongListDto();
+            }
+        }
+
+        public IEnumerable<LongListAddedByDto> GetLongListAddedBy(int vid)
+        {
+            try
+            {
+
+
+                return new List<LongListAddedByDto>();
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return new List<LongListAddedByDto>();
             }
         }
     }
