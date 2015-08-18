@@ -25,6 +25,8 @@
                     return  viewsPath + 'cardTechnicalInterview.html';
                 case 'test':
                     return viewsPath + 'cardTest.html';
+                case 'summary':
+                    return viewsPath + 'cardSummary.html';
                 
                 default:
                     return '';
