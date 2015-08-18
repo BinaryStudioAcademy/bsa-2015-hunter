@@ -100,7 +100,7 @@
                 vm.LastName = response.name.split(' ')[1];
                 //vm.Email = response.data.email;
                 vm.Position = response.headline;
-                vm.YearsOfExperience = response.experienceTime.split('.')[0] / 365;
+                vm.YearsOfExperience = (response.experienceTime.split('.')[0] / 365).toFixed(1);;
                 //vm.Company = response.data.company;
                 vm.Location = response.location;
                 //vm.Skype = response.data.skype;
