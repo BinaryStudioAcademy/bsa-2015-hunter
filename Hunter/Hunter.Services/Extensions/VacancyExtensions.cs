@@ -70,32 +70,16 @@ namespace Hunter.Services
             return vll;
         }
 
-        public static IEnumerable<LongListAddedByDto> ToLongListAddedByDto(this IEnumerable<Card> cards)
-        {
-            return cards.OrderBy(c=>c.AddedByProfileId).Select(c => new LongListAddedByDto()
-            {
-                VacancyId = c.VacancyId,
-                UserLogin = c.UserProfile != null ? c.UserProfile.UserLogin : "",
-                Alias = c.UserProfile != null ? c.UserProfile.Alias : "",
-                CountOfAddedCandidates = cards.GroupBy(cc=>cc.AddedByProfileId).Count()
-            });
-            //return cards.Select(c => new CandidateLongListDto()
-            //{
-            //    Id = c.CandidateId,
-            //    FirstName = c.Candidate != null ? c.Candidate.FirstName : "",
-            //    LastName = c.Candidate != null ? c.Candidate.LastName : "",
-            //    Email = c.Candidate != null ? c.Candidate.Email : "",
-            //    Company = c.Candidate != null ? c.Candidate.Company : "",
-            //    Location = c.Candidate != null ? c.Candidate.Location : "",
-            //    Salary = c.Candidate != null ? c.Candidate.Salary : 0,
-            //    YearsOfExperience = c.Candidate != null ? c.Candidate.YearsOfExperience : 0,
-            //    Stage = c.Stage,
-            //    Resolution = c.Candidate != null ? c.Candidate.Resolution.ToString() : "",
-            //    AddedBy = c.UserProfile != null ? c.UserProfile.UserLogin : "",
-            //    AddDate = c.Added,
-            //    PhotoUrl = "api/fileupload/pictures/" + c.Id,
-            //    Shortlisted = c.Candidate != null && c.Candidate.Shortlisted
-            //});
-        }
+        //public static IEnumerable<AddedByDto> ToLongListAddedByDto(this IEnumerable<Card> cards)
+        //{
+        //    return cards.OrderBy(c=>c.AddedByProfileId).Select(c => new AddedByDto()
+        //    {
+        //        VacancyId = c.VacancyId,
+        //        UserLogin = c.UserProfile != null ? c.UserProfile.UserLogin : "",
+        //        Alias = c.UserProfile != null ? c.UserProfile.Alias : "",
+        //        CountOfAddedCandidates = cards.GroupBy(cc=>cc.AddedByProfileId).Count()
+        //    });
+            
+        //}
     }
 }

@@ -44,12 +44,12 @@ namespace Hunter.DataAccess.Entities
 
             context.UserProfile.AddRange(new List<UserProfile>()
             {
-             new UserProfile() {Added = DateTime.Now, Position = "Recruter",Alias = "HR",UserLogin = "recruiter@local.com", },
-             new UserProfile() {Added = DateTime.Now, Position = "Recruter",Alias = "HR",UserLogin = "recruiter1@local.com",},
-             new UserProfile() {Added = DateTime.Now, Position = "Recruter",Alias = "HR",UserLogin = "recruiter2@local.com",},
-             new UserProfile() {Added = DateTime.Now, Position = "Techspec",Alias = "TS",UserLogin = "techspec@local.com",  },
-             new UserProfile() {Added = DateTime.Now, Position = "Techspec",Alias = "TS",UserLogin = "techspec1@local.com", },
-             new UserProfile() {Added = DateTime.Now, Position = "Techspec",Alias = "TS",UserLogin = "techspec2@local.com", },
+             new UserProfile() {Added = DateTime.Now, Position = "Recruter",Alias = "HR1",UserLogin = "recruiter@local.com", },
+             new UserProfile() {Added = DateTime.Now, Position = "Recruter",Alias = "HR2",UserLogin = "recruiter1@local.com",},
+             new UserProfile() {Added = DateTime.Now, Position = "Recruter",Alias = "HR3",UserLogin = "recruiter2@local.com",},
+             new UserProfile() {Added = DateTime.Now, Position = "Techspec",Alias = "TS1",UserLogin = "techspec@local.com",  },
+             new UserProfile() {Added = DateTime.Now, Position = "Techspec",Alias = "TS2",UserLogin = "techspec1@local.com", },
+             new UserProfile() {Added = DateTime.Now, Position = "Techspec",Alias = "TS3",UserLogin = "techspec2@local.com", },
              new UserProfile() {Added = DateTime.Now, Position = "Admin",Alias = "A",UserLogin = "admin@local.com",         },
             });
 
@@ -90,10 +90,10 @@ namespace Hunter.DataAccess.Entities
             #endregion
 
             #region CANDIDATES
-            var candidate1 = new Candidate() { AddDate = new DateTime(2015, 8, 1), EditDate = new DateTime(2015, 7, 1), AddedByProfileId = 1, FirstName = "Hollis", LastName = "Sefton", Email = "sefton@outlook.com", CurrentPosition = "Chief Tactics Planner", Company = "3D Me!", Location = "Winter Park", Skype = "sefton1052", Phone = "202-555-0160", Salary = 64000, YearsOfExperience = 12 };
-            var candidate2 = new Candidate() { AddDate = new DateTime(2015, 8, 2), EditDate = new DateTime(2015, 7, 2), AddedByProfileId = 1, FirstName = "Porter", LastName = "Wystan", Email = "pwystan@yahoo.com", CurrentPosition = "Central Configuration Specialist", Company = "Acacia Group", Location = "Athens", Skype = "porter_9", Phone = "202-555-0141", Salary = 11000, YearsOfExperience = 7.8 };
+            var candidate1 = new Candidate() { AddDate = new DateTime(2015, 8, 1), EditDate = new DateTime(2015, 7, 1), AddedByProfileId = 1, FirstName = "Hollis", LastName = "Sefton", Email = "sefton@outlook.com", CurrentPosition = "Chief Tactics Planner", Company = "3D Me!", Location = "Winter Park", Skype = "sefton1052", Phone = "202-555-0160", Salary = 64000, YearsOfExperience = 12, Shortlisted = true};
+            var candidate2 = new Candidate() { AddDate = new DateTime(2015, 8, 2), EditDate = new DateTime(2015, 7, 2), AddedByProfileId = 2, FirstName = "Porter", LastName = "Wystan", Email = "pwystan@yahoo.com", CurrentPosition = "Central Configuration Specialist", Company = "Acacia Group", Location = "Athens", Skype = "porter_9", Phone = "202-555-0141", Salary = 11000, YearsOfExperience = 7.8, Shortlisted = true };
             var candidate3 = new Candidate() { AddDate = new DateTime(2015, 8, 3), EditDate = new DateTime(2015, 8, 3), AddedByProfileId = 1, FirstName = "Gabe", LastName = "Raven", Email = "graven@gmail.com", CurrentPosition = "International Tactics Developer", Company = "AirSync", Location = "West Fargo", Skype = "gabe_raven_001", Phone = "202-555-0167", Salary = 78000, YearsOfExperience = 9 };
-            var candidate4 = new Candidate() { AddDate = new DateTime(2015, 8, 4), EditDate = new DateTime(2015, 8, 4), AddedByProfileId = 2, FirstName = "Jack", LastName = "Sylvanus", Email = "jsylv@gmail.com", CurrentPosition = "Senior Brand Orchestrator", Company = "All Apps", Location = "Camp Hill", Skype = "jack_16", Phone = "202-555-0128", Salary = 94000, YearsOfExperience = 1.2 };
+            var candidate4 = new Candidate() { AddDate = new DateTime(2015, 8, 4), EditDate = new DateTime(2015, 8, 4), AddedByProfileId = 3, FirstName = "Jack", LastName = "Sylvanus", Email = "jsylv@gmail.com", CurrentPosition = "Senior Brand Orchestrator", Company = "All Apps", Location = "Camp Hill", Skype = "jack_16", Phone = "202-555-0128", Salary = 94000, YearsOfExperience = 1.2 };
             var candidate5 = new Candidate() { AddDate = new DateTime(2015, 8, 5), EditDate = new DateTime(2015, 8, 5), AddedByProfileId = 3, FirstName = "Lindsay", LastName = "Darryl", Email = "lindsay@outlook.com", CurrentPosition = "Lead Mobility Agent", Company = "Bitrex", Location = "Princeton", Skype = "0lindsay0", Phone = "202-555-0196", Salary = 67000, YearsOfExperience = 4 };
             var candidate6 = new Candidate() { AddDate = new DateTime(2015, 8, 5), EditDate = new DateTime(2015, 8, 5), AddedByProfileId = 2, FirstName = "Jennie", LastName = "Charlie", Email = "jennie@gmail.com", CurrentPosition = "Lead Integration Analyst", Company = "Decratex", Location = "Oakland Gardens", Skype = "jen0140", Phone = "202-555-0198", Salary = 99000, YearsOfExperience = 3.10 };
             var candidate7 = new Candidate() { AddDate = new DateTime(2015, 8, 6), EditDate = new DateTime(2015, 8, 6), AddedByProfileId = 3, FirstName = "Gracelyn", LastName = "Moriah", Email = "grace@yahoo.com", CurrentPosition = "Dynamic Quality Assistant", Company = "DigestIT", Location = "Stafford", Skype = "moriah_99", Phone = "613-555-0115", Salary = 82000, YearsOfExperience = 2.1 };
@@ -487,7 +487,7 @@ namespace Hunter.DataAccess.Entities
                     CandidateId = 1,
                     VacancyId = 1,
                     Added = new DateTime(2015, 8, 1),
-                    Stage = 1,
+                    Stage = 0,
                     AddedByProfileId = 1
                 },
                 new Card
@@ -496,7 +496,7 @@ namespace Hunter.DataAccess.Entities
                     VacancyId = 1,
                     Added = new DateTime(2015, 8, 1),
                     Stage = 1,
-                    AddedByProfileId = 1
+                    AddedByProfileId = 2
                 },
                 new Card
                 {
@@ -504,23 +504,23 @@ namespace Hunter.DataAccess.Entities
                     VacancyId = 1,
                     Added = new DateTime(2015, 8, 1),
                     Stage = 1,
-                    AddedByProfileId = 1
+                    AddedByProfileId = 3
                 },
                 new Card
                 {
                     CandidateId = 4,
                     VacancyId = 1,
                     Added = new DateTime(2015, 8, 1),
-                    Stage = 1,
+                    Stage = 2,
                     AddedByProfileId = 1
                 },
                 new Card
                 {
-                    CandidateId = 1,
-                    VacancyId = 2,
+                    CandidateId = 5,
+                    VacancyId = 1,
                     Added = new DateTime(2015, 8, 1),
-                    Stage = 1,
-                    AddedByProfileId = 1
+                    Stage = 3,
+                    AddedByProfileId = 4
                 },
                 new Card
                 {

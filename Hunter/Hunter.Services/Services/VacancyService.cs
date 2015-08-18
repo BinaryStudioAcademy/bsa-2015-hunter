@@ -16,19 +16,19 @@ namespace Hunter.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IVacancyRepository _vacancyRepository;
         private readonly ICandidateRepository _candidateRepository;
-        //private readonly ICardRepository _cardRepository;
+        private readonly ICardRepository _cardRepository;
         private readonly ILogger _logger;
 
         public VacancyService(
             IVacancyRepository vacancyRepository,
             ICandidateRepository candidateRepository,
-            //ICardRepository cardRepository,
+            ICardRepository cardRepository,
             ILogger logger,
             IUnitOfWork unitOfWork)
         {
             _vacancyRepository = vacancyRepository;
             _candidateRepository = candidateRepository;
-            //_cardRepository = cardRepository;
+            _cardRepository = cardRepository;
             _logger = logger;
             _unitOfWork = unitOfWork;
         }
@@ -137,18 +137,25 @@ namespace Hunter.Services
             }
         }
 
-        public IEnumerable<LongListAddedByDto> GetLongListAddedBy(int vid)
+        public IEnumerable<AddedByDto> GetLongListAddedBy(int vid)
         {
             try
             {
+                var addedByLongList = _cardRepository.Query().Where(c => c.VacancyId == vid)
+                    .GroupBy(c => c.UserProfile)
+                    .Select(c => new AddedByDto()
+                    {
+                        UserLogin = c.Key.UserLogin,
+                        Alias = c.Key.Alias,
+                        CountOfAddedCandidates = c.Count()
+                    });
 
-
-                return new List<LongListAddedByDto>();
+                return addedByLongList;
             }
             catch (Exception ex)
             {
                 _logger.Log(ex);
-                return new List<LongListAddedByDto>();
+                return new List<AddedByDto>();
             }
         }
     }

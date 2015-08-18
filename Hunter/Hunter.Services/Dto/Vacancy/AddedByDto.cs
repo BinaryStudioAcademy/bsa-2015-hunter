@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace Hunter.Services
 {
-    public class LongListAddedByDto
+    public class AddedByDto
     {
         public string Alias { get; set; }
 
         public string UserLogin { get; set; }
-
-        public int VacancyId { get; set; }
 
         public int CountOfAddedCandidates { get; set; }
     }

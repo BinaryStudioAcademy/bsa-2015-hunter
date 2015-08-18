@@ -87,7 +87,7 @@ namespace Hunter.Rest.Controllers
         [HttpGet]
         [Route("longlist/{id:int}/addedby")]
         [ActionName("LonglistAddedBy")]
-        [ResponseType(typeof(LongListAddedByDto))]
+        [ResponseType(typeof(AddedByDto))]
         public HttpResponseMessage GetVacancyLongListAddedBy(int id)
         {
             try

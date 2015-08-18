@@ -73,21 +73,21 @@
             return deferred.promise;
         }
 
-        //function getLongList(id) {
-        //    var deferred = $q.defer();
-        //    httpHandler.sendRequest({
-        //        url: '/api/candidates/longlist/' + id,
-        //        verb: 'GET',
-        //        successCallback: function (result) {
-        //            deferred.resolve(result.data);
-        //        },
-        //        errorCallback: function (status) {
-        //            console.log("Get candidates long list error");
-        //            console.log(status);
-        //        }
-        //    });
-        //    return deferred.promise;
-        //}
+        function getLongList(id) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/candidates/longlist/' + id,
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get candidates long list error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
 
         function getLongListDetails(id) {
             var deferred = $q.defer();
