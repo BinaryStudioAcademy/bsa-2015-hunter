@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Hunter.DataAccess.Entities;
 using Hunter.Services.Dto;
+using System.Linq;
 
 namespace Hunter.Services.Interfaces
 {

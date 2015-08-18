@@ -95,9 +95,38 @@ namespace Hunter.Rest.Controllers
                 var candidates = _candidateService.GetLongList(id);
                 if (candidates == null)
                 {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Vacatcy has no candidates!");
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Vacancy has no candidates!");
                 }
                 return Request.CreateResponse(HttpStatusCode.OK, candidates);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("longlist/{vid:int}/odata")]
+        [ActionName("LonglistOdata")]
+        [ResponseType(typeof(CandidateLongListDto))]
+        public HttpResponseMessage GetLongListOdata(ODataQueryOptions<CandidateLongListDto> options, int vid)
+        {
+            try
+            {
+                IQueryable candidates =
+                    options.ApplyTo(_candidateService.GetLongList(vid).AsQueryable());
+
+                if (candidates == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Vacancy has no candidates!");
+                }
+
+                var filteredCardidates = new PageResult<CandidateLongListDto>(
+                        candidates as IEnumerable<CandidateLongListDto>,
+                        Request.ODataProperties().NextLink,
+                        Request.ODataProperties().TotalCount);
+
+                return Request.CreateResponse(HttpStatusCode.OK, filteredCardidates);
             }
             catch (Exception ex)
             {

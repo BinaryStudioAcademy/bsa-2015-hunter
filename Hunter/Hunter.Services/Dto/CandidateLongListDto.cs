@@ -15,7 +15,7 @@ namespace Hunter.Services
         public double? YearsOfExperience { get; set; }
         public int Stage { get; set; }
         public string Resolution { get; set; }
-        public string UserAddsCard { get; set; }
+        public string AddedBy { get; set; }
         public DateTime AddDate { get; set; }
     }
 }

@@ -22,7 +22,7 @@
     function CandidateListController($location, $filter, $scope, $rootScope, authService, $odataresource, PoolsHttpService, $odata, EnumConstants) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
-        vm.name = "Candidates";
+        vm.name = 'Candidates';
 
         $rootScope.candidateDetails = {
                         show: false,
@@ -88,7 +88,7 @@
             if (vm.filter.pools.length > 0) {
                 var poolPred = [];
                 angular.forEach(vm.filter.pools, function (value, key) {
-                    poolPred.push(new $odata.Predicate(new $odata.Property('PoolNames/any(p: p eq \'' + value + '\' )'), true));
+                    poolPred.push(new $odata.Predicate(new $odatcandidateLista.Property('PoolNames/any(p: p eq \'' + value + '\' )'), true));
                 });
 
                 poolPred = $odata.Predicate.or(poolPred);
@@ -98,7 +98,7 @@
             if (vm.filter.inviters.length > 0) {
                 var invPred = [];
                 angular.forEach(vm.filter.inviters, function (value, key) {
-                    invPred.push(new $odata.Predicate("AddedBy", value));
+                    invPred.push(new $odata.Predicate('AddedBy', value));
                 });
 
                 invPred = $odata.Predicate.or(invPred);
