@@ -3,7 +3,7 @@
 
     angular
         .module('hunter-app')
-        .directive('filechange', FileChange);
+        .directive('ngFileChange', FileChange);
 
     FileChange.$inject = [];
 
@@ -11,7 +11,7 @@
         return {
             'restrict': 'A',
             'link': function(scope, elem, attr) {
-                var handler = scope.$eval(attr.filechange);
+                var handler = scope.$eval(attr.ngFileChange);
                 elem.bind('change', handler);
             }
         }
