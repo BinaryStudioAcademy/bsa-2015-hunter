@@ -133,6 +133,28 @@ namespace Hunter.Services
             }
         }
 
+        public IEnumerable<AddedByDto> GetCandidatesAddedBy()
+        {
+            try
+            {
+                var addedBy = _candidateRepository.Query()
+                    .GroupBy(c => c.UserProfile)
+                    .Select(c => new AddedByDto()
+                    {
+                        UserLogin = c.Key.UserLogin ?? "",
+                        Alias = c.Key.Alias ?? "Nobody",
+                        CountOfAddedCandidates = c.Count()
+                    });
+
+                return addedBy;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return new List<AddedByDto>();
+            }
+        }
+
         public void Add(CandidateDto dto)
         {
             var candidate = new Candidate();
