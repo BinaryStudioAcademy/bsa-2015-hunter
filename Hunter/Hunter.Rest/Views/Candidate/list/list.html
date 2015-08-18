@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="filte-form-wrapper col-md-2">
+        <div class="filte-form-wrapper col-md-3">
             
                 <div class="form-group">
                     <label>Filter</label>
@@ -34,82 +34,67 @@
                         Added by
                         <ul>
                             <li ng-repeat="inv in candidateListCtrl.inviters">
-                                <input type="checkbox" checklist-model="candidateListCtrl.filter.inviters" checklist-value="inv.email"> {{inv.name}}
+                                <input type="checkbox" checklist-model="candidateListCtrl.filter.inviters" checklist-value="inv.login"> {{inv.login}}
                             </li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="longlist-wrapper col-md-6" >
+        <div class="col-md-6">
+            <div class="form-group col-md-6">
+                <label>Order By</label>
+            <select class="form-control" ng-change="candidateListCtrl.getCandidates()" ng-options="item.options as item.text for item in candidateListCtrl.sortOptions" ng-model="candidateListCtrl.order"></select>
+            </div>
             <table class="longlist table table-bordered">
                 <tr>
                     <th></th>
                     <th>Photo</th>
                     <th>
-                        <a href="" ng-click="candidateListCtrl.sort('FirstName')">
-                            Name
-                            <span ng-show="candidateListCtrl.order.field == 'FirstName' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
-                            <span ng-show="candidateListCtrl.order.field == 'FirstName' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
-                        </a>
+                        Name
+                        <span ng-show="candidateListCtrl.order.field == 'FirstName' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
+                        <span ng-show="candidateListCtrl.order.field == 'FirstName' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
                     </th>
                     <th>
-                        <a href="" ng-click="candidateListCtrl.sort('AddedByName')">
-                            Added
-                            <span ng-show="candidateListCtrl.order.field == 'AddedByName' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
-                            <span ng-show="candidateListCtrl.order.field == 'AddedByName' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
-                        </a>
+                        Added
+                        <span ng-show="candidateListCtrl.order.field == 'AddedByName' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
+                        <span ng-show="candidateListCtrl.order.field == 'AddedByName' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
                     </th>
                     <th>
-
-                        <a href="" ng-click="candidateListCtrl.sort('Resolution')">
-                            Status
-                            <span ng-show="candidateListCtrl.order.field == 'Resolution' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
-                            <span ng-show="candidateListCtrl.order.field == 'Resolution' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
-                        </a>
-
+                        Status
+                        <span ng-show="candidateListCtrl.order.field == 'Resolution' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
+                        <span ng-show="candidateListCtrl.order.field == 'Resolution' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
                     </th>
                     <th ng-hide="$root.candidateDetails.show">
-                        <a href="" ng-click="candidateListCtrl.sort('Email')">
-                            Email
-                            <span ng-show="candidateListCtrl.order.field == 'Email' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
-                            <span ng-show="candidateListCtrl.order.field == 'Email' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
-                        </a>
+                        Email
+                        <span ng-show="candidateListCtrl.order.field == 'Email' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
+                        <span ng-show="candidateListCtrl.order.field == 'Email' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
                     </th>
                     <th ng-hide="$root.candidateDetails.show">
-                        <a href="" ng-click="candidateListCtrl.sort('YearsOfExperience')">
-                            Exp
-                            <span ng-show="candidateListCtrl.order.field == 'YearsOfExperience' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
-                            <span ng-show="candidateListCtrl.order.field == 'YearsOfExperience' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
-                        </a>
+                        Exp
+                        <span ng-show="candidateListCtrl.order.field == 'YearsOfExperience' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
+                        <span ng-show="candidateListCtrl.order.field == 'YearsOfExperience' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
                     </th>
                     <th ng-hide="$root.candidateDetails.show">
-                        <a href="" ng-click="candidateListCtrl.sort('Company')">
-                            Company
-                            <span ng-show="candidateListCtrl.order.field == 'Company' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
-                            <span ng-show="candidateListCtrl.order.field == 'Company' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
-                        </a>
+                        Company
+                        <span ng-show="candidateListCtrl.order.field == 'Company' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
+                        <span ng-show="candidateListCtrl.order.field == 'Company' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
                     </th>
                     <th ng-hide="$root.candidateDetails.show">
-                        <a href="" ng-click="candidateListCtrl.sort('Location')">
-                            City
-                            <span ng-show="candidateListCtrl.order.field == 'Location' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
-                            <span ng-show="candidateListCtrl.order.field == 'Location' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
-                        </a>
+                        City
+                        <span ng-show="candidateListCtrl.order.field == 'Location' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
+                        <span ng-show="candidateListCtrl.order.field == 'Location' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
                     </th>
                     <th ng-hide="$root.candidateDetails.show">
-                        <a href="" ng-click="candidateListCtrl.sort('Salary')">
-                            Salary
-                            <span ng-show="candidateListCtrl.order.field == 'Salary' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
-                            <span ng-show="candidateListCtrl.order.field == 'Salary' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
-                        </a>
+                        Salary
+                        <span ng-show="candidateListCtrl.order.field == 'Salary' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
+                        <span ng-show="candidateListCtrl.order.field == 'Salary' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
                     </th>
                 </tr>
                 <tr ng-repeat="item in candidateListCtrl.candidateList" ng-click="candidateListCtrl.ShowDetails(item.id)">
-                    <!--<tr ng-repeat="item in candidateListCtrl.candidateList">-->
                     <td><input type="checkbox" ng-model="item.shortListed"></td>
                     <td ng-switch on="item.photo">
-                       <img class="photo-in-list" ng-switch-default src="{{item.photoUrl}}"/>
+                        <img class="photo-in-list" ng-switch-default src="{{item.photoUrl}}"/>
                     </td>
                     <td><a href="#/candidate/{{item.id}}">{{item.firstName + " " + item.lastName}}</a></td>
                     <td>{{item.addedBy}}</td>
