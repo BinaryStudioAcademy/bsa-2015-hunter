@@ -41,11 +41,12 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="form-group col-md-6">
+        <div class="col-md-5">
+            <div class="form-group col-md-5">
                 <label>Order By</label>
             <select class="form-control" ng-change="candidateListCtrl.getCandidates()" ng-options="item.options as item.text for item in candidateListCtrl.sortOptions" ng-model="candidateListCtrl.order"></select>
             </div>
+            
             <table class="longlist table table-bordered">
                 <tr>
                     <th></th>
@@ -107,7 +108,7 @@
                 </tr>
             </table>
             <pagination total-items="candidateListCtrl.totalItems"
-                        ng-model="candidateListCtrl.currentPage"
+                        ng-model="candidateListCtrl.filter.currentPage"
                         items-per-page="candidateListCtrl.pageSize"
                         max-size="5"
                         class="pagination-sm"

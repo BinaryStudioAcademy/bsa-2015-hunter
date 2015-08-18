@@ -101,14 +101,15 @@ namespace Hunter.Services
 
         }
 
-        public IEnumerable<CandidateLongListDto> GetLongList(int id)
+        public IEnumerable<CandidateLongListDto> GetLongList(int vid)
         {
             try
             {
-                var cardsLongList = _cardRepository.QueryIncluding(c=>c.Candidate, c=>c.UserProfile)
-                                                   .Where(card => card.VacancyId == id)
-                                                   .ToList()
-                                                   .ToDto();
+                var cardsLongList =
+                    _cardRepository.QueryIncluding(c => c.Candidate, c => c.UserProfile)
+                        .Where(card => card.VacancyId == vid)
+                        .ToList()
+                        .ToDto();// All().Where(card => card.VacancyId == vid).ToCandidateLongListDto().OrderByDescending(c => c.AddDate);
                 return cardsLongList;
             }
             catch (Exception ex)
@@ -152,7 +153,7 @@ namespace Hunter.Services
             catch (Exception ex)
             {
                 _logger.Log(ex);
-                throw new Exception("Database save error!"); 
+                throw new Exception("Database save error!");
             }
         }
 

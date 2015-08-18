@@ -21,14 +21,14 @@
     function CandidateListController($location, $filter, $scope, $rootScope, authService, $odataresource, PoolsHttpService, $odata, EnumConstants, VacancyHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
-        vm.name = "Candidates";
+        vm.name = 'Candidates';
 
         $rootScope.candidateDetails = {
             show: false,
             id: null
         };
 
-        vm.currentPage = 1;
+       // vm.currentPage = 1;
         vm.pageSize = 5;
         vm.totalItems = 0;
         vm.skip = 0;
@@ -43,7 +43,8 @@
             pools: [],
             inviters: [],
             statuses: [],
-            search: ''
+            search: '',
+            currentPage: 1
         };
 
         vm.statuses = EnumConstants.resolutions;
@@ -98,7 +99,7 @@
             if (vm.filter.pools.length > 0) {
                 var poolPred = [];
                 angular.forEach(vm.filter.pools, function (value, key) {
-                    poolPred.push(new $odata.Predicate(new $odata.Property('PoolNames/any(p: p eq \'' + value + '\' )'), true));
+                    poolPred.push(new $odata.Predicate(new $odatcandidateLista.Property('PoolNames/any(p: p eq \'' + value + '\' )'), true));
                 });
 
                 poolPred = $odata.Predicate.or(poolPred);
@@ -108,7 +109,7 @@
             if (vm.filter.inviters.length > 0) {
                 var invPred = [];
                 angular.forEach(vm.filter.inviters, function (value, key) {
-                    invPred.push(new $odata.Predicate("AddedBy", value));
+                    invPred.push(new $odata.Predicate('AddedBy', value));
                 });
 
                 invPred = $odata.Predicate.or(invPred);
@@ -139,17 +140,11 @@
             } else {
                 predicate = undefined;
             }
+
+            vm.skip = (vm.filter.currentPage - 1) * vm.pageSize;
             vm.getCandidates();
         }, true);
-
-
-        $scope.$watch('candidateListCtrl.currentPage', function () {
-            vm.skip = (vm.currentPage - 1) * vm.pageSize;
-            vm.getCandidates();
-        });
-
-        vm.getCandidates();
-
+        
         vm.ShowDetails = function (id) {
             if ($rootScope.candidateDetails.id === id && $rootScope.candidateDetails.show === true) {
                 $rootScope.candidateDetails.show = false;

@@ -20,7 +20,7 @@ namespace Hunter.Services.Extensions
                 CardId = f.CardId,
                 Type = f.Type,
                 Text = f.Text,
-                Date = f.Edited == null ? f.Added.ToString("dd.MM.yy") : f.Edited.Value.ToString("dd.MM.yy"),
+                Date = f.Edited == null ? f.Added.ToString("dd.MM.yy HH:mm:ss") : f.Edited.Value.ToString("dd.MM.yy HH:mm:ss"),
                 UserName = f.UserProfile != null
                     ? f.UserProfile.UserLogin.Substring(0, f.UserProfile.UserLogin.IndexOf("@"))
                     : ""
@@ -37,8 +37,8 @@ namespace Hunter.Services.Extensions
                 Text = feedback.Text,
                 Date =
                     feedback.Edited == null
-                        ? feedback.Added.ToString("dd.MM.yy")
-                        : feedback.Edited.Value.ToString("dd.MM.yy"),
+                        ? feedback.Added.ToString("dd.MM.yy HH:mm:ss")
+                        : feedback.Edited.Value.ToString("dd.MM.yy HH:mm:ss"),
                 UserName = feedback.UserProfile != null
                     ? feedback.UserProfile.UserLogin.Substring(0, feedback.UserProfile.UserLogin.IndexOf("@"))
                     : ""
