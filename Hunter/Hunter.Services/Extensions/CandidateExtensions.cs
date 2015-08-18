@@ -81,7 +81,7 @@ namespace Hunter.Services
                 YearsOfExperience = c.Candidate != null ? c.Candidate.YearsOfExperience : 0,
                 Stage = c.Stage,
                 Resolution = c.Candidate != null ? c.Candidate.Resolution.ToString() : "",
-                UserAddsCard = c.UserProfile != null ? c.UserProfile.Alias : "",
+                AddedBy = c.UserProfile != null ? c.UserProfile.UserLogin : "",
                 AddDate = c.Added,
                 PhotoUrl = "api/fileupload/pictures/" + c.Id
             });

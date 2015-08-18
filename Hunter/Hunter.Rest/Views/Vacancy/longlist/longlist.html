@@ -13,17 +13,39 @@
                 <aside class="ll_filter">
                     <h2>Filter</h2>
                     <div class="ll_filter_input">
-                        <input ng-model="searchCandidate" class="form-control" type="text" placeholder="Search..." />
+                        <input type="search" class="form-control" ng-model="longListCtrl.filter.search">
                     </div>
                     <div class="ll_filter_items">
-                        <div>Shortlist</div>
-                        <div>Stage</div>
-                        <div>Resolution</div>
-                        <div>Added by</div>
+                        <ul>
+                            <li>
+                                Stage
+                                <ul>
+                                    <li ng-repeat="st in longListCtrl.stages">
+                                        <input type="checkbox" checklist-model="longListCtrl.filter.stages" checklist-value="st.id + 1"> {{st.name}}
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                Location
+                                <ul>
+                                    <li>
+                                        <input type="search" class="form-control" ng-model="longListCtrl.filter.location">
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                Added by
+                                <ul>
+                                    <li ng-repeat="dhr in longListCtrl.defaultHrs">
+                                        <input type="checkbox" checklist-model="longListCtrl.filter.hr" checklist-value="dhr.email"> {{dhr.name}}
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </aside>
                 <div class="ll_list">
-                    <div class="ll_candidate_item" ng-repeat="candidate in longListCtrl.candidates | filter:searchCandidate" ng-click="longListCtrl.viewCandidateInfo(candidate.id)">
+                    <div class="ll_candidate_item" ng-repeat="candidate in longListCtrl.candidatesList" ng-click="longListCtrl.viewCandidateInfo(candidate.id)">
                         <div class="col-md-4 ll_candidate_item_img">
                             <img src="" alt="" />
                             <p class="years_of_experience">{{candidate.yearsOfExperience}}</p>
@@ -44,7 +66,7 @@
                 </div>
             </div>
         </div>
-        <div class="ll_preview" ng-repeat="candidate in longListCtrl.candidates" ng-show="longListCtrl.tabIsSet(candidate.id)">
+        <div class="ll_preview" ng-repeat="candidate in longListCtrl.candidatesList" ng-show="longListCtrl.tabIsSet(candidate.id)">
             <p class="ll_close_button" ng-click="longListCtrl.tabSet(0)"><span class=" glyphicon glyphicon-remove"></span></p>
             <h2>Preview</h2>
             <div class="ll_preview_info">
