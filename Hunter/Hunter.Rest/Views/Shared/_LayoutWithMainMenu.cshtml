@@ -20,6 +20,8 @@
     <link type="text/css" rel="stylesheet" href="~/Content/hrInterview.css"/>
     <link type="text/css" rel="stylesheet" href="~/Content/hrSpecialNote.css" />
     <link type="text/css" rel="stylesheet" href="~/Content/candidate.css" />
+    
+    <script src='~/bower_components/angular/angular.js'></script>
 
     @RenderSection("css", false)
 </head>
@@ -60,7 +62,7 @@
                         </li>
                     </ul>
                     <ul  class="nav navbar-nav navbar-right">
-                        <li ng-model="radioModel" btn-radio="'Activity'"><a href="#/activity">Activity<span class="badge" ng-show="IndexCtrl.amount != 0">{{IndexCtrl.amount}}</span></a></li>
+                        <li ng-model="radioModel" btn-radio="'Activity'"><a href="#/activity">Activity<span class="badge " ng-cloak ng-show="IndexCtrl.amount != 0">{{IndexCtrl.amount}}</span></a></li>
                     </ul>
                 </div>
             </div>

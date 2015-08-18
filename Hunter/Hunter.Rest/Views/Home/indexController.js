@@ -14,6 +14,7 @@
     function IndexController($scope, IndexHttpService, $interval) {
         var vm = this;
         vm.name = "Index";
+        vm.amount = 0;
         $scope.radioModel = 'Home';
 
         getActivityAmount();

@@ -18,7 +18,8 @@
             addCandidate: addCandidate,
             getLongList: getLongList,
             getLongListDetails: getLongListDetails,
-            parseLinkedIn: parseLinkedIn
+            parseLinkedIn: parseLinkedIn,
+            getAddedByList: getAddedByList
         };
 
         function updateCandidate(body, successCallback, id) {
@@ -115,6 +116,22 @@
                 },
                 errorCallback: function (status) {
                     console.log("Get candidates long list error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
+
+        function getAddedByList() {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/candidates/addedby',
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get candidates long list Added by filter data error");
                     console.log(status);
                 }
             });
