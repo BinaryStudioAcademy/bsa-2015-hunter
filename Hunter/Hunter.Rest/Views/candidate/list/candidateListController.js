@@ -28,7 +28,7 @@
             id: null
         };
 
-        vm.currentPage = 1;
+       // vm.currentPage = 1;
         vm.pageSize = 5;
         vm.totalItems = 0;
         vm.skip = 0;
@@ -43,7 +43,8 @@
             pools: [],
             inviters: [],
             statuses: [],
-            search: ''
+            search: '',
+            currentPage: 1
         };
 
         vm.statuses = EnumConstants.resolutions;
@@ -139,17 +140,11 @@
             } else {
                 predicate = undefined;
             }
+
+            vm.skip = (vm.filter.currentPage - 1) * vm.pageSize;
             vm.getCandidates();
         }, true);
-
-
-        $scope.$watch('candidateListCtrl.currentPage', function () {
-            vm.skip = (vm.currentPage - 1) * vm.pageSize;
-            vm.getCandidates();
-        });
-
-        vm.getCandidates();
-
+        
         vm.ShowDetails = function (id) {
             if ($rootScope.candidateDetails.id === id && $rootScope.candidateDetails.show === true) {
                 $rootScope.candidateDetails.show = false;
