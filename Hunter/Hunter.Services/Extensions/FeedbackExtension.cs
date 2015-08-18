@@ -37,8 +37,8 @@ namespace Hunter.Services.Extensions
                 Text = feedback.Text,
                 Date =
                     feedback.Edited == null
-                        ? feedback.Added.ToString("dd.MM.yy")
-                        : feedback.Edited.Value.ToString("dd.MM.yy"),
+                        ? feedback.Added.ToString("dd.MM.yy HH:mm:ss")
+                        : feedback.Edited.Value.ToString("dd.MM.yy HH:mm:ss"),
                 UserName = feedback.UserProfile != null
                     ? feedback.UserProfile.UserLogin.Substring(0, feedback.UserProfile.UserLogin.IndexOf("@"))
                     : ""
