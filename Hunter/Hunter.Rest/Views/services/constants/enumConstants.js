@@ -17,9 +17,11 @@
                 { id: 5, name: 'Unfit', color: 'Grey', colorCode: 'rgb(238, 238, 238)' }
             ],
             vacancyStates: [
-                { id: 0, name: 'Open' },
-                { id: 1, name: 'Closed' },
-                { id: 2, name: 'Burning' }
+                { id: 0, name: 'Draft' },    // - is used when the vacancy is not yet opened.
+                { id: 1, name: 'Open' },     // - we can add new candidates, publish\post active landings in future
+                { id: 2, name: 'On Hold' },  // - vacancy is not relevant AT THE MOMENT. But will be IN SOME TIME. When vacancy is on hold we still can add candidates, feedbacks etc.
+                { id: 3, name: 'Filled' },   // - candidate has been hired and the vacancy is officially closed VACANCY MOVES TO ARCHIVE
+                { id: 4, name: 'Cancelled' } // - vacancy is no longer valid and not needed any more, no one is hired. VACANCY MOVES TO ARCHIVE
             ],
             substatuses: [
                 { id: 0, name: 'Test Failed' },
