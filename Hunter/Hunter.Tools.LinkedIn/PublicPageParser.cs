@@ -5,7 +5,7 @@ using HtmlAgilityPack;
 
 namespace Hunter.Tools.LinkedIn
 {
-    public class PublicPageParser
+    public class PublicPageParser : IPublicPageParser
     {
         private string Url { get; set; }
         private HtmlDocument Document { get; set; }

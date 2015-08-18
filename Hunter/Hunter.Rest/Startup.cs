@@ -17,6 +17,7 @@ using Hunter.DataAccess.Db.Repositories;
 using Hunter.DataAccess.Entities;
 using Hunter.Services.Services;
 using Hunter.Services.Services.Interfaces;
+using Hunter.Tools.LinkedIn;
 
 [assembly: OwinStartup(typeof(Hunter.Rest.Startup))]
 
@@ -70,9 +71,11 @@ namespace Hunter.Rest
             kernel.Bind<ITestService>().To<TestService>();
             kernel.Bind<IFeedbackService>().To<FeedbackService>();
             kernel.Bind<ISpecialNoteService>().To<SpecialNoteService>();
+            kernel.Bind<IResumeService>().To<ResumeService>();
             #endregion
 
             kernel.Bind<Common.Interfaces.ILogger>().To<Logger>();
+            kernel.Bind<IPublicPageParser>().To<PublicPageParser>();
 
             return kernel;
         }

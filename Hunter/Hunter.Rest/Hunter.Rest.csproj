@@ -291,6 +291,7 @@
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ResumeController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\SpecialNoteController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
@@ -884,6 +885,10 @@
     <ProjectReference Include="..\Hunter.Services\Hunter.Services.csproj">
       <Project>{7cb1e630-4503-4083-ba17-a17fa6fb74ab}</Project>
       <Name>Hunter.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hunter.Tools.LinkedIn\Hunter.Tools.LinkedIn.csproj">
+      <Project>{3690d09c-b5b4-4a5a-a424-c1b33a7ad338}</Project>
+      <Name>Hunter.Tools.LinkedIn</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
