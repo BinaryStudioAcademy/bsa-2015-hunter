@@ -45,21 +45,29 @@ namespace Hunter.Rest.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
             }
-            
+
         }
 
         [HttpGet]
         [Route("odata")]
         public IHttpActionResult GetOdata(ODataQueryOptions<CandidateDto> options)
         {
-            var query = _candidateService.Query().MapToDto();
-          
-            IQueryable results = options.ApplyTo(query.OrderByDescending(c => c.AddDate));
-            var result = new PageResult<CandidateDto>(
-                results as IEnumerable<CandidateDto>,
-                Request.ODataProperties().NextLink,
-                Request.ODataProperties().TotalCount);
-            return Ok(result);
+            try
+            {
+                var query = _candidateService.Query().MapToDto();
+
+                IQueryable results = options.ApplyTo(query.OrderByDescending(c => c.AddDate));
+                var result = new PageResult<CandidateDto>(
+                    results as IEnumerable<CandidateDto>,
+                    Request.ODataProperties().NextLink,
+                    Request.ODataProperties().TotalCount);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
         }
 
 
@@ -72,7 +80,7 @@ namespace Hunter.Rest.Controllers
             try
             {
                 var data = _candidateService.GetInfo(id);
-                
+
                 if (data == null)
                 {
                     return Request.CreateResponse(HttpStatusCode.NotFound);
@@ -164,7 +172,7 @@ namespace Hunter.Rest.Controllers
             try
             {
                 _candidateService.Add(candidate);
-                return Request.CreateResponse(HttpStatusCode.Created, _candidateService.Get(i=>i.Email.Equals(candidate.Email)).ToCandidateDto());
+                return Request.CreateResponse(HttpStatusCode.Created, _candidateService.Get(i => i.Email.Equals(candidate.Email)).ToCandidateDto());
 
             }
             catch (Exception e)
@@ -203,7 +211,7 @@ namespace Hunter.Rest.Controllers
         public HttpResponseMessage Delete(int id)
         {
             var candidate = _candidateService.Get(id);
-            
+
             if (candidate == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
