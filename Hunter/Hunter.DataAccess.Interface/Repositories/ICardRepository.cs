@@ -5,5 +5,6 @@ namespace Hunter.DataAccess.Interface
 {
     public interface ICardRepository : IRepository<Card>
     {
+        Card GetByCandidateAndVacancy(int candidateId, int vacancyId);
     }
 }

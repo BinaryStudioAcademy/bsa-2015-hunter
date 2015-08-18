@@ -1,15 +1,20 @@
 ﻿
 using System.Collections.Generic;
+using System.Net.Http;
 using Hunter.Services.Dto;
 
 namespace Hunter.Services.Interfaces
 {
     public interface IFileService
     {
-        void Add(FileDto file);
+        int Add(FileDto file);
         void Update(FileDto file);
-        FileDto Get(string fileName);
-        IEnumerable<FileDto> GetAll();
-        void Delete(string fileName);
+        FileDto Get(int id);
+        IEnumerable<FileDto> Get();
+        void Delete(int id);
+        FileDto DownloadFile(int id);
+        ByteArrayContent GetPhoto(int id);
+        FileDto GetResumeFileDto(int resumeId);
+        void UploadPhotoFromUrl(string url, int candidateId);
     }
 }

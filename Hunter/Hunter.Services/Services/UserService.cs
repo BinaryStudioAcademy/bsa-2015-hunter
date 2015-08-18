@@ -34,7 +34,7 @@ namespace Hunter.Services
 
         public IEnumerable<User> GetAllUsers()
         {
-            return _userRepository.All();
+            return _userRepository.Query().ToList();
         }
 
         public User GetUserByName(string name)

@@ -30,12 +30,12 @@ namespace Hunter.Tests.Services
         public void TestSetup()
         {
             _repository.Get(Arg.Any<int>()).Returns(new Pool { Id = 1, Name = "Pool name" });
-            _repository.All().Returns(new List<Pool>()
+            _repository.Query().Returns(new List<Pool>()
             {
                 new Pool(){Id = 1, Name = "Pool name #1"},
                 new Pool(){Id = 2, Name = "Pool name #2"},
                 new Pool(){Id = 3, Name = "Pool name #3"}
-            });
+            }.AsQueryable());
             _repository.Query().Returns(new List<Pool>()
             {
                 new Pool(){Id = 1, Name = "Pool name #1"},

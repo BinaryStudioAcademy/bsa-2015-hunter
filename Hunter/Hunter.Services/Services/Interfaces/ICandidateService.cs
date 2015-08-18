@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Hunter.DataAccess.Entities;
 using Hunter.Services.Dto;
 using System.Linq;
@@ -8,9 +9,9 @@ namespace Hunter.Services.Interfaces
 {
     public interface ICandidateService
     {
-        IEnumerable<Candidate> GetAll();
         Candidate Get(int id);
         Candidate Get(Func<Candidate, bool> predicat);
+        IQueryable<Candidate> Query();
         IEnumerable<CandidateDto> GetAllInfo();
         CandidateDto GetInfo(int id);
         void Add(CandidateDto candidate);

@@ -38,7 +38,7 @@ namespace Hunter.Tests.Services
         {
             var cardsList = new List<Card> {new Card {Id = 1, VacancyId = 1}, new Card {Id = 2, VacancyId = 1}};
 
-            _cardRepository.All().Returns(cardsList);
+            _cardRepository.Query().Returns(cardsList.AsQueryable());
 
         }
 

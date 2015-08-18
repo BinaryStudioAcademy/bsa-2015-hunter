@@ -52,7 +52,9 @@ namespace Hunter.Rest.Controllers
         [Route("odata")]
         public IHttpActionResult GetOdata(ODataQueryOptions<CandidateDto> options)
         {
-            IQueryable results = options.ApplyTo(_candidateService.GetAllInfo().OrderByDescending(c => c.AddDate).AsQueryable());
+            var query = _candidateService.Query().MapToDto();
+          
+            IQueryable results = options.ApplyTo(query.OrderByDescending(c => c.AddDate));
             var result = new PageResult<CandidateDto>(
                 results as IEnumerable<CandidateDto>,
                 Request.ODataProperties().NextLink,
@@ -152,25 +154,6 @@ namespace Hunter.Rest.Controllers
             catch (Exception ex)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
-            }
-        }
-
-        [HttpGet]
-        [Route("{id:int}/photo")]
-        public HttpResponseMessage GetPhotoUrl(int id)
-        {
-            if (_candidateService.Get(id) == null)
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound);
-            }
-
-            if (_candidateService.Get(id).Photo != null)
-            {
-                return Request.CreateResponse(HttpStatusCode.OK, "api/fileupload/pictures/" + id);
-            }
-            else
-            {
-                return Request.CreateResponse(HttpStatusCode.NoContent);
             }
         }
 

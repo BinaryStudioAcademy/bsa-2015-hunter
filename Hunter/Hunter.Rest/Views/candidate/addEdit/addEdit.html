@@ -68,9 +68,11 @@
         </div>
         <div class="col-md-4">
             <h3>Photo</h3><hr/>
-            <img class="editPagePhoto" ng-if="!candidateAddEditCtrl.photoLoaded" ngf-src="candidateAddEditCtrl.picture"/>
-            <img class="editPagePhoto" ng-if="candidateAddEditCtrl.photoLoaded" src="{{candidateAddEditCtrl.pictureUrl}}"/>
-            <button ngf-select ngf-multiple="false" ngf-change="candidateAddEditCtrl.previewSelected($file)">Upload Picture</button>
+            <img class="edit-page-photo" ng-if="!candidateAddEditCtrl.photoLoaded" ngf-src="candidateAddEditCtrl.picture"/>
+            <img class="edit-page-photo" ng-if="candidateAddEditCtrl.photoLoaded" src="{{candidateAddEditCtrl.photoUrl}}"/>
+            <input placeholder="enter external url" type="text" class="form-control" ng-model="candidateAddEditCtrl.externalUrl"/>
+            <button ng-click="candidateAddEditCtrl.getFromUrl()">Get photo from URL</button>
+            <button ngf-select ngf-multiple="false" ngf-change="candidateAddEditCtrl.previewSelected($file)">Upload photo from computer</button>
         </div>
     </div>
     <div class="row">
@@ -87,6 +89,7 @@
         <div class="col-md-4">
             <h3>Resume</h3><hr/>
             <input name="file" type="file" ngf-select ngf-change="candidateAddEditCtrl.onFileSelect($file)">
+            <a href="api/file/download/{{candidateAddEditCtrl.resume.id}}">{{candidateAddEditCtrl.resume.fileName}}</a>
         </div>
         <div class="col-md-4">
             <h3>Note</h3><hr/>

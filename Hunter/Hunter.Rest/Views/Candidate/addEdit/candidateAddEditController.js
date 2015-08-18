@@ -13,11 +13,12 @@
         'CandidateAddEditService',
         'PoolsHttpService',
         'UploadResumeService',
-        'UploadPhotoService'
+        'UploadPhotoService',
+        'FileHttpService'
     ];
 
     function CandidateAddEditController($location, $routeParams, authService,
-        candidateHttpService, candidateAddEditService, poolsHttpService, uploadResumeService, uploadPhotoService) {
+        candidateHttpService, candidateAddEditService, poolsHttpService, uploadResumeService, uploadPhotoService, fileHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         //vm.categories = [{ name: 'Select Candidate Category' }]; // .NET, JS, PHP
@@ -43,12 +44,16 @@
 
         vm.photoLoaded = true;
         vm.picture = null;
-        vm.pictureUrl = '';
+        vm.photoUrl = '';
+        vm.resume = null;
+        vm.externalUrl = '';
+        var firstPreviewUrl = '';
 
         //Here we should write all signatures for user actions callback method, for example,
         vm.addEditCandidate = addEditCandidate;
         vm.previewSelected = previewSelected;
         vm.onFileSelect = uploadResumeService.onFileSelect;
+        vm.getFromUrl = getFromUrl;
 
         (function () {
             // This is function for initialization actions, for example checking auth
@@ -94,6 +99,17 @@
             }
         }
 
+        function getFromUrl() {
+            uploadPhotoService.validateUrl(vm.externalUrl).then(function(isImage) {
+                if (isImage) {
+                    vm.photoUrl = vm.externalUrl;     
+                } else {
+                    vm.externalUrl = '';
+                    vm.photoUrl = firstPreviewUrl;
+                }
+            });               
+        }
+
         // not user-event functions
         function createCandidateRequestBody() {
             var Origin = vm.selectedOrigin.value;
@@ -128,12 +144,12 @@
                 Linkedin : vm.LinkedIn,
                 Phone: vm.Phone,
                 Salary: vm.Salary,
-                ResumeId: 0,
                 Origin: Origin,
                 Resolution: Resolution,
                 ShortListed: vm.ShortListed,
                 DateOfBirth: DateOfBirth,
-                PoolNames : Pools
+                PoolNames: Pools,
+                ResumeId: vm.resumeId
             }
             if (id != null) {
                 candidate.Id = id;
@@ -162,7 +178,9 @@
                 vm.selectedResolution = vm.resolutions[response.data.resolution];
                 vm.ShortListed = response.data.shortListed;
                 vm.DateOfBirth = new Date(response.data.dateOfBirth);
-
+                vm.photoUrl = response.data.photoUrl;
+                vm.resumeId = response.data.resumeId;
+                firstPreviewUrl = vm.photoUrl;
                 //getting already selected pools
                 for (var i = 0; i < response.data.poolNames.length; i++) {
                     for (var j = 0; j < vm.pools.length; j++) {
@@ -171,20 +189,24 @@
                         }
                     }
                 }
-                    
-                candidateHttpService.getPictureUrl(id).then(function (response) {
-                    if (response.status != 204) {
-                        vm.pictureUrl = response.data;
-                        vm.photoLoaded = true;
-                    }
-                });
+
+                vm.photoLoaded = true;
                 vm.nameInTitle = response.data.firstName + " " + response.data.lastName;
+                fileHttpService.getResume(vm.resumeId).then(function(data) {
+                    vm.resume = data;
+                });
             });
         }
 
         function successAddEditCandidate(data) {
             uploadResumeService.uploadResume(data.data);
-            uploadPhotoService.uploadPicture(vm.picture, data.data.id);
+
+            if (vm.photoUrl == vm.externalUrl) {
+                uploadPhotoService.uploadFromUrl(vm.externalUrl, data.data.id);
+            } else {
+                uploadPhotoService.uploadPicture(vm.picture, data.data.id);
+            }
+            
             $location.url('/candidate/list');
         }
     }

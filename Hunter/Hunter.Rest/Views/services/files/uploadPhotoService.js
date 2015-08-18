@@ -9,7 +9,9 @@
         var service = {
             uploadPicture: uploadPicture,
             validatePicture: validatePicture,
-            getPicture: getPicture
+            getPicture: getPicture,
+            validateUrl: validateUrl,
+            uploadFromUrl: uploadFromUrl
         }
 
         function uploadPicture(file, id) {
@@ -53,6 +55,29 @@
                 return true;
             }
             return false;
+        }
+
+        function validateUrl(src) {
+            var deferred = $q.defer();
+
+            var image = new Image();
+            image.onerror = function () {
+                deferred.resolve(false);
+            };
+            image.onload = function () {
+                deferred.resolve(true);
+            };
+            image.src = src;
+
+            return deferred.promise;
+        }
+
+        function uploadFromUrl(photoUrl, id) {
+            httpHandler.sendRequest({
+                verb: 'POST',
+                url: '/api/fileupload/pictures/fromUrl/' + id,
+                body: JSON.stringify(photoUrl)
+            });
         }
 
         return service;

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
-using Hunter.DataAccess.Entities;
-using Hunter.DataAccess.Entities.Entites.Enums;
+﻿using Hunter.DataAccess.Entities;
+using Hunter.Services.Dto;
 
-namespace Hunter.Services
+namespace Hunter.Services.Extensions
 {
     public static class ActivityExtension
     {
@@ -11,7 +9,7 @@ namespace Hunter.Services
         {
             ActivityDto activityDto = new ActivityDto()
             {
-                Id = activity.Id.ToString(),
+                Id = activity.Id,
                 Message = activity.Message,
                 Tag = activity.Tag,
                 UserLogin = activity.UserLogin,
@@ -24,17 +22,15 @@ namespace Hunter.Services
 
         public static Activity ToActivity(this ActivityDto activityDto)
         {
-            Activity activity = new Activity()
+            return new Activity()
             {
-                Id = Convert.ToInt32(activityDto.Id),
+                Id = activityDto.Id,
                 Message = activityDto.Message,
                 Tag = activityDto.Tag,
                 UserLogin = activityDto.UserLogin,
                 Url = activityDto.Url,
                 Time = activityDto.Time
             };
-
-            return activity;
         }
     }
 }

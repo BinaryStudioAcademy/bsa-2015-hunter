@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Entities;
 using Hunter.DataAccess.Interface;
@@ -35,13 +36,13 @@ namespace Hunter.Tests.Services
 
             _vacancyRepository.Get(Arg.Any<int>()).Returns(new Vacancy { Id = 1, Name = "Vacancy name", Card = cardsList });
 
-            _candidateRepository.All().Returns(new List<Candidate>()
+            _candidateRepository.Query().Returns(new List<Candidate>()
             {
                 new Candidate { Id = 1, FirstName = "Name 1", Card = cardsList },
                 new Candidate { Id = 2, FirstName = "Name 2", Card = new List<Card> { cardsList[0] } },
                 new Candidate { Id = 3, FirstName = "Name 3", Card = new List<Card> { cardsList[1] } },
                 new Candidate { Id = 3, FirstName = "Name 3", Card = new List<Card> { new Card { Id = 3, VacancyId = 2} } }
-            });
+            }.AsQueryable());
         }
 
         [Test]

@@ -5,7 +5,6 @@ namespace Hunter.Services
     public class CandidateLongListDto
     {
         public int Id { get; set; }
-        public byte[] Photo { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
@@ -17,5 +16,6 @@ namespace Hunter.Services
         public string Resolution { get; set; }
         public string AddedBy { get; set; }
         public DateTime AddDate { get; set; }
+        public string PhotoUrl { get; set; }
     }
 }

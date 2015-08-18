@@ -10,7 +10,7 @@ namespace Hunter.Services.Extensions
 {
     static class SpecialNoteExtension
     {
-        public static SpecialNoteDto ToSpecialNoteDto(this SpecialNote specialNote)
+        public static SpecialNoteDto ToDto(this SpecialNote specialNote)
         {
             var specialNotesDto = new SpecialNoteDto
             {
@@ -24,7 +24,7 @@ namespace Hunter.Services.Extensions
             return specialNotesDto;
         }
 
-        public static SpecialNote ToSpecialNote(this SpecialNoteDto specialNotesDto)
+        public static SpecialNote ToEntity(this SpecialNoteDto specialNotesDto)
         {
             var specialNote = new SpecialNote()
             {

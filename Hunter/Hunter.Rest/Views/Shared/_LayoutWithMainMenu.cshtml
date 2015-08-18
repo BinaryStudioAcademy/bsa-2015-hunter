@@ -32,8 +32,8 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li class="menu">
+                        <li ng-model="radioModel" btn-radio="'Home'"><a href="#">Home</a></li>
+                        <li ng-model="radioModel" btn-radio="'Candidates'" class="menu">
                             <a href="">Candidates<span class="caret"></span></a>
                             <ul class="submenu">
                                 <li><a href="#/candidate/list">Show All</a></li>
@@ -41,16 +41,16 @@
                             </ul>
 
                         </li>
-                        <li class="menu">
+                        <li ng-model="radioModel" btn-radio="'Vacancies'" class="menu">
                             <a href="">Vacancies<span class="caret"></span></a>
                             <ul class="submenu">
                                 <li><a href="#/vacancy/list">Show All</a></li>
                                 <li><a href="#/vacancy/edit">Add new</a></li>
                             </ul>
                         </li>
-                        <li><a href="#/statistics">Statistics</a></li>
-                        <li><a href="#/files">Files</a></li>
-                        <li class="menu">
+                        <li ng-model="radioModel" btn-radio="'Statistics'"><a href="#/statistics">Statistics</a></li>
+                        <li ng-model="radioModel" btn-radio="'Files'"><a href="#/files">Files</a></li>
+                        <li ng-model="radioModel" btn-radio="'Settings'" class="menu">
                             <a href="">Settings<span class="caret"></span></a>
                             <ul class="submenu">
                                 <li><a href="#/pool">Pools</a></li>
@@ -59,8 +59,8 @@
                             </ul>
                         </li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#/activity">Activity<span class="badge" ng-show="IndexCtrl.amount != 0">{{IndexCtrl.amount}}</span></a></li>
+                    <ul  class="nav navbar-nav navbar-right">
+                        <li ng-model="radioModel" btn-radio="'Activity'"><a href="#/activity">Activity<span class="badge" ng-show="IndexCtrl.amount != 0">{{IndexCtrl.amount}}</span></a></li>
                     </ul>
                 </div>
             </div>

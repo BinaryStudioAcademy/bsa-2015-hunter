@@ -32,19 +32,18 @@ namespace Hunter.Rest.Controllers
         [HttpGet]
         [Route("pictures/{id:int}")]
         public HttpResponseMessage GetPicture(int id)
-        {
-            var array = _candidateService.Get(id).Photo;
-            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
-            if (array != null)
+        {   
+            try
             {
-                result.Content = new ByteArrayContent(array);
+                HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+                result.Content = _fileService.GetPhoto(id);
                 result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
+                return result;
             }
-            else
+            catch (Exception e)
             {
-                result.StatusCode = HttpStatusCode.NotFound;
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
             }
-            return result;
         }
 
 
@@ -74,6 +73,22 @@ namespace Hunter.Rest.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
+        }
+
+        [HttpPost]
+        [Route("pictures/fromUrl/{id:int}")]
+        public HttpResponseMessage PostPictureFromUrl(int id, [FromBody]string photoUrl)
+        {
+            try
+            {
+                _fileService.UploadPhotoFromUrl(photoUrl, id);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+            
         }
 
         [HttpDelete]

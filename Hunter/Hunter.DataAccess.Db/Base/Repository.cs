@@ -8,17 +8,13 @@ using Hunter.DataAccess.Interface.Base;
 
 namespace Hunter.DataAccess.Db.Base
 {
-    public abstract class Repository<T> : IRepository<T> where T : class, IEntity,new()
+    public abstract class Repository<T> : IRepository<T> where T : class, IEntity, new()
     {
-        private  DbContext _dataContext;
-        private readonly DbSet<T> _dataSet;
-        private IDatabaseFactory _databaseFactory;
+        private readonly DbContext _dataContext;
 
         protected Repository(IDatabaseFactory databaseFactory)
         {
-            _databaseFactory = databaseFactory;
-            _dataContext = _databaseFactory.Get();
-            _dataSet = _dataContext.Set<T>();
+            _dataContext = databaseFactory.Get();
         }
 
         protected DbContext DataContext
@@ -26,13 +22,12 @@ namespace Hunter.DataAccess.Db.Base
             get { return _dataContext; }
         }
 
-
         public IQueryable<T> Query()
         {
-            return _dataSet.AsQueryable();
+            return _dataContext.Set<T>().AsQueryable();
         }
 
-        public IQueryable<T> QueryIncluding<TProperty>(params Expression<Func<T, TProperty>>[] includes)
+        public IQueryable<T> QueryIncluding(params Expression<Func<T, object>>[] includes)
         {
             var query = Query();
             if (includes != null && includes.Length > 0)
@@ -45,15 +40,9 @@ namespace Hunter.DataAccess.Db.Base
             return query;
         }
 
-        public IEnumerable<T> All()
-        {
-            return _dataSet.AsEnumerable();
-            //return _dataSet.AsNoTracking().ToList();
-        }
-
         public T Get(long id)
         {
-            return _dataSet.FirstOrDefault(x => x.Id == id);
+            return _dataContext.Set<T>().FirstOrDefault(x => x.Id == id);
         }
 
         public T Get(Func<T, bool> predicate)
@@ -80,11 +69,6 @@ namespace Hunter.DataAccess.Db.Base
             Delete(entity);
             _dataContext.SaveChanges();
         }
-
-        //public void SaveChanges()
-        //{
-        //    _dataContext.SaveChanges();
-        //}
 
         public void Update(T entity)
         {

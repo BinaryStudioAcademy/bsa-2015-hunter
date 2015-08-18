@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Hunter.Services;
+using Hunter.Services.Dto;
 using Hunter.Services.Interfaces;
 
 namespace Hunter.Rest.Controllers

@@ -29,11 +29,12 @@ namespace Hunter.Services
             _poolRepository = poolRepository;
         }
 
-        public IEnumerable<Candidate> GetAll()
+        public IEnumerable<CandidateDto> GetAllInfo()
         {
             try
             {
-                return _candidateRepository.All();
+                var data = _candidateRepository.Query().ToList().Select(x => x.ToCandidateDto());
+                return data;
             }
             catch (Exception ex)
             {
@@ -42,12 +43,11 @@ namespace Hunter.Services
             }
         }
 
-        public IEnumerable<CandidateDto> GetAllInfo()
+        public IQueryable<Candidate> Query()
         {
             try
             {
-                var data = _candidateRepository.All().Select(x => x.ToCandidateDto());
-                return data;
+                return _candidateRepository.Query();
             }
             catch (Exception ex)
             {

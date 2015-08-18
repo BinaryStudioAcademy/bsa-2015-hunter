@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using Hunter.Services.Dto;
+using Hunter.Services;
 using Newtonsoft.Json;
 
 namespace Hunter.Rest.Formaters
@@ -36,15 +36,16 @@ namespace Hunter.Rest.Formaters
             return false;
         }
 
-        public async override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content, IFormatterLogger formatterLogger,
+        public override async Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content,
+            IFormatterLogger formatterLogger,
             CancellationToken cancellationToken)
-        
+
         {
             if (!content.IsMimeMultipartContent())
             {
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
-            
+
             var fileDto = new FileDto();
             var parts = await content.ReadAsMultipartAsync(cancellationToken);
             //file content
@@ -53,9 +54,9 @@ namespace Hunter.Rest.Formaters
             var data = parts.Contents.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "\"data\"");
             var dataStr = await data.ReadAsStringAsync();
             fileDto = JsonConvert.DeserializeObject<FileDto>(dataStr);
-            //!!!fileDto.FileExtation = Path.GetExtension(fileContent.Headers.ContentDisposition.FileName.Replace("\"", ""));
-            //!!!fileDto.File = await fileContent.ReadAsStreamAsync();
-            
+
+            fileDto.File = await fileContent.ReadAsStreamAsync();
+
             return fileDto;
 
         }
