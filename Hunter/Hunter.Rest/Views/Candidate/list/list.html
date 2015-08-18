@@ -92,10 +92,10 @@
                         <span ng-show="candidateListCtrl.order.field == 'Salary' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
                     </th>
                 </tr>
-                <tr ng-repeat="item in candidateListCtrl.candidateList" ng-click="candidateListCtrl.ShowDetails(item.id)">
+                <tr ng-repeat="item in candidateListCtrl.candidateList" ng-click="candidateListCtrl.ShowDetails(item.id)" ng-class="candidateListCtrl.ActiveTr(item.id)">
                     <td><input type="checkbox" ng-model="item.shortListed"></td>
                     <td ng-switch on="item.photo">
-                        <img class="photo-in-list" ng-switch-default src="{{item.photoUrl}}"/>
+                        <img class="photo-in-list" ng-switch-default src="{{item.photoUrl}}" />
                     </td>
                     <td><a href="#/candidate/{{item.id}}">{{item.firstName + " " + item.lastName}}</a></td>
                     <td>{{item.addedBy}}</td>
