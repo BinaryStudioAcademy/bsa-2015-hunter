@@ -35,7 +35,7 @@ namespace Hunter.Services
                 StartDate = vacancy.StartDate,
                 EndDate = vacancy.EndDate,
                 PoolName = vacancy.Pool.Name,
-                AddedByName = vacancy.UserProfile != null ? vacancy.UserProfile.UserLogin : string.Empty,
+                AddedByName = vacancy.UserProfile != null ? vacancy.UserProfile.Alias : string.Empty,
                 AddedById = vacancy.UserProfile != null ? vacancy.UserProfile.Id : 0
             };
             return v;
