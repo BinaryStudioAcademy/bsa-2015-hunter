@@ -4,6 +4,7 @@ using System.Linq;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Entities.Entites.Enums;
 using Hunter.DataAccess.Interface.Base;
 using Hunter.Services.Dto;
 using Hunter.Services.Extensions;
@@ -19,9 +20,10 @@ namespace Hunter.Services
         private readonly ILogger _logger;
         private readonly IPoolRepository _poolRepository;
         private readonly IUserProfileRepository _userProfileRepository;
+        private readonly IActivityHelperService _activityHelperService;
 
         public CandidateService(IUnitOfWork unitOfWork, ICandidateRepository candidateRepository, ICardRepository cardRepository,
-            IPoolRepository poolRepository, ILogger logger, IUserProfileRepository userProfileRepository)
+            IPoolRepository poolRepository, ILogger logger, IUserProfileRepository userProfileRepository, IActivityHelperService activityHelperService)
         {
             _unitOfWork = unitOfWork;
             _candidateRepository = candidateRepository;
@@ -29,6 +31,7 @@ namespace Hunter.Services
             _logger = logger;
             _userProfileRepository = userProfileRepository;
             _poolRepository = poolRepository;
+            _activityHelperService = activityHelperService;
         }
 
         public IEnumerable<CandidateDto> GetAllInfo()
@@ -180,6 +183,7 @@ namespace Hunter.Services
             {
                 candidate.AddDate = DateTime.Now;
                 _candidateRepository.UpdateAndCommit(candidate);
+                _activityHelperService.CreateAddedCandidateActivity(candidate);
             }
             catch (Exception ex)
             {

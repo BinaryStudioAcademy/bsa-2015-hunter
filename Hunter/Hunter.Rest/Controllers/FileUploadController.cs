@@ -62,8 +62,7 @@ namespace Hunter.Rest.Controllers
                 byte[] ms = await provider.Contents[0].ReadAsByteArrayAsync();
                 var candidate = _candidateService.Get(id);
 
-                candidate.Photo = ms;
-                _candidateService.Update(candidate.ToCandidateDto());
+                _fileService.SavePhoto(candidate, ms);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (Exception e)

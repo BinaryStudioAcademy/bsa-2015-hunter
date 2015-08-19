@@ -12,7 +12,7 @@
                         </div>
                         <div>current/past: {{generalCardCtrl.candidate.currentPosition}}</div>
                         <div>company/location: {{generalCardCtrl.candidate.company+","+candidateCtrl.candidate.localion}}</div>
-                        <div>emaile: {{generalCardCtrl.candidate.email}}</div>
+                        <div>email: {{generalCardCtrl.candidate.email}}</div>
                         <div>skype: {{generalCardCtrl.candidate.skype}}</div>
                         <div>phone: {{generalCardCtrl.candidate.phone}}</div>
                     </div>
@@ -52,10 +52,10 @@
     <div class="row col-md-12">
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation"
-                ng-class="{active: generalCardCtrl.currentTabName == tab}"
+                ng-class="{active: generalCardCtrl.currentTabName == tab.name}"
                 ng-repeat="tab in generalCardCtrl.tabs track by $index"
                 ng-click="generalCardCtrl.changeTemplate(tab)">
-                <a role="presentation" data-toggle="tab">{{ tab }}</a>
+                <a role="presentation" data-toggle="tab">{{ tab.name }}</a>
             </li>
         </ul>
         <div class="tab-content">

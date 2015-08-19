@@ -70,6 +70,8 @@
                 verb: 'POST',
                 url: '/api/vacancy',
                 body: data,
+                successMessageToUser: 'Vacancy added',
+                errorMessageToUser: 'Vacancy not added',
                 errorCallback: function (status) {
                     console.log("Add vacancy error");
                     console.log(status);
@@ -82,6 +84,8 @@
                 verb: 'PUT',
                 url: '/api/vacancy/' + id,
                 body: data,
+                successMessageToUser: 'Vacancy updated',
+                errorMessageToUser: 'Vacancy not updated',
                 errorCallback: function (status) {
                     console.log("Update vacancy error");
                     console.log(status);
@@ -93,6 +97,8 @@
             httpHandler.sendRequest({
                 verb: 'DELETE',
                 url: '/api/vacancy/' + id,
+                successMessageToUser: 'Vacancy deleted',
+                errorMessageToUser: 'Vacancy not deleted',
                 errorCallback: function (status) {
                     console.log("Delete vacancy error");
                     console.log(status);
