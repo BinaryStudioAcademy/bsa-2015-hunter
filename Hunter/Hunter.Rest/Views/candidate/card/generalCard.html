@@ -2,8 +2,8 @@
     <div id="card-static">
         <div class="candidate-info">
             <div class="candidate-personal-info row">
-                <div class="image col-md-2" ng-switch on="generalCardCtrl.candidate.photo">
-                    <img class="profile-photo img-circle" ng-switch-default src="{{generalCardCtrl.candidate.photoUrl}}" />
+                <div class="image col-md-2">
+                    <img class="profile-photo img-circle" width="175px" src="{{generalCardCtrl.candidate.photoUrl}}" />
                 </div>
                 <div class="col-md-5">
                     <div class="personal-info">
@@ -41,17 +41,22 @@
             </div>
         </div>
     </div>
+    {{generalCardCtrl.currentStage}}
     <div class="row col-md-12">
         <div class="btn-group">
             <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[0]}}">{{generalCardCtrl.stages[0].name}}</label>
             <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[1]}}">{{generalCardCtrl.stages[1].name}}</label>
             <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[2]}}">{{generalCardCtrl.stages[2].name}}</label>
             <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[3]}}">{{generalCardCtrl.stages[3].name}}</label>
-            <select class="btn btn-default" ng-model="generalCardCtrl.currentStage">
-                <option class="btn btn-default" selected>Failed</option>
-                <option class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[5]}}" value="{{generalCardCtrl.stages[5]}}">{{generalCardCtrl.stages[5].name}}</option>
-                <option class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[6]}}" value="{{generalCardCtrl.stages[6]}}">{{generalCardCtrl.stages[6].name}}</option>
-            </select>
+            <div class="btn-group">
+                <label class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    Failed<span class="caret"></span>
+                </label>
+                <div class="dropdown-menu">
+                    <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[5]}}">{{generalCardCtrl.stages[5].name}}</label>
+                    <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[6]}}">{{generalCardCtrl.stages[6].name}}</label>
+                </div>
+            </div>
             <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[7]}}">{{generalCardCtrl.stages[7].name}}</label>
         </div>
     </div><br />
