@@ -145,7 +145,7 @@ namespace Hunter.Services
                     .GroupBy(c => c.UserProfile)
                     .Select(c => new AddedByDto()
                     {
-                        UserLogin = c.Key.UserLogin,
+                        UserLogin = c.Key.UserLogin ?? "",
                         Alias = c.Key.Alias,
                         CountOfAddedCandidates = c.Count()
                     });

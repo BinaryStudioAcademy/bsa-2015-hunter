@@ -49,20 +49,19 @@
             </div>
         </div>
     </div>
-        <div class="row">
-            <div class="col-md-9">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">{{generalCardCtrl.currentTabName}}</div>
-                        <div class="panel-body" id="card-dynamic" ng-include="generalCardCtrl.templateToShow"></div>
-                    </div>
-            </div>
-            <div class="col-md-3 list-group">
-                <a class="list-group-item"
-                   ng-class="{active: generalCardCtrl.currentTabName == tab}"
-                   ng-repeat="tab in generalCardCtrl.tabs track by $index"
-                   ng-click="generalCardCtrl.changeTemplate(tab)">
-                    {{ tab }}
-                </a>
+    <div class="row col-md-12">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation"
+                ng-class="{active: generalCardCtrl.currentTabName == tab}"
+                ng-repeat="tab in generalCardCtrl.tabs track by $index"
+                ng-click="generalCardCtrl.changeTemplate(tab)">
+                <a role="presentation" data-toggle="tab">{{ tab }}</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active">
+                <div class="panel-body" id="card-dynamic" ng-include="generalCardCtrl.templateToShow"></div>
             </div>
         </div>
+    </div>
 </div>

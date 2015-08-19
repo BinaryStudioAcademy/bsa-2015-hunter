@@ -79,6 +79,12 @@
     width: 70%;
     padding-left: 10px;
 }
+.ll_list select{
+    float: left;
+    margin: 20px 0;
+    width: 40%;
+    height: 30px;
+}
 .ll_filter_input {
     width: 100%;
     float: left;
@@ -170,6 +176,9 @@
 }
 .candidate_item_salary {
     max-width: 70px; 
+}
+.pagination {
+     float: right;
 }
 .ll_preview_info {
     width: 100%;

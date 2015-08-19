@@ -16,7 +16,7 @@
     function GeneralCardController($routeParams, $scope, candidateHttpService, cardService, enumConstants) {
         var vm = this;
         vm.templateToShow = '';
-        vm.tabs = ['Overview', 'Special Notes', 'HR Interview', 'Technical Interview', 'Test'];
+        vm.tabs = ['Overview', 'Special Notes', 'HR Interview', 'Technical Interview', 'Test', "Summary"];
         vm.currentTabName = vm.tabs[0];
         vm.candidate;
         vm.origins = enumConstants.origins;

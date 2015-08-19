@@ -49,6 +49,24 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpGet]
+        [Route("addedby")]
+        [ResponseType(typeof(IEnumerable<AddedByDto>))]
+        public HttpResponseMessage GetCandidatesListAddedBy()
+        {
+            try
+            {
+                var addedBy = _candidateService.GetCandidatesAddedBy();
+
+                return Request.CreateResponse(HttpStatusCode.OK, addedBy);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+
+        [HttpGet]
         [Route("odata")]
         public IHttpActionResult GetOdata(ODataQueryOptions<CandidateDto> options)
         {
