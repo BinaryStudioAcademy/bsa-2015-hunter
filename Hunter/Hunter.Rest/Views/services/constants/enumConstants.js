@@ -41,8 +41,7 @@
                 { id: 0, name: 'English' },
                 { id: 1, name: 'Personal' },
                 { id: 2, name: 'Expertise' },
-                { id: 3, name: 'Tech Feedback' },
-                { id: 4, name: 'Test Feedback' }
+                { id: 3, name: 'Test Feedback' }
             ],
             poolBackgroundColors: [
                 { id: 0, color: 'Green', colorCode: 'rgb(44, 201, 99)' },

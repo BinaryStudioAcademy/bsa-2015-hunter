@@ -7,8 +7,8 @@
                 <form name="feedbackForm" ng-submit="techInterviewCtrl.saveFeedback(techInterviewCtrl.techFeedback.id, techInterviewCtrl.techFeedback.cardId, techInterviewCtrl.techFeedback.text, techInterviewCtrl.techFeedback.type)">
                     <div>
                         <div>
-                            <h3>Tech Feedback</h3>
-                            <span ng-hide="techInterviewCtrl.techFeedback.date == ''">Updated by {{techInterviewCtrl.techFeedback.userName}} at {{techInterviewCtrl.techFeedback.date}}</span>
+                            <h3>{{generalCardCtrl.feedbackTypes[techInterviewCtrl.techFeedback.type].name}}</h3>
+                            <span ng-hide="techInterviewCtrl.techFeedback.date == ''">Edited by {{techInterviewCtrl.techFeedback.userName}} at {{techInterviewCtrl.techFeedback.date}}</span>
                         </div>
                         <textarea name="text" ng-model="techInterviewCtrl.techFeedback.text" ng-auto-expand>{{techInterviewCtrl.techFeedback.text}}</textarea>
                     </div>
