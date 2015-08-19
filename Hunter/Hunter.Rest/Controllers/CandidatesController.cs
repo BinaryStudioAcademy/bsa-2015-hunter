@@ -17,6 +17,7 @@ using Hunter.Services;
 
 namespace Hunter.Rest.Controllers
 {
+    [Authorize]
     [RoutePrefix("api/candidates")]
     public class CandidatesController : ApiController
     {
@@ -189,7 +190,7 @@ namespace Hunter.Rest.Controllers
         {
             try
             {
-                _candidateService.Add(candidate);
+                _candidateService.Add(candidate,User.Identity.Name);
                 return Request.CreateResponse(HttpStatusCode.Created, _candidateService.Get(i => i.Email.Equals(candidate.Email)).ToCandidateDto());
 
             }

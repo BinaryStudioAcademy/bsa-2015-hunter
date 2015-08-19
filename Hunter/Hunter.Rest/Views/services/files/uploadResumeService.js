@@ -1,5 +1,5 @@
-﻿(function() {
-    
+﻿(function () {
+
     'use strict';
 
     angular
@@ -18,27 +18,29 @@
             //uploadWithLatenc: uploadWithLatenc
         };
 
-        var _file;
+        var _files;
 
-        function onFileSelect($file) {
-            _file = $file;
+        function onFileSelect($files) {
+            _files = $files;
         }
 
         function uploadResume(candidate) {
-            if (!!_file) {
-                console.log(_file.name);
-                upload.upload({
-                    url: "api/fileupload",
-                    method: "POST",
-                    data: {
-                        fileType: enumConstants.fileType.Resume,
-                        fileName: _file.name,
-                        candidateid: candidate.id
-                    },
-                    file: _file
-                })
-                .success(function (data){console.log(data)});
-            }
+
+            angular.forEach(_files, function (file) {
+                if (file) {
+                    upload.upload({
+                        url: "api/fileupload",
+                        method: "POST",
+                        data: {
+                            fileType: enumConstants.fileType.Resume,
+                            fileName: file.name,
+                            candidateid: candidate.id
+                        },
+                        file: file
+                    })
+                    .success(function (data) { console.log(data) });
+                }
+            });
         }
 
         //function uploadWithLatenc(candidate) {
