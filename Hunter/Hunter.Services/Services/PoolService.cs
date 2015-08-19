@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Hunter.Common.Interfaces;
+using Hunter.DataAccess.Entities.Entites.Enums;
 using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Interface.Base;
 using Hunter.Services.Extensions;
+using Hunter.Services.Interfaces;
 
 namespace Hunter.Services
 {
@@ -13,12 +15,14 @@ namespace Hunter.Services
         private readonly IPoolRepository _poolRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger _logger;
-
-        public PoolService(IPoolRepository poolRepository, IUnitOfWork unitOfWork, ILogger logger)
+        private readonly IActivityHelperService _activityHelperService;
+        public PoolService(IPoolRepository poolRepository, IUnitOfWork unitOfWork, ILogger logger,
+            IActivityHelperService activityHelperService)
         {
             _poolRepository = poolRepository;
             _unitOfWork = unitOfWork;
             _logger = logger;
+            _activityHelperService = activityHelperService;
         }
 
         public IEnumerable<PoolViewModel> GetAllPools()
@@ -55,6 +59,8 @@ namespace Hunter.Services
                 // TODO seems like redundant conversions here
                 var entity = poolViewModel.ToPoolModel();
                 _poolRepository.UpdateAndCommit(entity);
+                
+                _activityHelperService.CreateAddedPoolActivity(entity);
 
                 return entity.ToPoolViewModel();
             }

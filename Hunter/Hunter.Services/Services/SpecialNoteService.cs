@@ -3,6 +3,7 @@ using System.Linq;
 using Hunter.DataAccess.Interface;
 using Hunter.Services.Dto;
 using Hunter.Services.Extensions;
+using Hunter.Services.Interfaces;
 using Hunter.Services.Services.Interfaces;
 
 namespace Hunter.Services.Services
@@ -11,12 +12,15 @@ namespace Hunter.Services.Services
     {
         private readonly ISpecialNoteRepository _specialNoteRepository;
         private readonly ICardRepository _cardRepository;
+        private readonly IActivityHelperService _activityHelperService;
         //private readonly IUserProfileRepository _userProfileRepository;
 
-        public SpecialNoteService(ISpecialNoteRepository specialNoteRepository, ICardRepository cardRepository)
+        public SpecialNoteService(ISpecialNoteRepository specialNoteRepository, ICardRepository cardRepository,
+            IActivityHelperService activityHelperService)
         {
             _specialNoteRepository = specialNoteRepository;
             _cardRepository = cardRepository;
+            _activityHelperService = activityHelperService;
             //_userProfileRepository = userProfileRepository;
         }
 
@@ -32,16 +36,20 @@ namespace Hunter.Services.Services
         }
 
 
-        public void AddSpecialNote(SpecialNoteDto entity, int vid, int cid)
+        public void AddSpecialNote(SpecialNoteDto dto, int vid, int cid)
         {
             var card = _cardRepository.GetByCandidateAndVacancy(cid, vid);
-            entity.CardId = card.Id;
-            _specialNoteRepository.UpdateAndCommit(entity.ToEntity());
+            dto.CardId = card.Id;
+            var specialNote = dto.ToEntity();
+            _specialNoteRepository.UpdateAndCommit(specialNote);
+            _activityHelperService.CreateAddedSpecialNoteActivity(specialNote);
         }
 
-        public void UpdateSpecialNote(SpecialNoteDto entity)
+        public void UpdateSpecialNote(SpecialNoteDto dto)
         {
-            _specialNoteRepository.UpdateAndCommit(entity.ToEntity());
+            var specialNote = dto.ToEntity();
+            _specialNoteRepository.UpdateAndCommit(specialNote);
+            _activityHelperService.CreateUpdatedSpecialNoteActivity(specialNote);
         }
 
 
