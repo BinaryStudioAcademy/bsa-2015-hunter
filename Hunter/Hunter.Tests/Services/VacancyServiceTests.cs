@@ -30,7 +30,7 @@ namespace Hunter.Tests.Services
             var activityHelperService = Substitute.For<IActivityHelperService>();
 
 
-            _vacancyService = new VacancyService(_vacancyRepository, _candidateRepository, logger, unitOfWork, activityHelperService, _cardRepository);
+            _vacancyService = new VacancyService(_vacancyRepository, _candidateRepository,_cardRepository, logger, unitOfWork, activityHelperService);
 
         }
 
