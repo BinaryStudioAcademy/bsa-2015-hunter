@@ -13,5 +13,6 @@ namespace Hunter.Services
         IEnumerable<FeedbackDto> GetAllHrInterviews(int vid, int cid);
         IdApiResult SaveFeedback(FeedbackDto hrInterviewDto, string name);
         FeedbackDto GetTechInterview(int vacancyId, int candidateId);
+        FeedbackDto GetSummary(int vacancyId, int candidateId);
     }
 }

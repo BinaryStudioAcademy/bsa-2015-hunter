@@ -19,6 +19,7 @@
         vm.newFeedback;
         vm.techFeedback;
         vm.tests;
+        vm.summary;
 
         FeedbackHttpService.getHrFeedback($routeParams.vid, $routeParams.cid).then(function (result) {
             vm.feedbacks = result;
@@ -30,6 +31,11 @@
 
         CardTestHttpService.getTest($routeParams.vid, $routeParams.cid, function (result) {
             vm.tests = result.data;
+        });
+
+        FeedbackHttpService.getSummary($routeParams.vid, $routeParams.cid).then(function (result) {
+            console.log(result);
+            vm.summary = result;
         });
     }
 })();
