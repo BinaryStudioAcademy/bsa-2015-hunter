@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Entities.Entites.Enums;
 using Hunter.DataAccess.Interface;
 using Hunter.Services.Dto;
 using Hunter.Services.Extensions;
 using Hunter.Services.Dto.ApiResults;
 using Hunter.DataAccess.Entities.Enums;
+using Hunter.Services.Interfaces;
 
 namespace Hunter.Services
 {
@@ -19,13 +21,16 @@ namespace Hunter.Services
         private readonly ICardRepository _cardRepository;
         private readonly IUserProfileRepository _userProfileRepository;
         private readonly ILogger _logger;
+        private readonly IActivityHelperService _activityHelperService;
 
-        public FeedbackService(IFeedbackRepository feedbackRepository, ICardRepository cardRepository, ILogger logger, IUserProfileRepository userProfileRepository)
+        public FeedbackService(IFeedbackRepository feedbackRepository, ICardRepository cardRepository, ILogger logger, 
+            IUserProfileRepository userProfileRepository, IActivityHelperService activityHelperService)
         {
             _feedbackRepository = feedbackRepository;
             _cardRepository = cardRepository;
             _logger = logger;
             _userProfileRepository = userProfileRepository;
+            _activityHelperService = activityHelperService;
         }
 
         public IEnumerable<Dto.FeedbackDto> GetAllHrInterviews(int vid, int cid)
@@ -107,6 +112,7 @@ namespace Hunter.Services
             try
             {
                 _feedbackRepository.UpdateAndCommit(feedback);
+                _activityHelperService.CreateUpdatedFeedbackActivity(feedback);
                 return Api.Updated(feedback.Id);
             }
             catch (Exception ex)

@@ -15,22 +15,26 @@ namespace Hunter.Services
 {
     public class FileService : IFileService
     {
-        private IFileRepository _fileRepository;
+        private readonly IFileRepository _fileRepository;
         private readonly ILogger _logger;
-        private ICandidateService _candidateService;
-        private IResumeRepository _resumeRepository;
-        private readonly ICandidateRepository _candidateRepository;
-
+        private readonly ICandidateService _candidateService;
+        private readonly IResumeRepository _resumeRepository;
+        private readonly IActivityHelperService _activityHelperService;
+        private readonly ICardRepository _cardRepository;
+		private readonly ICandidateRepository _candidateRepository;
         private string _localStorage = HttpContext.Current.Server.MapPath("~/App_Data/Hunter/Files/");
 
         public FileService(IFileRepository fileRepository, ILogger logger, ICandidateService candidateService,
-            IResumeRepository resumeRepository, ICandidateRepository candidateRepository)
+            IResumeRepository resumeRepository, IActivityHelperService activityHelperService, ICardRepository cardRepository,
+			ICandidateRepository candidateRepository)
         {
             _fileRepository = fileRepository;
             _logger = logger;
             _candidateService = candidateService;
             _resumeRepository = resumeRepository;
             _candidateRepository = candidateRepository;
+            _activityHelperService = activityHelperService;
+            _cardRepository = cardRepository;
         }
 
         public int Add(FileDto file)
@@ -78,8 +82,12 @@ namespace Hunter.Services
 
                         _candidateRepository.UpdateAndCommit(candidate);
                     }
-                 
-                }    
+                   _activityHelperService.CreateUploadedResumeActivity(candidate);                                            
+                }
+                if (file.FileType==FileType.Test)
+                {
+                    _activityHelperService.CreateUploadedTestActivity(_cardRepository.GetByCandidateAndVacancy(file.CandidateId, file.VacancyId));
+                }
 
                 return newFile.Id;
             }
@@ -205,9 +213,15 @@ namespace Hunter.Services
                 Stream stream = response.GetResponseStream();
                 stream.CopyTo(ms);
                 var candidate = _candidateService.Get(candidateId);
-                candidate.Photo = ms.ToArray();
-                _candidateService.Update(candidate.ToCandidateDto());
+                SavePhoto(candidate, ms.ToArray());
             }        
+        }
+
+        public void SavePhoto(Candidate candidate, byte[] sourceBytes)
+        {
+            candidate.Photo = sourceBytes;
+            _candidateService.Update(candidate.ToCandidateDto());
+            _activityHelperService.CreateUploadedPhotoActivity(candidate);
         }
     }
 }

@@ -8,6 +8,7 @@ using NSubstitute;
 using NUnit.Framework;
 using Hunter.Services;
 using Hunter.DataAccess.Entities;
+using Hunter.Services.Interfaces;
 
 namespace Hunter.Tests.Services
 {
@@ -22,8 +23,9 @@ namespace Hunter.Tests.Services
             _repository = Substitute.For<IPoolRepository>();
             var unitOfWork = Substitute.For<IUnitOfWork>();
             var logger = Substitute.For<ILogger>();
+            var activityHelperService = Substitute.For<IActivityHelperService>();
 
-            _service = new PoolService(_repository, unitOfWork, logger);
+            _service = new PoolService(_repository, unitOfWork, logger, activityHelperService);
         }
 
         [SetUp]

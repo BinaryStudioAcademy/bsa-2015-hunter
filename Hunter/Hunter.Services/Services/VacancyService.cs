@@ -7,6 +7,7 @@ using System.Reflection;
 using Hunter.DataAccess.Entities;
 using System;
 using System.Globalization;
+using Hunter.DataAccess.Entities.Entites.Enums;
 using Hunter.Services.Interfaces;
 
 namespace Hunter.Services
@@ -18,19 +19,22 @@ namespace Hunter.Services
         private readonly ICandidateRepository _candidateRepository;
         private readonly ICardRepository _cardRepository;
         private readonly ILogger _logger;
+        private readonly IActivityHelperService _activityHelperService;
 
         public VacancyService(
             IVacancyRepository vacancyRepository,
             ICandidateRepository candidateRepository,
             ICardRepository cardRepository,
             ILogger logger,
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork,
+            IActivityHelperService activityHelperService)
         {
             _vacancyRepository = vacancyRepository;
             _candidateRepository = candidateRepository;
             _cardRepository = cardRepository;
             _logger = logger;
             _unitOfWork = unitOfWork;
+            _activityHelperService = activityHelperService;
         }
         public IList<VacancyRowDto> Get()
         {
@@ -106,8 +110,11 @@ namespace Hunter.Services
         public void Add(VacancyDto dto)
         {
             if (dto == null) return;
-            _vacancyRepository.UpdateAndCommit(dto.ToVacancy());
+            var vacancy = dto.ToVacancy();
+            _vacancyRepository.UpdateAndCommit(vacancy);
+            _activityHelperService.CreateAddedVacancyActivity(vacancy);
         }
+
         public void Update(VacancyDto entity)
         {
             _vacancyRepository.UpdateAndCommit(entity.ToVacancy());
