@@ -40,14 +40,6 @@
                     break;
                 }
             }
-
-//            vm.tests.tests.forEach(function(test) {
-//                if (vm.filterTests(test)) {
-//                    vm.testFeedbacksPresent = true;
-//                    return false;
-//                }
-//                return true;
-//            });
         });
 
         vm.filterTests = function(test) {

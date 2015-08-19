@@ -24,21 +24,6 @@
         vm.testLink = '';
         vm.testFile = '';
 
-        //voting
-        vm.like = {'count': 0, 'wasClicked': false}
-        vm.dislike = { 'count': 0, 'wasClicked': false };
-        vm.vote = function(isLike) {
-            if (isLike && !vm.dislike.wasClicked) {
-                vm.like.count += vm.like.wasClicked ? -1 : 1;
-                vm.like.wasClicked = !vm.like.wasClicked;
-            }
-
-            if (!isLike && !vm.like.wasClicked) {
-                vm.dislike.count -= vm.dislike.wasClicked ? -1 : 1;
-                vm.dislike.wasClicked = !vm.dislike.wasClicked;
-            }
-        }
-
         vm.uploadLink = function () {
             if (vm.testLink == '') {
                 return;
