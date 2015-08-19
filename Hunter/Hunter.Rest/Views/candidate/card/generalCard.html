@@ -2,8 +2,8 @@
     <div id="card-static">
         <div class="candidate-info">
             <div class="candidate-personal-info row">
-                <div class="image col-md-2">
-                    <img class="img-circle" src="http://www.glaz.tv/images/logos/webcams/big/panda.jpg" alt="">
+                <div class="image col-md-2" ng-switch on="generalCardCtrl.candidate.photo">
+                    <img class="profile-photo img-circle" ng-switch-default src="{{generalCardCtrl.candidate.photoUrl}}" />
                 </div>
                 <div class="col-md-5">
                     <div class="personal-info">

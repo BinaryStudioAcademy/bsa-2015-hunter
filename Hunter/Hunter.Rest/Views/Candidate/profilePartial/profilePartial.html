@@ -9,13 +9,13 @@
     </div>
     <div class="candidate-info">
         <div class="candidate-personal-info row">
-            <div class="image col-md-5">
-                <img class="img-circle" src="http://www.glaz.tv/images/logos/webcams/big/panda.jpg" alt="">
+            <div class="image col-md-5" ng-switch on="candidatePartCtrl.candidate.photo">
+                <img class="preview-profile-photo img-circle" ng-switch-default src="{{candidatePartCtrl.candidate.photoUrl}}" />
             </div>
             <div class="col-md-7">
 
                 <span class="candidate-name">{{candidatePartCtrl.candidate.firstName+" "+candidatePartCtrl.candidate.lastName}}</span>
-                <div class="salary-wrapper">900</div>
+                <div class="salary-wrapper">{{candidatePartCtrl.candidate.salary}}</div>
             </div>
         </div>
         <div class="candidate-personal-info row">
