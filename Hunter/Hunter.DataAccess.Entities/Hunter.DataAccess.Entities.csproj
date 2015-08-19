@@ -150,6 +150,10 @@
     <Compile Include="Migrations\201508171149241_AddAddedFieldInTest.Designer.cs">
       <DependentUpon>201508171149241_AddAddedFieldInTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508190553193_ChangeUserIdOnUserProfileId.cs" />
+    <Compile Include="Migrations\201508190553193_ChangeUserIdOnUserProfileId.Designer.cs">
+      <DependentUpon>201508190553193_ChangeUserIdOnUserProfileId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -207,6 +211,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508171149241_AddAddedFieldInTest.resx">
       <DependentUpon>201508171149241_AddAddedFieldInTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508190553193_ChangeUserIdOnUserProfileId.resx">
+      <DependentUpon>201508190553193_ChangeUserIdOnUserProfileId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
