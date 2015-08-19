@@ -13,7 +13,7 @@ namespace Hunter.Services.Interfaces
         IEnumerable<FileDto> Get();
         void Delete(int id);
         FileDto DownloadFile(int id);
-        ByteArrayContent GetPhoto(int id);
+        byte[] GetPhoto(int id);
         FileDto GetResumeFileDto(int resumeId);
         void UploadPhotoFromUrl(string url, int candidateId);
     }

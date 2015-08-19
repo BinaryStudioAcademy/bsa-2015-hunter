@@ -27,7 +27,13 @@ namespace Hunter.Services
                 Linkedin = candidate.Linkedin,
                 Salary = candidate.Salary,
                 YearsOfExperience = Math.Round(experiance + candidate.CalculateYearsOfExperiance(), 1),
-                ResumeId = candidate.ResumeId != null ? (int)candidate.ResumeId : 0,
+                Resumes = candidate.Resume.Select(r => new ResumeDto()
+                {
+                    Id = r.Id,
+                    FileId = r.FileId,
+                    FileName = r.File.FileName,
+                    DownloadUrl = "api/file/dowload/"+ r.FileId
+                }),
                 AddedByProfileId = candidate.AddedByProfileId,
                 AddedBy = candidate.AddedByProfileId.HasValue ? candidate.UserProfile.UserLogin : "",
                 AddDate = candidate.AddDate,
@@ -56,7 +62,6 @@ namespace Hunter.Services
             candidate.Linkedin = dto.Linkedin;
             candidate.Salary = dto.Salary;
             candidate.YearsOfExperience = dto.YearsOfExperience;
-            candidate.ResumeId = dto.ResumeId == 0? (int?)null: dto.ResumeId;
             candidate.AddedByProfileId = dto.AddedByProfileId;
             //Card = dto.Cards.ToList();
             //Pool = new List<Pool>();
@@ -124,7 +129,6 @@ namespace Hunter.Services
                     Linkedin = c.Linkedin,
                     Salary = c.Salary,
                     YearsOfExperience =  c.YearsOfExperience,
-                    ResumeId = c.ResumeId,
                     AddedByProfileId = c.AddedByProfileId,
                     AddedBy = c.AddedByProfileId.HasValue ? c.UserProfile.UserLogin : "",
                     AddDate = c.AddDate,

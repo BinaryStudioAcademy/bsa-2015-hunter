@@ -158,5 +158,26 @@ namespace Hunter.Services
                 return new List<AddedByDto>();
             }
         }
+
+        public IEnumerable<AddedByDto> GetVacanciesAddedBy()
+        {
+            try
+            {
+                var addedBy = _vacancyRepository.Query()
+                    .GroupBy(c => c.UserProfile)
+                    .Select(c => new AddedByDto()
+                    {
+                        UserLogin = c.Key.UserLogin ?? "",
+                        Alias = c.Key.Alias ?? "Nobody"
+                    });
+
+                return addedBy;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return new List<AddedByDto>();
+            }
+        }
     }
 }
