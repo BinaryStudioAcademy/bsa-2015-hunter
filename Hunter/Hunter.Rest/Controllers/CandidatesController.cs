@@ -184,13 +184,35 @@ namespace Hunter.Rest.Controllers
             }
         }
 
+
+        [HttpPut]
+        [Route("{id:int}/{isShort:bool}")]
+        public IHttpActionResult PutShortList(int id, bool isShort)
+        {
+            try
+            {
+                if (!_candidateService.Query().Any(c => c.Id == id))
+                {
+                    return NotFound();
+                }
+                _candidateService.UpdateShortFlag(id, isShort);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
+
+
         [HttpPost]
         [Route("")]
         public HttpResponseMessage Post(CandidateDto candidate)
         {
             try
             {
-                _candidateService.Add(candidate,User.Identity.Name);
+                _candidateService.Add(candidate, User.Identity.Name);
                 return Request.CreateResponse(HttpStatusCode.Created, _candidateService.Get(i => i.Email.Equals(candidate.Email)).ToCandidateDto());
 
             }

@@ -19,5 +19,6 @@ namespace Hunter.Services.Interfaces
         IEnumerable<CandidateLongListDto> GetLongList(int id);
         CandidateLongListDetailsDto GetLongListDetails(int id);
         IEnumerable<AddedByDto> GetCandidatesAddedBy();
+        void UpdateShortFlag(int id, bool isShort);
     }
 }

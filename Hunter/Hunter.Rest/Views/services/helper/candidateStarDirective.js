@@ -4,23 +4,27 @@
         .module('hunter-app')
         .directive('shorListStar',shorListStar);
 
-    shorListStar.$inject = [];
+    shorListStar.$inject = ['CandidateHttpService'];
 
-    function shorListStar() {
+    function shorListStar(CandidateHttpService) {
             return {
                 template: '<i class="fa " ' +
-                    'ng-class="fill ? \'fa-star-o\' : \'fa-star\' "' +
-                    'ng-click="fill = !fill" ' +
+                    'ng-class="isShort ? \'fa-star\' : \'fa-star-o\' "' +
+                    'ng-click="update()" ' +
                     'style="position: absolute;font-size: large;top: 2px;left: 2px;color: gold;"' +
                     '></i>',
-                restrict: 'A',
-                transclude: true,
+                restrict: 'E',
+                scope: {
+                    isShort: "=isShort",
+                    candidateId:"=candidateId"
+                },
                 link: function (scope, element, attrs, ctrl, transclude) {
-                    scope.fill = false;
+                    
 
-                    transclude(function (clone) {
-                        element.append(clone);
-                    });
+                    scope.update = function() {
+                       scope.isShort = !scope.isShort;
+                       CandidateHttpService.setShortListFlag(scope.candidateId,scope.isShort);
+                    }
 
                 }
             }
