@@ -48,7 +48,7 @@
                             <p class="feedback-addedBy" ng-show="test.feedback.userName != undefined">
                                 updated by {{test.feedback.userName}} {{test.feedback.date | date:'dd.MM.yyyy hh.mm'}}
                             </p>
-                            <textarea class="feedbackField form-control ng-pristine ng-valid ng-binding ng-touched" 
+                            <textarea class="feedbackField"
                                       ng-auto-expand
                                       ng-readonly="test.feedbackConfig.fieldReadonly"
                                       ng-model="test.feedback.text"></textarea>

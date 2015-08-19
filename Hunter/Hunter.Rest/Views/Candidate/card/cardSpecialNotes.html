@@ -14,7 +14,7 @@
                 <form>
                     <div>
                         <div>
-                            <span>{{item.userLogin}} at {{item.lastEdited | date:'medium'}}</span>
+                            <span>Edited by {{item.userLogin}} {{item.lastEdited | date:'medium'}}</span>
                         </div>
                         <textarea name="text" ng-model="item.text" ng-auto-expand>{{item.text}}</textarea>
                     </div>
