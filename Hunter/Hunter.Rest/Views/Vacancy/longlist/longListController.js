@@ -25,7 +25,6 @@
         vm.shortlisted = true;
 
         vm.vacancy;
-        // vm.candidates;
         vm.candidateDetails;
 
         // get vacancy info
@@ -52,11 +51,20 @@
             return vm.tab === checkTab;
         };
 
-        vm.tabSet = function (id) {
+        vm.ActiveItem = function(id) {
+            if (vm.tabIsSet(id)) {
+                return 'll_candidate_item_active';
+            } else {
+                return '';
+            }
+        }
+
+        vm.previewTabSet = function (id) {
             vm.tab = id;
         }
+
         vm.viewCandidateInfo = function (id) {
-            vm.tabSet(id);
+            vm.previewTabSet(id);
 
             CandidateHttpService.getLongListDetails(id).then(function (result) {
                 console.log(result);
@@ -73,8 +81,8 @@
         vm.sortOptions = [
             { text: 'Added Date (new first)', options: { field: 'AddDate', dir: 'desc' } },
             { text: 'Added Date (old first)', options: { field: 'AddDate', dir: 'asc' } },
-            { text: 'Name (A-Z)', options: { field: 'FirstName', dir: 'desc' } },
-            { text: 'Name (Z-A)', options: { field: 'FirstName', dir: 'asc' } }
+            { text: 'Name (A-Z)', options: { field: 'FirstName', dir: 'asc' } },
+            { text: 'Name (Z-A)', options: { field: 'FirstName', dir: 'desc' } }
         ];
 
         vm.order = vm.sortOptions[0].options;
@@ -84,7 +92,6 @@
             shortlisted: false,
             stages: [],
             salary: [],
-            location: '',
             hr: [],
             currentPage: 1
         };
@@ -115,7 +122,9 @@
             if (vm.filter.search.length > 0) {
                 var pred = $odata.Predicate.or([
                     new $odata.Func('substringof', new $odata.Property('tolower(\'' + vm.filter.search + '\')'), new $odata.Property('tolower(FirstName)')),
-                    new $odata.Func('substringof', new $odata.Property('tolower(\'' + vm.filter.search + '\')'), new $odata.Property('tolower(LastName)'))
+                    new $odata.Func('substringof', new $odata.Property('tolower(\'' + vm.filter.search + '\')'), new $odata.Property('tolower(LastName)')),
+                    new $odata.Func('substringof', new $odata.Property('tolower(\'' + vm.filter.search + '\')'), new $odata.Property('tolower(Company)')),
+                    new $odata.Func('substringof', new $odata.Property('tolower(\'' + vm.filter.search + '\')'), new $odata.Property('tolower(Location)'))
                 ]);
 
                 filt.push(pred);
@@ -141,14 +150,6 @@
                 filt.push(stPred);
             }
 
-            if (vm.filter.location.length > 0) {
-                var locationPred = $odata.Predicate.or([
-                    new $odata.Func('substringof', new $odata.Property('tolower(\'' + vm.filter.location + '\')'), new $odata.Property('tolower(Location)'))
-                ]);
-
-                filt.push(locationPred);
-            }
-
             if (vm.filter.shortlisted.length > 0) {
                 var slPred = [];
                 angular.forEach(vm.filter.shortlisted, function (value, key) {
@@ -172,6 +173,7 @@
 
         vm.getCandidatesForLongList();
 
+       
 
         //function setTab(setTab) {
         //    vm.tab = setTab;

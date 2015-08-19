@@ -69,17 +69,5 @@ namespace Hunter.Services
             };
             return vll;
         }
-
-        //public static IEnumerable<AddedByDto> ToLongListAddedByDto(this IEnumerable<Card> cards)
-        //{
-        //    return cards.OrderBy(c=>c.AddedByProfileId).Select(c => new AddedByDto()
-        //    {
-        //        VacancyId = c.VacancyId,
-        //        UserLogin = c.UserProfile != null ? c.UserProfile.UserLogin : "",
-        //        Alias = c.UserProfile != null ? c.UserProfile.Alias : "",
-        //        CountOfAddedCandidates = cards.GroupBy(cc=>cc.AddedByProfileId).Count()
-        //    });
-            
-        //}
     }
 }
