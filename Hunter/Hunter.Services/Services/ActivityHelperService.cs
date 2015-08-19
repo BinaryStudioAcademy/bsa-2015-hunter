@@ -39,7 +39,7 @@ namespace Hunter.Services.Services
 
         public void CreateAddedVacancyActivity(Vacancy vacancy)
         {
-            string message = string.Format("A new vacancy has been added : {0}", vacancy.Name);
+            string message = string.Format("A new vacancy has been created : {0}", vacancy.Name);
             ActivityType type = ActivityType.Vacancy;
             Uri url = new Uri("#/vacancy/" + vacancy.Id, UriKind.Relative);
             _activityPostService.Post(message, type, url);
@@ -47,7 +47,7 @@ namespace Hunter.Services.Services
 
         public void CreateAddedPoolActivity(Pool pool)
         {
-            string message = string.Format("A new pool has been added : {0}", pool.Name);
+            string message = string.Format("A new pool has been created : {0}", pool.Name);
             ActivityType type = ActivityType.Pool;
             Uri url = new Uri("#/pool", UriKind.Relative);
             _activityPostService.Post(message, type, url);
@@ -70,13 +70,9 @@ namespace Hunter.Services.Services
                     break;
                 case 2:
                     feedbackType = "Expertise";
-                    feedbackRoute = "hrinterview";
-                    break;
-                case 3:
-                    feedbackType = "Technical";
                     feedbackRoute = "technicalinterview";
                     break;
-                case 4:
+                case 3:
                     feedbackType = "Test";
                     feedbackRoute = "test";
                     break;
