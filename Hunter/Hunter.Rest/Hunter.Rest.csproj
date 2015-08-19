@@ -748,6 +748,8 @@
     <Content Include="Views\candidate\addEdit\addEdit.html" />
     <Content Include="Views\candidate\addEdit\candidateAddEditController.js" />
     <Content Include="Views\candidate\candidateService.js" />
+    <Content Include="Views\candidate\card\cardSummary.html" />
+    <Content Include="Views\candidate\card\cardSummaryController.js" />
     <Content Include="Views\services\directive\autoExpandTextareaDirective.js" />
     <Content Include="Views\candidate\card\cardHrInterview.html" />
     <Content Include="Views\candidate\card\cardHrIterviewController.js" />

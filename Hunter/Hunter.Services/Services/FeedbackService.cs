@@ -90,6 +90,35 @@ namespace Hunter.Services
              
         }
 
+        public FeedbackDto GetSummary(int vacancyId, int candidateId)
+        {
+            try
+            {
+                var card = _cardRepository.Query()
+                    .SingleOrDefault(e => e.VacancyId == vacancyId && e.CandidateId == candidateId);
+
+
+                var summary = card.Feedback.FirstOrDefault(i => i.Type == (int) FeedbackType.Summary);
+                if (summary == null)
+                    return new FeedbackDto()
+                    {
+                        Id = 0,
+                        Type = (int)FeedbackType.Summary,
+                        CardId = candidateId,
+                        Text = "",
+                        Date = "",
+                        UserName = ""
+                    };
+
+                return summary.ToFeedbackDto();
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return null;
+            }
+        }
+
         public IdApiResult SaveFeedback(FeedbackDto hrInterviewDto, string name)
         {
             Feedback feedback;
