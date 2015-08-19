@@ -67,6 +67,10 @@ namespace Hunter.Services
             if (same != null && same.Id != profile.Id)
                 return Api.Conflict(string.Format("Profile with e-mail {0} already exists", editedUserProfile.Login));
 
+            same = _profileRepo.Get(pr => pr.Alias == editedUserProfile.Alias);
+            if (same != null && same.Id != profile.Id)
+                return Api.Conflict(string.Format("Profile with alias {0} already exists", editedUserProfile.Alias));
+
             editedUserProfile.Map(profile, _unitOfWork);
             if (profile.IsNew())
             {

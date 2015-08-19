@@ -20,7 +20,8 @@
             deleteVacancy: deleteVacancy,
             getLongList: getLongList,
             getLongListAddedBy: getLongListAddedBy,
-            getFilterInfo: getFilterInfo
+            getFilterInfo: getFilterInfo,
+            getAddedByList: getAddedByList
         }
 
         function getFilteredVacancies(filter) {
@@ -157,6 +158,22 @@
                 },
                 errorCallback: function (status) {
                     console.log("Get filter data error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
+
+        function getAddedByList() {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/vacancy/addedby',
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get vacancies Added by filter data error");
                     console.log(status);
                 }
             });
