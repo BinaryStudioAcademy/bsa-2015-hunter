@@ -92,11 +92,13 @@
     <Compile Include="Extensions\UserRoleExtention.cs" />
     <Compile Include="Extensions\VacancyExtensions.cs" />
     <Compile Include="FilterParams\VacancyFilterParams.cs" />
+    <Compile Include="Services\ActivityHelperService.cs" />
     <Compile Include="Services\ActivityService.cs" />
     <Compile Include="Services\CandidateService.cs" />
     <Compile Include="Services\ActivityPostService.cs" />
     <Compile Include="Services\FeedbackService.cs" />
     <Compile Include="Services\FileService.cs" />
+    <Compile Include="Services\Interfaces\IActivityHelperService.cs" />
     <Compile Include="Services\Interfaces\IActivityPostService.cs" />
     <Compile Include="Services\Interfaces\IActivityService.cs" />
     <Compile Include="Services\Interfaces\ICandidateService.cs" />

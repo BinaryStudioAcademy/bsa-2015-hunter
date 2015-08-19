@@ -58,10 +58,10 @@
             </div>
             <div class="col-md-3 list-group">
                 <a class="list-group-item"
-                   ng-class="{active: generalCardCtrl.currentTabName == tab}"
+                   ng-class="{active: generalCardCtrl.currentTabName == tab.name}"
                    ng-repeat="tab in generalCardCtrl.tabs track by $index"
                    ng-click="generalCardCtrl.changeTemplate(tab)">
-                    {{ tab }}
+                    {{ tab.name }}
                 </a>
             </div>
         </div>

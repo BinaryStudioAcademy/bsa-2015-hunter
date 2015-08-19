@@ -16,7 +16,7 @@
             getCandidate: getCandidate,
             getCandidateList: getCandidateList,
             addCandidate: addCandidate,
-            getLongList: getLongList,
+//            getLongList: getLongList,
             getLongListDetails: getLongListDetails,
             parseLinkedIn: parseLinkedIn
         };

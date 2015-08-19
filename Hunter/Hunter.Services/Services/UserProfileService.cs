@@ -17,13 +17,13 @@ namespace Hunter.Services
     public class UserProfileService : IUserProfileService
     {
         private const int _ItemsPerPage = 15;
-        private readonly IActivityPostService _activityPost;
+        private readonly IActivityHelperService _activityHelperService;
         private readonly IUserProfileRepository _profileRepo;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UserProfileService(IActivityPostService activityPost, IUserProfileRepository profileRepo, IUnitOfWork unitOfWork)
+        public UserProfileService(IActivityHelperService activityHelperService, IUserProfileRepository profileRepo, IUnitOfWork unitOfWork)
         {
-            _activityPost = activityPost;
+            _activityHelperService = activityHelperService;
             _profileRepo = profileRepo;
             _unitOfWork = unitOfWork;
         }
@@ -75,7 +75,7 @@ namespace Hunter.Services
             _profileRepo.UpdateAndCommit(profile);
             if (editedUserProfile.Id == 0)
             {
-                _activityPost.Post(string.Format("{0} joined Hunter", profile.UserLogin), ActivityType.User, new Uri("/user/edit/" + profile.Id, UriKind.Relative));
+                _activityHelperService.CreateAddedUserProfileActivity(profile);
             }
             return editedUserProfile.Id == 0 ? Api.Added(profile.Id, EditUserProfileVm.Create(profile)) : Api.Updated(profile.Id);
         }
