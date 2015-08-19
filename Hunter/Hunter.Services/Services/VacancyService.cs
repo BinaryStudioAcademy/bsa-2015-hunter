@@ -39,7 +39,7 @@ namespace Hunter.Services
         }
         public PageDto<VacancyRowDto> Get(VacancyFilterParams filterParams)
         {
-            IQueryable<Vacancy> query = _vacancyRepository.QueryIncluding(v => v.Pool, v => v.User);
+            IQueryable<Vacancy> query = _vacancyRepository.QueryIncluding(v => v.Pool, v => v.UserProfile);
 
             if (filterParams.Pools.Any())
             {
@@ -61,7 +61,7 @@ namespace Hunter.Services
             if (filterParams.AddedByArray.Any())
             {
                 var selectedCreators = filterParams.AddedByArray;
-                query = query.Where(vac => selectedCreators.Contains(vac.User.Login));
+                query = query.Where(vac => selectedCreators.Contains(vac.UserProfile.UserLogin));
             }
 
             if (!string.IsNullOrWhiteSpace(filterParams.Filter))
