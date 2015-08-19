@@ -34,7 +34,9 @@
                 { id: 2, name: 'Test Done' },
                 { id: 3, name: 'Interview' },
                 { id: 4, name: 'Failed' },
-                { id: 5, name: 'Passed' }
+                { id: 5, name: 'Test Failed' },
+                { id: 6, name: 'Interview Failed' },
+                { id: 7, name: 'Passed' }
             ],
             feedbackTypes: [
                 { id: 0, name: 'English' },

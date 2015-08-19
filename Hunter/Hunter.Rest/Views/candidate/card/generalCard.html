@@ -3,7 +3,7 @@
         <div class="candidate-info">
             <div class="candidate-personal-info row">
                 <div class="image col-md-2">
-                    <img class="img-circle" src="http://www.glaz.tv/images/logos/webcams/big/panda.jpg" alt="">
+                    <img class="img-circle" src="{{generalCardCtrl.candidate.photoUrl}}" width="175px" alt="{{generalCardCtrl.candidate.firstName + ' ' + generalCardCtrl.candidate.lastName}}">
                 </div>
                 <div class="col-md-5">
                     <div class="personal-info">
@@ -11,7 +11,7 @@
                             <span class="candidate-name">{{generalCardCtrl.candidate.firstName+" "+generalCardCtrl.candidate.lastName}}</span>
                         </div>
                         <div>current/past: {{generalCardCtrl.candidate.currentPosition}}</div>
-                        <div>company/location: {{generalCardCtrl.candidate.company+","+candidateCtrl.candidate.localion}}</div>
+                        <div>company/location: {{generalCardCtrl.candidate.company+", "+candidateCtrl.candidate.localion}}</div>
                         <div>emaile: {{generalCardCtrl.candidate.email}}</div>
                         <div>skype: {{generalCardCtrl.candidate.skype}}</div>
                         <div>phone: {{generalCardCtrl.candidate.phone}}</div>
@@ -26,19 +26,11 @@
                         <label>Resolution</label>
                         <select class="form-control" name="resolution">
                             <option ng-repeat="item in generalCardCtrl.resolutions">{{item.name}}</option>
-                            <!-- <option selected="selected">None</option>-->
-                            <!-- <option>Available</option>-->
-                            <!-- <option>NotInterested</option>-->
-                            <!-- <option>Hired</option>-->
-                            <!-- <option>Unfit</option>-->
-                            <!-- <option>NotNow</option>-->
                         </select>
                     </div>
                     <div class="candidate-resolution form-group">
                         <label>Substatus</label>
-                        <select class="form-control" name="substatuse">
-                            <option ng-repeat="item in generalCardCtrl.substatuses">{{item.name}}</option>
-                        </select>
+                        <select class="form-control" ng-model="generalCardCtrl.currentSubstatus" ng-options="status as status.name for status in generalCardCtrl.substatuses"></select>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -49,6 +41,20 @@
             </div>
         </div>
     </div>
+    <div class="row col-md-12">
+        <div class="btn-group">
+            <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[0]}}">{{generalCardCtrl.stages[0].name}}</label>
+            <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[1]}}">{{generalCardCtrl.stages[1].name}}</label>
+            <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[2]}}">{{generalCardCtrl.stages[2].name}}</label>
+            <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[3]}}">{{generalCardCtrl.stages[3].name}}</label>
+            <select class="btn btn-default" ng-model="generalCardCtrl.currentStage">
+                <option class="btn btn-default" selected>Failed</option>
+                <option class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[5]}}" value="{{generalCardCtrl.stages[5]}}">{{generalCardCtrl.stages[5].name}}</option>
+                <option class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[6]}}" value="{{generalCardCtrl.stages[6]}}">{{generalCardCtrl.stages[6].name}}</option>
+            </select>
+            <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[7]}}">{{generalCardCtrl.stages[7].name}}</label>
+        </div>
+    </div><br />
     <div class="row col-md-12">
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation"
