@@ -16,7 +16,9 @@
             saveHrFeedback: saveHrFeedback,
             saveTestFeedback: saveTestFeedback,
             getTechFeedback: getTechFeedback,
-            saveFeedback: saveFeedback
+            saveFeedback: saveFeedback,
+            getSummary: getSummary,
+            saveSummary: saveSummary
         }
 
         function getHrFeedback(vid, cid) {
@@ -94,6 +96,36 @@
             return deferred.promise;
         };
 
+        function getSummary(vid, cid) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/feedback/summary/' + vid + '/' + cid,
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get summary error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
+
+        function saveSummary(feedback, vid, cid) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/feedback/save',
+                verb: 'POST',
+                body: JSON.stringify(feedback),
+                successCallback: function (result) {
+                    var getResult = getSummary(vid, cid);
+                    deferred.resolve(getResult);
+                },
+                errorCallback: function (result) { console.log(result); }
+            });
+            return deferred.promise;
+        };
 
         return service;
     }

@@ -157,7 +157,7 @@
 
         vm.ActiveTr = function (id) {
             if (id == $rootScope.candidateDetails.id && $rootScope.candidateDetails.show) {
-                return 'active';
+                return 'info';
             }
             else {
                 return '';
