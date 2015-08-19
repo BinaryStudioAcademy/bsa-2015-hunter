@@ -20,6 +20,8 @@
         vm.techFeedback;
         vm.tests;
 
+        vm.testFeedbacksPresent = false;
+
         FeedbackHttpService.getHrFeedback($routeParams.vid, $routeParams.cid).then(function (result) {
             vm.feedbacks = result;
         });
@@ -30,11 +32,27 @@
 
         CardTestHttpService.getTest($routeParams.vid, $routeParams.cid, function (result) {
             vm.tests = result.data;
+
+            for (var i in vm.tests.tests) {
+                var test = vm.tests.tests[i];
+                if (vm.filterTests(test)) {
+                    vm.testFeedbacksPresent = true;
+                    break;
+                }
+            }
+
+//            vm.tests.tests.forEach(function(test) {
+//                if (vm.filterTests(test)) {
+//                    vm.testFeedbacksPresent = true;
+//                    return false;
+//                }
+//                return true;
+//            });
         });
 
         vm.filterTests = function(test) {
 
-            if (test.feedbackId != null)
+            if (test.feedbackId != null && test.feedback.text != '')
                 return true;
 
             return false;

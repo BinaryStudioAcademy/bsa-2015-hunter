@@ -1,25 +1,34 @@
 ﻿<div ng-controller="CardOverviewController as overviewCtrl" ng-cloak>
     <div class="hrInterview_form" ng-repeat="feedback in overviewCtrl.feedbacks">
         <div>
-            <div>
-                <h3>{{generalCardCtrl.feedbackTypes[feedback.type].name}}</h3>
+
+            <h3>{{generalCardCtrl.feedbackTypes[feedback.type].name}}</h3>
+            <div ng-hide="feedback.text == ''">
                 <span ng-hide="feedback.date == ''">Edited by {{feedback.userName}} at {{feedback.date | date:'dd.MM.yyyy hh.mm'}}</span>
+                <textarea disabled name="text" ng-model="feedback.text" ng-auto-expand></textarea>
             </div>
-            <textarea disabled name="text" ng-model="feedback.text" ng-auto-expand></textarea>
+            <div ng-show="feedback.text == ''">There are no feedbacks yet</div>
         </div>
     </div>
     <div class="hrInterview_form">
-        <div>
-            <h3>Tech Feedback</h3>
+
+        <h3>Tech Feedback</h3>
+        <div ng-hide="overviewCtrl.techFeedback.text == ''">
             <span ng-hide="overviewCtrl.techFeedback.date.length <= 0">Edited by {{overviewCtrl.techFeedback.userName}} at {{overviewCtrl.techFeedback.date | date:'dd.MM.yyyy hh.mm'}}</span>
+            <textarea disabled name="text" ng-model="overviewCtrl.techFeedback.text" ng-auto-expand></textarea>
         </div>
-        <textarea disabled name="text" ng-model="overviewCtrl.techFeedback.text" ng-auto-expand></textarea>
+        <div ng-show="overviewCtrl.techFeedback.text == ''">There are no feedbacks yet</div>
     </div>
     <div class="hrInterview_form" ng-repeat="test in overviewCtrl.tests.tests | filter:overviewCtrl.filterTests">
         <div>
             <h3>Test Feedback</h3>
             <span ng-hide="test.feedback.date.length <= 0">Edited by {{test.feedback.userName}} at {{test.feedback.date | date:'dd.MM.yyyy hh.mm'}}</span>
+
+            <textarea disabled name="text" ng-model="test.feedback.text" ng-auto-expand></textarea>
         </div>
-        <textarea disabled name="text" ng-model="test.feedback.text" ng-auto-expand></textarea>
+    </div>
+    <div ng-hide="overviewCtrl.testFeedbacksPresent">
+        <h3>Test Feedback</h3>
+        <span>There are no feedbacks yet</span>
     </div>
 </div>
