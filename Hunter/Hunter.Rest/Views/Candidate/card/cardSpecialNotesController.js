@@ -20,6 +20,8 @@
         vm.candidateNoteShow = getCandidateNote;
         vm.userNoteShow = getUserNote;
 
+        vm.toggleReadOnly = toggleReadOnly;
+
         vm.vacancy;
         vm.specialNote;
         vm.userName = localStorageService.get('authorizationData').userName;
@@ -61,6 +63,13 @@
             specialNoteHttpService.getCardSpecialNote($routeParams.vid, $routeParams.cid).then(function (result) {
                 console.log(result.data);
                 vm.specialNote = result.data;
+
+                vm.specialNote.forEach(function(note) {
+                    note.noteConfig = {
+                        'buttonName': 'Edit',
+                        'readOnly': true
+                    }
+                });
             });
         }
 
@@ -76,6 +85,24 @@
                 console.log(result.data);
                 vm.specialNote = result.data;
             });
+        }
+
+        function toggleReadOnly(note) {
+            note.noteConfig.readOnly = note.text != '' ? !note.noteConfig.readOnly : note.noteConfig.readOnly;
+
+            if (note.noteConfig.readOnly) {
+                note.noteConfig.buttonName = 'Edit';
+                SaveOldSpecialNote({
+                    'id': note.id,
+                    'userLogin': note.login,
+                    'text': note.text,
+                    'lastEdited': note.lastEdited,
+                    'cardId': note.cardId
+                });
+
+            } else {
+                note.noteConfig.buttonName = 'Save';
+            }
         }
     }
 })();

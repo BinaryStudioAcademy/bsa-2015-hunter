@@ -70,7 +70,8 @@
         });
 
         vm.toggleReadOnly = function () {
-            vm.techFeedback.feedbackConfig.readOnly = !vm.techFeedback.feedbackConfig.readOnly;
+            vm.techFeedback.feedbackConfig.readOnly = vm.techFeedback.text != '' ? 
+                !vm.techFeedback.feedbackConfig.readOnly : vm.techFeedback.feedbackConfig.readOnly;
 
             if (vm.techFeedback.feedbackConfig.readOnly) {
                 vm.techFeedback.feedbackConfig.buttonName = 'Edit';

@@ -89,9 +89,9 @@
                 return;
             }
 
-            toggleFeedbackConfig(test.feedbackConfig);
+            toggleFeedbackConfig(test.feedbackConfig, test.feedback.text);
 
-            if(test.feedbackConfig.fieldReadonly){
+            if(test.feedbackConfig.fieldReadonly && test.feedback.text != ''){
                 FeedbackHttpService.saveTestFeedback({
                     'feedback': test.feedback,
                     'testId': test.id
@@ -104,10 +104,10 @@
         }
         
         //change name of feedback button and readonly expression for textarea
-        function toggleFeedbackConfig(config) {
-            config.fieldReadonly = !config.fieldReadonly;
+        function toggleFeedbackConfig(config, text) {
+            config.fieldReadonly = text != '' ? !config.fieldReadonly : config.fieldReadonly;
 
-            if (config.fieldReadonly) {
+            if (config.fieldReadonly && text != '') {
                 config.buttonText = 'Edit';
             } else {
                 config.buttonText = 'Save';

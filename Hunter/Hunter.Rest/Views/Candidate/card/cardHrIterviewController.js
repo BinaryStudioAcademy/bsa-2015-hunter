@@ -62,7 +62,8 @@
         }
 
         vm.toggleReadOnly = function(feedback) {
-            feedback.feedbackConfig.readOnly = !feedback.feedbackConfig.readOnly;
+            feedback.feedbackConfig.readOnly = feedback.text != '' ? !feedback.feedbackConfig.readOnly
+                : feedback.feedbackConfig.readOnly;
 
             if (feedback.feedbackConfig.readOnly) {
                 feedback.feedbackConfig.buttonName = 'Edit';

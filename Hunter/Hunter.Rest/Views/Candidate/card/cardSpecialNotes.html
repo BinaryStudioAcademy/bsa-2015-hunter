@@ -16,10 +16,11 @@
                         <div>
                             <span>Edited by {{item.userLogin}} {{item.lastEdited | date:'medium'}}</span>
                         </div>
-                        <textarea name="text" ng-model="item.text" ng-auto-expand>{{item.text}}</textarea>
+                        <textarea class="form-control" name="text" ng-readonly="item.noteConfig.readOnly" 
+                                  ng-model="item.text" ng-auto-expand>{{item.text}}</textarea>
                     </div>
                     <div>
-                        <input class="btn" type="submit" value="Edit" ng-click="specialNotesCtrl.saveOldNote(item)"
+                        <input class="btn" type="button" value="{{item.noteConfig.buttonName}}" ng-click="specialNotesCtrl.toggleReadOnly(item)"
                                ng-show="item.userLogin == specialNotesCtrl.userName">
                     </div>
                 </form>

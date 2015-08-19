@@ -124,6 +124,7 @@ namespace Hunter.Rest.Controllers
                 if (ModelState.IsValid && id == model.Id)
                 {
                     model.LastEdited = DateTime.Now;
+                    model.UserLogin = User.Identity.Name;
                     _specialNoteService.UpdateSpecialNote(model);
                     return Request.CreateResponse(HttpStatusCode.OK, "Ok");
                 }
