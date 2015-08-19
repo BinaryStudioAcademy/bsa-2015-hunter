@@ -14,7 +14,6 @@ namespace Hunter.Services
 {
     public class CandidateService : ICandidateService
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly ICandidateRepository _candidateRepository;
         private readonly ICardRepository _cardRepository;
         private readonly ILogger _logger;
@@ -22,10 +21,9 @@ namespace Hunter.Services
         private readonly IUserProfileRepository _userProfileRepository;
         private readonly IActivityHelperService _activityHelperService;
 
-        public CandidateService(IUnitOfWork unitOfWork, ICandidateRepository candidateRepository, ICardRepository cardRepository,
+        public CandidateService(ICandidateRepository candidateRepository, ICardRepository cardRepository,
             IPoolRepository poolRepository, ILogger logger, IUserProfileRepository userProfileRepository, IActivityHelperService activityHelperService)
         {
-            _unitOfWork = unitOfWork;
             _candidateRepository = candidateRepository;
             _cardRepository = cardRepository;
             _logger = logger;
@@ -196,8 +194,7 @@ namespace Hunter.Services
         {
             try
             {
-                _candidateRepository.Delete(candidate);
-                _unitOfWork.SaveChanges();
+                _candidateRepository.DeleteAndCommit(candidate);
             }
             catch (Exception ex)
             {
@@ -220,8 +217,7 @@ namespace Hunter.Services
             }
             try
             {
-                _candidateRepository.Update(candidate);
-                _unitOfWork.SaveChanges();
+                _candidateRepository.UpdateAndCommit(candidate);
             }
             catch (Exception ex)
             {

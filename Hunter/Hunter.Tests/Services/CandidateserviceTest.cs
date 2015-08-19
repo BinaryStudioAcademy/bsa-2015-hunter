@@ -20,18 +20,21 @@ namespace Hunter.Tests.Services
         private readonly ICandidateRepository _candidateRepository;
         private readonly IPoolRepository _poolRepository;
         private readonly ICandidateService _candidateService;
+        private IUserProfileRepository _userProfileRepository;
 
         public CandidateServiceTest()
         {
             _cardRepository= Substitute.For<ICardRepository>();
             _candidateRepository = Substitute.For<ICandidateRepository>();
             _poolRepository = Substitute.For<IPoolRepository>();
+            _userProfileRepository = Substitute.For<IUserProfileRepository>();
 
             var unitOfWork = Substitute.For<IUnitOfWork>();
             var logger = Substitute.For<ILogger>();
             var activityHelperService = Substitute.For<IActivityHelperService>();
 
-            _candidateService = new CandidateService(unitOfWork, _candidateRepository, _cardRepository, _poolRepository, logger, activityHelperService);
+            _candidateService = new CandidateService(_candidateRepository, _cardRepository,
+                                                     _poolRepository, logger, _userProfileRepository, activityHelperService);
         }
 
         [SetUp]
