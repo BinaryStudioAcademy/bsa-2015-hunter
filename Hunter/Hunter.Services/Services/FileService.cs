@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Web;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
+using System.Web;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Entities;
 using Hunter.DataAccess.Interface;
-using Hunter.Services.Dto;
-using Hunter.Services.Interfaces;
 using Hunter.DataAccess.Interface.Repositories;
+using Hunter.Services.Interfaces;
 using File = System.IO.File;
 
 namespace Hunter.Services
@@ -21,16 +19,18 @@ namespace Hunter.Services
         private readonly ILogger _logger;
         private ICandidateService _candidateService;
         private IResumeRepository _resumeRepository;
+        private readonly ICandidateRepository _candidateRepository;
 
         private string _localStorage = HttpContext.Current.Server.MapPath("~/App_Data/Hunter/Files/");
 
         public FileService(IFileRepository fileRepository, ILogger logger, ICandidateService candidateService,
-            IResumeRepository resumeRepository)
+            IResumeRepository resumeRepository, ICandidateRepository candidateRepository)
         {
             _fileRepository = fileRepository;
             _logger = logger;
             _candidateService = candidateService;
             _resumeRepository = resumeRepository;
+            _candidateRepository = candidateRepository;
         }
 
         public int Add(FileDto file)
@@ -69,20 +69,16 @@ namespace Hunter.Services
                 if (file.FileType == FileType.Resume)
                 {
                     var candidate = _candidateService.Get(file.CandidateId);
-                    if (candidate.ResumeId != null)
+                    if (candidate != null)
                     {
-                        var resume = _resumeRepository.Get((int)candidate.ResumeId);
-                        resume.FileId = newFile.Id;
-                        _resumeRepository.UpdateAndCommit(resume);
+                        candidate.Resume.Add(new Resume()
+                        {
+                            FileId = newFile.Id
+                        });
+
+                        _candidateRepository.UpdateAndCommit(candidate);
                     }
-                    else
-                    {
-                        var resume = new Resume() { FileId = newFile.Id };
-                        _resumeRepository.UpdateAndCommit(resume);
-                        candidate.ResumeId = resume.Id;
-                        _candidateService.Update(candidate.ToCandidateDto());
-                    }
-                                                               
+                 
                 }    
 
                 return newFile.Id;
@@ -122,18 +118,10 @@ namespace Hunter.Services
             return stream;
         }
 
-        public ByteArrayContent GetPhoto(int id)
+        public byte[] GetPhoto(int candidateId)
         {
-            var array = _candidateService.Get(id).Photo;
-            if (array != null)
-            {
-                return new ByteArrayContent(array);
-            }
-            else
-            {
-                array = File.ReadAllBytes(HttpContext.Current.Server.MapPath("~/App_Data/no_photo.png"));
-                return new ByteArrayContent(array);
-            }
+            var array = _candidateService.Get(candidateId).Photo;
+            return array;
         }
 
         public FileDto GetResumeFileDto(int resumeId)

@@ -25,7 +25,7 @@ namespace Hunter.Services.Dto
             Linkedin = candidate.Linkedin;
             Salary = candidate.Salary;
             YearsOfExperience = candidate.YearsOfExperience;
-            ResumeId = candidate.ResumeId;
+           // ResumeId = candidate.ResumeId;
             AddedByProfileId = candidate.AddedByProfileId;
             Cards = candidate.Cards;
             PoolNames = candidate.PoolNames;

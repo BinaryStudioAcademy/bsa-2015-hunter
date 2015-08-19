@@ -66,6 +66,7 @@
     <Compile Include="Dto\Feedback\FeedbackDto.cs" />
     <Compile Include="Dto\FileDto.cs" />
     <Compile Include="Dto\FilterInfoDto.cs" />
+    <Compile Include="Dto\ResumeDto.cs" />
     <Compile Include="Dto\TestDto.cs" />
     <Compile Include="Dto\SpecialNoteDto.cs" />
     <Compile Include="Dto\UserProfileDto.cs" />
