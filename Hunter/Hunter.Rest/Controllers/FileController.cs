@@ -37,24 +37,24 @@ namespace Hunter.Rest.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("download/{id:int}")]
-        public IHttpActionResult GetFile(int fileId)
-        {
-            try
-            {
-                FileDto fileDto = _fileService.DownloadFile(fileId);
-                HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-                response.Content = new StreamContent(fileDto.File);
-                response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-
-                return ResponseMessage(response);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+//        [HttpGet]
+//        [Route("download/{id:int}")]
+//        public IHttpActionResult GetFile(int fileId)
+//        {
+//            try
+//            {
+//                FileDto fileDto = _fileService.DownloadFile(fileId);
+//                HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+//                response.Content = new StreamContent(fileDto.File);
+//                response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+//
+//                return ResponseMessage(response);
+//            }
+//            catch (Exception ex)
+//            {
+//                return BadRequest(ex.Message);
+//            }
+//        }
 
         [HttpGet]
         [Route("{id:int}")]

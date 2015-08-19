@@ -16,7 +16,7 @@ namespace Hunter.Services
             {
                 Id = file.Id,
                 Added = file.Added,
-                FileName = cutNamePrefix(file.FileName),
+                FileName = file.FileName,
                 Path = file.Path
             };
         }
@@ -38,13 +38,6 @@ namespace Hunter.Services
             file.Path = fileDto.Path;
             file.Added = fileDto.Added;
             file.FileName = fileDto.FileName;
-        }
-
-        private static string cutNamePrefix(string name)
-        {
-            var parts = name.Split(new string[] { "##" }, StringSplitOptions.None);
-
-            return parts.Length >= 3 ? parts[2] : parts[0];
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Web;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection.Emit;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Entities;
 using Hunter.DataAccess.Interface;
@@ -63,7 +64,7 @@ namespace Hunter.Services
                 SaveFile(file.File, fileName);
                 
                 var newFile = file.ToFile();
-                newFile.FileName = formatedFileName;
+                newFile.Path = fileName;
                 _fileRepository.UpdateAndCommit(newFile);
 
                 if (file.FileType == FileType.Resume)
@@ -147,13 +148,16 @@ namespace Hunter.Services
         {
             file.Added = DateTime.Now;
             var entity = _fileRepository.Get(file.Id);
-            if (entity == null) return;
-            var fileName = GetFullPath(entity.ToFileDto());
-            if (File.Exists(fileName))
-                File.Delete(fileName);
+
+            if (entity == null) 
+                return;
+
+            if (File.Exists(entity.Path))
+                File.Delete(entity.Path);
+
             file.ToFile(entity);
             _fileRepository.UpdateAndCommit(entity);
-            SaveFile(file.File, GetFullPath(file));
+            SaveFile(file.File, file.Path);
         }
 
         public FileDto Get(int id)
@@ -162,7 +166,7 @@ namespace Hunter.Services
             if (entity != null)
             {
                 var dto = entity.ToFileDto();
-                //dto.File = LoadFile(GetFullPath(dto));
+                //dto.File = LoadFile(entity.Path);
                 return dto;
             }
             return null;
@@ -172,13 +176,8 @@ namespace Hunter.Services
         {
             var files = _fileRepository.Query().ToList().Select(f => f.ToFileDto());
             //foreach (var file in files)
-            //    file.File = LoadFile(GetFullPath(file));
+            //    file.File = LoadFile(file.Path);
             return files;
-        }
-
-        private string GetFullPath(FileDto file)
-        {
-            return _localStorage + file.Path + file.FileName;
         }
 
         public void Delete(int id)
@@ -186,10 +185,9 @@ namespace Hunter.Services
             var entity = _fileRepository.Get(id);
             if (entity != null)
             {
-                var fileName = GetFullPath(entity.ToFileDto());
-                if (File.Exists(fileName))
+                if (File.Exists(entity.Path))
                 {
-                    File.Delete(fileName);
+                    File.Delete(entity.Path);
                     _fileRepository.DeleteAndCommit(entity);
                 }
             }
@@ -201,7 +199,7 @@ namespace Hunter.Services
             if (entity != null)
             {
                 var dto = entity.ToFileDto();
-                dto.File = LoadFile(GetFullPath(dto));
+                dto.File = LoadFile(dto.Path);
                 dto.File.Position = 0;
                 return dto;
             }
