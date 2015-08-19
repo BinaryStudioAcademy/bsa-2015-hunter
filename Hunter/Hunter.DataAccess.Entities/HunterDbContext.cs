@@ -72,11 +72,6 @@ namespace Hunter.DataAccess.Entities
                 .WithRequired(e => e.Pool)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Resume>()
-                .HasMany(e => e.Candidate)
-                .WithRequired(e => e.Resume)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<UserProfile>()
                 .HasMany(e => e.Candidate)
                 .WithOptional(e => e.UserProfile)
