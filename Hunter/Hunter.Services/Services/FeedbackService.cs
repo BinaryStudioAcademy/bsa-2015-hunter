@@ -104,7 +104,7 @@ namespace Hunter.Services
                     {
                         Id = 0,
                         Type = (int)FeedbackType.Summary,
-                        CardId = candidateId,
+                        CardId = card.Id,
                         Text = "",
                         Date = "",
                         UserName = ""
