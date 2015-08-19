@@ -12,5 +12,6 @@ namespace Hunter.Services.Interfaces
         void Delete(int id);
         VacancyLongListDto GetLongList(int id);
         IEnumerable<AddedByDto> GetLongListAddedBy(int id);
+        IEnumerable<AddedByDto> GetVacanciesAddedBy();
     }
 }

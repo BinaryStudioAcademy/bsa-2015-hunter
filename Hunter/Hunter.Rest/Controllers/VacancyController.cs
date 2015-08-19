@@ -169,5 +169,22 @@ namespace Hunter.Rest.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
             }
         }
+
+        [HttpGet]
+        [Route("addedby")]
+        [ResponseType(typeof(IEnumerable<AddedByDto>))]
+        public HttpResponseMessage GetCandidatesListAddedBy()
+        {
+            try
+            {
+                var addedBy = _vacancyService.GetVacanciesAddedBy();
+
+                return Request.CreateResponse(HttpStatusCode.OK, addedBy);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
     }
 }
