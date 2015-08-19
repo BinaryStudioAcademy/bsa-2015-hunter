@@ -29,7 +29,6 @@ namespace Hunter.Tests.Services
             _poolRepository = Substitute.For<IPoolRepository>();
             _userProfileRepository = Substitute.For<IUserProfileRepository>();
 
-            var unitOfWork = Substitute.For<IUnitOfWork>();
             var logger = Substitute.For<ILogger>();
             var activityHelperService = Substitute.For<IActivityHelperService>();
 
