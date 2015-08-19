@@ -72,7 +72,6 @@
 
         vm.order = vm.sortOptions[0].options;
 
-
         CandidateHttpService.getAddedByList().then(function (result) {
             vm.inviters = result;
         });
@@ -164,6 +163,7 @@
             }
         }
 
+        // 
     }
 
 })();

@@ -29,13 +29,12 @@
                 { id: 2, name: 'Passed' }
             ],
             cardStages: [
-                { id: 0, name: 'Test Send' },
-                { id: 1, name: 'Test Done' },
-                { id: 2, name: 'Interview' },
-                { id: 3, name: 'Failed' },
-                { id: 4, name: 'Test Failed' },
-                { id: 5, name: 'Interview Failed' },
-                { id: 6, name: 'Passed' }
+                { id: 0, name: 'Longlisted' },
+                { id: 1, name: 'Test Send' },
+                { id: 2, name: 'Test Done' },
+                { id: 3, name: 'Interview' },
+                { id: 4, name: 'Failed' },
+                { id: 5, name: 'Passed' }
             ],
             feedbackTypes: [
                 { id: 0, name: 'English' },
