@@ -15,7 +15,7 @@
         </div>
         <textarea disabled name="text" ng-model="overviewCtrl.techFeedback.text" ng-auto-expand></textarea>
     </div>
-    <div class="hrInterview_form" ng-repeat="test in overviewCtrl.tests.tests">
+    <div class="hrInterview_form" ng-repeat="test in overviewCtrl.tests.tests | filter:overviewCtrl.filterTests">
         <div>
             <h3>Test Feedback</h3>
             <span ng-hide="test.feedback.date.length <= 0">Edited by {{test.feedback.userName}} at {{test.feedback.date | date:'dd.MM.yyyy hh.mm'}}</span>

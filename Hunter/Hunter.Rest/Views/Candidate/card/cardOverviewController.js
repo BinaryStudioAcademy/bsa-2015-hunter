@@ -31,5 +31,13 @@
         CardTestHttpService.getTest($routeParams.vid, $routeParams.cid, function (result) {
             vm.tests = result.data;
         });
+
+        vm.filterTests = function(test) {
+
+            if (test.feedbackId != null)
+                return true;
+
+            return false;
+        }
     }
 })();
