@@ -2,108 +2,125 @@
     <h3>Add / Edit candidate : {{candidateAddEditCtrl.nameInTitle}}</h3>
     <div class="row">
         <div class="col-md-4">
-            <h3>General</h3><hr/>
+            <h3>General</h3><hr />
             <div>
                 <label>First Name</label>
-                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.FirstName"/>
+                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.FirstName" />
             </div>
             <div>
                 <label>Last Name</label>
-                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.LastName"/>
+                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.LastName" />
             </div>
             <div>
                 <label>Birth Date</label>
-                <input type="date" class="form-control" ng-model="candidateAddEditCtrl.DateOfBirth"/>
+                <input type="date" class="form-control" ng-model="candidateAddEditCtrl.DateOfBirth" />
             </div>
             <div>
                 <label>Location</label>
-                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.Location"/>
+                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.Location" />
             </div>
             <div>
                 <label>Position</label>
-                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.Position"/>
+                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.Position" />
             </div>
             <div>
                 <label>Years Of Experience</label>
                 <input type="text" class="form-control" ng-model="candidateAddEditCtrl.YearsOfExperience" />
             </div>
+            <div>
+                <label>Salary</label>
+                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.Salary" />
+            </div>
+            <hr />
         </div>
 
         <div class="col-md-4">
-            <h3>Contacts</h3><hr/>
+            <h3>Contacts</h3><hr />
             <div>
                 <label>Email</label>
-                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.Email"/>
+                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.Email" />
             </div>
             <div>
                 <label>Skype</label>
-                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.Skype"/>
+                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.Skype" />
             </div>
             <div>
                 <label>LinkedIn</label>
-                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.LinkedIn"/>
-                <input
-                    ng-disabled="candidateAddEditCtrl.LinkedIn.length == 0"
-                    type="button"
-                    class="btn btn-default form-control"
-                    ng-click="candidateAddEditCtrl.parseUrl(candidateAddEditCtrl.LinkedIn)"
-                    value="Get from LinkedIn"/>
+                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.LinkedIn" />
+                <input ng-disabled="candidateAddEditCtrl.LinkedIn.length == 0"
+                       type="button"
+                       class="btn btn-default form-control"
+                       ng-click="candidateAddEditCtrl.parseUrl(candidateAddEditCtrl.LinkedIn)"
+                       value="Get from LinkedIn" />
             </div>
             <div>
                 <label>Phone</label>
-                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.Phone"/>
+                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.Phone" />
             </div>
 
         </div>
         <div class="col-md-4">
-            <h3>Salary</h3><hr/>
-            <input type="text" class="form-control" ng-model="candidateAddEditCtrl.Salary"/>
-            <button>View Resume</button>
+            <h3>Resume</h3><hr/>
+            <label>Upload resume</label>
+            <span class="btn btn-default btn-file form-control">
+                Choose files
+                <input name="file" multiple type="file" ngf-select ngf-change="candidateAddEditCtrl.onFileSelect($files)">
+            </span>
+
+            <h4 ng-show="candidateAddEditCtrl.Resumes.length > 0">Uploaded resumes</h4>
+            <div ng-repeat="res in candidateAddEditCtrl.Resumes">
+
+                <ul>
+                    <li class="breakWords">File: {{res.fileName}}</li>
+                    <li>Uploaded: {{res.uploaded | date:'dd.MM.yyyy'}}</li>
+                </ul>
+                <a ng-href="{{res.downloadUrl}}" class="btn btn-default btn-block">Download</a>
+                <a ng-click="candidateAddEditCtrl.deleteResume(res)" class="btn btn-default btn-block">Delete File</a>
+                <hr/>
+            </div>
+
+            <div>
+                <label>Resume summary</label>
+                <textarea style="height: 250px;" type="text" class="form-control" ng-model="candidateAddEditCtrl.ResumeSummary"></textarea>
+            </div>
+
         </div>
     </div>
     <div class="row">
         <div class="col-md-4">
-            <h3>Status</h3><hr/>
+            <h3>Status</h3><hr />
             <div>
-                <label>Shortlisted: </label><input type="checkbox" ng-model="candidateAddEditCtrl.ShortListed"/>
+                <label>Shortlisted: </label><input type="checkbox" ng-model="candidateAddEditCtrl.ShortListed" />
             </div>
             <div>
-                <label>Origin:</label><select class="form-control" ng-model="candidateAddEditCtrl.selectedOrigin" ng-options="orgn.name for orgn in candidateAddEditCtrl.origins">
-                </select>
+                <label>Origin:</label><select class="form-control" ng-model="candidateAddEditCtrl.selectedOrigin" ng-options="orgn.name for orgn in candidateAddEditCtrl.origins"></select>
             </div>
             <div>
-                <label>Resolution:</label><select class="form-control" ng-model="candidateAddEditCtrl.selectedResolution" ng-options="res.name for res in candidateAddEditCtrl.resolutions">
-                </select>
+                <label>Resolution:</label><select class="form-control" ng-model="candidateAddEditCtrl.selectedResolution" ng-options="res.name for res in candidateAddEditCtrl.resolutions"></select>
             </div>
         </div>
         <div class="col-md-4">
-            <h3>Photo</h3><hr/>
-            <img class="edit-page-photo" ng-if="!candidateAddEditCtrl.photoLoaded" ngf-src="candidateAddEditCtrl.picture"/>
-            <img class="edit-page-photo" ng-if="candidateAddEditCtrl.photoLoaded" src="{{candidateAddEditCtrl.photoUrl}}"/>
-            <input placeholder="enter external url" type="text" class="form-control" ng-model="candidateAddEditCtrl.externalUrl"/>
+            <h3>Photo</h3><hr />
+            <img class="edit-page-photo" ng-if="!candidateAddEditCtrl.photoLoaded" ngf-src="candidateAddEditCtrl.picture" />
+            <img class="edit-page-photo" ng-if="candidateAddEditCtrl.photoLoaded" src="{{candidateAddEditCtrl.photoUrl}}" />
+            <input placeholder="enter external url" type="text" class="form-control" ng-model="candidateAddEditCtrl.externalUrl" />
             <button class="btn btn-default form-control" ng-click="candidateAddEditCtrl.getFromUrl()">Get photo from URL</button>
             <button class="btn btn-default form-control" ngf-select ngf-multiple="false" ngf-change="candidateAddEditCtrl.previewSelected($file)">Upload photo from computer</button>
         </div>
     </div>
     <div class="row">
         <div class="col-md-4">
-            <h3>Pools</h3><hr/>
+            <h3>Pools</h3><hr />
             <ul>
                 <li ng-repeat="pool in candidateAddEditCtrl.pools">
                     <input type="checkbox" checklist-model="candidateAddEditCtrl.selectedPools" checklist-value="pool.name"> {{pool.name}}
                 </li>
             </ul>
-            <!--<select multiple ng-model="candidateAddEditCtrl.selectedPools" ng-options="pool.name for pool in candidateAddEditCtrl.pools">
-            </select>-->
         </div>
+
         <div class="col-md-4">
-            <h3>Resume</h3><hr/>
-            <input name="file" type="file" ngf-select ngf-change="candidateAddEditCtrl.onFileSelect($file)">
-            <a href="api/file/download/{{candidateAddEditCtrl.resume.id}}">{{candidateAddEditCtrl.resume.fileName}}</a>
-        </div>
-        <div class="col-md-4">
-            <h3>Note</h3><hr/>
-            <input type="text" class="form-control"/>
+            <h3>Note</h3><hr />
+            <input type="text" class="form-control" />
         </div>
     </div>
     <div class="button-done">

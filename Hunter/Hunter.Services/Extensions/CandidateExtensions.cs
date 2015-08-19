@@ -31,9 +31,11 @@ namespace Hunter.Services
                 {
                     Id = r.Id,
                     FileId = r.FileId,
+                    Uploaded = r.File.Added,
                     FileName = r.File.FileName,
-                    DownloadUrl = "api/file/dowload/"+ r.FileId
+                    DownloadUrl = "api/file/download/"+ r.FileId
                 }),
+                ResumeSummary = candidate.ResumeSummary,
                 AddedByProfileId = candidate.AddedByProfileId,
                 AddedBy = candidate.AddedByProfileId.HasValue ? candidate.UserProfile.UserLogin : "",
                 AddDate = candidate.AddDate,
@@ -61,10 +63,8 @@ namespace Hunter.Services
             candidate.Phone = dto.Phone;
             candidate.Linkedin = dto.Linkedin;
             candidate.Salary = dto.Salary;
+            candidate.ResumeSummary = dto.ResumeSummary;
             candidate.YearsOfExperience = dto.YearsOfExperience;
-            candidate.AddedByProfileId = dto.AddedByProfileId;
-            //Card = dto.Cards.ToList();
-            //Pool = new List<Pool>();
             candidate.Resolution = (Resolution)dto.Resolution;
             candidate.Shortlisted = dto.ShortListed;
             candidate.Origin = (Origin)dto.Origin;

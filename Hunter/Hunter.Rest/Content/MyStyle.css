@@ -126,7 +126,7 @@ li{
   background-color: #b0b0b0;
 }
 
-/*Long list*/
+/*Candidates list*/
 .longlist-wrapper{
 	margin-top: 25px;
 }
@@ -148,9 +148,18 @@ li{
 	margin-left: 20px;
 }
 
+.preview-profile-photo {
+    height: 150px;
+    width: 150px;
+}
+
 /*Candidate page*/
 .candidate-info{
 /*	margin-left: 170px;*/
+}
+.profile-photo {
+    height: 200px;
+    width: 200px;
 }
 
 .personal-info{

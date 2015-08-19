@@ -13,15 +13,15 @@
             },
             viewsPath = '/Views/candidate/card/';
 
-        function changeTemplate(templateName) {
-            switch (templateName.toLowerCase()) {
+        function changeTemplate(templateRoute) {
+            switch (templateRoute.toLowerCase()) {
                 case 'overview':
                     return viewsPath + 'cardOverview.html';
-                case 'special notes':
+                case 'specialnotes':
                     return  viewsPath + 'cardSpecialNotes.html';
-                case 'hr interview':
+                case 'hrinterview':
                     return  viewsPath + 'cardHrInterview.html';
-                case 'technical interview':
+                case 'technicalinterview':
                     return  viewsPath + 'cardTechnicalInterview.html';
                 case 'test':
                     return viewsPath + 'cardTest.html';

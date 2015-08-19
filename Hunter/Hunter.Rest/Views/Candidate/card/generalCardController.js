@@ -10,13 +10,23 @@
         '$scope',
         'CandidateHttpService',
         'CardService',
-        'EnumConstants'
+        'EnumConstants',
+        '$location',
+        '$filter'
     ];
 
-    function GeneralCardController($routeParams, $scope, candidateHttpService, cardService, enumConstants) {
+    function GeneralCardController($routeParams, $scope, candidateHttpService, cardService, enumConstants, $location, $filter) {
         var vm = this;
         vm.templateToShow = '';
-        vm.tabs = ['Overview', 'Special Notes', 'HR Interview', 'Technical Interview', 'Test', "Summary"];
+
+        vm.tabs = [
+            { name: 'Overview', route: 'overview' },
+            { name: 'Special Notes', route: 'specialnotes' },
+            { name: 'HR Interview', route: 'hrinterview' },
+            { name: 'Technical Interview', route: 'technicalinterview' },
+            { name: 'Test', route: 'test' },
+            { name :'Summary', route: 'summary'}
+        ];
         vm.currentTabName = vm.tabs[0];
         vm.candidate;
         vm.origins = enumConstants.origins;
@@ -36,10 +46,11 @@
         
 
         vm.changeTemplate = function (tab) {
-            vm.currentTabName = tab;
-            vm.templateToShow = cardService.changeTemplate(tab);
+            vm.currentTabName = tab.name;
+            vm.templateToShow = cardService.changeTemplate(tab.route);
+            $location.search('tab', tab.route);      
         };
 
-        vm.changeTemplate(vm.tabs[0]);
+        vm.changeTemplate($filter('filter')(vm.tabs, { route: $location.search().tab }, true)[0]);
     }
 })();

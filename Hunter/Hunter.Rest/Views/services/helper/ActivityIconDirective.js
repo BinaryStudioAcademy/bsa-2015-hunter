@@ -15,7 +15,24 @@
                         case '2':
                             icon = 'fa-comment';
                             break;
-
+                        case '3':
+                            icon = 'fa-user-plus';
+                            break;
+                        case '4':
+                            icon = 'fa-list';
+                            break;
+                        case '5':
+                            icon = 'fa-bookmark-o';
+                            break;
+                        case '6':
+                            icon = 'fa-file-text';
+                            break;
+                        case '7':
+                            icon = 'fa-file';
+                            break;
+                        case '8':
+                            icon = 'fa-file-image-o';
+                            break;
                         default:
                             icon = 'fa-question';
                     }

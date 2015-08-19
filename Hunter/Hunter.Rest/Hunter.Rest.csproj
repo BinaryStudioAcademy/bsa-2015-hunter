@@ -502,7 +502,6 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\hrInterview.css" />
     <Content Include="Content\hrSpecialNote.css" />
-    <Content Include="Content\img\no_photo.png" />
     <Content Include="Content\longlist.css" />
     <Content Include="Content\MyStyle.css" />
     <Content Include="Content\pool.css" />
@@ -748,6 +747,8 @@
     <Content Include="Views\candidate\addEdit\addEdit.html" />
     <Content Include="Views\candidate\addEdit\candidateAddEditController.js" />
     <Content Include="Views\candidate\candidateService.js" />
+    <Content Include="Views\candidate\card\cardSummary.html" />
+    <Content Include="Views\candidate\card\cardSummaryController.js" />
     <Content Include="Views\services\directive\autoExpandTextareaDirective.js" />
     <Content Include="Views\candidate\card\cardHrInterview.html" />
     <Content Include="Views\candidate\card\cardHrIterviewController.js" />
@@ -796,6 +797,7 @@
     <Content Include="Views\register\register.html" />
     <Content Include="Views\register\registerController.js" />
     <Content Include="Views\services\candidate\addEdit\addEditService.js" />
+    <Content Include="Views\services\candidate\candidatesFilter.js" />
     <Content Include="Views\services\candidate\candidatesHttpService.js" />
     <Content Include="Views\services\candidate\card\cardTestHttpService.js" />
     <Content Include="Views\services\feedback\cardHrInterviewService.js" />
@@ -812,6 +814,7 @@
     <Content Include="Views\services\files\uploadResumeService.js" />
     <Content Include="Views\services\helper\httpHandler.js" />
     <Content Include="Views\services\home\indexHttpService.js" />
+    <Content Include="Views\services\longlist\longlistHttpService.js" />
     <Content Include="Views\services\userRole\userRoleHttpService.js" />
     <Content Include="Views\services\user\userHttpService.js" />
     <Content Include="Views\services\vacancy\addEdit\addEditService.js" />

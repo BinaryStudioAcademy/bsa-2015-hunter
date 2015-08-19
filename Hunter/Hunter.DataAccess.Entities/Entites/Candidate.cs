@@ -59,6 +59,8 @@ namespace Hunter.DataAccess.Entities
 
         public int? AddedByProfileId { get; set; }
 
+        public string ResumeSummary { get; set; }
+
         public virtual ICollection<Resume> Resume { get; set; }
 
         public virtual UserProfile UserProfile { get; set; }

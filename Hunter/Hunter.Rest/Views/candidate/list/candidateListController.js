@@ -15,10 +15,11 @@
         'PoolsHttpService',
         '$odata',
         'EnumConstants',
-        'CandidateHttpService'
+        'CandidateHttpService',
+        'LonglistHttpService'
     ];
 
-    function CandidateListController($location, $filter, $scope, $rootScope, authService, $odataresource, PoolsHttpService, $odata, EnumConstants, CandidateHttpService) {
+    function CandidateListController($location, $filter, $scope, $rootScope, authService, $odataresource, PoolsHttpService, $odata, EnumConstants, CandidateHttpService, longlistHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         vm.name = 'Candidates';
@@ -28,7 +29,7 @@
             id: null
         };
 
-       // vm.currentPage = 1;
+        // vm.currentPage = 1;
         vm.pageSize = 5;
         vm.totalItems = 0;
         vm.skip = 0;
@@ -93,7 +94,7 @@
                                 });
         }
 
-       $scope.$watch('candidateListCtrl.filter', function () {
+        $scope.$watch('candidateListCtrl.filter', function () {
             var filt = [];
 
             if (vm.filter.pools.length > 0) {
@@ -144,7 +145,7 @@
             vm.skip = (vm.filter.currentPage - 1) * vm.pageSize;
             vm.getCandidates();
         }, true);
-        
+
         vm.ShowDetails = function (id) {
             if ($rootScope.candidateDetails.id === id && $rootScope.candidateDetails.show === true) {
                 $rootScope.candidateDetails.show = false;
@@ -156,14 +157,40 @@
 
         vm.ActiveTr = function (id) {
             if (id == $rootScope.candidateDetails.id && $rootScope.candidateDetails.show) {
-                return 'active';
+                return 'info';
             }
             else {
                 return '';
             }
         }
 
-        // 
+        // signatures for user actions callback method
+        vm.addCandidateToLongList = addCandidateToLongList;
+        // user actions methods
+
+        // add cardidates to Long List
+        function addCandidateToLongList() {
+            var cards = createCardRequestBody();
+
+            longlistHttpService.addCards(cards);
+        }
+
+        // not user-event functions 
+        vm.selectedCandidates = [];
+        vm.VacancyId = 1;
+
+        function createCardRequestBody() {
+            var cards = [];
+            for (var i = 0; i < vm.selectedCandidates.length; i++) {
+                cards.push({
+                    CandidateId: vm.selectedCandidates[i],
+                    VacancyId: vm.VacancyId,
+                    Stage: EnumConstants.cardStages[0].id
+                });
+            }
+
+            return cards;
+        }
     }
 
 })();

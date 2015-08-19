@@ -23,7 +23,7 @@ namespace Hunter.Services
         {
             var activities = _activityRepository.Query();
 
-            return activities.Select(item => item.ToActivityDto()).ToList();
+            return activities.ToList().Select(item => item.ToActivityDto());
         }
 
 
