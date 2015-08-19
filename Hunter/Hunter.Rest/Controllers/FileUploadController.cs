@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
-using Hunter.DataAccess.Entities;
 using Hunter.Services;
-using Hunter.Services.Dto;
 using Hunter.Services.Interfaces;
-using Microsoft.AspNet.Identity;
-using Newtonsoft.Json;
 
 namespace Hunter.Rest.Controllers
 {
@@ -31,18 +23,23 @@ namespace Hunter.Rest.Controllers
 
         [HttpGet]
         [Route("pictures/{id:int}")]
-        public HttpResponseMessage GetPicture(int id)
+        public IHttpActionResult GetPicture(int id)
         {   
             try
             {
+                var photo = _fileService.GetPhoto(id);
+                if (photo == null)
+                {
+                    return Redirect(Url.Content("~/Content/img/no_photo.png"));
+                }
                 HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
-                result.Content = _fileService.GetPhoto(id);
+                result.Content = new ByteArrayContent(photo);
                 result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
-                return result;
+                return ResponseMessage(result);
             }
             catch (Exception e)
             {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+                return InternalServerError(e);
             }
         }
 
@@ -75,8 +72,8 @@ namespace Hunter.Rest.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("pictures/fromUrl/{id:int}")]
+        [System.Web.Mvc.HttpPost]
+        [System.Web.Mvc.Route("pictures/fromUrl/{id:int}")]
         public HttpResponseMessage PostPictureFromUrl(int id, [FromBody]string photoUrl)
         {
             try
@@ -91,8 +88,8 @@ namespace Hunter.Rest.Controllers
             
         }
 
-        [HttpDelete]
-        [Route("pictures/{id:int}")]
+        [System.Web.Mvc.HttpDelete]
+        [System.Web.Mvc.Route("pictures/{id:int}")]
         public HttpResponseMessage DeletePicture(int id)
         {
             var candidate = _candidateService.Get(id);
@@ -113,8 +110,8 @@ namespace Hunter.Rest.Controllers
         }
 
         // POST api/<controller>
-        [HttpPost]
-        [Route("")]
+        [System.Web.Mvc.HttpPost]
+        [System.Web.Mvc.Route("")]
         public void Post(FileDto data)
         {
             _fileService.Add(data);
