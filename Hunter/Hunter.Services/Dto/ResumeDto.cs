@@ -10,6 +10,7 @@ namespace Hunter.Services.Dto
     {
         public int Id { get; set; }
         public int FileId { get; set; }
+        public DateTime Uploaded { get; set; }
         public string FileName { get; set; }
         public string DownloadUrl { get; set; }
     }

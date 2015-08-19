@@ -18,14 +18,16 @@ namespace Hunter.Services
         private readonly ICardRepository _cardRepository;
         private readonly ILogger _logger;
         private readonly IPoolRepository _poolRepository;
+        private readonly IUserProfileRepository _userProfileRepository;
 
         public CandidateService(IUnitOfWork unitOfWork, ICandidateRepository candidateRepository, ICardRepository cardRepository,
-            IPoolRepository poolRepository, ILogger logger)
+            IPoolRepository poolRepository, ILogger logger, IUserProfileRepository userProfileRepository)
         {
             _unitOfWork = unitOfWork;
             _candidateRepository = candidateRepository;
             _cardRepository = cardRepository;
             _logger = logger;
+            _userProfileRepository = userProfileRepository;
             _poolRepository = poolRepository;
         }
 
@@ -155,10 +157,17 @@ namespace Hunter.Services
             }
         }
 
-        public void Add(CandidateDto dto)
+        public void Add(CandidateDto dto, string name)
         {
             var candidate = new Candidate();
             dto.ToCandidateModel(candidate);
+
+            var user = _userProfileRepository.Get(name);
+            if (user != null)
+            {
+                candidate.AddedByProfileId = user.Id;
+            }
+
             foreach (var item in dto.PoolNames)
             {
                 var pool = _poolRepository.Get(x => x.Name == item);

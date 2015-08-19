@@ -93,10 +93,11 @@
             });
         }
 
-        function deleteFile(id) {
+        function deleteFile(id,success) {
             httpHandler.sendRequest({
                 verb: 'DELETE',
                 url: '/api/file/' + id,
+                successCallback:success,
                 errorCallback: function (status) {
                     console.log("Delete file error");
                     console.log(status);

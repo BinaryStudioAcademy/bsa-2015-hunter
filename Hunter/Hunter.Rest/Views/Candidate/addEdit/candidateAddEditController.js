@@ -45,7 +45,6 @@
         vm.photoLoaded = true;
         vm.picture = null;
         vm.photoUrl = '';
-        vm.resume = null;
         vm.externalUrl = '';
         var firstPreviewUrl = '';
 
@@ -55,6 +54,7 @@
         vm.onFileSelect = uploadResumeService.onFileSelect;
         vm.getFromUrl = getFromUrl;
         vm.parseUrl = parseUrl;
+        vm.deleteResume = deleteResume;
 
         (function () {
             // This is function for initialization actions, for example checking auth
@@ -98,24 +98,12 @@
                 
                 vm.FirstName = response.name.split(' ')[0];
                 vm.LastName = response.name.split(' ')[1];
-                //vm.Email = response.data.email;
                 vm.Position = response.headline;
                 vm.YearsOfExperience = (response.experienceTime.split('.')[0] / 365).toFixed(1);;
-                //vm.Company = response.data.company;
                 vm.Location = response.location;
-                //vm.Skype = response.data.skype;
-                //vm.Phone = response.data.phone;
                 vm.externalUrl = response.img;
-                //vm.Salary = response.data.salary;
-                //vm.selectedOrigin = vm.origins[response.data.origin];
-                //vm.selectedResolution = vm.resolutions[response.data.resolution];
-                //vm.ShortListed = response.data.shortListed;
-                //vm.DateOfBirth = new Date(response.data.dateOfBirth);
-                //vm.photoUrl = response.data.photoUrl;
-                //vm.resumeId = response.data.resumeId;
-                //firstPreviewUrl = vm.photoUrl;
+                vm.ResumeSummary = 'Skills: ' + response.skills + '\nExperience: ' + response.experience + '\n Courses: ' + response.courses;
 
-                //vm.photoLoaded = true;
             });
         }
 
@@ -145,10 +133,6 @@
             var Resolution = vm.selectedResolution.value;
 
             Pools = vm.selectedPools;
-//            for (var i = 0; i<vm.selectedPools.length; i++) {
-////                var pool = { id: vm.selectedPools[i].id, name: vm.selectedPools[i].name };
-//                Pools.push(vm.selectedPools[i].name);
-//            }
             
             if (vm.DateOfBirth) {
                 var DateOfBirth = vm.DateOfBirth;
@@ -177,8 +161,8 @@
                 ShortListed: vm.ShortListed,
                 DateOfBirth: DateOfBirth,
                 PoolNames: Pools,
-                ResumeId: vm.resumeId,
-                YearsOfExperience:vm.YearsOfExperience
+                YearsOfExperience: vm.YearsOfExperience,
+                ResumeSummary: vm.ResumeSummary 
             }
             if (id != null) {
                 candidate.Id = id;
@@ -209,7 +193,8 @@
                 vm.ShortListed = response.data.shortListed;
                 vm.DateOfBirth = new Date(response.data.dateOfBirth);
                 vm.photoUrl = response.data.photoUrl;
-                vm.resumeId = response.data.resumeId;
+                vm.Resumes = response.data.resumes;
+                vm.ResumeSummary = response.data.resumeSummary;
                 firstPreviewUrl = vm.photoUrl;
                 //getting already selected pools
                 for (var i = 0; i < response.data.poolNames.length; i++) {
@@ -222,9 +207,17 @@
 
                 vm.photoLoaded = true;
                 vm.nameInTitle = response.data.firstName + " " + response.data.lastName;
-                fileHttpService.getResume(vm.resumeId).then(function(data) {
-                    vm.resume = data;
-                });
+            });
+        }
+
+
+        function deleteResume(resume) {
+            fileHttpService.deleteFile(resume.fileId,function() {
+                var index = vm.Resumes.indexOf(resume);
+                if (index >= 0) {
+                    vm.Resumes.splice(index, 1);
+                }
+
             });
         }
 

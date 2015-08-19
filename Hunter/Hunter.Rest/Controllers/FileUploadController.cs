@@ -72,8 +72,8 @@ namespace Hunter.Rest.Controllers
             }
         }
 
-        [System.Web.Mvc.HttpPost]
-        [System.Web.Mvc.Route("pictures/fromUrl/{id:int}")]
+        [HttpPost]
+        [Route("pictures/fromUrl/{id:int}")]
         public HttpResponseMessage PostPictureFromUrl(int id, [FromBody]string photoUrl)
         {
             try
@@ -88,8 +88,8 @@ namespace Hunter.Rest.Controllers
             
         }
 
-        [System.Web.Mvc.HttpDelete]
-        [System.Web.Mvc.Route("pictures/{id:int}")]
+        [HttpDelete]
+        [Route("pictures/{id:int}")]
         public HttpResponseMessage DeletePicture(int id)
         {
             var candidate = _candidateService.Get(id);
@@ -110,8 +110,8 @@ namespace Hunter.Rest.Controllers
         }
 
         // POST api/<controller>
-        [System.Web.Mvc.HttpPost]
-        [System.Web.Mvc.Route("")]
+        [HttpPost]
+        [Route("")]
         public void Post(FileDto data)
         {
             _fileService.Add(data);
