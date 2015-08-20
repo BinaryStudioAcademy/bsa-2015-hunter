@@ -20,6 +20,8 @@
         vm.candidateNoteShow = getCandidateNote;
         vm.userNoteShow = getUserNote;
 
+        vm.toggleReadOnly = toggleReadOnly;
+
         vm.vacancy;
         vm.specialNote;
         vm.userName = localStorageService.get('authorizationData').userName;
@@ -41,26 +43,50 @@
             var note = {
                 text : newText
             }
-            specialNoteHttpService.addSpecialNote(note,$routeParams.vid, $routeParams.cid, successAdd);
+            specialNoteHttpService.addSpecialNote(note, $routeParams.vid, $routeParams.cid)
+            .then(function(data) {
+                note.id = data.id;
+                note.lastEdited = data.update;
+                note.userLogin = data.userName;
+                note.cardId = data.cardId;
+                note.noteConfig = {
+                    'buttonName': 'Edit',
+                    'readOnly': true
+                };
+
+                vm.specialNote.push(note);
+            });
         }
 
         function SaveOldSpecialNote(note) {
-            specialNoteHttpService.updateSpecialNote(note, note.id, successEdit);
+            specialNoteHttpService.updateSpecialNote(note, note.id, successEdit)
+            .then(function(data) {
+                note.id = data.id;
+                note.lastEdited = data.update;
+                note.userLogin = data.userName;
+            });
         }
 
-        function successAdd() {
+        function successAdd(response) {
             //debugger;
             //$location.url('/candidate/list');'
             vm.newNoteText = "";
             getAllCardNote();
         }
-        function successEdit() {
+        function successEdit(response) {
             getAllCardNote();
         }
         function getAllCardNote() {
             specialNoteHttpService.getCardSpecialNote($routeParams.vid, $routeParams.cid).then(function (result) {
                 console.log(result.data);
                 vm.specialNote = result.data;
+
+                vm.specialNote.forEach(function(note) {
+                    note.noteConfig = {
+                        'buttonName': 'Edit',
+                        'readOnly': true
+                    }
+                });
             });
         }
 
@@ -76,6 +102,24 @@
                 console.log(result.data);
                 vm.specialNote = result.data;
             });
+        }
+
+        function toggleReadOnly(note) {
+            note.noteConfig.readOnly = note.text != '' ? !note.noteConfig.readOnly : note.noteConfig.readOnly;
+
+            if (note.noteConfig.readOnly) {
+                note.noteConfig.buttonName = 'Edit';
+                SaveOldSpecialNote({
+                    'id': note.id,
+                    'userLogin': note.login,
+                    'text': note.text,
+                    'lastEdited': note.lastEdited,
+                    'cardId': note.cardId
+                });
+
+            } else {
+                note.noteConfig.buttonName = 'Save';
+            }
         }
     }
 })();

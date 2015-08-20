@@ -22,22 +22,30 @@
             //deleteSpecialNote: deleteSpecialNote
         };
 
-        function updateSpecialNote(body, id, successCallback) {
+        function updateSpecialNote(body, id) {
+            var deferred = $q.defer();
             httpHandler.sendRequest({
                 verb: 'PUT',
                 url: '/api/specialnote/' + id,
                 body: body,
-                successCallback: successCallback
+                successCallback: function(response) {
+                    deferred.resolve(response.data);
+                }
             });
+
+            return deferred.promise;
         }
 
-        function addSpecialNote(body,vid,cid , successCallback) {
+        function addSpecialNote(body, vid, cid, successCallback) {
+            var deferred = $q.defer();
             httpHandler.sendRequest({
                 verb: 'POST',
                 url: '/api/specialnote/'+ vid+'/'+cid,
                 body: body,
-                successCallback: successCallback
+                successCallback: function (response) { deferred.resolve(response.data); }
             });
+
+            return deferred.promise;
         }
 
         function getSpecialNote(id) {

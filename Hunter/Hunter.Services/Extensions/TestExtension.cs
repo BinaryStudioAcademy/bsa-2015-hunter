@@ -39,7 +39,7 @@ namespace Hunter.Services.Extensions
             test.Url = testDto.Url;
             test.Added = testDto.Added;
 
-            if(test.FileId != null)
+            if(test.File != null)
                 testDto.File.ToFile(test.File = new File());
 
             if (testDto.Feedback != null)

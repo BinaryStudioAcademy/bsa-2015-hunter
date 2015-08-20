@@ -102,8 +102,8 @@ namespace Hunter.Rest.Controllers
         {
             try
             {
-                _feedbackService.SaveFeedback(FeedbackDto, User.Identity.Name);
-                return Request.CreateResponse(HttpStatusCode.OK, "Feedback was edited/saved!");
+                var result = _feedbackService.SaveFeedback(FeedbackDto, User.Identity.Name);
+                return Request.CreateResponse(HttpStatusCode.OK, result);
             }
             catch (Exception ex)
             {
@@ -117,10 +117,10 @@ namespace Hunter.Rest.Controllers
         {
             try
             {
-                var feedbackId =_feedbackService.SaveFeedback(testFeedback.Feedback, User.Identity.Name);
-                _testService.UpdateFeedback(testFeedback.TestId, (int)feedbackId.Id);
+                var result =_feedbackService.SaveFeedback(testFeedback.Feedback, User.Identity.Name);
+                _testService.UpdateFeedback(testFeedback.TestId, result.Id);
                 
-                return Ok();
+                return Ok(result);
             }
             catch (Exception ex)
             {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hunter.Services.Dto;
+using Hunter.Services.Dto.ApiResults;
 using Hunter.Services.Extensions;
 
 namespace Hunter.Services.Services.Interfaces
@@ -14,9 +15,9 @@ namespace Hunter.Services.Services.Interfaces
 
         SpecialNoteDto GetSpecialNoteById(int id);
 
-        void AddSpecialNote(SpecialNoteDto entity, int vid, int cid);
+        SpecNoteResult AddSpecialNote(SpecialNoteDto entity, int vid, int cid);
 
-        void UpdateSpecialNote(SpecialNoteDto entity);
+        SpecNoteResult UpdateSpecialNote(SpecialNoteDto entity);
 
         void DeleteSpecialNoteById(int id);
 

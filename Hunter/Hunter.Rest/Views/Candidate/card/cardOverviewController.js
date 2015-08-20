@@ -21,6 +21,8 @@
         vm.tests;
         vm.summary;
 
+        vm.testFeedbacksPresent = false;
+
         FeedbackHttpService.getHrFeedback($routeParams.vid, $routeParams.cid).then(function (result) {
             vm.feedbacks = result;
         });
@@ -31,7 +33,23 @@
 
         CardTestHttpService.getTest($routeParams.vid, $routeParams.cid, function (result) {
             vm.tests = result.data;
+
+            for (var i in vm.tests.tests) {
+                var test = vm.tests.tests[i];
+                if (vm.filterTests(test)) {
+                    vm.testFeedbacksPresent = true;
+                    break;
+                }
+            }
         });
+
+        vm.filterTests = function(test) {
+
+            if (test.feedbackId != null && test.feedback.text != '')
+                return true;
+
+            return false;
+        }
 
         FeedbackHttpService.getSummary($routeParams.vid, $routeParams.cid).then(function (result) {
             console.log(result);
