@@ -2,8 +2,9 @@
     <div id="card-static">
         <div class="candidate-info">
             <div class="candidate-personal-info row">
-                <div class="image col-md-2">
-                    <img class="profile-photo img-circle" ng-src="{{generalCardCtrl.candidate.photoUrl}}" />
+                <div class="image col-md-2" ng-switch on="generalCardCtrl.candidate.photo">
+                    <shor-list-star is-short="generalCardCtrl.candidate.shortListed" candidate-id="generalCardCtrl.candidate.id" size="'30px'"></shor-list-star>
+                    <img class="profile-photo img-circle" ng-switch-default src="{{generalCardCtrl.candidate.photoUrl}}"/>
                 </div>
                 <div class="col-md-5">
                     <div class="personal-info">

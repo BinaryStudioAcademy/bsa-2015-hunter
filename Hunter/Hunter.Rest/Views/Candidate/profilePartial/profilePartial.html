@@ -1,16 +1,14 @@
 ﻿<div class="container-partial" ng-controller='CandidatePartialController as candidatePartCtrl'>
     <div class="row">
-        <div class="col-md-2">
-            <button class="btn btn-default" type="button" ng-click="$root.candidateDetails.show = false">Exit</button>
-        </div>
-        <div class="col-md-10">
+        <div class="col-md-12">
             <h4>Preview</h4>
         </div>
     </div>
     <div class="candidate-info">
         <div class="candidate-personal-info row">
             <div class="image col-md-5">
-                <img class="preview-profile-photo img-circle" ng-src="{{candidatePartCtrl.candidate.photoUrl}}" />
+                <shor-list-star is-short="candidatePartCtrl.candidate.shortListed" candidate-id="candidatePartCtrl.candidate.id" size="'18px'"></shor-list-star>
+                <img class="preview-profile-photo img-circle" ng-src="{{candidatePartCtrl.candidate.photoUrl}}"/>
             </div>
             <div class="col-md-7">
 

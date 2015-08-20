@@ -190,6 +190,7 @@
 }
 .ll_preview_info_img {
     float: left;
+    position: relative;
 }
 .ll_preview_info_all {
     float: left;
