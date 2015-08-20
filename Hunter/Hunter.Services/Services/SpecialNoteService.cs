@@ -55,11 +55,13 @@ namespace Hunter.Services.Services
             };
         }
 
-        public SpecNoteResult UpdateSpecialNote(SpecialNoteDto entity)
+        public SpecNoteResult UpdateSpecialNote(SpecialNoteDto dto)
         {
-<<<<<<< HEAD
-            var specnoteEntity = entity.ToEntity();
+            var specnoteEntity = dto.ToEntity();
+            var userProfile = _userProfileRepository.Get(x => x.UserLogin == dto.UserLogin);
+            specnoteEntity.UserProfileId = userProfile != null ? userProfile.Id : (int?)null;
             _specialNoteRepository.UpdateAndCommit(specnoteEntity);
+            _activityHelperService.CreateUpdatedSpecialNoteActivity(specnoteEntity);
 
             return new SpecNoteResult
             {
@@ -68,13 +70,6 @@ namespace Hunter.Services.Services
                 Update = specnoteEntity.ToDto().LastEdited,
                 CardId = specnoteEntity.CardId
             };
-=======
-            var specialNote = dto.ToEntity();
-            var userProfile = _userProfileRepository.Get(x => x.UserLogin == dto.UserLogin);
-            specialNote.UserProfileId = userProfile != null ? userProfile.Id : (int?)null;
-            _specialNoteRepository.UpdateAndCommit(specialNote);
-            _activityHelperService.CreateUpdatedSpecialNoteActivity(specialNote);
->>>>>>> develop-use-user-alias
         }
 
 
