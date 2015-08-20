@@ -77,7 +77,8 @@ textarea {
 
 .circleButton-icon {
     /*margin: 7px 8px;*/
-    right: 5px;
+    margin: 9px 9px;
+    /*right: 5px;*/
 }
 
 .testLink {
@@ -111,8 +112,11 @@ textarea {
 }
 
 .group-btn {
+    /*margin-top: 28px;
+    left: -15px;*/
     margin-top: 28px;
-    left: -15px;
+    left: 630px;
+    bottom: 63px;
 }
 
 .without-border {
