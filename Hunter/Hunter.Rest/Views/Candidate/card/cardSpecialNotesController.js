@@ -43,20 +43,37 @@
             var note = {
                 text : newText
             }
-            specialNoteHttpService.addSpecialNote(note,$routeParams.vid, $routeParams.cid, successAdd);
+            specialNoteHttpService.addSpecialNote(note, $routeParams.vid, $routeParams.cid)
+            .then(function(data) {
+                note.id = data.id;
+                note.lastEdited = data.update;
+                note.userLogin = data.userName;
+                note.cardId = data.cardId;
+                note.noteConfig = {
+                    'buttonName': 'Edit',
+                    'readOnly': true
+                };
+
+                vm.specialNote.push(note);
+            });
         }
 
         function SaveOldSpecialNote(note) {
-            specialNoteHttpService.updateSpecialNote(note, note.id, successEdit);
+            specialNoteHttpService.updateSpecialNote(note, note.id, successEdit)
+            .then(function(data) {
+                note.id = data.id;
+                note.lastEdited = data.update;
+                note.userLogin = data.userName;
+            });
         }
 
-        function successAdd() {
+        function successAdd(response) {
             //debugger;
             //$location.url('/candidate/list');'
             vm.newNoteText = "";
             getAllCardNote();
         }
-        function successEdit() {
+        function successEdit(response) {
             getAllCardNote();
         }
         function getAllCardNote() {

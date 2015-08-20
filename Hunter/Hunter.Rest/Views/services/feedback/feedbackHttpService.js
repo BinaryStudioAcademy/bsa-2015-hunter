@@ -43,8 +43,8 @@
                 verb: 'POST',
                 body: JSON.stringify(feedback),
                 successCallback: function (result) {
-                    var getResult = getHrFeedback(vid, cid);
-                    deferred.resolve(getResult);
+                    var saveResult = result.data;
+                    deferred.resolve(saveResult);
                 },
                 errorCallback: function (result) { console.log(result); }
             });
@@ -52,13 +52,19 @@
         };
 
         function saveTestFeedback(feedbackObj) {
+            var deferred = $q.defer();
             httpHandler.sendRequest({
                 'url': '/api/feedback/test/update',
                 'verb': 'PUT',
                 'body': feedbackObj,
-                'successCallback': function(response) { console.log('test feedback was successfuly updated') },
+                'successCallback': function(response) {
+                    console.log('test feedback was successfuly updated');
+                    deferred.resolve(response.data);
+                },
                 'errorCallback': function(response) { console.log('Updating was failed') }
             });
+
+            return deferred.promise;
         }
 
         function getTechFeedback(vacancyId, candidateId) {
@@ -83,8 +89,8 @@
                 verb: 'POST',
                 body: JSON.stringify(feedback),
                 successCallback: function (result) {
-                    var newFeedback = getTechFeedback(vacancyId, candidateId);
-                    deferred.resolve(newFeedback);
+                    //                    var newFeedback = getTechFeedback(vacancyId, candidateId);
+                    deferred.resolve(result.data);
                 },
                 errorCallback: function (result) {
                     console.log("tech feedback update - error");

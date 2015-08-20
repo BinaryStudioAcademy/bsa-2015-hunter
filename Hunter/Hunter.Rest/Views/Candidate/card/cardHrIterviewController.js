@@ -47,17 +47,19 @@
             });
         });
 
-        vm.saveHrFeedback = function (id, cardId, type, text) {
-            vm.newFeedback = {
-                id: id,
-                cardId: cardId,
-                type: type,
-                text: text
+        vm.saveHrFeedback = function (feedback) {
+            var newFeedback = {
+                id: feedback.id,
+                cardId: feedback.cardId,
+                type: feedback.type,
+                text: feedback.text
             };
 
-            FeedbackHttpService.saveHrFeedback(vm.newFeedback, $routeParams.vid, $routeParams.cid).then(function (result) {
+            FeedbackHttpService.saveHrFeedback(newFeedback, $routeParams.vid, $routeParams.cid).then(function (result) {
                 console.log(result);
-//                vm.feedbacks = result;
+                feedback.id = result.id;
+                feedback.date = result.update;
+                feedback.userName = result.userName;
             });
         }
 
@@ -67,7 +69,7 @@
 
             if (feedback.feedbackConfig.readOnly) {
                 feedback.feedbackConfig.buttonName = 'Edit';
-                vm.saveHrFeedback(feedback.id, feedback.cardId, feedback.type, feedback.text);
+                vm.saveHrFeedback(feedback);
                 feedback.date = new Date();
                 feedback.userName = userName;
             } else {

@@ -10,11 +10,12 @@
         '$routeParams',
         'FeedbackHttpService',
         'UploadTestService',
-        'localStorageService'
+        'localStorageService',
+        '$scope'
     ];
 
     function CardTestController(CardTestHttpService, $routeParams,
-        FeedbackHttpService, UploadTestService, localStorageService) {
+        FeedbackHttpService, UploadTestService, localStorageService, $scope) {
         var vm = this;
         vm.templateName = 'Test';
         var candidateId = $routeParams.cid;
@@ -95,6 +96,10 @@
                 FeedbackHttpService.saveTestFeedback({
                     'feedback': test.feedback,
                     'testId': test.id
+                }).then(function(result) {
+                    test.feedback.id = result.id;
+                    test.feedback.date = result.update;
+                    test.feedback.userName = result.userName;
                 });
 
                 test.feedback.userName = userName;
@@ -117,9 +122,10 @@
         vm.fileName;
         var file;
         vm.onFileChanged = function (event) {
-            file = event.currentTarget.files[0];
+            file = event.target.files[0];
             vm.fileName = file.name;
             UploadTestService.onFileSelect(file);
+            $scope.$apply();
         }
 
         vm.uploadFile = function() {

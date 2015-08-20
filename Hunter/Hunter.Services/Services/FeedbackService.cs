@@ -89,34 +89,43 @@ namespace Hunter.Services
              
         }
 
-        public IdApiResult SaveFeedback(FeedbackDto hrInterviewDto, string name)
+        public FeedbackUpdatedResult SaveFeedback(FeedbackDto hrInterviewDto, string name)
         {
             Feedback feedback;
             var userProfile = _userProfileRepository.Get(u => u.UserLogin.ToLower() == name.ToLower());
-            
-            if (hrInterviewDto.Id != 0)
-            {
-                feedback = _feedbackRepository.Get(hrInterviewDto.Id);
-                if (feedback == null)
-                    return Api.NotFound(hrInterviewDto.Id);
-            }
-            else
-            {
-                feedback = new Feedback();
-            }
-
-            feedback.ProfileId = userProfile != null ? userProfile.Id : (int?)null;
-            hrInterviewDto.ToFeedback(feedback);
-            
             try
             {
+
+                if (hrInterviewDto.Id != 0)
+                {
+                    feedback = _feedbackRepository.Get(hrInterviewDto.Id);
+                    if (feedback == null) { 
+    //                    return Api.NotFound(hrInterviewDto.Id);
+                        throw new Exception("Feedback not found");
+                    }
+                }
+                else
+                {
+                    feedback = new Feedback();
+                }
+
+                feedback.ProfileId = userProfile != null ? userProfile.Id : (int?)null;
+                hrInterviewDto.ToFeedback(feedback);
+            
+            
                 _feedbackRepository.UpdateAndCommit(feedback);
-                return Api.Updated(feedback.Id);
+                return new FeedbackUpdatedResult
+                {
+                    Id = feedback.Id,
+                    Update = feedback.ToFeedbackDto().Date,
+                    UserName = feedback.ToFeedbackDto().UserName
+                };
             }
             catch (Exception ex)
             {
                 _logger.Log(ex);
-                return Api.Error((long)feedback.Id, ex.Message);
+//                return Api.Error((long)feedback.Id, ex.Message);
+                throw ex;
             }
         }
     }

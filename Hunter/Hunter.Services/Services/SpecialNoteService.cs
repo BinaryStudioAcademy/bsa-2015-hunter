@@ -2,6 +2,7 @@
 using System.Linq;
 using Hunter.DataAccess.Interface;
 using Hunter.Services.Dto;
+using Hunter.Services.Dto.ApiResults;
 using Hunter.Services.Extensions;
 using Hunter.Services.Services.Interfaces;
 
@@ -32,16 +33,34 @@ namespace Hunter.Services.Services
         }
 
 
-        public void AddSpecialNote(SpecialNoteDto entity, int vid, int cid)
+        public SpecNoteResult AddSpecialNote(SpecialNoteDto entity, int vid, int cid)
         {
             var card = _cardRepository.GetByCandidateAndVacancy(cid, vid);
             entity.CardId = card.Id;
-            _specialNoteRepository.UpdateAndCommit(entity.ToEntity());
+            var specnoteEntity = entity.ToEntity();
+            _specialNoteRepository.UpdateAndCommit(specnoteEntity);
+
+            return new SpecNoteResult
+            {
+                Id = specnoteEntity.Id,
+                UserName = specnoteEntity.ToDto().UserLogin,
+                Update = specnoteEntity.ToDto().LastEdited,
+                CardId = specnoteEntity.CardId
+            };
         }
 
-        public void UpdateSpecialNote(SpecialNoteDto entity)
+        public SpecNoteResult UpdateSpecialNote(SpecialNoteDto entity)
         {
-            _specialNoteRepository.UpdateAndCommit(entity.ToEntity());
+            var specnoteEntity = entity.ToEntity();
+            _specialNoteRepository.UpdateAndCommit(specnoteEntity);
+
+            return new SpecNoteResult
+            {
+                Id = specnoteEntity.Id,
+                UserName = specnoteEntity.ToDto().UserLogin,
+                Update = specnoteEntity.ToDto().LastEdited,
+                CardId = specnoteEntity.CardId
+            };
         }
 
 
