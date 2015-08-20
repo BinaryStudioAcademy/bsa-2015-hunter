@@ -16,10 +16,11 @@
         '$odata',
         'EnumConstants',
         'CandidateHttpService',
-        'LonglistHttpService'
+        'LonglistHttpService',
+        'VacancyHttpService'
     ];
 
-    function CandidateListController($location, $filter, $scope, $rootScope, authService, $odataresource, PoolsHttpService, $odata, EnumConstants, CandidateHttpService, longlistHttpService) {
+    function CandidateListController($location, $filter, $scope, $rootScope, authService, $odataresource, PoolsHttpService, $odata, EnumConstants, CandidateHttpService, longlistHttpService, vacancyHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         vm.name = 'Candidates';
@@ -171,13 +172,20 @@
         // add cardidates to Long List
         function addCandidateToLongList() {
             var cards = createCardRequestBody();
-
+            //console.log(cards);
             longlistHttpService.addCards(cards);
         }
 
         // not user-event functions 
         vm.selectedCandidates = [];
-        vm.VacancyId = 1;
+        vm.VacancyId;
+        vm.vacancyByState;
+        vm.vacancyStateId = EnumConstants.vacancyStates[1].id;
+
+        vacancyHttpService.getVacancyByState(vm.vacancyStateId).then(function (result) {
+            //console.log(result);
+            vm.vacancyByState = result;
+        });
 
         function createCardRequestBody() {
             var cards = [];

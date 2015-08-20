@@ -8,6 +8,7 @@ using Hunter.DataAccess.Entities;
 using System;
 using System.Globalization;
 using Hunter.DataAccess.Entities.Entites.Enums;
+using Hunter.Services.Dto.Vacancy;
 using Hunter.Services.Interfaces;
 
 namespace Hunter.Services
@@ -184,6 +185,27 @@ namespace Hunter.Services
             {
                 _logger.Log(ex);
                 return new List<AddedByDto>();
+            }
+        }
+
+        public IEnumerable<VacancyByStateDto> GetVacancyByState(int id)
+        {
+            try
+            {
+                var vacancy = _vacancyRepository.Query()
+                    .Where(v => v.Status == id)
+                    .Select(v => new VacancyByStateDto()
+                    {
+                        Id = v.Id,
+                        Name = v.Name
+                    });
+
+                return vacancy;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return new List<VacancyByStateDto>();
             }
         }
     }

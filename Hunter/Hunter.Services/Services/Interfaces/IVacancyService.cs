@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Hunter.Services.Dto.Vacancy;
 
 namespace Hunter.Services.Interfaces
 {
@@ -13,5 +14,7 @@ namespace Hunter.Services.Interfaces
         VacancyLongListDto GetLongList(int id);
         IEnumerable<AddedByDto> GetLongListAddedBy(int id);
         IEnumerable<AddedByDto> GetVacanciesAddedBy();
+
+        IEnumerable<VacancyByStateDto> GetVacancyByState(int id);
     }
 }

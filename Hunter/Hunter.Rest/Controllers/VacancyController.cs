@@ -102,6 +102,24 @@ namespace Hunter.Rest.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("state/{id:int}")]
+        [ActionName("stage")]
+        [ResponseType(typeof(AddedByDto))]
+        public HttpResponseMessage GetVacancyByState(int id)
+        {
+            try
+            {
+                var vacancy = _vacancyService.GetVacancyByState(id);
+
+                return Request.CreateResponse(HttpStatusCode.OK, vacancy);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
         [HttpPost]
         [Route("")]
         public HttpResponseMessage Post(VacancyDto value)

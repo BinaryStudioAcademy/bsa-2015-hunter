@@ -109,6 +109,12 @@
             </table>
             <div ng-click="candidateListCtrl.addCandidateToLongList()" style="background-color: grey; width: 200px; height: 30px; overflow: auto">Add candidate to Long List (temp button)</div>
             
+            <!--<select class="form-control" ng-change="candidateListCtrl.getCandidatesForLongList()" ng-options="item.options as item.name for item in candidateListCtrl.vacancyByState" ng-model="candidateListCtrl.VacancyId"></select>-->
+            <select class="form-control" ng-model="candidateListCtrl.VacancyId">
+                <option ng-repeat="option in candidateListCtrl.vacancyByState" value="{{option.id}}">{{option.name}}</option>
+            </select>
+
+
             <pagination total-items="candidateListCtrl.totalItems"
                         ng-model="candidateListCtrl.filter.currentPage"
                         items-per-page="candidateListCtrl.pageSize"
