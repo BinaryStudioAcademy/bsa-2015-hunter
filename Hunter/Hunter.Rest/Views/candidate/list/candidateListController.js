@@ -146,10 +146,11 @@
             vm.getCandidates();
         }, true);
 
-        vm.ShowDetails = function (id) {
-            if ($rootScope.candidateDetails.id != id ){
-                $rootScope.candidateDetails.id = id;
-            } 
+        vm.ShowDetails = function (item) {
+           // if ($rootScope.candidateDetails.id != id ){
+            $rootScope.candidateDetails.id = item.id;
+            $rootScope.candidateDetails.shortListed = item.shortListed;
+            // } 
         }
 
         vm.ActiveTr = function (id) {

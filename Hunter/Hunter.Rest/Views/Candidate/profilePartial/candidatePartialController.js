@@ -22,6 +22,14 @@
                 getCandidateDetails($rootScope.candidateDetails.id);
             });
 
+        $rootScope.$watch(
+            '$root.candidateDetails.shortListed',
+            function () {
+                if (vm.candidate) {
+                    vm.candidate.shortListed = $rootScope.candidateDetails.shortListed;
+                }
+            });
+
         vm.candidate;
 
         //(function() {
