@@ -104,8 +104,8 @@ namespace Hunter.Rest.Controllers
                     var login = RequestContext.Principal.Identity.Name;
                     model.UserLogin = login;
                     model.LastEdited = DateTime.Now;
-                    _specialNoteService.AddSpecialNote(model,vid,cid);
-                    return Request.CreateResponse(HttpStatusCode.OK, "Ok");
+                    var result = _specialNoteService.AddSpecialNote(model,vid,cid);
+                    return Request.CreateResponse(HttpStatusCode.OK, result);
                 }
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid model state");
             }
@@ -124,8 +124,9 @@ namespace Hunter.Rest.Controllers
                 if (ModelState.IsValid && id == model.Id)
                 {
                     model.LastEdited = DateTime.Now;
-                    _specialNoteService.UpdateSpecialNote(model);
-                    return Request.CreateResponse(HttpStatusCode.OK, "Ok");
+                    model.UserLogin = User.Identity.Name;
+                    var result = _specialNoteService.UpdateSpecialNote(model);
+                    return Request.CreateResponse(HttpStatusCode.OK, result);
                 }
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid model state");
             }

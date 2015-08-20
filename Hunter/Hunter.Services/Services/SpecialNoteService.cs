@@ -2,6 +2,7 @@
 using System.Linq;
 using Hunter.DataAccess.Interface;
 using Hunter.Services.Dto;
+using Hunter.Services.Dto.ApiResults;
 using Hunter.Services.Extensions;
 using Hunter.Services.Interfaces;
 using Hunter.Services.Services.Interfaces;
@@ -35,21 +36,34 @@ namespace Hunter.Services.Services
             return _specialNoteRepository.Get(id).ToDto();
         }
 
-
-        public void AddSpecialNote(SpecialNoteDto dto, int vid, int cid)
+        public SpecNoteResult AddSpecialNote(SpecialNoteDto entity, int vid, int cid)
         {
             var card = _cardRepository.GetByCandidateAndVacancy(cid, vid);
-            dto.CardId = card.Id;
-            var specialNote = dto.ToEntity();
-            _specialNoteRepository.UpdateAndCommit(specialNote);
-            _activityHelperService.CreateAddedSpecialNoteActivity(specialNote);
+            entity.CardId = card.Id;
+            var specnoteEntity = entity.ToEntity();
+            _specialNoteRepository.UpdateAndCommit(specnoteEntity);
+
+            return new SpecNoteResult
+            {
+                Id = specnoteEntity.Id,
+                UserName = specnoteEntity.ToDto().UserLogin,
+                Update = specnoteEntity.ToDto().LastEdited,
+                CardId = specnoteEntity.CardId
+            };
         }
 
-        public void UpdateSpecialNote(SpecialNoteDto dto)
+        public SpecNoteResult UpdateSpecialNote(SpecialNoteDto entity)
         {
-            var specialNote = dto.ToEntity();
-            _specialNoteRepository.UpdateAndCommit(specialNote);
-            _activityHelperService.CreateUpdatedSpecialNoteActivity(specialNote);
+            var specnoteEntity = entity.ToEntity();
+            _specialNoteRepository.UpdateAndCommit(specnoteEntity);
+
+            return new SpecNoteResult
+            {
+                Id = specnoteEntity.Id,
+                UserName = specnoteEntity.ToDto().UserLogin,
+                Update = specnoteEntity.ToDto().LastEdited,
+                CardId = specnoteEntity.CardId
+            };
         }
 
 
