@@ -66,7 +66,7 @@
                         <span ng-show="candidateListCtrl.order.field == 'Resolution' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
                         <span ng-show="candidateListCtrl.order.field == 'Resolution' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
                     </th>
-                    <th ng-hide="$root.candidateDetails.show">
+                    <!--<th ng-hide="$root.candidateDetails.show">
                         Email
                         <span ng-show="candidateListCtrl.order.field == 'Email' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
                         <span ng-show="candidateListCtrl.order.field == 'Email' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
@@ -90,7 +90,7 @@
                         Salary
                         <span ng-show="candidateListCtrl.order.field == 'Salary' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
                         <span ng-show="candidateListCtrl.order.field == 'Salary' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
-                    </th>
+                    </th>-->
                 </tr>
                 <tr ng-repeat="item in candidateListCtrl.candidateList" ng-click="candidateListCtrl.ShowDetails(item.id)" ng-class="candidateListCtrl.ActiveTr(item.id)">
                     <td><input type="checkbox" ng-model="item.shortListed" checklist-model="candidateListCtrl.selectedCandidates" checklist-value="item.id"></td>
@@ -101,11 +101,11 @@
                     <td><a href="#/candidate/{{item.id}}">{{item.firstName + " " + item.lastName}}</a></td>
                     <td>{{item.addedBy}}</td>
                     <td>{{candidateListCtrl.statuses[item.resolution].name}}</td>
-                    <td ng-hide="$root.candidateDetails.show">{{item.email}}</td>
+                    <!--<td ng-hide="$root.candidateDetails.show">{{item.email}}</td>
                     <td ng-hide="$root.candidateDetails.show">{{item.yearsOfExperience}}</td>
                     <td ng-hide="$root.candidateDetails.show">{{item.company}}</td>
                     <td ng-hide="$root.candidateDetails.show">{{item.location}}</td>
-                    <td ng-hide="$root.candidateDetails.show">{{item.salary}}</td>
+                    <td ng-hide="$root.candidateDetails.show">{{item.salary}}</td>-->
                 </tr>
             </table>
             <div ng-click="candidateListCtrl.addCandidateToLongList()" style="background-color: grey; width: 200px; height: 30px; overflow: auto">Add candidate to Long List (temp button)</div>
@@ -150,7 +150,7 @@
                 </div>
             </nav>
         </div>
-        <div class="col-md-4" ng-show="$root.candidateDetails.show" ng-include="'/Views/candidate/profilePartial/profilePartial.html'">
+        <div class="col-md-4" ng-include="'/Views/candidate/profilePartial/profilePartial.html'">
         </div>
     </div>
 </div>
