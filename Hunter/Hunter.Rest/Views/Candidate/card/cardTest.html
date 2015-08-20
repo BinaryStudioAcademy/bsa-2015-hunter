@@ -1,6 +1,22 @@
 ﻿<div ng-controller="CardTestController as testCtrl">
 
-    <div class="workArea container">
+    <div class="workArea container">123
+        <div class="workArea without-border container">
+            <div class="row workArea-row">
+                <div class="col-md-5">
+                    <input type="text" class="form-control testLink" placeholder="Provide link to test" ng-model="testCtrl.testLink" />
+                    <button class="btn btn-primary" ng-click="testCtrl.uploadLink()">Add</button>
+                </div>
+                <div class="col-md-7">
+                    <input style="margin-left: 16px;" class="form-control filePath" type="text" readonly placeholder="Pick the file with test" />
+                    <span class="file-input btn btn-primary btn-file">
+                        Browse… <input type="file" multiple="" filread="testCtrl">
+                    </span>
+
+                    <button class="btn btn-primary">Upload</button>
+                </div>
+            </div>
+        </div>
         <div class="row workArea-row" ng-repeat="test in testCtrl.test.tests">
             <div class="col-md-3 taskInfo">
                 <div>
@@ -52,22 +68,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="workArea without-border container">
-        <div class="row workArea-row">
-            <div class="col-md-5">
-                <input type="text" class="form-control testLink" placeholder="Provide link to test" ng-model="testCtrl.testLink"/>
-                <button class="btn btn-primary" ng-click="testCtrl.uploadLink()">Add</button>
-            </div>
-            <div class="col-md-7">
-                <input style="margin-left: 16px;" class="form-control filePath" type="text" readonly placeholder="Pick the file with test"/>
-                <span class="file-input btn btn-primary btn-file">
-                    Browse… <input type="file" multiple="" filread="testCtrl">
-                </span>
-
-                <button class="btn btn-primary">Upload</button>
             </div>
         </div>
     </div>
