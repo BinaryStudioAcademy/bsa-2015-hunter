@@ -82,6 +82,7 @@
         var Candidates = $odataresource('/api/Candidates/odata');
 
         vm.getCandidates = function () {
+            vm.tableLoad = true;
             var cands = Candidates.odata()
                                 .withInlineCount()
                                 .take(vm.pageSize)
@@ -92,7 +93,7 @@
                                     vm.candidateList = cands.items;
                                     $rootScope.candidateDetails.id = vm.candidateList[0].id;
                                     vm.totalItems = cands.count;
-                    console.log(vm.candidateList);
+                                    vm.tableLoad = false;
                 });
         }
 

@@ -109,3 +109,7 @@
 a.list-group-item:hover {
     cursor: pointer;
 }
+
+.treasure-overlay-spinner-content {
+    position: inherit;
+}

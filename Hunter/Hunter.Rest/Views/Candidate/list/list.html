@@ -6,12 +6,12 @@
     </div>
     <div class="row">
         <div class="filte-form-wrapper col-md-3">
-            
-                <div class="form-group">
-                    <label>Filter</label>
-                    <input type="search" class="form-control" ng-model="candidateListCtrl.filter.search">
-                </div>
-            
+
+            <div class="form-group">
+                <label>Filter</label>
+                <input type="search" class="form-control" ng-model="candidateListCtrl.filter.search">
+            </div>
+
             <div class="filter-settings">
                 <ul>
                     <li>
@@ -27,7 +27,7 @@
                         <ul>
                             <li ng-repeat="status in candidateListCtrl.statuses">
                                 <input type="checkbox" checklist-model="candidateListCtrl.filter.statuses" checklist-value="status.id"> {{status.name}}
-                            </li> 
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -41,123 +41,131 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-5">
-            <div class="form-group col-md-5">
-                <label>Order By</label>
-            <select class="form-control" ng-change="candidateListCtrl.getCandidates()" ng-options="item.options as item.text for item in candidateListCtrl.sortOptions" ng-model="candidateListCtrl.order"></select>
-            </div>
             
-            <table class="longlist table table-bordered">
-                <tr>
-                    <th></th>
-                    <th>Photo</th>
-                    <th>
-                        Name
-                        <span ng-show="candidateListCtrl.order.field == 'FirstName' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
-                        <span ng-show="candidateListCtrl.order.field == 'FirstName' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
-                    </th>
-                    <th>
-                        Added
-                        <span ng-show="candidateListCtrl.order.field == 'AddedByName' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
-                        <span ng-show="candidateListCtrl.order.field == 'AddedByName' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
-                    </th>
-                    <th>
-                        Status
-                        <span ng-show="candidateListCtrl.order.field == 'Resolution' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
-                        <span ng-show="candidateListCtrl.order.field == 'Resolution' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
-                    </th>
-                    <!--<th ng-hide="$root.candidateDetails.show">
-                        Email
-                        <span ng-show="candidateListCtrl.order.field == 'Email' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
-                        <span ng-show="candidateListCtrl.order.field == 'Email' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
-                    </th>
-                    <th ng-hide="$root.candidateDetails.show">
-                        Exp
-                        <span ng-show="candidateListCtrl.order.field == 'YearsOfExperience' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
-                        <span ng-show="candidateListCtrl.order.field == 'YearsOfExperience' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
-                    </th>
-                    <th ng-hide="$root.candidateDetails.show">
-                        Company
-                        <span ng-show="candidateListCtrl.order.field == 'Company' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
-                        <span ng-show="candidateListCtrl.order.field == 'Company' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
-                    </th>
-                    <th ng-hide="$root.candidateDetails.show">
-                        City
-                        <span ng-show="candidateListCtrl.order.field == 'Location' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
-                        <span ng-show="candidateListCtrl.order.field == 'Location' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
-                    </th>
-                    <th ng-hide="$root.candidateDetails.show">
-                        Salary
-                        <span ng-show="candidateListCtrl.order.field == 'Salary' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
-                        <span ng-show="candidateListCtrl.order.field == 'Salary' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
-                    </th>-->
-                </tr>
-                <tr ng-repeat="item in candidateListCtrl.candidateList" ng-click="candidateListCtrl.ShowDetails(item)" ng-class="candidateListCtrl.ActiveTr(item.id)">
-                    <td><input type="checkbox" checklist-model="candidateListCtrl.selectedCandidates" checklist-value="item.id"></td>
-                    <td style="position: relative">
-                        <shor-list-star is-short="item.shortListed" candidate-id="item.id" size="'18px'"></shor-list-star>
-                        <img class="photo-in-list" ng-src="{{item.photoUrl}}"/>
-                    </td>
-                    <td><a href="#/candidate/{{item.id}}">{{item.firstName + " " + item.lastName}}</a></td>
-                    <td>{{item.userAlias}}</td>
-                    <td>{{candidateListCtrl.statuses[item.resolution].name}}</td>
-                    <!--<td ng-hide="$root.candidateDetails.show">{{item.email}}</td>
-                    <td ng-hide="$root.candidateDetails.show">{{item.yearsOfExperience}}</td>
-                    <td ng-hide="$root.candidateDetails.show">{{item.company}}</td>
-                    <td ng-hide="$root.candidateDetails.show">{{item.location}}</td>
-                    <td ng-hide="$root.candidateDetails.show">{{item.salary}}</td>-->
-                </tr>
-            </table>
-            <div ng-click="candidateListCtrl.addCandidateToLongList()" style="background-color: grey; width: 200px; height: 30px; overflow: auto">Add candidate to Long List (temp button)</div>
-            
-            <!--<select class="form-control" ng-change="candidateListCtrl.getCandidatesForLongList()" ng-options="item.options as item.name for item in candidateListCtrl.vacancyByState" ng-model="candidateListCtrl.VacancyId"></select>-->
-            <select class="form-control" ng-model="candidateListCtrl.VacancyId">
-                <option ng-repeat="option in candidateListCtrl.vacancyByState" value="{{option.id}}">{{option.name}}</option>
-            </select>
-
-
-            <pagination total-items="candidateListCtrl.totalItems"
-                        ng-model="candidateListCtrl.filter.currentPage"
-                        items-per-page="candidateListCtrl.pageSize"
-                        max-size="5"
-                        class="pagination-sm"
-                        boundary-links="true"
-                        template-url="../../Views/templates/pagination.html"></pagination>
-            <nav>
-                <div class="row">
-                    <div class="dropdown col-md-2">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Add To Pool
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="#">.Net</a></li>
-                            <li><a href="#">JS</a></li>
-                            <li><a href="#">PHP</a></li>
-                            <li><a href="#">QA</a></li>
-                        </ul>
-                    </div>
-                    <div class="dropdown col-md-1">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            .Net
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="#">.Net</a></li>
-                            <li><a href="#">JS</a></li>
-                            <li><a href="#">PHP</a></li>
-                            <li><a href="#">QA</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-1">
-                        <button class="btn btn-default" type="button">Ok</button>
-                    </div>
-
+            <div class="col-md-5">
+                <div class="form-group col-md-5">
+                    <label>Order By</label>
+                    <select class="form-control" ng-change="candidateListCtrl.getCandidates()" ng-options="item.options as item.text for item in candidateListCtrl.sortOptions" ng-model="candidateListCtrl.order"></select>
                 </div>
-            </nav>
-        </div>
-        <div class="col-md-4" ng-include="'/Views/candidate/profilePartial/profilePartial.html'">
-        </div>
+
+        <treasure-overlay-spinner active='candidateListCtrl.tableLoad'>
+
+                <table class="longlist table table-bordered">
+                    <tr>
+                        <th></th>
+                        <th>Photo</th>
+                        <th>
+                            Name
+                            <span ng-show="candidateListCtrl.order.field == 'FirstName' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
+                            <span ng-show="candidateListCtrl.order.field == 'FirstName' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
+                        </th>
+                        <th>
+                            Added
+                            <span ng-show="candidateListCtrl.order.field == 'AddedByName' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
+                            <span ng-show="candidateListCtrl.order.field == 'AddedByName' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
+                        </th>
+                        <th>
+                            Status
+                            <span ng-show="candidateListCtrl.order.field == 'Resolution' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
+                            <span ng-show="candidateListCtrl.order.field == 'Resolution' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
+                        </th>
+                        <!--<th ng-hide="$root.candidateDetails.show">
+                            Email
+                            <span ng-show="candidateListCtrl.order.field == 'Email' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
+                            <span ng-show="candidateListCtrl.order.field == 'Email' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
+                        </th>
+                        <th ng-hide="$root.candidateDetails.show">
+                            Exp
+                            <span ng-show="candidateListCtrl.order.field == 'YearsOfExperience' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
+                            <span ng-show="candidateListCtrl.order.field == 'YearsOfExperience' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
+                        </th>
+                        <th ng-hide="$root.candidateDetails.show">
+                            Company
+                            <span ng-show="candidateListCtrl.order.field == 'Company' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
+                            <span ng-show="candidateListCtrl.order.field == 'Company' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
+                        </th>
+                        <th ng-hide="$root.candidateDetails.show">
+                            City
+                            <span ng-show="candidateListCtrl.order.field == 'Location' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
+                            <span ng-show="candidateListCtrl.order.field == 'Location' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
+                        </th>
+                        <th ng-hide="$root.candidateDetails.show">
+                            Salary
+                            <span ng-show="candidateListCtrl.order.field == 'Salary' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
+                            <span ng-show="candidateListCtrl.order.field == 'Salary' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
+                        </th>-->
+                    </tr>
+                    <tr ng-repeat="item in candidateListCtrl.candidateList" ng-click="candidateListCtrl.ShowDetails(item)" ng-class="candidateListCtrl.ActiveTr(item.id)">
+                        <td><input type="checkbox" checklist-model="candidateListCtrl.selectedCandidates" checklist-value="item.id"></td>
+                        <td style="position: relative">
+                            <shor-list-star is-short="item.shortListed" candidate-id="item.id" size="'18px'"></shor-list-star>
+                            <img class="photo-in-list" ng-src="{{item.photoUrl}}"/>
+                        </td>
+                        <td><a href="#/candidate/{{item.id}}">{{item.firstName + " " + item.lastName}}</a></td>
+                        <td>{{item.userAlias}}</td>
+                        <td>{{candidateListCtrl.statuses[item.resolution].name}}</td>
+                        <!--<td ng-hide="$root.candidateDetails.show">{{item.email}}</td>
+                        <td ng-hide="$root.candidateDetails.show">{{item.yearsOfExperience}}</td>
+                        <td ng-hide="$root.candidateDetails.show">{{item.company}}</td>
+                        <td ng-hide="$root.candidateDetails.show">{{item.location}}</td>
+                        <td ng-hide="$root.candidateDetails.show">{{item.salary}}</td>-->
+                    </tr>
+                </table>
+
+                <div ng-click="candidateListCtrl.addCandidateToLongList()" style="background-color: grey; width: 200px; height: 30px; overflow: auto">Add candidate to Long List (temp button)</div>
+
+                <!--<select class="form-control" ng-change="candidateListCtrl.getCandidatesForLongList()" ng-options="item.options as item.name for item in candidateListCtrl.vacancyByState" ng-model="candidateListCtrl.VacancyId"></select>-->
+                <select class="form-control" ng-model="candidateListCtrl.VacancyId">
+                    <option ng-repeat="option in candidateListCtrl.vacancyByState" value="{{option.id}}">{{option.name}}</option>
+                </select>
+
+
+                <pagination total-items="candidateListCtrl.totalItems"
+                            ng-model="candidateListCtrl.filter.currentPage"
+                            items-per-page="candidateListCtrl.pageSize"
+                            max-size="5"
+                            class="pagination-sm"
+                            boundary-links="true"
+                            template-url="../../Views/templates/pagination.html"></pagination>
+
+        </treasure-overlay-spinner>
+
+                <nav>
+                    <div class="row">
+                        <div class="dropdown col-md-2">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Add To Pool
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="#">.Net</a></li>
+                                <li><a href="#">JS</a></li>
+                                <li><a href="#">PHP</a></li>
+                                <li><a href="#">QA</a></li>
+                            </ul>
+                        </div>
+                        <div class="dropdown col-md-1">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                .Net
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="#">.Net</a></li>
+                                <li><a href="#">JS</a></li>
+                                <li><a href="#">PHP</a></li>
+                                <li><a href="#">QA</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-default" type="button">Ok</button>
+                        </div>
+
+                    </div>
+                </nav>
+            </div>
+            <div class="col-md-4" ng-include="'/Views/candidate/profilePartial/profilePartial.html'"></div>
+
+
     </div>
 </div>
 
