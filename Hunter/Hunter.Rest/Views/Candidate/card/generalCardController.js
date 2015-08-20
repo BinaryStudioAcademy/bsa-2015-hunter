@@ -33,9 +33,10 @@
         vm.resolutions = enumConstants.resolutions;
         vm.substatuses = enumConstants.substatuses;
         vm.feedbackTypes = enumConstants.feedbackTypes;
-
+        vm.stages = enumConstants.cardStages;
+        vm.currentStage = enumConstants.cardStages[0];
+        vm.currentSubstatus = enumConstants.substatuses[0];
         console.log("rout", $routeParams);
-
         (function() {
             candidateHttpService.getCandidate($routeParams["cid"]).then(function (response) {
                 vm.candidate = response.data;
