@@ -25,7 +25,7 @@
             { name: 'HR Interview', route: 'hrinterview' },
             { name: 'Technical Interview', route: 'technicalinterview' },
             { name: 'Test', route: 'test' },
-			{ name :'Summary', route: 'summary'}
+            { name :'Summary', route: 'summary'}
         ];
         vm.currentTabName = vm.tabs[0];
         vm.candidate;
@@ -46,7 +46,7 @@
 
         vm.changeTemplate = function (tab) {
             vm.currentTabName = tab.name;
-            vm.templateToShow = cardService.changeTemplate(tab.name);
+            vm.templateToShow = cardService.changeTemplate(tab.route);
             $location.search('tab', tab.route);      
         };
 

@@ -19,7 +19,8 @@
 //            getLongList: getLongList,
             getLongListDetails: getLongListDetails,
             parseLinkedIn: parseLinkedIn,
-            getAddedByList: getAddedByList
+            getAddedByList: getAddedByList,
+            setShortListFlag: setShortListFlag
         };
 
         function updateCandidate(body, successCallback, id) {
@@ -137,6 +138,24 @@
             });
             return deferred.promise;
         }
+
+        function setShortListFlag(cid, isShort) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/candidates/' +cid + '/' + isShort,
+                verb: 'PUT',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get candidates long list Added by filter data error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
+
+
 
         return service;
     }
