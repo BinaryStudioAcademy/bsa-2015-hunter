@@ -39,7 +39,7 @@
         vm.selectedOrigin = vm.origins[0];
         vm.selectedResolution = vm.resolutions[0];
         vm.selectedPools = [];
-        var id = null;
+        vm.id = null;
         var Pools = [];
 
         vm.photoLoaded = true;
@@ -164,19 +164,19 @@
                 YearsOfExperience: vm.YearsOfExperience,
                 ResumeSummary: vm.ResumeSummary 
             }
-            if (id != null) {
-                candidate.Id = id;
+            if (vm.id != null) {
+                candidate.Id = vm.id;
             }
             return candidate;
         }
 
         function initializeFields() {
             if ($routeParams.id) {
-                id = $routeParams.id;
+                vm.id = $routeParams.id;
             } else {
                 return;
             }   
-            candidateHttpService.getCandidate(id).then(function(response) {
+            candidateHttpService.getCandidate(vm.id).then(function(response) {
                 vm.FirstName = response.data.firstName;
                 vm.LastName = response.data.lastName;
                 vm.Email = response.data.email;

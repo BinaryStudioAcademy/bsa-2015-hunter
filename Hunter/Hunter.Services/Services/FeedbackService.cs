@@ -43,16 +43,20 @@ namespace Hunter.Services
             try
             {
                 var feedbacks = card.Feedback
-                    .Where(f => (f.Type == 0 || f.Type == 1 ))
+                    .Where(f => (f.Type == 0 || f.Type == 1 || f.Type == 2))
                     .ToFeedbacksDto().ToList();
 
                 if (!feedbacks.Any(f => f.Type == 0))
                 {
-                    feedbacks.Add(new FeedbackDto { Id = 0, Type = 0, CardId = card.Id, Text = "", Date = "", UserName = "" });
+                    feedbacks.Add(new FeedbackDto { Id = 0, Type = 0, CardId = card.Id, Text = "", Date = DateTime.Now, UserName = "" });
                 }
                 if (!feedbacks.Any(f => f.Type == 1))
-                { 
-                    feedbacks.Add(new FeedbackDto { Id = 0, Type = 1, CardId = card.Id, Text = "", Date = "", UserName = "" });
+                {
+                    feedbacks.Add(new FeedbackDto { Id = 0, Type = 1, CardId = card.Id, Text = "", Date = DateTime.Now, UserName = "" });
+                }
+                if (!feedbacks.Any(f => f.Type == 2))
+                {
+                    feedbacks.Add(new FeedbackDto { Id = 0, Type = 2, CardId = card.Id, Text = "", Date = DateTime.Now, UserName = "" });
                 }
 
                 return feedbacks.OrderBy(f => f.Type);
@@ -79,7 +83,7 @@ namespace Hunter.Services
                     .Where(e => e.Type == type)
                     .FirstOrDefault();
                 if (feedback == null)
-                    return new FeedbackDto() { Id = 0, Type = type, CardId = card.Id, Text = "", Date = "", UserName = "" };
+                    return new FeedbackDto() { Id = 0, Type = type, CardId = card.Id, Text = "", Date = DateTime.Now, UserName = "" };
                 return feedback.ToFeedbackDto();
             }
             catch (Exception e)
@@ -106,7 +110,7 @@ namespace Hunter.Services
                         Type = (int)FeedbackType.Summary,
                         CardId = card.Id,
                         Text = "",
-                        Date = "",
+                        Date = DateTime.Now,
                         UserName = ""
                     };
 
@@ -119,35 +123,43 @@ namespace Hunter.Services
             }
         }
 
-        public IdApiResult SaveFeedback(FeedbackDto hrInterviewDto, string name)
+        public FeedbackUpdatedResult SaveFeedback(FeedbackDto hrInterviewDto, string name)
         {
             Feedback feedback;
             var userProfile = _userProfileRepository.Get(u => u.UserLogin.ToLower() == name.ToLower());
-            
-            if (hrInterviewDto.Id != 0)
-            {
-                feedback = _feedbackRepository.Get(hrInterviewDto.Id);
-                if (feedback == null)
-                    return Api.NotFound(hrInterviewDto.Id);
-            }
-            else
-            {
-                feedback = new Feedback();
-            }
-
-            feedback.ProfileId = userProfile != null ? userProfile.Id : (int?)null;
-            hrInterviewDto.ToFeedback(feedback);
-            
             try
             {
+
+                if (hrInterviewDto.Id != 0)
+                {
+                    feedback = _feedbackRepository.Get(hrInterviewDto.Id);
+                    if (feedback == null) { 
+    //                    return Api.NotFound(hrInterviewDto.Id);
+                        throw new Exception("Feedback not found");
+                    }
+                }
+                else
+                {
+                    feedback = new Feedback();
+                }
+
+                feedback.ProfileId = userProfile != null ? userProfile.Id : (int?)null;
+                hrInterviewDto.ToFeedback(feedback);
+            
+            
                 _feedbackRepository.UpdateAndCommit(feedback);
-                _activityHelperService.CreateUpdatedFeedbackActivity(feedback);
-                return Api.Updated(feedback.Id);
+                return new FeedbackUpdatedResult
+                {
+                    Id = feedback.Id,
+                    Update = feedback.ToFeedbackDto().Date,
+                    UserName = feedback.ToFeedbackDto().UserName
+                };
             }
             catch (Exception ex)
             {
                 _logger.Log(ex);
-                return Api.Error((long)feedback.Id, ex.Message);
+//                return Api.Error((long)feedback.Id, ex.Message);
+                throw ex;
             }
         }
     }

@@ -111,9 +111,9 @@ namespace Hunter.Rest.Controllers
         // POST api/<controller>
         [HttpPost]
         [Route("")]
-        public void Post(FileDto data)
+        public int Post(FileDto data)
         {
-            _fileService.Add(data);
+            return _fileService.Add(data);
         }
     }
 }

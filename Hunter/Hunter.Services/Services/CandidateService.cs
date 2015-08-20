@@ -158,6 +158,16 @@ namespace Hunter.Services
             }
         }
 
+        public void UpdateShortFlag(int id, bool isShort)
+        {
+            var candidate = _candidateRepository.Get(id);
+            if (candidate != null)
+            {
+                candidate.Shortlisted = isShort;
+                _candidateRepository.UpdateAndCommit(candidate);
+            }
+        }
+
         public void Add(CandidateDto dto, string name)
         {
             var candidate = new Candidate();

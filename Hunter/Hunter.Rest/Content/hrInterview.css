@@ -47,7 +47,7 @@
 }
 .hrInterview_form form>div:last-child {
     width: 20%;
-    padding: 40px 0 0 5px;
+    padding: 28px 0 0 5px;
 
 }
 .hrInterview_form textarea{
@@ -58,5 +58,4 @@
     border-radius: 5px;
     border: 2px solid gray;
     padding: 5px;
-    background-color: rgb(238, 238, 238);
 }

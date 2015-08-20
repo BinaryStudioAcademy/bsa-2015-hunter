@@ -1,16 +1,14 @@
 ﻿<div class="container-partial" ng-controller='CandidatePartialController as candidatePartCtrl'>
     <div class="row">
-        <div class="col-md-2">
-            <button class="btn btn-default" type="button" ng-click="$root.candidateDetails.show = false">Exit</button>
-        </div>
-        <div class="col-md-10">
+        <div class="col-md-12">
             <h4>Preview</h4>
         </div>
     </div>
     <div class="candidate-info">
         <div class="candidate-personal-info row">
-            <div class="image col-md-5" ng-switch on="candidatePartCtrl.candidate.photo">
-                <img class="preview-profile-photo img-circle" ng-switch-default src="{{candidatePartCtrl.candidate.photoUrl}}" />
+            <div class="image col-md-5">
+                <shor-list-star is-short="candidatePartCtrl.candidate.shortListed" candidate-id="candidatePartCtrl.candidate.id" size="'30px'"></shor-list-star>
+                <img class="preview-profile-photo img-circle" ng-src="{{candidatePartCtrl.candidate.photoUrl}}"/>
             </div>
             <div class="col-md-7">
 
@@ -22,7 +20,7 @@
             <div class="personal-info-small">
 
                 <div>current/past: {{candidatePartCtrl.candidate.currentPosition}}</div>
-                <div>company/location: {{candidatePartCtrl.candidate.company+","+candidatePartCtrl.candidate.localion}}</div>
+                <div>company/location: {{candidatePartCtrl.candidate.company+","+candidatePartCtrl.candidate.location}}</div>
                 <div>emaile: {{candidatePartCtrl.candidate.email}}</div>
                 <div>skype: {{candidatePartCtrl.candidate.skype}}</div>
                 <div>phone: {{candidatePartCtrl.candidate.phone}}</div>

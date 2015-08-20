@@ -6,8 +6,9 @@
     </div>
     <div class="candidate-info">
         <div class="candidate-personal-info row">
-            <div class="image col-md-2" ng-switch on="candidateCtrl.candidate.photo">
-                <img class="profile-photo img-circle" ng-switch-default src="{{candidateCtrl.candidate.photoUrl}}" />
+            <div class="image col-md-2">
+                <shor-list-star is-short="candidateCtrl.candidate.shortListed" candidate-id="candidateCtrl.candidate.id" size="'32px'"></shor-list-star>
+                <img class="profile-photo img-circle" ng-src="{{candidateCtrl.candidate.photoUrl}}"/>
             </div>
             <div class="col-md-7">
                 <div class="personal-info">
@@ -15,7 +16,7 @@
                         <span class="candidate-name">{{candidateCtrl.candidate.firstName+" "+candidateCtrl.candidate.lastName}}</span>
                     </div>
                     <div>current/past: {{candidateCtrl.candidate.currentPosition}}</div>
-                    <div>company/location: {{candidateCtrl.candidate.company+","+candidateCtrl.candidate.localion}}</div>
+                    <div>company/location: {{candidateCtrl.candidate.company+", "+candidateCtrl.candidate.location}}</div>
                     <div>emaile: {{candidateCtrl.candidate.email}}</div>
                     <div>skype: {{candidateCtrl.candidate.skype}}</div>
                     <div>phone: {{candidateCtrl.candidate.phone}}</div>

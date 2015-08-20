@@ -41,8 +41,9 @@
                 </aside>
                 <div class="ll_list">
                     <div class="ll_candidate_item" ng-repeat="candidate in longListCtrl.candidatesList" ng-click="longListCtrl.viewCandidateInfo(candidate.id)" ng-class="longListCtrl.ActiveItem(candidate.id)">
-                        <div class="col-md-4 ll_candidate_item_img" >
-                            <span ng-switch on="candidate.photo"><img ng-switch-default src="{{candidate.photoUrl}}" /></span>
+                        <div class="col-md-4 ll_candidate_item_img">
+                            <shor-list-star is-short="candidate.shortlisted" candidate-id="candidate.id" size="'18px'"></shor-list-star>
+                            <img ng-src="{{candidate.photoUrl}}" />
                             <p class="years_of_experience">{{candidate.yearsOfExperience}}</p>
                             <!--<p class="candidate_bookmark"><span class="glyphicon glyphicon-star-empty"></span></p>-->
                         </div>
@@ -81,7 +82,8 @@
             <h2>Preview</h2>
             <div class="ll_preview_info">
                 <div class="ll_preview_info_img">
-                    <img src="{{longListCtrl.candidateDetails.photoUrl}}" alt="{{longListCtrl.candidateDetails.firstName}} {{longListCtrl.candidateDetails.lastName}} foto" title="{{longListCtrl.candidateDetails.firstName}} {{longListCtrl.candidateDetails.lastName}} foto" />
+                    <shor-list-star is-short="longListCtrl.candidateDetails.shortlisted" candidate-id="longListCtrl.candidateDetails.id" size="'30px'"></shor-list-star>
+                    <img src="{{longListCtrl.candidateDetails.photoUrl}}" alt="{{longListCtrl.candidateDetails.firstName}} {{longListCtrl.candidateDetails.lastName}} foto" title="{{longListCtrl.candidateDetails.firstName}} {{longListCtrl.candidateDetails.lastName}} foto"/>
                 </div>
                 <div class="ll_preview_info_all">
                     <p>{{longListCtrl.candidateDetails.firstName}} {{longListCtrl.candidateDetails.lastName}}</p>
@@ -89,7 +91,7 @@
                     <p>{{longListCtrl.candidateDetails.resolution}} / {{longListCtrl.stages[candidate.stage].name}}</p>
                 </div>
                 <div class="ll_preview_info_control">
-                    <a class="btn" href="#/vacancy/{{longListCtrl.vacancy.id}}/candidate/{{longListCtrl.candidateDetails.id}}">Full Profile</a>
+                    <a class="btn" href="#/vacancy/{{longListCtrl.vacancy.id}}/candidate/{{longListCtrl.candidateDetails.id}}">Details</a>
                     <a class="btn" href="../../#">Edit Profile</a>
                 </div>
                 <div class="ll_preview_info_comments">

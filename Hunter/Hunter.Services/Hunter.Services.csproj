@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\ActivityDto.cs" />
+    <Compile Include="Dto\ApiResults\FeedbackUpdatedResult.cs" />
+    <Compile Include="Dto\ApiResults\SpecNoteResult.cs" />
     <Compile Include="Dto\ApiResults\TestsResult.cs" />
     <Compile Include="Dto\CandidateLongListDetailsDto.cs" />
     <Compile Include="Dto\CandidateLongListDto.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="Dto\ResumeDto.cs" />
     <Compile Include="Dto\TestDto.cs" />
     <Compile Include="Dto\SpecialNoteDto.cs" />
+    <Compile Include="Dto\UserDto.cs" />
     <Compile Include="Dto\UserProfileDto.cs" />
     <Compile Include="Dto\Vacancy\AddedByDto.cs" />
     <Compile Include="Dto\Vacancy\VacancyByStateDto.cs" />
@@ -90,6 +93,7 @@
     <Compile Include="Extensions\CandidateExtensions.cs" />
     <Compile Include="Extensions\TestExtension.cs" />
     <Compile Include="Extensions\SpecialNoteExtension.cs" />
+    <Compile Include="Extensions\UserExtension.cs" />
     <Compile Include="Extensions\UserProfileExtension.cs" />
     <Compile Include="Extensions\UserRoleExtention.cs" />
     <Compile Include="Extensions\VacancyExtensions.cs" />

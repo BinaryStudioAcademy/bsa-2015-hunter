@@ -13,7 +13,11 @@
             </div>
             <div>
                 <label>Birth Date</label>
-                <input type="date" class="form-control" ng-model="candidateAddEditCtrl.DateOfBirth" />
+                <input type="date" class="form-control" ng-model="candidateAddEditCtrl.DateOfBirth"/>
+            </div>
+            <div>
+                <label>Company</label>
+                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.Company" />
             </div>
             <div>
                 <label>Location</label>
@@ -100,9 +104,14 @@
             </div>
         </div>
         <div class="col-md-4">
-            <h3>Photo</h3><hr />
+            <h3>Photo</h3><hr/>
+            <div style="position: relative">
+                
+            <shor-list-star is-short="candidateAddEditCtrl.ShortListed" candidate-id="candidateAddEditCtrl.id" size="'45px'"></shor-list-star>
+            
             <img class="edit-page-photo" ng-if="!candidateAddEditCtrl.photoLoaded" ngf-src="candidateAddEditCtrl.picture" />
             <img class="edit-page-photo" ng-if="candidateAddEditCtrl.photoLoaded" src="{{candidateAddEditCtrl.photoUrl}}" />
+            </div>
             <input placeholder="enter external url" type="text" class="form-control" ng-model="candidateAddEditCtrl.externalUrl" />
             <button class="btn btn-default form-control" ng-click="candidateAddEditCtrl.getFromUrl()">Get photo from URL</button>
             <button class="btn btn-default form-control" ngf-select ngf-multiple="false" ngf-change="candidateAddEditCtrl.previewSelected($file)">Upload photo from computer</button>
