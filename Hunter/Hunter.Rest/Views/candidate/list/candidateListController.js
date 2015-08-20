@@ -6,7 +6,8 @@
         .controller('CandidateListController', CandidateListController);
 
     CandidateListController.$inject = [
-       '$location',
+        '$location',
+        '$routeParams',
         '$filter',
         '$scope',
         '$rootScope',
@@ -20,7 +21,7 @@
         'VacancyHttpService'
     ];
 
-    function CandidateListController($location, $filter, $scope, $rootScope, authService, $odataresource, PoolsHttpService, $odata, EnumConstants, CandidateHttpService, longlistHttpService, vacancyHttpService) {
+    function CandidateListController($location, $routeParams, $filter, $scope, $rootScope, authService, $odataresource, PoolsHttpService, $odata, EnumConstants, CandidateHttpService, longlistHttpService, vacancyHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         vm.name = 'Candidates';
@@ -34,6 +35,29 @@
         vm.totalItems = 0;
         vm.skip = 0;
         vm.order;
+
+        vm.vacancy;
+        vm.vacancyId;
+        
+        vm.pageConfig = {
+            pageTitle: 'Candidates (general pool)',
+            isAddToVacancyButton: true,
+            locationAfterAdding: '/candidate/list'
+    };
+
+        if (!isObjectEmpty($routeParams)) {
+            vm.vacancyId = $routeParams.addToVacancy;
+
+            // get vacancy info
+            vacancyHttpService.getLongList(vm.vacancyId).then(function (result) {
+                console.log(result);
+                vm.vacancy = result;
+                vm.pageConfig.pageTitle = "Add Candidates to '" + vm.vacancy.name + "'";
+            });
+
+            vm.pageConfig.isAddToVacancyButton = false;
+            vm.pageConfig.locationAfterAdding = '/vacancy/' + vm.vacancyId + '/longlist';
+        }
 
         vm.pools = [];
         PoolsHttpService.getAllPools().then(function (result) {
@@ -92,8 +116,8 @@
                                     vm.candidateList = cands.items;
                                     $rootScope.candidateDetails.id = vm.candidateList[0].id;
                                     vm.totalItems = cands.count;
-                    console.log(vm.candidateList);
-                });
+                                    console.log(vm.candidateList);
+                                });
         }
 
         $scope.$watch('candidateListCtrl.filter', function () {
@@ -149,7 +173,7 @@
         }, true);
 
         vm.ShowDetails = function (item) {
-           // if ($rootScope.candidateDetails.id != id ){
+            // if ($rootScope.candidateDetails.id != id ){
             $rootScope.candidateDetails.id = item.id;
             $rootScope.candidateDetails.shortListed = item.shortListed;
             // } 
@@ -172,17 +196,17 @@
         function addCandidateToLongList() {
             var cards = createCardRequestBody();
             //console.log(cards);
-            longlistHttpService.addCards(cards);
+            longlistHttpService.addCards(cards, vm.pageConfig.locationAfterAdding);
         }
 
         // not user-event functions 
         vm.selectedCandidates = [];
-        vm.VacancyId;
+        
         vm.vacancyByState;
         vm.vacancyStateId = EnumConstants.vacancyStates[1].id;
 
         vacancyHttpService.getVacancyByState(vm.vacancyStateId).then(function (result) {
-            //console.log(result);
+            console.log(result);
             vm.vacancyByState = result;
         });
 
@@ -191,12 +215,16 @@
             for (var i = 0; i < vm.selectedCandidates.length; i++) {
                 cards.push({
                     CandidateId: vm.selectedCandidates[i],
-                    VacancyId: vm.VacancyId,
+                    VacancyId: vm.vacancyId,
                     Stage: EnumConstants.cardStages[0].id
                 });
             }
 
             return cards;
+        }
+
+        function isObjectEmpty(obj) {
+            return (Object.getOwnPropertyNames(obj).length === 0);
         }
     }
 

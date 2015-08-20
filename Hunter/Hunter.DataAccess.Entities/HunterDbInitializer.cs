@@ -126,7 +126,7 @@ namespace Hunter.DataAccess.Entities
             var vacancy1 = new Vacancy()
             {
                 Name = "PHP Developer",
-                Status = 0,
+                Status = 1,
                 UserProfileId = 1,
                 StartDate = new DateTime(2015, 8, 1),
                 EndDate = new DateTime(2015, 10, 5),
@@ -168,7 +168,7 @@ namespace Hunter.DataAccess.Entities
             var vacancy2 = new Vacancy()
             {
                 Name = "PHP Developer - Magento Lead",
-                Status = 0,
+                Status = 1,
                 UserProfileId = 2,
                 StartDate = new DateTime(2015, 8, 2),
                 EndDate = new DateTime(2015, 10, 5),

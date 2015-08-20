@@ -1,17 +1,17 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10">
-            <h3>Candidates (general pool)</h3>
+            <h3>{{candidateListCtrl.pageConfig.pageTitle}}</h3>
         </div>
     </div>
     <div class="row">
         <div class="filte-form-wrapper col-md-3">
-            
-                <div class="form-group">
-                    <label>Filter</label>
-                    <input type="search" class="form-control" ng-model="candidateListCtrl.filter.search">
-                </div>
-            
+
+            <div class="form-group">
+                <label>Filter</label>
+                <input type="search" class="form-control" ng-model="candidateListCtrl.filter.search">
+            </div>
+
             <div class="filter-settings">
                 <ul>
                     <li>
@@ -27,7 +27,7 @@
                         <ul>
                             <li ng-repeat="status in candidateListCtrl.statuses">
                                 <input type="checkbox" checklist-model="candidateListCtrl.filter.statuses" checklist-value="status.id"> {{status.name}}
-                            </li> 
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -44,9 +44,9 @@
         <div class="col-md-5">
             <div class="form-group col-md-5">
                 <label>Order By</label>
-            <select class="form-control" ng-change="candidateListCtrl.getCandidates()" ng-options="item.options as item.text for item in candidateListCtrl.sortOptions" ng-model="candidateListCtrl.order"></select>
+                <select class="form-control" ng-change="candidateListCtrl.getCandidates()" ng-options="item.options as item.text for item in candidateListCtrl.sortOptions" ng-model="candidateListCtrl.order"></select>
             </div>
-            
+
             <table class="longlist table table-bordered">
                 <tr>
                     <th></th>
@@ -96,7 +96,7 @@
                     <td><input type="checkbox" checklist-model="candidateListCtrl.selectedCandidates" checklist-value="item.id"></td>
                     <td style="position: relative">
                         <shor-list-star is-short="item.shortListed" candidate-id="item.id" size="'18px'"></shor-list-star>
-                        <img class="photo-in-list" ng-src="{{item.photoUrl}}"/>
+                        <img class="photo-in-list" ng-src="{{item.photoUrl}}" />
                     </td>
                     <td><a href="#/candidate/{{item.id}}">{{item.firstName + " " + item.lastName}}</a></td>
                     <td>{{item.addedBy}}</td>
@@ -108,14 +108,16 @@
                     <td ng-hide="$root.candidateDetails.show">{{item.salary}}</td>-->
                 </tr>
             </table>
-            <div ng-click="candidateListCtrl.addCandidateToLongList()" style="background-color: grey; width: 200px; height: 30px; overflow: auto">Add candidate to Long List (temp button)</div>
-            
-            <!--<select class="form-control" ng-change="candidateListCtrl.getCandidatesForLongList()" ng-options="item.options as item.name for item in candidateListCtrl.vacancyByState" ng-model="candidateListCtrl.VacancyId"></select>-->
-            <select class="form-control" ng-model="candidateListCtrl.VacancyId">
-                <option ng-repeat="option in candidateListCtrl.vacancyByState" value="{{option.id}}">{{option.name}}</option>
-            </select>
-
-
+            <div ng-show="candidateListCtrl.pageConfig.isAddToVacancyButton" class="row form-inline">
+                <select class="col-md-7 form-control" ng-model="candidateListCtrl.VacancyId">
+                    <!--<option value="">-- choose vacancy --</option>-->
+                    <option ng-repeat="option in candidateListCtrl.vacancyByState" value="{{option.id}}">{{option.name}}</option>
+                </select>
+                <button class="btn btn-default col-md-offset-1 col-md-4" type="button" ng-click="candidateListCtrl.addCandidateToLongList()">Add to Long List</button>
+            </div>
+            <div ng-hide="candidateListCtrl.pageConfig.isAddToVacancyButton" class="row form-inline">
+                <button class="btn btn-default col-md-offset-1 col-md-10" type="button" ng-click="candidateListCtrl.addCandidateToLongList()">Add to '{{candidateListCtrl.vacancy.name}}' Long List</button>
+            </div>
             <pagination total-items="candidateListCtrl.totalItems"
                         ng-model="candidateListCtrl.filter.currentPage"
                         items-per-page="candidateListCtrl.pageSize"
@@ -123,7 +125,7 @@
                         class="pagination-sm"
                         boundary-links="true"
                         template-url="../../Views/templates/pagination.html"></pagination>
-            <nav>
+            <!--<nav>
                 <div class="row">
                     <div class="dropdown col-md-2">
                         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -154,7 +156,7 @@
                     </div>
 
                 </div>
-            </nav>
+            </nav>-->
         </div>
         <div class="col-md-4" ng-include="'/Views/candidate/profilePartial/profilePartial.html'">
         </div>
