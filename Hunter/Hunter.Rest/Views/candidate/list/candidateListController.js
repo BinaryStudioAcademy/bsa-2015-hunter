@@ -100,7 +100,7 @@
             if (vm.filter.pools.length > 0) {
                 var poolPred = [];
                 angular.forEach(vm.filter.pools, function (value, key) {
-                    poolPred.push(new $odata.Predicate(new $odatcandidateLista.Property('PoolNames/any(p: p eq \'' + value + '\' )'), true));
+                    poolPred.push(new $odata.Predicate(new $odata.Property('PoolNames/any(p: p eq \'' + value + '\' )'), true));
                 });
 
                 poolPred = $odata.Predicate.or(poolPred);

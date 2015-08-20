@@ -173,7 +173,13 @@
 
         vm.getCandidatesForLongList();
 
-       
+        $scope.$watch('longListCtrl.candidateDetails.shortlisted', function () {
+            angular.forEach(vm.candidatesList, function (item) {
+               if (item.id == vm.candidateDetails.id) {
+                    item.shortlisted = vm.candidateDetails.shortlisted;
+                }
+            });
+        });
 
         //function setTab(setTab) {
         //    vm.tab = setTab;

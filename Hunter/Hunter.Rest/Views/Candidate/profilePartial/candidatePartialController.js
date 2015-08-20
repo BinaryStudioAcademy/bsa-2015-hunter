@@ -6,13 +6,14 @@
         .controller('CandidatePartialController', CandidatePartialController);
 
     CandidatePartialController.$inject = [
+        '$scope',
         '$location',
         '$rootScope',
         'AuthService',
         'CandidateHttpService'
     ];
 
-    function CandidatePartialController($location, $rootScope, authService, candidateHttpService) {
+    function CandidatePartialController($scope, $location, $rootScope, authService, candidateHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         $rootScope.$watch(
@@ -32,16 +33,21 @@
         //    }
         //})();
 
+        $scope.$watch('candidatePartCtrl.candidate.shortListed', function () {
+            if (vm.candidate) {
+                angular.forEach($scope.$parent.candidateListCtrl.candidateList, function (item) {
+                    if (item.id == vm.candidate.id) {
+                        item.shortListed = vm.candidate.shortListed;
+                    }
+                });
+            }
+        });
+
 
         function getCandidateDetails(id) {
-            if (id != null) {
-                candidateHttpService.getCandidate(id).then(function (response) {
-                    console.log(response.data);
-                    vm.candidate = response.data;
-                });
-            } else {
-                return;
-            }
+            candidateHttpService.getCandidate(id).then(function (response) {
+                vm.candidate = response.data;
+            });
 
         }
     }
