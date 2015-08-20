@@ -64,7 +64,7 @@ namespace Hunter.Services
                
                 Id = vacancy.Id,
                 Name = vacancy.Name,
-                AddedByName = vacancy.UserProfile != null ? vacancy.UserProfile.UserLogin : "",
+                AddedByName = vacancy.UserProfile != null ? vacancy.UserProfile.UserLogin : ""
                 //PoolId = vacancy.PoolId
             };
             return vll;

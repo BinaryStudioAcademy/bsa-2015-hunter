@@ -12,7 +12,8 @@ namespace Hunter.Services.Extensions
                 Id = activity.Id,
                 Message = activity.Message,
                 Tag = activity.Tag,
-                UserLogin = activity.UserLogin,
+                UserLogin = activity.UserProfile.UserLogin,
+                UserAlias = activity.UserProfile.Alias,
                 Url = activity.Url,
                 Time = activity.Time
             };
@@ -27,7 +28,6 @@ namespace Hunter.Services.Extensions
                 Id = activityDto.Id,
                 Message = activityDto.Message,
                 Tag = activityDto.Tag,
-                UserLogin = activityDto.UserLogin,
                 Url = activityDto.Url,
                 Time = activityDto.Time
             };

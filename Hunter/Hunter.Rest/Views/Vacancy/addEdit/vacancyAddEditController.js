@@ -11,10 +11,12 @@
         'AuthService',
         'VacancyHttpService',
         'PoolsHttpService',
-        'EnumConstants'
+        'EnumConstants',
+        'localStorageService'
     ];
 
-    function VacancyAddEditController($location, $routeParams, authService, vacancyHttpService, poolsHttpService, enumConstants) {
+    function VacancyAddEditController($location, $routeParams, authService, vacancyHttpService, poolsHttpService, enumConstants,
+        localStorageService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
 
@@ -39,8 +41,8 @@
 
         vm.submitVacancy = function () {
             if (vacancyHttpService.validateVacancy(vm.currentVacancy)) {
-                if (vm.isNewVacancy)
-                {
+                if (vm.isNewVacancy) {
+                    vm.currentVacancy.userLogin = localStorageService.get('authorizationData').userName;
                     vacancyHttpService.addVacancy(vm.currentVacancy);
                 } else {
                     vacancyHttpService.updateVacancy(vm.currentVacancy, vm.currentVacancy.id);

@@ -2,7 +2,7 @@
     <div class="hrInterview_form">
         <div>
             <h3>Summary</h3>
-            <span ng-hide="overviewCtrl.summary.date.length <= 0">Edited by {{overviewCtrl.summary.userName}} at {{overviewCtrl.summary.date}}</span>
+            <span ng-hide="overviewCtrl.summary.date.length <= 0">Edited by {{overviewCtrl.summary.userAlias}} at {{overviewCtrl.summary.date}}</span>
         </div>
         <textarea disabled name="text" ng-model="overviewCtrl.summary.text" ng-auto-expand></textarea>
     </div>
@@ -10,7 +10,7 @@
         <div ng-show="feedback.text.length > 0">
             <div>
                 <h3>{{generalCardCtrl.feedbackTypes[feedback.type].name}}</h3>
-                <span ng-hide="feedback.date == ''">Updated by {{feedback.userName}} at {{feedback.date}}</span>
+                <span ng-hide="feedback.date == ''">Updated by {{feedback.userAlias}} at {{feedback.date}}</span>
             </div>
             <textarea disabled name="text" ng-model="feedback.text" ng-auto-expand></textarea>
         </div>
@@ -18,7 +18,7 @@
     <div class="hrInterview_form" ng-show="overviewCtrl.techFeedback.text.length > 0">
         <div>
             <h3>Expertise</h3>
-            <span ng-hide="overviewCtrl.techFeedback.date.length <= 0">Edited by {{overviewCtrl.techFeedback.userName}} at {{overviewCtrl.techFeedback.date}}</span>
+            <span ng-hide="overviewCtrl.techFeedback.date.length <= 0">Edited by {{overviewCtrl.techFeedback.userAlias}} at {{overviewCtrl.techFeedback.date}}</span>
         </div>
         <textarea disabled name="text" ng-model="overviewCtrl.techFeedback.text" ng-auto-expand></textarea>
     </div>
@@ -26,7 +26,7 @@
         <div ng-show="test.feedback.text.length > 0">
             <div>
                 <h3>Test Feedback</h3>
-                <span ng-hide="test.feedback.date.length <= 0">Updated by {{test.feedback.userName}} at {{test.feedback.date}}</span>
+                <span ng-hide="test.feedback.date.length <= 0">Updated by {{test.feedback.userAlias}} at {{test.feedback.date}}</span>
             </div>
             <textarea disabled name="text" ng-model="test.feedback.text" ng-auto-expand></textarea>
         </div>

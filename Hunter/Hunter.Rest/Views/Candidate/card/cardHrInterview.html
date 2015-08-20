@@ -9,7 +9,7 @@
                     <div>
                         <div>
                             <h3>{{generalCardCtrl.feedbackTypes[feedback.type].name}}</h3>
-                            <span ng-hide="feedback.date == ''">Updated by {{feedback.userName}} at {{feedback.date}}</span>
+                            <span ng-hide="feedback.date == ''">Updated by {{feedback.userAlias}} at {{feedback.date}}</span>
                         </div>
                         <textarea name="text" ng-model="feedback.text" ng-auto-expand>{{feedback.text}}</textarea>
                     </div>

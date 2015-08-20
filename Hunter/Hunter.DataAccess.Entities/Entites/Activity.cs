@@ -10,8 +10,9 @@ namespace Hunter.DataAccess.Entities
     {
         public int Id { get; set; }
 
-        [StringLength(100)]
-        public string UserLogin { get; set; }
+        public int? UserProfileId { get; set; }
+
+        public virtual UserProfile UserProfile { get; set; }
 
         public ActivityType Tag { get; set; }
 
