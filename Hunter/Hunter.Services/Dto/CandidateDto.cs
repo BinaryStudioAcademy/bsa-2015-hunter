@@ -37,6 +37,8 @@ namespace Hunter.Services.Dto
 
         public string AddedBy { get; set; }
 
+        public string UserAlias { get; set; }
+
         public DateTime AddDate { get; set; }
 
         public IEnumerable<CardDto> Cards { get; set; }

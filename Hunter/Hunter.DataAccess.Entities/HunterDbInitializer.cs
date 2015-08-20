@@ -466,11 +466,11 @@ namespace Hunter.DataAccess.Entities
             #endregion
 
             #region ACTIVITY
-            var activity1 = new Activity() { Message = "recruiter@local.com has joined Hunter", Tag = ActivityType.User, Time = DateTime.Parse("10.08.2015"), UserLogin = "recruiter@local.com", Url = new Uri("#/user/edit/1", UriKind.Relative).ToString() };
-            var activity2 = new Activity() { Message = "A new vacancy has been created : PHP Developer", Tag = ActivityType.Vacancy, Time = DateTime.Parse("11.08.2015"), UserLogin = "recruiter2", Url = new Uri("#/vacancy/1", UriKind.Relative).ToString() };
-            var activity3 = new Activity() { Message = "Technical feedback for Hollis Sefton on PHP Developer has been updated", Tag = ActivityType.Feedback, Time = DateTime.Parse("12.08.2015"), UserLogin = "techspec1", Url = new Uri("#/vacancy/1/candidate/1?tab=technicalinterview", UriKind.Relative).ToString() };
-            var activity4 = new Activity() { Message = "English feedback for Hollis Sefton on PHP Developer has been updated", Tag = ActivityType.Feedback, Time = DateTime.Parse("13.08.2015"), UserLogin = "techspec@local.com", Url = new Uri("#/vacancy/1/candidate/1?tab=hrinterview", UriKind.Relative).ToString() };
-            var activity5 = new Activity() { Message = "A new candidate has been added : Hollis Sefton", Tag = ActivityType.Candidate, Time = DateTime.Parse("14.08.2015"), UserLogin = "recruiter@local.com", Url = new Uri("#/candidate/1", UriKind.Relative).ToString() };
+            var activity1 = new Activity() { Message = "recruiter@local.com has joined Hunter", Tag = ActivityType.User, Time = DateTime.Parse("10.08.2015"), UserProfileId = 3, Url = new Uri("#/user/edit/1", UriKind.Relative).ToString() };
+            var activity2 = new Activity() { Message = "A new vacancy has been created : PHP Developer", Tag = ActivityType.Vacancy, Time = DateTime.Parse("11.08.2015"), UserProfileId = 3, Url = new Uri("#/vacancy/1", UriKind.Relative).ToString() };
+            var activity3 = new Activity() { Message = "Technical feedback for Hollis Sefton on PHP Developer has been updated", Tag = ActivityType.Feedback, Time = DateTime.Parse("12.08.2015"), UserProfileId = 2, Url = new Uri("#/vacancy/1/candidate/1?tab=technicalinterview", UriKind.Relative).ToString() };
+            var activity4 = new Activity() { Message = "English feedback for Hollis Sefton on PHP Developer has been updated", Tag = ActivityType.Feedback, Time = DateTime.Parse("13.08.2015"), UserProfileId = 1, Url = new Uri("#/vacancy/1/candidate/1?tab=hrinterview", UriKind.Relative).ToString() };
+            var activity5 = new Activity() { Message = "A new candidate has been added : Hollis Sefton", Tag = ActivityType.Candidate, Time = DateTime.Parse("14.08.2015"), UserProfileId = 1, Url = new Uri("#/candidate/1", UriKind.Relative).ToString() };
 
             var activities = new List<Activity> {activity1, activity2, activity3, activity4, activity5};
 

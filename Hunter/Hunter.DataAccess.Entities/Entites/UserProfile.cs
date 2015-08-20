@@ -14,6 +14,8 @@ namespace Hunter.DataAccess.Entities
             Candidate = new HashSet<Candidate>();
             Card = new HashSet<Card>();
             Feedback = new HashSet<Feedback>();
+            SpeacialNote = new HashSet<SpecialNote>();
+            Activity = new HashSet<Activity>();
         }
         
         [Required]
@@ -39,5 +41,11 @@ namespace Hunter.DataAccess.Entities
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Feedback> Feedback { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SpecialNote> SpeacialNote { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Activity> Activity { get; set; }
     }
 }
