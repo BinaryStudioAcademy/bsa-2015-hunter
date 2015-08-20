@@ -15,10 +15,11 @@ namespace Hunter.Services.Extensions
             var specialNotesDto = new SpecialNoteDto
             {
                 Id = specialNote.Id,
-                UserLogin = specialNote.UserLogin,
+                UserLogin = specialNote.UserProfile.UserLogin,
                 Text = specialNote.Text,
                 LastEdited = specialNote.LastEdited,
-                CardId = specialNote.CardId
+                CardId = specialNote.CardId,
+                UserAlias = specialNote.UserProfile.Alias
             };
 
             return specialNotesDto;
@@ -29,7 +30,6 @@ namespace Hunter.Services.Extensions
             var specialNote = new SpecialNote()
             {
                 Id = specialNotesDto.Id,
-                UserLogin = specialNotesDto.UserLogin,
                 Text = specialNotesDto.Text,
                 LastEdited = specialNotesDto.LastEdited,
                 CardId = specialNotesDto.CardId

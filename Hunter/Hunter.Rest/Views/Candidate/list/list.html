@@ -99,7 +99,7 @@
                         <img class="photo-in-list" ng-src="{{item.photoUrl}}"/>
                     </td>
                     <td><a href="#/candidate/{{item.id}}">{{item.firstName + " " + item.lastName}}</a></td>
-                    <td>{{item.addedBy}}</td>
+                    <td>{{item.userAlias}}</td>
                     <td>{{candidateListCtrl.statuses[item.resolution].name}}</td>
                     <!--<td ng-hide="$root.candidateDetails.show">{{item.email}}</td>
                     <td ng-hide="$root.candidateDetails.show">{{item.yearsOfExperience}}</td>

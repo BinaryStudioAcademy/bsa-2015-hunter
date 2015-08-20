@@ -10,10 +10,6 @@ namespace Hunter.DataAccess.Entities
         public int Id { get; set; }
 
         [Required]
-        [StringLength(200)]
-        public string UserLogin { get; set; }
-
-        [Required]
         [StringLength(3000)]
         public string Text { get; set; }
 
@@ -22,5 +18,9 @@ namespace Hunter.DataAccess.Entities
         public int CardId { get; set; }
 
         public virtual Card Card { get; set; }
+
+        public int? UserProfileId { get; set; }
+
+        public virtual UserProfile UserProfile { get; set; }
     }
 }
