@@ -15,9 +15,9 @@
             httpHandler.sendRequest({
                 verb: 'POST',
                 url: '/api/card',
-                body: body,
+                body: JSON.stringify(body),
                 successMessageToUser: 'Cards was added',
-                errorMessageToUser: 'Cards war not added',
+                errorMessageToUser: 'Cards was not added',
                 errorCallback: function (status) {
                     console.log("Add cards error");
                     console.log(status);

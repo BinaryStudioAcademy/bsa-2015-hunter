@@ -94,9 +94,9 @@
                 </tr>
                 <tr ng-repeat="item in candidateListCtrl.candidateList" ng-click="candidateListCtrl.ShowDetails(item)" ng-class="candidateListCtrl.ActiveTr(item.id)">
                     <td><input type="checkbox" checklist-model="candidateListCtrl.selectedCandidates" checklist-value="item.id"></td>
-                    <td ng-switch on="item.photo" style="position: relative">
+                    <td style="position: relative">
                         <shor-list-star is-short="item.shortListed" candidate-id="item.id" size="'18px'"></shor-list-star>
-                        <img class="photo-in-list" ng-switch-default src="{{item.photoUrl}}"/>
+                        <img class="photo-in-list" ng-src="{{item.photoUrl}}"/>
                     </td>
                     <td><a href="#/candidate/{{item.id}}">{{item.firstName + " " + item.lastName}}</a></td>
                     <td>{{item.addedBy}}</td>
@@ -110,6 +110,12 @@
             </table>
             <div ng-click="candidateListCtrl.addCandidateToLongList()" style="background-color: grey; width: 200px; height: 30px; overflow: auto">Add candidate to Long List (temp button)</div>
             
+            <!--<select class="form-control" ng-change="candidateListCtrl.getCandidatesForLongList()" ng-options="item.options as item.name for item in candidateListCtrl.vacancyByState" ng-model="candidateListCtrl.VacancyId"></select>-->
+            <select class="form-control" ng-model="candidateListCtrl.VacancyId">
+                <option ng-repeat="option in candidateListCtrl.vacancyByState" value="{{option.id}}">{{option.name}}</option>
+            </select>
+
+
             <pagination total-items="candidateListCtrl.totalItems"
                         ng-model="candidateListCtrl.filter.currentPage"
                         items-per-page="candidateListCtrl.pageSize"
