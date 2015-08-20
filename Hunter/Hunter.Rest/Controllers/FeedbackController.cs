@@ -70,6 +70,25 @@ namespace Hunter.Rest.Controllers
             
         }
 
+        [HttpGet]
+        [Route("summary/{vacancyId:int}/{candidateId:int}")]
+        [ResponseType(typeof(FeedbackDto))]
+        public HttpResponseMessage GetSummary(int vacancyId, int candidateId)
+        {
+            try
+            {
+                var summary = _feedbackService.GetSummary(vacancyId, candidateId);
+                if (summary == null)
+                    return Request.CreateResponse(HttpStatusCode.NoContent, "not summary");
+                return Request.CreateResponse(HttpStatusCode.OK, summary);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
+            }
+
+        }
+
         // GET: api/Feedback/5
         public string Get(int id)
         {

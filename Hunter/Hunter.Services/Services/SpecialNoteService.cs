@@ -4,6 +4,7 @@ using Hunter.DataAccess.Interface;
 using Hunter.Services.Dto;
 using Hunter.Services.Dto.ApiResults;
 using Hunter.Services.Extensions;
+using Hunter.Services.Interfaces;
 using Hunter.Services.Services.Interfaces;
 
 namespace Hunter.Services.Services
@@ -12,12 +13,15 @@ namespace Hunter.Services.Services
     {
         private readonly ISpecialNoteRepository _specialNoteRepository;
         private readonly ICardRepository _cardRepository;
+        private readonly IActivityHelperService _activityHelperService;
         //private readonly IUserProfileRepository _userProfileRepository;
 
-        public SpecialNoteService(ISpecialNoteRepository specialNoteRepository, ICardRepository cardRepository)
+        public SpecialNoteService(ISpecialNoteRepository specialNoteRepository, ICardRepository cardRepository,
+            IActivityHelperService activityHelperService)
         {
             _specialNoteRepository = specialNoteRepository;
             _cardRepository = cardRepository;
+            _activityHelperService = activityHelperService;
             //_userProfileRepository = userProfileRepository;
         }
 
@@ -31,7 +35,6 @@ namespace Hunter.Services.Services
         {
             return _specialNoteRepository.Get(id).ToDto();
         }
-
 
         public SpecNoteResult AddSpecialNote(SpecialNoteDto entity, int vid, int cid)
         {

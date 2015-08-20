@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Hunter.DataAccess.Entities;
 using Hunter.Services.Dto;
-using System.Linq;
 
 namespace Hunter.Services.Interfaces
 {
@@ -14,10 +13,12 @@ namespace Hunter.Services.Interfaces
         IQueryable<Candidate> Query();
         IEnumerable<CandidateDto> GetAllInfo();
         CandidateDto GetInfo(int id);
-        void Add(CandidateDto candidate);
+        void Add(CandidateDto candidate, string name);
         void Delete(Candidate candidate);
         void Update(CandidateDto candidate);
         IEnumerable<CandidateLongListDto> GetLongList(int id);
         CandidateLongListDetailsDto GetLongListDetails(int id);
+        IEnumerable<AddedByDto> GetCandidatesAddedBy();
+        void UpdateShortFlag(int id, bool isShort);
     }
 }

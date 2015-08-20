@@ -1,21 +1,19 @@
 ﻿<div class="container-partial" ng-controller='CandidatePartialController as candidatePartCtrl'>
     <div class="row">
-        <div class="col-md-2">
-            <button class="btn btn-default" type="button" ng-click="$root.candidateDetails.show = false">Exit</button>
-        </div>
-        <div class="col-md-10">
+        <div class="col-md-12">
             <h4>Preview</h4>
         </div>
     </div>
     <div class="candidate-info">
         <div class="candidate-personal-info row">
             <div class="image col-md-5">
-                <img class="img-circle" src="http://www.glaz.tv/images/logos/webcams/big/panda.jpg" alt="">
+                <shor-list-star is-short="candidatePartCtrl.candidate.shortListed" candidate-id="candidatePartCtrl.candidate.id" size="'30px'"></shor-list-star>
+                <img class="preview-profile-photo img-circle" ng-src="{{candidatePartCtrl.candidate.photoUrl}}"/>
             </div>
             <div class="col-md-7">
 
                 <span class="candidate-name">{{candidatePartCtrl.candidate.firstName+" "+candidatePartCtrl.candidate.lastName}}</span>
-                <div class="salary-wrapper">900</div>
+                <div class="salary-wrapper">{{candidatePartCtrl.candidate.salary}}</div>
             </div>
         </div>
         <div class="candidate-personal-info row">

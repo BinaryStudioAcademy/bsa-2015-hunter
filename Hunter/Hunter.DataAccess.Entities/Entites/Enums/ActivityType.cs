@@ -10,6 +10,12 @@ namespace Hunter.DataAccess.Entities.Entites.Enums
     {
         User,
         Vacancy,
-        Feedback
+        Feedback,
+        Candidate,
+        Pool,
+        SpecialNote,
+        Resume,
+        Test,
+        Photo
     }
 }

@@ -127,7 +127,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = "PHP Developer",
                 Status = 0,
-                UserId = 1,
+                UserProfileId = 1,
                 StartDate = new DateTime(2015, 8, 1),
                 EndDate = new DateTime(2015, 10, 5),
                 Pool = phpPool,
@@ -169,7 +169,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = "PHP Developer - Magento Lead",
                 Status = 0,
-                UserId = 2,
+                UserProfileId = 2,
                 StartDate = new DateTime(2015, 8, 2),
                 EndDate = new DateTime(2015, 10, 5),
                 Pool = phpPool,
@@ -186,7 +186,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = "Senior PHP Developer",
                 Status = 0,
-                UserId = 3,
+                UserProfileId = 3,
                 StartDate = new DateTime(2015, 8, 3),
                 EndDate = new DateTime(2015, 10, 5),
                 Pool = phpPool,
@@ -221,7 +221,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = "Inventive JavaScript / Node.js Leader",
                 Status = 0,
-                UserId = 1,
+                UserProfileId = 1,
                 StartDate = new DateTime(2015, 8, 4),
                 Pool = jsPool,
                 Description = @"About You:
@@ -254,7 +254,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = "Software engineer (JavaScript, AngularJS)",
                 Status = 0,
-                UserId = 2,
+                UserProfileId = 2,
                 StartDate = new DateTime(2015, 8, 5),
                 Pool = jsPool,
                 Description = @"We are looking for the best and brightest minds in Web Development. Someone who is truly passionate about creating beautiful innovative next generation UIs using bleeding edge technologies.
@@ -290,7 +290,7 @@ namespace Hunter.DataAccess.Entities
                 Status = 0,
                 StartDate = new DateTime(2015, 8, 6),
                 Pool = jsPool,
-                UserId = 3,
+                UserProfileId = 3,
                 Description = @"Job Description
                                 As Senior JavaScript Developer you will be working on our most challenging and important TV projects and products. You will have a core role in our team of experienced developers, designers, project managers.
                                 Most TV platforms are web-based, so you will make heavy use of your skills in JavaScript, CSS and HTML. The central pillar of much of our software is our AppCore: a JavaScript library which allows us to easily write TV apps once and deploy them to many different TV platforms easily.
@@ -333,7 +333,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = "Web Developer (Javascript/C#/.NET)",
                 Status = 0,
-                UserId = 1,
+                UserProfileId = 1,
                 StartDate = new DateTime(2015, 8, 7),
                 Pool = netPool,
                 Description = @"Job Description
@@ -382,7 +382,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = ".Net Developer",
                 Status = 0,
-                UserId = 2,
+                UserProfileId = 2,
                 StartDate = new DateTime(2015, 8, 8),
                 Pool = netPool,
                 Description = @"Job Description
@@ -420,7 +420,7 @@ namespace Hunter.DataAccess.Entities
             {
                 Name = "Backend .Net Web Developer",
                 Status = 0,
-                UserId = 3,
+                UserProfileId = 3,
                 StartDate = new DateTime(2015, 8, 2),
                 Pool = netPool,
                 Description = @"Job Description
@@ -466,11 +466,11 @@ namespace Hunter.DataAccess.Entities
             #endregion
 
             #region ACTIVITY
-            var activity1 = new Activity() { Message = "Add new user to Pool", Tag = ActivityType.User, Time = DateTime.Parse("10.08.2015"), UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
-            var activity2 = new Activity() { Message = "Create new Vacancy Junior PHP Developer", Tag = ActivityType.Vacancy, Time = DateTime.Parse("11.08.2015"), UserLogin = "recruiter2", Url = "http://binary-studio.com/" };
-            var activity3 = new Activity() { Message = "Add new Feedback to Hollis Sefton", Tag = ActivityType.Feedback, Time = DateTime.Parse("12.08.2015"), UserLogin = "techspec1", Url = "http://binary-studio.com/" };
-            var activity4 = new Activity() { Message = "Add new Feedback to Jennie Charlie", Tag = ActivityType.Feedback, Time = DateTime.Parse("13.08.2015"), UserLogin = "techspec@local.com", Url = "http://binary-studio.com/" };
-            var activity5 = new Activity() { Message = "Add new user Lon Abner to Pool", Tag = ActivityType.User, Time = DateTime.Parse("14.08.2015"), UserLogin = "recruiter@local.com", Url = "http://binary-studio.com/" };
+            var activity1 = new Activity() { Message = "recruiter@local.com has joined Hunter", Tag = ActivityType.User, Time = DateTime.Parse("10.08.2015"), UserLogin = "recruiter@local.com", Url = new Uri("#/user/edit/1", UriKind.Relative).ToString() };
+            var activity2 = new Activity() { Message = "A new vacancy has been created : PHP Developer", Tag = ActivityType.Vacancy, Time = DateTime.Parse("11.08.2015"), UserLogin = "recruiter2", Url = new Uri("#/vacancy/1", UriKind.Relative).ToString() };
+            var activity3 = new Activity() { Message = "Technical feedback for Hollis Sefton on PHP Developer has been updated", Tag = ActivityType.Feedback, Time = DateTime.Parse("12.08.2015"), UserLogin = "techspec1", Url = new Uri("#/vacancy/1/candidate/1?tab=technicalinterview", UriKind.Relative).ToString() };
+            var activity4 = new Activity() { Message = "English feedback for Hollis Sefton on PHP Developer has been updated", Tag = ActivityType.Feedback, Time = DateTime.Parse("13.08.2015"), UserLogin = "techspec@local.com", Url = new Uri("#/vacancy/1/candidate/1?tab=hrinterview", UriKind.Relative).ToString() };
+            var activity5 = new Activity() { Message = "A new candidate has been added : Hollis Sefton", Tag = ActivityType.Candidate, Time = DateTime.Parse("14.08.2015"), UserLogin = "recruiter@local.com", Url = new Uri("#/candidate/1", UriKind.Relative).ToString() };
 
             var activities = new List<Activity> {activity1, activity2, activity3, activity4, activity5};
 
@@ -634,7 +634,7 @@ namespace Hunter.DataAccess.Entities
                     Text = "Technical Feedback Expertise comment",
                     Added = new DateTime(2015,10,8),
                     Edited = DateTime.Now,
-                    Type = (int)FeedbackType.TechFeedback,
+                    Type = (int)FeedbackType.Expertise,
                     Status = 1
                 },
                 new Feedback()
@@ -644,7 +644,7 @@ namespace Hunter.DataAccess.Entities
                     Text = "Technical Feedback Expertise comment",
                     Added = new DateTime(2015,10,8),
                     Edited = DateTime.Now,
-                    Type = (int)FeedbackType.TechFeedback,
+                    Type = (int)FeedbackType.Expertise,
                     Status = 1
                 }
             };

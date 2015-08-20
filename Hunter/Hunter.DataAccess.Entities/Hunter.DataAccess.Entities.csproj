@@ -150,6 +150,18 @@
     <Compile Include="Migrations\201508171149241_AddAddedFieldInTest.Designer.cs">
       <DependentUpon>201508171149241_AddAddedFieldInTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508190553193_ChangeUserIdOnUserProfileId.cs" />
+    <Compile Include="Migrations\201508190553193_ChangeUserIdOnUserProfileId.Designer.cs">
+      <DependentUpon>201508190553193_ChangeUserIdOnUserProfileId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508190916315_candidate_resume_scheme.cs" />
+    <Compile Include="Migrations\201508190916315_candidate_resume_scheme.Designer.cs">
+      <DependentUpon>201508190916315_candidate_resume_scheme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508191038149_add_resumeSummari_candidate_field.cs" />
+    <Compile Include="Migrations\201508191038149_add_resumeSummari_candidate_field.Designer.cs">
+      <DependentUpon>201508191038149_add_resumeSummari_candidate_field.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -207,6 +219,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508171149241_AddAddedFieldInTest.resx">
       <DependentUpon>201508171149241_AddAddedFieldInTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508190553193_ChangeUserIdOnUserProfileId.resx">
+      <DependentUpon>201508190553193_ChangeUserIdOnUserProfileId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508190916315_candidate_resume_scheme.resx">
+      <DependentUpon>201508190916315_candidate_resume_scheme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508191038149_add_resumeSummari_candidate_field.resx">
+      <DependentUpon>201508191038149_add_resumeSummari_candidate_field.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

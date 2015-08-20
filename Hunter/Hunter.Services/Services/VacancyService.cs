@@ -7,6 +7,7 @@ using System.Reflection;
 using Hunter.DataAccess.Entities;
 using System;
 using System.Globalization;
+using Hunter.DataAccess.Entities.Entites.Enums;
 using Hunter.Services.Interfaces;
 
 namespace Hunter.Services
@@ -18,19 +19,22 @@ namespace Hunter.Services
         private readonly ICandidateRepository _candidateRepository;
         private readonly ICardRepository _cardRepository;
         private readonly ILogger _logger;
+        private readonly IActivityHelperService _activityHelperService;
 
         public VacancyService(
             IVacancyRepository vacancyRepository,
             ICandidateRepository candidateRepository,
             ICardRepository cardRepository,
             ILogger logger,
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork,
+            IActivityHelperService activityHelperService)
         {
             _vacancyRepository = vacancyRepository;
             _candidateRepository = candidateRepository;
             _cardRepository = cardRepository;
             _logger = logger;
             _unitOfWork = unitOfWork;
+            _activityHelperService = activityHelperService;
         }
         public IList<VacancyRowDto> Get()
         {
@@ -39,7 +43,7 @@ namespace Hunter.Services
         }
         public PageDto<VacancyRowDto> Get(VacancyFilterParams filterParams)
         {
-            IQueryable<Vacancy> query = _vacancyRepository.QueryIncluding(v => v.Pool, v => v.User);
+            IQueryable<Vacancy> query = _vacancyRepository.QueryIncluding(v => v.Pool, v => v.UserProfile);
 
             if (filterParams.Pools.Any())
             {
@@ -61,7 +65,7 @@ namespace Hunter.Services
             if (filterParams.AddedByArray.Any())
             {
                 var selectedCreators = filterParams.AddedByArray;
-                query = query.Where(vac => selectedCreators.Contains(vac.User.Login));
+                query = query.Where(vac => selectedCreators.Contains(vac.UserProfile.UserLogin));
             }
 
             if (!string.IsNullOrWhiteSpace(filterParams.Filter))
@@ -106,8 +110,11 @@ namespace Hunter.Services
         public void Add(VacancyDto dto)
         {
             if (dto == null) return;
-            _vacancyRepository.UpdateAndCommit(dto.ToVacancy());
+            var vacancy = dto.ToVacancy();
+            _vacancyRepository.UpdateAndCommit(vacancy);
+            _activityHelperService.CreateAddedVacancyActivity(vacancy);
         }
+
         public void Update(VacancyDto entity)
         {
             _vacancyRepository.UpdateAndCommit(entity.ToVacancy());
@@ -145,12 +152,33 @@ namespace Hunter.Services
                     .GroupBy(c => c.UserProfile)
                     .Select(c => new AddedByDto()
                     {
-                        UserLogin = c.Key.UserLogin,
+                        UserLogin = c.Key.UserLogin ?? "",
                         Alias = c.Key.Alias,
                         CountOfAddedCandidates = c.Count()
                     });
 
                 return addedByLongList;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return new List<AddedByDto>();
+            }
+        }
+
+        public IEnumerable<AddedByDto> GetVacanciesAddedBy()
+        {
+            try
+            {
+                var addedBy = _vacancyRepository.Query()
+                    .GroupBy(c => c.UserProfile)
+                    .Select(c => new AddedByDto()
+                    {
+                        UserLogin = c.Key.UserLogin ?? "",
+                        Alias = c.Key.Alias ?? "Nobody"
+                    });
+
+                return addedBy;
             }
             catch (Exception ex)
             {

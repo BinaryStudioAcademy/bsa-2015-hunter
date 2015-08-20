@@ -27,7 +27,15 @@ namespace Hunter.Services
                 Linkedin = candidate.Linkedin,
                 Salary = candidate.Salary,
                 YearsOfExperience = Math.Round(experiance + candidate.CalculateYearsOfExperiance(), 1),
-                ResumeId = candidate.ResumeId != null ? (int)candidate.ResumeId : 0,
+                Resumes = candidate.Resume.Select(r => new ResumeDto()
+                {
+                    Id = r.Id,
+                    FileId = r.FileId,
+                    Uploaded = r.File.Added,
+                    FileName = r.File.FileName,
+                    DownloadUrl = "api/file/download/"+ r.FileId
+                }),
+                ResumeSummary = candidate.ResumeSummary,
                 AddedByProfileId = candidate.AddedByProfileId,
                 AddedBy = candidate.AddedByProfileId.HasValue ? candidate.UserProfile.UserLogin : "",
                 AddDate = candidate.AddDate,
@@ -55,11 +63,8 @@ namespace Hunter.Services
             candidate.Phone = dto.Phone;
             candidate.Linkedin = dto.Linkedin;
             candidate.Salary = dto.Salary;
+            candidate.ResumeSummary = dto.ResumeSummary;
             candidate.YearsOfExperience = dto.YearsOfExperience;
-            candidate.ResumeId = dto.ResumeId == 0? (int?)null: dto.ResumeId;
-            candidate.AddedByProfileId = dto.AddedByProfileId;
-            //Card = dto.Cards.ToList();
-            //Pool = new List<Pool>();
             candidate.Resolution = (Resolution)dto.Resolution;
             candidate.Shortlisted = dto.ShortListed;
             candidate.Origin = (Origin)dto.Origin;
@@ -102,7 +107,8 @@ namespace Hunter.Services
                 Resolution = Enum.GetName(typeof (Resolution), candidate.Resolution),
                 Stage = card != null ? Enum.GetName(typeof(Stage), card.Stage) : "-",
                 TestComment = card != null ? (card.Test.FirstOrDefault(t => t.Id == card.Id) != null ? card.Test.FirstOrDefault(t => t.Id == card.Id).Comment : "No test comment") : "No test comment",
-                SpecialNotes = card != null ? (card.SpecialNote.FirstOrDefault(n => n.Id == card.Id) != null ? card.SpecialNote.FirstOrDefault(n => n.Id == card.Id).Text : "No special note") : "No special note"
+                SpecialNotes = card != null ? (card.SpecialNote.FirstOrDefault(n => n.Id == card.Id) != null ? card.SpecialNote.FirstOrDefault(n => n.Id == card.Id).Text : "No special note") : "No special note",
+                Shortlisted = candidate.Shortlisted
             };
         }
 
@@ -124,7 +130,6 @@ namespace Hunter.Services
                     Linkedin = c.Linkedin,
                     Salary = c.Salary,
                     YearsOfExperience =  c.YearsOfExperience,
-                    ResumeId = c.ResumeId,
                     AddedByProfileId = c.AddedByProfileId,
                     AddedBy = c.AddedByProfileId.HasValue ? c.UserProfile.UserLogin : "",
                     AddDate = c.AddDate,

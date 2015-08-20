@@ -17,6 +17,7 @@ using Hunter.Services;
 
 namespace Hunter.Rest.Controllers
 {
+    [Authorize]
     [RoutePrefix("api/candidates")]
     public class CandidatesController : ApiController
     {
@@ -47,6 +48,24 @@ namespace Hunter.Rest.Controllers
             }
 
         }
+
+        [HttpGet]
+        [Route("addedby")]
+        [ResponseType(typeof(IEnumerable<AddedByDto>))]
+        public HttpResponseMessage GetCandidatesListAddedBy()
+        {
+            try
+            {
+                var addedBy = _candidateService.GetCandidatesAddedBy();
+
+                return Request.CreateResponse(HttpStatusCode.OK, addedBy);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
 
         [HttpGet]
         [Route("odata")]
@@ -165,13 +184,35 @@ namespace Hunter.Rest.Controllers
             }
         }
 
+
+        [HttpPut]
+        [Route("{id:int}/{isShort:bool}")]
+        public IHttpActionResult PutShortList(int id, bool isShort)
+        {
+            try
+            {
+                if (!_candidateService.Query().Any(c => c.Id == id))
+                {
+                    return NotFound();
+                }
+                _candidateService.UpdateShortFlag(id, isShort);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
+
+
         [HttpPost]
         [Route("")]
         public HttpResponseMessage Post(CandidateDto candidate)
         {
             try
             {
-                _candidateService.Add(candidate);
+                _candidateService.Add(candidate, User.Identity.Name);
                 return Request.CreateResponse(HttpStatusCode.Created, _candidateService.Get(i => i.Email.Equals(candidate.Email)).ToCandidateDto());
 
             }

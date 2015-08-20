@@ -19,7 +19,9 @@
             updateVacancy: updateVacancy,
             deleteVacancy: deleteVacancy,
             getLongList: getLongList,
-            getFilterInfo: getFilterInfo
+            getLongListAddedBy: getLongListAddedBy,
+            getFilterInfo: getFilterInfo,
+            getAddedByList: getAddedByList
         }
 
         function getFilteredVacancies(filter) {
@@ -68,6 +70,8 @@
                 verb: 'POST',
                 url: '/api/vacancy',
                 body: data,
+                successMessageToUser: 'Vacancy added',
+                errorMessageToUser: 'Vacancy not added',
                 errorCallback: function (status) {
                     console.log("Add vacancy error");
                     console.log(status);
@@ -80,6 +84,8 @@
                 verb: 'PUT',
                 url: '/api/vacancy/' + id,
                 body: data,
+                successMessageToUser: 'Vacancy updated',
+                errorMessageToUser: 'Vacancy not updated',
                 errorCallback: function (status) {
                     console.log("Update vacancy error");
                     console.log(status);
@@ -91,6 +97,8 @@
             httpHandler.sendRequest({
                 verb: 'DELETE',
                 url: '/api/vacancy/' + id,
+                successMessageToUser: 'Vacancy deleted',
+                errorMessageToUser: 'Vacancy not deleted',
                 errorCallback: function (status) {
                     console.log("Delete vacancy error");
                     console.log(status);
@@ -130,6 +138,22 @@
             return deferred.promise;
         }
 
+        function getLongListAddedBy(vid) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/vacancy/longlist/' + vid + '/addedby',
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get vacancy long list Added by filter data error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
+
         function getFilterInfo(roleName) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
@@ -140,6 +164,22 @@
                 },
                 errorCallback: function (status) {
                     console.log("Get filter data error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
+
+        function getAddedByList() {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/vacancy/addedby',
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get vacancies Added by filter data error");
                     console.log(status);
                 }
             });

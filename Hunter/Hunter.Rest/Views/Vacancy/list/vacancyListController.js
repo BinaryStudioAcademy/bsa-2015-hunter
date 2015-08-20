@@ -57,10 +57,7 @@
             vm.filterParams.reverceSort = vm.sortAction.reverseSort;
             vacancyHttpService.getFilteredVacancies(vm.filterParams).then(function (result) {
                 vm.vacancies = result.rows;
-                if (vm.vacancies.length > 0)
-                {
-                    vm.totalCount = result.totalCount;
-                }
+                vm.totalCount = result.totalCount;
             });
         }
 
@@ -82,9 +79,8 @@
             }
         }
 
-        vacancyHttpService.getFilterInfo('Recruiter').then(function (result) {
-            //vm.pools = result.pools;
-            vm.adders = result.users;
+        vacancyHttpService.getAddedByList().then(function (result) {
+            vm.adders = result;
         });
 
         vm.loadDataByParams();

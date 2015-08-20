@@ -15,20 +15,20 @@
         'PoolsHttpService',
         '$odata',
         'EnumConstants',
-        'VacancyHttpService'
+        'CandidateHttpService',
+        'LonglistHttpService'
     ];
 
-    function CandidateListController($location, $filter, $scope, $rootScope, authService, $odataresource, PoolsHttpService, $odata, EnumConstants, VacancyHttpService) {
+    function CandidateListController($location, $filter, $scope, $rootScope, authService, $odataresource, PoolsHttpService, $odata, EnumConstants, CandidateHttpService, longlistHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         vm.name = 'Candidates';
 
         $rootScope.candidateDetails = {
-            show: false,
             id: null
         };
 
-       // vm.currentPage = 1;
+        // vm.currentPage = 1;
         vm.pageSize = 5;
         vm.totalItems = 0;
         vm.skip = 0;
@@ -72,8 +72,8 @@
 
         vm.order = vm.sortOptions[0].options;
 
-        VacancyHttpService.getFilterInfo('Recruiter').then(function (result) {
-            vm.inviters = result.users;
+        CandidateHttpService.getAddedByList().then(function (result) {
+            vm.inviters = result;
         });
 
         var predicate;
@@ -89,17 +89,18 @@
                                 .orderBy(vm.order.field, vm.order.dir)
                                 .query(function () {
                                     vm.candidateList = cands.items;
+                    $rootScope.candidateDetails.id = vm.candidateList[0].id;
                                     vm.totalItems = cands.count;
                                 });
         }
 
-       $scope.$watch('candidateListCtrl.filter', function () {
+        $scope.$watch('candidateListCtrl.filter', function () {
             var filt = [];
 
             if (vm.filter.pools.length > 0) {
                 var poolPred = [];
                 angular.forEach(vm.filter.pools, function (value, key) {
-                    poolPred.push(new $odata.Predicate(new $odatcandidateLista.Property('PoolNames/any(p: p eq \'' + value + '\' )'), true));
+                    poolPred.push(new $odata.Predicate(new $odata.Property('PoolNames/any(p: p eq \'' + value + '\' )'), true));
                 });
 
                 poolPred = $odata.Predicate.or(poolPred);
@@ -144,25 +145,50 @@
             vm.skip = (vm.filter.currentPage - 1) * vm.pageSize;
             vm.getCandidates();
         }, true);
-        
-        vm.ShowDetails = function (id) {
-            if ($rootScope.candidateDetails.id === id && $rootScope.candidateDetails.show === true) {
-                $rootScope.candidateDetails.show = false;
-            } else {
-                $rootScope.candidateDetails.show = true;
-                $rootScope.candidateDetails.id = id;
-            }
+
+        vm.ShowDetails = function (item) {
+           // if ($rootScope.candidateDetails.id != id ){
+            $rootScope.candidateDetails.id = item.id;
+            $rootScope.candidateDetails.shortListed = item.shortListed;
+            // } 
         }
 
         vm.ActiveTr = function (id) {
-            if (id == $rootScope.candidateDetails.id && $rootScope.candidateDetails.show) {
-                return 'active';
+            if (id == $rootScope.candidateDetails.id) {
+                return 'info';
             }
             else {
                 return '';
             }
         }
 
+        // signatures for user actions callback method
+        vm.addCandidateToLongList = addCandidateToLongList;
+        // user actions methods
+
+        // add cardidates to Long List
+        function addCandidateToLongList() {
+            var cards = createCardRequestBody();
+
+            longlistHttpService.addCards(cards);
+        }
+
+        // not user-event functions 
+        vm.selectedCandidates = [];
+        vm.VacancyId = 1;
+
+        function createCardRequestBody() {
+            var cards = [];
+            for (var i = 0; i < vm.selectedCandidates.length; i++) {
+                cards.push({
+                    CandidateId: vm.selectedCandidates[i],
+                    VacancyId: vm.VacancyId,
+                    Stage: EnumConstants.cardStages[0].id
+                });
+            }
+
+            return cards;
+        }
     }
 
 })();

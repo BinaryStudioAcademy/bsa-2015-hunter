@@ -27,8 +27,11 @@ namespace Hunter.Tests.Services
 
             var unitOfWork = Substitute.For<IUnitOfWork>();
             var logger = Substitute.For<ILogger>();
+            var activityHelperService = Substitute.For<IActivityHelperService>();
 
-            _vacancyService = new VacancyService(_vacancyRepository, _candidateRepository, _cardRepository, logger, unitOfWork);
+
+            _vacancyService = new VacancyService(_vacancyRepository, _candidateRepository,_cardRepository, logger, unitOfWork, activityHelperService);
+
         }
 
         [SetUp]

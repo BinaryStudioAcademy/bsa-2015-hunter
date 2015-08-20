@@ -35,8 +35,8 @@ namespace Hunter.Services
                 StartDate = vacancy.StartDate,
                 EndDate = vacancy.EndDate,
                 PoolName = vacancy.Pool.Name,
-                AddedByName = vacancy.User != null ? vacancy.User.UserName : string.Empty,
-                AddedById = vacancy.User != null ? vacancy.User.Id : 0
+                AddedByName = vacancy.UserProfile != null ? vacancy.UserProfile.Alias : string.Empty,
+                AddedById = vacancy.UserProfile != null ? vacancy.UserProfile.Id : 0
             };
             return v;
         }
@@ -64,22 +64,10 @@ namespace Hunter.Services
                
                 Id = vacancy.Id,
                 Name = vacancy.Name,
-                AddedByName = vacancy.User != null ? vacancy.User.Login : "",
+                AddedByName = vacancy.UserProfile != null ? vacancy.UserProfile.UserLogin : "",
                 //PoolId = vacancy.PoolId
             };
             return vll;
         }
-
-        //public static IEnumerable<AddedByDto> ToLongListAddedByDto(this IEnumerable<Card> cards)
-        //{
-        //    return cards.OrderBy(c=>c.AddedByProfileId).Select(c => new AddedByDto()
-        //    {
-        //        VacancyId = c.VacancyId,
-        //        UserLogin = c.UserProfile != null ? c.UserProfile.UserLogin : "",
-        //        Alias = c.UserProfile != null ? c.UserProfile.Alias : "",
-        //        CountOfAddedCandidates = cards.GroupBy(cc=>cc.AddedByProfileId).Count()
-        //    });
-            
-        //}
     }
 }

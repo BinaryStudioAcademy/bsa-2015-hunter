@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Hunter.DataAccess.Entities;
 
 namespace Hunter.Services.Dto
 {
@@ -31,7 +29,9 @@ namespace Hunter.Services.Dto
 
         public double? YearsOfExperience { get; set; }
 
-        public int? ResumeId { get; set; }
+        public IEnumerable<ResumeDto> Resumes { get; set; }
+
+        public string ResumeSummary { get; set; }
 
         public int? AddedByProfileId { get; set; }
 

@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
-using Hunter.DataAccess.Entities;
 using Hunter.Services;
-using Hunter.Services.Dto;
 using Hunter.Services.Interfaces;
-using Microsoft.AspNet.Identity;
-using Newtonsoft.Json;
 
 namespace Hunter.Rest.Controllers
 {
@@ -31,18 +23,23 @@ namespace Hunter.Rest.Controllers
 
         [HttpGet]
         [Route("pictures/{id:int}")]
-        public HttpResponseMessage GetPicture(int id)
+        public IHttpActionResult GetPicture(int id)
         {   
             try
             {
+                var photo = _fileService.GetPhoto(id);
+                if (photo == null)
+                {
+                    return Redirect(Url.Content("~/Content/img/no_photo.png"));
+                }
                 HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
-                result.Content = _fileService.GetPhoto(id);
+                result.Content = new ByteArrayContent(photo);
                 result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
-                return result;
+                return ResponseMessage(result);
             }
             catch (Exception e)
             {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+                return InternalServerError(e);
             }
         }
 
@@ -65,8 +62,7 @@ namespace Hunter.Rest.Controllers
                 byte[] ms = await provider.Contents[0].ReadAsByteArrayAsync();
                 var candidate = _candidateService.Get(id);
 
-                candidate.Photo = ms;
-                _candidateService.Update(candidate.ToCandidateDto());
+                _fileService.SavePhoto(candidate, ms);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (Exception e)

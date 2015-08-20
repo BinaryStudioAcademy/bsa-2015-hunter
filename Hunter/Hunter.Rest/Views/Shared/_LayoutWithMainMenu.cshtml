@@ -20,6 +20,8 @@
     <link type="text/css" rel="stylesheet" href="~/Content/hrInterview.css"/>
     <link type="text/css" rel="stylesheet" href="~/Content/hrSpecialNote.css" />
     <link type="text/css" rel="stylesheet" href="~/Content/candidate.css" />
+    
+    <script src='~/bower_components/angular/angular.js'></script>
 
     @RenderSection("css", false)
 </head>
@@ -28,47 +30,76 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                     <a class="navbar-brand" href="#">Hunter</a>
                 </div>
+
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li ng-model="radioModel" btn-radio="'Home'"><a href="#">Home</a></li>
-                        <li ng-model="radioModel" btn-radio="'Candidates'" class="menu">
-                            <a href="">Candidates<span class="caret"></span></a>
-                            <ul class="submenu">
-                                <li><a href="#/candidate/list">Show All</a></li>
+                        <li ng-model="radioModel" btn-radio="'Candidates'" class="dropdown">
+                            <a href="#/candidate/list"
+                               class="dropdown-toggle" data-toggle="dropdown" role="button">Candidates<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="visible-xs"><a href="#/candidate/list">Show All</a></li>
                                 <li><a href="#/candidate/edit">Add new</a></li>
                             </ul>
 
                         </li>
-                        <li ng-model="radioModel" btn-radio="'Vacancies'" class="menu">
-                            <a href="">Vacancies<span class="caret"></span></a>
-                            <ul class="submenu">
-                                <li><a href="#/vacancy/list">Show All</a></li>
+                        <li ng-model="radioModel" btn-radio="'Vacancies'" class="dropdown">
+                            <a href="#/vacancy/list"
+                               class="dropdown-toggle" data-toggle="dropdown" role="button">Vacancies<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="visible-xs"><a href="#/vacancy/list">Show All</a></li>
                                 <li><a href="#/vacancy/edit">Add new</a></li>
                             </ul>
                         </li>
                         <li ng-model="radioModel" btn-radio="'Statistics'"><a href="#/statistics">Statistics</a></li>
                         <li ng-model="radioModel" btn-radio="'Files'"><a href="#/files">Files</a></li>
-                        <li ng-model="radioModel" btn-radio="'Settings'" class="menu">
-                            <a href="">Settings<span class="caret"></span></a>
-                            <ul class="submenu">
+                        <li ng-model="radioModel" btn-radio="'Settings'" class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button">Settings<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
                                 <li><a href="#/pool">Pools</a></li>
                                 <li><a href="#/user">Users</a></li>
                                 <li><a href="#/role">Roles</a></li>
                             </ul>
                         </li>
                     </ul>
-                    <ul  class="nav navbar-nav navbar-right">
-                        <li ng-model="radioModel" btn-radio="'Activity'"><a href="#/activity">Activity<span class="badge" ng-show="IndexCtrl.amount != 0">{{IndexCtrl.amount}}</span></a></li>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li ng-model="radioModel" btn-radio="'Activity'"><a href="#/activity">Activity<span class="badge " ng-cloak ng-show="IndexCtrl.amount != 0">{{IndexCtrl.amount}}</span></a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-
     </header>
     @RenderBody()
 
+    @* inspired by http://wpeden.com/tipsntuts/twitter-bootstrap-dropdown-on-hover-and-activating-click-event-on-parent-item/ *@
+    <script>
+        jQuery(function ($) {
+            if ($(window).width() > 769) {
+                $('.navbar .dropdown').hover(function () {
+                    $(this).find('.dropdown-menu').first().stop(true, true).delay(100).slideDown();
+
+                }, function () {
+                    $(this).find('.dropdown-menu').first().stop(true, true).delay(50).slideUp();
+
+                });
+
+                $('.navbar .dropdown > a').click(function () {
+                    if (this.href) {
+                        location.href = this.href;
+                    }
+                });
+
+            }
+        });
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

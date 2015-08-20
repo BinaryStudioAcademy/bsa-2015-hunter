@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Entities.Entites.Enums;
 using Hunter.DataAccess.Interface;
 using Hunter.Services.Dto;
 using Hunter.Services.Extensions;
 using Hunter.Services.Dto.ApiResults;
 using Hunter.DataAccess.Entities.Enums;
+using Hunter.Services.Interfaces;
 
 namespace Hunter.Services
 {
@@ -19,13 +21,16 @@ namespace Hunter.Services
         private readonly ICardRepository _cardRepository;
         private readonly IUserProfileRepository _userProfileRepository;
         private readonly ILogger _logger;
+        private readonly IActivityHelperService _activityHelperService;
 
-        public FeedbackService(IFeedbackRepository feedbackRepository, ICardRepository cardRepository, ILogger logger, IUserProfileRepository userProfileRepository)
+        public FeedbackService(IFeedbackRepository feedbackRepository, ICardRepository cardRepository, ILogger logger, 
+            IUserProfileRepository userProfileRepository, IActivityHelperService activityHelperService)
         {
             _feedbackRepository = feedbackRepository;
             _cardRepository = cardRepository;
             _logger = logger;
             _userProfileRepository = userProfileRepository;
+            _activityHelperService = activityHelperService;
         }
 
         public IEnumerable<Dto.FeedbackDto> GetAllHrInterviews(int vid, int cid)
@@ -66,7 +71,7 @@ namespace Hunter.Services
 
         public FeedbackDto GetTechInterview(int vacancyId, int candidateId)
         {
-            int type = (int)FeedbackType.TechFeedback;
+            int type = (int)FeedbackType.Expertise;
             try
             {
                 var card = _cardRepository
@@ -87,6 +92,35 @@ namespace Hunter.Services
                 return null;
             }
              
+        }
+
+        public FeedbackDto GetSummary(int vacancyId, int candidateId)
+        {
+            try
+            {
+                var card = _cardRepository.Query()
+                    .SingleOrDefault(e => e.VacancyId == vacancyId && e.CandidateId == candidateId);
+
+
+                var summary = card.Feedback.FirstOrDefault(i => i.Type == (int) FeedbackType.Summary);
+                if (summary == null)
+                    return new FeedbackDto()
+                    {
+                        Id = 0,
+                        Type = (int)FeedbackType.Summary,
+                        CardId = card.Id,
+                        Text = "",
+                        Date = DateTime.Now,
+                        UserName = ""
+                    };
+
+                return summary.ToFeedbackDto();
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return null;
+            }
         }
 
         public FeedbackUpdatedResult SaveFeedback(FeedbackDto hrInterviewDto, string name)

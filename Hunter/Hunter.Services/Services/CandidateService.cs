@@ -4,6 +4,7 @@ using System.Linq;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Entities.Entites.Enums;
 using Hunter.DataAccess.Interface.Base;
 using Hunter.Services.Dto;
 using Hunter.Services.Extensions;
@@ -13,20 +14,22 @@ namespace Hunter.Services
 {
     public class CandidateService : ICandidateService
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly ICandidateRepository _candidateRepository;
         private readonly ICardRepository _cardRepository;
         private readonly ILogger _logger;
         private readonly IPoolRepository _poolRepository;
+        private readonly IUserProfileRepository _userProfileRepository;
+        private readonly IActivityHelperService _activityHelperService;
 
-        public CandidateService(IUnitOfWork unitOfWork, ICandidateRepository candidateRepository, ICardRepository cardRepository,
-            IPoolRepository poolRepository, ILogger logger)
+        public CandidateService(ICandidateRepository candidateRepository, ICardRepository cardRepository,
+            IPoolRepository poolRepository, ILogger logger, IUserProfileRepository userProfileRepository, IActivityHelperService activityHelperService)
         {
-            _unitOfWork = unitOfWork;
             _candidateRepository = candidateRepository;
             _cardRepository = cardRepository;
             _logger = logger;
+            _userProfileRepository = userProfileRepository;
             _poolRepository = poolRepository;
+            _activityHelperService = activityHelperService;
         }
 
         public IEnumerable<CandidateDto> GetAllInfo()
@@ -133,10 +136,49 @@ namespace Hunter.Services
             }
         }
 
-        public void Add(CandidateDto dto)
+        public IEnumerable<AddedByDto> GetCandidatesAddedBy()
+        {
+            try
+            {
+                var addedBy = _candidateRepository.Query()
+                    .GroupBy(c => c.UserProfile)
+                    .Select(c => new AddedByDto()
+                    {
+                        UserLogin = c.Key.UserLogin ?? "",
+                        Alias = c.Key.Alias ?? "Nobody",
+                        CountOfAddedCandidates = c.Count()
+                    });
+
+                return addedBy;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return new List<AddedByDto>();
+            }
+        }
+
+        public void UpdateShortFlag(int id, bool isShort)
+        {
+            var candidate = _candidateRepository.Get(id);
+            if (candidate != null)
+            {
+                candidate.Shortlisted = isShort;
+                _candidateRepository.UpdateAndCommit(candidate);
+            }
+        }
+
+        public void Add(CandidateDto dto, string name)
         {
             var candidate = new Candidate();
             dto.ToCandidateModel(candidate);
+
+            var user = _userProfileRepository.Get(name);
+            if (user != null)
+            {
+                candidate.AddedByProfileId = user.Id;
+            }
+
             foreach (var item in dto.PoolNames)
             {
                 var pool = _poolRepository.Get(x => x.Name == item);
@@ -149,6 +191,7 @@ namespace Hunter.Services
             {
                 candidate.AddDate = DateTime.Now;
                 _candidateRepository.UpdateAndCommit(candidate);
+                _activityHelperService.CreateAddedCandidateActivity(candidate);
             }
             catch (Exception ex)
             {
@@ -161,8 +204,7 @@ namespace Hunter.Services
         {
             try
             {
-                _candidateRepository.Delete(candidate);
-                _unitOfWork.SaveChanges();
+                _candidateRepository.DeleteAndCommit(candidate);
             }
             catch (Exception ex)
             {
@@ -185,8 +227,7 @@ namespace Hunter.Services
             }
             try
             {
-                _candidateRepository.Update(candidate);
-                _unitOfWork.SaveChanges();
+                _candidateRepository.UpdateAndCommit(candidate);
             }
             catch (Exception ex)
             {

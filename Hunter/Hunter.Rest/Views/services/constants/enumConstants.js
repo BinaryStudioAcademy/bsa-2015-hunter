@@ -29,10 +29,10 @@
                 { id: 2, name: 'Passed' }
             ],
             cardStages: [
-                { id: 0, name: 'Test Send' },
-                { id: 1, name: 'Test Done' },
-                { id: 2, name: 'Interview' },
-                { id: 3, name: 'Failed' },
+                { id: 0, name: 'Long Listed' },
+                { id: 1, name: 'Test Send' },
+                { id: 2, name: 'Test Done' },
+                { id: 3, name: 'Interview' },
                 { id: 4, name: 'Test Failed' },
                 { id: 5, name: 'Interview Failed' },
                 { id: 6, name: 'Passed' }
@@ -42,7 +42,8 @@
                 { id: 1, name: 'Personal' },
                 { id: 2, name: 'Expertise' },
                 { id: 3, name: 'Tech Feedback' },
-                { id: 4, name: 'Test Feedback' }
+                { id: 4, name: 'Test Feedback' },
+                { id: 5, name: 'Summary' }
             ],
             poolBackgroundColors: [
                 { id: 0, color: 'Green', colorCode: 'rgb(44, 201, 99)' },

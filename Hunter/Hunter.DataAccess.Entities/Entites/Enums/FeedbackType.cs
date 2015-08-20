@@ -12,6 +12,7 @@ namespace Hunter.DataAccess.Entities.Enums
         Personal,
         Expertise,
         TechFeedback,
-        TestFeedback
+        TestFeedback,
+        Summary
     }
 }

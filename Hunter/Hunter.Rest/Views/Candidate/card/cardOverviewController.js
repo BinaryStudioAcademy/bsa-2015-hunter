@@ -19,6 +19,7 @@
         vm.newFeedback;
         vm.techFeedback;
         vm.tests;
+        vm.summary;
 
         vm.testFeedbacksPresent = false;
 
@@ -49,5 +50,10 @@
 
             return false;
         }
+
+        FeedbackHttpService.getSummary($routeParams.vid, $routeParams.cid).then(function (result) {
+            console.log(result);
+            vm.summary = result;
+        });
     }
 })();
