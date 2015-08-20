@@ -43,7 +43,7 @@
                     <div class="ll_candidate_item" ng-repeat="candidate in longListCtrl.candidatesList" ng-click="longListCtrl.viewCandidateInfo(candidate.id)" ng-class="longListCtrl.ActiveItem(candidate.id)">
                         <div class="col-md-4 ll_candidate_item_img">
                             <shor-list-star is-short="candidate.shortlisted" candidate-id="candidate.id" size="'18px'"></shor-list-star>
-                            <span ng-switch on="candidate.photo"><img ng-switch-default src="{{candidate.photoUrl}}" /></span>
+                            <img ng-src="{{candidate.photoUrl}}" />
                             <p class="years_of_experience">{{candidate.yearsOfExperience}}</p>
                             <!--<p class="candidate_bookmark"><span class="glyphicon glyphicon-star-empty"></span></p>-->
                         </div>

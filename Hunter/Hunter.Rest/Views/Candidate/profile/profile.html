@@ -6,9 +6,9 @@
     </div>
     <div class="candidate-info">
         <div class="candidate-personal-info row">
-            <div class="image col-md-2" ng-switch on="candidateCtrl.candidate.photo">
+            <div class="image col-md-2">
                 <shor-list-star is-short="candidateCtrl.candidate.shortListed" candidate-id="candidateCtrl.candidate.id" size="'32px'"></shor-list-star>
-                <img class="profile-photo img-circle" ng-switch-default src="{{candidateCtrl.candidate.photoUrl}}"/>
+                <img class="profile-photo img-circle" ng-src="{{candidateCtrl.candidate.photoUrl}}"/>
             </div>
             <div class="col-md-7">
                 <div class="personal-info">
