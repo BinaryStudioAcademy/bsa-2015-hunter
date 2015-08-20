@@ -17,5 +17,6 @@ namespace Hunter.Services.Dto
         public string TestComment { get; set; }
         public string SpecialNotes { get; set; }
         public string PhotoUrl { get; set; }
+        public bool Shortlisted { get; set; }
     }
 }

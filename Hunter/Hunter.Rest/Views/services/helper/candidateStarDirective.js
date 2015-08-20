@@ -11,12 +11,13 @@
                 template: '<i class="fa " ' +
                     'ng-class="isShort ? \'fa-star\' : \'fa-star-o\' "' +
                     'ng-click="update()" ' +
-                    'style="position: absolute;font-size: large;top: 2px;left: 2px;color: gold;"' +
+                    'style="position: absolute;font-size:{{size}};top: 2px;left: 2px;color: gold;"' +
                     '></i>',
                 restrict: 'E',
                 scope: {
                     isShort: "=isShort",
-                    candidateId:"=candidateId"
+                    candidateId: "=candidateId",
+                    size:"=size"
                 },
                 link: function (scope, element, attrs, ctrl, transclude) {
                     
