@@ -112,7 +112,7 @@
                                                 vm.candidatesList = cands.items;
                                                 vm.totalItems = cands.count;
                                             });
-            console.log(vm.candidatesList);
+            console.log('long list', vm.candidatesList);
         };
 
         // seatch filter

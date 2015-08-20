@@ -6,8 +6,11 @@
     </div>
     <div class="candidate-info">
         <div class="candidate-personal-info row">
-            <div class="image col-md-2" ng-switch on="candidateCtrl.candidate.photo">
-                <img class="profile-photo img-circle" ng-switch-default src="{{candidateCtrl.candidate.photoUrl}}" />
+<!--            <div class="image col-md-2" ng-switch on="candidateCtrl.candidate.photo">-->
+<!--                <img class="profile-photo img-circle" ng-switch-default src="{{candidateCtrl.candidate.photoUrl}}" />-->
+            <!-- </div>-->
+            <div class="image col-md-2">
+                <img class="profile-photo img-circle" ng-src="{{candidateCtrl.candidate.photoUrl}}" />
             </div>
             <div class="col-md-7">
                 <div class="personal-info">

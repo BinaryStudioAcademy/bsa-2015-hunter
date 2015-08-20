@@ -94,8 +94,9 @@
                 </tr>
                 <tr ng-repeat="item in candidateListCtrl.candidateList" ng-click="candidateListCtrl.ShowDetails(item.id)" ng-class="candidateListCtrl.ActiveTr(item.id)">
                     <td><input type="checkbox" ng-model="item.shortListed" checklist-model="candidateListCtrl.selectedCandidates" checklist-value="item.id"></td>
-                    <td ng-switch on="item.photo">
-                        <img class="photo-in-list" ng-switch-default src="{{item.photoUrl}}" />
+                    <td>
+<!--                        <span ng-switch on="item.photo"><img class="photo-in-list" ng-switch-default src="{{item.photoUrl}}" /></span>-->
+                         <img class="photo-in-list" ng-src="{{item.photoUrl}}"/>
                     </td>
                     <td><a href="#/candidate/{{item.id}}">{{item.firstName + " " + item.lastName}}</a></td>
                     <td>{{item.addedBy}}</td>
