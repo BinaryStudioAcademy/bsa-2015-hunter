@@ -25,7 +25,6 @@
         vm.name = 'Candidates';
 
         $rootScope.candidateDetails = {
-            show: false,
             id: null
         };
 
@@ -90,6 +89,7 @@
                                 .orderBy(vm.order.field, vm.order.dir)
                                 .query(function () {
                                     vm.candidateList = cands.items;
+                    $rootScope.candidateDetails.id = vm.candidateList[0].id;
                                     vm.totalItems = cands.count;
                                 });
         }
@@ -147,16 +147,13 @@
         }, true);
 
         vm.ShowDetails = function (id) {
-            if ($rootScope.candidateDetails.id === id && $rootScope.candidateDetails.show === true) {
-                $rootScope.candidateDetails.show = false;
-            } else {
-                $rootScope.candidateDetails.show = true;
+            if ($rootScope.candidateDetails.id != id ){
                 $rootScope.candidateDetails.id = id;
-            }
+            } 
         }
 
         vm.ActiveTr = function (id) {
-            if (id == $rootScope.candidateDetails.id && $rootScope.candidateDetails.show) {
+            if (id == $rootScope.candidateDetails.id) {
                 return 'info';
             }
             else {
