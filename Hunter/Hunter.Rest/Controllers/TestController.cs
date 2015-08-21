@@ -95,7 +95,6 @@ namespace Hunter.Rest.Controllers
 
         [HttpPut]
         [Route("{id:int}/comment")]
-        //[ActionName("UpdateComment")]
         public HttpResponseMessage UpdateComment(int id, [FromBody]string text)
         {
             try
