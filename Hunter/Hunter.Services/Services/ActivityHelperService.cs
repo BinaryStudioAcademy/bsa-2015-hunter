@@ -95,7 +95,6 @@ namespace Hunter.Services.Services
                 var card = _cardRepository.Get(x => x.Id == feedback.CardId);
                 string feedbackType;
                 string feedbackRoute;
-
                 switch (feedback.Type)
                 {
                     case 0:

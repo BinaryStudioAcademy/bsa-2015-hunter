@@ -17,6 +17,7 @@
 
     function CandidateProfileController($location, $routeParams, authService, candidateHttpService, candidateAddEditService, candidateService) {
         var vm = this;
+        vm.isScinner = true;
         vm.subMenuItems = [
             {
                 name: 'Applications',
@@ -64,6 +65,7 @@
         vm.candidate;
         candidateHttpService.getCandidate(getCandidateID($location.path())).then(function (response) {
             vm.candidate = response.data;
+            vm.isScinner = false;
             console.log(response.data);
         });
 

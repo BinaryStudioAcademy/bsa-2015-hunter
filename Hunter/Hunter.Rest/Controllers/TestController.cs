@@ -92,5 +92,20 @@ namespace Hunter.Rest.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPut]
+        [Route("{id:int}/comment")]
+        public IHttpActionResult UpdateComment(int id, [FromBody]string comment)
+        {
+            try
+            {
+                _testService.UpdateComment(id, comment);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
