@@ -18,12 +18,15 @@
         FeedbackHttpService, UploadTestService, localStorageService, $scope) {
         var vm = this;
         vm.templateName = 'Test';
+        vm.editingIndex = -1;
         var candidateId = $routeParams.cid;
         var vacancyId = $routeParams.vid;
         var userName = localStorageService.get('authorizationData').userName;
 
         vm.testLink = '';
         vm.testFile = '';
+
+        vm.changeCurrentTest = changeCurrentTest;
 
         vm.uploadLink = function () {
             if (vm.testLink == '') {
@@ -36,7 +39,7 @@
                 'cardId': vm.test.cardId,
                 'feedbackId': null,
                 'added': new Date()
-        }
+            }
 
             CardTestHttpService.sendTest(testSend, function(response) {
                 var lastUploadTestId = response.data;
@@ -168,6 +171,35 @@
                     vm.test.tests.push(test);
                 });
             });
+        }
+
+        function changeCurrentTest(index) {
+            if (vm.editingIndex == -1) {
+                vm.editingIndex = index;
+            } else {
+                if (vm.editingIndex == index) {
+                    var test = vm.test.tests[vm.editingIndex];
+                    CardTestHttpService.updateTestComment(test.id, test.comment);
+                    FeedbackHttpService.saveTestFeedback({
+                        'feedback': test.feedback,
+                        'testId': test.id
+                    }).then(function (result) {
+                        test.feedback.id = result.id;
+                        console.log(result.id);
+                        test.feedback.date = result.update;
+                        test.feedback.userName = result.userName;
+                        test.feedbackId = result.id;
+                    });
+                    //test.feedback.userName = userName;
+                    //test.feedback.date = new Date();
+
+                    vm.editingIndex = -1;
+                } else {
+                    alertify.alert('Apply your changes!');
+                }
+
+            }
+            
         }
     }
 })();

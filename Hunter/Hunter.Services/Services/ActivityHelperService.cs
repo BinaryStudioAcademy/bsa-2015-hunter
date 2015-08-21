@@ -54,41 +54,50 @@ namespace Hunter.Services.Services
         }
 
         public void CreateUpdatedFeedbackActivity(Feedback feedback)
-        {         
-            string feedbackType;
-            string feedbackRoute;
-            
-            switch (feedback.Type)
+        {
+            try
             {
-                case 0:
-                    feedbackType = "English";
-                    feedbackRoute = "hrinterview";
-                    break;
-                case 1:
-                    feedbackType = "Personal";
-                    feedbackRoute = "hrinterview";
-                    break;
-                case 2:
-                    feedbackType = "Expertise";
-                    feedbackRoute = "technicalinterview";
-                    break;
-                case 3:
-                    feedbackType = "Test";
-                    feedbackRoute = "test";
-                    break;
-                default:
-                    feedbackType = "";
-                    feedbackRoute = "";
-                    break;
-            }
 
-            string message = string.Format("{0} feedback for {1} {2} on {3} has been updated", 
-                feedbackType, feedback.Card.Candidate.FirstName, feedback.Card.Candidate.LastName, feedback.Card.Vacancy.Name);
-            ActivityType type = ActivityType.Feedback;
-            //todo: change activity url to /feedback.Card/:id when the latter is implemented
-            Uri url = new Uri(string.Format("#/vacancy/{0}/candidate/{1}?tab={2}",
-                feedback.Card.VacancyId, feedback.Card.CandidateId, feedbackRoute), UriKind.Relative);
-            _activityPostService.Post(message, type, url);
+                string feedbackType;
+                string feedbackRoute;
+
+                switch (feedback.Type)
+                {
+                    case 0:
+                        feedbackType = "English";
+                        feedbackRoute = "hrinterview";
+                        break;
+                    case 1:
+                        feedbackType = "Personal";
+                        feedbackRoute = "hrinterview";
+                        break;
+                    case 2:
+                        feedbackType = "Expertise";
+                        feedbackRoute = "technicalinterview";
+                        break;
+                    case 3:
+                        feedbackType = "Test";
+                        feedbackRoute = "test";
+                        break;
+                    default:
+                        feedbackType = "";
+                        feedbackRoute = "";
+                        break;
+                }
+
+                string message = string.Format("{0} feedback for {1} {2} on {3} has been updated",
+                    feedbackType, feedback.Card.Candidate.FirstName, feedback.Card.Candidate.LastName,
+                    feedback.Card.Vacancy.Name);
+                ActivityType type = ActivityType.Feedback;
+                //todo: change activity url to /feedback.Card/:id when the latter is implemented
+                Uri url = new Uri(string.Format("#/vacancy/{0}/candidate/{1}?tab={2}",
+                    feedback.Card.VacancyId, feedback.Card.CandidateId, feedbackRoute), UriKind.Relative);
+                _activityPostService.Post(message, type, url);
+            }
+            catch (Exception)
+            {
+                //add message to logger
+            }
         }
 
         public void CreateAddedSpecialNoteActivity(SpecialNote specialNote)

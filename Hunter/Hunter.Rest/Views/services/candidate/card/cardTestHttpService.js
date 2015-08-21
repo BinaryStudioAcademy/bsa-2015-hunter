@@ -12,7 +12,8 @@
     function CardTestHttpService(HttpHandler) {
         var service = {
             'getTest': getTest,
-            'sendTest': uploadTest
+            'sendTest': uploadTest,
+            updateTestComment: updateTestComment
         };
 
         function getTest(vacancyId, candidateId, success) {
@@ -36,7 +37,16 @@
             });
         }
 
+        function updateTestComment(id, comment, success) {
+            HttpHandler.sendRequest({
+                verb: 'PUT',
+                url: '/api/test/' + id + '/comment',
+                body: comment,
+                successCallback: success,
+                errorMessageToDev: 'POST TEST COMMENT ERROR'
+            });
+        }
+
         return service;
     }
-
 })();

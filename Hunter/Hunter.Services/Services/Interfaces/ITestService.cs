@@ -12,5 +12,6 @@ namespace Hunter.Services.Services.Interfaces
         void DeleteTestById(int testId);
         TestsResult GetCardTests(int vacancyId, int candidateId);
         void UpdateFeedback(int testId, int feedbackId);
+        void UpdateComment(int id, string comment);
     }
 }

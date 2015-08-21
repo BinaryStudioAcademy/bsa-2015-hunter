@@ -1,5 +1,5 @@
-﻿<div class="container-partial" ng-controller='CandidatePartialController as candidatePartCtrl'>
-    <treasure-overlay-spinner active='candidatePartCtrl.prevLoad'>
+﻿<div class="container-partial" ng-controller='CandidatePartialController as candidatePartCtrl' >
+    <div spinner='candidatePartCtrl.prevLoad'>
         <div class="row">
             <div class="col-md-12">
                 <h4>Preview</h4>
@@ -21,8 +21,9 @@
                 <div class="personal-info-small">
 
                     <div>current/past: {{candidatePartCtrl.candidate.currentPosition}}</div>
+                    <div>years of experience: {{candidatePartCtrl.candidate.yearsOfExperience}}</div>
                     <div>company/location: {{candidatePartCtrl.candidate.company+","+candidatePartCtrl.candidate.location}}</div>
-                    <div>emaile: {{candidatePartCtrl.candidate.email}}</div>
+                    <div>email: {{candidatePartCtrl.candidate.email}}</div>
                     <div>skype: {{candidatePartCtrl.candidate.skype}}</div>
                     <div>phone: {{candidatePartCtrl.candidate.phone}}</div>
                 </div>
@@ -93,5 +94,5 @@
                 </div>
             </div>
         </div>
-    </treasure-overlay-spinner>
+    </div>
 </div>

@@ -42,13 +42,13 @@
             </div>
         </div>
 
-            <div class="col-md-5">
+            <div class="col-md-5" spinner="candidateListCtrl.tableSpinner">
                 <div class="form-group col-md-5">
                     <label>Order By</label>
                     <select class="form-control" ng-change="candidateListCtrl.getCandidates()" ng-options="item.options as item.text for item in candidateListCtrl.sortOptions" ng-model="candidateListCtrl.order"></select>
                 </div>
 
-        <treasure-overlay-spinner active='candidateListCtrl.tableLoad'>
+
 
                 <table class="longlist table table-bordered">
                     <tr>
@@ -128,7 +128,7 @@
                             boundary-links="true"
                             template-url="../../Views/templates/pagination.html"></pagination>
 
-        </treasure-overlay-spinner>
+      
 
                 <!--<nav>
                     <div class="row">

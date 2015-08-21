@@ -38,6 +38,7 @@
 
         vm.vacancy;
         vm.vacancyId;
+        vm.tableSpinner = false;
         
         vm.pageConfig = {
             pageTitle: 'Candidates (general pool)',
@@ -106,7 +107,7 @@
         var Candidates = $odataresource('/api/Candidates/odata');
 
         vm.getCandidates = function () {
-            vm.tableLoad = true;
+            vm.tableSpinner = true;
             var cands = Candidates.odata()
                                 .withInlineCount()
                                 .take(vm.pageSize)
@@ -117,7 +118,7 @@
                                     vm.candidateList = cands.items;
                                     $rootScope.candidateDetails.id = vm.candidateList[0].id;
                                     vm.totalItems = cands.count;
-                                    vm.tableLoad = false;
+                                    vm.tableSpinner = false;
                 });
         }
 
