@@ -1,10 +1,11 @@
 ﻿<div ng-controller="CardOverviewController as overviewCtrl" ng-cloak>
     <div class="hrInterview_form">
-        <div>
-            <h3>Summary</h3>
+        <h3>Summary</h3>
+         <div ng-hide="overviewCtrl.summary.text==''">
             <span ng-hide="overviewCtrl.summary.date.length <= 0">Edited by {{overviewCtrl.summary.userAlias}} {{overviewCtrl.summary.date}}</span>
+            <textarea disabled name="text" ng-model="overviewCtrl.summary.text" ng-auto-expand></textarea>
         </div>
-        <textarea disabled name="text" ng-model="overviewCtrl.summary.text" ng-auto-expand></textarea>
+            <div ng-show="overviewCtrl.summary.text == ''">There is no summary yet</div>
     </div>
     <div class="hrInterview_form" ng-repeat="feedback in overviewCtrl.feedbacks">
         <div>
