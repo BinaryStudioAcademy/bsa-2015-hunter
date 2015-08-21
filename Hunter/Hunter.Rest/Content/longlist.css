@@ -135,9 +135,11 @@
     margin: 9px 0;
 }
 .ll_candidate_item:hover, .ll_candidate_item_active {
-    cursor: pointer;
     border: 4px solid grey;
     padding: 2px;
+}
+.ll_candidate_item a:hover{
+    cursor: pointer;
 }
 .ll_candidate_item_active{
     background-color: rgb(248, 248, 248);

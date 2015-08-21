@@ -21,6 +21,7 @@ namespace Hunter.Services
         private readonly ICardRepository _cardRepository;
         private readonly ILogger _logger;
         private readonly IActivityHelperService _activityHelperService;
+        private readonly IUserProfileRepository _userProfileRepository;
 
         public VacancyService(
             IVacancyRepository vacancyRepository,
@@ -28,7 +29,8 @@ namespace Hunter.Services
             ICardRepository cardRepository,
             ILogger logger,
             IUnitOfWork unitOfWork,
-            IActivityHelperService activityHelperService)
+            IActivityHelperService activityHelperService,
+            IUserProfileRepository userProfileRepository)
         {
             _vacancyRepository = vacancyRepository;
             _candidateRepository = candidateRepository;
@@ -36,6 +38,7 @@ namespace Hunter.Services
             _logger = logger;
             _unitOfWork = unitOfWork;
             _activityHelperService = activityHelperService;
+            _userProfileRepository = userProfileRepository;
         }
         public IList<VacancyRowDto> Get()
         {
@@ -112,6 +115,8 @@ namespace Hunter.Services
         {
             if (dto == null) return;
             var vacancy = dto.ToVacancy();
+            var user = _userProfileRepository.Get(x => x.UserLogin == dto.UserLogin);
+            vacancy.UserProfileId = user != null ? user.Id : (int?) null;
             _vacancyRepository.UpdateAndCommit(vacancy);
             _activityHelperService.CreateAddedVacancyActivity(vacancy);
         }
@@ -128,6 +133,7 @@ namespace Hunter.Services
                 _vacancyRepository.Delete(vacancy);
                 _unitOfWork.SaveChanges();
             }
+
         }
 
         public VacancyLongListDto GetLongList(int id)

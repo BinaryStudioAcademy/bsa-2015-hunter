@@ -33,6 +33,8 @@ namespace Hunter.Services
 
         public string StatusName { get; set; }
 
+        public string UserLogin { get; set; }
+
         //public virtual ICollection<CardDTO> Card { get; set; }
 
         //public virtual PoolDTO Pool { get; set; }

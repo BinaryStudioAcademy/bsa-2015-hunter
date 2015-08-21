@@ -11,6 +11,9 @@ namespace Hunter.Services.Dto
         [StringLength(100)]
         public string UserLogin { get; set; }
 
+        [StringLength(100)]
+        public string UserAlias { get; set; }
+
         [StringLength(150)]
         public ActivityType Tag { get; set; }
 

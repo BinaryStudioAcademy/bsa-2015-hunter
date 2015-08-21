@@ -41,10 +41,10 @@ namespace Hunter.Services
 
             foreach (var dto in dtoCards)
             {
-                if (_cardRepository.Query().Any(c => c.CandidateId == dto.CandidateId))
-                {
-                    continue;    
-                }
+                //if (_cardRepository.Query().Any(c => c.CandidateId == dto.CandidateId && c.VacancyId == dto.VacancyId))
+                //{
+                //    continue;    
+                //}
                 
                 _cardRepository.UpdateAndCommit(dto.ToCardModel(userProfileId));
             }
