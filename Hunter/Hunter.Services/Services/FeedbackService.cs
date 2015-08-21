@@ -146,11 +146,12 @@ namespace Hunter.Services
             
                 _feedbackRepository.UpdateAndCommit(feedback);
                 _activityHelperService.CreateUpdatedFeedbackActivity(feedback);
+                var dto = feedback.ToFeedbackDto();
                 return new FeedbackUpdatedResult
                 {
                     Id = feedback.Id,
-                    Update = feedback.ToFeedbackDto().Date,
-                    UserName = feedback.ToFeedbackDto().UserName
+                    Update = dto.Date,
+                    UserName = dto.UserName
                 };
             }
             catch (Exception ex)
