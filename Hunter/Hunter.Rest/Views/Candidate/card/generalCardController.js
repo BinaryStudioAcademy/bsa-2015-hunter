@@ -44,7 +44,7 @@
             });
         })();
         
-
+        // TODO: Define event function at the beginning of controller and only then should be implementation vm.saveHrFeedback = saveHrFeedback; function saveHrFeedback() {}
         vm.changeTemplate = function (tab) {
             vm.currentTabName = tab.name;
             vm.templateToShow = cardService.changeTemplate(tab.route);

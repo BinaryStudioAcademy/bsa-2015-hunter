@@ -56,6 +56,7 @@
             });
         }
 
+        // TODO:  All vm and local variables should be declared at the beginning
         vm.test;
         CardTestHttpService.getTest(vacancyId, candidateId, function(response) {
             vm.test = response.data;

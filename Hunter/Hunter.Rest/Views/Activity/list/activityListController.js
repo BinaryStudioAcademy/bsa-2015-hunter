@@ -20,6 +20,7 @@
         //Here we should write all vm variables default values. For Example:
         vm.name = "Activity";
 
+        // TODO: Use camelCase
         $scope.IndexCtrl.amount = 0;
 
         
@@ -35,6 +36,7 @@
 
         vm.activityList;
         // Here we should write any functions we need, for example, body of user actions methods.
+        // TODO: Initialization Should Be covered with self invoke function
         activityHttpService.getActivityList(function (data) {
             vm.activityList = data.data;
             console.log(data.data);
@@ -62,6 +64,7 @@
             lastViewdId);
         }
 
+        // TODO: Data Functions (not user event functions) Should Be In Services
         function isNewActivityPresent(activityList) {
             if (activityList == null || activityList.length == 0) {
                 return;
@@ -79,6 +82,7 @@
         }
     }
 
+    // TODO: Data Functions (not user event functions) Should Be In Services
     function sortFunc(a, b) {
         var aDate = new Date(a.time);
         var bDate = new Date(b.time);
