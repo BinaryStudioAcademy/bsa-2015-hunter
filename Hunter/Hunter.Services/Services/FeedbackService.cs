@@ -43,7 +43,7 @@ namespace Hunter.Services
             try
             {
                 var feedbacks = card.Feedback
-                    .Where(f => (f.Type == 0 || f.Type == 1))
+                    .Where(f => (f.Type == 0 || f.Type == 1 || f.Type == 2))
                     .ToFeedbacksDto().ToList();
 
                 if (!feedbacks.Any(f => f.Type == 0))
@@ -53,6 +53,10 @@ namespace Hunter.Services
                 if (!feedbacks.Any(f => f.Type == 1))
                 {
                     feedbacks.Add(new FeedbackDto { Id = 0, Type = 1, CardId = card.Id, Text = "", Date = DateTime.Now, UserName = "" });
+                }
+                if (!feedbacks.Any(f => f.Type == 2))
+                {
+                    feedbacks.Add(new FeedbackDto { Id = 0, Type = 2, CardId = card.Id, Text = "", Date = DateTime.Now, UserName = "" });
                 }
 
                 return feedbacks.OrderBy(f => f.Type);
@@ -67,7 +71,7 @@ namespace Hunter.Services
 
         public FeedbackDto GetTechInterview(int vacancyId, int candidateId)
         {
-            int type = (int)FeedbackType.Expertise;
+            int type = (int)FeedbackType.TechFeedback;
             try
             {
                 var card = _cardRepository
