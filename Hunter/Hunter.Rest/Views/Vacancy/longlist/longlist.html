@@ -86,7 +86,7 @@
                     <img src="{{longListCtrl.candidateDetails.photoUrl}}" alt="{{longListCtrl.candidateDetails.firstName}} {{longListCtrl.candidateDetails.lastName}} foto" title="{{longListCtrl.candidateDetails.firstName}} {{longListCtrl.candidateDetails.lastName}} foto"/>
                 </div>
                 <div class="ll_preview_info_all">
-                    <p><a href="#/candidate/{{longListCtrl.candidateDetails.id}}">{{longListCtrl.candidateDetails.firstName + " " + longListCtrl.candidateDetails.lastName}}</a></p>
+                    <p><a href="#/vacancy/{{longListCtrl.vacancy.id}}/candidate/{{longListCtrl.candidateDetails.id}}">{{longListCtrl.candidateDetails.firstName + " " + longListCtrl.candidateDetails.lastName}}</a></p>
                     <p>{{longListCtrl.candidateDetails.salary}}</p>
                     <p>{{longListCtrl.candidateDetails.resolution}} / {{longListCtrl.stages[candidate.stage].name}}</p>
                 </div>

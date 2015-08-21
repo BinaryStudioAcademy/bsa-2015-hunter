@@ -172,7 +172,7 @@ angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.dir
                 .when('/candidates/:profileId/specnotes', {
                         templateUrl: '',
                         controller: 'specnotesController',
-                        controllerAs: 'specnotesCtrl',
+                        controllerAs: 'specnotesCtrl'
                     })
                 //slide 6 (history bitton click result)
                 .when('/candidates/:profileId/specnotes/history', {
