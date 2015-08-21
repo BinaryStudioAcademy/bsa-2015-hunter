@@ -19,10 +19,11 @@
         vm.vacancy;
         var userName = localStorageService.get('authorizationData').userName;
 
+        // TODO: Initialization Should Be covered with self invoke function
         VacancyHttpService.getVacancy($routeParams.vid).then(function (result) {
             vm.vacancy = result;
         });
-
+        // TODO: Define event function at the beginning of controller and only then should be implementation vm.saveHrFeedback = saveHrFeedback; function saveHrFeedback() {}
         vm.saveFeedback = function (feedback) {
             var body = {
                 id: feedback.id,

@@ -23,6 +23,7 @@
         vm.feedbacks;
         vm.newFeedback;
 
+        // TODO: Initialization Should Be Covered with self invoke function
         VacancyHttpService.getLongList($routeParams.vid).then(function (result) {
             console.log(result);
             vm.vacancy = result;
@@ -47,6 +48,7 @@
             });
         });
 
+        // TODO: Define event function at the beginning of controller and only then should be implementation vm.saveHrFeedback = saveHrFeedback; function saveHrFeedback() {}
         vm.saveHrFeedback = function (feedback) {
             var newFeedback = {
                 id: feedback.id,
