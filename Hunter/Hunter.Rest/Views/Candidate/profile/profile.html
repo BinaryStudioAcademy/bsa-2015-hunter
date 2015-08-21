@@ -41,10 +41,10 @@
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div spinner="candidateCtrl.isScinner" class="col-md-3">
                 <div class="salary-wrapper">{{candidateCtrl.candidate.salary}}</div>
                 <input class="btn-veiw-resume btn btn-default btn-block" type="button" value="Veiw Resume">
-                <a spinner="candidateCtrl.isScinner" class="btn btn-default btn-block" href="#/candidate/edit/{{candidateCtrl.candidate.id}}">Edit Profile</a>
+                <a class="btn btn-default btn-block" href="#/candidate/edit/{{candidateCtrl.candidate.id}}">Edit Profile</a>
             </div>
         </div>
         <div class="note-info-container" ng-include='candidateCtrl.templateToShow'></div>

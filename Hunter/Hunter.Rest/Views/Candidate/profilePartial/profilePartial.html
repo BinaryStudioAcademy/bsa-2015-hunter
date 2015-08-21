@@ -8,7 +8,7 @@
         <div class="candidate-info">
             <div class="candidate-personal-info row">
                 <div class="image col-md-5">
-                    <shor-list-star is-short="candidatePartCtrl.candidate.shortListed" candidate-id="candidatePartCtrl.candidate.id" size="'30px'"></shor-list-star>
+                    <shor-list-star is-short="candidatePartCtrl.candidate.shortListed" candidate-id="candidatePartCtrl.candidate.id" size="'30px'" ng-click="candidatePartCtrl.starUpdate()"></shor-list-star>
                     <img class="preview-profile-photo img-circle" ng-src="{{candidatePartCtrl.candidate.photoUrl}}" />
                 </div>
                 <div class="col-md-7">
@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="candidate-personal-info row">
-                <div class="personal-info-small">
+                <div class="personal-info-small col-md-push-12">
 
                     <div>current/past: {{candidatePartCtrl.candidate.currentPosition}}</div>
                     <div>years of experience: {{candidatePartCtrl.candidate.yearsOfExperience}}</div>
@@ -48,10 +48,13 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-md-push-12">
+                
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active"><a href="" data-toggle="tab">Aplications</a></li>
                 <li role="presentation"><a href="" data-toggle="tab">Notes</a></li>
             </ul>
+            </div>
         </div>
         <div class="candidate-notes row">
             <div class="note-info-conteiner col-md-12">
