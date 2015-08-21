@@ -58,6 +58,11 @@
                 Resume: 0,
                 Test: 1,
                 Other: 2
+            },
+            successStatus: {
+                'None': 0,
+                'Like': 1,
+                'Dislike': 2
             }
         });
 })();

@@ -18,7 +18,8 @@
             getTechFeedback: getTechFeedback,
             saveFeedback: saveFeedback,
             getSummary: getSummary,
-            saveSummary: saveSummary
+            saveSummary: saveSummary,
+            updateSuccessStatus: updateSuccessStatus
         }
 
         function getHrFeedback(vid, cid) {
@@ -131,6 +132,16 @@
             });
             return deferred.promise;
         };
+
+        function updateSuccessStatus(feedbackId, status) {
+            httpHandler.sendRequest({
+                'url': '/api/feedback/' + feedbackId + 'success/update',
+                'verb': 'POST',
+                body: status,
+                'successCallback': function (response) { console.log(response); },
+                'errorCallback': function (response){console.log(response)}
+            });
+        }
 
         return service;
     }

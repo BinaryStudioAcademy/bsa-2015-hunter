@@ -5,7 +5,9 @@
         .module('hunter-app')
         .directive('thumbButton', ThumbButton);
 
-    ThumbButton.$inject = [];
+    ThumbButton.$inject = [
+//        'EnumConstants'
+    ];
 
     function ThumbButton() {
         return {
@@ -16,8 +18,9 @@
             scope: {
                 btnType: '@btnType',
                 btnIcon: '@btnIcon',
-                feedConfig: '=feedConfig',
-                borderColor: '@borderColor'
+                test: '=test',
+                borderColor: '@borderColor',
+                key: '@key'
             },
             restrict: 'EA',
             link: function (scope, elem, attr) {
@@ -29,13 +32,20 @@
 
                 scope.click = function() {
 
-                    if (scope.feedConfig.style == undefined || scope.feedConfig.style["border-color"] != scope.borderColor) {
-                        scope.feedConfig.style = { 'border-color': scope.borderColor }
+                    if (scope.test.feedbackConfig.style == undefined || scope.test.feedbackConfig.style["border-color"] != scope.borderColor) {
+                        scope.test.feedbackConfig.style = { 'border-color': scope.borderColor };
+                        scope.test.feedback.successStatus = scope.getSuccess(scope.key);
                     } else {
-                        scope.feedConfig.style = {'border-color': 'gray'}
+                        scope.test.feedbackConfig.style = { 'border-color': 'gray' }
+                        scope.test.feedback.successStatus = scope.getSuccess('None');
                     }
                 }
-            }
+            },
+            controller: ['$scope', 'EnumConstants', function($scope, EnumConstants) {
+                    $scope.getSuccess = function(key) {
+                        return EnumConstants.successStatus[key];
+                    }
+            }]
         }
     }
 })()

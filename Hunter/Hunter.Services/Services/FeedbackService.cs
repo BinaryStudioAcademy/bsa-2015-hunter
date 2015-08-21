@@ -162,5 +162,20 @@ namespace Hunter.Services
                 throw ex;
             }
         }
+
+        public FeedbackUpdatedResult UpdateSuccessStatus(int feedbackId, SuccessStatus status, string name)
+        {
+            try
+            {
+                var feedback = _feedbackRepository.Get(feedbackId);
+//                feedback.SuccessStatus = status;
+                return SaveFeedback(feedback.ToFeedbackDto(), name);
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                throw ex;
+            }
+        }
     }
 }

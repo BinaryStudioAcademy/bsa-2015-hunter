@@ -64,6 +64,7 @@
     <Compile Include="Entites\Enums\Resolution.cs" />
     <Compile Include="Entites\Enums\Stage.cs" />
     <Compile Include="Entites\Enums\Status.cs" />
+    <Compile Include="Entites\Enums\SuccessStatus.cs" />
     <Compile Include="Entites\Feedback.cs" />
     <Compile Include="Entites\File.cs" />
     <Compile Include="Entites\IEntity.cs" />

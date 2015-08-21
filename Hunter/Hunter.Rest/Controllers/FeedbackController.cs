@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Hunter.Services.Dto;
 using System.Web.Http.Description;
+using Hunter.DataAccess.Entities.Entites.Enums;
 using Hunter.Services;
 using Hunter.Services.Dto.Feedback;
 using Hunter.Services.Services.Interfaces;
@@ -121,6 +122,23 @@ namespace Hunter.Rest.Controllers
                 _testService.UpdateFeedback(testFeedback.TestId, result.Id);
                 
                 return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("{feedbackId:int}/success/update")]
+        public IHttpActionResult UpdateSuccessStatus(int feedbackId, [FromBody] int status)
+        {
+            try
+            {
+                SuccessStatus stat = (SuccessStatus) status;
+                _feedbackService.UpdateSuccessStatus(feedbackId, stat, User.Identity.Name);
+
+                return Ok();
             }
             catch (Exception ex)
             {
