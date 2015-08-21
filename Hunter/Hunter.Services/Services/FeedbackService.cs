@@ -137,6 +137,7 @@ namespace Hunter.Services
                 else
                 {
                     feedback = new Feedback();
+                    feedback.Added = DateTime.Now;
                 }
 
                 feedback.ProfileId = userProfile != null ? userProfile.Id : (int?)null;
@@ -144,7 +145,7 @@ namespace Hunter.Services
             
             
                 _feedbackRepository.UpdateAndCommit(feedback);
-                //_activityHelperService.CreateUpdatedFeedbackActivity(feedback);
+                _activityHelperService.CreateUpdatedFeedbackActivity(feedback);
                 return new FeedbackUpdatedResult
                 {
                     Id = feedback.Id,

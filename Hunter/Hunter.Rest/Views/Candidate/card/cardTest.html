@@ -17,7 +17,7 @@
     </div>
 
     <div class="wrapper">
-        <div class="row workArea-row" ng-repeat="test in testCtrl.test.tests | orderBy:'id':true">
+        <div class="row workArea-row" ng-repeat="test in testCtrl.test.tests">
             <div class="row">
                 <div ng-show="test.file != null">
                     <div class="col-md-1">Task</div>
@@ -44,7 +44,7 @@
             </div>
             <div class="row" ng-show="test.comment != null || testCtrl.editingIndex == $index">
                 <div class="col-md-1">Comment</div>
-                <div ng-show="testCtrl.editingIndex == $index" class="col-md-11">
+                <div class="col-md-11">
                     <textarea class="form-control feedbackField"
                               ng-auto-expand
                               ng-readonly="testCtrl.editingIndex != $index"

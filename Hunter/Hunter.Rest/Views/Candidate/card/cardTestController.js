@@ -179,20 +179,20 @@
             } else {
                 if (vm.editingIndex == index) {
                     var test = vm.test.tests[vm.editingIndex];
-                    CardTestHttpService.updateTestComment(test.id, test.comment);
-                    FeedbackHttpService.saveTestFeedback({
-                        'feedback': test.feedback,
-                        'testId': test.id
-                    }).then(function (result) {
-                        test.feedback.id = result.id;
-                        console.log(result.id);
-                        test.feedback.date = result.update;
-                        test.feedback.userName = result.userName;
-                        test.feedbackId = result.id;
-                    });
-                    //test.feedback.userName = userName;
-                    //test.feedback.date = new Date();
-
+                    if (test.comment != null) {
+                        CardTestHttpService.updateTestComment(test.id, test.comment);
+                    }
+                    if (test.feedback.text != null) {
+                        FeedbackHttpService.saveTestFeedback({
+                            'feedback': test.feedback,
+                            'testId': test.id
+                        }).then(function (result) {
+                            test.feedback.id = result.id;
+                            test.feedback.date = result.update;
+                            test.feedback.userName = result.userName;
+                            test.feedbackId = result.id;
+                        });
+                    }
                     vm.editingIndex = -1;
                 } else {
                     alertify.alert('Apply your changes!');

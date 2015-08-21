@@ -95,16 +95,16 @@ namespace Hunter.Rest.Controllers
 
         [HttpPut]
         [Route("{id:int}/comment")]
-        public IHttpActionResult UpdateComment(int id, [FromBody]string comment)
+        public HttpResponseMessage UpdateComment(int id, [FromBody]string text)
         {
             try
             {
-                _testService.UpdateComment(id, comment);
-                return Ok();
+                _testService.UpdateComment(id, text);
+                return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
         }
     }
