@@ -33,7 +33,7 @@ namespace Hunter.Services.Dto
             ShortListed = candidate.ShortListed;
             Origin = candidate.Origin;
             DateOfBirth = candidate.DateOfBirth;
-
+            UserAlias = candidate.UserAlias;
             ResolutionString = Enum.GetName(typeof (Resolution), (DataAccess.Entities.Enums.Resolution)Resolution);
         }
     }

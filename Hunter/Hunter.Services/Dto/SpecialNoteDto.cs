@@ -13,6 +13,6 @@ namespace Hunter.Services.Dto
         public string Text { get; set; }
         public DateTime LastEdited { get; set; }
         public int CardId { get; set; }
-
+        public string UserAlias { get; set; }
     }
 }

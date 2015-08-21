@@ -18,5 +18,6 @@ namespace Hunter.Services.Dto
         public string SpecialNotes { get; set; }
         public string PhotoUrl { get; set; }
         public bool Shortlisted { get; set; }
+        public string UserAlias { get; set; }
     }
 }

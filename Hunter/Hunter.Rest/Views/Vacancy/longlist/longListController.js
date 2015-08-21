@@ -110,6 +110,7 @@
                                             .orderBy(vm.order.field, vm.order.dir)
                                             .query(function () {
                                                 vm.candidatesList = cands.items;
+                    vm.viewCandidateInfo(vm.candidatesList[0].id);
                                                 vm.totalItems = cands.count;
                                             });
             console.log('long list', vm.candidatesList);

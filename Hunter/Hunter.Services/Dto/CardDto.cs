@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hunter.Services.Dto
+namespace Hunter.Services
 {
     public class CardDto
     {

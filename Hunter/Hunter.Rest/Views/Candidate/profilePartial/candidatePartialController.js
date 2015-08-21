@@ -53,8 +53,10 @@
 
 
         function getCandidateDetails(id) {
+            vm.prevLoad = true;
             candidateHttpService.getCandidate(id).then(function (response) {
                 vm.candidate = response.data;
+                vm.prevLoad = false;
             });
 
         }

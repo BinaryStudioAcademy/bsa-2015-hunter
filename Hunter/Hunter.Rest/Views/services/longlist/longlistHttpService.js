@@ -4,20 +4,24 @@
 
     LonglistHttpService.$inject = [
     'HttpHandler',
-    '$q'
+    '$q',
+	'$location'
     ];
-    function LonglistHttpService(httpHandler, $q) {
+    function LonglistHttpService(httpHandler, $q, $location) {
         var service = {
             addCards: addCards
         }
 
-        function addCards(body) {
+        function addCards(body, newLocation) {
             httpHandler.sendRequest({
                 verb: 'POST',
                 url: '/api/card',
-                body: body,
-                successMessageToUser: 'Cards was added',
-                errorMessageToUser: 'Cards war not added',
+                body: JSON.stringify(body),
+				successCallback: function (result) {
+                        $location.url(newLocation);
+                    },
+                successMessageToUser: 'Cards were added',
+                errorMessageToUser: 'Cards were not added',
                 errorCallback: function (status) {
                     console.log("Add cards error");
                     console.log(status);

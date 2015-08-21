@@ -162,6 +162,14 @@
     <Compile Include="Migrations\201508191038149_add_resumeSummari_candidate_field.Designer.cs">
       <DependentUpon>201508191038149_add_resumeSummari_candidate_field.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508201411303_added_userProfile_field_to_special_not.cs" />
+    <Compile Include="Migrations\201508201411303_added_userProfile_field_to_special_not.Designer.cs">
+      <DependentUpon>201508201411303_added_userProfile_field_to_special_not.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508201751269_added_userprofile_field_to_activity_entity.cs" />
+    <Compile Include="Migrations\201508201751269_added_userprofile_field_to_activity_entity.Designer.cs">
+      <DependentUpon>201508201751269_added_userprofile_field_to_activity_entity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -228,6 +236,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508191038149_add_resumeSummari_candidate_field.resx">
       <DependentUpon>201508191038149_add_resumeSummari_candidate_field.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508201411303_added_userProfile_field_to_special_not.resx">
+      <DependentUpon>201508201411303_added_userProfile_field_to_special_not.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508201751269_added_userprofile_field_to_activity_entity.resx">
+      <DependentUpon>201508201751269_added_userprofile_field_to_activity_entity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

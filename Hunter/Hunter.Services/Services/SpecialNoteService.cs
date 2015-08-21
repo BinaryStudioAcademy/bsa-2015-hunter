@@ -14,15 +14,15 @@ namespace Hunter.Services.Services
         private readonly ISpecialNoteRepository _specialNoteRepository;
         private readonly ICardRepository _cardRepository;
         private readonly IActivityHelperService _activityHelperService;
-        //private readonly IUserProfileRepository _userProfileRepository;
+        private readonly IUserProfileRepository _userProfileRepository;
 
         public SpecialNoteService(ISpecialNoteRepository specialNoteRepository, ICardRepository cardRepository,
-            IActivityHelperService activityHelperService)
+            IActivityHelperService activityHelperService, IUserProfileRepository userProfileRepository)
         {
             _specialNoteRepository = specialNoteRepository;
             _cardRepository = cardRepository;
             _activityHelperService = activityHelperService;
-            //_userProfileRepository = userProfileRepository;
+            _userProfileRepository = userProfileRepository;
         }
 
         public IEnumerable<SpecialNoteDto> GetAllSpecialNotes()
@@ -36,12 +36,15 @@ namespace Hunter.Services.Services
             return _specialNoteRepository.Get(id).ToDto();
         }
 
-        public SpecNoteResult AddSpecialNote(SpecialNoteDto entity, int vid, int cid)
+        public SpecNoteResult AddSpecialNote(SpecialNoteDto dto, int vid, int cid)
         {
             var card = _cardRepository.GetByCandidateAndVacancy(cid, vid);
-            entity.CardId = card.Id;
-            var specnoteEntity = entity.ToEntity();
+            dto.CardId = card.Id;
+            var specnoteEntity = dto.ToEntity();
+            var userProfile = _userProfileRepository.Get(x => x.UserLogin == dto.UserLogin);
+            specnoteEntity.UserProfileId = userProfile != null ? userProfile.Id : (int?)null;
             _specialNoteRepository.UpdateAndCommit(specnoteEntity);
+            _activityHelperService.CreateAddedSpecialNoteActivity(specnoteEntity);
 
             return new SpecNoteResult
             {
@@ -52,10 +55,13 @@ namespace Hunter.Services.Services
             };
         }
 
-        public SpecNoteResult UpdateSpecialNote(SpecialNoteDto entity)
+        public SpecNoteResult UpdateSpecialNote(SpecialNoteDto dto)
         {
-            var specnoteEntity = entity.ToEntity();
+            var specnoteEntity = dto.ToEntity();
+            var userProfile = _userProfileRepository.Get(x => x.UserLogin == dto.UserLogin);
+            specnoteEntity.UserProfileId = userProfile != null ? userProfile.Id : (int?)null;
             _specialNoteRepository.UpdateAndCommit(specnoteEntity);
+            _activityHelperService.CreateUpdatedSpecialNoteActivity(specnoteEntity);
 
             return new SpecNoteResult
             {
@@ -77,7 +83,7 @@ namespace Hunter.Services.Services
         {
             return
                 _specialNoteRepository.Query()
-                    .Where(x => x.UserLogin == login && x.Card.CandidateId == candidateId && x.Card.VacancyId == vacancyId )
+                    .Where(x => x.UserProfile.UserLogin == login && x.Card.CandidateId == candidateId && x.Card.VacancyId == vacancyId )
                     .OrderByDescending(x => x.LastEdited)
                     .ToList()
                     .Select(x => x.ToDto());

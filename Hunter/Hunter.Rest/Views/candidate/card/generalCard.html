@@ -2,9 +2,9 @@
     <div id="card-static">
         <div class="candidate-info">
             <div class="candidate-personal-info row">
-                <div class="image col-md-2" ng-switch on="generalCardCtrl.candidate.photo">
+                <div class="image col-md-2">
                     <shor-list-star is-short="generalCardCtrl.candidate.shortListed" candidate-id="generalCardCtrl.candidate.id" size="'30px'"></shor-list-star>
-                    <img class="profile-photo img-circle" ng-switch-default src="{{generalCardCtrl.candidate.photoUrl}}"/>
+                    <img class="profile-photo img-circle" ng-src="{{generalCardCtrl.candidate.photoUrl}}"/>
                 </div>
                 <div class="col-md-5">
                     <div class="personal-info">
@@ -12,7 +12,7 @@
                             <span class="candidate-name">{{generalCardCtrl.candidate.firstName+" "+generalCardCtrl.candidate.lastName}}</span>
                         </div>
                         <div>current/past: {{generalCardCtrl.candidate.currentPosition}}</div>
-                        <div>company/location: {{generalCardCtrl.candidate.company+", "+candidateCtrl.candidate.localion}}</div>
+                        <div>company/location: {{generalCardCtrl.candidate.company+", "+generalCardCtrl.candidate.location}}</div>
                         <div>email: {{generalCardCtrl.candidate.email}}</div>
                         <div>skype: {{generalCardCtrl.candidate.skype}}</div>
                         <div>phone: {{generalCardCtrl.candidate.phone}}</div>
