@@ -16,25 +16,42 @@
         </div>
     </div>
 
-    <div class="wrapper personal-info">
+    <div class="wrapper">
         <div class="row workArea-row" ng-repeat="test in testCtrl.test.tests | orderBy:'id':true">
             <div class="row">
                 <div ng-show="test.file != null">
                     <div class="col-md-1">Task</div>
-                    <div class="col-md-10"><a href="/api/file/download/{{test.file.id}}">{{test.file.fileName}}</a> Size: {{test.file.size}} Uploaded: {{test.file.added | date:'dd.MM.yyyy hh:mm:ss'}}</div>
-                    <div class="col-md-1"><button class="btn btn-primary">Edit</button></div>
+                    <div class="col-md-10"><a href="/api/file/download/{{test.file.id}}">{{test.file.fileName}}</a> Size: {{test.file.size}} Uploaded: {{test.file.added | date:'dd.MM.yyyy hh:mm:ss'}}
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-default" ng-click="testCtrl.changeCurrentTest($index)">
+                            <i ng-show="testCtrl.editingIndex != $index" class="fa fa-pencil-square-o"></i>
+                            <i ng-show="testCtrl.editingIndex == $index" class="fa fa-check"></i>
+                        </button>
+                    </div>
                 </div>
                 <div ng-show="test.url != null && test.file == null">
                     <div class="col-md-1">Task</div>
-                    <div class="col-md-10"><a href="{{test.url}}">{{test.url}}</a> Added {{test.added | date:'dd.MM.yyyy hh:mm:ss'}}</div>
-                    <div class="col-md-1"><button class="btn btn-primary">Edit</button></div>
+                    <div class="col-md-10"><a href="{{test.url}}">{{test.url}}</a> Added {{test.added | date:'dd.MM.yyyy hh:mm:ss'}}
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-default" ng-click="testCtrl.changeCurrentTest($index)">
+                            <i ng-show="testCtrl.editingIndex != $index" class="fa fa-pencil-square-o"></i>
+                            <i ng-show="testCtrl.editingIndex == $index" class="fa fa-check"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="row" ng-show="test.comment != null">
+            <div class="row" ng-show="test.comment != null || testCtrl.editingIndex == $index">
                 <div class="col-md-1">Comment</div>
-                <div class="col-md-11">{{test.comment}}</div>
+                <div ng-show="testCtrl.editingIndex == $index" class="col-md-11">
+                    <textarea class="form-control feedbackField"
+                              ng-auto-expand
+                              ng-readonly="testCtrl.editingIndex != $index"
+                              ng-model="test.comment"></textarea>
+                </div>
             </div>
-            <div class="row" ng-show="test.feedbackId != null">
+            <div class="row" ng-show="test.feedbackId != null || testCtrl.editingIndex == $index">
                 <div class="col-md-1 disableBottomMargins">
                     Feedback
                     <div class="row">
@@ -43,12 +60,12 @@
                     </div>
                 </div>
                 <div class="col-md-11">
-                    <p class="feedback-addedBy" ng-show="test.feedback.userName != undefined">
+                    <p style="text-align: right" ng-show="test.feedback.userName != undefined">
                         updated by {{test.feedback.userName}} {{test.feedback.date | date:'dd.MM.yyyy hh:mm:ss'}}
                     </p>
                     <textarea class="form-control feedbackField"
                               ng-auto-expand
-                              ng-readonly="test.feedbackConfig.fieldReadonly"
+                              ng-readonly="testCtrl.editingIndex != $index"
                               ng-model="test.feedback.text"></textarea>
                 </div>
             </div>

@@ -18,12 +18,15 @@
         FeedbackHttpService, UploadTestService, localStorageService, $scope) {
         var vm = this;
         vm.templateName = 'Test';
+        vm.editingIndex = -1;
         var candidateId = $routeParams.cid;
         var vacancyId = $routeParams.vid;
         var userName = localStorageService.get('authorizationData').userName;
 
         vm.testLink = '';
         vm.testFile = '';
+
+        vm.changeCurrentTest = changeCurrentTest;
 
         vm.uploadLink = function () {
             if (vm.testLink == '') {
@@ -36,7 +39,7 @@
                 'cardId': vm.test.cardId,
                 'feedbackId': null,
                 'added': new Date()
-        }
+            }
 
             CardTestHttpService.sendTest(testSend, function(response) {
                 var lastUploadTestId = response.data;
@@ -167,6 +170,33 @@
                     vm.test.tests.push(test);
                 });
             });
+        }
+
+        function changeCurrentTest(index) {
+            if (vm.editingIndex == -1) {
+                vm.editingIndex = index;
+            } else {
+                if (vm.editingIndex == index) {
+                    //updateComments();
+                    FeedbackHttpService.saveTestFeedback({
+                        'feedback': vm.test.tests[vm.editingIndex].feedback,
+                        'testId': vm.test.tests[vm.editingIndex].id
+                    }).then(function (result) {
+                        vm.test.tests[vm.editingIndex].feedback.id = result.id;
+                        vm.test.tests[vm.editingIndex].feedback.date = result.update;
+                        vm.test.tests[vm.editingIndex].feedback.userName = result.userName;
+                        vm.test.tests[vm.editingIndex].feedbackId = result.id;
+                    });
+                    vm.test.tests[vm.editingIndex].feedback.userName = userName;
+                    vm.test.tests[vm.editingIndex].feedback.date = new Date();
+
+                    vm.editingIndex = -1;
+                } else {
+                    alertify.alert('Apply your changes!');
+                }
+
+            }
+            
         }
     }
 })();
