@@ -2,48 +2,49 @@
 
     <div class="row">
         <div class="col-md-5">
-            <input type="text" class="form-control testLink" placeholder="Provide link to test" ng-model="testCtrl.testLink" />
+            <input type="text" class="form-control testLink" placeholder="Provide link to test" ng-model="testCtrl.testLink"/>
             <button class="btn btn-primary" ng-click="testCtrl.uploadLink()">Add</button>
         </div>
         <div class="col-md-7">
             <input class="form-control filePath" type="text" readonly placeholder="Pick the file with test"
-                   ng-model="testCtrl.fileName" />
+                   ng-model="testCtrl.fileName"/>
             <span class="file-input btn btn-primary btn-file">
                 Choose...<input type="file" multiple="" ng-file-change="testCtrl.onFileChanged">
             </span>
-
             <button class="btn btn-primary" ng-click="testCtrl.uploadFile()">Upload</button>
         </div>
     </div>
-
-    <div class="wrapper">
+    <br/>
+    <div class="wrapper" style="border: solid"><br/>
         <div class="row workArea-row" ng-repeat="test in testCtrl.test.tests">
             <div class="row">
                 <div ng-show="test.file != null">
-                    <div class="col-md-1">Task</div>
-                    <div class="col-md-10"><a href="/api/file/download/{{test.file.id}}">{{test.file.fileName}}</a> Size: {{test.file.size}} Uploaded: {{test.file.added | date:'dd.MM.yyyy hh:mm:ss'}}
+                    <div class="col-md-1"><label>Task</label></div>
+                    <div class="col-md-10">
+                        <a href="/api/file/download/{{test.file.id}}">{{test.file.fileName}}</a> Size: {{test.file.size}} Uploaded: {{test.file.added | date:'dd.MM.yyyy hh:mm:ss'}}
                     </div>
                     <div class="col-md-1">
-                        <button class="btn btn-default" ng-click="testCtrl.changeCurrentTest($index)">
-                            <i ng-show="testCtrl.editingIndex != $index" class="fa fa-pencil-square-o"></i>
-                            <i ng-show="testCtrl.editingIndex == $index" class="fa fa-check"></i>
+                        <button class="circleButton btn btn-info" ng-click="testCtrl.changeCurrentTest($index)">
+                            <span ng-show="testCtrl.editingIndex != $index" class="glyphicon glyphicon-pencil circleButton-icon"></span>
+                            <span ng-show="testCtrl.editingIndex == $index" class="glyphicon glyphicon-ok circleButton-icon"></span>
                         </button>
                     </div>
                 </div>
                 <div ng-show="test.url != null && test.file == null">
-                    <div class="col-md-1">Task</div>
-                    <div class="col-md-10"><a href="{{test.url}}">{{test.url}}</a> Added {{test.added | date:'dd.MM.yyyy hh:mm:ss'}}
+                    <div class="col-md-1"><label>Task</label></div>
+                    <div class="col-md-10">
+                        <a href="{{test.url}}">{{test.url}}</a> Added {{test.added | date:'dd.MM.yyyy hh:mm:ss'}}
                     </div>
                     <div class="col-md-1">
-                        <button class="btn btn-default" ng-click="testCtrl.changeCurrentTest($index)">
-                            <i ng-show="testCtrl.editingIndex != $index" class="fa fa-pencil-square-o"></i>
-                            <i ng-show="testCtrl.editingIndex == $index" class="fa fa-check"></i>
+                        <button class="circleButton btn btn-info" ng-click="testCtrl.changeCurrentTest($index)">
+                            <span ng-show="testCtrl.editingIndex != $index" class="glyphicon glyphicon-pencil circleButton-icon"></span>
+                            <span ng-show="testCtrl.editingIndex == $index" class="glyphicon glyphicon-ok circleButton-icon"></span>
                         </button>
                     </div>
                 </div>
             </div>
-            <div class="row" ng-show="test.comment != null || testCtrl.editingIndex == $index">
-                <div class="col-md-1">Comment</div>
+            <div class="row" ng-show="(test.comment != null && test.comment != '') || testCtrl.editingIndex == $index">
+                <div class="col-md-1"><label>Comment</label></div>
                 <div class="col-md-11">
                     <textarea class="form-control feedbackField"
                               ng-auto-expand
@@ -53,7 +54,7 @@
             </div>
             <div class="row" ng-show="test.feedbackId != null || testCtrl.editingIndex == $index">
                 <div class="col-md-1 disableBottomMargins">
-                    Feedback
+                    <label>Feedback</label>
                     <div class="row">
                         <div class="circleButton btn btn-success"><span class="glyphicon glyphicon-thumbs-up circleButton-icon"></span></div>
                         <div class="circleButton btn btn-danger"><span class="glyphicon glyphicon-thumbs-down circleButton-icon"></span></div>
@@ -69,7 +70,7 @@
                               ng-model="test.feedback.text"></textarea>
                 </div>
             </div>
-            <hr />
+            <hr/>
         </div>
     </div>
 </div>
