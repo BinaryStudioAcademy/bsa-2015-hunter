@@ -90,21 +90,21 @@ namespace Hunter.DataAccess.Entities
             #endregion
 
             #region CANDIDATES
-            var candidate1 = new Candidate() { AddDate = new DateTime(2015, 8, 1), EditDate = new DateTime(2015, 7, 1), AddedByProfileId = 1, FirstName = "Hollis", LastName = "Sefton", Email = "sefton@outlook.com", CurrentPosition = "Chief Tactics Planner", Company = "3D Me!", Location = "Winter Park", Skype = "sefton1052", Phone = "202-555-0160", Salary = 64000, YearsOfExperience = 12, Shortlisted = true};
-            var candidate2 = new Candidate() { AddDate = new DateTime(2015, 8, 2), EditDate = new DateTime(2015, 7, 2), AddedByProfileId = 2, FirstName = "Porter", LastName = "Wystan", Email = "pwystan@yahoo.com", CurrentPosition = "Central Configuration Specialist", Company = "Acacia Group", Location = "Athens", Skype = "porter_9", Phone = "202-555-0141", Salary = 11000, YearsOfExperience = 7.8, Shortlisted = true };
-            var candidate3 = new Candidate() { AddDate = new DateTime(2015, 8, 3), EditDate = new DateTime(2015, 8, 3), AddedByProfileId = 1, FirstName = "Gabe", LastName = "Raven", Email = "graven@gmail.com", CurrentPosition = "International Tactics Developer", Company = "AirSync", Location = "West Fargo", Skype = "gabe_raven_001", Phone = "202-555-0167", Salary = 78000, YearsOfExperience = 9 };
-            var candidate4 = new Candidate() { AddDate = new DateTime(2015, 8, 4), EditDate = new DateTime(2015, 8, 4), AddedByProfileId = 3, FirstName = "Jack", LastName = "Sylvanus", Email = "jsylv@gmail.com", CurrentPosition = "Senior Brand Orchestrator", Company = "All Apps", Location = "Camp Hill", Skype = "jack_16", Phone = "202-555-0128", Salary = 94000, YearsOfExperience = 1.2 };
-            var candidate5 = new Candidate() { AddDate = new DateTime(2015, 8, 5), EditDate = new DateTime(2015, 8, 5), AddedByProfileId = 3, FirstName = "Lindsay", LastName = "Darryl", Email = "lindsay@outlook.com", CurrentPosition = "Lead Mobility Agent", Company = "Bitrex", Location = "Princeton", Skype = "0lindsay0", Phone = "202-555-0196", Salary = 67000, YearsOfExperience = 4 };
-            var candidate6 = new Candidate() { AddDate = new DateTime(2015, 8, 5), EditDate = new DateTime(2015, 8, 5), AddedByProfileId = 2, FirstName = "Jennie", LastName = "Charlie", Email = "jennie@gmail.com", CurrentPosition = "Lead Integration Analyst", Company = "Decratex", Location = "Oakland Gardens", Skype = "jen0140", Phone = "202-555-0198", Salary = 99000, YearsOfExperience = 3.10 };
-            var candidate7 = new Candidate() { AddDate = new DateTime(2015, 8, 6), EditDate = new DateTime(2015, 8, 6), AddedByProfileId = 3, FirstName = "Gracelyn", LastName = "Moriah", Email = "grace@yahoo.com", CurrentPosition = "Dynamic Quality Assistant", Company = "DigestIT", Location = "Stafford", Skype = "moriah_99", Phone = "613-555-0115", Salary = 82000, YearsOfExperience = 2.1 };
-            var candidate8 = new Candidate() { AddDate = new DateTime(2015, 8, 7), EditDate = new DateTime(2015, 8, 7), AddedByProfileId = 1, FirstName = "Elizabeth", LastName = "Rona", Email = "eliz@hotmail.com", CurrentPosition = "Dynamic Identity Supervisor", Company = "eCourt", Location = "Sterling", Skype = "lisy228", Phone = "01632 960277", Salary = 71000, YearsOfExperience = 5 };
-            var candidate9 = new Candidate() { AddDate = new DateTime(2015, 8, 8), EditDate = new DateTime(2015, 8, 8), AddedByProfileId = 3, FirstName = "Sunny", LastName = "Fawn", Email = "fawn@gmail.com", CurrentPosition = "Division Assistant", Company = "Micromax", Location = "Windermere", Skype = "fawn322", Phone = "613-555-0104", Salary = 89000, YearsOfExperience = 4.4 };
-            var candidate10 = new Candidate() { AddDate = new DateTime(2015, 8, 10), EditDate = new DateTime(2015, 8, 10), AddedByProfileId = 2, FirstName = "Christianne", LastName = "Diantha", Email = "diantha@outlook.com", CurrentPosition = "Senior Optimization Planner", Company = "ExoGame", Location = "Summerville", Skype = "diantha", Phone = "613-555-0160", Salary = 91000, YearsOfExperience = 15 };
-            var candidate11 = new Candidate() { AddDate = new DateTime(2015, 8, 6), EditDate = new DateTime(2015, 8, 6), AddedByProfileId = 1, FirstName = "Allie", LastName = "Merideth", Email = "merideth@hotmail.com", CurrentPosition = "Division Architect", Company = "Future Technology", Location = "Canton", Skype = "merideth99", Phone = "01632 960813", Salary = 115000, YearsOfExperience = 0.9 };
-            var candidate12 = new Candidate() { AddDate = new DateTime(2015, 8, 15), EditDate = new DateTime(2015, 8, 15), AddedByProfileId = 2, FirstName = "Kennedy", LastName = "Wardell", Email = "wardell@yahoo.com", CurrentPosition = "Product Functionality Consultant", Company = "Highway Cruise Lines", Location = "Pikesville", Skype = "ken1520", Phone = "613-555-0126", Salary = 80000, YearsOfExperience = 1.5 };
-            var candidate13 = new Candidate() { AddDate = new DateTime(2015, 8, 18), EditDate = new DateTime(2015, 8, 18), AddedByProfileId = 1, FirstName = "Gloria", LastName = "Delma", Email = "glor@outlook.com", CurrentPosition = "District Creative Director", Company = "Karmalogic", Location = "Bristol", Skype = "gloria33", Phone = "613-555-0115", Salary = 99000, YearsOfExperience = 4 };
-            var candidate14 = new Candidate() { AddDate = new DateTime(2015, 8, 20), EditDate = new DateTime(2015, 8, 20), AddedByProfileId = 2, FirstName = "Deanne", LastName = "Imogene", Email = "imogene@hotmail.com", CurrentPosition = "Global Creative Associate", Company = "Microluxe", Location = "Goose Creek", Skype = "deanne17", Phone = "01632 960437", Salary = 117000, YearsOfExperience = 2 };
-            var candidate15 = new Candidate() { AddDate = new DateTime(2015, 8, 30), EditDate = new DateTime(2015, 8, 30), AddedByProfileId = 3, FirstName = "Lon", LastName = "Abner", Email = "lonabner@gmail.com", CurrentPosition = "Senior Web Analyst", Company = "KCS Design", Location = "Abingdon", Skype = "lon78", Phone = "613-555-0167", Salary = 102000, YearsOfExperience = 3 };
+            var candidate1 = new Candidate() { AddDate = new DateTime(2015, 8, 1), EditDate = new DateTime(2015, 7, 1), AddedByProfileId = 1, FirstName = "Hollis", LastName = "Sefton", Email = "sefton@outlook.com", CurrentPosition = "Chief Tactics Planner", Company = "3D Me!", Location = "Winter Park", Skype = "sefton1052", Phone = "202-555-0160", Salary = 64000, YearsOfExperience = 12, Shortlisted = true, Resolution = Resolution.Available};
+            var candidate2 = new Candidate() { AddDate = new DateTime(2015, 8, 2), EditDate = new DateTime(2015, 7, 2), AddedByProfileId = 2, FirstName = "Porter", LastName = "Wystan", Email = "pwystan@yahoo.com", CurrentPosition = "Central Configuration Specialist", Company = "Acacia Group", Location = "Athens", Skype = "porter_9", Phone = "202-555-0141", Salary = 11000, YearsOfExperience = 7.8, Shortlisted = true, Resolution = Resolution.Hired };
+            var candidate3 = new Candidate() { AddDate = new DateTime(2015, 8, 3), EditDate = new DateTime(2015, 8, 3), AddedByProfileId = 1, FirstName = "Gabe", LastName = "Raven", Email = "graven@gmail.com", CurrentPosition = "International Tactics Developer", Company = "AirSync", Location = "West Fargo", Skype = "gabe_raven_001", Phone = "202-555-0167", Salary = 78000, YearsOfExperience = 9, Resolution = Resolution.NotInterested };
+            var candidate4 = new Candidate() { AddDate = new DateTime(2015, 8, 4), EditDate = new DateTime(2015, 8, 4), AddedByProfileId = 3, FirstName = "Jack", LastName = "Sylvanus", Email = "jsylv@gmail.com", CurrentPosition = "Senior Brand Orchestrator", Company = "All Apps", Location = "Camp Hill", Skype = "jack_16", Phone = "202-555-0128", Salary = 94000, YearsOfExperience = 1.2, Resolution = Resolution.Unfit };
+            var candidate5 = new Candidate() { AddDate = new DateTime(2015, 8, 5), EditDate = new DateTime(2015, 8, 5), AddedByProfileId = 3, FirstName = "Lindsay", LastName = "Darryl", Email = "lindsay@outlook.com", CurrentPosition = "Lead Mobility Agent", Company = "Bitrex", Location = "Princeton", Skype = "0lindsay0", Phone = "202-555-0196", Salary = 67000, YearsOfExperience = 4, Resolution = Resolution.NotNow };
+            var candidate6 = new Candidate() { AddDate = new DateTime(2015, 8, 5), EditDate = new DateTime(2015, 8, 5), AddedByProfileId = 2, FirstName = "Jennie", LastName = "Charlie", Email = "jennie@gmail.com", CurrentPosition = "Lead Integration Analyst", Company = "Decratex", Location = "Oakland Gardens", Skype = "jen0140", Phone = "202-555-0198", Salary = 99000, YearsOfExperience = 3.10, Resolution = Resolution.Available };
+            var candidate7 = new Candidate() { AddDate = new DateTime(2015, 8, 6), EditDate = new DateTime(2015, 8, 6), AddedByProfileId = 3, FirstName = "Gracelyn", LastName = "Moriah", Email = "grace@yahoo.com", CurrentPosition = "Dynamic Quality Assistant", Company = "DigestIT", Location = "Stafford", Skype = "moriah_99", Phone = "613-555-0115", Salary = 82000, YearsOfExperience = 2.1, Resolution = Resolution.Hired };
+            var candidate8 = new Candidate() { AddDate = new DateTime(2015, 8, 7), EditDate = new DateTime(2015, 8, 7), AddedByProfileId = 1, FirstName = "Elizabeth", LastName = "Rona", Email = "eliz@hotmail.com", CurrentPosition = "Dynamic Identity Supervisor", Company = "eCourt", Location = "Sterling", Skype = "lisy228", Phone = "01632 960277", Salary = 71000, YearsOfExperience = 5, Resolution = Resolution.NotInterested  };
+            var candidate9 = new Candidate() { AddDate = new DateTime(2015, 8, 8), EditDate = new DateTime(2015, 8, 8), AddedByProfileId = 3, FirstName = "Sunny", LastName = "Fawn", Email = "fawn@gmail.com", CurrentPosition = "Division Assistant", Company = "Micromax", Location = "Windermere", Skype = "fawn322", Phone = "613-555-0104", Salary = 89000, YearsOfExperience = 4.4, Resolution = Resolution.Unfit };
+            var candidate10 = new Candidate() { AddDate = new DateTime(2015, 8, 10), EditDate = new DateTime(2015, 8, 10), AddedByProfileId = 2, FirstName = "Christianne", LastName = "Diantha", Email = "diantha@outlook.com", CurrentPosition = "Senior Optimization Planner", Company = "ExoGame", Location = "Summerville", Skype = "diantha", Phone = "613-555-0160", Salary = 91000, YearsOfExperience = 15, Resolution = Resolution.NotNow };
+            var candidate11 = new Candidate() { AddDate = new DateTime(2015, 8, 6), EditDate = new DateTime(2015, 8, 6), AddedByProfileId = 1, FirstName = "Allie", LastName = "Merideth", Email = "merideth@hotmail.com", CurrentPosition = "Division Architect", Company = "Future Technology", Location = "Canton", Skype = "merideth99", Phone = "01632 960813", Salary = 115000, YearsOfExperience = 0.9, Resolution = Resolution.Available };
+            var candidate12 = new Candidate() { AddDate = new DateTime(2015, 8, 15), EditDate = new DateTime(2015, 8, 15), AddedByProfileId = 2, FirstName = "Kennedy", LastName = "Wardell", Email = "wardell@yahoo.com", CurrentPosition = "Product Functionality Consultant", Company = "Highway Cruise Lines", Location = "Pikesville", Skype = "ken1520", Phone = "613-555-0126", Salary = 80000, YearsOfExperience = 1.5, Resolution = Resolution.Available };
+            var candidate13 = new Candidate() { AddDate = new DateTime(2015, 8, 18), EditDate = new DateTime(2015, 8, 18), AddedByProfileId = 1, FirstName = "Gloria", LastName = "Delma", Email = "glor@outlook.com", CurrentPosition = "District Creative Director", Company = "Karmalogic", Location = "Bristol", Skype = "gloria33", Phone = "613-555-0115", Salary = 99000, YearsOfExperience = 4, Resolution = Resolution.Available };
+            var candidate14 = new Candidate() { AddDate = new DateTime(2015, 8, 20), EditDate = new DateTime(2015, 8, 20), AddedByProfileId = 2, FirstName = "Deanne", LastName = "Imogene", Email = "imogene@hotmail.com", CurrentPosition = "Global Creative Associate", Company = "Microluxe", Location = "Goose Creek", Skype = "deanne17", Phone = "01632 960437", Salary = 117000, YearsOfExperience = 2, Resolution = Resolution.Available };
+            var candidate15 = new Candidate() { AddDate = new DateTime(2015, 8, 30), EditDate = new DateTime(2015, 8, 30), AddedByProfileId = 3, FirstName = "Lon", LastName = "Abner", Email = "lonabner@gmail.com", CurrentPosition = "Senior Web Analyst", Company = "KCS Design", Location = "Abingdon", Skype = "lon78", Phone = "613-555-0167", Salary = 102000, YearsOfExperience = 3, Resolution = Resolution.Available };
 
             var candidates = new List<Candidate>() { candidate1, candidate2, candidate3, candidate4, candidate5, candidate6, candidate7, candidate8, candidate9, candidate10, candidate11, candidate12, candidate13, candidate14, candidate15 };
             candidates.ForEach(candidate => context.Candidate.Add(candidate));
@@ -482,6 +482,7 @@ namespace Hunter.DataAccess.Entities
 
             var cards = new List<Card>
             {
+                #region ForVacancy1
                 new Card
                 {
                     CandidateId = 1,
@@ -522,6 +523,51 @@ namespace Hunter.DataAccess.Entities
                     Stage = 3,
                     AddedByProfileId = 4
                 },
+                #endregion
+                
+                #region ForVacancy2
+                new Card
+                {
+                    CandidateId = 6,
+                    VacancyId = 2,
+                    Added = new DateTime(2015, 8, 1),
+                    Stage = 0,
+                    AddedByProfileId = 1
+                },
+                new Card
+                {
+                    CandidateId = 7,
+                    VacancyId = 2,
+                    Added = new DateTime(2015, 8, 1),
+                    Stage = 1,
+                    AddedByProfileId = 2
+                },
+                new Card
+                {
+                    CandidateId = 8,
+                    VacancyId = 2,
+                    Added = new DateTime(2015, 8, 1),
+                    Stage = 1,
+                    AddedByProfileId = 3
+                },
+                new Card
+                {
+                    CandidateId = 9,
+                    VacancyId = 2,
+                    Added = new DateTime(2015, 8, 1),
+                    Stage = 2,
+                    AddedByProfileId = 1
+                },
+                new Card
+                {
+                    CandidateId = 10,
+                    VacancyId = 2,
+                    Added = new DateTime(2015, 8, 1),
+                    Stage = 3,
+                    AddedByProfileId = 4
+                },
+                #endregion
+                
                 new Card
                 {
                     CandidateId = 2,
@@ -577,7 +623,7 @@ namespace Hunter.DataAccess.Entities
                     Added = new DateTime(2015, 8, 1),
                     Stage = 1,
                     AddedByProfileId = 1
-        }
+                }
             };
 
             cards.ForEach(c => context.Card.Add(c));
