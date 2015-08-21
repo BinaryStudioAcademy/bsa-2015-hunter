@@ -42,7 +42,7 @@
                 <div class="ll_list">
                     <div class="ll_candidate_item" ng-repeat="candidate in longListCtrl.candidatesList" ng-click="longListCtrl.viewCandidateInfo(candidate.id)" ng-class="longListCtrl.ActiveItem(candidate.id)">
                         <div class="col-md-4 ll_candidate_item_img">
-                            <shor-list-star is-short="candidate.shortlisted" candidate-id="candidate.id" size="'18px'"></shor-list-star>
+                            <shor-list-star is-short="candidate.shortlisted" candidate-id="candidate.id" size="'18px'" ng-click="longListCtrl.updatePrevStar()"></shor-list-star>
                             <img ng-src="{{candidate.photoUrl}}" />
                             <p class="years_of_experience">{{candidate.yearsOfExperience}}</p>
                             <!--<p class="candidate_bookmark"><span class="glyphicon glyphicon-star-empty"></span></p>-->
@@ -82,11 +82,11 @@
             <h2>Preview</h2>
             <div class="ll_preview_info">
                 <div class="ll_preview_info_img">
-                    <shor-list-star is-short="longListCtrl.candidateDetails.shortlisted" candidate-id="longListCtrl.candidateDetails.id" size="'30px'"></shor-list-star>
+                    <shor-list-star is-short="longListCtrl.candidateDetails.shortlisted" candidate-id="longListCtrl.candidateDetails.id" size="'30px'" ng-click="longListCtrl.starUpdate()"></shor-list-star>
                     <img src="{{longListCtrl.candidateDetails.photoUrl}}" alt="{{longListCtrl.candidateDetails.firstName}} {{longListCtrl.candidateDetails.lastName}} foto" title="{{longListCtrl.candidateDetails.firstName}} {{longListCtrl.candidateDetails.lastName}} foto"/>
                 </div>
                 <div class="ll_preview_info_all">
-                    <p><a href="#/candidate/{{longListCtrl.candidateDetails.id}}">{{longListCtrl.candidateDetails.firstName + " " + longListCtrl.candidateDetails.lastName}}</a></p>
+                    <p><a href="#/vacancy/{{longListCtrl.vacancy.id}}/candidate/{{longListCtrl.candidateDetails.id}}">{{longListCtrl.candidateDetails.firstName + " " + longListCtrl.candidateDetails.lastName}}</a></p>
                     <p>{{longListCtrl.candidateDetails.salary}}</p>
                     <p>{{longListCtrl.candidateDetails.resolution}} / {{longListCtrl.stages[candidate.stage].name}}</p>
                 </div>

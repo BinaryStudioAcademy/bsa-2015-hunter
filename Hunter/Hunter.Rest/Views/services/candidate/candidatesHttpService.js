@@ -150,6 +150,7 @@
                 errorCallback: function (status) {
                     console.log("Get candidates long list Added by filter data error");
                     console.log(status);
+                    deferred.reject(status);
                 }
             });
             return deferred.promise;
