@@ -196,7 +196,7 @@ namespace Hunter.Rest.Controllers
                     return NotFound();
                 }
                 _candidateService.UpdateShortFlag(id, isShort);
-                return Ok();
+                return Ok(isShort);
             }
             catch (Exception e)
             {

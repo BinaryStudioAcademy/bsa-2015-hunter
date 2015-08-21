@@ -26,10 +26,10 @@
 
         vm.vacancy;
         vm.candidateDetails;
+        vm.starUpdate = starUpdate;
 
         // get vacancy info
         VacancyHttpService.getLongList($routeParams.id).then(function (result) {
-            console.log(result);
             vm.vacancy = result;
         });
 
@@ -42,7 +42,6 @@
         // get all Added by
         vm.addedByList;
         VacancyHttpService.getLongListAddedBy($routeParams.id).then(function (result) {
-            console.log(result);
             vm.addedByList = result;
         });
 
@@ -67,7 +66,6 @@
             vm.previewTabSet(id);
 
             CandidateHttpService.getLongListDetails(id).then(function (result) {
-                console.log(result);
                 vm.candidateDetails = result;
             });
         }
@@ -174,13 +172,13 @@
 
         vm.getCandidatesForLongList();
 
-        $scope.$watch('longListCtrl.candidateDetails.shortlisted', function () {
+        function starUpdate() {
             angular.forEach(vm.candidatesList, function (item) {
                if (item.id == vm.candidateDetails.id) {
                     item.shortlisted = vm.candidateDetails.shortlisted;
                 }
             });
-        });
+        };
 
         //function setTab(setTab) {
         //    vm.tab = setTab;
