@@ -20,6 +20,7 @@ namespace Hunter.Services.Extensions
                 Type = f.Type,
                 Text = f.Text,
                 Date = f.Edited == null ? f.Added : f.Edited.Value,
+                UserAlias = f.UserProfile!=null ? f.UserProfile.Alias : "" ,
                 UserName = f.UserProfile != null
                     ? f.UserProfile.UserLogin.Substring(0, f.UserProfile.UserLogin.IndexOf("@"))
                     : ""
@@ -39,7 +40,8 @@ namespace Hunter.Services.Extensions
                         : feedback.Edited.Value,
                 UserName = feedback.UserProfile != null
                     ? feedback.UserProfile.UserLogin.Substring(0, feedback.UserProfile.UserLogin.IndexOf("@"))
-                    : ""
+                    : "",
+                UserAlias = feedback.UserProfile != null ? feedback.UserProfile.Alias : "" 
             };
         }
 

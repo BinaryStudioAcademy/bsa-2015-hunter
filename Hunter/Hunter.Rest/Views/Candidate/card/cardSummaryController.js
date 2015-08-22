@@ -13,9 +13,11 @@
 
     function cardSummaryController(feedbackHttpService, vacancyHttpService, $routeParams) {
         var vm = this;
+        // TODO: Initialization Should Be With Initial Value, at least [], {}, ''
         vm.vacancy;
         vm.summary;
 
+        // TODO: Define event function at the beginning of controller and only then should be implementation vm.saveHrFeedback = saveHrFeedback; function saveHrFeedback() {}
         vm.saveSummary  = function (summary) {
             var body = {
                 id: summary.id,
@@ -33,6 +35,7 @@
             });
         }
 
+        // TODO: Initialization Should Be covered with self invoke function
         vacancyHttpService.getLongList($routeParams.vid).then(function (result) {
             console.log(result);
             vm.vacancy = result;

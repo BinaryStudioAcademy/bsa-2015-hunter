@@ -324,6 +324,9 @@
     <Content Include="bower_components\alertifyjs\src\css\themes\bootstrap\bootstrap.css" />
     <Content Include="bower_components\alertifyjs\src\css\themes\default\default.css" />
     <Content Include="bower_components\alertifyjs\src\js\alertify.js" />
+    <Content Include="bower_components\angular-animate\angular-animate.js" />
+    <Content Include="bower_components\angular-animate\angular-animate.min.js" />
+    <Content Include="bower_components\angular-animate\index.js" />
     <Content Include="bower_components\angular-bootstrap\.gitignore" />
     <Content Include="bower_components\angular-bootstrap\index.js" />
     <Content Include="bower_components\angular-bootstrap\ui-bootstrap-csp.css" />
@@ -344,6 +347,10 @@
     <Content Include="bower_components\angular-route\angular-route.js" />
     <Content Include="bower_components\angular-route\angular-route.min.js" />
     <Content Include="bower_components\angular-route\index.js" />
+    <Content Include="bower_components\angular-treasure-overlay-spinner\dist\treasure-overlay-spinner.min.css" />
+    <Content Include="bower_components\angular-treasure-overlay-spinner\dist\treasure-overlay-spinner.min.js" />
+    <Content Include="bower_components\angular-treasure-overlay-spinner\src\treasure-overlay-spinner.css" />
+    <Content Include="bower_components\angular-treasure-overlay-spinner\src\treasure-overlay-spinner.js" />
     <Content Include="bower_components\angular-utils-pagination\dirPagination.js" />
     <Content Include="bower_components\angular-utils-pagination\dirPagination.tpl.html" />
     <Content Include="bower_components\angular-utils-pagination\index.js" />
@@ -505,6 +512,7 @@
     <Content Include="Content\longlist.css" />
     <Content Include="Content\MyStyle.css" />
     <Content Include="Content\pool.css" />
+    <Content Include="Content\spinnerStyle.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -729,6 +737,13 @@
     <Content Include="bower_components\checklist-model\.bower.json" />
     <Content Include="bower_components\checklist-model\bower.json" />
     <Content Include="bower_components\checklist-model\readme.md" />
+    <Content Include="bower_components\angular-animate\.bower.json" />
+    <Content Include="bower_components\angular-animate\angular-animate.min.js.map" />
+    <Content Include="bower_components\angular-animate\bower.json" />
+    <Content Include="bower_components\angular-animate\package.json" />
+    <Content Include="bower_components\angular-animate\README.md" />
+    <Content Include="bower_components\angular-treasure-overlay-spinner\.bower.json" />
+    <Content Include="bower_components\angular-treasure-overlay-spinner\bower.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -801,6 +816,7 @@
     <Content Include="Views\services\candidate\candidatesHttpService.js" />
     <Content Include="Views\services\candidate\card\cardTestHttpService.js" />
     <Content Include="Views\services\directive\filechange.js" />
+    <Content Include="Views\services\directive\spinnerDirective.js" />
     <Content Include="Views\services\feedback\cardHrInterviewService.js" />
     <Content Include="Views\services\feedback\feedbackHttpService.js" />
     <Content Include="Views\services\candidate\specialNote\specialNoteHttpService.js" />
@@ -909,7 +925,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53147</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

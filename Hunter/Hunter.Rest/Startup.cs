@@ -73,6 +73,7 @@ namespace Hunter.Rest
             kernel.Bind<ISpecialNoteService>().To<SpecialNoteService>();
             kernel.Bind<IResumeService>().To<ResumeService>();
             kernel.Bind<IActivityHelperService>().To<ActivityHelperService>();
+            kernel.Bind<ICardService>().To<CardService>();
             #endregion
 
             kernel.Bind<Common.Interfaces.ILogger>().To<Logger>();

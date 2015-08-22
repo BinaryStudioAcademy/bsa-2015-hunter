@@ -25,14 +25,16 @@ namespace Hunter.Services.Extensions
             return dto;
         }
 
-        public static void ToCardModel(this CardDto dto, Card card)
+        public static Card ToCardModel(this CardDto dto, int? userProfileId)
         {
-            card.Id = dto.Id;
-            card.VacancyId = dto.VacancyId;
-            card.CandidateId = dto.CandidateId;
-            card.Added = dto.Added;
-            card.AddedByProfileId = dto.AddedByProfileId;
-            card.Stage = dto.Stage;
+            return new Card()
+            {
+                CandidateId = dto.CandidateId,
+                VacancyId = dto.VacancyId,
+                Added = DateTime.UtcNow,
+                Stage = dto.Stage,
+                AddedByProfileId = userProfileId
+            };
         }
     }
 }

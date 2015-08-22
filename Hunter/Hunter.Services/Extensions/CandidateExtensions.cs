@@ -45,7 +45,8 @@ namespace Hunter.Services
                 ShortListed = candidate.Shortlisted,
                 Origin = (int) candidate.Origin,
                 DateOfBirth = candidate.DateOfBirth,
-                PhotoUrl = "api/fileupload/pictures/"+candidate.Id
+                PhotoUrl = "api/fileupload/pictures/"+candidate.Id,
+                UserAlias = candidate.UserProfile != null ? candidate.UserProfile.Alias : ""
             };
             return dto;
         }
@@ -89,7 +90,8 @@ namespace Hunter.Services
                 AddedBy = c.UserProfile != null ? c.UserProfile.UserLogin : "",
                 AddDate = c.Added,
                 PhotoUrl = "api/fileupload/pictures/" + c.Id,
-                Shortlisted = c.Candidate!=null && c.Candidate.Shortlisted
+                Shortlisted = c.Candidate!=null && c.Candidate.Shortlisted,
+                UserAlias = c.UserProfile != null ? c.UserProfile.Alias : ""
             });
         }
 
@@ -108,7 +110,8 @@ namespace Hunter.Services
                 Stage = card != null ? Enum.GetName(typeof(Stage), card.Stage) : "-",
                 TestComment = card != null ? (card.Test.FirstOrDefault(t => t.Id == card.Id) != null ? card.Test.FirstOrDefault(t => t.Id == card.Id).Comment : "No test comment") : "No test comment",
                 SpecialNotes = card != null ? (card.SpecialNote.FirstOrDefault(n => n.Id == card.Id) != null ? card.SpecialNote.FirstOrDefault(n => n.Id == card.Id).Text : "No special note") : "No special note",
-                Shortlisted = candidate.Shortlisted
+                Shortlisted = candidate.Shortlisted,
+                UserAlias = candidate.UserProfile != null ? candidate.UserProfile.Alias : ""
             };
         }
 
@@ -149,7 +152,8 @@ namespace Hunter.Services
                     ShortListed = c.Shortlisted,
                     Origin = (int) c.Origin,
                     DateOfBirth = c.DateOfBirth,
-                    PhotoUrl = "api/fileupload/pictures/" + c.Id
+                    PhotoUrl = "api/fileupload/pictures/" + c.Id,
+                    UserAlias = c.UserProfile!=null ? c.UserProfile.Alias : ""
                 }
                 );
         }

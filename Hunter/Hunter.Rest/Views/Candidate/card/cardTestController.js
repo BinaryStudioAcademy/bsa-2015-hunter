@@ -18,12 +18,15 @@
         FeedbackHttpService, UploadTestService, localStorageService, $scope) {
         var vm = this;
         vm.templateName = 'Test';
+        vm.editingIndex = -1;
         var candidateId = $routeParams.cid;
         var vacancyId = $routeParams.vid;
         var userName = localStorageService.get('authorizationData').userName;
 
         vm.testLink = '';
         vm.testFile = '';
+
+        vm.changeCurrentTest = changeCurrentTest;
 
         vm.uploadLink = function () {
             if (vm.testLink == '') {
@@ -36,7 +39,7 @@
                 'cardId': vm.test.cardId,
                 'feedbackId': null,
                 'added': new Date()
-        }
+            }
 
             CardTestHttpService.sendTest(testSend, function(response) {
                 var lastUploadTestId = response.data;
@@ -56,6 +59,7 @@
             });
         }
 
+        // TODO:  All vm and local variables should be declared at the beginning
         vm.test;
         CardTestHttpService.getTest(vacancyId, candidateId, function(response) {
             vm.test = response.data;
@@ -167,6 +171,33 @@
                     vm.test.tests.push(test);
                 });
             });
+        }
+
+        function changeCurrentTest(index) {
+            if (vm.editingIndex == -1) {
+                vm.editingIndex = index;
+            } else {
+                if (vm.editingIndex == index) {
+                    var test = vm.test.tests[vm.editingIndex];
+                    if (test.comment != null) {
+                        CardTestHttpService.updateTestComment(test.id, test.comment);
+                    }
+                    FeedbackHttpService.saveTestFeedback({
+                        'feedback': test.feedback,
+                        'testId': test.id
+                    }).then(function (result) {
+                        test.feedback.id = result.id;
+                        test.feedback.date = result.update;
+                        test.feedback.userName = result.userName;
+                        test.feedbackId = result.id;
+                    });
+                    vm.editingIndex = -1;
+                } else {
+                    alertify.alert('Apply your changes!');
+                }
+
+            }
+            
         }
     }
 })();

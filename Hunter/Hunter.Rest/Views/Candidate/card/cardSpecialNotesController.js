@@ -28,6 +28,7 @@
         console.log(vm.userName);
         vm.newNoteText;
 
+        // TODO: Initialization Should Be Covered with self invoke function
         VacancyHttpService.getLongList($routeParams.vid).then(function (result) {
             console.log(result);
             vm.vacancy = result;
@@ -76,6 +77,8 @@
         function successEdit(response) {
             getAllCardNote();
         }
+
+        // TODO: Data Functions (not user event functions) Should Be In Services
         function getAllCardNote() {
             specialNoteHttpService.getCardSpecialNote($routeParams.vid, $routeParams.cid).then(function (result) {
                 console.log(result.data);

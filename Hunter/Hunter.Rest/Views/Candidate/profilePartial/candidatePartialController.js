@@ -31,17 +31,9 @@
             });
 
         vm.candidate;
-
-        //(function() {
-        //    // This is function for initialization actions, for example checking auth
-        //    if (authService.isLoggedIn()) {
-        //    // Can Make Here Any Actions For Data Initialization, for example, http queries, etc.
-        //    } else {
-        //        $location.url('/login');
-        //    }
-        //})();
-
-        $scope.$watch('candidatePartCtrl.candidate.shortListed', function () {
+        vm.starUpdate = starUpdate;
+       
+        function starUpdate() {
             if (vm.candidate) {
                 angular.forEach($scope.$parent.candidateListCtrl.candidateList, function (item) {
                     if (item.id == vm.candidate.id) {
@@ -49,12 +41,14 @@
                     }
                 });
             }
-        });
+        };
 
 
         function getCandidateDetails(id) {
+            vm.prevLoad = true;
             candidateHttpService.getCandidate(id).then(function (response) {
                 vm.candidate = response.data;
+                vm.prevLoad = false;
             });
 
         }

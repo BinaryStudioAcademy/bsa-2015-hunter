@@ -14,7 +14,7 @@
                 <form>
                     <div>
                         <div>
-                            <span>Edited by {{item.userLogin}} {{item.lastEdited | date:'medium'}}</span>
+                            <span>Edited by {{item.userAlias}} {{item.lastEdited | date:'medium'}}</span>
                         </div>
                         <textarea class="form-control" name="text" ng-readonly="item.noteConfig.readOnly" 
                                   ng-model="item.text" ng-auto-expand>{{item.text}}</textarea>

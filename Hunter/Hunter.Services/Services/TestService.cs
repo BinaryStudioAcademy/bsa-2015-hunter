@@ -155,5 +155,22 @@ namespace Hunter.Services.Services
                 .Select(x => x.Id)
                 .FirstOrDefault();
         }
+
+
+        public void UpdateComment(int id, string comment)
+        {
+            try
+            {
+                Test test = _testRepository.Get(id);
+                test.Comment = comment;
+                _testRepository.UpdateAndCommit(test);
+                //_unitOfWork.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                throw ex;
+            }
+        }
     }
 }

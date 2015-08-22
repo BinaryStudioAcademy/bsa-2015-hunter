@@ -4,9 +4,9 @@
             <div class="ll_title">
                 <h1>{{longListCtrl.vacancy.name}}</h1>
                 <div class="ll_control_buttons">
-                    <a class="btn" href="../../#">Add Candidate</a>
-                    <a class="btn" href="../../#">Create New Candidate</a>
-                    <a class="btn" href="../../#">Vacancy Details</a>
+                    <a class="btn" href="#/candidate/list?addToVacancy={{longListCtrl.vacancy.id}}">Add Candidate</a>
+                    <a class="btn" href="#/candidate/edit">Create New Candidate</a>
+                    <a class="btn" href="#/vacancy/edit/{{longListCtrl.vacancy.id}}">Edit Vacancy</a>
                 </div>
             </div>
             <div class="ll_main">
@@ -42,14 +42,14 @@
                 <div class="ll_list">
                     <div class="ll_candidate_item" ng-repeat="candidate in longListCtrl.candidatesList" ng-click="longListCtrl.viewCandidateInfo(candidate.id)" ng-class="longListCtrl.ActiveItem(candidate.id)">
                         <div class="col-md-4 ll_candidate_item_img">
-                            <shor-list-star is-short="candidate.shortlisted" candidate-id="candidate.id" size="'18px'"></shor-list-star>
+                            <shor-list-star is-short="candidate.shortlisted" candidate-id="candidate.id" size="'18px'" ng-click="longListCtrl.updatePrevStar()"></shor-list-star>
                             <img ng-src="{{candidate.photoUrl}}" />
                             <p class="years_of_experience">{{candidate.yearsOfExperience}}</p>
                             <!--<p class="candidate_bookmark"><span class="glyphicon glyphicon-star-empty"></span></p>-->
                         </div>
                         <div class="col-md-4">
                             <p>
-                                <strong>{{candidate.firstName}} {{candidate.lastName}}</strong>
+                                <strong><a href="#/vacancy/{{longListCtrl.vacancy.id}}/candidate/{{candidate.id}}">{{candidate.firstName + " " + candidate.lastName}}</a></strong>
                             </p>
                             <p>{{candidate.addDate == null ? '' : candidate.addDate | date:'dd.MM.yyyy'}}</p>
                         </div>
@@ -82,17 +82,17 @@
             <h2>Preview</h2>
             <div class="ll_preview_info">
                 <div class="ll_preview_info_img">
-                    <shor-list-star is-short="longListCtrl.candidateDetails.shortlisted" candidate-id="longListCtrl.candidateDetails.id" size="'30px'"></shor-list-star>
+                    <shor-list-star is-short="longListCtrl.candidateDetails.shortlisted" candidate-id="longListCtrl.candidateDetails.id" size="'30px'" ng-click="longListCtrl.starUpdate()"></shor-list-star>
                     <img src="{{longListCtrl.candidateDetails.photoUrl}}" alt="{{longListCtrl.candidateDetails.firstName}} {{longListCtrl.candidateDetails.lastName}} foto" title="{{longListCtrl.candidateDetails.firstName}} {{longListCtrl.candidateDetails.lastName}} foto"/>
                 </div>
                 <div class="ll_preview_info_all">
-                    <p>{{longListCtrl.candidateDetails.firstName}} {{longListCtrl.candidateDetails.lastName}}</p>
+                    <p><a href="#/vacancy/{{longListCtrl.vacancy.id}}/candidate/{{longListCtrl.candidateDetails.id}}">{{longListCtrl.candidateDetails.firstName + " " + longListCtrl.candidateDetails.lastName}}</a></p>
                     <p>{{longListCtrl.candidateDetails.salary}}</p>
                     <p>{{longListCtrl.candidateDetails.resolution}} / {{longListCtrl.stages[candidate.stage].name}}</p>
                 </div>
                 <div class="ll_preview_info_control">
                     <a class="btn" href="#/vacancy/{{longListCtrl.vacancy.id}}/candidate/{{longListCtrl.candidateDetails.id}}">Details</a>
-                    <a class="btn" href="../../#">Edit Profile</a>
+                    <a class="btn" href="#/candidate/edit/{{longListCtrl.candidateDetails.id}}">Edit Profile</a>
                 </div>
                 <div class="ll_preview_info_comments">
                     <h3>Comments and notes</h3>
