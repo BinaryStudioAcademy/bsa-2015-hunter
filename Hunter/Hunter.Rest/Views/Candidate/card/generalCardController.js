@@ -37,6 +37,7 @@
         vm.stages = enumConstants.cardStages;
         vm.currentStage;
         vm.currentSubstatus = enumConstants.substatuses[0];
+        vm.updateResolution = updateResolution;
 
         console.log("rout", $routeParams);
         (function() {
@@ -76,5 +77,9 @@
             var cid = $routeParams["cid"];
             cardService.updateCardStage(vid, cid, vm.currentStage.id);
         }
+
+        function updateResolution() {
+            candidateHttpService.updateCandidateResolution($routeParams.cid, vm.candidate.resolution);
+        };
     }
 })();
