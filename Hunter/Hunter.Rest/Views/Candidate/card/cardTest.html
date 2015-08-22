@@ -24,10 +24,10 @@
                         <a href="/api/file/download/{{test.file.id}}">{{test.file.fileName}}</a> Size: {{test.file.size}} Uploaded: {{test.file.added | date:'dd.MM.yyyy hh:mm:ss'}}
                     </div>
                     <div class="col-md-1">
-                        <button class="circleButton btn btn-info" ng-click="testCtrl.changeCurrentTest($index)">
-                            <span ng-show="testCtrl.editingIndex != $index" class="glyphicon glyphicon-pencil circleButton-icon"></span>
-                            <span ng-show="testCtrl.editingIndex == $index" class="glyphicon glyphicon-ok circleButton-icon"></span>
-                        </button>
+                        <i class="btn" ng-click="testCtrl.changeCurrentTest($index)">
+                            <span ng-show="testCtrl.editingIndex != $index" class="glyphicon glyphicon-pencil"></span>
+                            <span ng-show="testCtrl.editingIndex == $index" class="glyphicon glyphicon-ok"></span>
+                        </i>
                     </div>
                 </div>
                 <div ng-show="test.url != null && test.file == null">
@@ -36,10 +36,10 @@
                         <a href="{{test.url}}">{{test.url}}</a> Added {{test.added | date:'dd.MM.yyyy hh:mm:ss'}}
                     </div>
                     <div class="col-md-1">
-                        <button class="circleButton btn btn-info" ng-click="testCtrl.changeCurrentTest($index)">
-                            <span ng-show="testCtrl.editingIndex != $index" class="glyphicon glyphicon-pencil circleButton-icon"></span>
-                            <span ng-show="testCtrl.editingIndex == $index" class="glyphicon glyphicon-ok circleButton-icon"></span>
-                        </button>
+                        <i class="btn" ng-click="testCtrl.changeCurrentTest($index)">
+                            <span ng-show="testCtrl.editingIndex != $index" class="glyphicon glyphicon-pencil"></span>
+                            <span ng-show="testCtrl.editingIndex == $index" class="glyphicon glyphicon-ok"></span>
+                        </i>
                     </div>
                 </div>
             </div>

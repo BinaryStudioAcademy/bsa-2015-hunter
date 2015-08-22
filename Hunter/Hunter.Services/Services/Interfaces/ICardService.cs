@@ -6,5 +6,7 @@ namespace Hunter.Services.Interfaces
     public interface ICardService
     {
         void AddCards(IEnumerable<CardDto> dto, string name);
+        bool UpdateCardStage(int vid, int cid, int stage);
+        int GetCardStage(int vid, int cid);
     }
 }
