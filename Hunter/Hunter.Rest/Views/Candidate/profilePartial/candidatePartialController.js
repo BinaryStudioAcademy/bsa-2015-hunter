@@ -16,10 +16,18 @@
     function CandidatePartialController($scope, $location, $rootScope, authService, candidateHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
+        vm.isEmpty = false;
+
+
         $rootScope.$watch(
             '$root.candidateDetails.id',
             function () {
-                getCandidateDetails($rootScope.candidateDetails.id);
+                if ($rootScope.candidateDetails.id == 0) {
+                    vm.isEmpty = true;
+                } else {
+                    getCandidateDetails($rootScope.candidateDetails.id);
+                    vm.isEmpty = false;
+                }
             });
 
         $rootScope.$watch(
@@ -32,7 +40,7 @@
 
         vm.candidate;
         vm.starUpdate = starUpdate;
-       
+
         function starUpdate() {
             if (vm.candidate) {
                 angular.forEach($scope.$parent.candidateListCtrl.candidateList, function (item) {

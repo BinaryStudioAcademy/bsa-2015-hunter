@@ -45,7 +45,7 @@
             pageTitle: 'Candidates (general pool)',
             isAddToVacancyButton: true,
             locationAfterAdding: '/candidate/list'
-    };
+        };
 
         if (!isObjectEmpty($routeParams)) {
             vm.vacancyId = $routeParams.addToVacancy;
@@ -117,10 +117,14 @@
                                 .orderBy(vm.order.field, vm.order.dir)
                                 .query(function () {
                                     vm.candidateList = cands.items;
-                                    $rootScope.candidateDetails.id = vm.candidateList[0].id;
                                     vm.totalItems = cands.count;
                                     vm.tableSpinner = false;
-                });
+                                    if (vm.candidateList.length > 0) {
+                                        $rootScope.candidateDetails.id = vm.candidateList[0].id;
+                                    } else {
+                                        $rootScope.candidateDetails.id = 0;
+                                    }
+                                });
         }
 
         $scope.$watch('candidateListCtrl.filter', function () {
@@ -176,10 +180,10 @@
         }, true);
 
         vm.ShowDetails = function (item) {
-           if ($rootScope.candidateDetails.id != item.id ){
-            $rootScope.candidateDetails.id = item.id;
-            $rootScope.candidateDetails.shortListed = item.shortListed;
-           } 
+            if ($rootScope.candidateDetails.id != item.id) {
+                $rootScope.candidateDetails.id = item.id;
+                $rootScope.candidateDetails.shortListed = item.shortListed;
+            }
         }
 
         vm.ActiveTr = function (id) {
@@ -204,7 +208,7 @@
 
         // not user-event functions 
         vm.selectedCandidates = [];
-        
+
         vm.vacancyByState;
         vm.vacancyStateId = EnumConstants.vacancyStates[1].id;
 
