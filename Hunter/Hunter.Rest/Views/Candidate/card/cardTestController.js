@@ -180,17 +180,22 @@
                 if (vm.editingIndex == index) {
                     var test = vm.test.tests[vm.editingIndex];
                     if (test.comment != null) {
-                        CardTestHttpService.updateTestComment(test.id, test.comment);
+                        CardTestHttpService.updateTestComment({
+                            id: test.id, 
+                            comment: test.comment
+                        });
                     }
-                    FeedbackHttpService.saveTestFeedback({
-                        'feedback': test.feedback,
-                        'testId': test.id
-                    }).then(function (result) {
-                        test.feedback.id = result.id;
-                        test.feedback.date = result.update;
-                        test.feedback.userName = result.userName;
-                        test.feedbackId = result.id;
-                    });
+                    if (test.feedback.text != null) {
+                        FeedbackHttpService.saveTestFeedback({
+                            'feedback': test.feedback,
+                            'testId': test.id
+                        }).then(function (result) {
+                            test.feedback.id = result.id;
+                            test.feedback.date = result.update;
+                            test.feedback.userName = result.userName;
+                            test.feedbackId = result.id;
+                        });
+                    }
                     vm.editingIndex = -1;
                 } else {
                     alertify.alert('Apply your changes!');

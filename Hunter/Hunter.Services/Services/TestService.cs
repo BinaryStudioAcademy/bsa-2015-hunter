@@ -156,7 +156,6 @@ namespace Hunter.Services.Services
                 .FirstOrDefault();
         }
 
-
         public void UpdateComment(int id, string comment)
         {
             try
@@ -164,7 +163,6 @@ namespace Hunter.Services.Services
                 Test test = _testRepository.Get(id);
                 test.Comment = comment;
                 _testRepository.UpdateAndCommit(test);
-                //_unitOfWork.SaveChanges();
             }
             catch (Exception ex)
             {
