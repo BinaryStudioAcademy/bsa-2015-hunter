@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hunter.DataAccess.Entities;
-using Hunter.Services.Dto;
+﻿using Hunter.DataAccess.Entities.Entites.Enums;
+﻿using Hunter.Services.Dto;
 
 namespace Hunter.Services.Extensions
 {
@@ -20,6 +21,7 @@ namespace Hunter.Services.Extensions
                 Type = f.Type,
                 Text = f.Text,
                 Date = f.Edited == null ? f.Added : f.Edited.Value,
+                SuccessStatus = (int)f.SuccessStatus,
                 UserAlias = f.UserProfile!=null ? f.UserProfile.Alias : "" ,
                 UserName = f.UserProfile != null
                     ? f.UserProfile.UserLogin.Substring(0, f.UserProfile.UserLogin.IndexOf("@"))
@@ -35,6 +37,7 @@ namespace Hunter.Services.Extensions
                 CardId = feedback.CardId,
                 Type = feedback.Type,
                 Text = feedback.Text,
+                SuccessStatus = (int)feedback.SuccessStatus,
                 Date = feedback.Edited == null
                         ? feedback.Added
                         : feedback.Edited.Value,
@@ -50,6 +53,7 @@ namespace Hunter.Services.Extensions
             feedback.CardId = hrInterviewDto.CardId;
             feedback.Type = hrInterviewDto.Type;
             feedback.Text = hrInterviewDto.Text;
+            feedback.SuccessStatus = (SuccessStatus) hrInterviewDto.SuccessStatus;
             if (hrInterviewDto.Id != 0)
             {
                 feedback.Edited = DateTime.Now;

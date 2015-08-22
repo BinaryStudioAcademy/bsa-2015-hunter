@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Hunter.DataAccess.Entities.Entites.Enums;
 
 namespace Hunter.DataAccess.Entities
 {
@@ -31,6 +32,8 @@ namespace Hunter.DataAccess.Entities
         public int Type { get; set; }
 
         public int Status { get; set; }
+
+        public SuccessStatus SuccessStatus { get; set; }
 
         public virtual Card Card { get; set; }
 
