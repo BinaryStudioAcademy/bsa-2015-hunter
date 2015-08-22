@@ -42,28 +42,20 @@
             };
             specialNoteHttpService.addSpecialNote(note, $routeParams.vid, $routeParams.cid)
             .then(function (data) {
-                vm.notes.push(data);
+                note.id = data.id;
+                note.lastEdited = data.update;
+                note.userLogin = data.userName;
+                vm.notes.unshift(note);
             });
         }
 
         function saveOldSpecialNote(note) {
-            specialNoteHttpService.updateSpecialNote(note, note.id, successEdit)
+            specialNoteHttpService.updateSpecialNote(note, note.id)
             .then(function (data) {
                 note.id = data.id;
                 note.lastEdited = data.update;
                 note.userLogin = data.userName;
             });
-        }
-
-        function successAdd(response) {
-            //debugger;
-            //$location.url('/candidate/list');'
-            vm.newNoteText = "";
-            getAllCardNote();
-        }
-
-        function successEdit(response) {
-            //getAllCardNote();
         }
 
         // TODO: Data Functions (not user event functions) Should Be In Services
@@ -73,20 +65,6 @@
                 vm.notes = result.data;
             });
         }
-
-        /*function getCandidateNote() {
-            specialNoteHttpService.getCandidateSpecialNote($routeParams.cid).then(function (result) {
-                console.log(result.data);
-                vm.notes = result.data;
-            });
-        }
-
-        function getUserNote() {
-            specialNoteHttpService.getUserSpecialNote(vm.userName, $routeParams.vid, $routeParams.cid).then(function (result) {
-                console.log(result.data);
-                vm.notes = result.data;
-            });
-        }*/
 
         function saveOldNote(note) {
             saveOldSpecialNote(note);
