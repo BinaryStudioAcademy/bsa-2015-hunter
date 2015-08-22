@@ -59,8 +59,35 @@ namespace Hunter.Rest.Controllers
         }
 
         // PUT: api/Card/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        [Route("stage")]
+        public HttpResponseMessage GetStage([FromUri]int vid, [FromUri]int cid, [FromBody]int newStage)
         {
+            try
+            {
+                if (_cardService.UpdateCardStage(vid, cid, newStage))
+                    return Request.CreateResponse(HttpStatusCode.OK, "Ok");
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid update stage");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("stage")]
+        public HttpResponseMessage UpdateStage([FromUri]int vid, [FromUri]int cid)
+        {
+            try
+            {
+                var stage = _cardService.GetCardStage(vid, cid);
+                return Request.CreateResponse(HttpStatusCode.OK, stage);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
         }
 
         // DELETE: api/Card/5

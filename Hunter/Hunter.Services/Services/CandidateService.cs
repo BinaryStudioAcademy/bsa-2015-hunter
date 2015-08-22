@@ -5,6 +5,7 @@ using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Entities;
 using Hunter.DataAccess.Entities.Entites.Enums;
+using Hunter.DataAccess.Entities.Enums;
 using Hunter.DataAccess.Interface.Base;
 using Hunter.Services.Dto;
 using Hunter.Services.Extensions;
@@ -166,6 +167,13 @@ namespace Hunter.Services
                 candidate.Shortlisted = isShort;
                 _candidateRepository.UpdateAndCommit(candidate);
             }
+        }
+
+        public void UpdateResolution(int id, Resolution resolution)
+        {
+            var candidate = _candidateRepository.Get(id);
+            candidate.Resolution = resolution;
+            _candidateRepository.UpdateAndCommit(candidate);
         }
 
         public void Add(CandidateDto dto, string name)
