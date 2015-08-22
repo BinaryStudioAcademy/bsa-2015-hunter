@@ -49,5 +49,21 @@ namespace Hunter.Services
                 _cardRepository.UpdateAndCommit(dto.ToCardModel(userProfileId));
             }
         }
+
+        public bool UpdateCardStage(int vid, int cid, int stage)
+        {
+            var card = _cardRepository.Get(c => c.VacancyId == vid && c.CandidateId == cid);
+            if (card == null) return false;
+            card.Stage = stage;
+            _cardRepository.UpdateAndCommit(card);
+            return true;
+        }
+
+        public int GetCardStage(int vid, int cid)
+        {
+            var card = _cardRepository.Get(c => c.VacancyId == vid && c.CandidateId == cid);
+            if (card == null) return 0;
+            return card.Stage;
+        }
     }
 }

@@ -5,11 +5,16 @@
         .module('hunter-app')
         .factory('CardService', CardService);
 
-    CardService.$inject = [];
+    CardService.$inject = [
+        '$q',
+        'HttpHandler'
+    ];
 
-    function CardService() {
+    function CardService($q, httpHandler) {
         var service = {
-                changeTemplate: changeTemplate
+            changeTemplate: changeTemplate,
+            updateCardStage: updateCardStage,
+            getCardStage: getCardStage
             },
             viewsPath = '/Views/candidate/card/';
 
@@ -31,6 +36,35 @@
                 default:
                     return '';
             }
+        }
+
+        function updateCardStage(vid, cid, stage) {
+            httpHandler.sendRequest({
+                verb: 'PUT',
+                url: '/api/card/stage/?vid=' + vid + '&cid=' + cid,
+                body: stage,
+                successMessageToUser: 'Card stage was updated',
+                errorMessageToUser: 'Card stage update failed',
+                errorCallback: function (status) {
+                    console.log("Update card stage error:" + status);
+                }
+            });
+        }
+
+        function getCardStage(vid, cid) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                verb: 'GET',
+                url: '/api/card/stage/?vid=' + vid + '&cid=' + cid,
+                successCallback: function (response) {
+                    deferred.resolve(response);
+                },
+                errorCallback: function (status) {
+                    console.log("getting card stage error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
         }
 
         return service;

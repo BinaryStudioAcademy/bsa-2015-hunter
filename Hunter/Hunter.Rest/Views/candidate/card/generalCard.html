@@ -50,7 +50,7 @@
             <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[3]}}">{{generalCardCtrl.stages[3].name}}</label>
             <div class="btn-group" ng-show="generalCardCtrl.currentStage.id != generalCardCtrl.stages[4].id && generalCardCtrl.currentStage.id != generalCardCtrl.stages[5].id">
                 <label class="btn btn-default" data-toggle="dropdown">Failed <span class="caret"></span></label>
-                <div class="dropdown-menu btn btn-default">
+                <div class="dropdown-menu">
                     <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[4]}}">{{generalCardCtrl.stages[4].name}}</label>
                     <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[5]}}">{{generalCardCtrl.stages[5].name}}</label>
                 </div>
@@ -64,12 +64,12 @@
             <div class="btn-group" ng-show="generalCardCtrl.currentStage.id == generalCardCtrl.stages[5].id">
                 <label class="btn btn-default" data-toggle="dropdown" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[5]}}">{{generalCardCtrl.stages[5].name}} <span class="caret"></span></label>
                 <div class="dropdown-menu">
-                    <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[4]}}">{{generalCardCtrl.stages[4].name}}</label>
+                    <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[4]}}"">{{generalCardCtrl.stages[4].name}}</label>
                 </div>
             </div>
             <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[6]}}">{{generalCardCtrl.stages[6].name}}</label>
-        </div>
-    </div><br />
+        </div><br/>
+    </div>
     <div class="row col-md-12">
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation"
