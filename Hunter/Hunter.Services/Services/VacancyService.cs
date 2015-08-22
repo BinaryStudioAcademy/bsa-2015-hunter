@@ -123,8 +123,11 @@ namespace Hunter.Services
 
         public void Update(VacancyDto entity)
         {
-            _vacancyRepository.UpdateAndCommit(entity.ToVacancy());
+            var vacancy = _vacancyRepository.Get(entity.Id);
+            entity.ToVacancy(vacancy);
+            _vacancyRepository.UpdateAndCommit(vacancy);
         }
+
         public void Delete(int id)
         {
             var vacancy = _vacancyRepository.Get(id);
