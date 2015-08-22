@@ -136,8 +136,8 @@
 
         function updateSuccessStatus(feedbackId, status) {
             httpHandler.sendRequest({
-                'url': '/api/feedback/' + feedbackId + 'success/update',
-                'verb': 'POST',
+                'url': '/api/feedback/' + feedbackId + '/success/update',
+                'verb': 'PUT',
                 body: status,
                 'successCallback': function (response) { console.log(response); },
                 'errorCallback': function (response){console.log(response)}

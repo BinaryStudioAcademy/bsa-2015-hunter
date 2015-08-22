@@ -39,11 +39,17 @@
                         scope.test.feedbackConfig.style = { 'border-color': 'gray' }
                         scope.test.feedback.successStatus = scope.getSuccess('None');
                     }
+
+                    scope.saveSuccessStatus(scope.test.feedback);
                 }
             },
-            controller: ['$scope', 'EnumConstants', function($scope, EnumConstants) {
+            controller: ['$scope', 'EnumConstants', 'FeedbackHttpService', function ($scope, EnumConstants, FeedbackHttpService) {
                     $scope.getSuccess = function(key) {
                         return EnumConstants.successStatus[key];
+                    }
+
+                    $scope.saveSuccessStatus = function(feedback) {
+                        FeedbackHttpService.updateSuccessStatus(feedback.id, feedback.successStatus);
                     }
             }]
         }

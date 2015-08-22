@@ -171,7 +171,7 @@ namespace Hunter.Services
             try
             {
                 var feedback = _feedbackRepository.Get(feedbackId);
-//                feedback.SuccessStatus = status;
+                feedback.SuccessStatus = status;
                 return SaveFeedback(feedback.ToFeedbackDto(), name);
             }
             catch (Exception ex)

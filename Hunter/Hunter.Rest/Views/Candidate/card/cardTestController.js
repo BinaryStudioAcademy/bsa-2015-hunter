@@ -48,11 +48,13 @@
                     'cardId': vm.test.cardId,
                     'text': '',
                     'date': '',
-                    'type': 4
+                    'type': 4,
+                    "successStatus": 0
                 };
                 testSend.feedbackConfig = {
                     'buttonText': 'Save',
-                    'fieldReadonly': false
+                    'fieldReadonly': false,
+                    'style': {'border-coor': 'grey'}
                 }
 
                 vm.test.tests.push(testSend);
@@ -69,19 +71,25 @@
                 if (test.feedback != null && test.feedback.text != '') {
                     feedbackConfig = {
                         'buttonText': 'Edit',
-                        'fieldReadonly': true
+                        'fieldReadonly': true,
+                        "style": {
+                            "border-color": test.feedback.successStatus == 0 ? 'grey'
+                                : test.feedback.successStatus == 1 ? 'green' : 'red'
+                        }
                     }
                 } else {
                     test.feedback = {
                         'cardId': vm.test.cardId,
                         'text': '',
                         'date': '',
-                        'type': 4
+                        'type': 4,
+                        "successStatus": 0
                     };
 
                     feedbackConfig = {
                         'buttonText': 'Save',
-                        'fieldReadonly': false
+                        'fieldReadonly': false,
+                        'style': {"border-color": 'grey'}
                     }
                 }
 
@@ -152,11 +160,13 @@
                         'cardId': vm.test.cardId,
                         'text': '',
                         'date': '',
-                        'type': 4
+                        'type': 4,
+                        "successStatus": 0
                     };
                     test.feedbackConfig = {
                         'buttonText': 'Save',
-                        'fieldReadonly': false
+                        'fieldReadonly': false,
+                        "style": {"border-color": 'grey'}
                     };
                     test.file = {
                         'id': fileId,

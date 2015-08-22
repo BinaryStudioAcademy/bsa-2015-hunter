@@ -56,8 +56,12 @@
                 <div class="col-md-1 disableBottomMargins">
                     <label>Feedback</label>
                     <div class="row">
-                        <div class="circleButton btn btn-success"><span class="glyphicon glyphicon-thumbs-up circleButton-icon"></span></div>
-                        <div class="circleButton btn btn-danger"><span class="glyphicon glyphicon-thumbs-down circleButton-icon"></span></div>
+<!--                        <div class="circleButton btn btn-success"><span class="glyphicon glyphicon-thumbs-up circleButton-icon"></span></div>-->
+                        <!-- <div class="circleButton btn btn-danger"><span class="glyphicon glyphicon-thumbs-down circleButton-icon"></span></div>-->
+                        <thumb-button btn-type="btn-success" btn-icon="fa-thumbs-o-up" test="test"
+                                      border-color="green" key="Like"></thumb-button>
+                        <thumb-button btn-type="btn-danger" btn-icon="fa-thumbs-o-down" test="test"
+                                      border-color="red" key="Dislike"></thumb-button>
                     </div>
                 </div>
                 <div class="col-md-11">
@@ -67,7 +71,8 @@
                     <textarea class="form-control feedbackField"
                               ng-auto-expand
                               ng-readonly="testCtrl.editingIndex != $index"
-                              ng-model="test.feedback.text"></textarea>
+                              ng-model="test.feedback.text"
+                              ng-style="test.feedbackConfig.style"></textarea>
                 </div>
             </div>
             <hr/>
