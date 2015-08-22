@@ -78,7 +78,11 @@ textarea {
 .circleButton-icon {
     /*margin: 7px 8px;*/
     margin: 9px 9px;
-    /*right: 5px;*/
+    
+}
+
+.circleButton-icon-edit {
+    right: 5px;
 }
 
 .testLink {

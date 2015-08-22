@@ -18,8 +18,7 @@
             scope: {
                 btnType: '@btnType',
                 btnIcon: '@btnIcon',
-                test: '=test',
-                borderColor: '@borderColor',
+                feedback: '=feedback',
                 key: '@key'
             },
             restrict: 'EA',
@@ -32,20 +31,24 @@
 
                 scope.click = function() {
 
-                    if (scope.test.feedbackConfig.style == undefined || scope.test.feedbackConfig.style["border-color"] != scope.borderColor) {
-                        scope.test.feedbackConfig.style = { 'border-color': scope.borderColor };
-                        scope.test.feedback.successStatus = scope.getSuccess(scope.key);
+                    if (scope.feedback.feedbackConfig.style == undefined || scope.feedback.feedbackConfig.style["border-color"] != scope.getColor(scope.key)) {
+                        scope.feedback.feedbackConfig.style = { 'border-color': scope.getColor(scope.key) };
+                        scope.feedback.successStatus = scope.getSuccess(scope.key);
                     } else {
-                        scope.test.feedbackConfig.style = { 'border-color': 'gray' }
-                        scope.test.feedback.successStatus = scope.getSuccess('None');
+                        scope.feedback.feedbackConfig.style = { 'border-color': scope.getColor('None') }
+                        scope.feedback.successStatus = scope.getSuccess('None');
                     }
 
-                    scope.saveSuccessStatus(scope.test.feedback);
+                    scope.saveSuccessStatus(scope.feedback);
                 }
             },
             controller: ['$scope', 'EnumConstants', 'FeedbackHttpService', function ($scope, EnumConstants, FeedbackHttpService) {
                     $scope.getSuccess = function(key) {
                         return EnumConstants.successStatus[key];
+                    }
+
+                    $scope.getColor = function(key) {
+                        return EnumConstants.voteColors[key];
                     }
 
                     $scope.saveSuccessStatus = function(feedback) {

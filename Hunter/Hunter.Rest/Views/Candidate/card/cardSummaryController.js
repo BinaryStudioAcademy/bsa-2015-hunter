@@ -8,10 +8,11 @@
     cardSummaryController.$inject = [
         'FeedbackHttpService',
         'VacancyHttpService',
-        '$routeParams'
+        '$routeParams',
+        'EnumConstants'
     ];
 
-    function cardSummaryController(feedbackHttpService, vacancyHttpService, $routeParams) {
+    function cardSummaryController(feedbackHttpService, vacancyHttpService, $routeParams, EnumConstants) {
         var vm = this;
         // TODO: Initialization Should Be With Initial Value, at least [], {}, ''
         vm.vacancy;
@@ -23,7 +24,8 @@
                 id: summary.id,
                 cardId: summary.cardId,
                 text: summary.text,
-                type: summary.type
+                type: summary.type,
+                successStatus: summary.successStatus
             }
             feedbackHttpService.saveSummary(body, $routeParams.vid, $routeParams.cid).then(function (result) {
                 summary.id = result.id;
@@ -46,27 +48,33 @@
             vm.summary = result;
             
             if (vm.summary.text == '') {
-                vm.summary.summaryConfig = {
+                vm.summary.feedbackConfig = {
                     'buttonName': 'Save',
                     'readOnly': false
                 }
             } else {
-                vm.summary.summaryConfig = {
+                vm.summary.feedbackConfig = {
                     'buttonName': 'Edit',
                     'readOnly': true
                 }
             }
+
+            vm.summary.feedbackConfig.style = {
+                "border-color": vm.summary.successStatus == 0 ? EnumConstants.voteColors['None']
+                    : vm.summary.successStatus == 1 ? EnumConstants.voteColors['Like']
+                    : EnumConstants.voteColors['Dislike']
+            }
         });
 
         vm.toggleReadOnly = function() {
-            vm.summary.summaryConfig.readOnly = vm.summary.text == '' ? vm.summary.summaryConfig.readOnly
-                : !vm.summary.summaryConfig.readOnly;
+            vm.summary.feedbackConfig.readOnly = vm.summary.text == '' ? vm.summary.feedbackConfig.readOnly
+                : !vm.summary.feedbackConfig.readOnly;
 
-            if (vm.summary.summaryConfig.readOnly) {
-                vm.summary.summaryConfig.buttonName = 'Edit';
+            if (vm.summary.feedbackConfig.readOnly) {
+                vm.summary.feedbackConfig.buttonName = 'Edit';
                 vm.saveSummary(vm.summary);
             } else {
-                vm.summary.summaryConfig.buttonName = 'Save';
+                vm.summary.feedbackConfig.buttonName = 'Save';
             }
         }
     }

@@ -7,10 +7,21 @@
                 <form name="feedbackForm" ng-submit="techInterviewCtrl.saveFeedback(techInterviewCtrl.techFeedback.id, techInterviewCtrl.techFeedback.cardId, techInterviewCtrl.techFeedback.text, techInterviewCtrl.techFeedback.type)">
                     <div>
                         <div>
-                            <h3>{{generalCardCtrl.feedbackTypes[techInterviewCtrl.techFeedback.type].name}}</h3>
+                            <h3 style="display: inline">{{generalCardCtrl.feedbackTypes[techInterviewCtrl.techFeedback.type].name}}</h3>
+                            <div ng-hide="techInterviewCtrl.techFeedback.id == 0">
+                                <thumb-button btn-type="btn-success" btn-icon="fa-thumbs-o-up" 
+                                              feedback="techInterviewCtrl.techFeedback"
+                                              key="Like"></thumb-button>
+                                <thumb-button btn-type="btn-danger" btn-icon="fa-thumbs-o-down" 
+                                              feedback="techInterviewCtrl.techFeedback"
+                                              key="Dislike"></thumb-button>
+                            </div>
                             <span ng-hide="techInterviewCtrl.techFeedback.date == '' || techInterviewCtrl.techFeedback.id==0">Edited by {{techInterviewCtrl.techFeedback.userAlias}} {{techInterviewCtrl.techFeedback.date | date:'dd.MM.yyyy hh.mm'}}</span>
                         </div>
-                        <textarea class="form-control" ng-readonly="techInterviewCtrl.techFeedback.feedbackConfig.readOnly" name="text" ng-model="techInterviewCtrl.techFeedback.text" ng-auto-expand>{{techInterviewCtrl.techFeedback.text}}</textarea>
+                        <textarea class="form-control" ng-readonly="techInterviewCtrl.techFeedback.feedbackConfig.readOnly"
+                                  name="text" ng-model="techInterviewCtrl.techFeedback.text"
+                                  ng-style="techInterviewCtrl.techFeedback.feedbackConfig.style"
+                                  ng-auto-expand>{{techInterviewCtrl.techFeedback.text}}</textarea>
                     </div>
                     <div>
                         <input ng-click="techInterviewCtrl.toggleReadOnly()" class="btn" type="button" value="{{techInterviewCtrl.techFeedback.feedbackConfig.buttonName}}">

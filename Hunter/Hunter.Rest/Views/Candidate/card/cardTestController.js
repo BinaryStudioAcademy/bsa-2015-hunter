@@ -10,18 +10,17 @@
         '$routeParams',
         'FeedbackHttpService',
         'UploadTestService',
-        'localStorageService',
-        '$scope'
+        '$scope',
+        'EnumConstants'
     ];
 
     function CardTestController(CardTestHttpService, $routeParams,
-        FeedbackHttpService, UploadTestService, localStorageService, $scope) {
+        FeedbackHttpService, UploadTestService, $scope, EnumConstants) {
         var vm = this;
         vm.templateName = 'Test';
         vm.editingIndex = -1;
         var candidateId = $routeParams.cid;
         var vacancyId = $routeParams.vid;
-        var userName = localStorageService.get('authorizationData').userName;
 
         vm.testLink = '';
         vm.testFile = '';
@@ -49,13 +48,13 @@
                     'text': '',
                     'date': '',
                     'type': 4,
-                    "successStatus": 0
+                    "successStatus": 0,
+                    'feedbackConfig': {
+                        'buttonText': 'Save',
+                        'fieldReadonly': false,
+                        'style': { 'border-coor': EnumConstants.voteColors['None'] }
+                    }
                 };
-                testSend.feedbackConfig = {
-                    'buttonText': 'Save',
-                    'fieldReadonly': false,
-                    'style': {'border-coor': 'grey'}
-                }
 
                 vm.test.tests.push(testSend);
             });
@@ -73,8 +72,9 @@
                         'buttonText': 'Edit',
                         'fieldReadonly': true,
                         "style": {
-                            "border-color": test.feedback.successStatus == 0 ? 'grey'
-                                : test.feedback.successStatus == 1 ? 'green' : 'red'
+                            "border-color": test.feedback.successStatus == 0 ? EnumConstants.voteColors['None']
+                                : test.feedback.successStatus == 1 ? EnumConstants.voteColors['Like']
+                                : EnumConstants.voteColors['Dislike']
                         }
                     }
                 } else {
@@ -89,11 +89,11 @@
                     feedbackConfig = {
                         'buttonText': 'Save',
                         'fieldReadonly': false,
-                        'style': {"border-color": 'grey'}
+                        'style': {"border-color": EnumConstants.voteColors['None']}
                     }
                 }
 
-                test.feedbackConfig = feedbackConfig;
+                test.feedback.feedbackConfig = feedbackConfig;
             });
         });
 
@@ -102,20 +102,25 @@
                 return;
             }
 
-            toggleFeedbackConfig(test.feedbackConfig, test.feedback.text);
+            toggleFeedbackConfig(test.feedback.feedbackConfig, test.feedback.text);
 
-            if(test.feedbackConfig.fieldReadonly && test.feedback.text != ''){
+            if (test.feedback.feedbackConfig.fieldReadonly && test.feedback.text != '') {
                 FeedbackHttpService.saveTestFeedback({
-                    'feedback': test.feedback,
+                    'feedback': {
+                        'id': feedback.id,
+                        'cardId': feedback.cardId,
+                        'text': feedback.text,
+                        'date': feedback.date,
+                        'userName': feedback.userName,
+                        'type': feedback.type,
+                        'successStatus': feedback.successStatus
+                    },
                     'testId': test.id
                 }).then(function(result) {
                     test.feedback.id = result.id;
                     test.feedback.date = result.update;
                     test.feedback.userName = result.userName;
                 });
-
-                test.feedback.userName = userName;
-                test.feedback.date = new Date();
             }
 
         }
@@ -161,12 +166,12 @@
                         'text': '',
                         'date': '',
                         'type': 4,
-                        "successStatus": 0
-                    };
-                    test.feedbackConfig = {
-                        'buttonText': 'Save',
-                        'fieldReadonly': false,
-                        "style": {"border-color": 'grey'}
+                        "successStatus": 0,
+                        "feedbackConfig": {
+                            'buttonText': 'Save',
+                            'fieldReadonly': false,
+                            "style": { "border-color": EnumConstants.voteColors['None'] }
+                        }
                     };
                     test.file = {
                         'id': fileId,

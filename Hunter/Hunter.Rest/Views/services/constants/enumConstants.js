@@ -63,6 +63,11 @@
                 'None': 0,
                 'Like': 1,
                 'Dislike': 2
+            },
+            voteColors: {
+                'None': 'grey',
+                'Like': 'green',
+                'Dislike': 'red'
             }
         });
 })();

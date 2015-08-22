@@ -37,8 +37,8 @@
                     </div>
                     <div class="col-md-1">
                         <button class="circleButton btn btn-info" ng-click="testCtrl.changeCurrentTest($index)">
-                            <span ng-show="testCtrl.editingIndex != $index" class="glyphicon glyphicon-pencil circleButton-icon"></span>
-                            <span ng-show="testCtrl.editingIndex == $index" class="glyphicon glyphicon-ok circleButton-icon"></span>
+                            <span ng-show="testCtrl.editingIndex != $index" class="glyphicon glyphicon-pencil circleButton-icon-edit"></span>
+                            <span ng-show="testCtrl.editingIndex == $index" class="glyphicon glyphicon-ok circleButton-icon-edit"></span>
                         </button>
                     </div>
                 </div>
@@ -58,10 +58,10 @@
                     <div class="row">
 <!--                        <div class="circleButton btn btn-success"><span class="glyphicon glyphicon-thumbs-up circleButton-icon"></span></div>-->
                         <!-- <div class="circleButton btn btn-danger"><span class="glyphicon glyphicon-thumbs-down circleButton-icon"></span></div>-->
-                        <thumb-button btn-type="btn-success" btn-icon="fa-thumbs-o-up" test="test"
-                                      border-color="green" key="Like"></thumb-button>
-                        <thumb-button btn-type="btn-danger" btn-icon="fa-thumbs-o-down" test="test"
-                                      border-color="red" key="Dislike"></thumb-button>
+                        <thumb-button btn-type="btn-success" btn-icon="fa-thumbs-o-up" feedback="test.feedback"
+                                      key="Like"></thumb-button>
+                        <thumb-button btn-type="btn-danger" btn-icon="fa-thumbs-o-down" feedback="test.feedback"
+                                      key="Dislike"></thumb-button>
                     </div>
                 </div>
                 <div class="col-md-11">
@@ -72,7 +72,7 @@
                               ng-auto-expand
                               ng-readonly="testCtrl.editingIndex != $index"
                               ng-model="test.feedback.text"
-                              ng-style="test.feedbackConfig.style"></textarea>
+                              ng-style="test.feedback.feedbackConfig.style"></textarea>
                 </div>
             </div>
             <hr/>

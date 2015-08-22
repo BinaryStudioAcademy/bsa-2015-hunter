@@ -10,13 +10,12 @@
         'FeedbackHttpService',
         'CardHrInterviewService',
         '$routeParams',
-        'localStorageService'
+        'EnumConstants'
     ];
 
     function CardHrInterviewController(VacancyHttpService, FeedbackHttpService, CardHrInterviewService,
-        $routeParams, localStorageService) {
+        $routeParams, EnumConstants) {
         var vm = this;
-        var userName = localStorageService.get('authorizationData').userName;
 
         vm.templateName = 'HR Interview';
         vm.vacancy;
@@ -45,6 +44,12 @@
                         "readOnly": true
                     };
                 }
+
+                feedback.feedbackConfig.style = {
+                    "border-color": feedback.successStatus == 0 ? EnumConstants.voteColors['None']
+                        : feedback.successStatus == 1 ? EnumConstants.voteColors['Like']
+                        : EnumConstants.voteColors['Dislike']
+                }
             });
         });
 
@@ -54,7 +59,8 @@
                 id: feedback.id,
                 cardId: feedback.cardId,
                 type: feedback.type,
-                text: feedback.text
+                text: feedback.text,
+                successStatus: feedback.successStatus
             };
 
             FeedbackHttpService.saveHrFeedback(newFeedback, $routeParams.vid, $routeParams.cid).then(function (result) {
