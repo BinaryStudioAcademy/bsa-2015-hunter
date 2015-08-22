@@ -41,8 +41,9 @@
                 { id: 0, name: 'English' },
                 { id: 1, name: 'Personal' },
                 { id: 2, name: 'Expertise' },
-                { id: 3, name: 'Test Feedback' },
-                { id: 4, name: 'Summary' }
+                { id: 3, name: 'Tech Feedback' },
+                { id: 4, name: 'Test Feedback' },
+                { id: 5, name: 'Summary' }
             ],
             poolBackgroundColors: [
                 { id: 0, color: 'Green', colorCode: 'rgb(44, 201, 99)' },
@@ -57,6 +58,11 @@
                 Resume: 0,
                 Test: 1,
                 Other: 2
+            },
+            successStatus: {
+                'None': 0,
+                'Like': 1,
+                'Dislike': 2
             }
         });
 })();

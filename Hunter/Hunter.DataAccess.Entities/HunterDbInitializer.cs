@@ -680,7 +680,7 @@ namespace Hunter.DataAccess.Entities
                     Text = "Technical Feedback Expertise comment",
                     Added = new DateTime(2015,10,8),
                     Edited = DateTime.Now,
-                    Type = (int)FeedbackType.Expertise,
+                    Type = (int)FeedbackType.TechFeedback,
                     Status = 1
                 },
                 new Feedback()
@@ -690,7 +690,7 @@ namespace Hunter.DataAccess.Entities
                     Text = "Technical Feedback Expertise comment",
                     Added = new DateTime(2015,10,8),
                     Edited = DateTime.Now,
-                    Type = (int)FeedbackType.Expertise,
+                    Type = (int)FeedbackType.TechFeedback,
                     Status = 1
                 }
             };

@@ -37,11 +37,11 @@
             });
         }
 
-        function updateTestComment(id, comment, success) {
+        function updateTestComment(body, success) {
             HttpHandler.sendRequest({
                 verb: 'PUT',
-                url: '/api/test/' + id + '/comment',
-                body: comment,
+                url: '/api/test/comment',
+                body: body,
                 successCallback: success,
                 errorMessageToDev: 'POST TEST COMMENT ERROR'
             });

@@ -69,7 +69,8 @@
     <Compile Include="Dto\FileDto.cs" />
     <Compile Include="Dto\FilterInfoDto.cs" />
     <Compile Include="Dto\ResumeDto.cs" />
-    <Compile Include="Dto\TestDto.cs" />
+    <Compile Include="Dto\Test\TestCommentDto.cs" />
+    <Compile Include="Dto\Test\TestDto.cs" />
     <Compile Include="Dto\SpecialNoteDto.cs" />
     <Compile Include="Dto\UserDto.cs" />
     <Compile Include="Dto\UserProfileDto.cs" />

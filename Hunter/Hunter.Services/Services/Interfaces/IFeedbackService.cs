@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hunter.DataAccess.Entities.Entites.Enums;
 using Hunter.Services.Dto;
 using Hunter.Services.Dto.ApiResults;
 
@@ -14,5 +15,6 @@ namespace Hunter.Services
         FeedbackUpdatedResult SaveFeedback(FeedbackDto hrInterviewDto, string name);
         FeedbackDto GetTechInterview(int vacancyId, int candidateId);
         FeedbackDto GetSummary(int vacancyId, int candidateId);
+        FeedbackUpdatedResult UpdateSuccessStatus(int feedbackId, SuccessStatus status, string name);
     }
 }

@@ -43,7 +43,7 @@ namespace Hunter.Services
             try
             {
                 var feedbacks = card.Feedback
-                    .Where(f => (f.Type == 0 || f.Type == 1))
+                    .Where(f => (f.Type == 0 || f.Type == 1 || f.Type == 2))
                     .ToFeedbacksDto().ToList();
 
                 if (!feedbacks.Any(f => f.Type == 0))
@@ -53,6 +53,10 @@ namespace Hunter.Services
                 if (!feedbacks.Any(f => f.Type == 1))
                 {
                     feedbacks.Add(new FeedbackDto { Id = 0, Type = 1, CardId = card.Id, Text = "", Date = DateTime.Now, UserName = "" });
+                }
+                if (!feedbacks.Any(f => f.Type == 2))
+                {
+                    feedbacks.Add(new FeedbackDto { Id = 0, Type = 2, CardId = card.Id, Text = "", Date = DateTime.Now, UserName = "" });
                 }
 
                 return feedbacks.OrderBy(f => f.Type);
@@ -67,7 +71,7 @@ namespace Hunter.Services
 
         public FeedbackDto GetTechInterview(int vacancyId, int candidateId)
         {
-            int type = (int)FeedbackType.Expertise;
+            int type = (int)FeedbackType.TechFeedback;
             try
             {
                 var card = _cardRepository
@@ -146,17 +150,33 @@ namespace Hunter.Services
             
                 _feedbackRepository.UpdateAndCommit(feedback);
                 _activityHelperService.CreateUpdatedFeedbackActivity(feedback);
+                var dto = feedback.ToFeedbackDto();
                 return new FeedbackUpdatedResult
                 {
                     Id = feedback.Id,
-                    Update = feedback.ToFeedbackDto().Date,
-                    UserName = feedback.ToFeedbackDto().UserName
+                    Update = dto.Date,
+                    UserName = dto.UserName
                 };
             }
             catch (Exception ex)
             {
                 _logger.Log(ex);
 //                return Api.Error((long)feedback.Id, ex.Message);
+                throw ex;
+            }
+        }
+
+        public FeedbackUpdatedResult UpdateSuccessStatus(int feedbackId, SuccessStatus status, string name)
+        {
+            try
+            {
+                var feedback = _feedbackRepository.Get(feedbackId);
+                feedback.SuccessStatus = status;
+                return SaveFeedback(feedback.ToFeedbackDto(), name);
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
                 throw ex;
             }
         }

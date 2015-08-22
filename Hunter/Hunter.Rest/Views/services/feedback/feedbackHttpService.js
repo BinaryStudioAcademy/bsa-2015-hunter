@@ -18,7 +18,8 @@
             getTechFeedback: getTechFeedback,
             saveFeedback: saveFeedback,
             getSummary: getSummary,
-            saveSummary: saveSummary
+            saveSummary: saveSummary,
+            updateSuccessStatus: updateSuccessStatus
         }
 
         function getHrFeedback(vid, cid) {
@@ -54,16 +55,17 @@
         };
 
         function saveTestFeedback(feedbackObj) {
+            console.log(feedbackObj);
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                'url': '/api/feedback/test/update',
-                'verb': 'PUT',
-                'body': feedbackObj,
-                'successCallback': function(response) {
+                url: '/api/feedback/test/update',
+                verb: 'PUT',
+                body: feedbackObj,
+                successCallback: function(response) {
                     console.log('test feedback was successfuly updated');
                     deferred.resolve(response.data);
                 },
-                'errorCallback': function(response) { console.log('Updating was failed') }
+                errorCallback: function(response) { console.log('Updating was failed') }
             });
 
             return deferred.promise;
@@ -131,6 +133,16 @@
             });
             return deferred.promise;
         };
+
+        function updateSuccessStatus(feedbackId, status) {
+            httpHandler.sendRequest({
+                'url': '/api/feedback/' + feedbackId + '/success/update',
+                'verb': 'PUT',
+                body: status,
+                'successCallback': function (response) { console.log(response); },
+                'errorCallback': function (response){console.log(response)}
+            });
+        }
 
         return service;
     }

@@ -64,6 +64,7 @@
     <Compile Include="Entites\Enums\Resolution.cs" />
     <Compile Include="Entites\Enums\Stage.cs" />
     <Compile Include="Entites\Enums\Status.cs" />
+    <Compile Include="Entites\Enums\SuccessStatus.cs" />
     <Compile Include="Entites\Feedback.cs" />
     <Compile Include="Entites\File.cs" />
     <Compile Include="Entites\IEntity.cs" />
@@ -170,6 +171,10 @@
     <Compile Include="Migrations\201508201751269_added_userprofile_field_to_activity_entity.Designer.cs">
       <DependentUpon>201508201751269_added_userprofile_field_to_activity_entity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508220759380_AddSuccessStatusInFeedback.cs" />
+    <Compile Include="Migrations\201508220759380_AddSuccessStatusInFeedback.Designer.cs">
+      <DependentUpon>201508220759380_AddSuccessStatusInFeedback.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -242,6 +247,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508201751269_added_userprofile_field_to_activity_entity.resx">
       <DependentUpon>201508201751269_added_userprofile_field_to_activity_entity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508220759380_AddSuccessStatusInFeedback.resx">
+      <DependentUpon>201508220759380_AddSuccessStatusInFeedback.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
