@@ -1,5 +1,5 @@
 ﻿<div ng-controller="CardSpecialNotesController as specialNotesCtrl">
-    <div class="hrSpecialNote_wrap">
+    <div ng-init="showAddBlock=true">
         <ul class="nav nav-pills">
             <li class="active">
                 <a data-toggle="pill" ng-click="specialNotesCtrl.cardNoteShow()">
@@ -8,34 +8,25 @@
             </li>
             <li><a data-toggle="pill" ng-click="specialNotesCtrl.candidateNoteShow()">All Notes</a></li>
             <li><a data-toggle="pill" ng-click="specialNotesCtrl.userNoteShow()">My Notes</a></li>
+            <a ng-click="showAddBlock= !showAddBlock" title="Add new Note"><span class="fa fa-2x fa-plus-circle fa-flip-vertical"></span></a>
         </ul>
-        <div class="hrSpecialNote_comments">
-            <div class="hrSpecialNote_form" ng-repeat="item in specialNotesCtrl.specialNote">
-                <form>
-                    <div>
-                        <div>
-                            <span>Edited by {{item.userAlias}} {{item.lastEdited | date:'medium'}}</span>
-                        </div>
-                        <textarea class="form-control" name="text" ng-readonly="item.noteConfig.readOnly" 
-                                  ng-model="item.text" ng-auto-expand>{{item.text}}</textarea>
-                    </div>
-                    <div>
-                        <input class="btn" type="button" value="{{item.noteConfig.buttonName}}" ng-click="specialNotesCtrl.toggleReadOnly(item)"
-                               ng-show="item.userLogin == specialNotesCtrl.userName">
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="hrSpecialNote_form_edit">
+        <div class="hrSpecialNote_form_add" ng-show="showAddBlock">
             <form>
-                <div class="row">
-                    <div class="col-md-10">
-                        <textarea name="text" ng-model="specialNotesCtrl.newNoteText" ng-auto-expand></textarea>
-                    </div>
-                    <div class="col-md-2">
-                        <input style="position: relative; bottom: 8px;" class="btn bottom-Done" type="submit" value="Done" ng-click="specialNotesCtrl.saveNewNote(specialNotesCtrl.newNoteText)">
-                    </div>
+                <div class="form-group">
+                    <textarea class="form-control" name="text" ng-model="specialNotesCtrl.newNoteText" ng-auto-expand></textarea>
                 </div>
+                <button class="btn btn-success col-sm-4" type="submit" ng-click="specialNotesCtrl.saveNewNote()">Add</button>
+            </form>
+        </div>
+        <div class="hrSpecialNote_form" ng-repeat="item in specialNotesCtrl.notes">
+            <form ng-init="editMode=false">
+                <div class="col-md-12">
+                    <span>Updated by {{item.userAlias}} {{item.lastEdited | date:'medium'}}</span>
+                    <a title="Edit Note" ng-click="editMode=true" ng-hide="editMode"><i class="fa fa-pencil-square"></i></a>
+                    <a title="Save Edit" ng-click="editMode=false; specialNotesCtrl.saveOldNote(item)" ng-show="editMode"><i class="fa fa-check-square"></i></a>
+                </div>
+                <textarea class="form-control" name="text" ng-readonly="!editMode"
+                          ng-model="item.text" ng-auto-expand></textarea>
             </form>
         </div>
     </div>
