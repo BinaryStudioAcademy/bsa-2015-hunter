@@ -39,7 +39,8 @@
         vm.vacancy;
         vm.vacancyId;
         vm.tableSpinner = false;
-        
+        vm.updatePrevStar = updatePrevStar;
+
         vm.pageConfig = {
             pageTitle: 'Candidates (general pool)',
             isAddToVacancyButton: true,
@@ -175,10 +176,10 @@
         }, true);
 
         vm.ShowDetails = function (item) {
-            // if ($rootScope.candidateDetails.id != id ){
+           if ($rootScope.candidateDetails.id != item.id ){
             $rootScope.candidateDetails.id = item.id;
             $rootScope.candidateDetails.shortListed = item.shortListed;
-            // } 
+           } 
         }
 
         vm.ActiveTr = function (id) {
@@ -227,6 +228,14 @@
 
         function isObjectEmpty(obj) {
             return (Object.getOwnPropertyNames(obj).length === 0);
+        }
+
+        function updatePrevStar($event, cand) {
+            $event.stopImmediatePropagation();
+            if ($rootScope.candidateDetails.id == cand.id) {
+                $rootScope.candidateDetails.id = cand.id;
+                $rootScope.candidateDetails.shortListed = cand.shortListed;
+            }
         }
     }
 

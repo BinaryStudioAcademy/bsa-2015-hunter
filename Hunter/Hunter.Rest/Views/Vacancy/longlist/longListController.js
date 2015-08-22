@@ -27,6 +27,7 @@
         vm.vacancy;
         vm.candidateDetails;
         vm.starUpdate = starUpdate;
+        vm.updatePrevStar = updatePrevStar;
 
         // get vacancy info
         VacancyHttpService.getLongList($routeParams.id).then(function (result) {
@@ -179,6 +180,13 @@
                 }
             });
         };
+
+        function updatePrevStar($event,cand) {
+            $event.stopImmediatePropagation();
+            if (cand.id == vm.candidateDetails.id) {
+                vm.candidateDetails.shortlisted = cand.shortlisted;
+            }
+        }
 
         //function setTab(setTab) {
         //    vm.tab = setTab;
