@@ -11,6 +11,7 @@ using System.Web.Http.OData;
 using System.Web.Http.OData.Extensions;
 using System.Web.Http.OData.Query;
 using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Entities.Enums;
 using Hunter.Services.Dto;
 using Hunter.Services.Interfaces;
 using Hunter.Services;
@@ -197,6 +198,21 @@ namespace Hunter.Rest.Controllers
                 }
                 _candidateService.UpdateShortFlag(id, isShort);
                 return Ok(isShort);
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
+        [HttpPut]
+        [Route("{id:int}/resolution/{resolution}")]
+        public IHttpActionResult PutCandidateResolution(int id, Resolution resolution)
+        {
+            try
+            {
+                _candidateService.UpdateResolution(id,resolution);
+                return Ok();
             }
             catch (Exception e)
             {

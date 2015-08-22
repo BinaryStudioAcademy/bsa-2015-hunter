@@ -1,4 +1,4 @@
-﻿(function() {
+﻿(function () {
     'use strict';
 
     angular
@@ -11,11 +11,12 @@
         'AuthService',
         'CandidateHttpService',
         'CandidateAddEditService',
-        'CandidateService'
+        'CandidateService',
+        'EnumConstants'
 
     ];
 
-    function CandidateProfileController($location, $routeParams, authService, candidateHttpService, candidateAddEditService, candidateService) {
+    function CandidateProfileController($location, $routeParams, authService, candidateHttpService, candidateAddEditService, candidateService, EnumConstants) {
         var vm = this;
         vm.isScinner = true;
         vm.subMenuItems = [
@@ -34,25 +35,28 @@
             }
         ];
 
+        vm.resolutions = [];
+        vm.candidate = {};
+
+        vm.updateResolution = updateResolution;
         vm.changeTemplate = changeTemplate;
 
         (function() {
+            // This is function for initialization actions
+            if (!$routeParams.cid) {
+                $location.url('/login');
+            }
+        })();
+
+        (function () {
             vm.templateToShow = candidateService.changeTemplate(vm.subMenuItems[0].name);
-        } )();
+            vm.resolutions = EnumConstants.resolutions;
+        })();
 
-
-        //(function() {
-        //    // This is function for initialization actions, for example checking auth
-        //    if (authService.isLoggedIn()) {
-        //    // Can Make Here Any Actions For Data Initialization, for example, http queries, etc.
-        //    } else {
-        //        $location.url('/login');
-        //    }
-        //})();
 
         function changeTemplate(templateName) {
             vm.templateToShow = candidateService.changeTemplate(templateName);
-            vm.subMenuItems.forEach(function(item, i, arr) {
+            vm.subMenuItems.forEach(function (item, i, arr) {
                 if (item === templateName) {
                     item.isActive = true;
                 } else {
@@ -62,8 +66,11 @@
 
         }
 
-        vm.candidate;
-        candidateHttpService.getCandidate(getCandidateID($location.path())).then(function (response) {
+        function updateResolution() {
+            candidateHttpService.updateCandidateResolution($routeParams.cid, vm.candidate.resolution);
+        };
+
+        candidateHttpService.getCandidate($routeParams.cid).then(function (response) {
             vm.candidate = response.data;
             vm.isScinner = false;
             console.log(response.data);

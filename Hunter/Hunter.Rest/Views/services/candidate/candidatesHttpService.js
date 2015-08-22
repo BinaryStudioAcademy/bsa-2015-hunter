@@ -20,7 +20,8 @@
             getLongListDetails: getLongListDetails,
             parseLinkedIn: parseLinkedIn,
             getAddedByList: getAddedByList,
-            setShortListFlag: setShortListFlag
+            setShortListFlag: setShortListFlag,
+            updateCandidateResolution : updateCandidateResolution
         };
 
         function updateCandidate(body, successCallback, id) {
@@ -148,7 +149,6 @@
                     deferred.resolve(result.data);
                 },
                 errorCallback: function (status) {
-                    console.log("Get candidates long list Added by filter data error");
                     console.log(status);
                     deferred.reject(status);
                 }
@@ -156,7 +156,21 @@
             return deferred.promise;
         }
 
-
+        function updateCandidateResolution(cid, resolution) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/candidates/' + cid + '/resolution/' + resolution,
+                verb: 'PUT',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log(status);
+                    deferred.reject(status);
+                }
+            });
+            return deferred.promise;
+        }
 
         return service;
     }
