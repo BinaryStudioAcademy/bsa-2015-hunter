@@ -1,5 +1,5 @@
 ﻿<div class="container-partial" ng-controller='CandidatePartialController as candidatePartCtrl' >
-    <div spinner='candidatePartCtrl.prevLoad'>
+    <div ng-if="!candidatePartCtrl.isEmpty" spinner='candidatePartCtrl.prevLoad'>
         <div class="row">
             <div class="col-md-12">
                 <h4>Preview</h4>
