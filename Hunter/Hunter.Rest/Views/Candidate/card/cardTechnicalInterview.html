@@ -8,7 +8,7 @@
                     <div>
                         <div>
                             <h3 style="display: inline">{{generalCardCtrl.feedbackTypes[techInterviewCtrl.techFeedback.type].name}}</h3>
-                            <div ng-hide="techInterviewCtrl.techFeedback.id == 0">
+                            <div class="vote-group" ng-hide="techInterviewCtrl.techFeedback.id == 0">
                                 <thumb-button btn-type="btn-success" btn-icon="fa-thumbs-o-up" 
                                               feedback="techInterviewCtrl.techFeedback"
                                               key="Like"></thumb-button>

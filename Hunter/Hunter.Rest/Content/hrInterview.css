@@ -59,3 +59,18 @@
     border: 2px solid gray;
     padding: 5px;
 }
+
+.hrInterview_form .circleButton {
+    width: 30px;
+}
+
+.hrInterview_form .circleButton-icon {
+    margin: 9px 9px;
+}
+
+.hrInterview_form .vote-group {
+    position: absolute;
+    right: 0px;
+    left: 100px;
+    bottom: 2px;
+}
