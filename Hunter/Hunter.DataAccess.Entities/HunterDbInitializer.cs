@@ -633,6 +633,7 @@ namespace Hunter.DataAccess.Entities
             #region FEEDBACK
             var feedbacks = new List<Feedback>
             {
+                #region FeedbackForCardId1
                 new Feedback
                 {
                     CardId = 1,
@@ -640,17 +641,7 @@ namespace Hunter.DataAccess.Entities
                     Text = "HR Feedback English comment",
                     Added = new DateTime(2015, 8, 1),
                     Edited = new DateTime(2015, 8, 1),
-                    Type = 0,
-                    Status = 1
-                },
-                new Feedback
-                {
-                    CardId = 1,
-                    ProfileId = 1,
-                    Text = "HR feedback Personal comment",
-                    Added = new DateTime(2015, 8, 1),
-                    Edited = new DateTime(2015, 8, 1),
-                    Type = 1,
+                    Type = (int)FeedbackType.English,
                     Status = 1
                 },
                 new Feedback
@@ -660,12 +651,210 @@ namespace Hunter.DataAccess.Entities
                     Text = "HR Feedback Expertise comment",
                     Added = new DateTime(2015, 8, 1),
                     Edited = new DateTime(2015, 8, 1),
-                    Type = 2,
+                    Type = (int)FeedbackType.Expertise,
                     Status = 1
                 },
                 new Feedback
                 {
                     CardId = 1,
+                    ProfileId = 1,
+                    Text = "HR Feedback Personal comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = (int)FeedbackType.Personal,
+                    Status = 1
+                },
+                new Feedback
+                {
+                    CardId = 1,
+                    ProfileId = 1,
+                    Text = "HR Feedback Summary comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = (int)FeedbackType.Summary,
+                    Status = 1
+                },
+                new Feedback
+                {
+                    CardId = 1,
+                    ProfileId = 4,
+                    Text = "HR Feedback Tech Feedback comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = (int)FeedbackType.TechFeedback,
+                    Status = 1
+                },
+                new Feedback
+                {
+                    CardId = 1,
+                    ProfileId = 4,
+                    Text = "HR Feedback Test Feedback comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = (int)FeedbackType.TestFeedback,
+                    Status = 1
+                }, 
+                #endregion
+
+                #region FeedbackForCardId2
+                new Feedback
+                {
+                    CardId = 2,
+                    ProfileId = 2,
+                    Text = "HR Feedback English comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = (int)FeedbackType.English,
+                    Status = 1
+                },
+                new Feedback
+                {
+                    CardId = 2,
+                    ProfileId = 2,
+                    Text = "HR Feedback Expertise comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = (int)FeedbackType.Expertise,
+                    Status = 1
+                },
+                new Feedback
+                {
+                    CardId = 2,
+                    ProfileId = 2,
+                    Text = "HR Feedback Personal comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = (int)FeedbackType.Personal,
+                    Status = 1
+                },
+                new Feedback
+                {
+                    CardId = 2,
+                    ProfileId = 2,
+                    Text = "HR Feedback Summary comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = (int)FeedbackType.Summary,
+                    Status = 1
+                },
+                new Feedback
+                {
+                    CardId = 2,
+                    ProfileId = 5,
+                    Text = "HR Feedback Tech Feedback comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = (int)FeedbackType.TechFeedback,
+                    Status = 1
+                },
+                new Feedback
+                {
+                    CardId = 2,
+                    ProfileId = 5,
+                    Text = "HR Feedback Test Feedback comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = (int)FeedbackType.TestFeedback,
+                    Status = 1
+                }, 
+                #endregion
+
+                #region FeedbackForCardId3
+                new Feedback
+                {
+                    CardId = 3,
+                    ProfileId = 3,
+                    Text = "HR Feedback English comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = (int)FeedbackType.English,
+                    Status = 1
+                },
+                new Feedback
+                {
+                    CardId = 3,
+                    ProfileId = 3,
+                    Text = "HR Feedback Expertise comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = (int)FeedbackType.Expertise,
+                    Status = 1
+                },
+                new Feedback
+                {
+                    CardId = 3,
+                    ProfileId = 3,
+                    Text = "HR Feedback Personal comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = (int)FeedbackType.Personal,
+                    Status = 1
+                },
+                new Feedback
+                {
+                    CardId = 3,
+                    ProfileId = 3,
+                    Text = "HR Feedback Summary comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = (int)FeedbackType.Summary,
+                    Status = 1
+                },
+                new Feedback
+                {
+                    CardId = 3,
+                    ProfileId = 6,
+                    Text = "HR Feedback Tech Feedback comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = (int)FeedbackType.TechFeedback,
+                    Status = 1
+                },
+                new Feedback
+                {
+                    CardId = 3,
+                    ProfileId = 6,
+                    Text = "HR Feedback Test Feedback comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = (int)FeedbackType.TestFeedback,
+                    Status = 1
+                }, 
+                #endregion
+
+                new Feedback
+                {
+                    CardId = 11,
+                    ProfileId = 1,
+                    Text = "HR Feedback English comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = 0,
+                    Status = 1
+                },
+                new Feedback
+                {
+                    CardId = 11,
+                    ProfileId = 1,
+                    Text = "HR feedback Personal comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = 1,
+                    Status = 1
+                },
+                new Feedback
+                {
+                    CardId = 11,
+                    ProfileId = 1,
+                    Text = "HR Feedback Expertise comment",
+                    Added = new DateTime(2015, 8, 1),
+                    Edited = new DateTime(2015, 8, 1),
+                    Type = 2,
+                    Status = 1
+                },
+                new Feedback
+                {
+                    CardId = 11,
                     ProfileId = 1,
                     Text = "Tech. spec feedback for test",
                     Added = DateTime.Now,
@@ -675,7 +864,7 @@ namespace Hunter.DataAccess.Entities
                 },
                 new Feedback()
                 {
-                    CardId = 1,
+                    CardId = 11,
                     ProfileId = 1,
                     Text = "Technical Feedback Expertise comment",
                     Added = new DateTime(2015,10,8),
@@ -685,7 +874,7 @@ namespace Hunter.DataAccess.Entities
                 },
                 new Feedback()
                 {
-                    CardId = 2,
+                    CardId = 12,
                     ProfileId = 2,
                     Text = "Technical Feedback Expertise comment",
                     Added = new DateTime(2015,10,8),
@@ -713,11 +902,14 @@ namespace Hunter.DataAccess.Entities
 
             #region TEST
 
-            var test1 = new Test {CardId = 1, Comment = "Test to get a job", FeedbackId = 4, Url = "http://goodwork.com", FileId = null, Added = DateTime.Now};
-            var test2 = new Test{CardId = 2, Comment = "Very hard test", FeedbackId = 4, Url = "http://test.com", FileId = null, Added = DateTime.Now};
-            var test3 = new Test{CardId = 3, Comment = "I very want this job", FeedbackId = 4, FileId = null, Url = "http://testwork.ua", Added = DateTime.Now};
+            var test1 = new Test { CardId = 11, Comment = "Test to get a job", FeedbackId = 4, Url = "http://goodwork.com", FileId = null, Added = DateTime.Now};
+            var test2 = new Test { CardId = 12, Comment = "Very hard test", FeedbackId = 4, Url = "http://test.com", FileId = null, Added = DateTime.Now};
+            var test3 = new Test { CardId = 13, Comment = "I very want this job", FeedbackId = 4, FileId = null, Url = "http://testwork.ua", Added = DateTime.Now};
+            var test4 = new Test { CardId = 1, Comment = "Test to get a job", FeedbackId = 6, Url = "http://goodwork.com", FileId = null, Added = DateTime.Now };
+            var test5 = new Test { CardId = 2, Comment = "Very hard test", FeedbackId = 12, Url = "http://test.com", FileId = null, Added = DateTime.Now };
+            var test6 = new Test { CardId = 3, Comment = "I very want this job", FeedbackId = 18, FileId = null, Url = "http://testwork.ua", Added = DateTime.Now };
 
-            var tests = new List<Test> {test1, test2, test3};
+            var tests = new List<Test> {test1, test2, test3, test4, test5, test6};
             tests.ForEach(x => context.Test.Add(x));
             context.SaveChanges();
 
