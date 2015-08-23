@@ -14,12 +14,17 @@
         </div>
         <div ng-show="showAddBlock" class="row">
             <br/>
-            <form>
-                <div class="form-group">
-                    <textarea class="form-control" name="text" ng-model="specialNotesCtrl.newNoteText" ng-auto-expand></textarea>
+            <div ng-form="form">
+                <div class="form-group" ng-class="{'has-warning': !form.NoteText.$valid}">
+                    <textarea name="NoteText" class="form-control" ng-model="specialNotesCtrl.newNoteText" ng-auto-expand required placeholder="Enter new note"></textarea>
+                    <span ng-show="form.NoteText.$error.required" class="help-block">Required</span>
                 </div>
-                <button class="btn btn-success col-sm-4" type="submit" ng-click="specialNotesCtrl.saveNewNote()">Add</button>
-            </form>
+                <button class="btn btn-success col-sm-4" type="submit"
+                        ng-click="specialNotesCtrl.saveNewNote()"
+                        data-ng-disabled="!form.$valid">
+                    Add
+                </button>
+            </div>
         </div>
         <div class="row">
             <div class="hrSpecialNote_form" ng-repeat="item in specialNotesCtrl.notes">
@@ -29,7 +34,8 @@
                         <a title="Edit Note" ng-click="editMode=true" ng-hide="editMode"><i class="fa fa-2x fa-pencil-square"></i></a>
                         <a title="Save Edit" ng-click="editMode=false; specialNotesCtrl.saveOldNote(item)" ng-show="editMode"><i class="fa fa-2x fa-check-square"></i></a>
                     </div>
-                    <textarea class="form-control" name="text" ng-readonly="!editMode"
+                    <textarea class="form-control" name="text" 
+                              ng-readonly="!editMode"
                               ng-model="item.text" ng-auto-expand></textarea>
                 </form>
             </div>
