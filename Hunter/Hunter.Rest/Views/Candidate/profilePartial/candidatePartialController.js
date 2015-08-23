@@ -10,14 +10,19 @@
         '$location',
         '$rootScope',
         'AuthService',
-        'CandidateHttpService'
+        'CandidateHttpService',
+        'EnumConstants'
     ];
 
-    function CandidatePartialController($scope, $location, $rootScope, authService, candidateHttpService) {
+    function CandidatePartialController($scope, $location, $rootScope, authService, candidateHttpService, EnumConstants) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         vm.isEmpty = false;
 
+        vm.candidate;
+        vm.resolutions = EnumConstants.resolutions;
+        vm.starUpdate = starUpdate;
+        vm.updateResolution = updateResolution;
 
         $rootScope.$watch(
             '$root.candidateDetails.id',
@@ -38,8 +43,6 @@
                 }
             });
 
-        vm.candidate;
-        vm.starUpdate = starUpdate;
 
         function starUpdate() {
             if (vm.candidate) {
@@ -60,5 +63,14 @@
             });
 
         }
+
+        function updateResolution() {
+            candidateHttpService.updateCandidateResolution(vm.candidate.id, vm.candidate.resolution);
+            angular.forEach($scope.$parent.candidateListCtrl.candidateList, function (item) {
+                if (item.id == vm.candidate.id) {
+                    item.resolution = vm.candidate.resolution;
+                }
+            });
+        };
     }
 })();

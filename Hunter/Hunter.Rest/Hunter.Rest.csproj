@@ -810,7 +810,6 @@
     <Content Include="Views\register\register.html" />
     <Content Include="Views\register\registerController.js" />
     <Content Include="Views\services\candidate\addEdit\addEditService.js" />
-    <Content Include="Views\services\candidate\candidatesFilter.js" />
     <Content Include="Views\services\candidate\candidatesHttpService.js" />
     <Content Include="Views\services\candidate\card\cardTestHttpService.js" />
     <Content Include="Views\services\directive\filechange.js" />
@@ -833,7 +832,6 @@
     <Content Include="Views\services\longlist\longlistHttpService.js" />
     <Content Include="Views\services\userRole\userRoleHttpService.js" />
     <Content Include="Views\services\user\userHttpService.js" />
-    <Content Include="Views\services\vacancy\addEdit\addEditService.js" />
     <Content Include="Views\Statistics\list.html" />
     <Content Include="Views\Statistics\statisticsController.js" />
     <Content Include="Views\templates\pagination.html" />
@@ -875,6 +873,7 @@
     <Folder Include="Content\fontAwesome\" />
     <Folder Include="Views\role\addEdit\" />
     <Folder Include="Views\role\profile\" />
+    <Folder Include="Views\services\vacancy\addEdit\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

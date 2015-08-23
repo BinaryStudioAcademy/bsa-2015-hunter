@@ -64,7 +64,7 @@
                     id: id,
                     Name: data.name,
                     StartDate: new Date(data.startDate),
-                    EndDate: new Date(data.endDate),
+                    EndDate: data.endDate != null ? new Date(data.endDate) : null,
                     Location: data.location,
                     Status: data.status,
                     Description: data.description,
