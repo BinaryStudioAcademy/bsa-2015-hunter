@@ -13,7 +13,6 @@ namespace Hunter.DataAccess.Entities
         {
             Feedback = new HashSet<Feedback>();
             Interview = new HashSet<Interview>();
-            SpecialNote = new HashSet<SpecialNote>();
             Test = new HashSet<Test>();
         }
 
@@ -40,9 +39,6 @@ namespace Hunter.DataAccess.Entities
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Interview> Interview { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SpecialNote> SpecialNote { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Test> Test { get; set; }
