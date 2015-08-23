@@ -20,7 +20,8 @@ namespace Hunter.Services
                 EndDate = vacancy.EndDate,
                 Description = vacancy.Description,
                 PoolId = vacancy.PoolId,
-                StatusName = ((Status)vacancy.Status).ToString()
+                StatusName = ((Status)vacancy.Status).ToString(),
+                UserLogin = vacancy.UserProfile != null ? vacancy.UserProfile.Alias : string.Empty
             };
             return v;
         }
@@ -52,9 +53,19 @@ namespace Hunter.Services
                 EndDate = vacancy.EndDate,
                 Description = vacancy.Description,
                 PoolId = vacancy.PoolId
-                
             };
             return v;
+        }
+
+        public static void ToVacancy(this VacancyDto vacancyDto, Vacancy vacancy)
+        {
+            vacancy.Id = vacancyDto.Id;
+            vacancy.Name = vacancyDto.Name;
+            vacancy.Status = vacancyDto.Status;
+            vacancy.StartDate = vacancyDto.StartDate;
+            vacancy.EndDate = vacancyDto.EndDate;
+            vacancy.Description = vacancyDto.Description;
+            vacancy.PoolId = vacancyDto.PoolId;
         }
 
         public static VacancyLongListDto ToVacancyLongListDto(this Vacancy vacancy)
@@ -64,7 +75,7 @@ namespace Hunter.Services
                
                 Id = vacancy.Id,
                 Name = vacancy.Name,
-                AddedByName = vacancy.UserProfile != null ? vacancy.UserProfile.UserLogin : ""
+                AddedByName = vacancy.UserProfile != null ? vacancy.UserProfile.UserLogin : string.Empty
                 //PoolId = vacancy.PoolId
             };
             return vll;
