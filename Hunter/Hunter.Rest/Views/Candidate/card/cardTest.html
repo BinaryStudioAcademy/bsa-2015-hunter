@@ -44,18 +44,21 @@
                 </div>
             </div>
             <div class="row" ng-show="(test.comment != null && test.comment != '') || testCtrl.editingIndex == $index">
-                <div class="col-md-1"><label>Comment</label></div>
+                <!--Corection-->
+                <div class="col-md-1"></div>
                 <div class="col-md-11">
+                    <h4 style="margin-bottom: 0;">Comment</h4>
                     <textarea class="form-control feedbackField"
                               ng-auto-expand
                               ng-readonly="testCtrl.editingIndex != $index"
                               ng-model="test.comment"></textarea>
                 </div>
+                <!--End Corection-->
             </div>
             <div class="row" ng-show="test.feedbackId != null || testCtrl.editingIndex == $index">
                 <!--Correction-->
                 <div style="top: 33px; left: 10px;" class="col-md-1 disableBottomMargins">
-                <!--End Correction-->
+                <!--End Corection-->
                     <div class="row" ng-hide="test.feedback.id == undefind || test.feedback.id == 0">
                         <thumb-button btn-type="btn-success" btn-icon="fa-thumbs-o-up" feedback="test.feedback"
                                       key="Like"></thumb-button>
