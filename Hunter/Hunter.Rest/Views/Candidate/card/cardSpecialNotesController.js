@@ -8,8 +8,7 @@
     CardSpecialNotesController.$inject = [
         'SpecialNoteHttpService',
         'VacancyHttpService',
-        '$routeParams',
-        'localStorageService'
+        '$routeParams'
     ];
 
     function CardSpecialNotesController(specialNoteHttpService, VacancyHttpService, $routeParams, localStorageService) {
@@ -24,8 +23,6 @@
 
         vm.vacancy;
         vm.specialNote;
-        vm.userName = localStorageService.get('authorizationData').userName;
-        console.log(vm.userName);
         vm.newNoteText;
 
         // TODO: Initialization Should Be Covered with self invoke function
@@ -48,7 +45,7 @@
             .then(function(data) {
                 note.id = data.id;
                 note.lastEdited = data.update;
-                note.userLogin = data.userName;
+                note.userAlias = data.userAlias;
                 note.cardId = data.cardId;
                 note.noteConfig = {
                     'buttonName': 'Edit',
@@ -64,7 +61,7 @@
             .then(function(data) {
                 note.id = data.id;
                 note.lastEdited = data.update;
-                note.userLogin = data.userName;
+                note.userAlias = data.userAlias;
             });
         }
 
@@ -101,7 +98,7 @@
         }
 
         function getUserNote() {
-            specialNoteHttpService.getUserSpecialNote(vm.userName, $routeParams.vid, $routeParams.cid).then(function (result) {
+            specialNoteHttpService.getUserSpecialNote(vm.userAlias, $routeParams.vid, $routeParams.cid).then(function (result) {
                 console.log(result.data);
                 vm.specialNote = result.data;
             });
@@ -114,7 +111,7 @@
                 note.noteConfig.buttonName = 'Edit';
                 SaveOldSpecialNote({
                     'id': note.id,
-                    'userLogin': note.login,
+                    'userAlias': note.login,
                     'text': note.text,
                     'lastEdited': note.lastEdited,
                     'cardId': note.cardId

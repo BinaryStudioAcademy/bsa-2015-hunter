@@ -49,7 +49,7 @@ namespace Hunter.Services.Services
             return new SpecNoteResult
             {
                 Id = specnoteEntity.Id,
-                UserName = specnoteEntity.ToDto().UserLogin,
+                UserAlias = specnoteEntity.ToDto().UserAlias,
                 Update = specnoteEntity.ToDto().LastEdited,
                 CardId = specnoteEntity.CardId
             };
@@ -66,7 +66,7 @@ namespace Hunter.Services.Services
             return new SpecNoteResult
             {
                 Id = specnoteEntity.Id,
-                UserName = specnoteEntity.ToDto().UserLogin,
+                UserAlias = specnoteEntity.ToDto().UserAlias,
                 Update = specnoteEntity.ToDto().LastEdited,
                 CardId = specnoteEntity.CardId
             };

@@ -67,7 +67,7 @@
                 console.log(result);
                 feedback.id = result.id;
                 feedback.date = result.update;
-                feedback.userName = result.userName;
+                feedback.userAlias = result.userAlias;
             });
         }
 
@@ -78,8 +78,6 @@
             if (feedback.feedbackConfig.readOnly) {
                 feedback.feedbackConfig.buttonName = 'Edit';
                 vm.saveHrFeedback(feedback);
-                feedback.date = new Date();
-                feedback.userName = userName;
             } else {
                 feedback.feedbackConfig.buttonName = 'Save';
             }
