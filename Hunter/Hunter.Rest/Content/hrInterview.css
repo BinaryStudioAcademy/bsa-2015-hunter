@@ -23,7 +23,7 @@
 }
 .hrInterview_comments h3{
     font-size: 24px;
-    width: 50%;
+    /*width: 50%;*/
     margin: 0;
 }
 .hrInterview_comments span{
@@ -69,8 +69,5 @@
 }
 
 .hrInterview_form .vote-group {
-    position: absolute;
-    right: 0px;
-    left: 100px;
-    bottom: 2px;
+    width: auto;
 }
