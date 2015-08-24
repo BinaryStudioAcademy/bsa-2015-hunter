@@ -13,10 +13,10 @@
         'CandidateHttpService',
         'LonglistHttpService',
         'EnumConstants',
-        'LonglistService'
+        //'LonglistService'
     ];
 
-    function LongListPreviewController($scope, $location, $route, $rootScope, candidateHttpService, longlistHttpService, EnumConstants, longlistService) {
+    function LongListPreviewController($scope, $location, $route, $rootScope, candidateHttpService, longlistHttpService, EnumConstants) {
         var vm = this;
 
         vm.hideCandidatePreview = hideCandidatePreview;
