@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Entities.Enums;
 using Hunter.Services.Dto;
 
 namespace Hunter.Services.Interfaces
@@ -20,5 +21,6 @@ namespace Hunter.Services.Interfaces
         CandidateLongListDetailsDto GetLongListDetails(int id);
         IEnumerable<AddedByDto> GetCandidatesAddedBy();
         void UpdateShortFlag(int id, bool isShort);
+        void UpdateResolution(int id, Resolution resolution);
     }
 }

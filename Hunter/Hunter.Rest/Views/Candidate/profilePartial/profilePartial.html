@@ -35,14 +35,7 @@
                 <div class="form-inline col-md-7">
                     <div class="candidate-resolution form-group">
                         <label>Resolution</label>
-                        <select class="form-control" name="resolution">
-                            <option selected="selected">None</option>
-                            <option>Available</option>
-                            <option>NotInterested</option>
-                            <option>Hired</option>
-                            <option>Unfit</option>
-                            <option>NotNow</option>
-                        </select>
+                        <select class="form-control" name="resolution" ng-change="candidatePartCtrl.updateResolution()" ng-model="candidatePartCtrl.candidate.resolution" ng-options="resolution.id as resolution.name for resolution in candidatePartCtrl.resolutions"></select>
                     </div>
                 </div>
             </div>

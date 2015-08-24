@@ -155,7 +155,7 @@ namespace Hunter.Services
                 {
                     Id = feedback.Id,
                     Update = dto.Date,
-                    UserName = dto.UserName
+                    UserAlias = dto.UserAlias
                 };
             }
             catch (Exception ex)

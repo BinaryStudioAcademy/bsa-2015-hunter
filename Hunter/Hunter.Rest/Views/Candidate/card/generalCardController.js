@@ -40,6 +40,7 @@
         vm.currentStage;
         vm.currentSubstatus = enumConstants.substatuses[0];
         vm.removeCard = removeCard;
+        vm.updateResolution = updateResolution;
 
         console.log("rout", $routeParams);
         (function() {
@@ -84,5 +85,9 @@
             longlistHttpService.removeCard($routeParams["vid"], cid);
             $timeout($location.url('/vacancy/' + $routeParams["vid"] + '/longlist'), 1200);
         }
+
+        function updateResolution() {
+            candidateHttpService.updateCandidateResolution($routeParams.cid, vm.candidate.resolution);
+        };
     }
 })();

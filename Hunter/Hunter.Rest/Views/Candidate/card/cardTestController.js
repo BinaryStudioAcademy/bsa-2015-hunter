@@ -10,18 +10,17 @@
         '$routeParams',
         'FeedbackHttpService',
         'UploadTestService',
-        'localStorageService',
-        '$scope'
+        '$scope',
+        'EnumConstants'
     ];
 
     function CardTestController(CardTestHttpService, $routeParams,
-        FeedbackHttpService, UploadTestService, localStorageService, $scope) {
+        FeedbackHttpService, UploadTestService, $scope, EnumConstants) {
         var vm = this;
         vm.templateName = 'Test';
         vm.editingIndex = -1;
         var candidateId = $routeParams.cid;
         var vacancyId = $routeParams.vid;
-        var userName = localStorageService.get('authorizationData').userName;
 
         vm.testLink = '';
         vm.testFile = '';
@@ -47,15 +46,15 @@
                 testSend.feedback = {
                     'cardId': vm.test.cardId,
                     'text': '',
-                    'date': '',
+                    'date': new Date(),
                     'type': 4,
-                    "successStatus": 0
+                    "successStatus": 0,
+                    'feedbackConfig': {
+                        'buttonText': 'Save',
+                        'fieldReadonly': false,
+                        'style': { 'border-coor': EnumConstants.voteColors['None'] }
+                    }
                 };
-                testSend.feedbackConfig = {
-                    'buttonText': 'Save',
-                    'fieldReadonly': false,
-                    'style': {'border-coor': 'grey'}
-                }
 
                 vm.test.tests.push(testSend);
             });
@@ -73,27 +72,30 @@
                         'buttonText': 'Edit',
                         'fieldReadonly': true,
                         "style": {
-                            "border-color": test.feedback.successStatus == 0 ? 'grey'
-                                : test.feedback.successStatus == 1 ? 'green' : 'red'
+                            "border-color": test.feedback.successStatus == 0 ? EnumConstants.voteColors['None']
+                                : test.feedback.successStatus == 1 ? EnumConstants.voteColors['Like']
+                                : EnumConstants.voteColors['Dislike']
                         }
                     }
                 } else {
                     test.feedback = {
+                        'id': 0,
                         'cardId': vm.test.cardId,
                         'text': '',
-                        'date': '',
+                        'date': new Date(),
                         'type': 4,
+                        "userAlias": '',
                         "successStatus": 0
                     };
 
                     feedbackConfig = {
                         'buttonText': 'Save',
                         'fieldReadonly': false,
-                        'style': {"border-color": 'grey'}
+                        'style': {"border-color": EnumConstants.voteColors['None']}
                     }
                 }
 
-                test.feedbackConfig = feedbackConfig;
+                test.feedback.feedbackConfig = feedbackConfig;
             });
         });
 
@@ -102,20 +104,25 @@
                 return;
             }
 
-            toggleFeedbackConfig(test.feedbackConfig, test.feedback.text);
+            toggleFeedbackConfig(test.feedback.feedbackConfig, test.feedback.text);
 
-            if(test.feedbackConfig.fieldReadonly && test.feedback.text != ''){
+            if (test.feedback.feedbackConfig.fieldReadonly && test.feedback.text != '') {
                 FeedbackHttpService.saveTestFeedback({
-                    'feedback': test.feedback,
+                    'feedback': {
+                        'id': feedback.id,
+                        'cardId': feedback.cardId,
+                        'text': feedback.text,
+                        'date': feedback.date,
+                        'userAlias': feedback.userAlias,
+                        'type': feedback.type,
+                        'successStatus': feedback.successStatus
+                    },
                     'testId': test.id
                 }).then(function(result) {
                     test.feedback.id = result.id;
                     test.feedback.date = result.update;
-                    test.feedback.userName = result.userName;
+                    test.feedback.userAlias = result.userAlias;
                 });
-
-                test.feedback.userName = userName;
-                test.feedback.date = new Date();
             }
 
         }
@@ -157,16 +164,18 @@
 
                     test.id = testId;
                     test.feedback = {
+                        'id': 0,
                         'cardId': vm.test.cardId,
                         'text': '',
-                        'date': '',
+                        'date': new Date(),
                         'type': 4,
-                        "successStatus": 0
-                    };
-                    test.feedbackConfig = {
-                        'buttonText': 'Save',
-                        'fieldReadonly': false,
-                        "style": {"border-color": 'grey'}
+                        "successStatus": 0,
+                        "userAlias": '',
+                        "feedbackConfig": {
+                            'buttonText': 'Save',
+                            'fieldReadonly': false,
+                            "style": { "border-color": EnumConstants.voteColors['None'] }
+                        }
                     };
                     test.file = {
                         'id': fileId,
@@ -183,26 +192,39 @@
             });
         }
 
-        function changeCurrentTest(index) {
+        function changeCurrentTest(index, test) {
+
+            if (vm.editingIndex == index && test.feedback.text == '') {
+                return;
+            }
+
             if (vm.editingIndex == -1) {
                 vm.editingIndex = index;
             } else {
                 if (vm.editingIndex == index) {
-                    var test = vm.test.tests[vm.editingIndex];
+//                    var test = vm.test.tests[vm.editingIndex];
                     if (test.comment != null) {
                         CardTestHttpService.updateTestComment({
-                            id: test.id, 
+                            id: test.id,
                             comment: test.comment
                         });
                     }
-                    if (test.feedback.text != null) {
+                    if (test.feedback.text != null && test.feedback.text != '') {
                         FeedbackHttpService.saveTestFeedback({
-                            'feedback': test.feedback,
+                            'feedback': {
+                                'id': test.feedback.id,
+                                'cardId': test.feedback.cardId,
+                                'text': test.feedback.text,
+                                'date': test.feedback.date,
+                                'userAlias': test.feedback.userAlias,
+                                'type': test.feedback.type,
+                                'successStatus': test.feedback.successStatus
+                            },
                             'testId': test.id
-                        }).then(function (result) {
+                        }).then(function(result) {
                             test.feedback.id = result.id;
                             test.feedback.date = result.update;
-                            test.feedback.userName = result.userName;
+                            test.feedback.userAlias = result.userAlias;
                             test.feedbackId = result.id;
                         });
                     }

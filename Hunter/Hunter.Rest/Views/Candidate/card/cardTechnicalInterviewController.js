@@ -9,15 +9,15 @@
         'FeedbackHttpService',
         '$routeParams',
         'VacancyHttpService',
-        'localStorageService'
+        'EnumConstants'
     ];
 
-    function CardTechnicalInterviewController(FeedbackHttpService, $routeParams, VacancyHttpService, localStorageService) {
+    function CardTechnicalInterviewController(FeedbackHttpService, $routeParams, VacancyHttpService,
+        EnumConstants) {
         var vm = this;
         vm.templateName = 'Technical Interview';
         vm.techFeedback;
         vm.vacancy;
-        var userName = localStorageService.get('authorizationData').userName;
 
         // TODO: Initialization Should Be covered with self invoke function
         VacancyHttpService.getVacancy($routeParams.vid).then(function (result) {
@@ -29,27 +29,14 @@
                 id: feedback.id,
                 cardId: feedback.cardId,
                 text: feedback.text,
-                type: feedback.type
+                type: feedback.type,
+                successStatus: feedback.successStatus
             }
 
             FeedbackHttpService.saveFeedback(body, $routeParams.vid, $routeParams.cid).then(function (result) {
-                //                vm.techFeedback = result;
                 feedback.id = result.id;
                 feedback.date = result.update;
-                feedback.userName = result.userName;
-                //!!!!!!
-//                if (vm.techFeedback.text == '') {
-//                    vm.techFeedback.feedbackConfig = {
-//                        'buttonName': 'Save',
-//                        'readOnly': false
-//                    }
-//                } else {
-//                    vm.techFeedback.feedbackConfig = {
-//                        'buttonName': 'Edit',
-//                        'readOnly': true
-//                    }
-//                }
-                //!!!!!!!
+                feedback.userAlias = result.userAlias;
                 console.log("result after update");
                 console.log(feedback);
             });
@@ -71,6 +58,12 @@
                 }
             }
 
+            vm.techFeedback.feedbackConfig.style = {
+                "border-color": vm.techFeedback.successStatus == 0 ? EnumConstants.voteColors['None']
+                                : vm.techFeedback.successStatus == 1 ? EnumConstants.voteColors['Like']
+                                : EnumConstants.voteColors['Dislike']
+            }
+
             console.log(result);
         });
 
@@ -81,8 +74,6 @@
             if (vm.techFeedback.feedbackConfig.readOnly) {
                 vm.techFeedback.feedbackConfig.buttonName = 'Edit';
                 vm.saveFeedback(vm.techFeedback);
-//                feedback.userName = userName;
-//                feedback.date = new Date();
             } else {
                 vm.techFeedback.feedbackConfig.buttonName = 'Save';
             }

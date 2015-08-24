@@ -107,13 +107,17 @@ namespace Hunter.Services.Services
                         break;
                     case 2:
                         feedbackType = "Expertise";
-                        feedbackRoute = "technicalinterview";
+                        feedbackRoute = "hrinterview";
                         break;
                     case 3:
+                        feedbackType = "Tech";
+                        feedbackRoute = "technicalinterview";
+                        break;
+                    case 4:
                         feedbackType = "Test";
                         feedbackRoute = "test";
                         break;
-                    case 4:
+                    case 5:
                         feedbackType = "Summary";
                         feedbackRoute = "summary";
                         break;

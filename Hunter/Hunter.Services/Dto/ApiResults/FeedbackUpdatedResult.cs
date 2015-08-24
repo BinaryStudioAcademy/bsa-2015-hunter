@@ -10,6 +10,6 @@ namespace Hunter.Services.Dto.ApiResults
     {
         public int Id { get; set; }
         public DateTime Update { get; set; }
-        public string UserName { get; set; }
+        public string UserAlias { get; set; }
     }
 }
