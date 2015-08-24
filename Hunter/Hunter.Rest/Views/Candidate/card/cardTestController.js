@@ -200,7 +200,7 @@
                             comment: test.comment
                         });
                     }
-                    if (test.feedback.text != null) {
+                    if (test.feedback.text != null && test.feedback.text != '') {
                         FeedbackHttpService.saveTestFeedback({
                             'feedback': test.feedback,
                             'testId': test.id
