@@ -8,5 +8,7 @@ namespace Hunter.Services.Interfaces
         void AddCards(IEnumerable<CardDto> dto, string name);
         bool UpdateCardStage(int vid, int cid, int stage);
         int GetCardStage(int vid, int cid);
+        bool IsCardExist(int vid, int cid);
+        void DeleteCard(int vid, int cid);
     }
 }

@@ -1,0 +1,33 @@
+﻿<div class="container-partial" ng-controller='LongListPreviewController as llPreviewCtrl'>
+    <div ng-if="llPreviewCtrl.isPreviewShown" class="col-md-12 ll_preview" spinner="llPreviewCtrl.prevLoad">
+        <p class="ll_close_button" ng-click="llPreviewCtrl.hideCandidatePreview()"><span class=" glyphicon glyphicon-remove"></span></p>
+        <h2>Preview</h2>
+        <div class="ll_preview_info">
+            <div class="ll_preview_info_img">
+                <shor-list-star is-short="llPreviewCtrl.candidateDetails.shortlisted" candidate-id="llPreviewCtrl.candidateDetails.id" size="'30px'" ng-click="longListCtrl.starUpdate()"></shor-list-star>
+                <img src="{{llPreviewCtrl.candidateDetails.photoUrl}}" alt="{{llPreviewCtrl.candidateDetails.firstName}} {{llPreviewCtrl.candidateDetails.lastName}} foto" title="{{llPreviewCtrl.candidateDetails.firstName}} {{llPreviewCtrl.candidateDetails.lastName}} foto" />
+            </div>
+            <div class="ll_preview_info_all">
+                <p>
+                    <a href="#/vacancy/{{llPreviewCtrl.vacancyId}}/candidate/{{llPreviewCtrl.candidateDetails.id}}">{{llPreviewCtrl.candidateDetails.firstName + " " + llPreviewCtrl.candidateDetails.lastName}}</a>
+                </p>
+                <p>{{llPreviewCtrl.candidateDetails.salary}}</p>
+                <p>{{llPreviewCtrl.candidateDetails.resolution}} / {{llPreviewCtrl.stages[llPreviewCtrl.candidateDetails.stage].name}}</p>
+            </div>
+            <div class="ll_preview_info_control">
+                <a class="btn btn-default" href="#/vacancy/{{llPreviewCtrl.vacancyId}}/candidate/{{llPreviewCtrl.candidateDetails.id}}">Details</a>
+                <a class="btn btn-default" href="#/candidate/edit/{{llPreviewCtrl.candidateDetails.id}}">Edit Profile</a>
+                <button class="btn btn-default" type="button" ng-click="llPreviewCtrl.removeCard(llPreviewCtrl.candidateDetails.id)">Remove from List</button>
+            </div>
+            <div class="ll_preview_info_comments">
+                <h3>Comments and notes</h3>
+                <p>{{llPreviewCtrl.candidateDetails.testComment}}</p>
+                <p>{{llPreviewCtrl.candidateDetails.specialNotes}}</p>
+            </div>
+            <div class="ll_preview_info_control">
+                <a class="btn btn-default" href="../../#">View Resume</a>
+                <a class="btn btn-default" href="../../#">View Linkedin</a>
+            </div>
+        </div>
+    </div>
+</div>

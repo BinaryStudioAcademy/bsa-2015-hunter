@@ -53,6 +53,13 @@
     right: 15px;
 }
 
+.feedback-title {
+    display: inline-block; 
+    margin-bottom: 0; 
+    width: auto;
+    float: left;
+}
+
 textarea {
     resize: none;
 }

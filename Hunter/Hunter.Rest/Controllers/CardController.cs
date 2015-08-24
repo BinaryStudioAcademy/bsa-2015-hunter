@@ -90,9 +90,27 @@ namespace Hunter.Rest.Controllers
             }
         }
 
-        // DELETE: api/Card/5
-        public void Delete(int id)
+        // DELETE: api/Card/5/5
+        [HttpDelete]
+        [Route("{vid:int}/{cid:int}")]
+        public HttpResponseMessage Delete(int vid, int cid)
         {
+            try
+            {
+                if (!_cardService.IsCardExist(vid, cid))
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound,
+                        string.Format("No card for vacancy with id={0} and candidate with id={1}!", vid, cid));
+                }
+                _cardService.DeleteCard(vid, cid);
+
+                return Request.CreateResponse(HttpStatusCode.OK, string.Format("Card for vacancy with id={0} and candidate with id={1} was deleted!", vid, cid));
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
         }
+
     }
 }

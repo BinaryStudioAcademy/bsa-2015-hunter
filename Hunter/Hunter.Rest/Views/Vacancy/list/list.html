@@ -67,7 +67,7 @@
                         <tr dir-paginate="vacancy in vacancyListCtrl.vacancies | itemsPerPage: vacancyListCtrl.filterParams.pageSize"
                             total-items="vacancyListCtrl.totalCount" current-page="vacancyListCtrl.filterParams.page">
                             <td>
-                                {{vacancy.id}} - {{vacancy.endDate}} <input type="checkbox" />
+                                <input type="checkbox" />
                             </td>
                             <td>
                                 <a href="#/vacancy/{{vacancy.id}}/longlist">{{vacancy.name}}</a>

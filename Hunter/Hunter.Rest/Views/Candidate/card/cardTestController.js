@@ -46,7 +46,7 @@
                 testSend.feedback = {
                     'cardId': vm.test.cardId,
                     'text': '',
-                    'date': '',
+                    'date': new Date(),
                     'type': 4,
                     "successStatus": 0,
                     'feedbackConfig': {
@@ -79,10 +79,12 @@
                     }
                 } else {
                     test.feedback = {
+                        'id': 0,
                         'cardId': vm.test.cardId,
                         'text': '',
-                        'date': '',
+                        'date': new Date(),
                         'type': 4,
+                        "userAlias": '',
                         "successStatus": 0
                     };
 
@@ -111,7 +113,7 @@
                         'cardId': feedback.cardId,
                         'text': feedback.text,
                         'date': feedback.date,
-                        'userName': feedback.userName,
+                        'userAlias': feedback.userAlias,
                         'type': feedback.type,
                         'successStatus': feedback.successStatus
                     },
@@ -119,7 +121,7 @@
                 }).then(function(result) {
                     test.feedback.id = result.id;
                     test.feedback.date = result.update;
-                    test.feedback.userName = result.userName;
+                    test.feedback.userAlias = result.userAlias;
                 });
             }
 
@@ -162,11 +164,13 @@
 
                     test.id = testId;
                     test.feedback = {
+                        'id': 0,
                         'cardId': vm.test.cardId,
                         'text': '',
-                        'date': '',
+                        'date': new Date(),
                         'type': 4,
                         "successStatus": 0,
+                        "userAlias": '',
                         "feedbackConfig": {
                             'buttonText': 'Save',
                             'fieldReadonly': false,
@@ -188,26 +192,39 @@
             });
         }
 
-        function changeCurrentTest(index) {
+        function changeCurrentTest(index, test) {
+
+            if (vm.editingIndex == index && test.feedback.text == '') {
+                return;
+            }
+
             if (vm.editingIndex == -1) {
                 vm.editingIndex = index;
             } else {
                 if (vm.editingIndex == index) {
-                    var test = vm.test.tests[vm.editingIndex];
+//                    var test = vm.test.tests[vm.editingIndex];
                     if (test.comment != null) {
                         CardTestHttpService.updateTestComment({
-                            id: test.id, 
+                            id: test.id,
                             comment: test.comment
                         });
                     }
-                    if (test.feedback.text != null) {
+                    if (test.feedback.text != null && test.feedback.text != '') {
                         FeedbackHttpService.saveTestFeedback({
-                            'feedback': test.feedback,
+                            'feedback': {
+                                'id': test.feedback.id,
+                                'cardId': test.feedback.cardId,
+                                'text': test.feedback.text,
+                                'date': test.feedback.date,
+                                'userAlias': test.feedback.userAlias,
+                                'type': test.feedback.type,
+                                'successStatus': test.feedback.successStatus
+                            },
                             'testId': test.id
-                        }).then(function (result) {
+                        }).then(function(result) {
                             test.feedback.id = result.id;
                             test.feedback.date = result.update;
-                            test.feedback.userName = result.userName;
+                            test.feedback.userAlias = result.userAlias;
                             test.feedbackId = result.id;
                         });
                     }

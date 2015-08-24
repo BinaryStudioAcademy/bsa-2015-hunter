@@ -8,7 +8,9 @@
                 <form name="feedbackForm" ng-submit="hrInterviewCtrl.saveHrFeedback(feedback.id, feedback.cardId, feedback.type, feedback.text)">
                     <div>
                         <div>
-                            <h3>{{generalCardCtrl.feedbackTypes[feedback.type].name}}</h3>
+                            <div style="width: auto;">
+                                <h3>{{generalCardCtrl.feedbackTypes[feedback.type].name}}</h3>
+                            </div>
                             <div class="vote-group" ng-hide="feedback.id == 0">
                                 <thumb-button btn-type="btn-success" btn-icon="fa-thumbs-o-up"
                                               feedback="feedback"

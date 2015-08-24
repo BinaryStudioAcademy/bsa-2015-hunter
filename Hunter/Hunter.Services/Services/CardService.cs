@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Interface.Base;
-using Hunter.Services.Interfaces;
-using Hunter.Services.Dto;
 using Hunter.Services.Extensions;
-using Hunter.Services.Dto.ApiResults;
-using Hunter.DataAccess.Entities;
+using Hunter.Services.Interfaces;
 
 namespace Hunter.Services
 {
@@ -21,7 +16,7 @@ namespace Hunter.Services
         private readonly IUserProfileRepository _userProfileRepository;
         private readonly ILogger _logger;
 
-        public CardService (ICardRepository cardRepository, IUserProfileRepository userProfileRepository, IUnitOfWork unitOfWork, ILogger logger)
+        public CardService(ICardRepository cardRepository, IUserProfileRepository userProfileRepository, IUnitOfWork unitOfWork, ILogger logger)
         {
             _cardRepository = cardRepository;
             _userProfileRepository = userProfileRepository;
@@ -34,7 +29,7 @@ namespace Hunter.Services
             //if (dtoCards == null) return;
 
             //var newCard = new Card();
-            
+
             var userProfile = _userProfileRepository.Get(u => u.UserLogin.ToLower() == name.ToLower());
 
             var userProfileId = userProfile != null ? userProfile.Id : (int?)null;
@@ -43,9 +38,9 @@ namespace Hunter.Services
             {
                 if (_cardRepository.Query().Any(c => (c.CandidateId == dto.CandidateId && c.VacancyId == dto.VacancyId)))
                 {
-                    continue;    
+                    continue;
                 }
-                
+
                 _cardRepository.UpdateAndCommit(dto.ToCardModel(userProfileId));
             }
         }
@@ -64,6 +59,32 @@ namespace Hunter.Services
             var card = _cardRepository.Get(c => c.VacancyId == vid && c.CandidateId == cid);
             if (card == null) return 0;
             return card.Stage;
+        }
+
+        public bool IsCardExist(int vid, int cid)
+        {
+            try
+            {
+                return _cardRepository.Query().Any(c => c.VacancyId == vid && c.CandidateId == cid);
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return false;
+            }
+        }
+
+        public void DeleteCard(int vid, int cid)
+        {
+            try
+            {
+                _cardRepository.DeleteAndCommit(_cardRepository.Get(c => c.VacancyId == vid && c.CandidateId == cid));
+
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+            }
         }
     }
 }
