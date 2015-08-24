@@ -24,7 +24,7 @@
                         <a href="/api/file/download/{{test.file.id}}">{{test.file.fileName}}</a> Size: {{test.file.size}} Uploaded: {{test.file.added | date:'dd.MM.yyyy hh:mm:ss'}}
                     </div>
                     <div class="col-md-1">
-                        <i class="btn" ng-click="testCtrl.changeCurrentTest($index)">
+                        <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index)">
                             <span ng-show="testCtrl.editingIndex != $index" class="glyphicon glyphicon-pencil"></span>
                             <span ng-show="testCtrl.editingIndex == $index" class="glyphicon glyphicon-ok"></span>
                         </i>
@@ -36,7 +36,7 @@
                         <a href="{{test.url}}">{{test.url}}</a> Added {{test.added | date:'dd.MM.yyyy hh:mm:ss'}}
                     </div>
                     <div class="col-md-1">
-                        <i class="btn" ng-click="testCtrl.changeCurrentTest($index)">
+                        <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index)">
                             <span ng-show="testCtrl.editingIndex != $index" class="glyphicon glyphicon-pencil"></span>
                             <span ng-show="testCtrl.editingIndex == $index" class="glyphicon glyphicon-ok"></span>
                         </i>
@@ -73,6 +73,7 @@
                               ng-readonly="testCtrl.editingIndex != $index"
                               ng-model="test.feedback.text"
                               ng-style="test.feedback.feedbackConfig.style"></textarea>
+                    <span ng-show="testCtrl.editingIndex == $index && test.feedback.text == ''" class="help-block">Required</span>
                 </div>
             </div>
             <hr/>

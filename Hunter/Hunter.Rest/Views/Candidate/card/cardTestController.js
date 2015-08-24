@@ -46,7 +46,7 @@
                 testSend.feedback = {
                     'cardId': vm.test.cardId,
                     'text': '',
-                    'date': '',
+                    'date': new Date(),
                     'type': 4,
                     "successStatus": 0,
                     'feedbackConfig': {
@@ -79,10 +79,12 @@
                     }
                 } else {
                     test.feedback = {
+                        'id': 0,
                         'cardId': vm.test.cardId,
                         'text': '',
-                        'date': '',
+                        'date': new Date(),
                         'type': 4,
+                        "userAlias": '',
                         "successStatus": 0
                     };
 
@@ -162,11 +164,13 @@
 
                     test.id = testId;
                     test.feedback = {
+                        'id': 0,
                         'cardId': vm.test.cardId,
                         'text': '',
-                        'date': '',
+                        'date': new Date(),
                         'type': 4,
                         "successStatus": 0,
+                        "userAlias": '',
                         "feedbackConfig": {
                             'buttonText': 'Save',
                             'fieldReadonly': false,
@@ -189,6 +193,11 @@
         }
 
         function changeCurrentTest(index) {
+
+            if (vm.editingIndex == index && vm.test.tests[index].feedback.text == '') {
+                return;
+            }
+
             if (vm.editingIndex == -1) {
                 vm.editingIndex = index;
             } else {
@@ -196,15 +205,23 @@
                     var test = vm.test.tests[vm.editingIndex];
                     if (test.comment != null) {
                         CardTestHttpService.updateTestComment({
-                            id: test.id, 
+                            id: test.id,
                             comment: test.comment
                         });
                     }
                     if (test.feedback.text != null && test.feedback.text != '') {
                         FeedbackHttpService.saveTestFeedback({
-                            'feedback': test.feedback,
+                            'feedback': {
+                                'id': test.feedback.id,
+                                'cardId': test.feedback.cardId,
+                                'text': test.feedback.text,
+                                'date': test.feedback.date,
+                                'userAlias': test.feedback.userAlias,
+                                'type': test.feedback.type,
+                                'successStatus': test.feedback.successStatus
+                            },
                             'testId': test.id
-                        }).then(function (result) {
+                        }).then(function(result) {
                             test.feedback.id = result.id;
                             test.feedback.date = result.update;
                             test.feedback.userAlias = result.userAlias;
