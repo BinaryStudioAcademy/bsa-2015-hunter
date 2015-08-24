@@ -175,6 +175,10 @@
     <Compile Include="Migrations\201508220759380_AddSuccessStatusInFeedback.Designer.cs">
       <DependentUpon>201508220759380_AddSuccessStatusInFeedback.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508241018498_DeleteCardAndAddCandidateVacancyInSpecialNote.cs" />
+    <Compile Include="Migrations\201508241018498_DeleteCardAndAddCandidateVacancyInSpecialNote.Designer.cs">
+      <DependentUpon>201508241018498_DeleteCardAndAddCandidateVacancyInSpecialNote.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -250,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508220759380_AddSuccessStatusInFeedback.resx">
       <DependentUpon>201508220759380_AddSuccessStatusInFeedback.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508241018498_DeleteCardAndAddCandidateVacancyInSpecialNote.resx">
+      <DependentUpon>201508241018498_DeleteCardAndAddCandidateVacancyInSpecialNote.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

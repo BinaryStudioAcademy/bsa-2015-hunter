@@ -15,7 +15,7 @@ namespace Hunter.Services.Services.Interfaces
 
         SpecialNoteDto GetSpecialNoteById(int id);
 
-        SpecNoteResult AddSpecialNote(SpecialNoteDto entity, int vid, int cid);
+        SpecNoteResult AddSpecialNote(SpecialNoteDto entity);
 
         SpecNoteResult UpdateSpecialNote(SpecialNoteDto entity);
 
