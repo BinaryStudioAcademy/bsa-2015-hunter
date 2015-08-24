@@ -36,12 +36,13 @@
 
         function saveNewSpecialNote() {
             var note = {
-                text: vm.newNoteText
+                text: vm.newNoteText,
+                vacancyId: $routeParams.vid,
+                candidateId: $routeParams.cid
             };
-            specialNoteHttpService.addSpecialNote(note, $routeParams.vid, $routeParams.cid)
+            specialNoteHttpService.addSpecialNote(note)
             .then(function (data) {
                 note.id = data.id;
-                note.cardId = data.cardId;
                 note.lastEdited = data.update;
                 note.userLogin = data.userName;
                 vm.notes.unshift(note);
