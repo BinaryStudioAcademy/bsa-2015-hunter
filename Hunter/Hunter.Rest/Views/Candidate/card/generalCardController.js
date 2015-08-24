@@ -12,10 +12,12 @@
         'CardService',
         'EnumConstants',
         '$location',
-        '$filter'
+        '$filter',
+        'LonglistHttpService',
+        '$timeout'
     ];
 
-    function GeneralCardController($routeParams, $scope, candidateHttpService, cardService, enumConstants, $location, $filter) {
+    function GeneralCardController($routeParams, $scope, candidateHttpService, cardService, enumConstants, $location, $filter, longlistHttpService, $timeout) {
         var vm = this;
         vm.templateToShow = '';
         vm.isLoad = true;
@@ -37,6 +39,7 @@
         vm.stages = enumConstants.cardStages;
         vm.currentStage;
         vm.currentSubstatus = enumConstants.substatuses[0];
+        vm.removeCard = removeCard;
 
         console.log("rout", $routeParams);
         (function() {
@@ -75,6 +78,11 @@
             var vid = $routeParams["vid"];
             var cid = $routeParams["cid"];
             cardService.updateCardStage(vid, cid, vm.currentStage.id);
+        }
+
+        function removeCard(cid) {
+            longlistHttpService.removeCard($routeParams["vid"], cid);
+            $timeout($location.url('/vacancy/' + $routeParams["vid"] + '/longlist'), 1200);
         }
     }
 })();

@@ -9,17 +9,19 @@
         '$location',
         'VacancyHttpService',
         'CandidateHttpService',
+        'LonglistHttpService',
         '$routeParams',
         '$odataresource',
         '$odata',
         '$filter',
         '$scope',
-        'EnumConstants'
+        'EnumConstants',
+        '$timeout',
+        '$rootScope'
     ];
 
-    function LongListController($location, VacancyHttpService, CandidateHttpService, $routeParams, $odataresource, $odata, $filter, $scope, EnumConstants) {
+    function LongListController($location, vacancyHttpService, candidateHttpService, longlistHttpService, $routeParams, $odataresource, $odata, $filter, $scope, EnumConstants, $timeout, $rootScope) {
         var vm = this;
-        vm.tab = 0;
 
         vm.stages = EnumConstants.cardStages;
         vm.shortlisted = true;
@@ -28,47 +30,41 @@
         vm.candidateDetails;
         vm.starUpdate = starUpdate;
         vm.updatePrevStar = updatePrevStar;
-
+        vm.activateItem = activateItem;
+        vm.viewCandidateInfo = viewCandidateInfo;
+        vm.getCandidatesForLongList = getCandidatesForLongList;
+        
         // get vacancy info
-        VacancyHttpService.getLongList($routeParams.id).then(function (result) {
+        vacancyHttpService.getLongList($routeParams.id).then(function (result) {
             vm.vacancy = result;
         });
 
-        // get all vacancies candidates
-        //CandidateHttpService.getLongList($routeParams.id).then(function (result) {
-        //    console.log(result);
-        //    vm.candidates = result;
-        //});
-
         // get all Added by
-        vm.addedByList;
-        VacancyHttpService.getLongListAddedBy($routeParams.id).then(function (result) {
+        vacancyHttpService.getLongListAddedBy($routeParams.id).then(function (result) {
             vm.addedByList = result;
         });
 
         // click on candidate item shows candidates preview
-        vm.tabIsSet = function (checkTab) {
-            return vm.tab === checkTab;
+
+        $rootScope.candidatePreview = {
+            vid: $routeParams.id,
+            cid: 0
         };
 
-        vm.ActiveItem = function(id) {
-            if (vm.tabIsSet(id)) {
+        function viewCandidateInfo(id) {
+            if ($rootScope.candidatePreview.cid !== id) {
+                $rootScope.candidatePreview.cid = id;
+            }
+
+            vm.candidateIdChecked = id;
+        }
+
+        function activateItem(id) {
+            if (vm.candidateIdChecked === id) {
                 return 'll_candidate_item_active';
             } else {
                 return '';
             }
-        }
-
-        vm.previewTabSet = function (id) {
-            vm.tab = id;
-        }
-
-        vm.viewCandidateInfo = function (id) {
-            vm.previewTabSet(id);
-
-            CandidateHttpService.getLongListDetails(id).then(function (result) {
-                vm.candidateDetails = result;
-            });
         }
 
         // filtering/sorting candidates
@@ -96,11 +92,11 @@
         };
 
         vm.name = 'CandidatesForLongList';
-
-        // 
+ 
         var CandidatesForLongList = $odataresource('/api/candidates/longlist/' + $routeParams.id + '/odata');
-
-        vm.getCandidatesForLongList = function () {
+        vm.listSpinner = false;
+        function getCandidatesForLongList() {
+            vm.listSpinner = true;
             var cands = CandidatesForLongList.odata()
                                             .withInlineCount()
                                             .take(vm.pageSize)
@@ -109,13 +105,13 @@
                                             .orderBy(vm.order.field, vm.order.dir)
                                             .query(function () {
                                                 vm.candidatesList = cands.items;
-                    vm.viewCandidateInfo(vm.candidatesList[0].id);
+                                                vm.listSpinner = false;
+                                                //vm.viewCandidateInfo(vm.candidatesList[0].id);
                                                 vm.totalItems = cands.count;
                                             });
-            console.log('long list', vm.candidatesList);
         };
 
-        // seatch filter
+        // filters
         $scope.$watch('longListCtrl.filter', function () {
             var filt = [];
 
@@ -187,22 +183,5 @@
                 vm.candidateDetails.shortlisted = cand.shortlisted;
             }
         }
-
-        //function setTab(setTab) {
-        //    vm.tab = setTab;
-        //};
-        //Here we should write all vm variables default values. For Example:
-        //vm.someVariable = 'This is datailse vacancy page';
-
-        //(function() {
-        //    // This is function for initialization actions, for example checking auth
-        //    if (authService.isLoggedIn()) {
-        //    // Can Make Here Any Actions For Data Initialization, for example, http queries, etc.
-        //    } else {
-        //        $location.url('/login');
-        //    }
-        //})();
-        // Here we should write any functions we need, for example, body of user actions methods.
-
     }
 })();

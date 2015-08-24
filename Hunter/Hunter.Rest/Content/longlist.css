@@ -1,28 +1,4 @@
-﻿.ll_container * {
-    /*border: 1px solid green;*/
-}
-.ll_container {
-    width: 100%;
-    overflow: hidden;
-}
-
-.ll_main_wrap {
-    width: 65%;
-    height: 100%;
-    float: left;
-    padding-right: 10px;
-}
-.ll_container h2{
-    width: 100%;
-    float: left;
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
-}
-
-.ll_preview{
-    width: 35%;
-    float: right;
+﻿.ll_preview{
     border: 1px solid gray;
     border-radius: 3px;
     padding: 5px;
@@ -33,93 +9,9 @@
     font-weight: bold;
     font-size: 18px;
     border-bottom: 1px solid gray;
-    margin-bottom: 5px;
-}
-.ll_title {
-    float: left;
-    width: 100%;
-}
-.ll_title>* {
-    height: 100%;
-}
-.ll_title>h1 {
-    padding: 0;
-    margin: 0;
-    font-size: 25px;
-    width: 30%;
-    float: left;
-}
-.ll_control_buttons {
-    float: right;
-    width: 70%;
-}
-.ll_control_buttons .btn{
-    float: right;
-    background-color: rgb(221, 221, 221);
-    color: rgb(51, 51, 51);
-    width: auto;
-    margin-left: 5px;
-    font-size: 12px;
-    height: 28px;
+    margin: 0 0 5px 0;
 }
 
-.ll_main {
-    float: left;
-    width: 100%;
-    padding-top: 15px;
-}
-
-.ll_filter, .ll_list {
-    float: left;
-}
-.ll_filter {
-    width: 30%;
-}
-.ll_list {
-    width: 70%;
-    padding-left: 10px;
-}
-.ll_list select{
-    float: left;
-    margin: 20px 0;
-    width: 40%;
-    height: 30px;
-}
-.ll_filter_input {
-    width: 100%;
-    float: left;
-          
-}
-.ll_filter_items {
-    width: 100%;
-    float: left;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    padding: 5px;
-}
-.ll_filter_input>input {
-    height: 25px;
-    margin: 5px 0;
-}
-.ll_filter_items>*{
-    width: 100%;
-    float: left;
-}
-.ll_filter_items>ul>li {
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 5px;
-}
-.ll_filter_items>ul>li:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-}
-.ll_filter_items li li{
-    padding-left: 10px;
-}
-.ll_filter_items input[type='search'] {
-    height: 25px;
-    margin: 5px 0;
-}
 .ll_candidate_item {
     padding: 5px;
     float: left;
@@ -134,7 +26,7 @@
 .ll_candidate_item p:first-child {
     margin: 9px 0;
 }
-.ll_candidate_item:hover, .ll_candidate_item_active {
+.ll_candidate_item:hover{
     border: 4px solid grey;
     padding: 2px;
 }
@@ -142,7 +34,7 @@
     cursor: pointer;
 }
 .ll_candidate_item_active{
-    background-color: rgb(248, 248, 248);
+    background-color: rgb(217, 237, 247);
 }
 .ll_candidate_item .ll_candidate_item_img {
     position: relative;
@@ -264,6 +156,3 @@
     margin: 0;
 }
 
-.temppp {
-    background-color: red;
-}

@@ -851,6 +851,9 @@
     <Content Include="Views\Vacancy\list\vacancyListController.js" />
     <Content Include="Views\Vacancy\list\list.html" />
     <Content Include="Views\services\pool\poolsHttpService.js" />
+    <Content Include="Views\vacancy\longlist\longListPreview.html" />
+    <Content Include="Views\vacancy\longlist\longListPreviewController.js" />
+    <Content Include="Views\vacancy\longlist\longListService.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

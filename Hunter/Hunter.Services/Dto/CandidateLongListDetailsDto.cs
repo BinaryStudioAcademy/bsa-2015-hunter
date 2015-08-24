@@ -13,7 +13,7 @@ namespace Hunter.Services.Dto
         public string LastName { get; set; }
         public double? Salary { get; set; }
         public string Resolution { get; set; }
-        public string Stage { get; set; }
+        public int Stage { get; set; }
         public string TestComment { get; set; }
         public string SpecialNotes { get; set; }
         public string PhotoUrl { get; set; }
