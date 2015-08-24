@@ -111,7 +111,7 @@
                         'cardId': feedback.cardId,
                         'text': feedback.text,
                         'date': feedback.date,
-                        'userName': feedback.userName,
+                        'userAlias': feedback.userAlias,
                         'type': feedback.type,
                         'successStatus': feedback.successStatus
                     },
@@ -119,7 +119,7 @@
                 }).then(function(result) {
                     test.feedback.id = result.id;
                     test.feedback.date = result.update;
-                    test.feedback.userName = result.userName;
+                    test.feedback.userAlias = result.userAlias;
                 });
             }
 
@@ -207,7 +207,7 @@
                         }).then(function (result) {
                             test.feedback.id = result.id;
                             test.feedback.date = result.update;
-                            test.feedback.userName = result.userName;
+                            test.feedback.userAlias = result.userAlias;
                             test.feedbackId = result.id;
                         });
                     }
