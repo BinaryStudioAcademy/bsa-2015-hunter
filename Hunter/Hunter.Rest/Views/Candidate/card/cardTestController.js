@@ -192,9 +192,9 @@
             });
         }
 
-        function changeCurrentTest(index) {
+        function changeCurrentTest(index, test) {
 
-            if (vm.editingIndex == index && vm.test.tests[index].feedback.text == '') {
+            if (vm.editingIndex == index && test.feedback.text == '') {
                 return;
             }
 
@@ -202,7 +202,7 @@
                 vm.editingIndex = index;
             } else {
                 if (vm.editingIndex == index) {
-                    var test = vm.test.tests[vm.editingIndex];
+//                    var test = vm.test.tests[vm.editingIndex];
                     if (test.comment != null) {
                         CardTestHttpService.updateTestComment({
                             id: test.id,

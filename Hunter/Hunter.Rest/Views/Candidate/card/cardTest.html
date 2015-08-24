@@ -16,7 +16,7 @@
     </div>
     <br/>
     <div class="wrapper" style="border: solid"><br/>
-        <div class="row workArea-row" ng-repeat="test in testCtrl.test.tests">
+        <div class="row workArea-row" ng-repeat="test in testCtrl.test.tests | orderBy:'id':true">
             <div class="row">
                 <div ng-show="test.file != null">
                     <div class="col-md-1"><label>Task</label></div>
@@ -24,7 +24,7 @@
                         <a href="/api/file/download/{{test.file.id}}">{{test.file.fileName}}</a> Size: {{test.file.size}} Uploaded: {{test.file.added | date:'dd.MM.yyyy hh:mm:ss'}}
                     </div>
                     <div class="col-md-1">
-                        <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index)">
+                        <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index, test)">
                             <span ng-show="testCtrl.editingIndex != $index" class="glyphicon glyphicon-pencil"></span>
                             <span ng-show="testCtrl.editingIndex == $index" class="glyphicon glyphicon-ok"></span>
                         </i>
@@ -36,7 +36,7 @@
                         <a href="{{test.url}}">{{test.url}}</a> Added {{test.added | date:'dd.MM.yyyy hh:mm:ss'}}
                     </div>
                     <div class="col-md-1">
-                        <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index)">
+                        <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index, test)">
                             <span ng-show="testCtrl.editingIndex != $index" class="glyphicon glyphicon-pencil"></span>
                             <span ng-show="testCtrl.editingIndex == $index" class="glyphicon glyphicon-ok"></span>
                         </i>
