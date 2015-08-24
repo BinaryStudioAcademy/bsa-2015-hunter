@@ -9,17 +9,15 @@
         'FeedbackHttpService',
         '$routeParams',
         'VacancyHttpService',
-        'localStorageService',
         'EnumConstants'
     ];
 
     function CardTechnicalInterviewController(FeedbackHttpService, $routeParams, VacancyHttpService,
-        localStorageService, EnumConstants) {
+        EnumConstants) {
         var vm = this;
         vm.templateName = 'Technical Interview';
         vm.techFeedback;
         vm.vacancy;
-        var userName = localStorageService.get('authorizationData').userName;
 
         // TODO: Initialization Should Be covered with self invoke function
         VacancyHttpService.getVacancy($routeParams.vid).then(function (result) {
@@ -38,7 +36,7 @@
             FeedbackHttpService.saveFeedback(body, $routeParams.vid, $routeParams.cid).then(function (result) {
                 feedback.id = result.id;
                 feedback.date = result.update;
-                feedback.userName = result.userName;
+                feedback.userAlias = result.userAlias;
                 console.log("result after update");
                 console.log(feedback);
             });
