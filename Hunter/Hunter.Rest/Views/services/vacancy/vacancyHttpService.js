@@ -81,6 +81,7 @@
         }
 
         function updateVacancy(data, id) {
+            console.log(data);
             httpHandler.sendRequest({
                 verb: 'PUT',
                 url: '/api/vacancy/' + id,

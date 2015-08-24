@@ -25,13 +25,13 @@
         vm.isNewVacancy = true;
         vm.currentVacancy = {
             id: 0,
-            Name: '',
-            StartDate: new Date(),
-            EndDate: null,
-            Location: '',
-            Status: 0,
-            Description: '',
-            PoolId: 1
+            name: '',
+            startDate: new Date(),
+            endDate: null,
+            location: '',
+            status: 0,
+            description: '',
+            poolId: 1
         };
         vm.pools = [];
         poolsHttpService.getAllPools().then(function (data) {
@@ -62,14 +62,16 @@
                 vm.isNewVacancy = false;
                 vm.currentVacancy = {
                     id: id,
-                    Name: data.name,
-                    StartDate: new Date(data.startDate),
-                    EndDate: data.endDate != null ? new Date(data.endDate) : null,
-                    Location: data.location,
-                    Status: data.status,
-                    Description: data.description,
-                    PoolId: data.poolId
+                    name: data.name,
+                    startDate: new Date(data.startDate),
+                    endDate: data.endDate != null ? new Date(data.endDate) : null,
+                    location: data.location,
+                    status: data.status,
+                    description: data.description,
+                    poolId: data.poolId
                 };
+                console.log('Original date - ' + data.endDate);
+                console.log('Converted data', new Date(data.endDate));
             });
             //if (vacancy != null) {
             //    console.log(vacancy.data);

@@ -67,7 +67,7 @@
                         <tr dir-paginate="vacancy in vacancyListCtrl.vacancies | itemsPerPage: vacancyListCtrl.filterParams.pageSize"
                             total-items="vacancyListCtrl.totalCount" current-page="vacancyListCtrl.filterParams.page">
                             <td>
-                                <input type="checkbox" />
+                                {{vacancy.id}} - {{vacancy.endDate}} <input type="checkbox" />
                             </td>
                             <td>
                                 <a href="#/vacancy/{{vacancy.id}}/longlist">{{vacancy.name}}</a>
@@ -76,8 +76,8 @@
                                 <a href="#/vacancy/edit/{{vacancy.id}}" title="Edit Vacancy"><i class="fa fa-pencil"></i></a>
                             </td>
                             <td>{{vacancy.poolName}}</td>
-                            <td>{{vacancy.startDate == null ? 'no date' : vacancy.startDate | date:'dd-MM-yyyy'}}</td>
-                            <td>{{vacancy.endDate == null ? 'no date' : vacancy.endDate | date:'dd-MM-yyyy'}}</td>
+                            <td>{{vacancy.startDate == null ? 'no date' : vacancy.startDate | date:'dd.MM.yyyy'}}</td>
+                            <td>{{vacancy.endDate == null ? 'no date' : vacancy.endDate | date:'dd.MM.yyyy'}}</td>
                             <td><a href="#/user/edit/{{vacancy.addedById}}">{{vacancy.addedByName}}</a></td>                            
                         </tr>
                     </tbody>
