@@ -48,7 +48,7 @@
                 <div class="col-md-11">
                     <h4 style="margin-bottom: 0;">Comment</h4>
                     <textarea class="form-control feedbackField"
-                              ng-auto-expand
+                              msd-elastic
                               ng-readonly="testCtrl.editingIndex != $index"
                               ng-model="test.comment"></textarea>
                 </div>
@@ -69,7 +69,7 @@
                         <span>updated by {{test.feedback.userAlias}} {{test.feedback.date | date:'dd.MM.yyyy HH:mm'}}</span>
                     </div>
                     <textarea class="form-control feedbackField"
-                              ng-auto-expand
+                              msd-elastic
                               ng-readonly="testCtrl.editingIndex != $index"
                               ng-model="test.feedback.text"
                               ng-style="test.feedback.feedbackConfig.style"></textarea>

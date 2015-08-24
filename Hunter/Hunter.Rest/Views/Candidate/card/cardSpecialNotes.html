@@ -16,7 +16,7 @@
             <br/>
             <div ng-form="form">
                 <div class="form-group" ng-class="{'has-warning': !form.NoteText.$valid}">
-                    <textarea name="NoteText" class="form-control" ng-model="specialNotesCtrl.newNoteText" ng-auto-expand required placeholder="Enter new note"></textarea>
+                    <textarea name="NoteText" class="form-control" ng-model="specialNotesCtrl.newNoteText" msd-elastic required placeholder="Enter new note"></textarea>
                     <span ng-show="form.NoteText.$error.required" class="help-block">Required</span>
                 </div>
                 <button class="btn btn-success col-sm-4" type="submit"
@@ -36,7 +36,7 @@
                     </div>
                     <textarea class="form-control" name="text" 
                               ng-readonly="!editMode"
-                              ng-model="item.text" ng-auto-expand></textarea>
+                              ng-model="item.text" msd-elastic></textarea>
                 </form>
             </div>
         </div>

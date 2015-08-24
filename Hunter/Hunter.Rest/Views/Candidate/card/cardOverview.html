@@ -10,7 +10,7 @@
             <div ng-show="overviewCtrl.summary.text == ''" class="col-md-3" style="margin-top:25px">There is no summary yet</div>
         </div>
         <div ng-hide="overviewCtrl.summary.text==''">
-            <textarea class="form-control" ng-style="overviewCtrl.summary.style" disabled name="text" ng-model="overviewCtrl.summary.text" ng-auto-expand></textarea>
+            <textarea class="form-control" ng-style="overviewCtrl.summary.style" disabled name="text" ng-model="overviewCtrl.summary.text" msd-elastic></textarea>
         </div>
         
     </div>
@@ -25,7 +25,7 @@
             <div ng-show="feedback.text == ''" class="col-md-3" style="margin-top:25px">There is no feedback yet</div>
         </div>
         <div ng-hide="feedback.text == ''">
-            <textarea class="form-control" ng-style="feedback.style" disabled name="text" ng-model="feedback.text" ng-auto-expand></textarea>
+            <textarea class="form-control" ng-style="feedback.style" disabled name="text" ng-model="feedback.text" msd-elastic></textarea>
         </div>
     </div>
     <div class="row">
@@ -36,7 +36,7 @@
         <div ng-show="overviewCtrl.techFeedback.text == ''" class="col-md-3" style="margin-top:25px">There is no feedback yet</div>
     </div>
     <div ng-hide="overviewCtrl.techFeedback.text == ''">
-        <textarea class="form-control" ng-style="overviewCtrl.techFeedback.style" disabled name="text" ng-model="overviewCtrl.techFeedback.text" ng-auto-expand></textarea>
+        <textarea class="form-control" ng-style="overviewCtrl.techFeedback.style" disabled name="text" ng-model="overviewCtrl.techFeedback.text" msd-elastic></textarea>
     </div>
     <div class="row">
         <div class="col-md-3">
@@ -51,7 +51,7 @@
             </div>
         </div>
         <div ng-hide="test.feedback.text == ''">
-            <textarea class="form-control" ng-style="test.feedback.style" disabled name="text" ng-model="test.feedback.text" ng-auto-expand></textarea>
+            <textarea class="form-control" ng-style="test.feedback.style" disabled name="text" ng-model="test.feedback.text" msd-elastic></textarea>
         </div>
     </div>
     <!--<div ng-hide="overviewCtrl.testFeedbacksPresent">
