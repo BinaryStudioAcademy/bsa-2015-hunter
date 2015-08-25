@@ -49,21 +49,11 @@
         if (!isObjectEmpty($routeParams)) {
             vm.vacancyId = $routeParams.addToVacancy;
 
-            // get vacancy info
-            vacancyHttpService.getLongList(vm.vacancyId).then(function (result) {
-                console.log(result);
-                vm.vacancy = result;
-                vm.pageConfig.pageTitle = "Add Candidates to '" + vm.vacancy.name + "'";
-            });
-
             vm.pageConfig.isAddToVacancyButton = false;
             vm.pageConfig.locationAfterAdding = '/vacancy/' + vm.vacancyId + '/longlist';
         }
 
         vm.pools = [];
-        PoolsHttpService.getAllPools().then(function (result) {
-            vm.pools = result;
-        });
 
         vm.filter = {
             pools: [],
@@ -97,10 +87,6 @@
         ];
 
         vm.order = vm.sortOptions[0].options;
-
-        CandidateHttpService.getAddedByList().then(function (result) {
-            vm.inviters = result;
-        });
 
         var predicate;
 
@@ -208,13 +194,8 @@
         // not user-event functions 
         vm.selectedCandidates = [];
 
-        vm.vacancyByState;
-        vm.vacancyStateId = EnumConstants.vacancyStates[1].id;
-
-        vacancyHttpService.getVacancyByState(vm.vacancyStateId).then(function (result) {
-            console.log(result);
-            vm.vacancyByState = result;
-        });
+        vm.vacancyByState=[];
+        vm.vacancyStateIds = [EnumConstants.vacancyStates[1].id, EnumConstants.vacancyStates[2].id];
 
         function createCardRequestBody() {
             var cards = [];
@@ -233,7 +214,34 @@
             return (Object.getOwnPropertyNames(obj).length === 0);
         }
 
-        
+        // initializating function
+        (function () {
+
+            // get vacancy info
+            vacancyHttpService.getLongList(vm.vacancyId).then(function (result) {
+                console.log(result);
+                vm.vacancy = result;
+                vm.pageConfig.pageTitle = "Add Candidates to '" + vm.vacancy.name + "'";
+            });
+
+            PoolsHttpService.getAllPools().then(function (result) {
+                vm.pools = result;
+            });
+
+            CandidateHttpService.getAddedByList().then(function (result) {
+                vm.inviters = result;
+            });
+
+            //getting vacancies with "open" and "on hold" states
+            for (var i = 0; i < vm.vacancyStateIds.length; i++) {
+                vacancyHttpService.getVacancyByState(vm.vacancyStateIds[i]).then(function (result) {
+                    console.log(result);
+                    for (var j = 0; j < result.length; j++) {
+                        vm.vacancyByState.push(result[j]);
+                    }
+                });
+            }
+        })();
     }
 
 })();

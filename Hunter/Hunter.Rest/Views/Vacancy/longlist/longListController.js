@@ -106,7 +106,9 @@
                                             .query(function () {
                                                 vm.candidatesList = cands.items;
                                                 vm.listSpinner = false;
-                                                //vm.viewCandidateInfo(vm.candidatesList[0].id);
+                                                if (vm.candidatesList.length > 0) {
+                                                    vm.viewCandidateInfo(vm.candidatesList[0].id);
+                                                }
                                                 vm.totalItems = cands.count;
                                             });
         };
