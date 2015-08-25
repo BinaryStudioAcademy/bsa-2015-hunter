@@ -26,6 +26,9 @@ namespace Hunter.DataAccess.Entities
 
         public DateTime? EndDate { get; set; }
 
+        [StringLength(300)]
+        public string Location { get; set; }
+
         [StringLength(4000)]
         public string Description { get; set; }
 
