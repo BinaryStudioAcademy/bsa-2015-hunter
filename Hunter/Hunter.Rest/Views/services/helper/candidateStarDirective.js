@@ -4,9 +4,9 @@
         .module('hunter-app')
         .directive('shorListStar', shorListStar);
 
-    shorListStar.$inject = ['CandidateHttpService'];
+    shorListStar.$inject = ['CandidateHttpService', '$rootScope'];
 
-    function shorListStar(CandidateHttpService) {
+    function shorListStar(CandidateHttpService, $rootScope) {
         return {
             template: '<i class="fa " ' +
                 'ng-class="isShort ? \'fa-star\' : \'fa-star-o\' "' +
@@ -27,7 +27,14 @@
                         scope.isShort = result;
                     });
                     scope.isShort = !scope.isShort;
+                    $rootScope.$broadcast('starChangeEvent', { id: scope.candidateId, isShort: scope.isShort });
                 }
+
+                $rootScope.$on('starChangeEvent', function(event, e) {
+                    if (e.id == scope.candidateId) {
+                        scope.isShort = e.isShort;
+                    }
+                });
 
             }
         }

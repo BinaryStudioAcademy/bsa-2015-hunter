@@ -8,7 +8,7 @@
         <div class="candidate-info">
             <div class="candidate-personal-info row">
                 <div class="image col-md-5">
-                    <shor-list-star is-short="candidatePartCtrl.candidate.shortListed" candidate-id="candidatePartCtrl.candidate.id" size="'30px'" ng-click="candidatePartCtrl.starUpdate()"></shor-list-star>
+                    <shor-list-star is-short="candidatePartCtrl.candidate.shortListed" candidate-id="candidatePartCtrl.candidate.id" size="'30px'" ng-click="$event.stopPropagation();"></shor-list-star>
                     <img class="preview-profile-photo img-circle" ng-src="{{candidatePartCtrl.candidate.photoUrl}}" />
                 </div>
                 <div class="col-md-7">
