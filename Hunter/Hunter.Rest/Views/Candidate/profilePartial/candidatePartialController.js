@@ -21,7 +21,6 @@
 
         vm.candidate;
         vm.resolutions = EnumConstants.resolutions;
-        vm.starUpdate = starUpdate;
         vm.updateResolution = updateResolution;
 
         $rootScope.$watch(
@@ -42,17 +41,6 @@
                     vm.candidate.shortListed = $rootScope.candidateDetails.shortListed;
                 }
             });
-
-
-        function starUpdate() {
-            if (vm.candidate) {
-                angular.forEach($scope.$parent.candidateListCtrl.candidateList, function (item) {
-                    if (item.id == vm.candidate.id) {
-                        item.shortListed = vm.candidate.shortListed;
-                    }
-                });
-            }
-        };
 
 
         function getCandidateDetails(id) {

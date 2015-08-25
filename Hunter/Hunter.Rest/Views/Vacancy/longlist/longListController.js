@@ -30,7 +30,6 @@
         vm.vacancy;
         vm.candidateDetails;
         vm.starUpdate = starUpdate;
-        vm.updatePrevStar = updatePrevStar;
         vm.activateItem = activateItem;
         vm.viewCandidateInfo = viewCandidateInfo;
         vm.getCandidatesForLongList = getCandidatesForLongList;
@@ -178,11 +177,6 @@
             });
         };
 
-        function updatePrevStar($event,cand) {
-            $event.stopImmediatePropagation();
-            if (cand.id == vm.candidateDetails.id) {
-                vm.candidateDetails.shortlisted = cand.shortlisted;
-            }
-        }
+       
     }
 })();

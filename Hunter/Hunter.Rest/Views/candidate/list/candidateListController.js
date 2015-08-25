@@ -39,7 +39,6 @@
         vm.vacancy;
         vm.vacancyId;
         vm.tableSpinner = false;
-        vm.updatePrevStar = updatePrevStar;
 
         vm.pageConfig = {
             pageTitle: 'Candidates (general pool)',
@@ -234,13 +233,7 @@
             return (Object.getOwnPropertyNames(obj).length === 0);
         }
 
-        function updatePrevStar($event, cand) {
-            $event.stopImmediatePropagation();
-            if ($rootScope.candidateDetails.id == cand.id) {
-                $rootScope.candidateDetails.id = cand.id;
-                $rootScope.candidateDetails.shortListed = cand.shortListed;
-            }
-        }
+        
     }
 
 })();
