@@ -5,30 +5,30 @@
         <div class="col-md-4">
             <h3>General</h3><hr />
             <label>Name</label>
-            <input ng-model="vacancyAddEditCtrl.currentVacancy.Name" type="text" name="Name" class="form-control" size="50" maxlength="300" ng-required />
+            <input type="text" ng-model="vacancyAddEditCtrl.currentVacancy.name" class="form-control" size="50" maxlength="300" ng-required />
             <label>Start Date</label>
-            <input type="date" ng-model="vacancyAddEditCtrl.currentVacancy.StartDate" name="StartDate" class="form-control" />
+            <input type="date" ng-model="vacancyAddEditCtrl.currentVacancy.startDate" class="form-control" />
             <label>End Date</label>
-            <input type="date" ng-model="vacancyAddEditCtrl.currentVacancy.EndDate" name="EndDate" class="form-control" />
+            <input type="date" ng-model="vacancyAddEditCtrl.currentVacancy.endDate" class="form-control" />
             <label>Location</label>
-            <input type="text" ng-model="vacancyAddEditCtrl.currentVacancy.Location" name="Location" class="form-control" />
+            <input type="text" ng-model="vacancyAddEditCtrl.currentVacancy.location" class="form-control" />
         </div>
         <div class="col-md-4">
             <h3>Description</h3><hr />
-            <textarea ng-model="vacancyAddEditCtrl.currentVacancy.Description" name="Description" class="form-control" maxlength="4000" cols="50" rows="11"></textarea>
+            <textarea ng-model="vacancyAddEditCtrl.currentVacancy.description" class="form-control" maxlength="4000" cols="50" rows="11"></textarea>
         </div>
     </div>
     <div class="row">
         <div class="col-md-4">
             <h3>Status</h3><hr />
             <label>State</label>
-            <select class="form-control" ng-model="vacancyAddEditCtrl.currentVacancy.Status" ng-options="state.id as state.name for state in vacancyAddEditCtrl.statuses" name="Status"></select>
+            <select class="form-control" ng-model="vacancyAddEditCtrl.currentVacancy.status" ng-options="state.id as state.name for state in vacancyAddEditCtrl.statuses"></select>
 </div>
     </div>
     <div class="row">
         <div class="col-md-4">
             <h3>Pool</h3><hr />
-            <select class="form-control" ng-model="vacancyAddEditCtrl.currentVacancy.PoolId" name="PoolId" ng-options="pool.id as pool.name for pool in vacancyAddEditCtrl.pools"></select>
+            <select class="form-control" ng-model="vacancyAddEditCtrl.currentVacancy.poolId" ng-options="pool.id as pool.name for pool in vacancyAddEditCtrl.pools"></select>
         </div>
         <div class="col-md-4">
             <input class="btn btn-primary pull-right" type="submit" value="Done" ng-click="vacancyAddEditCtrl.submitVacancy()" />

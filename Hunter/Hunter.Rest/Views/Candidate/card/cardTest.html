@@ -21,7 +21,7 @@
                 <div ng-show="test.file != null">
                     <div class="col-md-1"><label>Task</label></div>
                     <div class="col-md-10">
-                        <a href="/api/file/download/{{test.file.id}}">{{test.file.fileName}}</a> Size: {{test.file.size}} Uploaded: {{test.file.added | date:'dd.MM.yyyy hh:mm:ss'}}
+                        <a href="/api/file/download/{{test.file.id}}">{{test.file.fileName}}</a> Size: {{test.file.size}} Uploaded: {{test.file.added | date:'dd.MM.yyyy HH:mm:ss'}}
                     </div>
                     <div class="col-md-1">
                         <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index, test)">
@@ -33,7 +33,7 @@
                 <div ng-show="test.url != null && test.file == null">
                     <div class="col-md-1"><label>Task</label></div>
                     <div class="col-md-10">
-                        <a href="{{test.url}}">{{test.url}}</a> Added {{test.added | date:'dd.MM.yyyy hh:mm:ss'}}
+                        <a href="{{test.url}}">{{test.url}}</a> Added {{test.added | date:'dd.MM.yyyy HH:mm:ss'}}
                     </div>
                     <div class="col-md-1">
                         <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index, test)">
@@ -48,7 +48,7 @@
                 <div class="col-md-11">
                     <h4 style="margin-bottom: 0;">Comment</h4>
                     <textarea class="form-control feedbackField"
-                              ng-auto-expand
+                              msd-elastic
                               ng-readonly="testCtrl.editingIndex != $index"
                               ng-model="test.comment"></textarea>
                 </div>
@@ -66,10 +66,10 @@
                                       key="Dislike"></thumb-button>
                     </div>
                     <div style="display: inline; float: right; margin-top: 10px;" ng-show="test.feedback.userName != undefined">
-                        <span>updated by {{test.feedback.userAlias}} {{test.feedback.date | date:'dd.MM.yyyy hh:mm:ss'}}</span>
+                        <span>updated by {{test.feedback.userAlias}} {{test.feedback.date | date:'dd.MM.yyyy HH:mm'}}</span>
                     </div>
                     <textarea class="form-control feedbackField"
-                              ng-auto-expand
+                              msd-elastic
                               ng-readonly="testCtrl.editingIndex != $index"
                               ng-model="test.feedback.text"
                               ng-style="test.feedback.feedbackConfig.style"></textarea>
