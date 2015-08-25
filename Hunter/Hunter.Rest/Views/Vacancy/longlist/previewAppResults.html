@@ -1,0 +1,7 @@
+﻿<div class="container-partial ll_preview_overview_wrap">
+    <div class="row col-md-13" ng-repeat="result in llPreviewCtrl.appResults">
+        <a class="col-md-3" href="#/vacancy/{{result.vacancyId}}/longlist">{{result.pool}}</a>
+        <div class="col-md-4">{{result.date | date:'dd.MM.yyyy'}}</div>
+        <div class="col-md-5">{{longListCtrl.stages[result.stage].name}}</div>
+    </div>
+</div>

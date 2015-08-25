@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Hunter.Services.Interfaces;
+using System.Web.Http.Description;
 
 namespace Hunter.Rest.Controllers
 {
@@ -37,6 +38,46 @@ namespace Hunter.Rest.Controllers
             return "value";
         }
 
+        // GET: api/Card/5
+        [HttpGet]
+        [Route("appResults/{vid:int}/{cid:int}")]
+        [ResponseType(typeof(AppResultCardDto))]
+        public HttpResponseMessage ApplicationResults(int vid, int cid)
+        {
+            try
+            {
+                var results = _cardService.GetApplicationResults(vid, cid);
+                if (results == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Candidate has no other vacancy!");
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, results);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        /*
+         
+        public HttpResponseMessage GetCandidateLongList(int id)
+        {
+            try
+            {
+                var candidates = _candidateService.GetLongList(id);
+                if (candidates == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Vacancy has no candidates!");
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, candidates);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+         */
 
         // POST: api/Card
         [HttpPost]

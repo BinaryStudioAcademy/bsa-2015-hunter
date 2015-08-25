@@ -852,6 +852,9 @@
     <Content Include="Views\vacancy\longlist\longListPreview.html" />
     <Content Include="Views\vacancy\longlist\longListPreviewController.js" />
     <Content Include="Views\vacancy\longlist\longListService.js" />
+    <Content Include="Views\vacancy\longlist\previewAppResults.html" />
+    <Content Include="Views\vacancy\longlist\previewOverview.html" />
+    <Content Include="Views\vacancy\longlist\previewSpecialNotes.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

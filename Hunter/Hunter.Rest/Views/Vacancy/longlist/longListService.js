@@ -12,24 +12,26 @@
 
     function LonglistService(httpHandler, $q, $location) {
         var service = {
-            changeTemplate: changeTemplate
+            changeTemplate: changeTemplate,
             
         }
+
+        var viewsPath = '/Views/vacancy/longlist/';
 
         function changeTemplate(templateRoute) {
             switch (templateRoute.toLowerCase()) {
                 case 'overview':
-                    return viewsPath + 'cardOverview.html';
+                    return viewsPath + 'previewOverview.html';
                 case 'specialnotes':
-                    return viewsPath + 'cardSpecialNotes.html';
+                    return viewsPath + 'previewSpecialNotes.html';
                 case 'appresults':
-                    return viewsPath + 'applicationResults.html';
+                    return viewsPath + 'previewAppResults.html';
 
                 default:
                     return '';
             }
         }
-        
+
         return service;
     }
 })();

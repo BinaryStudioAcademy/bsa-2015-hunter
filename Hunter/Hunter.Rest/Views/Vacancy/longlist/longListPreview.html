@@ -4,7 +4,7 @@
         <h2>Preview</h2>
         <div class="ll_preview_info">
             <div class="ll_preview_info_img">
-                <shor-list-star is-short="llPreviewCtrl.candidateDetails.shortlisted" candidate-id="llPreviewCtrl.candidateDetails.id" size="'30px'" ng-click="longListCtrl.starUpdate()"></shor-list-star>
+                <!--<shor-list-star is-short="llPreviewCtrl.candidateDetails.shortlisted" candidate-id="llPreviewCtrl.candidateDetails.id" size="'30px'" ng-click="longListCtrl.starUpdate()"></shor-list-star>-->
                 <img src="{{llPreviewCtrl.candidateDetails.photoUrl}}" alt="{{llPreviewCtrl.candidateDetails.firstName}} {{llPreviewCtrl.candidateDetails.lastName}} foto" title="{{llPreviewCtrl.candidateDetails.firstName}} {{llPreviewCtrl.candidateDetails.lastName}} foto" />
             </div>
             <div class="ll_preview_info_all">
@@ -19,10 +19,25 @@
                 <a class="btn btn-default" href="#/candidate/edit/{{llPreviewCtrl.candidateDetails.id}}">Edit Profile</a>
                 <button class="btn btn-default" type="button" ng-click="llPreviewCtrl.removeCard(llPreviewCtrl.candidateDetails.id)">Remove from List</button>
             </div>
-            <div class="ll_preview_info_comments">
+            <!--<div class="ll_preview_info_comments">
                 <h3>Comments and notes</h3>
                 <p>{{llPreviewCtrl.candidateDetails.testComment}}</p>
                 <p>{{llPreviewCtrl.candidateDetails.specialNotes}}</p>
+            </div>-->
+            <div class="row col-md-12">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation"
+                        ng-class="{active: llPreviewCtrl.currentTabName == tab.name}"
+                        ng-repeat="tab in llPreviewCtrl.tabs track by $index"
+                        ng-click="llPreviewCtrl.changeTemplate(tab)">
+                        <a role="presentation" data-toggle="tab">{{ tab.name }}</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active">
+                        <div id="card-dynamic" ng-include="llPreviewCtrl.templateToShow"></div>
+                    </div>
+                </div>
             </div>
             <div class="ll_preview_info_control">
                 <a class="btn btn-default" href="../../#">View Resume</a>

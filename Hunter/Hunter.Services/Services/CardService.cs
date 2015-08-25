@@ -86,5 +86,28 @@ namespace Hunter.Services
                 _logger.Log(ex);
             }
         }
+
+        public IEnumerable<AppResultCardDto> GetApplicationResults(int vid, int cid)
+        {
+            try
+            {
+                var appResults = _cardRepository.Query()
+                    .Where(c => c.VacancyId != vid && c.CandidateId == cid)
+                    .Select(c => new AppResultCardDto()
+                {
+                    VacancyId = c.VacancyId,
+                    Stage = c.Stage,
+                    Date = c.Added,
+                    Pool = c.Vacancy.Pool.Name
+                });
+
+                return appResults;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return new List<AppResultCardDto>();
+            }
+        }
     }
 }

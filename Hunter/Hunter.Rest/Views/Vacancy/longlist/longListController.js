@@ -10,6 +10,7 @@
         'VacancyHttpService',
         'CandidateHttpService',
         'LonglistHttpService',
+        'LonglistService',
         '$routeParams',
         '$odataresource',
         '$odata',
@@ -20,7 +21,7 @@
         '$rootScope'
     ];
 
-    function LongListController($location, vacancyHttpService, candidateHttpService, longlistHttpService, $routeParams, $odataresource, $odata, $filter, $scope, EnumConstants, $timeout, $rootScope) {
+    function LongListController($location, vacancyHttpService, candidateHttpService, longlistHttpService, longlistService, $routeParams, $odataresource, $odata, $filter, $scope, EnumConstants, $timeout, $rootScope) {
         var vm = this;
 
         vm.stages = EnumConstants.cardStages;

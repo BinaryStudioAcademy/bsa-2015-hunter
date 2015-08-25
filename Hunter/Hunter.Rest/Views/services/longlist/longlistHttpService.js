@@ -12,7 +12,8 @@
     function LonglistHttpService(httpHandler, $q, $location) {
         var service = {
             addCards: addCards,
-            removeCard: removeCard
+            removeCard: removeCard,
+            getAppResults: getAppResults
         }
 
         function addCards(body, newLocation) {
@@ -42,6 +43,23 @@
                 },
                 errorCallback: function (result) { console.log(result); }
             });
+        }
+
+        function getAppResults(vid, cid) {
+
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/card/appResults/' + vid + '/' + cid,
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get application results error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
         }
 
         return service;

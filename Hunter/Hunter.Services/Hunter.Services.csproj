@@ -61,6 +61,7 @@
     <Compile Include="Dto\ApiResults\FeedbackUpdatedResult.cs" />
     <Compile Include="Dto\ApiResults\SpecNoteResult.cs" />
     <Compile Include="Dto\ApiResults\TestsResult.cs" />
+    <Compile Include="Dto\AppResultCardDto.cs" />
     <Compile Include="Dto\CandidateLongListDetailsDto.cs" />
     <Compile Include="Dto\CandidateLongListDto.cs" />
     <Compile Include="Dto\CardDto.cs" />
