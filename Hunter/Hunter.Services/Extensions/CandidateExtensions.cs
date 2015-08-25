@@ -97,7 +97,7 @@ namespace Hunter.Services
 
         public static CandidateLongListDetailsDto ToCandidateLongListDetailsDto(this Candidate candidate)
         {
-            var card = candidate.Card.FirstOrDefault(c => c.Id == candidate.Id);
+            var card = candidate.Card.FirstOrDefault(c => c.CandidateId == candidate.Id);
             
             return new CandidateLongListDetailsDto
             {

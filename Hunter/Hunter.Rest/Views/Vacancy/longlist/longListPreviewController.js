@@ -71,6 +71,7 @@
                 vm.prevLoad = true;
                 candidateHttpService.getLongListDetails(cid).then(function (result) {
                     vm.candidateDetails = result;
+                    console.log(vm.candidateDetails);
                     vm.prevLoad = false;
                 });
             })();
