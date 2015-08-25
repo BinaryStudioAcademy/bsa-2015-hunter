@@ -23,7 +23,7 @@
                         </ul>
                     </li>
                     <li>
-                        Status
+                        Resolution
                         <ul>
                             <li ng-repeat="status in candidateListCtrl.statuses">
                                 <input type="checkbox" checklist-model="candidateListCtrl.filter.statuses" checklist-value="status.id"> {{status.name}}
@@ -65,7 +65,7 @@
                             <span ng-show="candidateListCtrl.order.field == 'AddedByName' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
                         </th>
                         <th>
-                            Status
+                            Resolution
                             <span ng-show="candidateListCtrl.order.field == 'Resolution' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
                             <span ng-show="candidateListCtrl.order.field == 'Resolution' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
                         </th>
