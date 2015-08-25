@@ -14,6 +14,7 @@ namespace Hunter.DataAccess.Entities
         {
             Card = new HashSet<Card>();
             Pool = new HashSet<Pool>();
+            Resume = new HashSet<Resume>();
             Origin = Origin.Sourced;
             Resolution = Resolution.None;
             Shortlisted = false;
