@@ -332,6 +332,9 @@
     <Content Include="bower_components\angular-bootstrap\ui-bootstrap-tpls.min.js" />
     <Content Include="bower_components\angular-bootstrap\ui-bootstrap.js" />
     <Content Include="bower_components\angular-bootstrap\ui-bootstrap.min.js" />
+    <Content Include="bower_components\angular-elastic\elastic.js" />
+    <Content Include="bower_components\angular-elastic\index.html" />
+    <Content Include="bower_components\angular-elastic\LICENCE.txt" />
     <Content Include="bower_components\angular-local-storage\.gitattributes" />
     <Content Include="bower_components\angular-local-storage\.gitignore" />
     <Content Include="bower_components\angular-local-storage\demo\demo-app.js" />
@@ -742,6 +745,10 @@
     <Content Include="bower_components\angular-animate\README.md" />
     <Content Include="bower_components\angular-treasure-overlay-spinner\.bower.json" />
     <Content Include="bower_components\angular-treasure-overlay-spinner\bower.json" />
+    <Content Include="bower_components\angular-elastic\.bower.json" />
+    <Content Include="bower_components\angular-elastic\bower.json" />
+    <Content Include="bower_components\angular-elastic\package.json" />
+    <Content Include="bower_components\angular-elastic\README.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
