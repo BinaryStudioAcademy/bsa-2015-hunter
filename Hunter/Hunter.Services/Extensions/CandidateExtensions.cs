@@ -13,6 +13,7 @@ namespace Hunter.Services
         public static CandidateDto ToCandidateDto(this Candidate candidate)
         {
             double experiance = candidate.YearsOfExperience ?? 0;
+            var resumes = candidate.Resume ?? new List<Resume>();
             var dto = new CandidateDto()
             {
                 Id = candidate.Id,
@@ -24,10 +25,10 @@ namespace Hunter.Services
                 Location = candidate.Location,
                 Skype = candidate.Skype,
                 Phone = candidate.Phone,
-                Linkedin = candidate.Linkedin,
+                Linkedin = candidate.Linkedin ?? "",
                 Salary = candidate.Salary,
                 YearsOfExperience = Math.Round(experiance + candidate.CalculateYearsOfExperiance(), 1),
-                Resumes = candidate.Resume.Select(r => new ResumeDto()
+                Resumes = resumes.Select(r => new ResumeDto()
                 {
                     Id = r.Id,
                     FileId = r.FileId,
@@ -35,7 +36,7 @@ namespace Hunter.Services
                     FileName = r.File.FileName,
                     DownloadUrl = "api/file/download/"+ r.FileId
                 }),
-                ResumeSummary = candidate.ResumeSummary,
+                ResumeSummary = candidate.ResumeSummary ?? "",
                 AddedByProfileId = candidate.AddedByProfileId,
                 AddedBy = candidate.AddedByProfileId.HasValue ? candidate.UserProfile.UserLogin : "",
                 AddDate = candidate.AddDate,
