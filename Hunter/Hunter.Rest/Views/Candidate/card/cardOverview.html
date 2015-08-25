@@ -7,7 +7,7 @@
             <div class="col-md-10" style="text-align:right;margin-top:25px">
                 <span ng-hide="overviewCtrl.summary.text=='' || overviewCtrl.summary.date == ''">Edited by {{overviewCtrl.summary.userAlias}} {{overviewCtrl.summary.date | date:'dd.MM.yyyy HH:mm'}}</span>
             </div>
-            <div ng-show="overviewCtrl.summary.text == ''" class="col-md-3" style="margin-top:25px">There is no summary yet</div>
+            <div ng-show="overviewCtrl.summary.text == ''" class="col-md-3" style="">There is no summary yet</div>
         </div>
         <div ng-hide="overviewCtrl.summary.text==''">
             <textarea class="form-control" ng-style="overviewCtrl.summary.style" disabled name="text" ng-model="overviewCtrl.summary.text" msd-elastic></textarea>
