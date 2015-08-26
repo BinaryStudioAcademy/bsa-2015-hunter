@@ -254,12 +254,13 @@ li {
 .page-count-wrapper{
     margin-right: 10px;
 }
-.page-count-wrapper>select {
-    height: 30px;
+    .page-count-wrapper > select {
+        height: 30px;
+    }
 /*partia candidate detailes in candidate list*/
 .partia-candidate-detailes {
     position: fixed;
-    top: 52px;
+    top: 42px;
     right: 0%;
     height: 100%;
     z-index: 10;
