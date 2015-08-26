@@ -54,5 +54,7 @@ namespace Hunter.Services.Dto
         public DateTime DateOfBirth {get; set; } 
 
         public string PhotoUrl { get; set; }
+
+        public string LastResumeUrl { get; set; }
     }
 }
