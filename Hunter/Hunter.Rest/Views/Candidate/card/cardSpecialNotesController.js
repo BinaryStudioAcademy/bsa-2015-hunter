@@ -8,7 +8,8 @@
     CardSpecialNotesController.$inject = [
         'SpecialNoteHttpService',
         'VacancyHttpService',
-        '$routeParams'
+        '$routeParams',
+        'localStorageService'
     ];
 
     function CardSpecialNotesController(specialNoteHttpService, VacancyHttpService, $routeParams, localStorageService) {
@@ -26,7 +27,7 @@
         vm.newNoteText = '';
         vm.specialNote;
         vm.newNoteText;
-
+        vm.userName = localStorageService.get('authorizationData').userName;
         // TODO: Initialization Should Be Covered with self invoke function
         VacancyHttpService.getLongList($routeParams.vid).then(function(result) {
             console.log(result);
