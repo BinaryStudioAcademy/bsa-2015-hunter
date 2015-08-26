@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.UI.WebControls;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Interface.Base;
@@ -94,12 +95,13 @@ namespace Hunter.Services
                 var appResults = _cardRepository.Query()
                     .Where(c => c.VacancyId != vid && c.CandidateId == cid)
                     .Select(c => new AppResultCardDto()
-                {
-                    VacancyId = c.VacancyId,
-                    Stage = c.Stage,
-                    Date = c.Added,
-                    Pool = c.Vacancy.Pool.Name
-                });
+                    {
+                        CardId = c.Id,
+                        VacancyId = c.VacancyId,
+                        Stage = c.Stage,
+                        Date = c.Added,
+                        Pool = c.Vacancy.Pool.Name
+                    });
 
                 return appResults;
             }
@@ -107,6 +109,30 @@ namespace Hunter.Services
             {
                 _logger.Log(ex);
                 return new List<AppResultCardDto>();
+            }
+        }
+
+        public AppResultCardDto GetCardInfo(int vid, int cid)
+        {
+            try
+            {
+                var appResults = _cardRepository.Query()
+                    .Where(c => c.VacancyId == vid && c.CandidateId == cid)
+                    .Select(c => new AppResultCardDto()
+                    {
+                        CardId = c.Id,
+                        VacancyId = c.VacancyId,
+                        Stage = c.Stage,
+                        Date = c.Added,
+                        Pool = c.Vacancy.Pool.Name
+                    }).FirstOrDefault();
+
+                return appResults;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                throw new Exception("no card found!");
             }
         }
     }

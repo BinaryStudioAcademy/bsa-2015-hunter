@@ -1,32 +1,63 @@
 ﻿<div ng-controller="CardTechnicalInterviewController as techInterviewCtrl">
     <div class="hrInterview_wrap">
-        <div class="btn btn-default" ng-click="generalCardCtrl.changeTemplate(tab)">{{techInterviewCtrl.vacancy.name}}</div>
-        
+        <div class="row">
+            <ul class="nav nav-pills">
+                <li ng-if="generalCardCtrl.isLLM" class="active">
+                    <a data-toggle="pill" ng-click="techInterviewCtrl.getFeedbacks()">
+                        {{techInterviewCtrl.vacancy.name}}
+                    </a>
+                </li>
+                <li><a data-toggle="pill" ng-click="techInterviewCtrl.getAllFeedbacks()">All Feedbacks</a></li>
+                <li><a data-toggle="pill" ng-click="techInterviewCtrl.getMyFeedbacks()">My Feedbacks</a></li>
+                <a ng-if="generalCardCtrl.isLLM" ng-click="showAddBlock= !showAddBlock" title="Add new Feedback"><span class="fa fa-2x fa-plus-circle"></span></a>
+            </ul>
+        </div>
+
+
+        <div ng-show="showAddBlock" class="row">
+            <br/>
+            <div ng-form="form">
+                <div class="form-group" ng-class="{'has-warning': !form.NoteText.$valid}">
+                    <textarea name="text" class="form-control"
+                              ng-model="newTechFeedback.text" 
+                              msd-elastic required placeholder="Enter new feedback"></textarea>
+                    <span ng-show="form.text.$error.required" class="help-block">Required</span>
+                </div>
+                <button class="btn btn-success col-sm-4" type="submit"
+                        ng-click="techInterviewCtrl.saveFeedback(newTechFeedback)"
+                        data-ng-disabled="!form.$valid">
+                    Add
+                </button>
+            </div>
+        </div>
+
+
         <div class="hrInterview_comments">
-            <div class="hrInterview_form">
-                <form name="feedbackForm" ng-submit="techInterviewCtrl.saveFeedback(techInterviewCtrl.techFeedback.id, techInterviewCtrl.techFeedback.cardId, techInterviewCtrl.techFeedback.text, techInterviewCtrl.techFeedback.type)">
+            <div class="hrInterview_form" ng-repeat="item in techInterviewCtrl.techFeedbacks">
+                <form name="feedbackForm" >
                     <div>
                         <div>
                             <div style="width: auto;">
-                                <h3 style="display: inline">{{generalCardCtrl.feedbackTypes[techInterviewCtrl.techFeedback.type].name}}</h3>
+                                <h3 style="display: inline">{{generalCardCtrl.feedbackTypes[techInterviewCtrl.techFeedback.type].name}} {{techInterviewCtrl.vacancy.name != item.vacancy || generalCardCtrl.isLLM ? 'from ' + feedback.vacancy :''}}</h3>
                             </div>
-                            <div class="vote-group" ng-hide="techInterviewCtrl.techFeedback.id == 0">
+                            <div class="vote-group" ng-hide="item.id == 0">
                                 <thumb-button btn-type="btn-success" btn-icon="fa-thumbs-o-up"
-                                              feedback="techInterviewCtrl.techFeedback"
+                                              feedback="item"
                                               key="Like"></thumb-button>
                                 <thumb-button btn-type="btn-danger" btn-icon="fa-thumbs-o-down"
-                                              feedback="techInterviewCtrl.techFeedback"
+                                              feedback="item"
                                               key="Dislike"></thumb-button>
                             </div>
-                            <span ng-hide="techInterviewCtrl.techFeedback.date == '' || techInterviewCtrl.techFeedback.id==0">Edited by {{techInterviewCtrl.techFeedback.userAlias}} {{techInterviewCtrl.techFeedback.date | date:'dd.MM.yyyy hh.mm'}}</span>
+                            <span ng-hide="item.date == '' || item.id==0">Updated by {{item.userAlias}} {{item.date | date:'dd.MM.yyyy hh.mm'}} </span>
                         </div>
-                        <textarea class="form-control" ng-readonly="techInterviewCtrl.techFeedback.feedbackConfig.readOnly"
-                                  name="text" ng-model="techInterviewCtrl.techFeedback.text"
-                                  ng-style="techInterviewCtrl.techFeedback.feedbackConfig.style"
-                                  msd-elastic>{{techInterviewCtrl.techFeedback.text}}</textarea>
+                        <textarea class="form-control" ng-readonly="!item.editMode"
+                                  name="text" ng-model="item.text"
+                                  ng-style="{'border-color':techInterviewCtrl.voteColors[item.successStatus] }"
+                                  msd-elastic>{{item.text}}</textarea>
                     </div>
                     <div>
-                        <input ng-click="techInterviewCtrl.toggleReadOnly()" class="btn" type="button" value="{{techInterviewCtrl.techFeedback.feedbackConfig.buttonName}}">
+                        <button ng-click="techInterviewCtrl.updateFeedback(item)"
+                               class="btn" type="button">{{item.editMode == true ?'Save':'Edit' }}</button>
                     </div>
                 </form>
             </div>

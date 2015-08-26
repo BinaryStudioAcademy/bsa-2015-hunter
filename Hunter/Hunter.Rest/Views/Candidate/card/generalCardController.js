@@ -37,6 +37,7 @@
         vm.updateResolution = updateResolution;
         vm.changeTemplate = changeTemplate;
         vm.vacancy = {};
+        vm.cardInfo = {};
         vm.isLLM = false;
 
         var vid = $routeParams["vid"];
@@ -63,6 +64,10 @@
                     { name: 'Test', route: 'test' },
                     { name: 'Summary', route: 'summary' }
                 ];
+                longlistHttpService.getCardInfo(vid, cid).then(function (result) {
+                    vm.cardInfo = result;
+                    console.log(vm.cardInfo);
+                });
                 vm.currentTabName = vm.tabs[0];
                 cardService.getCardStage(vid, cid).then(function (response) {
                     vm.currentStage = enumConstants.cardStages[response.data];
@@ -73,7 +78,7 @@
                 });
             })();
         } else {
-            (function() {
+            (function () {
                 vm.tabs = [
                    { name: 'Overview', route: 'overview' },
                    { name: 'Special Notes', route: 'specialnotes' },

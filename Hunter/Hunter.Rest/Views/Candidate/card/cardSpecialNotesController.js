@@ -8,10 +8,11 @@
     CardSpecialNotesController.$inject = [
         'SpecialNoteHttpService',
         'VacancyHttpService',
-        '$routeParams'
+        '$routeParams',
+        '$scope'
     ];
 
-    function CardSpecialNotesController(specialNoteHttpService, VacancyHttpService, $routeParams, localStorageService) {
+    function CardSpecialNotesController(specialNoteHttpService, VacancyHttpService, $routeParams, $scope) {
         var vm = this;
         vm.templateName = 'Special Notes';
 
@@ -21,24 +22,32 @@
         vm.loadAllNotes = loadAllNotes;
         vm.loadMyNotes = loadMyNotes;
 
-        vm.vacancy;
-        vm.notes;
+        vm.vacancy ={};
+        vm.notes = [];
         vm.newNoteText = '';
-        vm.specialNote;
-        vm.newNoteText;
+        vm.specialNote ={};
+        vm.newNoteText ='';
 
         // TODO: Initialization Should Be Covered with self invoke function
-        VacancyHttpService.getLongList($routeParams.vid).then(function(result) {
-            console.log(result);
-            vm.vacancy = result;
-        });
+        (function () {
 
+            if ($scope.$parent.generalCardCtrl.isLLM) {
+                loadCardNotes();
+
+
+                VacancyHttpService.getLongList($routeParams.vid).then(function(result) {
+                    vm.vacancy = result;
+                });
+            } else {
+                loadAllNotes();
+            }
+        })();
         function saveNewSpecialNote() {
             var note = {
                 text: vm.newNoteText
             };
             specialNoteHttpService.addSpecialNote(note, $routeParams.vid, $routeParams.cid)
-                .then(function(data) {
+                .then(function (data) {
                     note.id = data.id;
                     note.lastEdited = data.update;
                     note.userAlias = data.userAlias;
@@ -51,7 +60,7 @@
 
         function saveOldNote(note) {
             specialNoteHttpService.updateSpecialNote(note, note.id)
-                .then(function(data) {
+                .then(function (data) {
                     note.id = data.id;
                     note.lastEdited = data.update;
                     note.userLogin = data.userName;
@@ -61,28 +70,27 @@
         // TODO: Data Functions (not user event functions) Should Be In Services
         function loadCardNotes() {
             specialNoteHttpService.getCardSpecialNote($routeParams.vid, $routeParams.cid)
-                .then(function(result) {
+                .then(function (result) {
                     console.log(result.data);
                     vm.notes = result.data;
                 });
         };
 
         function loadAllNotes() {
-            specialNoteHttpService.getCandidateSpecialNote($routeParams.cid).then(function(result) {
+            specialNoteHttpService.getCandidateSpecialNote($routeParams.cid).then(function (result) {
                 console.log(result.data);
                 vm.notes = result.data;
             });
         }
 
         function loadMyNotes() {
-            specialNoteHttpService.getUserSpecialNote(vm.userName, $routeParams.vid, $routeParams.cid).then(function(result) {
+            specialNoteHttpService.getUserSpecialNote($routeParams.cid).then(function (result) {
                 console.log(result.data);
                 vm.notes = result.data;
             });
         }
 
-        loadCardNotes();
-
+        
         function toggleReadOnly(note) {
             note.noteConfig.readOnly = note.text != '' ? !note.noteConfig.readOnly : note.noteConfig.readOnly;
 

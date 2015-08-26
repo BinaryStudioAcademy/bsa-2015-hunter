@@ -79,11 +79,11 @@ namespace Hunter.Services.Services
             _specialNoteRepository.DeleteAndCommit(specialNote);
         }
 
-        public IEnumerable<SpecialNoteDto> GetSpecialNotesForUser(string login, int vacancyId, int candidateId)
+        public IEnumerable<SpecialNoteDto> GetSpecialNotesForUser(string login, int candidateId)
         {
             return
                 _specialNoteRepository.Query()
-                    .Where(x => x.UserProfile.UserLogin == login && x.Card.CandidateId == candidateId && x.Card.VacancyId == vacancyId )
+                    .Where(x => x.UserProfile.UserLogin == login && x.Card.CandidateId == candidateId )
                     .OrderByDescending(x => x.LastEdited)
                     .ToList()
                     .Select(x => x.ToDto());

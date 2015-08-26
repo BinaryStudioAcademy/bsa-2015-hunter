@@ -16,5 +16,6 @@ namespace Hunter.Services.Dto
         public int Type { get; set; }
         public string UserAlias { get; set; }
         public int SuccessStatus { get; set; }
+        public string Vacancy { get; set; }
     }
 }

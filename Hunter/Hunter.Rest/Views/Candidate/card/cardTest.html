@@ -1,6 +1,6 @@
 ﻿<div ng-controller="CardTestController as testCtrl">
 
-    <div class="row">
+    <div ng-if="generalCardCtrl.isLLM" class="row">
         <div class="col-md-5">
             <input type="text" class="form-control testLink" placeholder="Provide link to test" ng-model="testCtrl.testLink"/>
             <button class="btn btn-primary" ng-click="testCtrl.uploadLink()">Add</button>

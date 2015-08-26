@@ -31,14 +31,14 @@
 
                 scope.click = function() {
 
-                    if (scope.feedback.feedbackConfig.style == undefined || scope.feedback.feedbackConfig.style["border-color"] != scope.getColor(scope.key)) {
-                        scope.feedback.feedbackConfig.style = { 'border-color': scope.getColor(scope.key) };
-                        scope.feedback.successStatus = scope.getSuccess(scope.key);
-                    } else {
-                        scope.feedback.feedbackConfig.style = { 'border-color': scope.getColor('None') }
-                        scope.feedback.successStatus = scope.getSuccess('None');
-                    }
-
+                    //if (scope.feedback.feedbackConfig.style == undefined || scope.feedback.feedbackConfig.style["border-color"] != scope.getColor(scope.key)) {
+                    //    scope.feedback.feedbackConfig.style = { 'border-color': scope.getColor(scope.key) };
+                    //    scope.feedback.successStatus = scope.getSuccess(scope.key);
+                    //} else {
+                    //    scope.feedback.feedbackConfig.style = { 'border-color': scope.getColor('None') }
+                    //    scope.feedback.successStatus = scope.getSuccess('None');
+                    //}
+                    scope.feedback.successStatus = scope.getSuccess(scope.key);
                     scope.saveSuccessStatus(scope.feedback);
                 }
             },

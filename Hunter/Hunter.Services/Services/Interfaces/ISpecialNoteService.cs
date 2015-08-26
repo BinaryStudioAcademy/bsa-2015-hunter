@@ -21,7 +21,7 @@ namespace Hunter.Services.Services.Interfaces
 
         void DeleteSpecialNoteById(int id);
 
-        IEnumerable<SpecialNoteDto> GetSpecialNotesForUser(string login, int vacancyId, int candidateId);
+        IEnumerable<SpecialNoteDto> GetSpecialNotesForUser(string login, int candidateId);
 
         IEnumerable<SpecialNoteDto> GetSpecialNotesForCandidate(int candidateId);
 

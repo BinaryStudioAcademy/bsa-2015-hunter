@@ -25,7 +25,8 @@ namespace Hunter.Services.Extensions
                 UserAlias = f.UserProfile!=null ? f.UserProfile.Alias : "" ,
                 UserName = f.UserProfile != null
                     ? f.UserProfile.UserLogin.Substring(0, f.UserProfile.UserLogin.IndexOf("@"))
-                    : ""
+                    : "",
+                Vacancy = f.Card.Vacancy.Name
             }).OrderBy(f => f.Type);
         }
 

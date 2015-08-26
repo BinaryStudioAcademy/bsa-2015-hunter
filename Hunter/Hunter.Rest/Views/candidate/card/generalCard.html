@@ -42,7 +42,10 @@
                     <a class="btn-veiw-resume btn btn-default btn-block" href="#">Veiw Resume</a>
                     <a class="btn btn-default btn-block" href="#/candidate/edit/{{generalCardCtrl.candidate.id}}">Edit Profile</a>
                     <a ng-if="generalCardCtrl.isLLM" class="btn btn-default btn-block" href="#/candidate/{{generalCardCtrl.candidate.id}}">Full Profile</a>
-                    <button ng-if="generalCardCtrl.isLLM" class="btn btn-default btn-block" type="button" ng-click="generalCardCtrl.removeCard(generalCardCtrl.candidate.id)">Remove from List</button>
+                    <button ng-if="generalCardCtrl.isLLM"
+                            class="btn btn-default btn-block"
+                            type="button" 
+                            ng-click="generalCardCtrl.removeCard(generalCardCtrl.candidate.id)">Remove from List</button>
                 </div>
             </div>
         </div>
