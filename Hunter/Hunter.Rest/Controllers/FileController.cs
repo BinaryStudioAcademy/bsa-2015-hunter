@@ -20,10 +20,10 @@ namespace Hunter.Rest.Controllers
         {
             _fileService = fileService;
         }
-        
+
         [HttpGet]
         [Route("")]
-        [ResponseType(typeof(IEnumerable<FileDto>))]
+        [ResponseType(typeof (IEnumerable<FileDto>))]
         public HttpResponseMessage Get()
         {
             try
@@ -58,7 +58,7 @@ namespace Hunter.Rest.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
-        [ResponseType(typeof(FileDto))]
+        [ResponseType(typeof (FileDto))]
         public HttpResponseMessage Get(int id)
         {
             try
@@ -74,7 +74,7 @@ namespace Hunter.Rest.Controllers
 
         [HttpGet]
         [Route("resume/{id:int}")]
-        [ResponseType(typeof(FileDto))]
+        [ResponseType(typeof (FileDto))]
         public HttpResponseMessage GetCandidateResume(int id)
         {
             try
@@ -90,7 +90,7 @@ namespace Hunter.Rest.Controllers
 
         [HttpPost]
         [Route("")]
-        public HttpResponseMessage Post([FromBody]FileDto value)
+        public HttpResponseMessage Post([FromBody] FileDto value)
         {
             try
             {
@@ -109,7 +109,7 @@ namespace Hunter.Rest.Controllers
 
         [HttpPut]
         [Route("{id:int}")]
-        public HttpResponseMessage Put(int id, [FromBody]FileDto value)
+        public HttpResponseMessage Put(int id, [FromBody] FileDto value)
         {
             try
             {
@@ -143,7 +143,7 @@ namespace Hunter.Rest.Controllers
 
         [HttpGet]
         [Route("download/{id:int}")]
-        [ResponseType(typeof(FileDto))]
+        [ResponseType(typeof (FileDto))]
         public HttpResponseMessage DownloadFile(int id)
         {
             try
@@ -160,6 +160,20 @@ namespace Hunter.Rest.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
+        }
+
+        [HttpGet]
+        [Route("open/pdf/{id:int}")]
+        [ResponseType(typeof (FileDto))]
+        public HttpResponseMessage OpenInBrowser(int id)
+        {
+            var file = _fileService.DownloadFile(id);
+            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+            result.Content = new StreamContent(file.File);
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
+            result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("inline");
+            result.Content.Headers.ContentDisposition.FileName = file.OriginalFileName();
+            return result;
         }
     }
 }

@@ -83,6 +83,7 @@
             vm.adders = result;
         });
 
+        vm.pushPopItem(vm.statuses[1].id, vm.filterParams.status);
         vm.loadDataByParams();
     }
 })();

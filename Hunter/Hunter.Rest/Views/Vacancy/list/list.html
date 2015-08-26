@@ -36,7 +36,7 @@
                 <ul>
                     <li ng-repeat="status in vacancyListCtrl.statuses">
                         <div class="checkbox">
-                            <label><input type="checkbox" ng-click="vacancyListCtrl.pushPopItem(vacancyListCtrl.statuses[$index].id, vacancyListCtrl.filterParams.status)">{{status.name}}</label>
+                            <label><input type="checkbox" ng-click="vacancyListCtrl.pushPopItem(vacancyListCtrl.statuses[$index].id, vacancyListCtrl.filterParams.status)" ng-checked="status.id == 1">{{status.name}}</label>
                         </div>
                     </li>
                 </ul>

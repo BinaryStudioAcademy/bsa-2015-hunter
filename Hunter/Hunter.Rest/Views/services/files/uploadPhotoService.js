@@ -73,6 +73,7 @@
         }
 
         function uploadFromUrl(photoUrl, id) {
+
             httpHandler.sendRequest({
                 verb: 'POST',
                 url: '/api/fileupload/pictures/fromUrl/' + id,

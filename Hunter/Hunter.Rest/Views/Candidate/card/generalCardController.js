@@ -41,6 +41,7 @@
         vm.currentSubstatus = enumConstants.substatuses[0];
         vm.removeCard = removeCard;
         vm.updateResolution = updateResolution;
+        vm.showResume = showResume;
 
         console.log("rout", $routeParams);
         (function() {
@@ -89,5 +90,9 @@
         function updateResolution() {
             candidateHttpService.updateCandidateResolution($routeParams.cid, vm.candidate.resolution);
         };
+
+        function showResume() {
+            window.open(vm.candidate.lastResumeUrl);
+        }
     }
 })();

@@ -229,7 +229,8 @@ namespace Hunter.Rest.Controllers
             try
             {
                 _candidateService.Add(candidate, User.Identity.Name);
-                return Request.CreateResponse(HttpStatusCode.Created, _candidateService.Get(i => i.Email.Equals(candidate.Email)).ToCandidateDto());
+                var cand = _candidateService.Get(i => i.Email.Equals(candidate.Email)).ToCandidateDto();
+                return Request.CreateResponse(HttpStatusCode.Created, cand);
 
             }
             catch (Exception e)
