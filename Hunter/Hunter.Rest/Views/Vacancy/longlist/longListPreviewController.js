@@ -26,6 +26,7 @@
         vm.getCandidateDetails = getCandidateDetails;
         vm.removeCard = removeCard;
         vm.changeTemplate = changeTemplate;
+        vm.showResume = showResume;
 
         vm.isPreviewShown = false;
         vm.stages = EnumConstants.cardStages;
@@ -146,6 +147,10 @@
             vm.currentTabName = tab.name;
             vm.templateToShow = longlistService.changeTemplate(tab.route);
             //$location.search('tab', tab.route);
+        }
+
+        function showResume() {
+            window.open(vm.candidateDetails.lastResumeUrl);
         }
     }
 })();

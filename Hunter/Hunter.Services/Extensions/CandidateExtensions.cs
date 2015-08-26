@@ -46,7 +46,8 @@ namespace Hunter.Services
                 Origin = (int) candidate.Origin,
                 DateOfBirth = candidate.DateOfBirth,
                 PhotoUrl = "api/fileupload/pictures/"+candidate.Id,
-                UserAlias = candidate.UserProfile != null ? candidate.UserProfile.Alias : ""
+                UserAlias = candidate.UserProfile != null ? candidate.UserProfile.Alias : "",
+                LastResumeUrl = candidate.Resume.Count>0 ? "api/file/open/pdf/"+candidate.Resume.LastOrDefault().FileId : ""
             };
             return dto;
         }
@@ -111,7 +112,8 @@ namespace Hunter.Services
                 TestComment = card != null ? (card.Test.FirstOrDefault(t => t.Id == card.Id) != null ? card.Test.FirstOrDefault(t => t.Id == card.Id).Comment : "No test comment") : "No test comment",
                 SpecialNotes = card != null ? (card.SpecialNote.FirstOrDefault(n => n.Id == card.Id) != null ? card.SpecialNote.FirstOrDefault(n => n.Id == card.Id).Text : "No special note") : "No special note",
                 Shortlisted = candidate.Shortlisted,
-                UserAlias = candidate.UserProfile != null ? candidate.UserProfile.Alias : ""
+                UserAlias = candidate.UserProfile != null ? candidate.UserProfile.Alias : "",
+                LastResumeUrl = candidate.Resume.Count > 0 ? "api/file/open/pdf/" + candidate.Resume.LastOrDefault().FileId : ""
             };
         }
 

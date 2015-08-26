@@ -19,5 +19,6 @@ namespace Hunter.Services.Dto
         public string PhotoUrl { get; set; }
         public bool Shortlisted { get; set; }
         public string UserAlias { get; set; }
+        public string LastResumeUrl { get; set; }
     }
 }
