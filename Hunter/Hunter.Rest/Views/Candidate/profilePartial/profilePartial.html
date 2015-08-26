@@ -1,8 +1,9 @@
 ﻿<div class="container-partial" ng-controller='CandidatePartialController as candidatePartCtrl' >
     <div ng-if="!candidatePartCtrl.isEmpty" spinner='candidatePartCtrl.prevLoad'>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-11">
                 <h4>Preview</h4>
+                <p class="ll_close_button" ng-click="$root.candidateDetails.show = false"><span class=" glyphicon glyphicon-remove"></span></p>
             </div>
         </div>
         <div class="candidate-info">
