@@ -241,10 +241,9 @@ li{
 
 /*pagination*/
 
-.page-count-wrapper {
-    margin: 20px 5px;
+.page-count-wrapper{
+    margin-right: 10px;
 }
-
 .page-count-wrapper>select {
     height: 30px;
 }

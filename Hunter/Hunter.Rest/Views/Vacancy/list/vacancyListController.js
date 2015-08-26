@@ -57,6 +57,7 @@
             vm.filterParams.reverceSort = vm.sortAction.reverseSort;
             vacancyHttpService.getFilteredVacancies(vm.filterParams).then(function (result) {
                 vm.vacancies = result.rows;
+                console.log(vm.vacancies);
                 vm.totalCount = result.totalCount;
             });
         }
