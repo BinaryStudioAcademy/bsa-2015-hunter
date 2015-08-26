@@ -107,6 +107,7 @@ namespace Hunter.Services
                 PhotoUrl =  "api/fileupload/pictures/" + candidate.Id,
                 Salary = candidate.Salary,
                 Resolution = Enum.GetName(typeof (Resolution), candidate.Resolution),
+                Linkedin = candidate.Linkedin,
                 Stage = card != null ? card.Stage : 0,
                 TestComment = card != null ? (card.Test.FirstOrDefault(t => t.Id == card.Id) != null ? card.Test.FirstOrDefault(t => t.Id == card.Id).Comment : "No test comment") : "No test comment",
                 SpecialNotes = card != null ? (card.SpecialNote.FirstOrDefault(n => n.Id == card.Id) != null ? card.SpecialNote.FirstOrDefault(n => n.Id == card.Id).Text : "No special note") : "No special note",
