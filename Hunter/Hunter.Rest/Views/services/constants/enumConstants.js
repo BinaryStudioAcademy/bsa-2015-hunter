@@ -4,6 +4,16 @@
     angular
         .module('hunter-app')
         .constant('EnumConstants', {
+            // colors codes for https://gyazo.com/1892bee572fcbfe529f53e024766d78f
+            // bgcolors: {
+            //    'Green': '#a0fa7d',
+            //    'Yellow': '#effa55',
+            //    'Red': '#f05858',
+            //    'Orange': '#f57a0e',
+            //    'Aquamarine': '#4cdeb5',
+            //    'Purple': '#b53cb5',
+            //    'Blue': '#57a6eb'
+            //}
             origins: [
                 { id: 0, name: 'Sourced', color: 'White', colorCode: 'rgb(255, 255, 255)' },
                 { id: 1, name: 'Applied', color: 'Green', colorCode: 'rgb(44, 201, 99)' }
@@ -17,10 +27,10 @@
                 { id: 5, name: 'Unfit', color: 'Grey', colorCode: 'rgb(238, 238, 238)' }
             ],
             vacancyStates: [
-                { id: 0, name: 'Draft' },    // - is used when the vacancy is not yet opened.
-                { id: 1, name: 'Open' },     // - we can add new candidates, publish\post active landings in future
-                { id: 2, name: 'On Hold' },  // - vacancy is not relevant AT THE MOMENT. But will be IN SOME TIME. When vacancy is on hold we still can add candidates, feedbacks etc.
-                { id: 3, name: 'Filled' },   // - candidate has been hired and the vacancy is officially closed VACANCY MOVES TO ARCHIVE
+                { id: 0, name: 'Draft' }, // - is used when the vacancy is not yet opened.
+                { id: 1, name: 'Open' }, // - we can add new candidates, publish\post active landings in future
+                { id: 2, name: 'On Hold' }, // - vacancy is not relevant AT THE MOMENT. But will be IN SOME TIME. When vacancy is on hold we still can add candidates, feedbacks etc.
+                { id: 3, name: 'Filled' }, // - candidate has been hired and the vacancy is officially closed VACANCY MOVES TO ARCHIVE
                 { id: 4, name: 'Cancelled' } // - vacancy is no longer valid and not needed any more, no one is hired. VACANCY MOVES TO ARCHIVE
             ],
             substatuses: [
@@ -29,13 +39,13 @@
                 { id: 2, name: 'Passed' }
             ],
             cardStages: [
-                { id: 0, name: 'Long Listed' },
-                { id: 1, name: 'Test Send' },
-                { id: 2, name: 'Test Done' },
-                { id: 3, name: 'Interview' },
-                { id: 4, name: 'Test Failed' },
-                { id: 5, name: 'Interview Failed' },
-                { id: 6, name: 'Passed' }
+                { id: 0, name: 'Long Listed', bgcolor: '#effa55' },
+                { id: 1, name: 'Test Send', bgcolor: '#effa55' },
+                { id: 2, name: 'Test Done', bgcolor: '#effa55' },
+                { id: 3, name: 'Interview', bgcolor: '#effa55' },
+                { id: 4, name: 'Test Failed', bgcolor: '#f05858' },
+                { id: 5, name: 'Interview Failed', bgcolor: '#f05858' },
+                { id: 6, name: 'Passed', bgcolor: '#a0fa7d' }
             ],
             feedbackTypes: [
                 { id: 0, name: 'English' },
@@ -70,4 +80,5 @@
                 'Dislike': 'red'
             }
         });
+
 })();

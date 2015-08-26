@@ -161,10 +161,17 @@
     border: 1px solid #ddd;
     border-top: none;
 }
+.ll_preview_appresults{
+    margin-bottom: 10px;
+}
 .ll_preview_overview {
     float: left;
     width: 100%;
     margin-bottom: 10px;
+}
+.ll_preview_activ{
+    border: 1px solid gray;
+    font-weight: bold;
 }
 .ll_preview_overview *{
     float: left;

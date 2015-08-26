@@ -19,6 +19,7 @@
         'EnumConstants',
         '$timeout',
         '$rootScope'
+        //'$on'
     ];
 
     function LongListController($location, vacancyHttpService, candidateHttpService, longlistHttpService, longlistService, $routeParams, $odataresource, $odata, $filter, $scope, EnumConstants, $timeout, $rootScope) {
@@ -30,7 +31,6 @@
         vm.vacancy;
         vm.candidateDetails;
         vm.starUpdate = starUpdate;
-        vm.activateItem = activateItem;
         vm.viewCandidateInfo = viewCandidateInfo;
         vm.getCandidatesForLongList = getCandidatesForLongList;
         
@@ -45,27 +45,20 @@
         });
 
         // click on candidate item shows candidates preview
-
         $rootScope.candidatePreview = {
             vid: $routeParams.id,
             cid: 0
         };
 
-        function viewCandidateInfo(id) {
-            if ($rootScope.candidatePreview.cid !== id) {
-                $rootScope.candidatePreview.cid = id;
-            }
-
-            vm.candidateIdChecked = id;
+        vm.activateItemId = 0;
+        function viewCandidateInfo(cid) {
+            $rootScope.candidatePreview.cid = cid;
+            vm.activateItemId = cid;
         }
-
-        function activateItem(id) {
-            if (vm.candidateIdChecked === id) {
-                return 'll_candidate_item_active';
-            } else {
-                return '';
-            }
-        }
+        
+        $scope.$on('hideCandidatePreview', function() {
+            vm.activateItemId = 0;
+        });
 
         // filtering/sorting candidates
         vm.pageSize = 5;

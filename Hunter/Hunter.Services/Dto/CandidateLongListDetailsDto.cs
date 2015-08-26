@@ -14,8 +14,6 @@ namespace Hunter.Services.Dto
         public double? Salary { get; set; }
         public string Resolution { get; set; }
         public int Stage { get; set; }
-        public string TestComment { get; set; }
-        public string SpecialNotes { get; set; }
         public string PhotoUrl { get; set; }
         public bool Shortlisted { get; set; }
         public string UserAlias { get; set; }
