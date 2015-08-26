@@ -43,6 +43,11 @@ namespace Hunter.DataAccess.Entities
                 .WithMany(e => e.Candidate)
                 .Map(m => m.ToTable("Candidate_Pool").MapLeftKey("CandidateId").MapRightKey("PoolId"));
 
+            modelBuilder.Entity<Candidate>()
+                .HasMany(e => e.SpecialNote)
+                .WithRequired(e => e.Candidate)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Card>()
                 .HasMany(e => e.Feedback)
                 .WithRequired(e => e.Card)
@@ -50,11 +55,6 @@ namespace Hunter.DataAccess.Entities
 
             modelBuilder.Entity<Card>()
                 .HasMany(e => e.Interview)
-                .WithRequired(e => e.Card)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Card>()
-                .HasMany(e => e.SpecialNote)
                 .WithRequired(e => e.Card)
                 .WillCascadeOnDelete(false);
 
@@ -97,6 +97,12 @@ namespace Hunter.DataAccess.Entities
                 .HasMany(e => e.Card)
                 .WithRequired(e => e.Vacancy)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Vacancy>()
+                .HasMany(e => e.SpecialNote)
+                .WithOptional(e => e.Vacancy)
+                .WillCascadeOnDelete(false);
+
         }
     }
 }

@@ -13,6 +13,7 @@ namespace Hunter.Services
         public static CandidateDto ToCandidateDto(this Candidate candidate)
         {
             double experiance = candidate.YearsOfExperience ?? 0;
+            var resumes = candidate.Resume ?? new List<Resume>();
             var dto = new CandidateDto()
             {
                 Id = candidate.Id,
@@ -24,10 +25,10 @@ namespace Hunter.Services
                 Location = candidate.Location,
                 Skype = candidate.Skype,
                 Phone = candidate.Phone,
-                Linkedin = candidate.Linkedin,
+                Linkedin = candidate.Linkedin ?? "",
                 Salary = candidate.Salary,
                 YearsOfExperience = Math.Round(experiance + candidate.CalculateYearsOfExperiance(), 1),
-                Resumes = candidate.Resume.Select(r => new ResumeDto()
+                Resumes = resumes.Select(r => new ResumeDto()
                 {
                     Id = r.Id,
                     FileId = r.FileId,
@@ -35,7 +36,7 @@ namespace Hunter.Services
                     FileName = r.File.FileName,
                     DownloadUrl = "api/file/download/"+ r.FileId
                 }),
-                ResumeSummary = candidate.ResumeSummary,
+                ResumeSummary = candidate.ResumeSummary ?? "",
                 AddedByProfileId = candidate.AddedByProfileId,
                 AddedBy = candidate.AddedByProfileId.HasValue ? candidate.UserProfile.UserLogin : "",
                 AddDate = candidate.AddDate,
@@ -46,7 +47,8 @@ namespace Hunter.Services
                 Origin = (int) candidate.Origin,
                 DateOfBirth = candidate.DateOfBirth,
                 PhotoUrl = "api/fileupload/pictures/"+candidate.Id,
-                UserAlias = candidate.UserProfile != null ? candidate.UserProfile.Alias : ""
+                UserAlias = candidate.UserProfile != null ? candidate.UserProfile.Alias : "",
+                LastResumeUrl = candidate.Resume.Count>0 ? "api/file/open/pdf/"+candidate.Resume.LastOrDefault().FileId : ""
             };
             return dto;
         }
@@ -107,9 +109,11 @@ namespace Hunter.Services
                 PhotoUrl =  "api/fileupload/pictures/" + candidate.Id,
                 Salary = candidate.Salary,
                 Resolution = Enum.GetName(typeof (Resolution), candidate.Resolution),
+                Linkedin = candidate.Linkedin,
                 Stage = card != null ? card.Stage : 0,
                 Shortlisted = candidate.Shortlisted,
-                UserAlias = candidate.UserProfile != null ? candidate.UserProfile.Alias : ""
+                UserAlias = candidate.UserProfile != null ? candidate.UserProfile.Alias : "",
+                LastResumeUrl = candidate.Resume.Count > 0 ? "api/file/open/pdf/" + candidate.Resume.LastOrDefault().FileId : ""
             };
         }
 

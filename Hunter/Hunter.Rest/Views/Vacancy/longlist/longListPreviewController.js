@@ -27,6 +27,7 @@
         vm.getCandidateDetails = getCandidateDetails;
         vm.removeCard = removeCard;
         vm.changeTemplate = changeTemplate;
+        vm.showResume = showResume;
 
         vm.isPreviewShown = false;
         vm.stages = EnumConstants.cardStages;
@@ -93,7 +94,7 @@
 
             (function () {
                 feedbackHttpService.getHrFeedback(vm.vacancyId, cid).then(function (result) {
-                    for (var i = 0; i < 3; i++) {
+                    for (var i = 0; i < 2; i++) {
                         vm.overviews[i + 1].text = result[i].text;
                         vm.overviews[i + 1].date = result[i].date;
                         vm.overviews[i + 1].user = result[i].userAlias;
@@ -152,6 +153,10 @@
             vm.currentTabEmpty = longlistService.isCurrentTabEmpty(tab.route, vm.overviewText, vm.notes);
             vm.templateToShow = longlistService.changeTemplate(tab.route);
             console.log(vm.overviewText);
+        }
+
+        function showResume() {
+            window.open(vm.candidateDetails.lastResumeUrl);
         }
     }
 })();

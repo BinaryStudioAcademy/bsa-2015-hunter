@@ -15,7 +15,9 @@ namespace Hunter.Services.Dto
         public string Resolution { get; set; }
         public int Stage { get; set; }
         public string PhotoUrl { get; set; }
+        public string Linkedin { get; set; }
         public bool Shortlisted { get; set; }
         public string UserAlias { get; set; }
+        public string LastResumeUrl { get; set; }
     }
 }

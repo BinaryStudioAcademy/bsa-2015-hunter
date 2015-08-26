@@ -106,18 +106,14 @@ namespace Hunter.Services.Services
                         feedbackRoute = "hrinterview";
                         break;
                     case 2:
-                        feedbackType = "Expertise";
-                        feedbackRoute = "hrinterview";
-                        break;
-                    case 3:
                         feedbackType = "Tech";
                         feedbackRoute = "technicalinterview";
                         break;
-                    case 4:
+                    case 3:
                         feedbackType = "Test";
                         feedbackRoute = "test";
                         break;
-                    case 5:
+                    case 4:
                         feedbackType = "Summary";
                         feedbackRoute = "summary";
                         break;
@@ -145,13 +141,13 @@ namespace Hunter.Services.Services
         {
             try
             {
-                var card = _cardRepository.Get(x => x.Id == specialNote.CardId);
-                string message = string.Format("A special note for {0} {1} on {2} has been added",
-                card.Candidate.FirstName, card.Candidate.LastName, card.Vacancy.Name);
-                ActivityType type = ActivityType.SpecialNote;
-                Uri url = new Uri(string.Format("#/vacancy/{0}/candidate/{1}?tab={2}",
-                    card.VacancyId, card.CandidateId, "specialnotes"), UriKind.Relative);
-                _activityPostService.Post(message, type, url);
+                //var card = _cardRepository.Get(x => x.Id == specialNote.CardId);
+                //string message = string.Format("A special note for {0} {1} on {2} has been added",
+                //card.Candidate.FirstName, card.Candidate.LastName, card.Vacancy.Name);
+                //ActivityType type = ActivityType.SpecialNote;
+                //Uri url = new Uri(string.Format("#/vacancy/{0}/candidate/{1}?tab={2}",
+                //    card.VacancyId, card.CandidateId, "specialnotes"), UriKind.Relative);
+                //_activityPostService.Post(message, type, url);
             }
             catch (Exception e)
             {
@@ -163,14 +159,14 @@ namespace Hunter.Services.Services
         {
             try
             {
-                var card = _cardRepository.Get(x => x.Id == specialNote.CardId);
-                string message = string.Format("A special note for {0} {1} on {2} has been updated",
-                    card.Candidate.FirstName, card.Candidate.LastName,
-                    card.Vacancy.Name);
-                ActivityType type = ActivityType.SpecialNote;
-                Uri url = new Uri(string.Format("#/vacancy/{0}/candidate/{1}?tab={2}",
-                    card.VacancyId, card.CandidateId, "specialnotes"), UriKind.Relative);
-                _activityPostService.Post(message, type, url);
+                //var card = _cardRepository.Get(x => x.Id == specialNote.CardId);
+                //string message = string.Format("A special note for {0} {1} on {2} has been updated",
+                //    card.Candidate.FirstName, card.Candidate.LastName,
+                //    card.Vacancy.Name);
+                //ActivityType type = ActivityType.SpecialNote;
+                //Uri url = new Uri(string.Format("#/vacancy/{0}/candidate/{1}?tab={2}",
+                //    card.VacancyId, card.CandidateId, "specialnotes"), UriKind.Relative);
+                //_activityPostService.Post(message, type, url);
             }
             catch (Exception e)
             {

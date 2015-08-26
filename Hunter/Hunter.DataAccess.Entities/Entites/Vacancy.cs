@@ -12,6 +12,7 @@ namespace Hunter.DataAccess.Entities
         public Vacancy()
         {
             Card = new HashSet<Card>();
+            SpecialNote = new HashSet<SpecialNote>();
         }
 
         public int Id { get; set; }
@@ -26,6 +27,9 @@ namespace Hunter.DataAccess.Entities
 
         public DateTime? EndDate { get; set; }
 
+        [StringLength(300)]
+        public string Location { get; set; }
+
         [StringLength(4000)]
         public string Description { get; set; }
 
@@ -35,6 +39,9 @@ namespace Hunter.DataAccess.Entities
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Card> Card { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SpecialNote> SpecialNote { get; set; }
 
         public virtual Pool Pool { get; set; }
 

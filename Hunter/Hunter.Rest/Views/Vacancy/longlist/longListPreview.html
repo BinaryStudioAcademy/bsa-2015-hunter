@@ -36,8 +36,8 @@
                 </div>
             </div>
             <div class="ll_preview_info_control">
-                <a class="btn btn-default" href="../../#">View Resume</a>
-                <a class="btn btn-default" href="../../#">View Linkedin</a>
+				<input class="btn btn-default" type="button" value="View Resume" ng-click="llPreviewCtrl.showResume()" ng-disabled="llPreviewCtrl.candidateDetails.lastResumeUrl==''">
+                <a class="btn btn-default" ng-show="llPreviewCtrl.candidateDetails.linkedin != null" href="{{llPreviewCtrl.candidateDetails.linkedin}}" target="_blank">View LinkenIn Profile</a>
             </div>
         </div>
     </div>
