@@ -78,7 +78,7 @@
 
             (function () {
                 feedbackHttpService.getHrFeedback(vm.vacancyId, cid).then(function (result) {
-                    for (var i = 0; i < 3; i++) {
+                    for (var i = 0; i < 2; i++) {
                         vm.overviews[i + 1].text = result[i].text;
                         vm.overviews[i + 1].date = result[i].date;
                         vm.overviews[i + 1].user = result[i].userAlias;

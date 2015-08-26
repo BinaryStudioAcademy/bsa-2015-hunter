@@ -7,7 +7,7 @@ using Hunter.Services.Services.Interfaces;
 
 namespace Hunter.Rest.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [RoutePrefix("api/specialnote")]
     public class SpecialNoteController : ApiController
     {
