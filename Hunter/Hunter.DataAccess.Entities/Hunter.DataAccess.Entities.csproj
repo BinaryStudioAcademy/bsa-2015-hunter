@@ -179,6 +179,10 @@
     <Compile Include="Migrations\201508251857283_add_location_field_to_vacancy.Designer.cs">
       <DependentUpon>201508251857283_add_location_field_to_vacancy.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508261630367_DeleteCardAndAddCandidateVacancyInSpecialNotesEntity.cs" />
+    <Compile Include="Migrations\201508261630367_DeleteCardAndAddCandidateVacancyInSpecialNotesEntity.Designer.cs">
+      <DependentUpon>201508261630367_DeleteCardAndAddCandidateVacancyInSpecialNotesEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -257,6 +261,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508251857283_add_location_field_to_vacancy.resx">
       <DependentUpon>201508251857283_add_location_field_to_vacancy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508261630367_DeleteCardAndAddCandidateVacancyInSpecialNotesEntity.resx">
+      <DependentUpon>201508261630367_DeleteCardAndAddCandidateVacancyInSpecialNotesEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

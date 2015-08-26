@@ -14,7 +14,9 @@ namespace Hunter.DataAccess.Entities
         {
             Card = new HashSet<Card>();
             Pool = new HashSet<Pool>();
+
             Resume = new HashSet<Resume>();
+            SpecialNote = new HashSet<SpecialNote>();
             Origin = Origin.Sourced;
             Resolution = Resolution.None;
             Shortlisted = false;
@@ -82,6 +84,9 @@ namespace Hunter.DataAccess.Entities
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pool> Pool { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SpecialNote> SpecialNote { get; set; }
 
         public double CalculateYearsOfExperiance()
         {

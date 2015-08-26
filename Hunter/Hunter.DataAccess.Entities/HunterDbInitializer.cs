@@ -648,16 +648,6 @@ namespace Hunter.DataAccess.Entities
                 {
                     CardId = 1,
                     ProfileId = 1,
-                    Text = "HR Feedback Expertise comment",
-                    Added = new DateTime(2015, 8, 1),
-                    Edited = new DateTime(2015, 8, 1),
-                    Type = (int)FeedbackType.Expertise,
-                    Status = 1
-                },
-                new Feedback
-                {
-                    CardId = 1,
-                    ProfileId = 1,
                     Text = "HR Feedback Personal comment",
                     Added = new DateTime(2015, 8, 1),
                     Edited = new DateTime(2015, 8, 1),
@@ -711,16 +701,6 @@ namespace Hunter.DataAccess.Entities
                 {
                     CardId = 2,
                     ProfileId = 2,
-                    Text = "HR Feedback Expertise comment",
-                    Added = new DateTime(2015, 8, 1),
-                    Edited = new DateTime(2015, 8, 1),
-                    Type = (int)FeedbackType.Expertise,
-                    Status = 1
-                },
-                new Feedback
-                {
-                    CardId = 2,
-                    ProfileId = 2,
                     Text = "HR Feedback Personal comment",
                     Added = new DateTime(2015, 8, 1),
                     Edited = new DateTime(2015, 8, 1),
@@ -768,16 +748,6 @@ namespace Hunter.DataAccess.Entities
                     Added = new DateTime(2015, 8, 1),
                     Edited = new DateTime(2015, 8, 1),
                     Type = (int)FeedbackType.English,
-                    Status = 1
-                },
-                new Feedback
-                {
-                    CardId = 3,
-                    ProfileId = 3,
-                    Text = "HR Feedback Expertise comment",
-                    Added = new DateTime(2015, 8, 1),
-                    Edited = new DateTime(2015, 8, 1),
-                    Type = (int)FeedbackType.Expertise,
                     Status = 1
                 },
                 new Feedback
@@ -846,7 +816,7 @@ namespace Hunter.DataAccess.Entities
                 {
                     CardId = 11,
                     ProfileId = 1,
-                    Text = "HR Feedback Expertise comment",
+                    Text = "HR Feedback Tech feedback comment",
                     Added = new DateTime(2015, 8, 1),
                     Edited = new DateTime(2015, 8, 1),
                     Type = 2,
@@ -859,7 +829,7 @@ namespace Hunter.DataAccess.Entities
                     Text = "Tech. spec feedback for test",
                     Added = DateTime.Now,
                     Edited = DateTime.Now,
-                    Type = 4,
+                    Type = 3,
                     Status = 1
                 },
                 new Feedback()
@@ -905,14 +875,64 @@ namespace Hunter.DataAccess.Entities
             var test1 = new Test { CardId = 11, Comment = "Test to get a job", FeedbackId = 4, Url = "http://goodwork.com", FileId = null, Added = DateTime.Now};
             var test2 = new Test { CardId = 12, Comment = "Very hard test", FeedbackId = 4, Url = "http://test.com", FileId = null, Added = DateTime.Now};
             var test3 = new Test { CardId = 13, Comment = "I very want this job", FeedbackId = 4, FileId = null, Url = "http://testwork.ua", Added = DateTime.Now};
-            var test4 = new Test { CardId = 1, Comment = "Test to get a job", FeedbackId = 6, Url = "http://goodwork.com", FileId = null, Added = DateTime.Now };
-            var test5 = new Test { CardId = 2, Comment = "Very hard test", FeedbackId = 12, Url = "http://test.com", FileId = null, Added = DateTime.Now };
-            var test6 = new Test { CardId = 3, Comment = "I very want this job", FeedbackId = 18, FileId = null, Url = "http://testwork.ua", Added = DateTime.Now };
+            
+            var test4 = new Test { CardId = 1, Comment = "Test to get a job", FeedbackId = 5, Url = "http://goodwork.com", FileId = null, Added = DateTime.Now };
+            var test5 = new Test { CardId = 2, Comment = "Very hard test", FeedbackId = 10, Url = "http://test.com", FileId = null, Added = DateTime.Now };
+            var test6 = new Test { CardId = 3, Comment = "I very want this job", FeedbackId = 15, FileId = null, Url = "http://testwork.ua", Added = DateTime.Now };
 
             var tests = new List<Test> {test1, test2, test3, test4, test5, test6};
             tests.ForEach(x => context.Test.Add(x));
             context.SaveChanges();
 
+            #endregion
+
+            #region SpecialNote
+            var specialNotes = new List<SpecialNote> 
+            {
+                new SpecialNote()
+                {
+                    LastEdited = new DateTime(2010,10,8),
+                    Text = "Text Special Note 1",
+                    CandidateId = 1,
+                    VacancyId = 1,
+                    UserProfileId = 1,
+                },
+                new SpecialNote()
+                {
+                    LastEdited = new DateTime(2010,10,8),
+                    Text = "Text Special Note 2",
+                    CandidateId = 2,
+                    VacancyId = 1,
+                    UserProfileId = 2,
+                },
+                new SpecialNote()
+                {
+                    LastEdited = new DateTime(2010,10,8),
+                    Text = "Text Special Note 3",
+                    CandidateId = 3,
+                    VacancyId = 1,
+                    UserProfileId = 3,
+                },
+                new SpecialNote()
+                {
+                    LastEdited = new DateTime(2010,10,8),
+                    Text = "Text Special Note 4",
+                    CandidateId = 4,
+                    VacancyId = 1,
+                    UserProfileId = 1,
+                },
+                new SpecialNote()
+                {
+                    LastEdited = new DateTime(2010,10,8),
+                    Text = "Text Special Note 5",
+                    CandidateId = 5,
+                    VacancyId = 1,
+                    UserProfileId = 2,
+                },
+            };
+
+            context.SpecialNote.AddRange(specialNotes);
+            context.SaveChanges();
             #endregion
         }
 

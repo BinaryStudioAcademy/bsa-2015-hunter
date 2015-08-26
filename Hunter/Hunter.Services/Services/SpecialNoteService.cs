@@ -36,10 +36,8 @@ namespace Hunter.Services.Services
             return _specialNoteRepository.Get(id).ToDto();
         }
 
-        public SpecNoteResult AddSpecialNote(SpecialNoteDto dto, int vid, int cid)
+        public SpecNoteResult AddSpecialNote(SpecialNoteDto dto)
         {
-            var card = _cardRepository.GetByCandidateAndVacancy(cid, vid);
-            dto.CardId = card.Id;
             var specnoteEntity = dto.ToEntity();
             var userProfile = _userProfileRepository.Get(x => x.UserLogin == dto.UserLogin);
             specnoteEntity.UserProfileId = userProfile != null ? userProfile.Id : (int?)null;
@@ -50,8 +48,7 @@ namespace Hunter.Services.Services
             {
                 Id = specnoteEntity.Id,
                 UserAlias = specnoteEntity.ToDto().UserAlias,
-                Update = specnoteEntity.ToDto().LastEdited,
-                CardId = specnoteEntity.CardId
+                Update = specnoteEntity.LastEdited
             };
         }
 
@@ -67,8 +64,7 @@ namespace Hunter.Services.Services
             {
                 Id = specnoteEntity.Id,
                 UserAlias = specnoteEntity.ToDto().UserAlias,
-                Update = specnoteEntity.ToDto().LastEdited,
-                CardId = specnoteEntity.CardId
+                Update = specnoteEntity.ToDto().LastEdited
             };
         }
 
@@ -83,7 +79,7 @@ namespace Hunter.Services.Services
         {
             return
                 _specialNoteRepository.Query()
-                    .Where(x => x.UserProfile.UserLogin == login && x.Card.CandidateId == candidateId && x.Card.VacancyId == vacancyId )
+                    .Where(x => x.UserProfile.UserLogin == login && x.CandidateId == candidateId && x.VacancyId == vacancyId )
                     .OrderByDescending(x => x.LastEdited)
                     .ToList()
                     .Select(x => x.ToDto());
@@ -91,7 +87,7 @@ namespace Hunter.Services.Services
 
         public IEnumerable<SpecialNoteDto> GetSpecialNotesForCandidate(int candidateId)
         {
-            return _specialNoteRepository.Query().Where(x => x.Card.CandidateId == candidateId)
+            return _specialNoteRepository.Query().Where(x => x.CandidateId == candidateId)
                 .OrderByDescending(x => x.LastEdited)
                 .ToList()
                 .Select(x => x.ToDto());
@@ -100,7 +96,7 @@ namespace Hunter.Services.Services
         public IEnumerable<SpecialNoteDto> GetSpecialNotesForCard(int vacancyId, int candidateId)
         {
             return _specialNoteRepository.Query()
-                .Where(x => x.Card.CandidateId == candidateId && x.Card.VacancyId == vacancyId)
+                .Where(x => x.CandidateId == candidateId && x.VacancyId == vacancyId)
                 .OrderByDescending(x => x.LastEdited)
                 .ToList()
                 .Select(x => x.ToDto());
