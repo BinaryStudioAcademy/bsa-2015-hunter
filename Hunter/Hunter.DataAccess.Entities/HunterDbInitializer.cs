@@ -885,6 +885,55 @@ namespace Hunter.DataAccess.Entities
             context.SaveChanges();
 
             #endregion
+
+            #region SpecialNote
+            var specialNotes = new List<SpecialNote> 
+            {
+                new SpecialNote()
+                {
+                    LastEdited = new DateTime(2010,10,8),
+                    Text = "Text Special Note 1",
+                    CandidateId = 1,
+                    VacancyId = 1,
+                    UserProfileId = 1,
+                },
+                new SpecialNote()
+                {
+                    LastEdited = new DateTime(2010,10,8),
+                    Text = "Text Special Note 2",
+                    CandidateId = 2,
+                    VacancyId = 1,
+                    UserProfileId = 2,
+                },
+                new SpecialNote()
+                {
+                    LastEdited = new DateTime(2010,10,8),
+                    Text = "Text Special Note 3",
+                    CandidateId = 3,
+                    VacancyId = 1,
+                    UserProfileId = 3,
+                },
+                new SpecialNote()
+                {
+                    LastEdited = new DateTime(2010,10,8),
+                    Text = "Text Special Note 4",
+                    CandidateId = 4,
+                    VacancyId = 1,
+                    UserProfileId = 1,
+                },
+                new SpecialNote()
+                {
+                    LastEdited = new DateTime(2010,10,8),
+                    Text = "Text Special Note 5",
+                    CandidateId = 5,
+                    VacancyId = 1,
+                    UserProfileId = 2,
+                },
+            };
+
+            context.SpecialNote.AddRange(specialNotes);
+            context.SaveChanges();
+            #endregion
         }
 
         private static byte[] ToByteArray(string sqlVarBinary)

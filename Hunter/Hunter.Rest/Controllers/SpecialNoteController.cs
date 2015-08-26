@@ -7,7 +7,7 @@ using Hunter.Services.Services.Interfaces;
 
 namespace Hunter.Rest.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [RoutePrefix("api/specialnote")]
     public class SpecialNoteController : ApiController
     {
@@ -17,7 +17,6 @@ namespace Hunter.Rest.Controllers
         {
             _specialNoteService = specialNoteService;
         }
-
 
         [HttpGet]
         [Route("")]
@@ -95,8 +94,8 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpPost]
-        [Route("{vid}/{cid}")]
-        public HttpResponseMessage PostSpecialNote(int vid, int cid, [FromBody] SpecialNoteDto model)
+        [Route("create")]
+        public HttpResponseMessage PostSpecialNote([FromBody] SpecialNoteDto model)
         {
             try
             {
@@ -105,7 +104,7 @@ namespace Hunter.Rest.Controllers
                     var login = RequestContext.Principal.Identity.Name;
                     model.UserLogin = login;
                     model.LastEdited = DateTime.Now;
-                    var result = _specialNoteService.AddSpecialNote(model,vid,cid);
+                    var result = _specialNoteService.AddSpecialNote(model);
                     return Request.CreateResponse(HttpStatusCode.OK, result);
                 }
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid model state");

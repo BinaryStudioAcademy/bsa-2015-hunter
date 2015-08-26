@@ -15,12 +15,16 @@ namespace Hunter.DataAccess.Entities
 
         public DateTime LastEdited { get; set; }
 
-        public int CardId { get; set; }
-
-        public virtual Card Card { get; set; }
-
         public int? UserProfileId { get; set; }
 
         public virtual UserProfile UserProfile { get; set; }
+
+        public int CandidateId { get; set; }
+
+        public virtual Candidate Candidate { get; set; }
+
+        public int? VacancyId { get; set; }
+
+        public virtual Vacancy Vacancy { get; set; }
     }
 }
