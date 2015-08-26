@@ -84,6 +84,16 @@
                 </table>
                 <div class="text-center">
                     <dir-pagination-controls boundary-links="true" on-page-change="vacancyListCtrl.pageChangeHandler(newPageNumber)" template-url="/Views/vacancy/list/dirPagination.tpl.html"></dir-pagination-controls>
+                    <div class="pagination form-inline" style="margin-right: 5px">
+                        <span>Items on page</span>
+                        <select class="form-control" ng-model="vacancyListCtrl.filterParams.pageSize" ng-change="">
+                            <option selected value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="">All</option>
+                        </select>
+
+                    </div>
                 </div>
             </div>
         </form>

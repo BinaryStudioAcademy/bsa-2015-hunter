@@ -74,6 +74,16 @@
                         boundary-links="true"
                         template-url="../../Views/templates/pagination.html">
             </pagination>
+            <div class="pagination page-count-wrapper form-inline">
+                <span>Items on page</span>
+                <select class="form-control" ng-model="longListCtrl.pageSize" ng-change="longListCtrl.getCandidatesForLongList(">
+                    <option selected value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="">All</option>
+                </select>
+
+            </div>
         </div>
         <div class="col-md-4" ng-include="'/Views/vacancy/longlist/longListPreview.html'"></div>
     </div>

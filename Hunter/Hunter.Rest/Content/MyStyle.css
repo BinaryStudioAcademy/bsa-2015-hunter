@@ -216,7 +216,7 @@ li{
     padding: 8px;	
 }
 
-=======
+/*=======*/
 .col-md-4 {
     font: 13pt bold ;
     margin-top: 10px;
@@ -237,4 +237,14 @@ li{
 .photo-in-list {
     width: 50px;
     height: auto;
+}
+
+/*pagination*/
+
+.page-count-wrapper {
+    margin: 20px 5px;
+}
+
+.page-count-wrapper>select {
+    height: 30px;
 }
