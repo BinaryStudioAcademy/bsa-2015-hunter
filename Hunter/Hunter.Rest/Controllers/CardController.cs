@@ -40,13 +40,13 @@ namespace Hunter.Rest.Controllers
 
         // GET: api/Card/5
         [HttpGet]
-        [Route("appResults/{vid:int}/{cid:int}")]
+        [Route("appResults/{cid:int}")]
         [ResponseType(typeof(AppResultCardDto))]
-        public HttpResponseMessage ApplicationResults(int vid, int cid)
+        public HttpResponseMessage ApplicationResults(int cid)
         {
             try
             {
-                var results = _cardService.GetApplicationResults(vid, cid);
+                var results = _cardService.GetApplicationResults(cid);
                 if (results == null)
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, "Candidate has no other vacancy!");

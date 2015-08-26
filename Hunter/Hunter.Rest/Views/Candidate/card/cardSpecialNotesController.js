@@ -8,7 +8,8 @@
     CardSpecialNotesController.$inject = [
         'SpecialNoteHttpService',
         'VacancyHttpService',
-        '$routeParams'
+        '$routeParams',
+        'localStorageService'
     ];
 
     function CardSpecialNotesController(specialNoteHttpService, VacancyHttpService, $routeParams, localStorageService) {
@@ -26,7 +27,7 @@
         vm.newNoteText = '';
         vm.specialNote;
         vm.newNoteText;
-
+        vm.userName = localStorageService.get('authorizationData').userName;
         // TODO: Initialization Should Be Covered with self invoke function
         VacancyHttpService.getLongList($routeParams.vid).then(function(result) {
             console.log(result);
@@ -35,18 +36,18 @@
 
         function saveNewSpecialNote() {
             var note = {
-                text: vm.newNoteText
+                text: vm.newNoteText,
+                vacancyId: $routeParams.vid,
+                candidateId: $routeParams.cid
             };
-            specialNoteHttpService.addSpecialNote(note, $routeParams.vid, $routeParams.cid)
-                .then(function(data) {
-                    note.id = data.id;
-                    note.lastEdited = data.update;
-                    note.userAlias = data.userAlias;
-                    note.cardId = data.cardId;
-                    note.lastEdited = data.update;
-                    vm.notes.unshift(note);
-                    vm.newNoteText = '';
-                });
+            specialNoteHttpService.addSpecialNote(note)
+            .then(function (data) {
+                note.id = data.id;
+                note.lastEdited = data.update;
+                note.userLogin = data.userName;
+                vm.notes.unshift(note);
+                vm.newNoteText = '';
+            });
         }
 
         function saveOldNote(note) {

@@ -73,13 +73,13 @@
                             Email
                             <span ng-show="candidateListCtrl.order.field == 'Email' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
                             <span ng-show="candidateListCtrl.order.field == 'Email' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
-                        </th>
+                        </th>-->
                         <th ng-hide="$root.candidateDetails.show">
                             Exp
                             <span ng-show="candidateListCtrl.order.field == 'YearsOfExperience' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
                             <span ng-show="candidateListCtrl.order.field == 'YearsOfExperience' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
                         </th>
-                        <th ng-hide="$root.candidateDetails.show">
+                        <!--<th ng-hide="$root.candidateDetails.show">
                             Company
                             <span ng-show="candidateListCtrl.order.field == 'Company' && candidateListCtrl.order.dir == 'asc'" class="fa fa-caret-down"></span>
                             <span ng-show="candidateListCtrl.order.field == 'Company' && candidateListCtrl.order.dir == 'desc'" class="fa fa-caret-up"></span>
@@ -104,9 +104,9 @@
                         <td><a href="#/candidate/{{item.id}}">{{item.firstName + " " + item.lastName}}</a></td>
                         <td>{{item.userAlias}}</td>
                         <td>{{candidateListCtrl.statuses[item.resolution].name}}</td>
-                        <!--<td ng-hide="$root.candidateDetails.show">{{item.email}}</td>
+                        <!--<td ng-hide="$root.candidateDetails.show">{{item.email}}</td>-->
                         <td ng-hide="$root.candidateDetails.show">{{item.yearsOfExperience}}</td>
-                        <td ng-hide="$root.candidateDetails.show">{{item.company}}</td>
+                        <!--<td ng-hide="$root.candidateDetails.show">{{item.company}}</td>
                         <td ng-hide="$root.candidateDetails.show">{{item.location}}</td>
                         <td ng-hide="$root.candidateDetails.show">{{item.salary}}</td>-->
                     </tr>
@@ -120,13 +120,26 @@
                 <div ng-hide="candidateListCtrl.pageConfig.isAddToVacancyButton" class="row form-inline">
                     <button class="btn btn-default col-md-offset-1 col-md-10" type="button" ng-click="candidateListCtrl.addCandidateToLongList()">Add to '{{candidateListCtrl.vacancy.name}}' Long List</button>
                 </div>
-                <pagination total-items="candidateListCtrl.totalItems"
-                            ng-model="candidateListCtrl.filter.currentPage"
-                            items-per-page="candidateListCtrl.pageSize"
-                            max-size="5"
-                            class="pagination-sm"
-                            boundary-links="true"
-                            template-url="../../Views/templates/pagination.html"></pagination>
+                <div class="row form-inline">
+                    <pagination total-items="candidateListCtrl.totalItems"
+                                ng-model="candidateListCtrl.filter.currentPage"
+                                items-per-page="candidateListCtrl.pageSize"
+                                max-size="5"
+                                class="pagination-sm"
+                                boundary-links="true"
+                                template-url="../../Views/templates/pagination.html"></pagination>
+                    <div class="pagination page-count-wrapper">
+                        <span>Items on page</span>
+                        <select class="form-control" ng-model="candidateListCtrl.pageSize" ng-change="candidateListCtrl.getCandidates()">
+                            <option selected value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="">All</option>
+                        </select>
+
+                    </div>
+                </div>
+                
 
       
 

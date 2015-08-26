@@ -40,6 +40,7 @@
 
         vm.updateResolution = updateResolution;
         vm.changeTemplate = changeTemplate;
+        vm.showResume = showResume;
 
         (function() {
             // This is function for initialization actions
@@ -75,6 +76,10 @@
             vm.isScinner = false;
             console.log(response.data);
         });
+
+        function showResume() {
+            window.open(vm.candidate.lastResumeUrl);
+        }
 
         function getCandidateID(url) {
             return url.split('/').pop();

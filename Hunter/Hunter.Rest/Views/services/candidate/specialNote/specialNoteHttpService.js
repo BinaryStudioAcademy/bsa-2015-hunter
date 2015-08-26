@@ -36,11 +36,11 @@
             return deferred.promise;
         }
 
-        function addSpecialNote(body, vid, cid) {
+        function addSpecialNote(body) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
                 verb: 'POST',
-                url: '/api/specialnote/'+ vid+'/'+cid,
+                url: '/api/specialnote/create',
                 body: body,
                 successCallback: function(response) {
                      deferred.resolve(response.data);

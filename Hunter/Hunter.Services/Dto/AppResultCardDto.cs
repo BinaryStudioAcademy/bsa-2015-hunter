@@ -11,6 +11,6 @@ namespace Hunter.Services
         public int VacancyId { get; set; }
         public DateTime Date { get; set; }
         public int Stage { get; set; }
-        public string Pool{ get; set; }
+        public string Vacancy { get; set; }
     }
 }

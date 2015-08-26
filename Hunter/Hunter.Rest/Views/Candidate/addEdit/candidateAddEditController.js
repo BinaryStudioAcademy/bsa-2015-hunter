@@ -112,6 +112,7 @@
             if (uploadPhotoService.validatePicture($file)) {
                 vm.photoLoaded = false;
                 vm.picture = $file;
+                vm.photoUrl = $file.name;
             }
         }
 
@@ -225,7 +226,7 @@
         function successAddEditCandidate(data) {
             uploadResumeService.uploadResume(data.data);
 
-            if (vm.photoUrl == vm.externalUrl) {
+            if (vm.photoUrl == vm.externalUrl && vm.externalUrl != '') {
                 uploadPhotoService.uploadFromUrl(vm.externalUrl, data.data.id);
             } else {
                 uploadPhotoService.uploadPicture(vm.picture, data.data.id);

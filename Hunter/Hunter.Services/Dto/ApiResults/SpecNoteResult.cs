@@ -8,6 +8,7 @@ namespace Hunter.Services.Dto.ApiResults
 {
     public class SpecNoteResult : FeedbackUpdatedResult
     {
-        public int CardId { get; set; }
+        //public int VacancyId { get; set; }
+        //public int CandidateId { get; set; }
     }
 }
