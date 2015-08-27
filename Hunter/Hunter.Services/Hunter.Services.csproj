@@ -62,13 +62,14 @@
     <Compile Include="Dto\ApiResults\SpecNoteResult.cs" />
     <Compile Include="Dto\ApiResults\TestsResult.cs" />
     <Compile Include="Dto\AppResultCardDto.cs" />
-    <Compile Include="Dto\CandidateLongListDetailsDto.cs" />
-    <Compile Include="Dto\CandidateLongListDto.cs" />
+    <Compile Include="Dto\Candidate\CandidateLongListDetailsDto.cs" />
+    <Compile Include="Dto\Candidate\CandidateLongListDto.cs" />
     <Compile Include="Dto\CardDto.cs" />
     <Compile Include="Dto\Feedback\TestFeedbackHrInterviewDto.cs" />
     <Compile Include="Dto\Feedback\FeedbackDto.cs" />
     <Compile Include="Dto\FileDto.cs" />
     <Compile Include="Dto\FilterInfoDto.cs" />
+    <Compile Include="Dto\PoolCandidateDto.cs" />
     <Compile Include="Dto\ResumeDto.cs" />
     <Compile Include="Dto\Test\TestCommentDto.cs" />
     <Compile Include="Dto\Test\TestDto.cs" />
@@ -79,7 +80,7 @@
     <Compile Include="Dto\Vacancy\VacancyByStateDto.cs" />
     <Compile Include="Dto\Vacancy\VacancyLongListDto.cs" />
     <Compile Include="Dto\UserRoleDto.cs" />
-    <Compile Include="Dto\CandidateDtoWithResolutionString.cs" />
+    <Compile Include="Dto\Candidate\CandidateDtoWithResolutionString.cs" />
     <Compile Include="Dto\ApiResults\ApiResult.cs" />
     <Compile Include="Dto\User\EditUserProfileVm.cs" />
     <Compile Include="Dto\User\UserProfileRowVm.cs" />
@@ -91,7 +92,7 @@
     <Compile Include="Extensions\ActivityExtension.cs" />
     <Compile Include="Extensions\PoolExtension.cs" />
     <Compile Include="Dto\PoolViewModel.cs" />
-    <Compile Include="Dto\CandidateDto.cs" />
+    <Compile Include="Dto\Candidate\CandidateDto.cs" />
     <Compile Include="Extensions\CandidateExtensions.cs" />
     <Compile Include="Extensions\TestExtension.cs" />
     <Compile Include="Extensions\SpecialNoteExtension.cs" />

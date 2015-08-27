@@ -12,5 +12,6 @@ namespace Hunter.Services
         bool IsPoolNameExist(string name);
         bool IsPoolExist(int id);
         bool IsPoolNameExistExceptCurrentPool(PoolViewModel pool);
+        Dictionary<string, string> GetColors();
     }
 }

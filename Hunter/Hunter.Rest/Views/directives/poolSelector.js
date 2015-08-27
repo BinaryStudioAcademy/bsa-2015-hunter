@@ -27,12 +27,12 @@
             }],
             template: 
                 '<div style="width: auto; display: inline-block;">' +
-                    '<div style="float: left; width: auto; display: inline-block;">' +
-                        '<div ng-repeat="pool in candidate.poolNames" style="width: auto; float: left;' + '">' +
+                    '<div class="pool-label-container">' +
+                        '<div ng-repeat="pool in candidate.poolNames" class="pool-label" style="background-color: {{candidate.poolColors[pool.toLowerCase()]}};">' +
                         '{{pool}}</div>' +
                     '</div>' +
                     '<button id="addPoolBtn" class=" btn btn-default"><i class="fa fa-plus"></i></button>' +
-                    '<div style="position: absolute; width: auto; background-color: white; z-index: 100" ng-controller="PoolGeneralController as generalCtrl">' +
+                    '<div class="pool-widget-container" ng-controller="PoolGeneralController as generalCtrl">' +
                         '<div style="width: 380px;" ng-include="generalCtrl.link"></div>' +
                     '</div>' +
                 '</div>'

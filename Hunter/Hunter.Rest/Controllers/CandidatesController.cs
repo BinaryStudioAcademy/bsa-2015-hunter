@@ -23,10 +23,12 @@ namespace Hunter.Rest.Controllers
     public class CandidatesController : ApiController
     {
         private readonly ICandidateService _candidateService;
+        private readonly IPoolService _poolService;
 
-        public CandidatesController(ICandidateService candidateService)
+        public CandidatesController(ICandidateService candidateService, IPoolService poolService)
         {
             _candidateService = candidateService;
+            _poolService = poolService;
         }
 
         public CandidatesController()
@@ -105,6 +107,8 @@ namespace Hunter.Rest.Controllers
                 {
                     return Request.CreateResponse(HttpStatusCode.NotFound);
                 }
+
+                data.PoolColors = _poolService.GetColors();
 
                 return Request.CreateResponse(HttpStatusCode.OK, data);
             }

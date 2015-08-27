@@ -56,5 +56,7 @@ namespace Hunter.Services.Dto
         public string PhotoUrl { get; set; }
 
         public string LastResumeUrl { get; set; }
+
+        public Dictionary<string, string> PoolColors { get; set; }
     }
 }

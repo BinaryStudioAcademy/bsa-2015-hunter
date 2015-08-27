@@ -1,0 +1,18 @@
+﻿.pool-label {
+    width: auto; 
+    float: left;
+    margin-left: 3px;
+}
+
+.pool-label-container {
+    float: left; 
+    width: auto; 
+    display: inline-block;
+}
+
+.pool-widget-container {
+    position: absolute;
+    width: auto;
+    background-color: white;
+    z-index: 100;
+}
