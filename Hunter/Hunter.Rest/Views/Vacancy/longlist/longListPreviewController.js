@@ -74,11 +74,10 @@
         vm.appResults = [];
 
         function getCandidateDetails(cid) {
+            vm.prevLoad = true;
             (function () {
-                vm.prevLoad = true;
                 candidateHttpService.getLongListDetails(cid).then(function (result) {
                     vm.candidateDetails = result;
-                    vm.prevLoad = false;
                 });
             })();
 
@@ -138,6 +137,7 @@
             (function() {
                 longlistHttpService.getAppResults(cid).then(function (result) {
                     vm.appResults = result;
+                    vm.prevLoad = false;
                 });
             })();
         }
@@ -152,7 +152,6 @@
             vm.currentTabName = tab.name;
             vm.currentTabEmpty = longlistService.isCurrentTabEmpty(tab.route, vm.overviewText, vm.notes);
             vm.templateToShow = longlistService.changeTemplate(tab.route);
-            console.log(vm.overviewText);
         }
 
         function showResume() {
