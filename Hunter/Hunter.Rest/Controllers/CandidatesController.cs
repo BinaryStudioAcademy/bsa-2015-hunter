@@ -264,6 +264,21 @@ namespace Hunter.Rest.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("{candidateId:int}/addpool/{poolId:int}")]
+        public IHttpActionResult AddPoolToCandidate(int candidateId, int poolId)
+        {
+            try
+            {
+                _candidateService.UpdateCandidatePool(candidateId, poolId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpDelete]
         [Route("{id:int}")]
         public HttpResponseMessage Delete(int id)

@@ -242,5 +242,34 @@ namespace Hunter.Services
                 _logger.Log(ex);
             }
         }
+
+        public void UpdateCandidatePool(int candidateId, int poolId, bool delete = false)
+        {
+            try
+            {
+                var candidate = _candidateRepository.Get(candidateId);
+                if (candidate.Pool.Any(x => x.Id == poolId))
+                {
+                    throw new Exception("This candidate is already in this pool");
+                }
+
+                var pool = _poolRepository.Get(poolId);
+                if (!delete)
+                {
+                    candidate.Pool.Add(pool);
+                    Update(candidate.ToCandidateDto());
+                }
+                else
+                {
+                    candidate.Pool.Remove(pool);
+                    Update(candidate.ToCandidateDto());
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                throw ex;
+            }
+        }
     }
 }

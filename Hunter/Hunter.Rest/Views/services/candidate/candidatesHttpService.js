@@ -21,7 +21,8 @@
             parseLinkedIn: parseLinkedIn,
             getAddedByList: getAddedByList,
             setShortListFlag: setShortListFlag,
-            updateCandidateResolution : updateCandidateResolution
+            updateCandidateResolution: updateCandidateResolution,
+            addCandidatePool: addCandidatePool
         };
 
         function updateCandidate(body, successCallback, id) {
@@ -169,6 +170,20 @@
                     deferred.reject(status);
                 }
             });
+            return deferred.promise;
+        }
+
+        function addCandidatePool(candidateId, poolId) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                'url': 'api/candidates/' + candidateId + '/addpool/' + poolId,
+                'verb': 'PUT',
+                'successCallback': function(response) {
+                    console.log('Pool added successful');
+                    deferred.resolve(response.data);
+                }
+            });
+
             return deferred.promise;
         }
 
