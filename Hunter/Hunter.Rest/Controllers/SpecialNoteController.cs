@@ -64,12 +64,12 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("user/{login}/{vid}/{cid}")]
-        public HttpResponseMessage GetSpecialNoteForUser(string login,int vid, int cid)
+        [Route("user/{cid}")]
+        public HttpResponseMessage GetSpecialNoteForUser(int cid)
         {
             try
             {
-                var specialNotes = _specialNoteService.GetSpecialNotesForUser(login, vid, cid);
+                var specialNotes = _specialNoteService.GetSpecialNotesForUser(User.Identity.Name, cid);
                 return Request.CreateResponse(HttpStatusCode.OK, specialNotes);
             }
             catch (Exception ex)
@@ -103,7 +103,7 @@ namespace Hunter.Rest.Controllers
                 {
                     var login = RequestContext.Principal.Identity.Name;
                     model.UserLogin = login;
-                    model.LastEdited = DateTime.Now;
+                    model.LastEdited = DateTime.UtcNow;
                     var result = _specialNoteService.AddSpecialNote(model);
                     return Request.CreateResponse(HttpStatusCode.OK, result);
                 }

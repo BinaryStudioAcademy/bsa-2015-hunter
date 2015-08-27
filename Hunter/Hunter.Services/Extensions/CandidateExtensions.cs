@@ -28,26 +28,32 @@ namespace Hunter.Services
                 Linkedin = candidate.Linkedin ?? "",
                 Salary = candidate.Salary,
                 YearsOfExperience = Math.Round(experiance + candidate.CalculateYearsOfExperiance(), 1),
-                Resumes = resumes.Select(r => new ResumeDto()
+                //Resumes = resumes.Select(r => new ResumeDto()
+                Resumes = candidate.Resume != null ? candidate.Resume.Select(r => new ResumeDto()
                 {
                     Id = r.Id,
                     FileId = r.FileId,
                     Uploaded = r.File.Added,
                     FileName = r.File.FileName,
+                    
                     DownloadUrl = "api/file/download/" + r.FileId
-                }),
-                ResumeSummary = candidate.ResumeSummary ?? "",
+                //}) : new HashSet<ResumeDto>(),
+                //ResumeSummary = candidate.ResumeSummary,
                 AddedByProfileId = candidate.AddedByProfileId,
                 AddedBy = candidate.AddedByProfileId.HasValue ? candidate.UserProfile.UserLogin : "",
                 AddDate = candidate.AddDate,
                 Cards = candidate.Card.Select(x => x.ToCardDto()).ToList(),
                 PoolNames = candidate.Pool.Select(x => x.Name).ToList(),
+                
                 Resolution = (int)candidate.Resolution,
                 ShortListed = candidate.Shortlisted,
+                
                 Origin = (int)candidate.Origin,
                 DateOfBirth = candidate.DateOfBirth,
+                
                 PhotoUrl = "api/fileupload/pictures/" + candidate.Id,
                 UserAlias = candidate.UserProfile != null ? candidate.UserProfile.Alias : "",
+                
                 LastResumeUrl = candidate.Resume.Count > 0 ? "api/file/open/" + candidate.Resume.LastOrDefault().FileId : ""
             };
             return dto;
@@ -92,13 +98,16 @@ namespace Hunter.Services
                 AddedBy = c.UserProfile != null ? c.UserProfile.UserLogin : "",
                 AddDate = c.Added,
                 PhotoUrl = "api/fileupload/pictures/" + c.CandidateId,
+                
                 Shortlisted = c.Candidate != null && c.Candidate.Shortlisted,
                 UserAlias = c.UserProfile != null ? c.UserProfile.Alias : ""
             });
         }
 
+        
         public static CandidateLongListDetailsDto ToCandidateLongListDetailsDto(this Candidate candidate, int vid)
         {
+            
             var card = candidate.Card.FirstOrDefault(c => c.CandidateId == candidate.Id && c.VacancyId == vid);
 
             return new CandidateLongListDetailsDto
@@ -106,8 +115,10 @@ namespace Hunter.Services
                 Id = candidate.Id,
                 FirstName = candidate.FirstName,
                 LastName = candidate.LastName,
+                
                 PhotoUrl = "api/fileupload/pictures/" + candidate.Id,
                 Salary = candidate.Salary,
+                
                 Resolution = (int)candidate.Resolution,
                 Linkedin = candidate.Linkedin,
                 Stage = card != null ? card.Stage : 0,
@@ -134,6 +145,7 @@ namespace Hunter.Services
                     Phone = c.Phone,
                     Linkedin = c.Linkedin,
                     Salary = c.Salary,
+                    
                     YearsOfExperience = c.YearsOfExperience,
                     AddedByProfileId = c.AddedByProfileId,
                     AddedBy = c.AddedByProfileId.HasValue ? c.UserProfile.UserLogin : "",
@@ -150,11 +162,14 @@ namespace Hunter.Services
                     }
                     ),
                     PoolNames = c.Pool.Select(x => x.Name),
+                   
                     Resolution = (int)c.Resolution,
                     ShortListed = c.Shortlisted,
+                   
                     Origin = (int)c.Origin,
                     DateOfBirth = c.DateOfBirth,
                     PhotoUrl = "api/fileupload/pictures/" + c.Id,
+                    
                     UserAlias = c.UserProfile != null ? c.UserProfile.Alias : ""
                 }
                 );

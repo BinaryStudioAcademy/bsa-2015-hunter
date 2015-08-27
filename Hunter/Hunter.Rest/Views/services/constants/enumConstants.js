@@ -1,4 +1,5 @@
-﻿(function () {
+﻿/// <reference path="enumConstants.js" />
+(function () {
     'use strict';
 
     angular

@@ -9,27 +9,44 @@
         'FeedbackHttpService',
         '$routeParams',
         'VacancyHttpService',
-        'EnumConstants'
+        'EnumConstants',
+        '$scope'
     ];
 
-    function CardTechnicalInterviewController(FeedbackHttpService, $routeParams, VacancyHttpService,
-        EnumConstants) {
+    function CardTechnicalInterviewController(FeedbackHttpService, $routeParams, VacancyHttpService, EnumConstants, $scope) {
         var vm = this;
         vm.templateName = 'Technical Interview';
-        vm.techFeedback;
-        vm.vacancy;
+        vm.techFeedbacks = {};
+        vm.newTechFeedback = {};
+        vm.vacancy = {};
+        vm.saveFeedback = saveFeedback;
+        vm.updateFeedback = updateFeedback;
+        vm.getFeedbacks = getFeedbacks;
+        vm.getAllFeedbacks = getAllFeedbacks;
+        vm.getMyFeedbacks = getMyFeedbacks;
+        vm.voteColors = [];
 
-        // TODO: Initialization Should Be covered with self invoke function
-        VacancyHttpService.getVacancy($routeParams.vid).then(function (result) {
-            vm.vacancy = result;
-        });
-        // TODO: Define event function at the beginning of controller and only then should be implementation vm.saveHrFeedback = saveHrFeedback; function saveHrFeedback() {}
-        vm.saveFeedback = function (feedback) {
+        (function () {
+            VacancyHttpService.getVacancy($routeParams.vid).then(function (result) {
+                vm.vacancy = result;
+            });
+
+            vm.getFeedbacks();
+
+            for (var x in EnumConstants.voteColors) {
+                if (EnumConstants.voteColors.hasOwnProperty(x)) {
+                    vm.voteColors.push(EnumConstants.voteColors[x]);
+                }
+            }
+
+        })();
+
+        function saveFeedback(feedback) {
             var body = {
                 id: feedback.id,
-                cardId: feedback.cardId,
+                cardId: $scope.$parent.generalCardCtrl.cardInfo.cardId,
                 text: feedback.text,
-                type: feedback.type,
+                type: 3,
                 successStatus: feedback.successStatus
             }
 
@@ -37,46 +54,35 @@
                 feedback.id = result.id;
                 feedback.date = result.update;
                 feedback.userAlias = result.userAlias;
-                console.log("result after update");
-                console.log(feedback);
+                vm.techFeedbacks.push(result);
             });
         }
 
 
-        FeedbackHttpService.getTechFeedback($routeParams.vid, $routeParams.cid).then(function (result) {
-            vm.techFeedback = result;
 
-            if (vm.techFeedback.text == '') {
-                vm.techFeedback.feedbackConfig = {
-                    'buttonName': 'Save',
-                    'readOnly': false
-                }
+        function updateFeedback(feedback) {
+            if (!feedback.editMode) {
+                feedback.editMode = !feedback.editMode;
             } else {
-                vm.techFeedback.feedbackConfig = {
-                    'buttonName': 'Edit',
-                    'readOnly': true
-                }
+                feedback.editMode = !feedback.editMode;
+                vm.saveFeedback(feedback);
             }
+        }
 
-            vm.techFeedback.feedbackConfig.style = {
-                "border-color": vm.techFeedback.successStatus == 0 ? EnumConstants.voteColors['None']
-                                : vm.techFeedback.successStatus == 1 ? EnumConstants.voteColors['Like']
-                                : EnumConstants.voteColors['Dislike']
-            }
-
-            console.log(result);
-        });
-
-        vm.toggleReadOnly = function () {
-            vm.techFeedback.feedbackConfig.readOnly = vm.techFeedback.text != '' ? 
-                !vm.techFeedback.feedbackConfig.readOnly : vm.techFeedback.feedbackConfig.readOnly;
-
-            if (vm.techFeedback.feedbackConfig.readOnly) {
-                vm.techFeedback.feedbackConfig.buttonName = 'Edit';
-                vm.saveFeedback(vm.techFeedback);
-            } else {
-                vm.techFeedback.feedbackConfig.buttonName = 'Save';
-            }
+        function getAllFeedbacks() {
+            FeedbackHttpService.getTechFeedback(0, $routeParams.cid).then(function (result) {
+                vm.techFeedbacks = result;
+            });
+        }
+        function getMyFeedbacks() {
+            FeedbackHttpService.getTechFeedback(-1, $routeParams.cid).then(function (result) {
+                vm.techFeedbacks = result;
+            });
+        }
+        function getFeedbacks() {
+            FeedbackHttpService.getTechFeedback($routeParams.vid, $routeParams.cid).then(function (result) {
+                vm.techFeedbacks = result;
+            });
         }
 
     }

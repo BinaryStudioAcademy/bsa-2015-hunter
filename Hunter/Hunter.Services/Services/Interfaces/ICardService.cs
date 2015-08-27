@@ -12,5 +12,6 @@ namespace Hunter.Services.Interfaces
         bool IsCardExist(int vid, int cid);
         void DeleteCard(int vid, int cid);
         IEnumerable<AppResultCardDto> GetApplicationResults(int cid);
+        AppResultCardDto GetCardInfo(int vid, int cid);
     }
 }

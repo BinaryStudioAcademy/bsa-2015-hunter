@@ -56,6 +56,7 @@ namespace Hunter.Rest
             kernel.Bind<IUserRoleRepository>().To<UserRoleRepository>();
             kernel.Bind<IVacancyRepository>().To<VacancyRepository>();
             kernel.Bind<IFileRepository>().To<FileRepository>();
+            kernel.Bind<IScheduledNotificationRepository>().To<ScheduledNotificationRepository>();
             #endregion
 
             #region Services
@@ -74,6 +75,7 @@ namespace Hunter.Rest
             kernel.Bind<IResumeService>().To<ResumeService>();
             kernel.Bind<IActivityHelperService>().To<ActivityHelperService>();
             kernel.Bind<ICardService>().To<CardService>();
+            kernel.Bind<IScheduledNotificationService>().To<ScheduledNotificationService>();
             #endregion
 
             kernel.Bind<Common.Interfaces.ILogger>().To<Logger>();

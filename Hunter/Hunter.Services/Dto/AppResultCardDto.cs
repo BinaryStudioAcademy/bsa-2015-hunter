@@ -8,6 +8,7 @@ namespace Hunter.Services
 {
     public class AppResultCardDto
     {
+        public int CardId { get; set; } 
         public int VacancyId { get; set; }
         public DateTime Date { get; set; }
         public int Stage { get; set; }

@@ -33,7 +33,7 @@
         //vm.tableSize = 'col-md-9';
 
         // vm.currentPage = 1;
-        vm.pageSize = 5;
+        //vm.pageSize = 25;
         vm.totalItems = 0;
         vm.skip = 0;
         vm.order;
@@ -106,7 +106,7 @@
                                     vm.candidateList = cands.items;
                                     vm.totalItems = cands.count;
                                     vm.tableSpinner = false;
-                                    console.log(vm.candidateList);
+//                                    console.log(vm.candidateList);
                                     //if (vm.candidateList.length > 0) {
                                     //    $rootScope.candidateDetails.id = vm.candidateList[0].id;
                                     //} else {

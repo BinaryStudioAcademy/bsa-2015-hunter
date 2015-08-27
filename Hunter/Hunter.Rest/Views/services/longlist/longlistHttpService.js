@@ -13,7 +13,8 @@
         var service = {
             addCards: addCards,
             removeCard: removeCard,
-            getAppResults: getAppResults
+            getAppResults: getAppResults,
+            getCardInfo: getCardInfo
         }
 
         function addCards(body, newLocation) {
@@ -63,6 +64,23 @@
             });
             return deferred.promise;
         }
+
+        function getCardInfo(vid, cid) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/card/info/' + vid + '/' + cid,
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get application results error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
+
 
         return service;
     }

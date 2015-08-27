@@ -69,6 +69,7 @@
     <Compile Include="Repositories\IInterviewRepository.cs" />
     <Compile Include="Repositories\IPoolRepository.cs" />
     <Compile Include="Repositories\IResumeRepository.cs" />
+    <Compile Include="Repositories\IScheduledNotificationRepository.cs" />
     <Compile Include="Repositories\ISpecialNoteRepository.cs" />
     <Compile Include="Repositories\ITestRepository.cs" />
     <Compile Include="Repositories\IUserProfileRepository.cs" />
