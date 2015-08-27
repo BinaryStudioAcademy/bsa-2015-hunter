@@ -6,6 +6,7 @@ using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Interface.Base;
 using Hunter.Services.Extensions;
 using Hunter.Services.Interfaces;
+using System.Net.Mail;
 
 namespace Hunter.Services
 {
@@ -55,12 +56,36 @@ namespace Hunter.Services
             var notifications = _scheduledNotificationRepository.QueryIncluding(n => n.UserProfileId == userProfile.Id).ToList();
             return notifications.Select(item => item.ToScheduledNotificationDto()).ToList();
         }
+
         public ScheduledNotificationDto Get(int id)
         {
             var vacancy = _scheduledNotificationRepository.Get(id);
             if (vacancy != null)
                 return vacancy.ToScheduledNotificationDto();
             return null;
+        }
+
+        public void Notify()
+        {
+            throw new NotImplementedException();
+            var pendingDate = DateTime.UtcNow.Date.AddDays(1);
+            var notifications = _scheduledNotificationRepository.QueryIncluding(n => n.Pending < pendingDate && !n.IsSent).OrderBy(n => n.UserProfileId).ToList();
+            var currentEmail = string.Empty;
+            var emailClient = new SmtpClient();
+            MailMessage mailMessage = null;
+            foreach (var n in notifications)
+            {
+                if (currentEmail != n.UserProfile.UserLogin)
+                {
+                    if (currentEmail != string.Empty)
+                    {
+                        emailClient.Send(mailMessage);
+                    }
+                    currentEmail = n.UserProfile.UserLogin;
+                    mailMessage = new MailMessage("Hunter App", currentEmail);
+                    emailClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                }
+            }
         }
     }
 }

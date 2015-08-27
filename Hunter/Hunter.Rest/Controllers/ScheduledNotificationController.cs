@@ -105,5 +105,20 @@ namespace Hunter.Rest.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
         }
+
+        [HttpGet]
+        [Route("notify")]
+        public HttpResponseMessage Notify()
+        {
+            try
+            {
+                _scheduledNotificationService.Notify();
+                return Request.CreateResponse(HttpStatusCode.OK, "Ok");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
     }
 }
