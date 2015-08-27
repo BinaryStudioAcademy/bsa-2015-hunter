@@ -118,7 +118,20 @@
                 <div ng-hide="candidateListCtrl.pageConfig.isAddToVacancyButton" class="row form-inline">
                     <button class="btn btn-default col-md-offset-1 col-md-10" type="button" ng-click="candidateListCtrl.addCandidateToLongList()">Add to '{{candidateListCtrl.vacancy.name}}' Long List</button>
                 </div>
-                <div class="row form-inline">
+                <div>
+                    <div class="pagination page-count-wrapper form-inline">
+                        <span>Items on page</span>
+                        <select class="form-control"
+                                ng-init="candidateListCtrl.pageSize=25"
+                                ng-model="candidateListCtrl.pageSize"
+                                ng-change="candidateListCtrl.getCandidates()">
+                            <option value="5">5</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="">All</option>
+                        </select>
+                    </div>
                     <pagination total-items="candidateListCtrl.totalItems"
                                 ng-model="candidateListCtrl.filter.currentPage"
                                 items-per-page="candidateListCtrl.pageSize"
@@ -126,16 +139,7 @@
                                 class="pagination-sm"
                                 boundary-links="true"
                                 template-url="../../Views/templates/pagination.html"></pagination>
-                    <div class="pagination page-count-wrapper">
-                        <span>Items on page</span>
-                        <select class="form-control" ng-model="candidateListCtrl.pageSize" ng-change="candidateListCtrl.getCandidates()">
-                            <option selected value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="">All</option>
-                        </select>
 
-                    </div>
                 </div>
                 
 
