@@ -5,6 +5,12 @@ using System.Web.Http;
 using Hunter.Services;
 using Hunter.Services.Dto;
 using Hunter.Services.Interfaces;
+using System.Web.Http.OData.Query;
+using System.Linq;
+using System.Web.Http.OData;
+using System.Collections.Generic;
+using System.Web.Http.OData.Extensions;
+using System.Web.Http.Description;
 
 namespace Hunter.Rest.Controllers
 {
@@ -19,15 +25,67 @@ namespace Hunter.Rest.Controllers
             _activityService = activityService;
         }
 
-       
+
         [HttpGet]
         [Route("")]
         public HttpResponseMessage GetActivities()
-        {        
+        {
             try
             {
                 var activities = _activityService.GetAllActivities();
                 return Request.CreateResponse(HttpStatusCode.OK, activities);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("odata")]
+        [ActionName("GetOdata")]
+        [ResponseType(typeof(ActivityDto))]
+        public HttpResponseMessage GetOdata(ODataQueryOptions<ActivityDto> options)
+        {
+            try
+            {
+                IQueryable activities =
+                    options.ApplyTo(_activityService.GetAllActivities().AsQueryable());
+
+                if (activities == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "No activities!");
+                }
+
+                var filteredActivities = new PageResult<ActivityDto>(
+                        activities as IEnumerable<ActivityDto>,
+                        Request.ODataProperties().NextLink,
+                        Request.ODataProperties().TotalCount);
+
+                return Request.CreateResponse(HttpStatusCode.OK, filteredActivities);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("filters")]
+        [ActionName("getFilters")]
+        [ResponseType(typeof(IEnumerable<ActivityFilterDto>))]
+        public HttpResponseMessage GetFilters()
+        {
+            try
+            {
+                var filters = _activityService.GetFilters();
+
+                if (filters == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "No filters for activity!");
+                }
+
+                return Request.CreateResponse(HttpStatusCode.OK, filters);
             }
             catch (Exception ex)
             {
@@ -133,7 +191,7 @@ namespace Hunter.Rest.Controllers
         {
             try
             {
-                _activityService.DeleteActivityById(id); 
+                _activityService.DeleteActivityById(id);
                 return Request.CreateResponse(HttpStatusCode.OK, "Ok");
             }
             catch (Exception ex)

@@ -32,6 +32,32 @@ namespace Hunter.Services
             return _activityRepository.Get(id).ToActivityDto();
         }
 
+        public IEnumerable<ActivityFilterDto> GetFilters()
+        {
+            var tags = _activityRepository.Query()
+                .GroupBy(f => (int)f.Tag)
+                .Select(f => new ActivityFilterDto()
+                {
+                    FilterId = 0,
+                    Count = f.Count(),
+                    Name = "",
+                    OptionId = f.Key
+                }).ToList();
+
+            var users = _activityRepository.Query()
+                .GroupBy(f => f.UserProfile)
+                .Select(f => new ActivityFilterDto()
+                {
+                    FilterId = 1,
+                    Count = f.Count(),
+                    OptionId = f.Key.Id,
+                    Name = f.Key.Alias
+                }).ToList();
+
+            var filters = tags.Concat(users);
+
+            return filters;
+        }
 
         public void AddActivity(ActivityDto entity)
         {

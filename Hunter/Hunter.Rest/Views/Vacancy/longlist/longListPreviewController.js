@@ -31,6 +31,7 @@
 
         vm.isPreviewShown = false;
         vm.stages = EnumConstants.cardStages;
+        vm.resolutions = EnumConstants.resolutions;
 
         vm.tabs = [
             { name: 'Overview', route: 'overview' },
@@ -63,7 +64,7 @@
                 }
             });
 
-        function hideCandidatePreview(cid) {
+        function hideCandidatePreview() {
             $scope.$emit('hideCandidatePreview');
             $rootScope.candidatePreview.cid = 0;
             vm.isPreviewShown = false;
@@ -76,8 +77,9 @@
         function getCandidateDetails(cid) {
             vm.prevLoad = true;
             (function () {
-                candidateHttpService.getLongListDetails(cid).then(function (result) {
+                candidateHttpService.getLongListDetails(vm.vacancyId, cid).then(function (result) {
                     vm.candidateDetails = result;
+                    //console.log(result);
                 });
             })();
 

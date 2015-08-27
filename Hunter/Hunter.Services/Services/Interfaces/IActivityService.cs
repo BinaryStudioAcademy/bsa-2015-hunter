@@ -13,5 +13,7 @@ namespace Hunter.Services.Interfaces
 
         int GetUnreadActivitiesForUser(string login);
         void UpdateLastSeenActivity(string login, int lastSeenActivityId);
+
+        IEnumerable<ActivityFilterDto> GetFilters();
     }
 }

@@ -13,7 +13,7 @@ namespace Hunter.Services
         public double? Salary { get; set; }
         public double? YearsOfExperience { get; set; }
         public int Stage { get; set; }
-        public string Resolution { get; set; }
+        public int Resolution { get; set; }
         public string AddedBy { get; set; }
         public DateTime AddDate { get; set; }
         public string PhotoUrl { get; set; }
