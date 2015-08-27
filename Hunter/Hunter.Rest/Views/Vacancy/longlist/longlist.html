@@ -66,24 +66,32 @@
                 </div>
             </div>
             <select class="form-control" ng-change="longListCtrl.getCandidatesForLongList()" ng-options="item.options as item.text for item in longListCtrl.sortOptions" ng-model="longListCtrl.order"></select>
-            <pagination total-items="longListCtrl.totalItems"
-                        ng-model="longListCtrl.filter.currentPage"
-                        items-per-page="longListCtrl.pageSize"
-                        max-size="5"
-                        class="pagination-sm"
-                        boundary-links="true"
-                        template-url="../../Views/templates/pagination.html">
-            </pagination>
-            <div class="pagination page-count-wrapper form-inline">
-                <span>Items on page</span>
-                <select class="form-control" ng-model="longListCtrl.pageSize" ng-change="longListCtrl.getCandidatesForLongList(">
-                    <option selected value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="">All</option>
-                </select>
-
+            <div>
+                <div class="pagination page-count-wrapper form-inline">
+                    <span>Items on page:</span>
+                    <select class="form-control" ng-init="longListCtrl.pageSize=25" ng-model="longListCtrl.pageSize" ng-change="longListCtrl.getCandidatesForLongList()">
+                        <option value="5">5</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="">All</option>
+                    </select>
+                </div>
+                <pagination total-items="longListCtrl.totalItems"
+                            ng-model="longListCtrl.filter.currentPage"
+                            items-per-page="longListCtrl.pageSize"
+                            max-size="5"
+                            class="pagination-sm ll_pagination"
+                            boundary-links="true"
+                            template-url="../../Views/templates/pagination.html">
+                </pagination>
+                <!--                <div class="pagination page-count-wrapper form-inline">-->
+                <!--                    <span>Items on page</span>-->
+                <!--                    -->
+                <!---->
+                <!--                </div>-->
             </div>
+            
         </div>
         <div class="col-md-4" ng-include="'/Views/vacancy/longlist/longListPreview.html'"></div>
     </div>
