@@ -769,8 +769,10 @@
     <Content Include="Views\candidate\candidateService.js" />
     <Content Include="Views\candidate\card\cardSummary.html" />
     <Content Include="Views\candidate\card\cardSummaryController.js" />
+    <Content Include="Views\directives\poolSelector.js" />
     <Content Include="Views\directives\thumbButtonDirective.js" />
     <Content Include="Views\filters\localDateFilter.js" />
+    <Content Include="Views\pool\poolGeneralController.js" />
     <Content Include="Views\services\directive\autoExpandTextareaDirective.js" />
     <Content Include="Views\candidate\card\cardHrInterview.html" />
     <Content Include="Views\candidate\card\cardHrIterviewController.js" />

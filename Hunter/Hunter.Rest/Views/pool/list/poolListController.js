@@ -8,20 +8,35 @@
     PoolListController.$inject = [
         "$location",
         "AuthService",
-        "HttpHandler"
+        "HttpHandler",
+        '$scope'
     ];
 
-    function PoolListController($location, AuthService, HttpHandler) {
+    function PoolListController($location, AuthService, HttpHandler, $scope) {
         var vm = this;
-        
-        HttpHandler.sendRequest({
-                    url: "/api/pool",
-                    verb: "GET",
-                    successCallback: function(result) {
-                        console.log(result.data);
-                        vm.poolsList = result.data;
-                    },
-                    errorCallback: function (result) { console.log(result); }
-                });
+
+        vm.editPool = editPool;
+        vm.choosePool = choosePool;
+
+        (function() {
+            HttpHandler.sendRequest({
+                url: "/api/pool",
+                verb: "GET",
+                successCallback: function(result) {
+                    console.log(result.data);
+                    vm.poolsList = result.data;
+                },
+                errorCallback: function(result) { console.log(result); }
+            });
+        })();
+
+        function editPool(pool) {
+            $scope.generalCtrl.link = 'Views/pool/addEdit/addEdit.html';
+            $scope.generalCtrl.selectedPool = pool;
+        }
+
+        function choosePool(pool) {
+            $scope.generalCtrl.selectPool(pool);
+        }
     }
 })();
