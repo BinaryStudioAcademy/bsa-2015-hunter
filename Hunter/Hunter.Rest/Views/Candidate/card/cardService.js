@@ -32,7 +32,8 @@
                     return viewsPath + 'cardTest.html';
                 case 'summary':
                     return viewsPath + 'cardSummary.html';
-                
+                case 'application':
+                    return viewsPath + 'cardApplications.html';
                 default:
                     return '';
             }

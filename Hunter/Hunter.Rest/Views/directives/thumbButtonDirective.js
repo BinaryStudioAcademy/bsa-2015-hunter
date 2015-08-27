@@ -38,7 +38,7 @@
                         scope.feedback.feedbackConfig.style = { 'border-color': scope.getColor('None') }
                         scope.feedback.successStatus = scope.getSuccess('None');
                     }
-
+                    scope.feedback.successStatus = scope.getSuccess(scope.key);
                     scope.saveSuccessStatus(scope.feedback);
                 }
             },

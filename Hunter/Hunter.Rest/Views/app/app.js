@@ -61,9 +61,9 @@ angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.dir
                     controllerAs: 'candidateAddEditCtrl'
                 })
                 .when('/candidate/:cid', {
-                    templateUrl: viewPath + 'candidate/profile/profile.html',
-                    controller: 'CandidateProfileController',
-                    controllerAs: 'candidateCtrl'
+                    templateUrl: viewPath + 'candidate/card/generalCard.html',
+                    controller: 'GeneralCardController',
+                    controllerAs: 'generalCardCtrl'
                 })
                 .when('/vacancy/:vid/candidate/:cid', {
                     templateUrl: viewPath + 'candidate/card/generalCard.html',

@@ -28,15 +28,15 @@ namespace Hunter.Services
                 Linkedin = candidate.Linkedin ?? "",
                 Salary = candidate.Salary,
                 YearsOfExperience = Math.Round(experiance + candidate.CalculateYearsOfExperiance(), 1),
-                Resumes = resumes.Select(r => new ResumeDto()
+                Resumes = candidate.Resume != null ? candidate.Resume.Select(r => new ResumeDto()
                 {
                     Id = r.Id,
                     FileId = r.FileId,
                     Uploaded = r.File.Added,
                     FileName = r.File.FileName,
                     DownloadUrl = "api/file/download/"+ r.FileId
-                }),
-                ResumeSummary = candidate.ResumeSummary ?? "",
+                }) : new HashSet<ResumeDto>(),
+                ResumeSummary = candidate.ResumeSummary,
                 AddedByProfileId = candidate.AddedByProfileId,
                 AddedBy = candidate.AddedByProfileId.HasValue ? candidate.UserProfile.UserLogin : "",
                 AddDate = candidate.AddDate,

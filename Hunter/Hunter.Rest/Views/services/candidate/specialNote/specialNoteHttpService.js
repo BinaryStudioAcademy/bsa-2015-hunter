@@ -28,7 +28,7 @@
                 verb: 'PUT',
                 url: '/api/specialnote/' + id,
                 body: body,
-                successCallback: function(response) {
+                successCallback: function (response) {
                     deferred.resolve(response.data);
                 }
             });
@@ -42,7 +42,7 @@
                 verb: 'POST',
                 url: '/api/specialnote/create',
                 body: body,
-                successCallback: function(response) {
+                successCallback: function (response) {
                      deferred.resolve(response.data);
                 }
             });
@@ -98,7 +98,7 @@
             return deferred.promise;
         }
 
-        function getCardSpecialNote(vid,cid) {
+        function getCardSpecialNote(vid, cid) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
                 url: '/api/specialnote/' + vid + '/' + cid,
@@ -114,10 +114,10 @@
             return deferred.promise;
         }
 
-        function getUserSpecialNote(login, vid, cid) {
+        function getUserSpecialNote(cid) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/specialnote/user/' + login + '/'+vid+'/'+cid,
+                url: '/api/specialnote/user/' + cid,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result);

@@ -153,5 +153,21 @@ namespace Hunter.Rest.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("info/{vid:int}/{cid:int}")]
+        [ResponseType(typeof(AppResultCardDto))]
+        public IHttpActionResult GetCardInfo(int vid, int cid)
+        {
+            try
+            {
+                var results = _cardService.GetCardInfo(vid, cid);
+                return Ok(results);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

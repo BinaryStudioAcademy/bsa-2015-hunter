@@ -767,6 +767,8 @@
     <Content Include="Views\candidate\addEdit\addEdit.html" />
     <Content Include="Views\candidate\addEdit\candidateAddEditController.js" />
     <Content Include="Views\candidate\candidateService.js" />
+    <Content Include="Views\candidate\card\cardApplications.html" />
+    <Content Include="Views\candidate\card\cardApplicationsController.js" />
     <Content Include="Views\candidate\card\cardSummary.html" />
     <Content Include="Views\candidate\card\cardSummaryController.js" />
     <Content Include="Views\directives\thumbButtonDirective.js" />

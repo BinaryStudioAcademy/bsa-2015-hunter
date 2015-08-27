@@ -26,13 +26,6 @@ namespace Hunter.Rest.Controllers
             _testService = testService;
         }
 
-        // GET: api/Feedback
-        [HttpGet]
-        [Route("")]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
         [HttpGet]
         [Route("hr/{vid:int}/{cid:int}")]
@@ -42,7 +35,7 @@ namespace Hunter.Rest.Controllers
         {
             try
             {
-                var interviews = _feedbackService.GetAllHrInterviews(vid, cid);
+                var interviews = _feedbackService.GetAllHrInterviews(vid, cid,User.Identity.Name);
                 return interviews == null ? Request.CreateResponse(HttpStatusCode.BadRequest, "Vacancy has no candidates!") 
                     : Request.CreateResponse(HttpStatusCode.OK, interviews);
             }
@@ -54,12 +47,12 @@ namespace Hunter.Rest.Controllers
 
         [HttpGet]
         [Route("tech/{vacancyId:int}/{candidateId:int}")]
-        [ResponseType(typeof(FeedbackDto))]
+        [ResponseType(typeof(IEnumerable<FeedbackDto>))]
         public HttpResponseMessage GetTechInterview(int vacancyId, int candidateId)
         {
             try
             {
-                var interview = _feedbackService.GetTechInterview(vacancyId, candidateId);
+                var interview = _feedbackService.GetTechInterview(vacancyId, candidateId,User.Identity.Name);
                 if (interview == null)
                     return Request.CreateResponse(HttpStatusCode.NoContent, "not technical interview");
                 return Request.CreateResponse(HttpStatusCode.OK, interview);
@@ -88,12 +81,6 @@ namespace Hunter.Rest.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
             }
 
-        }
-
-        // GET: api/Feedback/5
-        public string Get(int id)
-        {
-            return "value";
         }
 
         // POST: api/Feedback
@@ -146,14 +133,24 @@ namespace Hunter.Rest.Controllers
             }
         }
 
-        // PUT: api/Feedback/5
-        public void Put(int id, [FromBody]string value)
+        [HttpGet]
+        [Route("overview/{vacancyId:int}/{candidateId:int}")]
+        [ResponseType(typeof(IEnumerable<FeedbackDto>))]
+        public HttpResponseMessage GetAll(int vacancyId, int candidateId)
         {
+            try
+            {
+                var feedbacks = _feedbackService.GetAllFeedbacks(vacancyId, candidateId);
+                if (feedbacks == null)
+                    return Request.CreateResponse(HttpStatusCode.NoContent, "not feedbacks");
+                return Request.CreateResponse(HttpStatusCode.OK, feedbacks);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
+            }
+
         }
 
-        // DELETE: api/Feedback/5
-        public void Delete(int id)
-        {
-        }
     }
 }

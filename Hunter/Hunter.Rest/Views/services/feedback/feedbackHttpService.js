@@ -19,7 +19,8 @@
             saveFeedback: saveFeedback,
             getSummary: getSummary,
             saveSummary: saveSummary,
-            updateSuccessStatus: updateSuccessStatus
+            updateSuccessStatus: updateSuccessStatus,
+            getLastFeedbacks: getLastFeedbacks,
         }
 
         function getHrFeedback(vid, cid) {
@@ -144,6 +145,22 @@
                 'errorCallback': function (response){console.log(response)}
             });
         }
+
+        function getLastFeedbacks(vid,cid) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/feedback/overview/' + vid + '/' + cid,
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get feedbacks error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        };
 
         return service;
     }
