@@ -28,7 +28,6 @@
         vm.specialNote ={};
         vm.newNoteText ='';
 
-        // TODO: Initialization Should Be Covered with self invoke function
         (function () {
 
             if ($scope.$parent.generalCardCtrl.isLLM) {
@@ -67,7 +66,6 @@
                 });
         }
 
-        // TODO: Data Functions (not user event functions) Should Be In Services
         function loadCardNotes() {
             specialNoteHttpService.getCardSpecialNote($routeParams.vid, $routeParams.cid)
                 .then(function (result) {
