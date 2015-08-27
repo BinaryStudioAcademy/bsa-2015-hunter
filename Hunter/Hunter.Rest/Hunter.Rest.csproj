@@ -292,6 +292,7 @@
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ResumeController.cs" />
+    <Compile Include="Controllers\ScheduledNotificationController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\SpecialNoteController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
