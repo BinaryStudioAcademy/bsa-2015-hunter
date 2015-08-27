@@ -27,8 +27,10 @@
         vm.name = 'Candidates';
 
         $rootScope.candidateDetails = {
-            id: null
+            id: null,
+            show: false
         };
+        //vm.tableSize = 'col-md-9';
 
         // vm.currentPage = 1;
         vm.pageSize = 5;
@@ -70,8 +72,8 @@
         vm.sortOptions = [
         { text: 'Name \u25BC', options: { field: 'FirstName', dir: 'asc' } },
         { text: 'Name \u25B2', options: { field: 'FirstName', dir: 'desc' } },
-        { text: 'Added \u25BC', options: { field: 'AddedBy', dir: 'asc' } },
-        { text: 'Added \u25B2', options: { field: 'AddedBy', dir: 'desc' } },
+        { text: 'Added \u25BC', options: { field: 'AddDate', dir: 'asc' } },
+        { text: 'Added \u25B2', options: { field: 'AddDate', dir: 'desc' } },
         { text: 'Status \u25BC', options: { field: 'Resolution', dir: 'asc' } },
         { text: 'Status \u25B2', options: { field: 'Resolution', dir: 'desc' } },
         { text: 'Email \u25BC', options: { field: 'Email', dir: 'asc' } },
@@ -104,11 +106,12 @@
                                     vm.candidateList = cands.items;
                                     vm.totalItems = cands.count;
                                     vm.tableSpinner = false;
-                                    if (vm.candidateList.length > 0) {
-                                        $rootScope.candidateDetails.id = vm.candidateList[0].id;
-                                    } else {
-                                        $rootScope.candidateDetails.id = 0;
-                                    }
+                                    console.log(vm.candidateList);
+                                    //if (vm.candidateList.length > 0) {
+                                    //    $rootScope.candidateDetails.id = vm.candidateList[0].id;
+                                    //} else {
+                                    //    $rootScope.candidateDetails.id = 0;
+                                    //}
                                 });
         }
 
@@ -167,12 +170,20 @@
         vm.ShowDetails = function (item) {
             if ($rootScope.candidateDetails.id != item.id) {
                 $rootScope.candidateDetails.id = item.id;
+                $rootScope.candidateDetails.show = true;
                 $rootScope.candidateDetails.shortListed = item.shortListed;
+                //vm.tableSize = 'col-md-5';
+            } else if ($rootScope.candidateDetails.id === item.id && $rootScope.candidateDetails.show === true) {
+                $rootScope.candidateDetails.show = false;
+                //vm.tableSize = 'col-md-9';
+            } else {
+                $rootScope.candidateDetails.show = true;
+                //vm.tableSize = 'col-md-5';
             }
         }
 
         vm.ActiveTr = function (id) {
-            if (id == $rootScope.candidateDetails.id) {
+            if (id == $rootScope.candidateDetails.id && $rootScope.candidateDetails.show === true) {
                 return 'info';
             }
             else {
@@ -194,7 +205,7 @@
         // not user-event functions 
         vm.selectedCandidates = [];
 
-        vm.vacancyByState=[];
+        vm.vacancyByState = [];
         vm.vacancyStateIds = [EnumConstants.vacancyStates[1].id, EnumConstants.vacancyStates[2].id];
 
         function createCardRequestBody() {

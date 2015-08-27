@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text.RegularExpressions;
 using System.Web.Http;
 using System.Web.Http.Description;
 
@@ -163,15 +164,23 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("open/pdf/{id:int}")]
+        [Route("open/{id:int}")]
         [ResponseType(typeof (FileDto))]
         public HttpResponseMessage OpenInBrowser(int id)
         {
             var file = _fileService.DownloadFile(id);
             HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
             result.Content = new StreamContent(file.File);
-            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
-            result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("inline");
+            if (!Regex.IsMatch(file.FileName, "[A-z]*(.pdf)"))
+            {
+                result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
+            }
+            else
+            {
+                result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
+                result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("inline");
+            } 
             result.Content.Headers.ContentDisposition.FileName = file.OriginalFileName();
             return result;
         }
