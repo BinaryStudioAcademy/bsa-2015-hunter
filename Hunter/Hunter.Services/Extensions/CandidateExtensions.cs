@@ -48,7 +48,7 @@ namespace Hunter.Services
                 DateOfBirth = candidate.DateOfBirth,
                 PhotoUrl = "api/fileupload/pictures/"+candidate.Id,
                 UserAlias = candidate.UserProfile != null ? candidate.UserProfile.Alias : "",
-                LastResumeUrl = candidate.Resume.Count>0 ? "api/file/open/pdf/"+candidate.Resume.LastOrDefault().FileId : ""
+                LastResumeUrl = candidate.Resume.Count>0 ? "api/file/open/"+candidate.Resume.LastOrDefault().FileId : ""
             };
             return dto;
         }
@@ -113,7 +113,7 @@ namespace Hunter.Services
                 Stage = card != null ? card.Stage : 0,
                 Shortlisted = candidate.Shortlisted,
                 UserAlias = candidate.UserProfile != null ? candidate.UserProfile.Alias : "",
-                LastResumeUrl = candidate.Resume.Count > 0 ? "api/file/open/pdf/" + candidate.Resume.LastOrDefault().FileId : ""
+                LastResumeUrl = candidate.Resume.Count > 0 ? "api/file/open/" + candidate.Resume.LastOrDefault().FileId : ""
             };
         }
 
