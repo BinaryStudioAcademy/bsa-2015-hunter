@@ -40,6 +40,10 @@
                     </td>
                 </tr>
             </table>
+            <div class="pagination page-count-wrapper form-inline">
+                <span>Items on page</span>
+                <select class="form-control" ng-change="ActivityListCtrl.getActivitiesOdata()" ng-options="item as item for item in ActivityListCtrl.itemsOnPage.items" ng-model="ActivityListCtrl.pageSize"></select>
+            </div>
             <pagination total-items="ActivityListCtrl.totalItems"
                         ng-model="ActivityListCtrl.filter.currentPage"
                         items-per-page="ActivityListCtrl.pageSize"
@@ -48,10 +52,6 @@
                         boundary-links="true"
                         template-url="../../Views/templates/pagination.html">
             </pagination>
-            <div class="pagination page-count-wrapper form-inline">
-                <span>Items on page</span>
-                <select class="form-control" ng-change="ActivityListCtrl.getActivitiesOdata()" ng-options="item as item for item in ActivityListCtrl.itemsOnPage.items" ng-model="ActivityListCtrl.pageSize"></select>
-            </div>
         </div>
     </div>
     
