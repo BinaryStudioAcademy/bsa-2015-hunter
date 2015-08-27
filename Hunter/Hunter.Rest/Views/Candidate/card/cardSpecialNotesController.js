@@ -34,24 +34,24 @@
                 loadCardNotes();
 
 
-                VacancyHttpService.getLongList($routeParams.vid).then(function(result) {
-                    vm.vacancy = result;
-                });
+        VacancyHttpService.getLongList($routeParams.vid).then(function(result) {
+            vm.vacancy = result;
+        });
             } else {
                 loadAllNotes();
             }
         })();
         function saveNewSpecialNote() {
             var note = {
-                text: vm.newNoteText
+                text: vm.newNoteText,
+                vacancyId: $routeParams.vid,
+                candidateId: $routeParams.cid
             };
-            specialNoteHttpService.addSpecialNote(note, $routeParams.vid, $routeParams.cid)
-                .then(function (data) {
+            specialNoteHttpService.addSpecialNote(note)
+            .then(function (data) {
                     note.id = data.id;
                     note.lastEdited = data.update;
-                    note.userAlias = data.userAlias;
-                    note.cardId = data.cardId;
-                    note.lastEdited = data.update;
+                note.userLogin = data.userName;
                     vm.notes.unshift(note);
                     vm.newNoteText = '';
                 });
@@ -88,7 +88,7 @@
             });
         }
 
-        
+
         function toggleReadOnly(note) {
             note.noteConfig.readOnly = note.text != '' ? !note.noteConfig.readOnly : note.noteConfig.readOnly;
 

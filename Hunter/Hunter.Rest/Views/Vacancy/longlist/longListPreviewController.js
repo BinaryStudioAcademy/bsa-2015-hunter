@@ -10,6 +10,7 @@
         '$location',
         '$route',
         '$rootScope',
+        //'$emit',
         'CandidateHttpService',
         'LonglistHttpService',
         'EnumConstants',
@@ -26,6 +27,7 @@
         vm.getCandidateDetails = getCandidateDetails;
         vm.removeCard = removeCard;
         vm.changeTemplate = changeTemplate;
+        vm.showResume = showResume;
 
         vm.isPreviewShown = false;
         vm.stages = EnumConstants.cardStages;
@@ -46,8 +48,6 @@
             { title: 'Tech Feedback', text: '', date: '', user: '' },
             { title: 'Test Feedback', text: '', date: '', user: '' }
         ];
-        vm.notes = [];
-        vm.appResults = [];
 
         $rootScope.$watch(
             '$root.candidatePreview.cid',
@@ -59,12 +59,19 @@
                 } else {
                     getCandidateDetails($rootScope.candidatePreview.cid);
                     vm.isPreviewShown = true;
+                    changeTemplate(vm.tabs[2]);
                 }
             });
 
-        function hideCandidatePreview() {
+        function hideCandidatePreview(cid) {
+            $scope.$emit('hideCandidatePreview');
+            $rootScope.candidatePreview.cid = 0;
             vm.isPreviewShown = false;
         }
+
+        vm.overviewText = '';
+        vm.notes = [];
+        vm.appResults = [];
 
         function getCandidateDetails(cid) {
             (function () {
@@ -76,11 +83,23 @@
             })();
 
             (function () {
+                feedbackHttpService.getSummary(vm.vacancyId, cid).then(function (result) {
+                    vm.overviews[0].text = result.text;
+                    vm.overviews[0].date = result.date;
+                    vm.overviews[0].user = result.userAlias;
+
+                    vm.overviewText = result.text;
+                });
+            })();
+
+            (function () {
                 feedbackHttpService.getHrFeedback(vm.vacancyId, cid).then(function (result) {
-                    for (var i = 0; i < 3; i++) {
+                    for (var i = 0; i < 2; i++) {
                         vm.overviews[i + 1].text = result[i].text;
                         vm.overviews[i + 1].date = result[i].date;
                         vm.overviews[i + 1].user = result[i].userAlias;
+
+                        vm.overviewText = result[i].text;
                     }
                 });
             })();
@@ -91,29 +110,21 @@
                     vm.overviews[4].text = result.text;
                     vm.overviews[4].date = result.date;
                     vm.overviews[4].user = result.userAlias;
+
+                    vm.overviewText = result.text;
                 });
             })();
 
-            (function () {
-                cardTestHttpService.getTest(vm.vacancyId, cid, function (result) {
-                    vm.tests = result.data;
-                    //console.log(result);
-                });
-            })();
-
-
-            (function () {
-                feedbackHttpService.getSummary(vm.vacancyId, cid).then(function (result) {
-                    vm.overviews[0].text = result.text;
-                    vm.overviews[0].date = result.date;
-                    vm.overviews[0].user = result.userAlias;
-                });
-            })();
+            //(function () {
+            //    cardTestHttpService.getTest(vm.vacancyId, cid, function (result) {
+            //        vm.tests = result.data;
+            //        //console.log(result);
+            //    });
+            //})();
 
             (function () {
                 specialNoteHttpService.getCardSpecialNote(vm.vacancyId, cid)
                     .then(function (result) {
-                        vm.notes = [];
                         for (var i = 0; i < result.data.length; i++) {
                             vm.notes.push({
                                 text: result.data[i].text,
@@ -121,14 +132,12 @@
                                 user: result.data[i].userAlias
                             });
                         }
-                        //console.log(result.data);
                     });
             })();
 
             (function() {
-                longlistHttpService.getAppResults(vm.vacancyId, cid).then(function (result) {
+                longlistHttpService.getAppResults(cid).then(function (result) {
                     vm.appResults = result;
-                    console.log(vm.appResults);
                 });
             })();
         }
@@ -137,15 +146,17 @@
             longlistHttpService.removeCard(vm.vacancyId, cid);
             vm.isPreviewShown = false;
             $route.reload();
-            //$timeout(vm.getCandidatesForLongList, 1200);
         }
 
-        vm.templateToShow = longlistService.changeTemplate(vm.tabs[0].route);
-        vm.currentTabName = vm.tabs[0].name;
         function changeTemplate(tab) {
             vm.currentTabName = tab.name;
+            vm.currentTabEmpty = longlistService.isCurrentTabEmpty(tab.route, vm.overviewText, vm.notes);
             vm.templateToShow = longlistService.changeTemplate(tab.route);
-            //$location.search('tab', tab.route);
+            console.log(vm.overviewText);
+        }
+
+        function showResume() {
+            window.open(vm.candidateDetails.lastResumeUrl);
         }
     }
 })();

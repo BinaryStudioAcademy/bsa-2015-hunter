@@ -21,7 +21,7 @@
                 <div ng-show="test.file != null">
                     <div class="col-md-1"><label>Task</label></div>
                     <div class="col-md-10">
-                        <a href="/api/file/download/{{test.file.id}}">{{test.file.fileName}}</a> Size: {{test.file.size}} Uploaded: {{test.file.added | date:'dd.MM.yyyy HH:mm:ss'}}
+                        <a href="/api/file/download/{{test.file.id}}">{{test.file.fileName}}</a> Size: {{test.file.size}} Uploaded: {{test.file.added | date:'dd.MM.yyyy HH:mm'}}
                     </div>
                     <div class="col-md-1">
                         <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index, test)">
@@ -33,7 +33,7 @@
                 <div ng-show="test.url != null && test.file == null">
                     <div class="col-md-1"><label>Task</label></div>
                     <div class="col-md-10">
-                        <a href="{{test.url}}">{{test.url}}</a> Added {{test.added | date:'dd.MM.yyyy HH:mm:ss'}}
+                        <a href="{{test.url}}">{{test.url}}</a> Added {{test.added | date:'dd.MM.yyyy HH:mm'}}
                     </div>
                     <div class="col-md-1">
                         <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index, test)">

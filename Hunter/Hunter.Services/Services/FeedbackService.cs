@@ -23,7 +23,7 @@ namespace Hunter.Services
         private readonly ILogger _logger;
         private readonly IActivityHelperService _activityHelperService;
 
-        public FeedbackService(IFeedbackRepository feedbackRepository, ICardRepository cardRepository, ILogger logger,
+        public FeedbackService(IFeedbackRepository feedbackRepository, ICardRepository cardRepository, ILogger logger, 
             IUserProfileRepository userProfileRepository, IActivityHelperService activityHelperService)
         {
             _feedbackRepository = feedbackRepository;
@@ -96,8 +96,8 @@ namespace Hunter.Services
                 else
                 {
                     feedbacks = _cardRepository
-                        .Query()
-                        .Where(e => e.VacancyId == vacancyId && e.CandidateId == candidateId)
+                .Query()
+                .Where(e => e.VacancyId == vacancyId && e.CandidateId == candidateId)
                         .SelectMany(c => c.Feedback.Where(f => f.Type == type));
                 }
 
@@ -109,7 +109,7 @@ namespace Hunter.Services
                 _logger.Log(e);
                 return null;
             }
-
+             
         }
 
         public FeedbackDto GetSummary(int vacancyId, int candidateId)
@@ -153,7 +153,7 @@ namespace Hunter.Services
                     feedback = _feedbackRepository.Get(feedbackDto.Id);
                     if (feedback == null)
                     {
-                        //                    return Api.NotFound(hrInterviewDto.Id);
+    //                    return Api.NotFound(hrInterviewDto.Id);
                         throw new Exception("Feedback not found");
                     }
                 }
@@ -165,8 +165,8 @@ namespace Hunter.Services
 
                 feedback.ProfileId = userProfile != null ? userProfile.Id : (int?)null;
                 feedbackDto.ToFeedback(feedback);
-
-
+            
+            
                 _feedbackRepository.UpdateAndCommit(feedback);
                 _activityHelperService.CreateUpdatedFeedbackActivity(feedback);
                 var dto = feedback.ToFeedbackDto();
@@ -175,7 +175,7 @@ namespace Hunter.Services
             catch (Exception ex)
             {
                 _logger.Log(ex);
-                //                return Api.Error((long)feedback.Id, ex.Message);
+//                return Api.Error((long)feedback.Id, ex.Message);
                 throw ex;
             }
         }

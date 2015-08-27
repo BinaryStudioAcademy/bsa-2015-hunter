@@ -27,8 +27,10 @@
         vm.name = 'Candidates';
 
         $rootScope.candidateDetails = {
-            id: null
+            id: null,
+            show: false
         };
+        //vm.tableSize = 'col-md-9';
 
         // vm.currentPage = 1;
         vm.pageSize = 5;
@@ -49,21 +51,11 @@
         if (!isObjectEmpty($routeParams)) {
             vm.vacancyId = $routeParams.addToVacancy;
 
-            // get vacancy info
-            vacancyHttpService.getLongList(vm.vacancyId).then(function (result) {
-                console.log(result);
-                vm.vacancy = result;
-                vm.pageConfig.pageTitle = "Add Candidates to '" + vm.vacancy.name + "'";
-            });
-
             vm.pageConfig.isAddToVacancyButton = false;
             vm.pageConfig.locationAfterAdding = '/vacancy/' + vm.vacancyId + '/longlist';
         }
 
         vm.pools = [];
-        PoolsHttpService.getAllPools().then(function (result) {
-            vm.pools = result;
-        });
 
         vm.filter = {
             pools: [],
@@ -80,8 +72,8 @@
         vm.sortOptions = [
         { text: 'Name \u25BC', options: { field: 'FirstName', dir: 'asc' } },
         { text: 'Name \u25B2', options: { field: 'FirstName', dir: 'desc' } },
-        { text: 'Added \u25BC', options: { field: 'AddedBy', dir: 'asc' } },
-        { text: 'Added \u25B2', options: { field: 'AddedBy', dir: 'desc' } },
+        { text: 'Added \u25BC', options: { field: 'AddDate', dir: 'asc' } },
+        { text: 'Added \u25B2', options: { field: 'AddDate', dir: 'desc' } },
         { text: 'Status \u25BC', options: { field: 'Resolution', dir: 'asc' } },
         { text: 'Status \u25B2', options: { field: 'Resolution', dir: 'desc' } },
         { text: 'Email \u25BC', options: { field: 'Email', dir: 'asc' } },
@@ -97,10 +89,6 @@
         ];
 
         vm.order = vm.sortOptions[0].options;
-
-        CandidateHttpService.getAddedByList().then(function (result) {
-            vm.inviters = result;
-        });
 
         var predicate;
 
@@ -118,11 +106,12 @@
                                     vm.candidateList = cands.items;
                                     vm.totalItems = cands.count;
                                     vm.tableSpinner = false;
-                                    if (vm.candidateList.length > 0) {
-                                        $rootScope.candidateDetails.id = vm.candidateList[0].id;
-                                    } else {
-                                        $rootScope.candidateDetails.id = 0;
-                                    }
+                                    console.log(vm.candidateList);
+                                    //if (vm.candidateList.length > 0) {
+                                    //    $rootScope.candidateDetails.id = vm.candidateList[0].id;
+                                    //} else {
+                                    //    $rootScope.candidateDetails.id = 0;
+                                    //}
                                 });
         }
 
@@ -181,12 +170,20 @@
         vm.ShowDetails = function (item) {
             if ($rootScope.candidateDetails.id != item.id) {
                 $rootScope.candidateDetails.id = item.id;
+                $rootScope.candidateDetails.show = true;
                 $rootScope.candidateDetails.shortListed = item.shortListed;
+                //vm.tableSize = 'col-md-5';
+            } else if ($rootScope.candidateDetails.id === item.id && $rootScope.candidateDetails.show === true) {
+                $rootScope.candidateDetails.show = false;
+                //vm.tableSize = 'col-md-9';
+            } else {
+                $rootScope.candidateDetails.show = true;
+                //vm.tableSize = 'col-md-5';
             }
         }
 
         vm.ActiveTr = function (id) {
-            if (id == $rootScope.candidateDetails.id) {
+            if (id == $rootScope.candidateDetails.id && $rootScope.candidateDetails.show === true) {
                 return 'info';
             }
             else {
@@ -208,13 +205,8 @@
         // not user-event functions 
         vm.selectedCandidates = [];
 
-        vm.vacancyByState;
-        vm.vacancyStateId = EnumConstants.vacancyStates[1].id;
-
-        vacancyHttpService.getVacancyByState(vm.vacancyStateId).then(function (result) {
-            console.log(result);
-            vm.vacancyByState = result;
-        });
+        vm.vacancyByState = [];
+        vm.vacancyStateIds = [EnumConstants.vacancyStates[1].id, EnumConstants.vacancyStates[2].id];
 
         function createCardRequestBody() {
             var cards = [];
@@ -233,7 +225,34 @@
             return (Object.getOwnPropertyNames(obj).length === 0);
         }
 
-        
+        // initializating function
+        (function () {
+
+            // get vacancy info
+            vacancyHttpService.getLongList(vm.vacancyId).then(function (result) {
+                console.log(result);
+                vm.vacancy = result;
+                vm.pageConfig.pageTitle = "Add Candidates to '" + vm.vacancy.name + "'";
+            });
+
+            PoolsHttpService.getAllPools().then(function (result) {
+                vm.pools = result;
+            });
+
+            CandidateHttpService.getAddedByList().then(function (result) {
+                vm.inviters = result;
+            });
+
+            //getting vacancies with "open" and "on hold" states
+            for (var i = 0; i < vm.vacancyStateIds.length; i++) {
+                vacancyHttpService.getVacancyByState(vm.vacancyStateIds[i]).then(function (result) {
+                    console.log(result);
+                    for (var j = 0; j < result.length; j++) {
+                        vm.vacancyByState.push(result[j]);
+                    }
+                });
+            }
+        })();
     }
 
 })();

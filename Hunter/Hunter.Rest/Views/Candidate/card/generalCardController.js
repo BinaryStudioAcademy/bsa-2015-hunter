@@ -39,6 +39,7 @@
         vm.vacancy = {};
         vm.cardInfo = {};
         vm.isLLM = false;
+        vm.showResume = showResume;
 
         var vid = $routeParams["vid"];
         var cid = $routeParams["cid"];
@@ -55,7 +56,7 @@
 
         if (vm.isLLM) {
 
-            (function () {
+        (function () {
                 vm.tabs = [
                     { name: 'Overview', route: 'overview' },
                     { name: 'Special Notes', route: 'specialnotes' },
@@ -70,13 +71,13 @@
                 });
                 vm.currentTabName = vm.tabs[0];
                 cardService.getCardStage(vid, cid).then(function (response) {
-                    vm.currentStage = enumConstants.cardStages[response.data];
-                    vm.isLoad = true;
-                });
+                vm.currentStage = enumConstants.cardStages[response.data];
+                vm.isLoad = true;
+            });
                 VacancyHttpService.getVacancy(vid).then(function (response) {
                     vm.vacancy = response;
                 });
-            })();
+        })();
         } else {
             (function () {
                 vm.tabs = [
@@ -92,7 +93,7 @@
         function changeTemplate(tab) {
             vm.currentTabName = tab.name;
             vm.templateToShow = cardService.changeTemplate(tab.route);
-            $location.search('tab', tab.route);
+            $location.search('tab', tab.route);      
         };
 
         vm.changeTemplate($filter('filter')(vm.tabs, { route: $location.search().tab }, true)[0]);
@@ -115,5 +116,9 @@
         function updateResolution() {
             candidateHttpService.updateCandidateResolution($routeParams.cid, vm.candidate.resolution);
         };
+
+        function showResume() {
+            window.open(vm.candidate.lastResumeUrl);
+        }
     }
 })();

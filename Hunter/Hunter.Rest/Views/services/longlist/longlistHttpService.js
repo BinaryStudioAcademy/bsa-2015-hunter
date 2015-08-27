@@ -42,15 +42,17 @@
                     //console.log(result);
                     //$location.url("/vacancy/1/longlist");
                 },
+                successMessageToUser: 'Card was removed',
+                errorMessageToUser: 'Card was not removed. Card is used',
                 errorCallback: function (result) { console.log(result); }
             });
         }
 
-        function getAppResults(vid, cid) {
+        function getAppResults(cid) {
 
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/card/appResults/' + vid + '/' + cid,
+                url: '/api/card/appResults/' + cid,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
