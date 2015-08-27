@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Reflection.Emit;
 using System.Web;
 using Hunter.Common.Interfaces;
@@ -58,16 +59,15 @@ namespace Hunter.Services
                     file.Path = "Other\\";
                     break;
             }
-            _localStorage = Path.Combine(_localStorage, file.Path);
+            var fullPath = Path.Combine(_localStorage, file.Path);
 
-            if (!Directory.Exists(_localStorage))
-                Directory.CreateDirectory(_localStorage);
+            if (!Directory.Exists(fullPath))
+                Directory.CreateDirectory(fullPath);
 
-            string fileName = Path.Combine(_localStorage, formatedFileName);
+            string fileName = Path.Combine(file.Path, formatedFileName);
             try
             {
                 SaveFile(file.File, fileName);
-                
                 var newFile = file.ToFile();
                 newFile.Path = fileName;
                 _fileRepository.UpdateAndCommit(newFile);
@@ -107,7 +107,7 @@ namespace Hunter.Services
 
         private void SaveFile(Stream file, string fileName)
         {
-            using (var fileStream = File.Open(fileName, FileMode.Create))
+            using (var fileStream = File.Open(Path.Combine(_localStorage, fileName), FileMode.Create))
             {
                 byte[] bytes = new byte[file.Length];
                 file.Read(bytes, 0, (int)file.Length);
@@ -115,12 +115,13 @@ namespace Hunter.Services
             }
         }
 
-        private Stream LoadFile(string fileName)
+        private Stream LoadFile(string relativePath)
         {
-            if (!File.Exists(fileName)) return null;
+            string path = Path.Combine(_localStorage, relativePath);
+            if (!File.Exists(path)) return null;
 
             Stream stream = null;
-            using (var fileStream = File.Open(fileName, FileMode.Open, FileAccess.Read))
+            using (var fileStream = File.Open(path, FileMode.Open, FileAccess.Read))
             {
                 stream = new MemoryStream();
                 fileStream.CopyTo(stream);
@@ -145,12 +146,12 @@ namespace Hunter.Services
         {
             file.Added = DateTime.Now;
             var entity = _fileRepository.Get(file.Id);
-
+            var path = Path.Combine(_localStorage, entity.Path);
             if (entity == null) 
                 return;
 
-            if (File.Exists(entity.Path))
-                File.Delete(entity.Path);
+            if (File.Exists(path))
+                File.Delete(path);
 
             file.ToFile(entity);
             _fileRepository.UpdateAndCommit(entity);
@@ -180,11 +181,12 @@ namespace Hunter.Services
         public void Delete(int id)
         {
             var entity = _fileRepository.Get(id);
+            var path = Path.Combine(_localStorage, entity.Path);
             if (entity != null)
             {
-                if (File.Exists(entity.Path))
+                if (File.Exists(path))
                 {
-                    File.Delete(entity.Path);
+                    File.Delete(path);
                     _fileRepository.DeleteAndCommit(entity);
                 }
             }
