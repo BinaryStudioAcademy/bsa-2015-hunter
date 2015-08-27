@@ -8,7 +8,10 @@
     function PoolSelector() {
         return {
             restrict: 'EA',
-            link: function(scope, elem, attr, ctrl) {
+            link: function (scope, elem, attr, ctrl) {
+                $('#addPoolBtn').bind('click', function() {
+                    $('#selectPoolMain').toggleClass('hide');
+                });
             },
             scope: {
                 'candidate': '=candidate'
@@ -32,7 +35,7 @@
                         '{{pool}}</div>' +
                     '</div>' +
                     '<button id="addPoolBtn" class=" btn btn-default"><i class="fa fa-plus"></i></button>' +
-                    '<div class="pool-widget-container" ng-controller="PoolGeneralController as generalCtrl">' +
+                    '<div id="selectPoolMain" class="pool-widget-container hide" ng-controller="PoolGeneralController as generalCtrl">' +
                         '<div style="width: 380px;" ng-include="generalCtrl.link"></div>' +
                     '</div>' +
                 '</div>'
