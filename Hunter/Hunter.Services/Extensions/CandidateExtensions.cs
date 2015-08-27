@@ -37,7 +37,7 @@ namespace Hunter.Services
                     FileName = r.File.FileName,
                     
                     DownloadUrl = "api/file/download/" + r.FileId
-                //}) : new HashSet<ResumeDto>(),
+                }) : new HashSet<ResumeDto>(),
                 //ResumeSummary = candidate.ResumeSummary,
                 AddedByProfileId = candidate.AddedByProfileId,
                 AddedBy = candidate.AddedByProfileId.HasValue ? candidate.UserProfile.UserLogin : "",
