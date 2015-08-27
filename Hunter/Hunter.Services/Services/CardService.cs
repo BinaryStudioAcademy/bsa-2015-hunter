@@ -125,7 +125,6 @@ namespace Hunter.Services
                         VacancyId = c.VacancyId,
                         Stage = c.Stage,
                         Date = c.Added,
-                        Pool = c.Vacancy.Pool.Name
                     }).FirstOrDefault();
 
                 return appResults;

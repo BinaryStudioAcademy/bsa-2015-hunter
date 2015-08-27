@@ -9,12 +9,13 @@
                 </li>
                 <li><a data-toggle="pill" ng-click="techInterviewCtrl.getAllFeedbacks()">All Feedbacks</a></li>
                 <li><a data-toggle="pill" ng-click="techInterviewCtrl.getMyFeedbacks()">My Feedbacks</a></li>
-                <a ng-if="generalCardCtrl.isLLM" ng-click="showAddBlock= !showAddBlock" title="Add new Feedback"><span class="fa fa-2x fa-plus-circle"></span></a>
+                <li><a ng-if="generalCardCtrl.isLLM" ng-click="techInterviewCtrl.showAddBlock= !techInterviewCtrl.showAddBlock" title="Add new Feedback"><span class="fa fa-2x fa-plus-circle"></span></a>
+                </li>
             </ul>
         </div>
 
 
-        <div ng-show="showAddBlock" class="row">
+        <div ng-show="techInterviewCtrl.showAddBlock" class="row">
             <br/>
             <div ng-form="form">
                 <div class="form-group" ng-class="{'has-warning': !form.NoteText.$valid}">

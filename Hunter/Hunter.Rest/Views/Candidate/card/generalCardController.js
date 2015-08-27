@@ -84,6 +84,7 @@
                    { name: 'Overview', route: 'overview' },
                    { name: 'Special Notes', route: 'specialnotes' },
                    { name: 'Test', route: 'test' },
+                   { name: 'Application', route: 'application' }
                 ];
                 vm.currentTabName = vm.tabs[0];
             })();

@@ -79,7 +79,7 @@ namespace Hunter.Services.Services
         {
             return
                 _specialNoteRepository.Query()
-                    .Where(x => x.UserProfile.UserLogin == login && x.Card.CandidateId == candidateId )
+                    .Where(x => x.UserProfile.UserLogin == login && x.CandidateId == candidateId )
                     .OrderByDescending(x => x.LastEdited)
                     .ToList()
                     .Select(x => x.ToDto());
