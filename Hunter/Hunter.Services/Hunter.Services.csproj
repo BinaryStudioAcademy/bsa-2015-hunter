@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\ActivityDto.cs" />
+    <Compile Include="Dto\ActivityFilterDto.cs" />
     <Compile Include="Dto\ApiResults\FeedbackUpdatedResult.cs" />
     <Compile Include="Dto\ApiResults\SpecNoteResult.cs" />
     <Compile Include="Dto\ApiResults\TestsResult.cs" />

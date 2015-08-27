@@ -105,7 +105,6 @@
                                                     vm.viewCandidateInfo(vm.candidatesList[0].id);
                                                 }
                                                 vm.totalItems = cands.count;
-                                                vm.viewCandidateInfo(vm.candidatesList[0].id);
                 });
         };
 

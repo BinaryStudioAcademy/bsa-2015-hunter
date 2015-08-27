@@ -34,7 +34,7 @@ namespace Hunter.Services
                     FileId = r.FileId,
                     Uploaded = r.File.Added,
                     FileName = r.File.FileName,
-                    DownloadUrl = "api/file/download/"+ r.FileId
+                    DownloadUrl = "api/file/download/" + r.FileId
                 }),
                 ResumeSummary = candidate.ResumeSummary ?? "",
                 AddedByProfileId = candidate.AddedByProfileId,
@@ -42,13 +42,13 @@ namespace Hunter.Services
                 AddDate = candidate.AddDate,
                 Cards = candidate.Card.Select(x => x.ToCardDto()).ToList(),
                 PoolNames = candidate.Pool.Select(x => x.Name).ToList(),
-                Resolution = (int) candidate.Resolution,
+                Resolution = (int)candidate.Resolution,
                 ShortListed = candidate.Shortlisted,
-                Origin = (int) candidate.Origin,
+                Origin = (int)candidate.Origin,
                 DateOfBirth = candidate.DateOfBirth,
-                PhotoUrl = "api/fileupload/pictures/"+candidate.Id,
+                PhotoUrl = "api/fileupload/pictures/" + candidate.Id,
                 UserAlias = candidate.UserProfile != null ? candidate.UserProfile.Alias : "",
-                LastResumeUrl = candidate.Resume.Count>0 ? "api/file/open/"+candidate.Resume.LastOrDefault().FileId : ""
+                LastResumeUrl = candidate.Resume.Count > 0 ? "api/file/open/" + candidate.Resume.LastOrDefault().FileId : ""
             };
             return dto;
         }
@@ -88,27 +88,27 @@ namespace Hunter.Services
                 Salary = c.Candidate != null ? c.Candidate.Salary : 0,
                 YearsOfExperience = c.Candidate != null ? c.Candidate.YearsOfExperience : 0,
                 Stage = c.Stage,
-                Resolution = c.Candidate != null ? c.Candidate.Resolution.ToString() : "",
+                Resolution = c.Candidate != null ? (int)c.Candidate.Resolution : 0,
                 AddedBy = c.UserProfile != null ? c.UserProfile.UserLogin : "",
                 AddDate = c.Added,
                 PhotoUrl = "api/fileupload/pictures/" + c.CandidateId,
-                Shortlisted = c.Candidate!=null && c.Candidate.Shortlisted,
+                Shortlisted = c.Candidate != null && c.Candidate.Shortlisted,
                 UserAlias = c.UserProfile != null ? c.UserProfile.Alias : ""
             });
         }
 
-        public static CandidateLongListDetailsDto ToCandidateLongListDetailsDto(this Candidate candidate)
+        public static CandidateLongListDetailsDto ToCandidateLongListDetailsDto(this Candidate candidate, int vid)
         {
-            var card = candidate.Card.FirstOrDefault(c => c.CandidateId == candidate.Id);
-            
+            var card = candidate.Card.FirstOrDefault(c => c.CandidateId == candidate.Id && c.VacancyId == vid);
+
             return new CandidateLongListDetailsDto
             {
                 Id = candidate.Id,
                 FirstName = candidate.FirstName,
                 LastName = candidate.LastName,
-                PhotoUrl =  "api/fileupload/pictures/" + candidate.Id,
+                PhotoUrl = "api/fileupload/pictures/" + candidate.Id,
                 Salary = candidate.Salary,
-                Resolution = Enum.GetName(typeof (Resolution), candidate.Resolution),
+                Resolution = (int)candidate.Resolution,
                 Linkedin = candidate.Linkedin,
                 Stage = card != null ? card.Stage : 0,
                 Shortlisted = candidate.Shortlisted,
@@ -134,7 +134,7 @@ namespace Hunter.Services
                     Phone = c.Phone,
                     Linkedin = c.Linkedin,
                     Salary = c.Salary,
-                    YearsOfExperience =  c.YearsOfExperience,
+                    YearsOfExperience = c.YearsOfExperience,
                     AddedByProfileId = c.AddedByProfileId,
                     AddedBy = c.AddedByProfileId.HasValue ? c.UserProfile.UserLogin : "",
                     AddDate = c.AddDate,
@@ -150,12 +150,12 @@ namespace Hunter.Services
                     }
                     ),
                     PoolNames = c.Pool.Select(x => x.Name),
-                    Resolution = (int) c.Resolution,
+                    Resolution = (int)c.Resolution,
                     ShortListed = c.Shortlisted,
-                    Origin = (int) c.Origin,
+                    Origin = (int)c.Origin,
                     DateOfBirth = c.DateOfBirth,
                     PhotoUrl = "api/fileupload/pictures/" + c.Id,
-                    UserAlias = c.UserProfile!=null ? c.UserProfile.Alias : ""
+                    UserAlias = c.UserProfile != null ? c.UserProfile.Alias : ""
                 }
                 );
         }

@@ -165,14 +165,14 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("candidatelonglist/{id:int}")]
+        [Route("candidatelonglist/{vid:int}/{cid:int}")]
         [ActionName("Candidatelonglist")]
         [ResponseType(typeof(CandidateLongListDetailsDto))]
-        public HttpResponseMessage GetCandidateLongListDetails(int id)
+        public HttpResponseMessage GetCandidateLongListDetails(int vid, int cid)
         {
             try
             {
-                var candidate = _candidateService.GetLongListDetails(id);
+                var candidate = _candidateService.GetLongListDetails(vid, cid);
                 if (candidate == null)
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, "Vacatcy has no candidates!");

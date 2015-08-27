@@ -77,7 +77,28 @@
                 'None': 'grey',
                 'Like': 'green',
                 'Dislike': 'red'
+            },
+            activityTags: {
+                '0': 'User',
+                '1': 'Vacancy',
+                '2': 'Feedback',
+                '3': 'Candidate',
+                '4': 'Pool',
+                '5': 'SpecialNote',
+                '6': 'Resume',
+                '7': 'Test',
+                '8': 'Photo'
+            },
+            itemsOnPage: {
+                defaultItem: 10,
+                items: [5, 10, 20, 50]
             }
+            //    { text: '5', value: 5, defaultItem: 0 },
+            //    { text: '10', value: 10, defaultItem: 1 },
+            //    { text: '20', value: 20, defaultItem: 0 },
+            //    { text: '50', value: 50, defaultItem: 0 },
+            //    { text: 'All', value: 500, defaultItem: 0 }
+            //]
         });
 
 })();

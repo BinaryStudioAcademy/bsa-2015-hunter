@@ -34,7 +34,7 @@
                         Added by
                         <ul>
                             <li ng-repeat="addedby in longListCtrl.addedByList">
-                                <input type="checkbox" checklist-model="longListCtrl.filter.hr" checklist-value="addedby.userLogin"> {{addedby.userLogin == '' ? 'unknown' : addedby.alias}} ({{addedby.countOfAddedCandidates}})
+                                <input type="checkbox" checklist-model="longListCtrl.filter.hr" checklist-value="addedby.userLogin"> {{addedby.userLogin == '' ? 'unknown' : addedby.alias}} <span>({{addedby.countOfAddedCandidates}})</span>
                             </li>
                         </ul>
                     </li>
@@ -76,7 +76,7 @@
             </pagination>
             <div class="pagination page-count-wrapper form-inline">
                 <span>Items on page</span>
-                <select class="form-control" ng-model="longListCtrl.pageSize" ng-change="longListCtrl.getCandidatesForLongList(">
+                <select class="form-control" ng-model="longListCtrl.pageSize" ng-change="longListCtrl.getCandidatesForLongList()">
                     <option selected value="5">5</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
