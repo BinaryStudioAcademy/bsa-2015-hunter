@@ -28,6 +28,12 @@ namespace Hunter.Services
             _unitOfWork = unitOfWork;
         }
 
+        public IEnumerable<UserProfileRowVm> GetUserProfile() 
+        {
+            var users = _profileRepo.Query().Select(e => UserProfileRowVm.Create(e));
+            return users.ToList();
+        }
+
         public IList<UserProfileRowVm> LoadPage(int page)
         {
             if (page <= 0)

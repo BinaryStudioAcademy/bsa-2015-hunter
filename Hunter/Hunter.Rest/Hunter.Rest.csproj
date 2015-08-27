@@ -771,6 +771,7 @@
     <Content Include="Views\candidate\card\cardApplicationsController.js" />
     <Content Include="Views\candidate\card\cardSummary.html" />
     <Content Include="Views\candidate\card\cardSummaryController.js" />
+    <Content Include="Views\services\directive\modalWindowDirective.js" />
     <Content Include="Views\directives\thumbButtonDirective.js" />
     <Content Include="Views\filters\localDateFilter.js" />
     <Content Include="Views\services\directive\autoExpandTextareaDirective.js" />
