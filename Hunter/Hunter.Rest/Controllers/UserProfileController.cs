@@ -23,13 +23,13 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("all")]
+        [Route("users/role/{roleName}")]
         [ResponseType(typeof(IEnumerable<UserProfileRowVm>))]
-        public HttpResponseMessage GetAll()
+        public HttpResponseMessage GetAllTech(string roleName)
         {
             try 
             {
-                var users = _profileService.GetUserProfile();
+                var users = _profileService.GetUserProfile(roleName);
                 return Request.CreateResponse(HttpStatusCode.OK, users);
             }
             catch(Exception e)

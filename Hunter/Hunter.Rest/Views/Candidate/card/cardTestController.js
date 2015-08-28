@@ -11,11 +11,12 @@
         'FeedbackHttpService',
         'UploadTestService',
         '$scope',
-        'EnumConstants'
+        'EnumConstants',
+        'UserHttpService'
     ];
 
     function CardTestController(CardTestHttpService, $routeParams,
-        FeedbackHttpService, UploadTestService, $scope, EnumConstants) {
+        FeedbackHttpService, UploadTestService, $scope, EnumConstants, UserHttpService) {
         var vm = this;
         vm.templateName = 'Test';
         vm.editingIndex = -1;
@@ -24,7 +25,7 @@
 
         vm.testLink = '';
         vm.testFile = '';
-
+        vm.techExperts = [];
         vm.changeCurrentTest = changeCurrentTest;
 
         vm.uploadLink = function () {
@@ -236,5 +237,10 @@
             }
             
         }
+
+        UserHttpService.getUsersByRole2('Technical Specialist').then(function (result) {
+            vm.techExperts = result;
+            console.log(result);
+        });
     }
 })();

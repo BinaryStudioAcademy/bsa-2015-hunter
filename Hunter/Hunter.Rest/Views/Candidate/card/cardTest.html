@@ -22,6 +22,7 @@
                     <div class="col-md-1"><label>Task</label></div>
                     <div class="col-md-10">
                         <a href="/api/file/download/{{test.file.id}}">{{test.file.fileName}}</a> Size: {{test.file.size}} Uploaded: {{test.file.added | date:'dd.MM.yyyy HH:mm'}}
+                        <button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add expert to test</button>
                     </div>
                     <div class="col-md-1">
                         <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index, test)">
@@ -34,6 +35,7 @@
                     <div class="col-md-1"><label>Task</label></div>
                     <div class="col-md-10">
                         <a href="{{test.url}}">{{test.url}}</a> Added {{test.added | date:'dd.MM.yyyy HH:mm'}}
+                        <button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add expert to test</button>
                     </div>
                     <div class="col-md-1">
                         <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index, test)">
@@ -77,6 +79,39 @@
                 </div>
             </div>
             <hr/>
+        </div>
+    </div>
+
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="row">
+                    <div class="col-md-5 margin-bottom">
+                        <input ng-model="testCtrl.filterSearch" type="text" class="form-control" placeholder="Enter login">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Alias</th>
+                                <th>Login</th>
+                                <th>Position</th>
+                                <th>Check</th>
+                            </tr>
+                            <tr ng-repeat="user in testCtrl.techExperts | filter:testCtrl.filterSearch">
+                                <td>{{user.alias}}</td>
+                                <td>{{user.login}}</td>
+                                <td>{{user.position}}</td>
+                                <td>
+                                    <button class="btn btn-default">Check for test</button>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

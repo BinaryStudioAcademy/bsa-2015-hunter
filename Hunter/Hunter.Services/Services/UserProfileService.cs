@@ -19,19 +19,30 @@ namespace Hunter.Services
         private const int _ItemsPerPage = 15;
         private readonly IActivityHelperService _activityHelperService;
         private readonly IUserProfileRepository _profileRepo;
+        private readonly IUserRoleRepository _roleRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UserProfileService(IActivityHelperService activityHelperService, IUserProfileRepository profileRepo, IUnitOfWork unitOfWork)
+        public UserProfileService(
+            IActivityHelperService activityHelperService,
+            IUserProfileRepository profileRepo,
+            IUnitOfWork unitOfWork,
+            IUserRoleRepository roleRepository)
         {
             _activityHelperService = activityHelperService;
             _profileRepo = profileRepo;
             _unitOfWork = unitOfWork;
+            _roleRepository = roleRepository;
         }
 
-        public IEnumerable<UserProfileRowVm> GetUserProfile() 
+        public IEnumerable<UserProfileRowVm> GetUserProfile(string roleName) 
         {
-            var users = _profileRepo.Query().Select(e => UserProfileRowVm.Create(e));
-            return users.ToList();
+            var users = _roleRepository
+                .Query()
+                .Where(e => e.Name == roleName)
+                .FirstOrDefault()
+                .Users
+                .Select(e => UserProfileRowVm.Create(_profileRepo.Get(e.Id)));
+            return users;
         }
 
         public IList<UserProfileRowVm> LoadPage(int page)
