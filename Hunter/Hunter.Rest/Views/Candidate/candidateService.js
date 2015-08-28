@@ -37,7 +37,7 @@
                 statuses: [],
                 search: routeParams.search || '',
                 pageSize: parseInt(routeParams.pageSize) || 10,
-                currentPage: parseInt(routeParams.currentPage) || 1,
+                currentPage: routeParams.currentPage || 1,
                 order: routeParams.order || 'AddDate_asc'
             };
 

@@ -163,7 +163,7 @@
             vm.statuses = EnumConstants.resolutions;
 
             vm.filter = CandidateService.convertRouteParamsToFilter($routeParams);
-            
+            console.log(vm.filter);
             vm.getCandidates(vm.filter);
 
             // get vacancy info
