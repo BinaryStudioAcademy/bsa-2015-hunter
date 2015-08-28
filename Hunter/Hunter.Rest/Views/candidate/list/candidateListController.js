@@ -18,10 +18,11 @@
         'EnumConstants',
         'CandidateHttpService',
         'LonglistHttpService',
-        'VacancyHttpService'
+        'VacancyHttpService',
+        'CandidateService'
     ];
 
-    function CandidateListController($location, $routeParams, $filter, $scope, $rootScope, authService, $odataresource, PoolsHttpService, $odata, EnumConstants, CandidateHttpService, longlistHttpService, vacancyHttpService) {
+    function CandidateListController($location, $routeParams, $filter, $scope, $rootScope, authService, $odataresource, PoolsHttpService, $odata, EnumConstants, CandidateHttpService, longlistHttpService, vacancyHttpService, CandidateService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         vm.name = 'Candidates';
@@ -31,16 +32,19 @@
             show: false
         };
         //vm.tableSize = 'col-md-9';
-
-        // vm.currentPage = 1;
-        //vm.pageSize = 25;
+        vm.sortOptions = [];
         vm.totalItems = 0;
-        vm.skip = 0;
-        vm.order;
+        vm.inviters = [];
+        vm.pools = [];
+        vm.statuses = [];
+        vm.filter = {};
 
         vm.vacancy;
         vm.vacancyId;
         vm.tableSpinner = false;
+
+
+        vm.getCandidates = getCandidates;
 
         vm.pageConfig = {
             pageTitle: 'Candidates (general pool)',
@@ -48,124 +52,32 @@
             locationAfterAdding: '/candidate/list'
         };
 
-        if (!isObjectEmpty($routeParams)) {
+        if ($routeParams.addToVacancy) {
             vm.vacancyId = $routeParams.addToVacancy;
 
             vm.pageConfig.isAddToVacancyButton = false;
             vm.pageConfig.locationAfterAdding = '/vacancy/' + vm.vacancyId + '/longlist';
         }
 
-        vm.pools = [];
 
-        vm.filter = {
-            pools: [],
-            inviters: [],
-            statuses: [],
-            search: '',
-            currentPage: 1
-        };
-
-        vm.statuses = EnumConstants.resolutions;
-
-        vm.inviters = [];
-
-        vm.sortOptions = [
-        { text: 'Name \u25BC', options: { field: 'FirstName', dir: 'asc' } },
-        { text: 'Name \u25B2', options: { field: 'FirstName', dir: 'desc' } },
-        { text: 'Added \u25BC', options: { field: 'AddDate', dir: 'asc' } },
-        { text: 'Added \u25B2', options: { field: 'AddDate', dir: 'desc' } },
-        { text: 'Status \u25BC', options: { field: 'Resolution', dir: 'asc' } },
-        { text: 'Status \u25B2', options: { field: 'Resolution', dir: 'desc' } },
-        { text: 'Email \u25BC', options: { field: 'Email', dir: 'asc' } },
-        { text: 'Email \u25B2', options: { field: 'Email', dir: 'desc' } },
-        { text: 'Years Of Experience \u25BC', options: { field: 'YearsOfExperience', dir: 'asc' } },
-        { text: 'Years Of Experience \u25B2', options: { field: 'YearsOfExperience', dir: 'desc' } },
-        { text: 'Company \u25BC', options: { field: 'Company', dir: 'asc' } },
-        { text: 'Company \u25B2', options: { field: 'Company', dir: 'desc' } },
-        { text: 'Location \u25BC', options: { field: 'Location', dir: 'asc' } },
-        { text: 'Location \u25B2', options: { field: 'Location', dir: 'desc' } },
-        { text: 'Salary \u25BC', options: { field: 'Salary', dir: 'asc' } },
-        { text: 'Salary \u25B2', options: { field: 'Salary', dir: 'desc' } }
-        ];
-
-        vm.order = vm.sortOptions[0].options;
-
-        var predicate;
-
-        var Candidates = $odataresource('/api/Candidates/odata');
-
-        vm.getCandidates = function () {
+        function getCandidates(filter) {
             vm.tableSpinner = true;
-            var cands = Candidates.odata()
-                                .withInlineCount()
-                                .take(vm.pageSize)
-                                .skip(vm.skip)
-                                .filter(predicate)
-                                .orderBy(vm.order.field, vm.order.dir)
-                                .query(function () {
-                                    vm.candidateList = cands.items;
-                                    vm.totalItems = cands.count;
-                                    vm.tableSpinner = false;
-//                                    console.log(vm.candidateList);
-                                    //if (vm.candidateList.length > 0) {
-                                    //    $rootScope.candidateDetails.id = vm.candidateList[0].id;
-                                    //} else {
-                                    //    $rootScope.candidateDetails.id = 0;
-                                    //}
-                                });
+            CandidateHttpService.getOdataCandidateList(filter).then(function (result) {
+                vm.candidateList = result.items;
+                vm.totalItems = result.count;
+                vm.tableSpinner = false;
+            });
         }
 
-        $scope.$watch('candidateListCtrl.filter', function () {
-            var filt = [];
+        vm.updateCandidate = function () {
+            $location.search(vm.filter);
+        };
 
-            if (vm.filter.pools.length > 0) {
-                var poolPred = [];
-                angular.forEach(vm.filter.pools, function (value, key) {
-                    poolPred.push(new $odata.Predicate(new $odata.Property('PoolNames/any(p: p eq \'' + value + '\' )'), true));
-                });
+        $scope.$on('$routeUpdate', function () {
 
-                poolPred = $odata.Predicate.or(poolPred);
-                filt.push(poolPred);
-            }
-
-            if (vm.filter.inviters.length > 0) {
-                var invPred = [];
-                angular.forEach(vm.filter.inviters, function (value, key) {
-                    invPred.push(new $odata.Predicate('AddedBy', value));
-                });
-
-                invPred = $odata.Predicate.or(invPred);
-                filt.push(invPred);
-            }
-
-            if (vm.filter.statuses.length > 0) {
-                var stPred = [];
-                angular.forEach(vm.filter.statuses, function (value, key) {
-                    stPred.push(new $odata.Predicate('Resolution', value));
-                });
-
-                stPred = $odata.Predicate.or(stPred);
-                filt.push(stPred);
-            }
-
-            if (vm.filter.search.length > 0) {
-                var pred = $odata.Predicate.or([
-                    new $odata.Func('substringof', new $odata.Property('tolower(\'' + vm.filter.search + '\')'), new $odata.Property('tolower(FirstName)')),
-                    new $odata.Func('substringof', new $odata.Property('tolower(\'' + vm.filter.search + '\')'), new $odata.Property('tolower(LastName)'))
-                ]);
-
-                filt.push(pred);
-            }
-
-            if (filt.length > 0) {
-                predicate = $odata.Predicate.and(filt);
-            } else {
-                predicate = undefined;
-            }
-
-            vm.skip = (vm.filter.currentPage - 1) * vm.pageSize;
-            vm.getCandidates();
-        }, true);
+            var filter = CandidateService.convertRouteParamsToFilter($routeParams);
+            vm.getCandidates(filter);
+        });
 
         vm.ShowDetails = function (item) {
             if ($rootScope.candidateDetails.id != item.id) {
@@ -227,6 +139,32 @@
 
         // initializating function
         (function () {
+
+            vm.sortOptions = [
+                { text: 'Name \u25BC', options: 'FirstName_asc'  },
+                { text: 'Name \u25B2', options: 'FirstName_desc'  },
+                { text: 'Added \u25BC', options: { field: 'AddDate_asc' } },
+                { text: 'Added \u25B2', options:  'AddDate_desc' },
+                { text: 'Status \u25BC', options:  'Resolution_asc' },
+                { text: 'Status \u25B2', options:  'Resolution_desc' },
+                { text: 'Email \u25BC', options:  'Email_asc' },
+                { text: 'Email \u25B2', options:  'Email_desc' },
+                { text: 'Years Of Experience \u25BC', options:  'YearsOfExperience_asc' },
+                { text: 'Years Of Experience \u25B2', options:  'YearsOfExperience_desc' },
+                { text: 'Company \u25BC', options:  'Company_asc' },
+                { text: 'Company \u25B2', options:  'Company_desc' },
+                { text: 'Location \u25BC', options:  'Location_asc' },
+                { text: 'Location \u25B2', options:  'Location_desc' },
+                { text: 'Salary \u25BC', options:  'Salary_asc' },
+                { text: 'Salary \u25B2', options:  'Salary_desc' }
+            ];
+
+
+            vm.statuses = EnumConstants.resolutions;
+
+            vm.filter = CandidateService.convertRouteParamsToFilter($routeParams);
+            console.log(vm.filter);
+            vm.getCandidates(vm.filter);
 
             // get vacancy info
             vacancyHttpService.getLongList(vm.vacancyId).then(function (result) {
