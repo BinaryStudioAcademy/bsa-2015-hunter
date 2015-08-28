@@ -11,21 +11,32 @@
         'FeedbackHttpService',
         'UploadTestService',
         '$scope',
-        'EnumConstants'
+        'EnumConstants',
+        'VacancyHttpService'
     ];
 
     function CardTestController(CardTestHttpService, $routeParams,
-        FeedbackHttpService, UploadTestService, $scope, EnumConstants) {
+        FeedbackHttpService, UploadTestService, $scope, EnumConstants, VacancyHttpService) {
         var vm = this;
         vm.templateName = 'Test';
         vm.editingIndex = -1;
+        vm.vacancy;
         var candidateId = $routeParams.cid;
         var vacancyId = $routeParams.vid;
 
         vm.testLink = '';
         vm.testFile = '';
 
+        vm.test;
         vm.changeCurrentTest = changeCurrentTest;
+        vm.loadAllTests = loadAllTests;
+        vm.loadVacancyTests = loadVacancyTests;
+
+        loadVacancyTests();
+
+        VacancyHttpService.getVacancy($routeParams.vid).then(function (result) {
+            vm.vacancy = result;
+        });
 
         vm.uploadLink = function () {
             if (vm.testLink == '') {
@@ -60,11 +71,25 @@
             });
         }
 
-        // TODO:  All vm and local variables should be declared at the beginning
-        vm.test;
-        CardTestHttpService.getTest(vacancyId, candidateId, function(response) {
-            vm.test = response.data;
+        function loadAllTests() {
+            CardTestHttpService.getAllTests(vacancyId, candidateId, function(response) {
+                vm.test = response.data;
 
+                initializeTests();
+            });
+        }
+
+        // TODO:  All vm and local variables should be declared at the beginning
+
+        function loadVacancyTests() {
+            CardTestHttpService.getTest(vacancyId, candidateId, function(response) {
+                vm.test = response.data;
+
+                initializeTests();
+            });
+        }
+
+        function initializeTests() {
             vm.test.tests.forEach(function (test) {
                 var feedbackConfig;
                 if (test.feedback != null && test.feedback.text != '') {
@@ -91,13 +116,13 @@
                     feedbackConfig = {
                         'buttonText': 'Save',
                         'fieldReadonly': false,
-                        'style': {"border-color": EnumConstants.voteColors['None']}
+                        'style': { "border-color": EnumConstants.voteColors['None'] }
                     }
                 }
 
                 test.feedback.feedbackConfig = feedbackConfig;
             });
-        });
+        }
 
         vm.feedbackButtonToggle = function (test) {
             if (vm.test.tests.length == 0) {
