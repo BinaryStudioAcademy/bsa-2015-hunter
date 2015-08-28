@@ -1,6 +1,16 @@
 ﻿<div ng-controller="CardTestController as testCtrl">
 
-    <div ng-if="generalCardCtrl.isLLM" class="row">
+    <div class="row">
+        <ul style="padding-left: 14px; margin-bottom: 10px;" class="nav nav-pills">
+            <li class="active" ng-if="testCtrl.vacancyId != undefined">
+                <a data-toggle="pill" ng-click="testCtrl.loadVacancyTests()">
+                    {{testCtrl.vacancy.name}}
+                </a>
+            </li>
+            <li class="{{testCtrl.vacancyId == undefined ? 'active' : ''}}"><a data-toggle="pill" ng-click="testCtrl.loadAllTests()">All Tests</a></li>
+        </ul>
+    </div>
+    <div class="row" ng-if="testCtrl.vacancyId != undefined">
         <div class="col-md-5">
             <input type="text" class="form-control testLink" placeholder="Provide link to test" ng-model="testCtrl.testLink"/>
             <button class="btn btn-primary" ng-click="testCtrl.uploadLink()">Add</button>
@@ -21,8 +31,9 @@
                 <div ng-show="test.file != null">
                     <div class="col-md-1"><label>Task</label></div>
                     <div class="col-md-10">
-                        <a href="/api/file/download/{{test.file.id}}">{{test.file.fileName}}</a> Size: {{test.file.size}} Uploaded: {{test.file.added | date:'dd.MM.yyyy HH:mm'}}
-                        <button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add expert to test</button>
+
+						<a href="/api/file/download/{{test.file.id}}">{{test.file.fileName}}</a> Size: {{test.file.size}} Uploaded: {{test.file.added | date:'dd.MM.yyyy HH:mm:ss'}}
+                        <button ng-click="testCtrl.checkedTestId = test.id" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add expert to test</button>
                     </div>
                     <div class="col-md-1">
                         <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index, test)">
@@ -34,8 +45,8 @@
                 <div ng-show="test.url != null && test.file == null">
                     <div class="col-md-1"><label>Task</label></div>
                     <div class="col-md-10">
-                        <a href="{{test.url}}">{{test.url}}</a> Added {{test.added | date:'dd.MM.yyyy HH:mm'}}
-                        <button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add expert to test</button>
+                        <a href="{{test.url}}">{{test.url}}</a> Added {{test.added | date:'dd.MM.yyyy HH:mm:ss'}}
+                        <button ng-click="testCtrl.checkedTestId = test.id" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add expert to test</button>
                     </div>
                     <div class="col-md-1">
                         <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index, test)">
@@ -87,7 +98,7 @@
             <div class="modal-content">
                 <div class="row">
                     <div class="col-md-5 margin-bottom">
-                        <input ng-model="testCtrl.filterSearch" type="text" class="form-control" placeholder="Enter login">
+                        <input ng-model="testCtrl.filterSearch" type="text" class="form-control" placeholder="Search">
                     </div>
                 </div>
                 <div class="row">
@@ -104,7 +115,7 @@
                                 <td>{{user.login}}</td>
                                 <td>{{user.position}}</td>
                                 <td>
-                                    <button class="btn btn-default">Check for test</button>
+                                    <button data-dismiss="modal" ng-click="testCtrl.checkTechExpert(user.id)" class="btn btn-default">Check for test</button>
                                 </td>
                             </tr>
                         </table>

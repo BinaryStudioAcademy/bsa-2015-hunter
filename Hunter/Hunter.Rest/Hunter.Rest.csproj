@@ -775,6 +775,8 @@
     <Content Include="Views\services\directive\modalWindowDirective.js" />
     <Content Include="Views\directives\thumbButtonDirective.js" />
     <Content Include="Views\filters\localDateFilter.js" />
+    <Content Include="Views\notification\addEdit\addEditModal.html" />
+    <Content Include="Views\notification\list\listTemplate.html" />
     <Content Include="Views\services\activity\activitiesService.js" />
     <Content Include="Views\notification\addEdit\addEditNotificationController.js" />
     <Content Include="Views\notification\list\list.html" />

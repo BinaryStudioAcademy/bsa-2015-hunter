@@ -13,7 +13,9 @@
         var service = {
             'getTest': getTest,
             'sendTest': uploadTest,
-            updateTestComment: updateTestComment
+            'updateTestComment': updateTestComment,
+            'getAllTests': getAllTests,
+            addCheckingToTest: addCheckingToTest
         };
 
         function getTest(vacancyId, candidateId, success) {
@@ -22,6 +24,16 @@
                 'url': 'api/test?vacancyId=' + vacancyId + '&candidateId=' + candidateId,
                 'successCallback': success,
                 'errorMessageToDev': 'GET TEST ERROR',
+                'errorMessageToUser': 'Failed'
+            });
+        }
+
+        function getAllTests(vacancyId, candidateId, success) {
+            HttpHandler.sendRequest({
+                'verb': 'GET',
+                'url': 'api/test/all/' + candidateId,
+                'successCallback': success,
+                'errorMessageToDev': 'GET ALL TESTS ERROR',
                 'errorMessageToUser': 'Failed'
             });
         }
@@ -46,6 +58,22 @@
                 errorMessageToDev: 'POST TEST COMMENT ERROR'
             });
         }
+
+        function addCheckingToTest(checkingId, testId) {
+            HttpHandler.sendRequest({
+                verb: 'PUT',
+                url: '/api/test/addChecking/' + checkingId + "/" + testId,
+                
+                successCallback: function (response) {
+                    console.log("ok add checking to test");
+                    console.log(response);
+                },
+                errorCallback: function (response) {
+                    console.log("error add checking to test");
+                    console.log(response);
+                }
+            });
+        };
 
         return service;
     }

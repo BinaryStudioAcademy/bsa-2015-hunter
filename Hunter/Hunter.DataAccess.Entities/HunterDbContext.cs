@@ -94,6 +94,12 @@ namespace Hunter.DataAccess.Entities
                 .HasForeignKey(e => e.RoleId)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<UserProfile>()
+                .HasMany(e => e.Test)
+                .WithOptional(e => e.UserProfile)
+                .HasForeignKey(e => e.UserProfileId)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Vacancy>()
                 .HasMany(e => e.Card)
                 .WithRequired(e => e.Vacancy)

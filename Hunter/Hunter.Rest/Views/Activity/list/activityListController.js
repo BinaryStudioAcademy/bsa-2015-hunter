@@ -42,9 +42,12 @@
         vm.activitiesList = [];
 
         vm.filterSpinner = false;
+        
         // get filter options 
         (function () {
             vm.filterSpinner = true;
+            vm.filterUsers = [];
+            vm.filterTags = [];
             activityHttpService.getFilterOptions().then(function(data) {
                 vm.filterUsers = activityService.getFilterUsers(data);
                 vm.filterTags = activityService.getFilterTags(data);

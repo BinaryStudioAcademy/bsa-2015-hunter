@@ -12,21 +12,41 @@
         'UploadTestService',
         '$scope',
         'EnumConstants',
-        'UserHttpService'
+        'UserHttpService',
+		'VacancyHttpService'
     ];
 
     function CardTestController(CardTestHttpService, $routeParams,
-        FeedbackHttpService, UploadTestService, $scope, EnumConstants, UserHttpService) {
+        FeedbackHttpService, UploadTestService, $scope, EnumConstants, UserHttpService,VacancyHttpService) {
+
         var vm = this;
         vm.templateName = 'Test';
         vm.editingIndex = -1;
+        vm.vacancy;
         var candidateId = $routeParams.cid;
-        var vacancyId = $routeParams.vid;
+        vm.vacancyId = $routeParams.vid;
 
         vm.testLink = '';
         vm.testFile = '';
+
         vm.techExperts = [];
+        vm.checkTechExpert = checkTechExpert;
+        vm.checkedTestId = 0;
+
+		vm.test;
         vm.changeCurrentTest = changeCurrentTest;
+        vm.loadAllTests = loadAllTests;
+        vm.loadVacancyTests = loadVacancyTests;
+
+        if (vm.vacancyId != undefined) {
+            loadVacancyTests();
+        } else {
+            loadAllTests();
+        }
+
+        VacancyHttpService.getVacancy($routeParams.vid).then(function (result) {
+            vm.vacancy = result;
+        });
 
         vm.uploadLink = function () {
             if (vm.testLink == '') {
@@ -61,11 +81,23 @@
             });
         }
 
-        // TODO:  All vm and local variables should be declared at the beginning
-        vm.test;
-        CardTestHttpService.getTest(vacancyId, candidateId, function(response) {
-            vm.test = response.data;
+        function loadAllTests() {
+            CardTestHttpService.getAllTests(vm.vacancyId, candidateId, function(response) {
+                vm.test = response.data;
+                initializeTests();
+            });
+        }
 
+        // TODO:  All vm and local variables should be declared at the beginning
+
+        function loadVacancyTests() {
+            CardTestHttpService.getTest(vm.vacancyId, candidateId, function(response) {
+                vm.test = response.data;
+                initializeTests();
+            });
+        }
+
+        function initializeTests() {
             vm.test.tests.forEach(function (test) {
                 var feedbackConfig;
                 if (test.feedback != null && test.feedback.text != '') {
@@ -92,13 +124,13 @@
                     feedbackConfig = {
                         'buttonText': 'Save',
                         'fieldReadonly': false,
-                        'style': {"border-color": EnumConstants.voteColors['None']}
+                        'style': { "border-color": EnumConstants.voteColors['None'] }
                     }
                 }
 
                 test.feedback.feedbackConfig = feedbackConfig;
             });
-        });
+        }
 
         vm.feedbackButtonToggle = function (test) {
             if (vm.test.tests.length == 0) {
@@ -149,7 +181,7 @@
         }
 
         vm.uploadFile = function() {
-            UploadTestService.uploadTest(candidateId, vacancyId, function(response) {
+            UploadTestService.uploadTest(candidateId, vm.vacancyId, function(response) {
                 var fileId = response.data;
 
                 var test = {
@@ -184,7 +216,7 @@
                         'fileName': file.name,
                         'added': new Date(),
                         'candidateId': candidateId,
-                        'vacancyId': vacancyId,
+                        'vacancyId': vm.vacancyId,
                         'size': file.size
                     };
 
@@ -242,5 +274,13 @@
             vm.techExperts = result;
             console.log(result);
         });
+
+        
+
+        function checkTechExpert(userId) {
+            console.log(userId);
+            console.log(vm.checkedTestId);
+            CardTestHttpService.addCheckingToTest(userId, vm.checkedTestId);
+        };
     }
 })();

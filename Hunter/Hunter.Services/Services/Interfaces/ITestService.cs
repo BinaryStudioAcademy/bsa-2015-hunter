@@ -6,12 +6,13 @@ namespace Hunter.Services.Services.Interfaces
 {
     public interface ITestService
     {
-        IEnumerable<TestDto> GetAllCandidatesTests(int candidateId);
+        TestsResult GetAllCandidatesTests(int candidateId);
         int AddTest(TestDto newTestDto);
         void UpdateTest(TestDto newTestDto);
         void DeleteTestById(int testId);
         TestsResult GetCardTests(int vacancyId, int candidateId);
         void UpdateFeedback(int testId, int feedbackId);
         void UpdateComment(int id, string comment);
+        void AddCheckingToTest(int testId, int userId);
     }
 }

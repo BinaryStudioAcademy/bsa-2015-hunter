@@ -35,7 +35,7 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("all")]
+        [Route("all/{candidateId}")]
         public IHttpActionResult GetAllTests(int candidateId)
         {
             try
@@ -77,6 +77,22 @@ namespace Hunter.Rest.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpPut]
+        [Route("addChecking/{testId:int}/{userId:int}")]
+        public IHttpActionResult AddCheckingToTest(int testId, int userId)
+        {
+            try 
+            {
+                _testService.AddCheckingToTest(testId, userId);
+                return Ok();
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+            
         }
 
         [HttpDelete]
