@@ -47,6 +47,8 @@
                             type="button" 
                             ng-click="generalCardCtrl.removeCard(generalCardCtrl.candidate.id)">Remove from List</button>
                     <a class="btn btn-default btn-block" ng-show="generalCardCtrl.candidate.linkedin != null" href="{{generalCardCtrl.candidate.linkedin}}" target="_blank">View LinkenIn Profile</a>
+                    <a class="btn btn-default btn-block" href="#" data-toggle="modal" data-target="#addEditNotificationModal">Add Notification</a>
+                    <div ng-include="'/Views/notification/addEdit/addEditModal.html'"></div>
                 </div>
             </div>
         </div>

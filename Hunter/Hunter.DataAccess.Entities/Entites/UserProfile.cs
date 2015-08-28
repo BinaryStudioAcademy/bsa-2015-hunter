@@ -16,6 +16,7 @@ namespace Hunter.DataAccess.Entities
             Feedback = new HashSet<Feedback>();
             SpeacialNote = new HashSet<SpecialNote>();
             Activity = new HashSet<Activity>();
+            ScheduledNotifications = new HashSet<ScheduledNotification>();
         }
         
         [Required]
@@ -33,19 +34,16 @@ namespace Hunter.DataAccess.Entities
         [Column("LViewedActivity")]
         public int LastViewedActivityId { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Candidate> Candidate { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Card> Card { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Feedback> Feedback { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SpecialNote> SpeacialNote { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Activity> Activity { get; set; }
+
+        public virtual ICollection<ScheduledNotification> ScheduledNotifications { get; set; }
     }
 }
