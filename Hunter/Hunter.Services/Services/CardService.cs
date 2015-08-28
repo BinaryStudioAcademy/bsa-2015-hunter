@@ -16,13 +16,15 @@ namespace Hunter.Services
         private readonly ICardRepository _cardRepository;
         private readonly IUserProfileRepository _userProfileRepository;
         private readonly ILogger _logger;
+        private readonly IActivityHelperService _activityHelperService;
 
-        public CardService(ICardRepository cardRepository, IUserProfileRepository userProfileRepository, IUnitOfWork unitOfWork, ILogger logger)
+        public CardService(ICardRepository cardRepository, IUserProfileRepository userProfileRepository, IUnitOfWork unitOfWork, ILogger logger, IActivityHelperService activityHelperService)
         {
             _cardRepository = cardRepository;
             _userProfileRepository = userProfileRepository;
             _unitOfWork = unitOfWork;
             _logger = logger;
+            _activityHelperService = activityHelperService;
         }
 
         public void AddCards(IEnumerable<CardDto> dtoCards, string name)
@@ -52,6 +54,7 @@ namespace Hunter.Services
             if (card == null) return false;
             card.Stage = stage;
             _cardRepository.UpdateAndCommit(card);
+            _activityHelperService.CreateChangedCardStageActivity(card);
             return true;
         }
 

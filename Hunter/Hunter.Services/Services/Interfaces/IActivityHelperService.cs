@@ -19,5 +19,6 @@ namespace Hunter.Services.Interfaces
         void CreateUploadedTestActivity(Card card);
         void CreateUploadedResumeActivity(Candidate candidate);
         void CreateUploadedPhotoActivity(Candidate candidate);
+        void CreateChangedCardStageActivity(Card card);
     }
 }
