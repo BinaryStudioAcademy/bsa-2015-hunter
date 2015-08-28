@@ -46,11 +46,11 @@
                     }
                 }
 
-                vm.syncPools = function(pool) {
-                    var index = $scope.candidate.poolNames.indexOf(pool.name);
+                vm.syncPools = function(pool, oldPool) {
+                    var index = $scope.candidate.poolNames.indexOf(oldPool.name);
                     if(index != -1){
                         $scope.candidate.poolNames[index] = pool.name;
-                        delete $scope.candidate.poolColors[pool.name.toLowerCase()];
+                        delete $scope.candidate.poolColors[oldPool.name.toLowerCase()];
                         $scope.candidate.poolColors[pool.name.toLowerCase()] = pool.color;
                     }
                 }

@@ -32,7 +32,7 @@
         }
 
         function poolChanged(pool) {
-            $scope.poolSelectorCtrl.syncPools(pool);
+            $scope.poolSelectorCtrl.syncPools(pool, vm.selectedPool);
         }
 
         function poolRemoved(pool) {
