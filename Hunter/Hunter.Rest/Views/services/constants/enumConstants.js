@@ -41,7 +41,7 @@
             ],
             cardStages: [
                 { id: 0, name: 'Long Listed', bgcolor: '#effa55' },
-                { id: 1, name: 'Test Send', bgcolor: '#effa55' },
+                { id: 1, name: 'Test Sent', bgcolor: '#effa55' },
                 { id: 2, name: 'Test Done', bgcolor: '#effa55' },
                 { id: 3, name: 'Interview', bgcolor: '#effa55' },
                 { id: 4, name: 'Test Failed', bgcolor: '#f05858' },
