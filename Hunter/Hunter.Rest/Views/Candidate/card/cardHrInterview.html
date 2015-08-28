@@ -43,7 +43,7 @@
                     <div>
                         <div>
                             <div style="width: auto;">
-                                <h3>{{generalCardCtrl.feedbackTypes[feedback.type].name}} {{hrInterviewCtrl.vacancy.name != feedback.vacancy || !generalCardCtrl.isLLM ? 'from ' + feedback.vacancy :''}}</h3>
+                                <h3>{{generalCardCtrl.feedbackTypes[feedback.type].name}} {{hrInterviewCtrl.vacancy.name != feedback.vacancy && feedback.vacancy != null ? 'from ' + feedback.vacancy :''}}</h3>
                             </div>
                             <div class="vote-group" ng-hide="feedback.id == 0">
                                 <thumb-button btn-type="btn-success" btn-icon="fa-thumbs-o-up"
