@@ -25,7 +25,7 @@ namespace Hunter.Services
         private readonly IActivityHelperService _activityHelperService;
         private readonly ICardRepository _cardRepository;
 		private readonly ICandidateRepository _candidateRepository;
-        private string _localStorage = HttpContext.Current.Server.MapPath("~/App_Data/Hunter/Files/");
+        private string _localStorage = System.Configuration.ConfigurationManager.AppSettings["FilesRootPath"];
 
         public FileService(IFileRepository fileRepository, ILogger logger, ICandidateService candidateService,
             IResumeRepository resumeRepository, IActivityHelperService activityHelperService, ICardRepository cardRepository,
