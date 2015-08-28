@@ -62,9 +62,9 @@ namespace Hunter.Services
 
         public IList<ScheduledNotificationDto> GetActive(string userLogin)
         {
-            var pendingDate = DateTime.UtcNow;
+            var currentDate = DateTime.UtcNow;
             var userProfile = _userProfileRepository.Get(p => p.UserLogin == userLogin);
-            var notifications = _scheduledNotificationRepository.Query().Where(n => n.UserProfile.Id == userProfile.Id && n.Pending < pendingDate && !n.IsShown).ToList();
+            var notifications = _scheduledNotificationRepository.Query().Where(n => n.UserProfile.Id == userProfile.Id && n.Pending < currentDate && !n.IsShown).ToList();
             return notifications.Select(item => item.ToScheduledNotificationDto()).ToList();
         }
 
@@ -81,6 +81,13 @@ namespace Hunter.Services
             var notification = _scheduledNotificationRepository.Get(id);
             notification.IsShown = true;
             _scheduledNotificationRepository.UpdateAndCommit(notification);
+        }
+
+        public IList<ScheduledNotificationDto> GetCandidateNotifications(string userLogin, int candidateId)
+        {
+            var userProfile = _userProfileRepository.Get(p => p.UserLogin == userLogin);
+            var notifications = _scheduledNotificationRepository.Query().Where(n => n.UserProfileId == userProfile.Id && n.CandidateId == candidateId).ToList();
+            return notifications.Select(item => item.ToScheduledNotificationDto()).ToList();
         }
 
         public void Notify()

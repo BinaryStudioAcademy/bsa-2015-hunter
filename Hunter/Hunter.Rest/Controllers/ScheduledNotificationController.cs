@@ -145,6 +145,23 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpGet]
+        [Route("candidate/{id:int}")]
+        [ResponseType(typeof(IEnumerable<ScheduledNotificationDto>))]
+        public HttpResponseMessage GetCandidateNotifications(int id)
+        {
+            try
+            {
+                var login = RequestContext.Principal.Identity.Name;
+                var notifications = _scheduledNotificationService.GetActive(login);
+                return Request.CreateResponse(HttpStatusCode.OK, notifications);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [HttpGet]
         [Route("notify")]
         public HttpResponseMessage Notify()
         {

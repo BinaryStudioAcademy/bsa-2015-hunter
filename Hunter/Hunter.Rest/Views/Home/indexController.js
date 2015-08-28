@@ -18,8 +18,8 @@
         vm.name = "Index";
         vm.amount = 0;
         $scope.radioModel = 'Home';
-        vm.notifications = null;
-        vm.clickedNotification = null;
+        $scope.notifications = null;
+        $scope.clickedNotification = null;
 
         callRefreshFunctions();
 
@@ -38,9 +38,9 @@
 
         function getActiveNotifications() {
             notificationHttpService.getActiveNotifications().then(function (result) {
-                vm.notifications = result;
-                if (vm.notifications != null) {
-                    for (var i = 0; i < vm.notifications.length; i++) {
+                $scope.notifications = result;
+                if ($scope.notifications != null) {
+                    for (var i = 0; i < $scope.notifications.length; i++) {
                         alertNotification(i);
                     }
                 }
@@ -48,15 +48,16 @@
         }
 
         function alertNotification(index) {
-            vm.clickedNotification = vm.notifications[index];
-            var alertMessage = vm.clickedNotification.pending + ' ' + vm.clickedNotification.message + '<a href="#/candidate/' + vm.clickedNotification.candidateId + '"></a>';
+            $scope.clickedNotification = $scope.notifications[index];
+            var alertMessage = $scope.clickedNotification.pending + ' ' + $scope.clickedNotification.message + '<a href="#/candidate/' + $scope.clickedNotification.candidateId + '"></a>';
 
-            alertify.success('Click me to show a notification!', 6000, function (isClicked) {
+            alertify.message('Click me to show a notification!', 180, function (isClicked) {
                 if (isClicked) {
-                    console.log(vm.clickedNotification);
-                    notificationHttpService.notificationShown(vm.clickedNotification.id);
-                    alertify.alert(alertMessage);
-                    $location.url('/candidate/' + vm.clickedNotification.candidateId);
+                    console.log($scope.clickedNotification);
+                    notificationHttpService.notificationShown($scope.clickedNotification.id);
+                    alertify.alert(alertMessage, function () {
+                        $location.url('/candidate/' + $scope.clickedNotification.candidateId);
+                    });
                 }
             });
         }
