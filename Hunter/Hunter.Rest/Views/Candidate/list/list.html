@@ -9,7 +9,7 @@
 
             <div class="form-group">
                 <label>Filter</label>
-                <input type="search" class="form-control" ng-model="candidateListCtrl.filter.search">
+                <input type="search" class="form-control" ng-model="candidateListCtrl.filter.search" ng-change="candidateListCtrl.updateCandidate()">
             </div>
 
             <div class="filter-settings">
@@ -18,7 +18,7 @@
                         Pool
                         <ul>
                             <li ng-repeat="pool in candidateListCtrl.pools">
-                                <input type="checkbox" checklist-model="candidateListCtrl.filter.pools" checklist-value="pool.name"> {{pool.name}}
+                                <input ng-click="candidateListCtrl.updateCandidate()" type="checkbox" checklist-model="candidateListCtrl.filter.pools" checklist-value="pool.name"> {{pool.name}}
                             </li>
                         </ul>
                     </li>
@@ -26,7 +26,7 @@
                         Resolution
                         <ul>
                             <li ng-repeat="status in candidateListCtrl.statuses">
-                                <input type="checkbox" checklist-model="candidateListCtrl.filter.statuses" checklist-value="status.id"> {{status.name}}
+                                <input ng-click="candidateListCtrl.updateCandidate()" type="checkbox" checklist-model="candidateListCtrl.filter.statuses" checklist-value="status.id"> {{status.name}}
                             </li>
                         </ul>
                     </li>
@@ -34,7 +34,7 @@
                         Added by
                         <ul>
                             <li ng-repeat="inv in candidateListCtrl.inviters">
-                                <input type="checkbox" checklist-model="candidateListCtrl.filter.inviters" checklist-value="inv.userLogin"> {{inv.alias}}({{inv.countOfAddedCandidates}})
+                                <input  ng-click="candidateListCtrl.updateCandidate()" type="checkbox" checklist-model="candidateListCtrl.filter.inviters" checklist-value="inv.userLogin"> {{inv.alias}}({{inv.countOfAddedCandidates}})
                             </li>
                         </ul>
                     </li>
@@ -45,7 +45,10 @@
             <div class="col-md-9" spinner="candidateListCtrl.tableSpinner">
                 <div class="form-group col-md-5">
                     <label>Order By</label>
-                    <select class="form-control" ng-change="candidateListCtrl.getCandidates()" ng-options="item.options as item.text for item in candidateListCtrl.sortOptions" ng-model="candidateListCtrl.order"></select>
+                    <select class="form-control" 
+                            ng-options="item.options as item.text for item in candidateListCtrl.sortOptions"
+                            ng-model="candidateListCtrl.filter.order"
+                            ng-change="candidateListCtrl.updateCandidate()"></select>
                 </div>
 
                 <table class="longlist table table-bordered">
@@ -122,20 +125,17 @@
                     <div class="pagination page-count-wrapper form-inline">
                         <span>Items on page</span>
                         <select class="form-control"
-                                ng-init="candidateListCtrl.pageSize=25"
-                                ng-model="candidateListCtrl.pageSize"
-                                ng-change="candidateListCtrl.getCandidates()">
-                            <option value="5">5</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                            <option value="">All</option>
+                                ng-model="candidateListCtrl.filter.pageSize"
+                                ng-change="candidateListCtrl.updateCandidate()">
+                            <option>0</option>
+                            <option ng-repeat="i in [10,25,50,100]">{{i}}</option>
                         </select>
                     </div>
                     <pagination total-items="candidateListCtrl.totalItems"
                                 ng-model="candidateListCtrl.filter.currentPage"
-                                items-per-page="candidateListCtrl.pageSize"
+                                items-per-page="candidateListCtrl.filter.pageSize"
                                 max-size="5"
+                                ng-click="candidateListCtrl.updateCandidate()"
                                 class="pagination-sm"
                                 boundary-links="true"
                                 template-url="../../Views/templates/pagination.html"></pagination>
