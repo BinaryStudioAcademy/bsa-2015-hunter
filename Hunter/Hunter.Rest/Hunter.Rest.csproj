@@ -513,6 +513,7 @@
     <Content Include="Content\longlist.css" />
     <Content Include="Content\MyStyle.css" />
     <Content Include="Content\pool.css" />
+    <Content Include="Content\poolSelector.css" />
     <Content Include="Content\spinnerStyle.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />

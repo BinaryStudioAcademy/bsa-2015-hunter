@@ -24,6 +24,11 @@
                     CandidateHttpService.addCandidatePool($scope.candidate.id, pool.id)
                         .then(function(data) {
                             $scope.candidate.poolNames.push(pool.name);
+
+                            if (!(pool.name in $scope.candidate.poolColors)) {
+                                $scope.candidate.poolColors[pool.name] = pool.color;
+                            }
+
                             $scope.$apply();
                     });
                 }
