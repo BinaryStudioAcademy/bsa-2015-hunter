@@ -38,6 +38,23 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpGet]
+        [Route("active")]
+        [ResponseType(typeof(IEnumerable<ScheduledNotificationDto>))]
+        public HttpResponseMessage GetActive()
+        {
+            try
+            {
+                var login = RequestContext.Principal.Identity.Name;
+                var notifications = _scheduledNotificationService.GetActive(login);
+                return Request.CreateResponse(HttpStatusCode.OK, notifications);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [HttpGet]
         [Route("{id:int}")]
         [ResponseType(typeof(ScheduledNotificationDto))]
         public HttpResponseMessage Get(int id)
@@ -61,6 +78,8 @@ namespace Hunter.Rest.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var login = RequestContext.Principal.Identity.Name;
+                    value.UserLogin = login;
                     _scheduledNotificationService.Add(value);
                     return Request.CreateResponse(HttpStatusCode.OK, "Ok");
                 }
@@ -81,6 +100,25 @@ namespace Hunter.Rest.Controllers
                 if (ModelState.IsValid)
                 {
                     _scheduledNotificationService.Update(value);
+                    return Request.CreateResponse(HttpStatusCode.OK, "Ok");
+                }
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid model state");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("{id:int}/shown")]
+        public HttpResponseMessage NotificationShowed(int id)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _scheduledNotificationService.NotificationShown(id);
                     return Request.CreateResponse(HttpStatusCode.OK, "Ok");
                 }
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid model state");

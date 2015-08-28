@@ -13,6 +13,8 @@ namespace Hunter.Services.Interfaces
         void Delete(int id);
         IList<ScheduledNotificationDto> Get(string userAlias);
         ScheduledNotificationDto Get(int id);
+        IList<ScheduledNotificationDto> GetActive(string userLogin);
+        void NotificationShown(int id);
         void Notify();
     }
 }

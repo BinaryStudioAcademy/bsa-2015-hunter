@@ -19,9 +19,9 @@
             getFilterUsers: getFilterUsers,
             getFilterTags: getFilterTags
         };
-
-        vm.filterUsers = [];
+        
         function getFilterUsers(f) {
+            vm.filterUsers = [];
             for (var i = 0; i < f.length; i++) {
                 if (f[i].filterId === 1) {
                     vm.filterUsers.push(f[i]);
@@ -30,9 +30,9 @@
 
             return vm.filterUsers;
         }
-
-        vm.filterTags = [];
+    
         function getFilterTags(f) {
+            vm.filterTags = [];
             for (var i = 0; i < f.length; i++) {
                 if (f[i].filterId === 0) {
                     f[i].name = vm.activityTags[f[i].optionId];
