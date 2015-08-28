@@ -68,10 +68,9 @@
         function notificationShown(data) {
             httpHandler.sendRequest({
                 verb: 'PUT',
-                url: '/api/notifications/' + data.id + '/shown',
-                body: data,
+                url: '/api/notifications/shown/' + data,
                 errorCallback: function (status) {
-                    console.log("Add Scheduled notification error");
+                    console.log("Shown Scheduled notification error");
                     console.log(status);
                 }
             });

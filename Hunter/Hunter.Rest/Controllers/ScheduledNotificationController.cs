@@ -111,8 +111,8 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpPut]
-        [Route("{id:int}/shown")]
-        public HttpResponseMessage NotificationShowed(int id)
+        [Route("shown/{id:int}")]
+        public HttpResponseMessage NotificationShown(int id)
         {
             try
             {

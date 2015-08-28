@@ -19,6 +19,7 @@
         vm.amount = 0;
         $scope.radioModel = 'Home';
         vm.notifications = null;
+        vm.clickedNotification = null;
 
         callRefreshFunctions();
 
@@ -36,25 +37,26 @@
         }
 
         function getActiveNotifications() {
-            console.log('getActiveNotifications');
             notificationHttpService.getActiveNotifications().then(function (result) {
                 vm.notifications = result;
                 if (vm.notifications != null) {
-                    vm.notifications.forEach(function (notification, i, notifications) {
-                        alertNotification(notification);
-                    });
+                    for (var i = 0; i < vm.notifications.length; i++) {
+                        alertNotification(i);
+                    }
                 }
             });
         }
 
-        function alertNotification(notification) {
-            var alertMessage = notification.pending + ' ' + notification.message + '<a href="#/candidate/' + notification.candidateId + '"></a>';
+        function alertNotification(index) {
+            vm.clickedNotification = vm.notifications[index];
+            var alertMessage = vm.clickedNotification.pending + ' ' + vm.clickedNotification.message + '<a href="#/candidate/' + vm.clickedNotification.candidateId + '"></a>';
 
             alertify.success('Click me to show a notification!', 6000, function (isClicked) {
                 if (isClicked) {
-                    notificationHttpService.notificationShown(notification.id);
+                    console.log(vm.clickedNotification);
+                    notificationHttpService.notificationShown(vm.clickedNotification.id);
                     alertify.alert(alertMessage);
-                    $location.url('/candidate/' + notification.candidateId);
+                    $location.url('/candidate/' + vm.clickedNotification.candidateId);
                 }
             });
         }
