@@ -108,7 +108,7 @@ namespace Hunter.Rest.Controllers
                     return Request.CreateResponse(HttpStatusCode.NotFound);
                 }
 
-                data.PoolColors = _poolService.GetColors();
+                data.PoolColors = _candidateService.GetColors(id);
 
                 return Request.CreateResponse(HttpStatusCode.OK, data);
             }

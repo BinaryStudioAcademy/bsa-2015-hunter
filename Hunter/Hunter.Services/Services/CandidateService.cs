@@ -271,5 +271,23 @@ namespace Hunter.Services
                 throw ex;
             }
         }
+
+        public Dictionary<string, string> GetColors(int id)
+        {
+            try
+            {
+                var colors = _candidateRepository.Query()
+                    .Where(x => x.Id == id)
+                    .SelectMany(cand => cand.Pool, (cand, pool) => new {Name = pool.Name, Color = pool.Color})
+                    .ToDictionary(x => x.Name.ToLower(), x => x.Color);
+
+                return colors;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex.Message);
+                throw ex;
+            }
+        }
     }
 }

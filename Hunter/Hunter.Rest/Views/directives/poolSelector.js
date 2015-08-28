@@ -26,10 +26,8 @@
                             $scope.candidate.poolNames.push(pool.name);
 
                             if (!(pool.name in $scope.candidate.poolColors)) {
-                                $scope.candidate.poolColors[pool.name] = pool.color;
+                                $scope.candidate.poolColors[pool.name.toLowerCase()] = pool.color;
                             }
-
-                            $scope.$apply();
                     });
                 }
             }],

@@ -135,19 +135,5 @@ namespace Hunter.Services
                 return false;
             }
         }
-
-        public Dictionary<string, string> GetColors()
-        {
-            try
-            {
-                var colors = _poolRepository.Query().Select(x => x).ToDictionary(x => x.Name.ToLower(), x => x.Color);
-                return colors;
-            }
-            catch (Exception ex)
-            {
-                _logger.Log(ex.Message);
-                throw ex;
-            }
-        }
     }
 }
