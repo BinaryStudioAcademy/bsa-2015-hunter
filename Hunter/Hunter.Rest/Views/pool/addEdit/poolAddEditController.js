@@ -39,6 +39,7 @@
 
             //!!!
             vm.poolUrl = "/api/pool/" + $scope.generalCtrl.selectedPool.id;
+//            vm.pool = $scope.generalCtrl.selectedPool;
             HttpHandler.sendRequest({
                 url: vm.poolUrl,
                 verb: "GET",
@@ -59,6 +60,7 @@
                         //console.log(result);
                         //                        $location.url("/pool");
                         $scope.generalCtrl.link = 'Views/pool/list/list.html';
+                        $scope.generalCtrl.poolChanged(vm.pool);
                     },
                     errorCallback: function (result) { console.log(result); }
                 });
@@ -72,6 +74,7 @@
                         //console.log(result);
                         //                        $location.url("/pool");
                         $scope.generalCtrl.link = 'Views/pool/list/list.html';
+                        $scope.generalCtrl.poolRemoved(vm.pool);
                     },
                     errorCallback: function (result) { console.log(result); }
                 });
@@ -95,7 +98,7 @@
                 errorCallback: function (result) { console.log(result); }
             });
 
-            vm.poolPostPut = function () {
+            vm.poolPostPut = function (pool) {
                 HttpHandler.sendRequest({
                     url: vm.poolUrl,
                     verb: "POST",

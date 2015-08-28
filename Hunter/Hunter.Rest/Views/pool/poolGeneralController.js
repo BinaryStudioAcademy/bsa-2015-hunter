@@ -14,6 +14,8 @@
 
         vm.selectPool = selectPool;
         vm.closeChooser = closeChooser;
+        vm.poolChanged = poolChanged;
+        vm.poolRemoved = poolRemoved;
 
         function selectPool(pool) {
             if ($scope.poolSelectorCtrl != undefined) {
@@ -27,6 +29,14 @@
             } else {
                 vm.link = '';
             }
+        }
+
+        function poolChanged(pool) {
+            $scope.poolSelectorCtrl.syncPools(pool);
+        }
+
+        function poolRemoved(pool) {
+            $scope.poolSelectorCtrl.removePoolFromCandidate(pool);
         }
     }
 })()
