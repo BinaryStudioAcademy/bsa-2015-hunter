@@ -1,93 +1,58 @@
-﻿<div class="container-partial" ng-controller='CandidatePartialController as candidatePartCtrl' >
-    <div ng-if="!candidatePartCtrl.isEmpty" spinner='candidatePartCtrl.prevLoad'>
-        <div class="row">
-            <div class="col-md-11">
-                <h4>Preview</h4>
-                <p class="ll_close_button" ng-click="$root.candidateDetails.show = false"><span class=" glyphicon glyphicon-remove"></span></p>
-            </div>
-        </div>
-        <div class="candidate-info">
-            <div class="candidate-personal-info row">
-                <div class="image col-md-5">
-                    <shor-list-star is-short="candidatePartCtrl.candidate.shortListed" candidate-id="candidatePartCtrl.candidate.id" size="'30px'" ng-click="$event.stopPropagation();"></shor-list-star>
-                    <img class="preview-profile-photo img-circle" ng-src="{{candidatePartCtrl.candidate.photoUrl}}" />
+﻿<div class="container-partial" ng-controller='CandidatePartialController as candidatePartCtrl' >  
+    <div ng-if="!candidatePartCtrl.isEmpty" spinner='candidatePartCtrl.prevLoad' class="row ll_preview">
+        <div class="col-md-12">
+            <p class="ll_close_button" ng-click="$root.candidateDetails.show = false"><span class=" glyphicon glyphicon-remove"></span></p>
+            <h2>Preview</h2>
+            <div class="ll_preview_info">
+                <div class="ll_preview_info_img">
+                    <shor-list-star is-short="candidatePartCtrl.candidate.shortlisted" candidate-id="candidatePartCtrl.candidate.id" size="'30px'"></shor-list-star>
+                    <img ng-src="{{candidatePartCtrl.candidate.photoUrl}}" alt="{{candidatePartCtrl.candidate.firstName}} {{candidatePartCtrl.candidate.lastName}} foto" title="{{candidatePartCtrl.candidate.firstName}} {{candidatePartCtrl.candidate.lastName}} foto" />
                 </div>
-                <div class="col-md-7">
-
-                    <span class="candidate-name">{{candidatePartCtrl.candidate.firstName+" "+candidatePartCtrl.candidate.lastName}}</span>
-                    <div class="salary-wrapper">{{candidatePartCtrl.candidate.salary}}</div>
+                <div class="ll_preview_info_all">
+                    <p>
+                        <a href="#/candidate/{{candidatePartCtrl.candidate.id}}">{{candidatePartCtrl.candidate.firstName + " " + candidatePartCtrl.candidate.lastName}}</a>
+                    </p>
+                    <p>{{candidatePartCtrl.candidate.salary}}</p>
+                    <p></p>
                 </div>
-            </div>
-            <div class="candidate-personal-info row">
-                <div class="personal-info-small col-md-push-12">
-
-                    <div>current/past: {{candidatePartCtrl.candidate.currentPosition}}</div>
-                    <div>years of experience: {{candidatePartCtrl.candidate.yearsOfExperience}}</div>
-                    <div>company/location: {{candidatePartCtrl.candidate.company+","+candidatePartCtrl.candidate.location}}</div>
-                    <div>email: {{candidatePartCtrl.candidate.email}}</div>
-                    <div>skype: {{candidatePartCtrl.candidate.skype}}</div>
-                    <div>phone: {{candidatePartCtrl.candidate.phone}}</div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-5">
-                    <a class="btn btn-default btn-block" href="#/candidate/{{candidatePartCtrl.candidate.id}}">Profile</a>
-                </div>
-                <div class="form-inline col-md-7">
-                    <div class="candidate-resolution form-group">
+                 <div class="personal-info">
+                            <div>Current/Past: {{candidatePartCtrl.candidate.currentPosition}}</div>
+                            <div>Years of experience: {{candidatePartCtrl.candidate.yearsOfExperience}}</div>
+                            <div>Company/Location: {{candidatePartCtrl.candidate.company+","+candidatePartCtrl.candidate.location}}</div>
+                            <div>Email: {{candidatePartCtrl.candidate.email}}</div>
+                            <div>Skype: {{candidatePartCtrl.candidate.skype}}</div>
+                            <div>Phone: {{candidatePartCtrl.candidate.phone}}</div>
+                 </div>
+                  <div class="candidate-resolution form-group">
                         <label>Resolution</label>
                         <select class="form-control" name="resolution" ng-change="candidatePartCtrl.updateResolution()" ng-model="candidatePartCtrl.candidate.resolution" ng-options="resolution.id as resolution.name for resolution in candidatePartCtrl.resolutions"></select>
+                  </div>
+                <div class="ll_preview_info_control">
+                    <a class="btn btn-default" href="#/candidate/{{candidatePartCtrl.candidate.id}}">Full Profile</a>
+                    <a class="btn btn-default" href="#/candidate/edit/{{candidatePartCtrl.candidate.id}}">Edit Profile</a>
+
+                </div>
+
+                <div class="col-md-12">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation"
+                            ng-class="{active: candidatePartCtrl.currentTabName == tab.name}"
+                            ng-repeat="tab in candidatePartCtrl.tabs track by $index"
+                            ng-click="candidatePartCtrl.changeTemplate(tab)">
+                            <a role="presentation" data-toggle="tab">{{ tab.name }}</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active ll_preview_overview_wrap">
+                            <p ng-hide="candidatePartCtrl.currentTabEmpty">No {{candidatePartCtrl.currentTabName}}
+                            </p>
+                                <div id="card-dynamic" ng-include="candidatePartCtrl.templateToShow"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-push-12">
-                
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="active"><a href="" data-toggle="tab">Aplications</a></li>
-                <li role="presentation"><a href="" data-toggle="tab">Notes</a></li>
-            </ul>
-            </div>
-        </div>
-        <div class="candidate-notes row">
-            <div class="note-info-conteiner col-md-12">
-                <div class="note-info-title">
-                    <h3>Aplication Results</h3>
-                </div>
-                <div>
-                    <table class="notes-table">
-                        <tr class="passed">
-                            <td>PHP</td>
-                            <td>15/04/2016</td>
-                            <td>passed</td>
-                        </tr>
-                        <tr class="passed">
-                            <td>PHP</td>
-                            <td>21/09/2016</td>
-                            <td>passed</td>
-                        </tr>
-                        <tr class="failed">
-                            <td>JS</td>
-                            <td>7/05/2016</td>
-                            <td>failed(test)</td>
-                        </tr>
-                        <tr class="passed">
-                            <td>PHP</td>
-                            <td>12/03/2016</td>
-                            <td>passed</td>
-                        </tr>
-                        <tr class="passed">
-                            <td>PHP</td>
-                            <td>20/07/2016</td>
-                            <td>passed</td>
-                        </tr>
-                        <tr class="failed">
-                            <td>JS</td>
-                            <td>17/05/2016</td>
-                            <td>failed(test)</td>
-                        </tr>
-                    </table>
+                <div class="ll_preview_info_control">
+                    <input class="btn btn-default" type="button" value="View Resume" ng-click="candidatePartCtrl.showResume()" ng-disabled="candidatePartCtrl.candidate.lastResumeUrl==''">
+                    <a class="btn btn-default" ng-show="candidatePartCtrl.candidate.linkedin != ''" href="{{candidatePartCtrl.candidate.linkedin}}" target="_blank">View LinkenIn Profile</a>
                 </div>
             </div>
         </div>
