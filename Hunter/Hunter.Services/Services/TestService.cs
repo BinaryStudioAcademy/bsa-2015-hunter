@@ -33,16 +33,21 @@ namespace Hunter.Services.Services
             _feedbackRepository = feedbackRepository;
         }
 
-        public IEnumerable<TestDto> GetAllCandidatesTests(int candidateId)
+        public TestsResult GetAllCandidatesTests(int candidateId)
         {
             try
             {
+//                var cardId = findCardId(candidateId);
+
                 var tests = _testRepository
                     .Query()
-                    .Where(x => x.Card.CandidateId == candidateId)
+                    .Where(x => x.Card.CandidateId == candidateId).ToList()
                     .Select(x => x.ToTestDto());
 
-                return tests;
+                return new TestsResult
+                {
+                    Tests = tests
+                };
             }
             catch (Exception ex)
             {
