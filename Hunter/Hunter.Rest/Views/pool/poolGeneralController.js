@@ -32,11 +32,15 @@
         }
 
         function poolChanged(pool) {
-            $scope.poolSelectorCtrl.syncPools(pool, vm.selectedPool);
+            if ($scope.poolSelectorCtrl != undefined) {
+                $scope.poolSelectorCtrl.syncPools(pool, vm.selectedPool);
+            }
         }
 
         function poolRemoved(pool) {
-            $scope.poolSelectorCtrl.removePoolFromCandidate(pool);
+            if ($scope.poolSelectorCtrl != undefined) {
+                $scope.poolSelectorCtrl.removePoolFromCandidate(pool);
+            }
         }
     }
 })()

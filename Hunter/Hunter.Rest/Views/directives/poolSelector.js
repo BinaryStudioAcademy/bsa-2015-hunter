@@ -70,7 +70,7 @@
                         '{{pool}}</div>' +
                     '</div>' +
                     '<button style="margin-left: 5px;" id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class=" btn btn-default"><i class="fa fa-plus"></i></button>' +
-                    '<div id="selectPoolMain" ng-if="poolSelectorCtrl.show" class="pool-widget-container" ng-controller="PoolGeneralController as generalCtrl">' +
+                    '<div id="selectPoolMain" ng-show="poolSelectorCtrl.show" class="pool-widget-container" ng-controller="PoolGeneralController as generalCtrl">' +
                         '<div style="width: 380px;" ng-include="generalCtrl.link"></div>' +
                     '</div>' +
                 '</div>'
