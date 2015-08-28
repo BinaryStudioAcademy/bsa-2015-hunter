@@ -34,7 +34,7 @@
                         Added by
                         <ul>
                             <li ng-repeat="addedby in longListCtrl.addedByList">
-                                <input type="checkbox" checklist-model="longListCtrl.filter.hr" checklist-value="addedby.userLogin"> {{addedby.userLogin == '' ? 'unknown' : addedby.alias}} ({{addedby.countOfAddedCandidates}})
+                                <input type="checkbox" checklist-model="longListCtrl.filter.hr" checklist-value="addedby.userLogin"> {{addedby.userLogin == '' ? 'unknown' : addedby.alias}} <span>({{addedby.countOfAddedCandidates}})</span>
                             </li>
                         </ul>
                     </li>

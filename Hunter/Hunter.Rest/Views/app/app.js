@@ -143,6 +143,13 @@ angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.dir
                     controllerAs: 'userAddEditCtrl'
                 });
 
+            $routeProvider
+                .when('/notifications', {
+                    templateUrl: viewPath + 'notification/list/list.html',
+                    controller: 'NotificationListController',
+                    controllerAs: 'notificationListCtrl'
+                });
+
             //result on statistics button click (slide 1)
             $routeProvider
                 .when('/statistics', {

@@ -36,10 +36,10 @@
             }
         }
 
-        function isCurrentTabEmpty(route, overviewText, notes) {
+        function isCurrentTabEmpty(route, overviews, notes) {
             switch (route.toLowerCase()) {
                 case 'overview':
-                    return overviewText.length > 0 ? true : false;
+                    return overviews.length > 0 ? true : false;
                 case 'specialnotes':
                     return notes.length > 0 ? true : false;
                 case 'appresults':

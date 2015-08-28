@@ -44,7 +44,7 @@
         function saveNewSpecialNote() {
             var note = {
                 text: vm.newNoteText,
-                vacancyId: $routeParams.vid,
+                vacancyId: $routeParams.vid || null,
                 candidateId: $routeParams.cid
             };
             specialNoteHttpService.addSpecialNote(note)

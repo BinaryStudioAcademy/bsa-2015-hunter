@@ -13,8 +13,7 @@
                         <a href="#/vacancy/{{llPreviewCtrl.vacancyId}}/candidate/{{llPreviewCtrl.candidateDetails.id}}">{{llPreviewCtrl.candidateDetails.firstName + " " + llPreviewCtrl.candidateDetails.lastName}}</a>
                     </p>
                     <p>{{llPreviewCtrl.candidateDetails.salary}}</p>
-                    <p title="Resolution">{{llPreviewCtrl.candidateDetails.resolution}} </p>
-                    <!--/ {{llPreviewCtrl.stages[llPreviewCtrl.candidateDetails.stage].name}}-->
+                    <p title="Resolution / Stage">{{llPreviewCtrl.resolutions[llPreviewCtrl.candidateDetails.resolution].name}} / {{llPreviewCtrl.stages[llPreviewCtrl.candidateDetails.stage].name}}</p>
                 </div>
                 <div class="ll_preview_info_control">
                 </div>

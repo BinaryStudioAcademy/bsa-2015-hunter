@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\ActivityDto.cs" />
+    <Compile Include="Dto\ActivityFilterDto.cs" />
     <Compile Include="Dto\ApiResults\FeedbackUpdatedResult.cs" />
     <Compile Include="Dto\ApiResults\SpecNoteResult.cs" />
     <Compile Include="Dto\ApiResults\TestsResult.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Dto\FileDto.cs" />
     <Compile Include="Dto\FilterInfoDto.cs" />
     <Compile Include="Dto\ResumeDto.cs" />
+    <Compile Include="Dto\ScheduledNotification\ScheduledNotificationDto.cs" />
     <Compile Include="Dto\Test\TestCommentDto.cs" />
     <Compile Include="Dto\Test\TestDto.cs" />
     <Compile Include="Dto\SpecialNoteDto.cs" />
@@ -93,6 +95,7 @@
     <Compile Include="Dto\PoolViewModel.cs" />
     <Compile Include="Dto\CandidateDto.cs" />
     <Compile Include="Extensions\CandidateExtensions.cs" />
+    <Compile Include="Extensions\ScheduledNotificationExtension.cs" />
     <Compile Include="Extensions\TestExtension.cs" />
     <Compile Include="Extensions\SpecialNoteExtension.cs" />
     <Compile Include="Extensions\UserExtension.cs" />
@@ -116,6 +119,7 @@
     <Compile Include="Services\Interfaces\IFileService.cs" />
     <Compile Include="Services\Interfaces\IFeedbackService.cs" />
     <Compile Include="Services\Interfaces\IPoolService.cs" />
+    <Compile Include="Services\Interfaces\IScheduledNotificationService.cs" />
     <Compile Include="Services\Interfaces\ITestService.cs" />
     <Compile Include="Services\Interfaces\ISpecialNoteService.cs" />
     <Compile Include="Services\Interfaces\IUserProfileService.cs" />
@@ -124,6 +128,7 @@
     <Compile Include="Services\Interfaces\IUserRoleService.cs" />
     <Compile Include="Services\Interfaces\IResumeService.cs" />
     <Compile Include="Services\ResumeService.cs" />
+    <Compile Include="Services\ScheduledNotificationService.cs" />
     <Compile Include="Services\TestService.cs" />
     <Compile Include="Services\SpecialNoteService.cs" />
     <Compile Include="Services\UserProfileService.cs" />
