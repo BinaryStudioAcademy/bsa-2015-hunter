@@ -103,7 +103,7 @@ namespace Hunter.Rest.Controllers
                 {
                     var login = RequestContext.Principal.Identity.Name;
                     model.UserLogin = login;
-                    model.LastEdited = DateTime.Now;
+                    model.LastEdited = DateTime.UtcNow;
                     var result = _specialNoteService.AddSpecialNote(model);
                     return Request.CreateResponse(HttpStatusCode.OK, result);
                 }

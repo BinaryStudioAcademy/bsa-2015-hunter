@@ -6,13 +6,15 @@
         .factory('ActivityHttpService', ActivityHttpService);
 
     ActivityHttpService.$inject = [
-        'HttpHandler'
+        'HttpHandler',
+        '$q'
     ];
 
-    function ActivityHttpService(httpHandler) {
+    function ActivityHttpService(httpHandler, $q) {
         var service = {
             getActivityList: getActivityList,
-            saveLastActivityId: saveActivityId
+            saveLastActivityId: saveActivityId,
+            getFilterOptions: getFilterOptions
         };
 
         function getActivityList(successCallback, body) {
@@ -35,6 +37,22 @@
                 'errorMessageToDev': 'POST ACTIVITY_ID ERROR',
                 'errorMessageToUser': 'Failed'
             });
+        }
+
+        function getFilterOptions() {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/activities/filters',
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get activities filter options error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
         }
 
         return service;
