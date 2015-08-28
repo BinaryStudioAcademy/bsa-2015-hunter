@@ -33,29 +33,36 @@ namespace Hunter.Services
             _activityHelperService = activityHelperService;
         }
 
-        public IEnumerable<Dto.FeedbackDto> GetAllHrInterviews(int vid, int cid)
+        public IEnumerable<FeedbackDto> GetAllHrInterviews(int vid, int cid, string name)
         {
 
-            var card = _cardRepository.Query().SingleOrDefault(c => c.VacancyId == vid && c.CandidateId == cid);
-
-            if (card == null)
-                return null;
             try
             {
-                var feedbacks = card.Feedback
-                    .Where(f => (f.Type == 0 || f.Type == 1))
-                    .ToFeedbacksDto().ToList();
+                IEnumerable<Feedback> feedbacks;
 
-                if (!feedbacks.Any(f => f.Type == 0))
+                if (vid == 0)
                 {
-                    feedbacks.Add(new FeedbackDto { Id = 0, Type = 0, CardId = card.Id, Text = "", Date = DateTime.Now, UserName = "" });
+                    feedbacks = _cardRepository
+                        .Query()
+                        .Where(e => e.CandidateId == cid)
+                        .SelectMany(c => c.Feedback.Where(f => f.Type == 0 || f.Type == 1 || f.Type == 2));
                 }
-                if (!feedbacks.Any(f => f.Type == 1))
+                else if (vid == -1)
                 {
-                    feedbacks.Add(new FeedbackDto { Id = 0, Type = 1, CardId = card.Id, Text = "", Date = DateTime.Now, UserName = "" });
+                    feedbacks = _cardRepository
+                        .Query()
+                        .Where(e => e.CandidateId == cid)
+                        .SelectMany(c => c.Feedback.Where(f => (f.Type == 0 || f.Type == 1 || f.Type == 2) && f.UserProfile.UserLogin == name));
+                }
+                else
+                {
+                    feedbacks = _cardRepository
+                        .Query()
+                        .Where(e => e.VacancyId == vid && e.CandidateId == cid)
+                        .SelectMany(c => c.Feedback.Where(f => f.Type == 0 || f.Type == 1 || f.Type == 2));
                 }
 
-                return feedbacks.OrderBy(f => f.Type);
+                return feedbacks.ToFeedbacksDto().OrderBy(f => f.Type);
             }
             catch (Exception ex)
             {
@@ -65,22 +72,37 @@ namespace Hunter.Services
 
         }
 
-        public FeedbackDto GetTechInterview(int vacancyId, int candidateId)
+        public IEnumerable<FeedbackDto> GetTechInterview(int vacancyId, int candidateId, string name)
         {
             int type = (int)FeedbackType.TechFeedback;
             try
             {
-                var card = _cardRepository
+                IEnumerable<Feedback> feedbacks;
+
+                if (vacancyId == 0)
+                {
+                    feedbacks = _cardRepository
+                        .Query()
+                        .Where(e => e.CandidateId == candidateId)
+                        .SelectMany(c => c.Feedback.Where(f => f.Type == type));
+                }
+                else if (vacancyId == -1)
+                {
+                    feedbacks = _cardRepository
+                        .Query()
+                        .Where(e => e.CandidateId == candidateId)
+                        .SelectMany(c => c.Feedback.Where(f => f.Type == type && f.UserProfile.UserLogin == name));
+                }
+                else
+                {
+                    feedbacks = _cardRepository
                 .Query()
                 .Where(e => e.VacancyId == vacancyId && e.CandidateId == candidateId)
-                .FirstOrDefault();
+                        .SelectMany(c => c.Feedback.Where(f => f.Type == type));
+                }
 
-                var feedback = card.Feedback
-                    .Where(e => e.Type == type)
-                    .FirstOrDefault();
-                if (feedback == null)
-                    return new FeedbackDto() { Id = 0, Type = type, CardId = card.Id, Text = "", Date = DateTime.Now, UserName = "" };
-                return feedback.ToFeedbackDto();
+                return feedbacks.ToFeedbacksDto();
+
             }
             catch (Exception e)
             {
@@ -98,7 +120,7 @@ namespace Hunter.Services
                     .SingleOrDefault(e => e.VacancyId == vacancyId && e.CandidateId == candidateId);
 
 
-                var summary = card.Feedback.FirstOrDefault(i => i.Type == (int) FeedbackType.Summary);
+                var summary = card.Feedback.FirstOrDefault(i => i.Type == (int)FeedbackType.Summary);
                 if (summary == null)
                     return new FeedbackDto()
                     {
@@ -119,17 +141,18 @@ namespace Hunter.Services
             }
         }
 
-        public FeedbackUpdatedResult SaveFeedback(FeedbackDto hrInterviewDto, string name)
+        public FeedbackDto SaveFeedback(FeedbackDto feedbackDto, string name)
         {
             Feedback feedback;
             var userProfile = _userProfileRepository.Get(u => u.UserLogin.ToLower() == name.ToLower());
             try
             {
 
-                if (hrInterviewDto.Id != 0)
+                if (feedbackDto.Id != 0)
                 {
-                    feedback = _feedbackRepository.Get(hrInterviewDto.Id);
-                    if (feedback == null) { 
+                    feedback = _feedbackRepository.Get(feedbackDto.Id);
+                    if (feedback == null)
+                    {
     //                    return Api.NotFound(hrInterviewDto.Id);
                         throw new Exception("Feedback not found");
                     }
@@ -141,18 +164,13 @@ namespace Hunter.Services
                 }
 
                 feedback.ProfileId = userProfile != null ? userProfile.Id : (int?)null;
-                hrInterviewDto.ToFeedback(feedback);
+                feedbackDto.ToFeedback(feedback);
             
             
                 _feedbackRepository.UpdateAndCommit(feedback);
                 _activityHelperService.CreateUpdatedFeedbackActivity(feedback);
                 var dto = feedback.ToFeedbackDto();
-                return new FeedbackUpdatedResult
-                {
-                    Id = feedback.Id,
-                    Update = dto.Date,
-                    UserAlias = dto.UserAlias
-                };
+                return feedback.ToFeedbackDto();
             }
             catch (Exception ex)
             {
@@ -162,7 +180,7 @@ namespace Hunter.Services
             }
         }
 
-        public FeedbackUpdatedResult UpdateSuccessStatus(int feedbackId, SuccessStatus status, string name)
+        public FeedbackDto UpdateSuccessStatus(int feedbackId, SuccessStatus status, string name)
         {
             try
             {
@@ -175,6 +193,37 @@ namespace Hunter.Services
                 _logger.Log(ex);
                 throw ex;
             }
+        }
+
+        public IEnumerable<FeedbackDto> GetAllFeedbacks(int vacancyId, int candidateId)
+        {
+
+            IEnumerable<Feedback> feedbacks = new List<Feedback>();
+            try
+            {
+
+                if (vacancyId != 0)
+                {
+                    Card card = _cardRepository.Query()
+                        .FirstOrDefault(c => c.CandidateId == candidateId && c.VacancyId == vacancyId);
+                    if (card != null)
+                        feedbacks = card.Feedback.GroupBy(f => f.Type).Select(f => f.Last());
+                }
+                else
+                {
+                    var cards = _cardRepository.Query()
+                        .Where(c => c.CandidateId == candidateId);
+
+                    feedbacks = cards.SelectMany(c => c.Feedback).ToList().GroupBy(f => f.Type).Select(f => f.Last());
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                throw ex;
+            }
+
+            return feedbacks.ToFeedbacksDto();
         }
     }
 }

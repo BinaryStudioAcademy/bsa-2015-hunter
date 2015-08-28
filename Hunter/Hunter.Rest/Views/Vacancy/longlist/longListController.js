@@ -61,7 +61,7 @@
         });
 
         // filtering/sorting candidates
-        vm.pageSize = 5;
+        vm.pageSize = 10;
         vm.skip = 0;
         var predicate;
         vm.order;
@@ -72,6 +72,8 @@
             { text: 'Name (A-Z)', options: { field: 'FirstName', dir: 'asc' } },
             { text: 'Name (Z-A)', options: { field: 'FirstName', dir: 'desc' } }
         ];
+
+        vm.itemsPerPage = [5, 10, 20, 40];
 
         vm.order = vm.sortOptions[0].options;
 
@@ -103,7 +105,7 @@
                                                     vm.viewCandidateInfo(vm.candidatesList[0].id);
                                                 }
                                                 vm.totalItems = cands.count;
-                                            });
+                });
         };
 
         // filters

@@ -30,6 +30,7 @@ namespace Hunter.DataAccess.Entities
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Vacancy> Vacancy { get; set; }
         public virtual DbSet<File> File { get; set; }
+        public virtual DbSet<ScheduledNotification> ScheduledNotification { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

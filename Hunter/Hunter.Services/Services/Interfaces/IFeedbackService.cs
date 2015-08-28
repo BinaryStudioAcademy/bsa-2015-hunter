@@ -11,10 +11,11 @@ namespace Hunter.Services
 {
     public interface IFeedbackService
     {
-        IEnumerable<FeedbackDto> GetAllHrInterviews(int vid, int cid);
-        FeedbackUpdatedResult SaveFeedback(FeedbackDto hrInterviewDto, string name);
-        FeedbackDto GetTechInterview(int vacancyId, int candidateId);
+        IEnumerable<FeedbackDto> GetAllHrInterviews(int vid, int cid, string name);
+        FeedbackDto SaveFeedback(FeedbackDto hrInterviewDto, string name);
+        IEnumerable<FeedbackDto> GetTechInterview(int vacancyId, int candidateId, string name);
         FeedbackDto GetSummary(int vacancyId, int candidateId);
-        FeedbackUpdatedResult UpdateSuccessStatus(int feedbackId, SuccessStatus status, string name);
+        FeedbackDto UpdateSuccessStatus(int feedbackId, SuccessStatus status, string name);
+        IEnumerable<FeedbackDto> GetAllFeedbacks(int vacancyId, int candidateId);
     }
 }

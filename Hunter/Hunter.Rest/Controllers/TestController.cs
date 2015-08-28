@@ -35,7 +35,7 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("all")]
+        [Route("all/{candidateId}")]
         public IHttpActionResult GetAllTests(int candidateId)
         {
             try

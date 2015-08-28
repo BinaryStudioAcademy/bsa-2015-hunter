@@ -1,6 +1,16 @@
 ﻿<div ng-controller="CardTestController as testCtrl">
 
     <div class="row">
+        <ul style="padding-left: 14px; margin-bottom: 10px;" class="nav nav-pills">
+            <li class="active" ng-if="testCtrl.vacancyId != undefined">
+                <a data-toggle="pill" ng-click="testCtrl.loadVacancyTests()">
+                    {{testCtrl.vacancy.name}}
+                </a>
+            </li>
+            <li class="{{testCtrl.vacancyId == undefined ? 'active' : ''}}"><a data-toggle="pill" ng-click="testCtrl.loadAllTests()">All Tests</a></li>
+        </ul>
+    </div>
+    <div class="row" ng-if="testCtrl.vacancyId != undefined">
         <div class="col-md-5">
             <input type="text" class="form-control testLink" placeholder="Provide link to test" ng-model="testCtrl.testLink"/>
             <button class="btn btn-primary" ng-click="testCtrl.uploadLink()">Add</button>
@@ -21,7 +31,7 @@
                 <div ng-show="test.file != null">
                     <div class="col-md-1"><label>Task</label></div>
                     <div class="col-md-10">
-                        <a href="/api/file/download/{{test.file.id}}">{{test.file.fileName}}</a> Size: {{test.file.size}} Uploaded: {{test.file.added | date:'dd.MM.yyyy HH:mm'}}
+                        <a href="/api/file/download/{{test.file.id}}">{{test.file.fileName}}</a> Size: {{test.file.size}} Uploaded: {{test.file.added | date:'dd.MM.yyyy HH:mm:ss'}}
                     </div>
                     <div class="col-md-1">
                         <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index, test)">
@@ -33,7 +43,7 @@
                 <div ng-show="test.url != null && test.file == null">
                     <div class="col-md-1"><label>Task</label></div>
                     <div class="col-md-10">
-                        <a href="{{test.url}}">{{test.url}}</a> Added {{test.added | date:'dd.MM.yyyy HH:mm'}}
+                        <a href="{{test.url}}">{{test.url}}</a> Added {{test.added | date:'dd.MM.yyyy HH:mm:ss'}}
                     </div>
                     <div class="col-md-1">
                         <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index, test)">

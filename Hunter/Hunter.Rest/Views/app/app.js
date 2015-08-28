@@ -61,9 +61,9 @@ angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.dir
                     controllerAs: 'candidateAddEditCtrl'
                 })
                 .when('/candidate/:cid', {
-                    templateUrl: viewPath + 'candidate/profile/profile.html',
-                    controller: 'CandidateProfileController',
-                    controllerAs: 'candidateCtrl'
+                    templateUrl: viewPath + 'candidate/card/generalCard.html',
+                    controller: 'GeneralCardController',
+                    controllerAs: 'generalCardCtrl'
                 })
                 .when('/vacancy/:vid/candidate/:cid', {
                     templateUrl: viewPath + 'candidate/card/generalCard.html',
@@ -147,6 +147,13 @@ angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.dir
                     templateUrl: viewPath + 'user/addEdit/addEdit.html',
                     controller: 'UserAddEditController',
                     controllerAs: 'userAddEditCtrl'
+                });
+
+            $routeProvider
+                .when('/notifications', {
+                    templateUrl: viewPath + 'notification/list/list.html',
+                    controller: 'NotificationListController',
+                    controllerAs: 'notificationListCtrl'
                 });
 
             //result on statistics button click (slide 1)

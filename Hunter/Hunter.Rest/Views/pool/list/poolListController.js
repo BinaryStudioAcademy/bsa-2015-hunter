@@ -17,6 +17,7 @@
 
         vm.editPool = editPool;
         vm.choosePool = choosePool;
+        vm.close = close;
 
         (function() {
             HttpHandler.sendRequest({
@@ -37,6 +38,10 @@
 
         function choosePool(pool) {
             $scope.generalCtrl.selectPool(pool);
+        }
+
+        function close() {
+            $scope.generalCtrl.closeChooser();
         }
     }
 })();

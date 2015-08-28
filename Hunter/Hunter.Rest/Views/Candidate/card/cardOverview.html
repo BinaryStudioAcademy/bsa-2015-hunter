@@ -1,61 +1,20 @@
 ﻿<div ng-controller="CardOverviewController as overviewCtrl" ng-cloak>
-    <div>
-        <div class="row">
-            <div class="col-md-2">
-                <h3>Summary</h3>
-            </div>
-            <div class="col-md-10" style="text-align:right;margin-top:25px">
-                <span ng-hide="overviewCtrl.summary.text=='' || overviewCtrl.summary.date == ''">Edited by {{overviewCtrl.summary.userAlias}} {{overviewCtrl.summary.date | date:'dd.MM.yyyy HH:mm'}}</span>
-            </div>
-            <div ng-show="overviewCtrl.summary.text == ''" class="col-md-3" style="">There is no summary yet</div>
-        </div>
-        <div ng-hide="overviewCtrl.summary.text==''">
-            <textarea class="form-control" ng-style="overviewCtrl.summary.style" disabled name="text" ng-model="overviewCtrl.summary.text" msd-elastic></textarea>
-        </div>
-        
-    </div>
     <div ng-repeat="feedback in overviewCtrl.feedbacks">
         <div class="row">
-            <div class="col-md-2">
-                <h3>{{generalCardCtrl.feedbackTypes[feedback.type].name}}</h3>
+            <div class="col-md-5">
+                <h3>{{generalCardCtrl.feedbackTypes[feedback.type].name}} {{ !generalCardCtrl.isLLM ? 'from ' + feedback.vacancy :''}}</h3>
             </div>
-            <div ng-hide="feedback.text == ''" class="col-md-10" style="text-align: right; margin-top: 25px">
-                <span ng-hide="feedback.date == ''">Edited by {{feedback.userAlias}} {{feedback.date | date:'dd.MM.yyyy HH:mm'}}</span>
+            <div class="col-md-7" style="text-align: right; margin-top: 25px">
+                <span ng-hide="feedback.date == ''">Updated by {{feedback.userAlias}} {{feedback.date | date:'dd.MM.yyyy HH:mm'}}</span>
             </div>
-            <div ng-show="feedback.text == ''" class="col-md-3" style="margin-top:25px">There is no feedback yet</div>
         </div>
         <div ng-hide="feedback.text == ''">
-            <textarea class="form-control" ng-style="feedback.style" disabled name="text" ng-model="feedback.text" msd-elastic></textarea>
+            <textarea class="form-control"
+                      ng-style="{'border-color':overviewCtrl.voteColors[feedback.successStatus] }"
+                      disabled name="text"
+                      ng-model="feedback.text"
+                      msd-elastic></textarea>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-3"><h3>Tech Feedback</h3></div>
-        <div ng-hide="overviewCtrl.techFeedback.text == ''" class="col-md-9" style="text-align: right; margin-top: 25px">
-            <span ng-hide="overviewCtrl.techFeedback.date.length <= 0">Edited by {{overviewCtrl.techFeedback.userAlias}} {{overviewCtrl.techFeedback.date | date:'dd.MM.yyyy HH:mm'}}</span>
-        </div>
-        <div ng-show="overviewCtrl.techFeedback.text == ''" class="col-md-3" style="margin-top:25px">There is no feedback yet</div>
-    </div>
-    <div ng-hide="overviewCtrl.techFeedback.text == ''">
-        <textarea class="form-control" ng-style="overviewCtrl.techFeedback.style" disabled name="text" ng-model="overviewCtrl.techFeedback.text" msd-elastic></textarea>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <h3>Test Feedback</h3>
-        </div>
-        <div ng-show="overviewCtrl.tests.tests.length == 0" class="col-md-3" style="margin-top:25px">There is no feedback yet</div>
-    </div>
-    <div ng-repeat="test in overviewCtrl.tests.tests | filter:overviewCtrl.filterTests">
-        <div class="row">
-            <div ng-hide="test.feedback.text == ''" class="col-md-12" style="text-align: right">
-                <span ng-hide="test.feedback.date.length <= 0">Edited by {{test.feedback.userAlias}} {{test.feedback.date | date:'dd.MM.yyyy HH:mm'}}</span>
-            </div>
-        </div>
-        <div ng-hide="test.feedback.text == ''">
-            <textarea class="form-control" ng-style="test.feedback.style" disabled name="text" ng-model="test.feedback.text" msd-elastic></textarea>
-        </div>
-    </div>
-    <!--<div ng-hide="overviewCtrl.testFeedbacksPresent">
-        <h3>Test Feedback</h3>
-        <span>There is no feedback yet</span>
-    </div>-->
+
 </div>

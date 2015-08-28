@@ -7,28 +7,32 @@
 
     CandidateHttpService.$inject = [
         'HttpHandler',
-        '$q'
+        '$q',
+        '$odataresource',
+        '$odata'
     ];
 
-    function CandidateHttpService(httpHandler,$q) {
+    function CandidateHttpService(httpHandler, $q, $odataresource, $odata) {
         var service = {
             updateCandidate: updateCandidate,
             getCandidate: getCandidate,
             getCandidateList: getCandidateList,
             addCandidate: addCandidate,
-//            getLongList: getLongList,
+            //            getLongList: getLongList,
             getLongListDetails: getLongListDetails,
             parseLinkedIn: parseLinkedIn,
             getAddedByList: getAddedByList,
             setShortListFlag: setShortListFlag,
             updateCandidateResolution: updateCandidateResolution,
-            addCandidatePool: addCandidatePool
+            addCandidatePool: addCandidatePool,
+            removeCandidatePool: removeCandidatePool,
+            getOdataCandidateList: getOdataCandidateList
         };
 
         function updateCandidate(body, successCallback, id) {
             httpHandler.sendRequest({
                 verb: 'PUT',
-                url: '/api/candidates/'+id,
+                url: '/api/candidates/' + id,
                 body: body,
                 successCallback: successCallback
             });
@@ -48,7 +52,7 @@
             httpHandler.sendRequest({
                 verb: 'GET',
                 url: '/api/candidates/' + id,
-//                body: body,
+                //                body: body,
                 successCallback: function (response) {
                     deferred.resolve(response);
                 },
@@ -65,7 +69,7 @@
             httpHandler.sendRequest({
                 verb: 'GET',
                 url: '/api/candidates/',
-//                body: body,
+                //                body: body,
                 successCallback: function (response) {
                     deferred.resolve(response);
                 },
@@ -77,26 +81,26 @@
             return deferred.promise;
         }
 
-        function getLongList(id) {
-            var deferred = $q.defer();
-            httpHandler.sendRequest({
-                url: '/api/candidates/longlist/' + id,
-                verb: 'GET',
-                successCallback: function (result) {
-                    deferred.resolve(result.data);
-                },
-                errorCallback: function (status) {
-                    console.log("Get candidates long list error");
-                    console.log(status);
-                }
-            });
-            return deferred.promise;
-        }
+        //function getLongList(id) {
+        //    var deferred = $q.defer();
+        //    httpHandler.sendRequest({
+        //        url: '/api/candidates/longlist/' + id,
+        //        verb: 'GET',
+        //        successCallback: function (result) {
+        //            deferred.resolve(result.data);
+        //        },
+        //        errorCallback: function (status) {
+        //            console.log("Get candidates long list error");
+        //            console.log(status);
+        //        }
+        //    });
+        //    return deferred.promise;
+        //}
 
-        function getLongListDetails(id) {
+        function getLongListDetails(vid, cid) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/candidates/candidatelonglist/' + id,
+                url: '/api/candidates/candidatelonglist/' + vid + '/' + cid,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -144,7 +148,7 @@
         function setShortListFlag(cid, isShort) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/candidates/' +cid + '/' + isShort,
+                url: '/api/candidates/' + cid + '/' + isShort,
                 verb: 'PUT',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -183,6 +187,89 @@
                     deferred.resolve(response.data);
                 }
             });
+
+            return deferred.promise;
+        }
+
+        function removeCandidatePool(candidateId, poolId) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                'url': 'api/candidates/' + candidateId + '/removepool/' + poolId,
+                'verb': 'DELETE',
+                'successCallback': function(response) {
+                    console.log('Pool removed successful');
+                    deferred.resolve(response.data);
+                }
+            });
+
+            return deferred.promise;
+        }
+
+        function getOdataCandidateList(filter) {
+            var deferred = $q.defer();
+
+            var predicate;
+            //
+            var filt = [];
+
+            if (filter.pools != undefined && filter.pools.length > 0) {
+                var poolPred = [];
+                angular.forEach(filter.pools, function (value, key) {
+                    poolPred.push(new $odata.Predicate(new $odata.Property('PoolNames/any(p: p eq \'' + value + '\' )'), true));
+                });
+
+                poolPred = $odata.Predicate.or(poolPred);
+                filt.push(poolPred);
+            }
+
+            if (filter.inviters != undefined && filter.inviters.length > 0) {
+                var invPred = [];
+                angular.forEach(filter.inviters, function (value, key) {
+                    invPred.push(new $odata.Predicate('AddedBy', value));
+                });
+
+                invPred = $odata.Predicate.or(invPred);
+                filt.push(invPred);
+            }
+
+            if (filter.statuses != undefined && filter.statuses.length > 0) {
+                var stPred = [];
+                angular.forEach(filter.statuses, function (value, key) {
+                    stPred.push(new $odata.Predicate('Resolution',parseInt(value)));
+                });
+
+                stPred = $odata.Predicate.or(stPred);
+                filt.push(stPred);
+            }
+
+            if (filter.search != undefined && filter.search.length > 0) {
+                var pred = $odata.Predicate.or([
+                    new $odata.Func('substringof', new $odata.Property('tolower(\'' + filter.search + '\')'), new $odata.Property('tolower(FirstName)')),
+                    new $odata.Func('substringof', new $odata.Property('tolower(\'' + filter.search + '\')'), new $odata.Property('tolower(LastName)'))
+                ]);
+
+                filt.push(pred);
+            }
+
+            if (filt.length > 0) {
+                predicate = $odata.Predicate.and(filt);
+            } else {
+                predicate = undefined;
+            }
+
+            var skip = (filter.currentPage - 1) * filter.pageSize;
+            //
+            var Candidates = $odataresource('/api/Candidates/odata');
+
+            var cands = Candidates.odata()
+                                .withInlineCount()
+                                .take(filter.pageSize)
+                                .skip(skip)
+                                .filter(predicate)
+                                .orderBy(filter.order.split('_')[0], filter.order.split('_')[1])
+                                .query(function () {
+                                    deferred.resolve(cands);
+                                });
 
             return deferred.promise;
         }

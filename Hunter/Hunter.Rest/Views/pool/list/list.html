@@ -3,13 +3,13 @@
         <div class="pool_title">
             <div></div>
             <h3>Pools</h3>
-            <div><a class="close_back" href="../../#" title="Close"></a></div>
+            <div><a class="close_back" ng-click="poolCtrl.close()" href="" title="Close"></a></div>
         </div>
         <div class="pool_list">
             <div><input ng-model="searchPool" class="form-control" ng-model="poolAddEditCtrl.pool.name" title="Pool name" type="text" placeholder="Search..." /></div>
             <ul class="column_data">
-                <li ng-repeat="pool in poolCtrl.poolsList | filter:searchPool" style="cursor: pointer;" ng-click="poolCtrl.choosePool(pool)">
-                    <p style="background-color: {{pool.color}}">{{pool.name}}</p>
+                <li ng-repeat="pool in poolCtrl.poolsList | filter:searchPool" style="cursor: pointer;">
+                    <p ng-click="poolCtrl.choosePool(pool)" style="background-color: {{pool.color}}">{{pool.name}}</p>
                     <a href="" ng-click="poolCtrl.editPool(pool)" title="Edit"></a>
                 </li>
             </ul>

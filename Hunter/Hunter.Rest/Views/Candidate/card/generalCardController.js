@@ -1,4 +1,4 @@
-﻿(function() {
+﻿(function () {
     'use strict';
 
     angular
@@ -14,55 +14,84 @@
         '$location',
         '$filter',
         'LonglistHttpService',
-        '$timeout'
+        '$timeout',
+        'VacancyHttpService'
     ];
 
-    function GeneralCardController($routeParams, $scope, candidateHttpService, cardService, enumConstants, $location, $filter, longlistHttpService, $timeout) {
+    function GeneralCardController($routeParams, $scope, candidateHttpService, cardService, enumConstants, $location, $filter, longlistHttpService, $timeout, VacancyHttpService) {
         var vm = this;
         vm.templateToShow = '';
         vm.isLoad = true;
 
-        vm.tabs = [
-            { name: 'Overview', route: 'overview' },
-            { name: 'Special Notes', route: 'specialnotes' },
-            { name: 'HR Interview', route: 'hrinterview' },
-            { name: 'Technical Interview', route: 'technicalinterview' },
-            { name: 'Test', route: 'test' },
-            { name :'Summary', route: 'summary'}
-        ];
-        vm.currentTabName = vm.tabs[0];
-        vm.candidate;
+        vm.tabs = [];
+        vm.currentTabName = {};
+        vm.candidate = {};
         vm.origins = enumConstants.origins;
         vm.resolutions = enumConstants.resolutions;
         vm.substatuses = enumConstants.substatuses;
         vm.feedbackTypes = enumConstants.feedbackTypes;
         vm.stages = enumConstants.cardStages;
-        vm.currentStage;
+        vm.currentStage = {};
         vm.currentSubstatus = enumConstants.substatuses[0];
         vm.removeCard = removeCard;
         vm.updateResolution = updateResolution;
+        vm.changeTemplate = changeTemplate;
+        vm.vacancy = {};
+        vm.cardInfo = {};
+        vm.isLLM = false;
         vm.showResume = showResume;
 
-        console.log("rout", $routeParams);
-        (function() {
-            candidateHttpService.getCandidate($routeParams["cid"]).then(function (response) {
-                vm.candidate = response.data;
-                console.log(response.data);
-            });
-        })();
+        var vid = $routeParams["vid"];
+        var cid = $routeParams["cid"];
+
+        if (vid) {
+            vm.isLLM = true;
+        }
+
         (function () {
-            var vid = $routeParams["vid"];
-            var cid = $routeParams["cid"];
-            cardService.getCardStage(vid, cid).then(function(response) {
-                vm.currentStage = enumConstants.cardStages[response.data];
-                console.log('Load current stage: ' + response.data);
-                console.log('Load current stage: ' + vm.currentStage);
-                vm.isLoad = true;
+            candidateHttpService.getCandidate(cid).then(function (response) {
+                vm.candidate = response.data;
             });
         })();
 
+        if (vm.isLLM) {
+
+        (function () {
+                vm.tabs = [
+                    { name: 'Overview', route: 'overview' },
+                    { name: 'Special Notes', route: 'specialnotes' },
+                    { name: 'HR Interview', route: 'hrinterview' },
+                    { name: 'Technical Interview', route: 'technicalinterview' },
+                    { name: 'Test', route: 'test' },
+                    { name: 'Summary', route: 'summary' }
+                ];
+                longlistHttpService.getCardInfo(vid, cid).then(function (result) {
+                    vm.cardInfo = result;
+                    console.log(vm.cardInfo);
+                });
+                vm.currentTabName = vm.tabs[0];
+                cardService.getCardStage(vid, cid).then(function (response) {
+                vm.currentStage = enumConstants.cardStages[response.data];
+                vm.isLoad = true;
+            });
+                VacancyHttpService.getVacancy(vid).then(function (response) {
+                    vm.vacancy = response;
+                });
+        })();
+        } else {
+            (function () {
+                vm.tabs = [
+                   { name: 'Overview', route: 'overview' },
+                   { name: 'Special Notes', route: 'specialnotes' },
+                   { name: 'Test', route: 'test' },
+                   { name: 'Application', route: 'application' }
+                ];
+                vm.currentTabName = vm.tabs[0];
+            })();
+        }
+
         // TODO: Define event function at the beginning of controller and only then should be implementation vm.saveHrFeedback = saveHrFeedback; function saveHrFeedback() {}
-        vm.changeTemplate = function (tab) {
+        function changeTemplate(tab) {
             vm.currentTabName = tab.name;
             vm.templateToShow = cardService.changeTemplate(tab.route);
             $location.search('tab', tab.route);      
@@ -77,14 +106,12 @@
         }, true);
 
         function updateCardStage() {
-            var vid = $routeParams["vid"];
-            var cid = $routeParams["cid"];
             cardService.updateCardStage(vid, cid, vm.currentStage.id);
         }
 
         function removeCard(cid) {
-            longlistHttpService.removeCard($routeParams["vid"], cid);
-            $timeout($location.url('/vacancy/' + $routeParams["vid"] + '/longlist'), 1200);
+            longlistHttpService.removeCard(vid, cid);
+            $timeout($location.url('/vacancy/' + vid + '/longlist'), 1200);
         }
 
         function updateResolution() {

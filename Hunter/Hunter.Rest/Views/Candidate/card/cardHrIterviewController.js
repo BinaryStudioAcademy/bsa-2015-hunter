@@ -10,82 +10,84 @@
         'FeedbackHttpService',
         'CardHrInterviewService',
         '$routeParams',
-        'EnumConstants'
+        'EnumConstants',
+        '$scope'
     ];
 
     function CardHrInterviewController(VacancyHttpService, FeedbackHttpService, CardHrInterviewService,
-        $routeParams, EnumConstants) {
+        $routeParams, EnumConstants, $scope) {
         var vm = this;
 
         vm.templateName = 'HR Interview';
         vm.vacancy;
         vm.feedbacks;
         vm.newFeedback;
+        vm.saveFeedback = saveFeedback;
+        vm.updateFeedback = updateFeedback;
+        vm.getFeedbacks = getFeedbacks;
+        vm.getAllFeedbacks = getAllFeedbacks;
+        vm.getMyFeedbacks = getMyFeedbacks;
+        vm.voteColors = [];
+        vm.HrFeedbackTypes = [];
 
-        // TODO: Initialization Should Be Covered with self invoke function
-        VacancyHttpService.getLongList($routeParams.vid).then(function (result) {
-            console.log(result);
-            vm.vacancy = result;
-        });
+        (function () {
+            if ($scope.$parent.generalCardCtrl.isLLM) {
+                VacancyHttpService.getVacancy($routeParams.vid).then(function (result) {
+                    vm.vacancy = result;
+                });
+                vm.getFeedbacks();
+            } else {
+                vm.getAllFeedbacks();
+            }
 
-        FeedbackHttpService.getHrFeedback($routeParams.vid, $routeParams.cid).then(function (result) {
-            console.log(result);
-            vm.feedbacks = result;
-
-            vm.feedbacks.forEach(function(feedback) {
-                if (feedback.text == '') {
-                    feedback.feedbackConfig = {
-                        'buttonName': 'Save',
-                        'readOnly': false
-                    }
-                } else {
-                    feedback.feedbackConfig = {
-                        'buttonName': 'Edit',
-                        "readOnly": true
-                    };
+            for (var x in EnumConstants.voteColors) {
+                if (EnumConstants.voteColors.hasOwnProperty(x)) {
+                    vm.voteColors.push(EnumConstants.voteColors[x]);
                 }
+            }
 
-                feedback.feedbackConfig.style = {
-                    "border-color": feedback.successStatus == 0 ? EnumConstants.voteColors['None']
-                        : feedback.successStatus == 1 ? EnumConstants.voteColors['Like']
-                        : EnumConstants.voteColors['Dislike']
-                }
-            });
-        });
+            vm.HrFeedbackTypes = EnumConstants.feedbackTypes.slice(0, 3);
 
-        // TODO: Define event function at the beginning of controller and only then should be implementation vm.saveHrFeedback = saveHrFeedback; function saveHrFeedback() {}
-        vm.saveHrFeedback = function (feedback) {
-            var newFeedback = {
-                id: feedback.id,
-                cardId: feedback.cardId,
-                type: feedback.type,
-                text: feedback.text,
-                successStatus: feedback.successStatus
-            };
+        })();
 
-            FeedbackHttpService.saveHrFeedback(newFeedback, $routeParams.vid, $routeParams.cid).then(function (result) {
-                console.log(result);
+
+        function saveFeedback(feedback) {
+
+            feedback.cardId = $scope.$parent.generalCardCtrl.cardInfo.cardId;
+
+            FeedbackHttpService.saveFeedback(feedback, $routeParams.vid, $routeParams.cid).then(function (result) {
                 feedback.id = result.id;
                 feedback.date = result.update;
                 feedback.userAlias = result.userAlias;
+                vm.feedbacks.push(result);
             });
         }
 
-        vm.toggleReadOnly = function(feedback) {
-            feedback.feedbackConfig.readOnly = feedback.text != '' ? !feedback.feedbackConfig.readOnly
-                : feedback.feedbackConfig.readOnly;
-
-            if (feedback.feedbackConfig.readOnly) {
-                feedback.feedbackConfig.buttonName = 'Edit';
-                vm.saveHrFeedback(feedback);
+        function updateFeedback(feedback) {
+            if (!feedback.editMode) {
+                feedback.editMode = !feedback.editMode;
             } else {
-                feedback.feedbackConfig.buttonName = 'Save';
+                feedback.editMode = !feedback.editMode;
+                vm.saveFeedback(feedback);
             }
         }
 
-        //vm.isDateShow = function (id) {
-        //    return CardHrInterviewService.isDateShow(vm.feedbacks[id].date);
-        //}
+        function getAllFeedbacks() {
+            FeedbackHttpService.getHrFeedback(0, $routeParams.cid).then(function (result) {
+                vm.feedbacks = result;
+            });
+        }
+        function getMyFeedbacks() {
+            FeedbackHttpService.getHrFeedback(-1, $routeParams.cid).then(function (result) {
+                vm.feedbacks = result;
+            });
+        }
+        function getFeedbacks() {
+            FeedbackHttpService.getHrFeedback($routeParams.vid, $routeParams.cid).then(function (result) {
+                vm.feedbacks = result;
+            });
+        }
+
 
     }
 })();

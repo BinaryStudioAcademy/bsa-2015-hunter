@@ -13,10 +13,19 @@
         vm.selectedPool = null;
 
         vm.selectPool = selectPool;
+        vm.closeChooser = closeChooser;
 
         function selectPool(pool) {
             if ($scope.poolSelectorCtrl != undefined) {
                 $scope.poolSelectorCtrl.addPoolToCandidate(pool);
+            }
+        }
+
+        function closeChooser() {
+            if ($scope.poolSelectorCtrl != undefined) {
+                $scope.poolSelectorCtrl.toggleShow();
+            } else {
+                vm.link = '';
             }
         }
     }

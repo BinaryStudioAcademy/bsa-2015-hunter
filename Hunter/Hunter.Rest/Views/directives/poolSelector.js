@@ -8,27 +8,42 @@
     function PoolSelector() {
         return {
             restrict: 'EA',
-            link: function (scope, elem, attr, ctrl) {
-                $('#addPoolBtn').bind('click', function() {
-                    $('#selectPoolMain').toggleClass('hide');
-                });
-            },
+//            link: function (scope, elem, attr, ctrl) {
+//                $('#addPoolBtn').bind('click', function() {
+//                    $('#selectPoolMain').toggleClass('hide');
+//                });
+//            },
             scope: {
                 'candidate': '=candidate'
             },
             controllerAs: 'poolSelectorCtrl',
             controller: ['$scope', 'CandidateHttpService', function ($scope, CandidateHttpService) {
                 var vm = this;
+                vm.show = false;
 
-                vm.addPoolToCandidate = function(pool) {
-                    CandidateHttpService.addCandidatePool($scope.candidate.id, pool.id)
-                        .then(function(data) {
-                            $scope.candidate.poolNames.push(pool.name);
+                vm.toggleShow = function() {
+                    vm.show = !vm.show;
+                }
 
-                            if (!(pool.name in $scope.candidate.poolColors)) {
-                                $scope.candidate.poolColors[pool.name.toLowerCase()] = pool.color;
-                            }
-                    });
+                vm.addPoolToCandidate = function (pool) {
+
+                    if ($scope.candidate.poolNames.indexOf(pool.name) == -1) {
+                        CandidateHttpService.addCandidatePool($scope.candidate.id, pool.id)
+                            .then(function(data) {
+                                $scope.candidate.poolNames.push(pool.name);
+
+                                if (!(pool.name in $scope.candidate.poolColors)) {
+                                    $scope.candidate.poolColors[pool.name.toLowerCase()] = pool.color;
+                                }
+                            });
+                    } else {
+                        CandidateHttpService.removeCandidatePool($scope.candidate.id, pool.id)
+                            .then(function(data) {
+                                var index = $scope.candidate.poolNames.indexOf(pool);
+                                $scope.candidate.poolNames.splice(index, 1);
+                                delete $scope.candidate.poolColors[pool.name.toLowerCase()];
+                        });
+                    }
                 }
             }],
             template: 
@@ -37,8 +52,8 @@
                         '<div ng-repeat="pool in candidate.poolNames" class="pool-label" style="background-color: {{candidate.poolColors[pool.toLowerCase()]}};">' +
                         '{{pool}}</div>' +
                     '</div>' +
-                    '<button id="addPoolBtn" class=" btn btn-default"><i class="fa fa-plus"></i></button>' +
-                    '<div id="selectPoolMain" class="pool-widget-container hide" ng-controller="PoolGeneralController as generalCtrl">' +
+                    '<button id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class=" btn btn-default"><i class="fa fa-plus"></i></button>' +
+                    '<div id="selectPoolMain" ng-if="poolSelectorCtrl.show" class="pool-widget-container" ng-controller="PoolGeneralController as generalCtrl">' +
                         '<div style="width: 380px;" ng-include="generalCtrl.link"></div>' +
                     '</div>' +
                 '</div>'

@@ -228,7 +228,7 @@ li {
 /*=======*/
 .col-md-4 {
     font: 13pt bold ;
-    margin-top: 10px;
+    /*margin-top: 10px;*/
 }
 
 .button-done {
@@ -252,7 +252,7 @@ li {
 /*pagination*/
 
 .page-count-wrapper{
-    margin-right: 10px;
+    margin-right: 5px;
 }
     .page-count-wrapper > select {
         height: 30px;

@@ -1,5 +1,5 @@
 ﻿<div class="container-partial">
-    <div class="row col-md-13 ll_preview_appresults"
+    <div class="col-md-12 ll_preview_appresults"
          ng-repeat="result in llPreviewCtrl.appResults"
          style="background-color: {{longListCtrl.stages[result.stage].bgcolor}}"
          ng-class="{{result.vacancyId}} == {{longListCtrl.vacancy.id}} ? 'll_preview_activ' : ''">

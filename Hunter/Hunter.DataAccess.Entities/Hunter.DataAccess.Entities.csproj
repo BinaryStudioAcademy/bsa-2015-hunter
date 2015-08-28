@@ -71,6 +71,7 @@
     <Compile Include="Entites\Interview.cs" />
     <Compile Include="Entites\Pool.cs" />
     <Compile Include="Entites\Resume.cs" />
+    <Compile Include="Entites\ScheduledNotification.cs" />
     <Compile Include="Entites\SpecialNote.cs" />
     <Compile Include="Entites\Test.cs" />
     <Compile Include="Entites\User.cs" />
@@ -183,6 +184,10 @@
     <Compile Include="Migrations\201508261630367_DeleteCardAndAddCandidateVacancyInSpecialNotesEntity.Designer.cs">
       <DependentUpon>201508261630367_DeleteCardAndAddCandidateVacancyInSpecialNotesEntity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508271411390_AddScheduledNotificationTable.cs" />
+    <Compile Include="Migrations\201508271411390_AddScheduledNotificationTable.Designer.cs">
+      <DependentUpon>201508271411390_AddScheduledNotificationTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -264,6 +269,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508261630367_DeleteCardAndAddCandidateVacancyInSpecialNotesEntity.resx">
       <DependentUpon>201508261630367_DeleteCardAndAddCandidateVacancyInSpecialNotesEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508271411390_AddScheduledNotificationTable.resx">
+      <DependentUpon>201508271411390_AddScheduledNotificationTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -169,14 +169,14 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("candidatelonglist/{id:int}")]
+        [Route("candidatelonglist/{vid:int}/{cid:int}")]
         [ActionName("Candidatelonglist")]
         [ResponseType(typeof(CandidateLongListDetailsDto))]
-        public HttpResponseMessage GetCandidateLongListDetails(int id)
+        public HttpResponseMessage GetCandidateLongListDetails(int vid, int cid)
         {
             try
             {
-                var candidate = _candidateService.GetLongListDetails(id);
+                var candidate = _candidateService.GetLongListDetails(vid, cid);
                 if (candidate == null)
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, "Vacatcy has no candidates!");
@@ -275,6 +275,21 @@ namespace Hunter.Rest.Controllers
             try
             {
                 _candidateService.UpdateCandidatePool(candidateId, poolId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Route("{candidateId:int}/removepool/{poolId:int}")]
+        public IHttpActionResult RemovePoolFromCandidate(int candidateId, int poolId)
+        {
+            try
+            {
+                _candidateService.UpdateCandidatePool(candidateId, poolId, true);
                 return Ok();
             }
             catch (Exception e)

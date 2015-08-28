@@ -3,6 +3,7 @@
     border-radius: 3px;
     padding: 5px;
     position: relative;
+    overflow: hidden;
 }
 .ll_preview h2{
     padding: 10px 0;
@@ -11,6 +12,12 @@
     border-bottom: 1px solid gray;
     margin: 0 0 5px 0;
 }
+.ll_preview .col-md-12 {
+    padding: 0;
+}
+.ll_preview .treasure-overlay-spinner-content {
+    overflow: hidden;
+}
 
 .ll_candidate_item {
     padding: 5px;
@@ -18,7 +25,9 @@
     width: 100%;
     border: 1px solid grey;
     border-radius: 3px;
+    margin-top: 5px;
     margin-bottom: 5px;
+    overflow: hidden;
 }
 .ll_candidate_item p {
     margin: 0;
@@ -76,7 +85,7 @@
     max-width: 70px; 
 }
 .pagination {
-     float: right;
+     float: left;
 }
 .ll_preview_info {
     width: 100%;
@@ -188,8 +197,7 @@
 }
 .ll_preview_overview .title p{
     width: 50%;
-    font-size: 10px;
-    font-style: italic;
+    font-size: 12px;
     margin: 0;
     position: absolute;
     bottom: 0;

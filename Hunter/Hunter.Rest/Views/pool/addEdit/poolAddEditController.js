@@ -22,11 +22,15 @@
         vm.addEditFlag = $scope.generalCtrl.selectedPool.id;
 
         vm.goBack = goBack;
+        vm.close = close;
 
         function goBack() {
             $scope.generalCtrl.link = 'Views/pool/list/list.html';
         }
 
+        function close() {
+            $scope.generalCtrl.closeChooser();
+        }
 
         if (vm.addEditFlag > 0) {
             vm.pageConfig.deleteButton = true;

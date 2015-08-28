@@ -123,11 +123,11 @@ namespace Hunter.Services
             }
         }
 
-        public CandidateLongListDetailsDto GetLongListDetails(int id)
+        public CandidateLongListDetailsDto GetLongListDetails(int vid, int cid)
         {
             try
             {
-                var candidate = _candidateRepository.Get(id).ToCandidateLongListDetailsDto();
+                var candidate = _candidateRepository.Get(cid).ToCandidateLongListDetailsDto(vid);
                 return candidate;
             }
             catch (Exception ex)
@@ -248,14 +248,14 @@ namespace Hunter.Services
             try
             {
                 var candidate = _candidateRepository.Get(candidateId);
-                if (candidate.Pool.Any(x => x.Id == poolId))
-                {
-                    throw new Exception("This candidate is already in this pool");
-                }
-
                 var pool = _poolRepository.Get(poolId);
                 if (!delete)
                 {
+                    if (candidate.Pool.Any(x => x.Id == poolId))
+                    {
+                        throw new Exception("This candidate is already in this pool");
+                    }
+
                     candidate.Pool.Add(pool);
                     Update(candidate.ToCandidateDto());
                 }
