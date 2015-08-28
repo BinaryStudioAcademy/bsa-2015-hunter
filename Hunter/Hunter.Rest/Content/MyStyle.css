@@ -228,7 +228,7 @@ li {
 /*=======*/
 .col-md-4 {
     font: 13pt bold ;
-    margin-top: 10px;
+    /*margin-top: 10px;*/
 }
 
 .button-done {

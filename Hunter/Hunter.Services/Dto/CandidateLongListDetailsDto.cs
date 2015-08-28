@@ -12,7 +12,7 @@ namespace Hunter.Services.Dto
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public double? Salary { get; set; }
-        public string Resolution { get; set; }
+        public int Resolution { get; set; }
         public int Stage { get; set; }
         public string PhotoUrl { get; set; }
         public string Linkedin { get; set; }
