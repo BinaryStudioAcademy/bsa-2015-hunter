@@ -42,10 +42,11 @@
             </div>
         </div>
         <div class="col-md-5" spinner="longListCtrl.listSpinner">
+            <select class="form-control" ng-change="longListCtrl.getCandidatesForLongList()" ng-options="item.options as item.text for item in longListCtrl.sortOptions" ng-model="longListCtrl.order"></select>
             <div class="ll_candidate_item" ng-repeat="candidate in longListCtrl.candidatesList" ng-click="longListCtrl.viewCandidateInfo(candidate.id)" ng-class="{ll_candidate_item_active: longListCtrl.activateItemId == candidate.id}">
                 <div class="col-md-4 ll_candidate_item_img">
                     <shor-list-star is-short="candidate.shortlisted" candidate-id="candidate.id" size="'18px'" ng-click="$event.stopPropagation();"></shor-list-star>
-                    <img ng-src="{{candidate.photoUrl}}" />
+                    <img ng-src="{{candidate.photoUrl}}"/>
                     <p class="years_of_experience" title="Years of Experience">{{candidate.yearsOfExperience}}</p>
                 </div>
                 <div class="col-md-4">
@@ -65,7 +66,6 @@
                     <p>{{candidate.company}} / {{candidate.location}}</p>
                 </div>
             </div>
-            <select class="form-control" ng-change="longListCtrl.getCandidatesForLongList()" ng-options="item.options as item.text for item in longListCtrl.sortOptions" ng-model="longListCtrl.order"></select>
             <div>
                 <div class="pagination page-count-wrapper form-inline">
                     <span>Items on page:</span>
@@ -85,13 +85,13 @@
                             boundary-links="true"
                             template-url="../../Views/templates/pagination.html">
                 </pagination>
-                <!--                <div class="pagination page-count-wrapper form-inline">-->
-                <!--                    <span>Items on page</span>-->
-                <!--                    -->
+                <!-- <div class="pagination page-count-wrapper form-inline">-->
+                <!-- <span>Items on page</span>-->
+                <!-- -->
                 <!---->
-                <!--                </div>-->
+                <!-- </div>-->
             </div>
-            
+
         </div>
         <div class="col-md-4" ng-include="'/Views/vacancy/longlist/longListPreview.html'"></div>
     </div>

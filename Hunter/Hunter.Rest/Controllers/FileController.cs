@@ -171,7 +171,7 @@ namespace Hunter.Rest.Controllers
             var file = _fileService.DownloadFile(id);
             HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
             result.Content = new StreamContent(file.File);
-            if (!Regex.IsMatch(file.FileName, "[A-z]*(.pdf)"))
+            if (!Regex.IsMatch(file.FileName, ".*(.pdf)"))
             {
                 result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                 result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");

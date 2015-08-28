@@ -29,7 +29,10 @@ namespace Hunter.Services
 
         public void Add(ScheduledNotificationDto notificationDto)
         {
+            var userProfile = _userProfileRepository.Get(p => p.UserLogin == notificationDto.UserLogin);
+            if (userProfile == null) return;
             var notification = notificationDto.ToScheduledNotification();
+            notification.UserProfileId = userProfile.Id;
             _scheduledNotificationRepository.UpdateAndCommit(notification);
         }
 
@@ -53,16 +56,31 @@ namespace Hunter.Services
         public IList<ScheduledNotificationDto> Get(string userLogin)
         {
             var userProfile = _userProfileRepository.Get(p => p.UserLogin == userLogin);
-            var notifications = _scheduledNotificationRepository.QueryIncluding(n => n.UserProfileId == userProfile.Id).ToList();
+            var notifications = _scheduledNotificationRepository.Query().Where(n => n.UserProfile.Id == userProfile.Id).ToList();
+            return notifications.Select(item => item.ToScheduledNotificationDto()).ToList();
+        }
+
+        public IList<ScheduledNotificationDto> GetActive(string userLogin)
+        {
+            var pendingDate = DateTime.UtcNow;
+            var userProfile = _userProfileRepository.Get(p => p.UserLogin == userLogin);
+            var notifications = _scheduledNotificationRepository.Query().Where(n => n.UserProfile.Id == userProfile.Id && n.Pending < pendingDate && !n.IsShown).ToList();
             return notifications.Select(item => item.ToScheduledNotificationDto()).ToList();
         }
 
         public ScheduledNotificationDto Get(int id)
         {
-            var vacancy = _scheduledNotificationRepository.Get(id);
-            if (vacancy != null)
-                return vacancy.ToScheduledNotificationDto();
+            var notification = _scheduledNotificationRepository.Get(id);
+            if (notification != null)
+                return notification.ToScheduledNotificationDto();
             return null;
+        }
+
+        public void NotificationShown(int id)
+        {
+            var notification = _scheduledNotificationRepository.Get(id);
+            notification.IsShown = true;
+            _scheduledNotificationRepository.UpdateAndCommit(notification);
         }
 
         public void Notify()
