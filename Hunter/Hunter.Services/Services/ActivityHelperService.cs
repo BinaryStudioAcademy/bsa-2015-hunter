@@ -222,5 +222,21 @@ namespace Hunter.Services.Services
                 _logger.Log("Creating activity exception : " + e.Message);
             }
         }
+
+        public void CreateChangedCardStageActivity(Card card)
+        {
+            try
+            {
+                string message = string.Format("Card stage for candidate {0} {1} in vacancy '{2}' has been changed", 
+                    card.Candidate.FirstName, card.Candidate.LastName, card.Vacancy.Name);
+                ActivityType type = ActivityType.Vacancy;
+                Uri url = new Uri("#/vacancy/" + card.VacancyId + "/candidate/" + card.CandidateId, UriKind.Relative);
+                _activityPostService.Post(message, type, url);
+            }
+            catch (Exception e)
+            {
+                _logger.Log("Creating activity exception : " + e.Message);
+            }
+        }
     }
 }
