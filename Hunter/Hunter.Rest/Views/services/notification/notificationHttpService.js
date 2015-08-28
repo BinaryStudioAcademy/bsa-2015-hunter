@@ -65,10 +65,10 @@
             });
         }
 
-        function notificationShown(data) {
+        function notificationShown(id) {
             httpHandler.sendRequest({
                 verb: 'PUT',
-                url: '/api/notifications/shown/' + data,
+                url: '/api/notifications/' + id + '/shown',
                 errorCallback: function (status) {
                     console.log("Shown Scheduled notification error");
                     console.log(status);
