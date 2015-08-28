@@ -20,6 +20,21 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpGet]
+        [Route("count")]
+        public HttpResponseMessage GetCountNotCheck() 
+        {
+            try 
+            {
+                int count = _testService.GetCountNoChecked(User.Identity.Name);
+                return Request.CreateResponse(HttpStatusCode.OK, count);
+            }
+            catch(Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
+            }
+        }
+
+        [HttpGet]
         [Route("")]
         public IHttpActionResult GetTest(int vacancyId, int candidateId)
         {

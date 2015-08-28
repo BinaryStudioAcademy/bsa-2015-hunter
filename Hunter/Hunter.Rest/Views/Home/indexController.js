@@ -17,6 +17,7 @@
         var vm = this;
         vm.name = "Index";
         vm.amount = 0;
+        vm.countTasks = 0;
         $scope.radioModel = 'Home';
         vm.notifications = null;
 
@@ -27,11 +28,18 @@
         function callRefreshFunctions() {
             getActivityAmount();
             getActiveNotifications();
+            getCountTasksForCheck();
         }
 
         function getActivityAmount() {
             indexHttpService.getActivityAmount(function (response) {
                 vm.amount = response.data;
+            });
+        }
+        function getCountTasksForCheck() {
+            indexHttpService.getTasksForCheck().then(function (result) {
+                console.log("count = " + result);
+                vm.countTasks = result;
             });
         }
 

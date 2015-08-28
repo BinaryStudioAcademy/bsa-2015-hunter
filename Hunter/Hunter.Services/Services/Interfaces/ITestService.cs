@@ -14,5 +14,6 @@ namespace Hunter.Services.Services.Interfaces
         void UpdateFeedback(int testId, int feedbackId);
         void UpdateComment(int id, string comment);
         void AddCheckingToTest(int testId, int userId);
+        int GetCountNoChecked(string userName);
     }
 }
