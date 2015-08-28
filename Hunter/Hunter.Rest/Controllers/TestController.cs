@@ -36,11 +36,11 @@ namespace Hunter.Rest.Controllers
 
         [HttpGet]
         [Route("all/{candidateId}")]
-        public IHttpActionResult GetAllTests(int candidateId, int vacancyId)
+        public IHttpActionResult GetAllTests(int candidateId)
         {
             try
             {
-                var tests = _testService.GetAllCandidatesTests(vacancyId, candidateId);
+                var tests = _testService.GetAllCandidatesTests(candidateId);
                 return Ok(tests);
             }
             catch (Exception ex)

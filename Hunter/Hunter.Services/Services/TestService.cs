@@ -33,11 +33,11 @@ namespace Hunter.Services.Services
             _feedbackRepository = feedbackRepository;
         }
 
-        public TestsResult GetAllCandidatesTests(int vacancyId, int candidateId)
+        public TestsResult GetAllCandidatesTests(int candidateId)
         {
             try
             {
-                var cardId = findCardId(vacancyId, candidateId);
+//                var cardId = findCardId(candidateId);
 
                 var tests = _testRepository
                     .Query()
@@ -46,8 +46,7 @@ namespace Hunter.Services.Services
 
                 return new TestsResult
                 {
-                    Tests = tests,
-                    CardId = cardId
+                    Tests = tests
                 };
             }
             catch (Exception ex)

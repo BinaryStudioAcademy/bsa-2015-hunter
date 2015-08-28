@@ -22,7 +22,7 @@
         vm.editingIndex = -1;
         vm.vacancy;
         var candidateId = $routeParams.cid;
-        var vacancyId = $routeParams.vid;
+        vm.vacancyId = $routeParams.vid;
 
         vm.testLink = '';
         vm.testFile = '';
@@ -32,7 +32,11 @@
         vm.loadAllTests = loadAllTests;
         vm.loadVacancyTests = loadVacancyTests;
 
-        loadVacancyTests();
+        if (vm.vacancyId != undefined) {
+            loadVacancyTests();
+        } else {
+            loadAllTests();
+        }
 
         VacancyHttpService.getVacancy($routeParams.vid).then(function (result) {
             vm.vacancy = result;
@@ -72,7 +76,7 @@
         }
 
         function loadAllTests() {
-            CardTestHttpService.getAllTests(vacancyId, candidateId, function(response) {
+            CardTestHttpService.getAllTests(vm.vacancyId, candidateId, function(response) {
                 vm.test = response.data;
 
                 initializeTests();
@@ -82,7 +86,7 @@
         // TODO:  All vm and local variables should be declared at the beginning
 
         function loadVacancyTests() {
-            CardTestHttpService.getTest(vacancyId, candidateId, function(response) {
+            CardTestHttpService.getTest(vm.vacancyId, candidateId, function(response) {
                 vm.test = response.data;
 
                 initializeTests();
@@ -173,7 +177,7 @@
         }
 
         vm.uploadFile = function() {
-            UploadTestService.uploadTest(candidateId, vacancyId, function(response) {
+            UploadTestService.uploadTest(candidateId, vm.vacancyId, function(response) {
                 var fileId = response.data;
 
                 var test = {
@@ -208,7 +212,7 @@
                         'fileName': file.name,
                         'added': new Date(),
                         'candidateId': candidateId,
-                        'vacancyId': vacancyId,
+                        'vacancyId': vm.vacancyId,
                         'size': file.size
                     };
 

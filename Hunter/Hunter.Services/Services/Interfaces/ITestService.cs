@@ -6,7 +6,7 @@ namespace Hunter.Services.Services.Interfaces
 {
     public interface ITestService
     {
-        TestsResult GetAllCandidatesTests(int vacancyId, int candidateId);
+        TestsResult GetAllCandidatesTests(int candidateId);
         int AddTest(TestDto newTestDto);
         void UpdateTest(TestDto newTestDto);
         void DeleteTestById(int testId);

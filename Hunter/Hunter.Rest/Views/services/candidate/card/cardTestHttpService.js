@@ -30,7 +30,7 @@
         function getAllTests(vacancyId, candidateId, success) {
             HttpHandler.sendRequest({
                 'verb': 'GET',
-                'url': 'api/test/all/' + candidateId + '?vacancyId=' + vacancyId,
+                'url': 'api/test/all/' + candidateId,
                 'successCallback': success,
                 'errorMessageToDev': 'GET ALL TESTS ERROR',
                 'errorMessageToUser': 'Failed'
