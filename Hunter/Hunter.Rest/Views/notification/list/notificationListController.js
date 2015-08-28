@@ -27,16 +27,22 @@
         }
 
         function deleteNotification(index) {
-            alertify.confirm('Delete notification?', function () {
+            if (confirm('Delete notification?')) {
                 if (vm.notifications == null) return;
                 if (index > -1) {
                     var id = vm.notifications[index].id;
                     vm.notifications.splice(index, 1);
                     notificationHttpService.deleteNotification(id);
                 }
-            });
+            }
+            //alertify.confirm('Delete notification?', function () {
+            //    if (vm.notifications == null) return;
+            //    if (index > -1) {
+            //        var id = vm.notifications[index].id;
+            //        vm.notifications.splice(index, 1);
+            //        notificationHttpService.deleteNotification(id);
+            //    }
+            //});
         }
-
-        
     }
 })();
