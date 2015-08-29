@@ -62,6 +62,10 @@
                         delete $scope.candidate.poolColors[pool.name];
                     }
                 }
+
+                vm.candidatePools = function() {
+                    return $scope.candidate.poolNames;
+                }
             }],
             template: 
                 '<div style="width: auto; display: inline-block;">' +

@@ -11,7 +11,7 @@
                 <li ng-repeat="pool in poolCtrl.poolsList | filter:searchPool" style="cursor: pointer; margin-bottom: 10px;">
                     <div class="pool-type" ng-click="poolCtrl.choosePool(pool)" style="background-color: {{pool.color}}">
                             <p>{{pool.name}}</p>
-                        <i class="fa fa-check pool-check" style="width: 10px;"></i>
+                        <i ng-if="pool.isChecked" class="fa fa-check pool-check" style="width: 10px;"></i>
                     </div>
                     <a href="" ng-click="poolCtrl.editPool(pool)" title="Edit"></a>
                 </li>

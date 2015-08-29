@@ -16,6 +16,7 @@
         vm.closeChooser = closeChooser;
         vm.poolChanged = poolChanged;
         vm.poolRemoved = poolRemoved;
+        vm.getCandidatePools = getCandidatePools;
 
         function selectPool(pool) {
             if ($scope.poolSelectorCtrl != undefined) {
@@ -40,6 +41,14 @@
         function poolRemoved(pool) {
             if ($scope.poolSelectorCtrl != undefined) {
                 $scope.poolSelectorCtrl.removePoolFromCandidate(pool);
+            }
+        }
+
+        function getCandidatePools() {
+            if ($scope.poolSelectorCtrl != undefined) {
+                return $scope.poolSelectorCtrl.candidatePools();
+            } else {
+                return [];
             }
         }
     }

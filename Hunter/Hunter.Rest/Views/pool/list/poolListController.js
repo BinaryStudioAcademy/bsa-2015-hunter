@@ -26,6 +26,15 @@
                 successCallback: function(result) {
                     console.log(result.data);
                     vm.poolsList = result.data;
+
+                    var names = $scope.generalCtrl.getCandidatePools();
+                    vm.poolsList.forEach(function (pool) {
+                        if (names.indexOf(pool.name) != -1) {
+                            pool.isChecked = true;
+                        } else {
+                            pool.isChecked = false;
+                        }
+                    });
                 },
                 errorCallback: function(result) { console.log(result); }
             });
@@ -38,6 +47,7 @@
 
         function choosePool(pool) {
             $scope.generalCtrl.selectPool(pool);
+            pool.isChecked = !pool.isChecked;
         }
 
         function close() {
