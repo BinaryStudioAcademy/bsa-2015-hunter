@@ -8,11 +8,23 @@
     function PoolSelector() {
         return {
             restrict: 'EA',
-//            link: function (scope, elem, attr, ctrl) {
+            link: function (scope, elem, attr, ctrl) {
 //                $('#addPoolBtn').bind('click', function() {
 //                    $('#selectPoolMain').toggleClass('hide');
-//                });
-//            },
+            //                });
+                $(document).click(function (event) {
+                    if ($(event.target).closest('#addPoolBtn').length != 0) {
+                        return;
+                    }
+
+                    var test = $(event.target).closest('#selectPoolMain').length;
+                    if ($(event.target).closest('#selectPoolMain').length != 0 && scope.poolSelectorCtrl.show)
+                        return;
+
+                    scope.poolSelectorCtrl.close();
+                });
+
+            },
             scope: {
                 'candidate': '=candidate'
             },
@@ -23,6 +35,11 @@
 
                 vm.toggleShow = function() {
                     vm.show = !vm.show;
+                }
+
+                vm.close = function() {
+                    vm.show = false;
+                    $scope.$apply();
                 }
 
                 vm.addPoolToCandidate = function (pool) {
