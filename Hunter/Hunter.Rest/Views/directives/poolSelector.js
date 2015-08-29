@@ -44,7 +44,8 @@
             },
             scope: {
                 'candidate': '=candidate',
-                'poolReadonly': '@poolReadonly'
+                'poolReadonly': '@poolReadonly',
+                'poolShort': '@poolShort'
             },
             controllerAs: 'poolSelectorCtrl',
             controller: ['$scope', 'CandidateHttpService', function ($scope, CandidateHttpService) {
@@ -106,8 +107,10 @@
             template: 
                 '<div style="width: auto; display: block;">' +
                     '<div style="width: {{wid}};" class="pool-label-container">' +
-                        '<div ng-repeat="pool in candidate.poolNames" class="pool-label" style="background-color: {{candidate.poolColors[pool.toLowerCase()]}};">' +
+                        '<div ng-if="poolShort === \'false\'" ng-repeat="pool in candidate.poolNames" class="pool-label" style="background-color: {{candidate.poolColors[pool.toLowerCase()]}};">' +
                         '{{pool}}</div>' +
+                        '<div ng-if="poolShort === \'true\'" ng-repeat="pool in candidate.poolNames" class="pool-label-short" style="background-color: {{candidate.poolColors[pool.toLowerCase()]}};">' +
+                        '</div>' +
                     '</div>' +
                     '<button ng-if="poolReadonly === \'false\'" style="margin-left: 5px;" id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class=" btn btn-default"><i class="fa fa-plus"></i></button>' +
                     '<div id="selectPoolMain" ng-show="poolSelectorCtrl.show" class="pool-widget-container" ng-controller="PoolGeneralController as generalCtrl">' +

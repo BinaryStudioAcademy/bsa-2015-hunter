@@ -5,6 +5,13 @@
     padding: 0 5px;
 }
 
+.pool-label-short {
+    width: 50px;
+    height: 13px;
+    float: left;
+    margin-left: 3px;
+}
+
 .pool-label-container {
     float: left; 
     width: auto; 
