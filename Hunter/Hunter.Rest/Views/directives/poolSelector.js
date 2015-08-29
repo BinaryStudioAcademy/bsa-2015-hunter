@@ -9,13 +9,6 @@
         return {
             restrict: 'EA',
             link: function (scope, elem, attr, ctrl) {
-//                $(document).click(function (e) {
-//                    if ($(e.target).is('#addPoolBtn', '#addPoolBtn *')) return;
-//
-//                    if ($(e.target).is('#selectPoolMain, #selectPoolMain *')) return;
-//
-//                    scope.poolSelectorCtrl.close();
-//                });
                 $(document).click(function (event) {
                     if ($(event.target).closest('#addPoolBtn').length != 0) {
                         return;
@@ -50,12 +43,14 @@
 
             },
             scope: {
-                'candidate': '=candidate'
+                'candidate': '=candidate',
+                'poolReadonly': '@poolReadonly'
             },
             controllerAs: 'poolSelectorCtrl',
             controller: ['$scope', 'CandidateHttpService', function ($scope, CandidateHttpService) {
                 var vm = this;
                 vm.show = false;
+                $scope.wid = $scope.poolReadonly === 'true' ? '100%' : 'auto';
 
                 vm.toggleShow = function() {
                     vm.show = !vm.show;
@@ -109,12 +104,12 @@
                 }
             }],
             template: 
-                '<div style="width: auto; display: inline-block;">' +
-                    '<div class="pool-label-container">' +
+                '<div style="width: auto; display: block;">' +
+                    '<div style="width: {{wid}};" class="pool-label-container">' +
                         '<div ng-repeat="pool in candidate.poolNames" class="pool-label" style="background-color: {{candidate.poolColors[pool.toLowerCase()]}};">' +
                         '{{pool}}</div>' +
                     '</div>' +
-                    '<button style="margin-left: 5px;" id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class=" btn btn-default"><i class="fa fa-plus"></i></button>' +
+                    '<button ng-if="poolReadonly === \'false\'" style="margin-left: 5px;" id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class=" btn btn-default"><i class="fa fa-plus"></i></button>' +
                     '<div id="selectPoolMain" ng-show="poolSelectorCtrl.show" class="pool-widget-container" ng-controller="PoolGeneralController as generalCtrl">' +
                         '<div style="width: 380px;" ng-include="generalCtrl.link"></div>' +
                     '</div>' +

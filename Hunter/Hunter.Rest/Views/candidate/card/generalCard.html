@@ -9,10 +9,9 @@
                 <div class="col-md-5">
                     <div class="personal-info">
                         <div>
+                            <pool-selector pool-readonly="false" candidate="generalCardCtrl.candidate"></pool-selector>
                             <span ng-if="!generalCardCtrl.isLLM" class="candidate-name">{{generalCardCtrl.candidate.firstName+" "+generalCardCtrl.candidate.lastName}} from General Pool</span>
                             <span ng-if="generalCardCtrl.isLLM" class="candidate-name">{{generalCardCtrl.candidate.firstName+" "+generalCardCtrl.candidate.lastName}} from {{generalCardCtrl.vacancy.name}}</span>
-
-                            <pool-selector candidate="generalCardCtrl.candidate"></pool-selector>
 
                         </div>
                         <div>current/past: {{generalCardCtrl.candidate.currentPosition}}</div>
