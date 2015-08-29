@@ -188,6 +188,10 @@
     <Compile Include="Migrations\201508271411390_AddScheduledNotificationTable.Designer.cs">
       <DependentUpon>201508271411390_AddScheduledNotificationTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508290646591_remove-location-field-in-vacancy.cs" />
+    <Compile Include="Migrations\201508290646591_remove-location-field-in-vacancy.Designer.cs">
+      <DependentUpon>201508290646591_remove-location-field-in-vacancy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -272,6 +276,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508271411390_AddScheduledNotificationTable.resx">
       <DependentUpon>201508271411390_AddScheduledNotificationTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508290646591_remove-location-field-in-vacancy.resx">
+      <DependentUpon>201508290646591_remove-location-field-in-vacancy.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
