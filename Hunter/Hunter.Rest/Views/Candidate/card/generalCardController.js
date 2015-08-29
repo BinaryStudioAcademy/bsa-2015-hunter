@@ -18,7 +18,7 @@
         'VacancyHttpService'
     ];
 
-    function GeneralCardController($routeParams, $scope, candidateHttpService, cardService, enumConstants, $location, $filter, longlistHttpService, $timeout, VacancyHttpService) {
+    function GeneralCardController($routeParams, $scope, candidateHttpService, cardService, enumConstants, $location, $filter, longlistHttpService, $timeout, vacancyHttpService) {
         var vm = this;
         vm.templateToShow = '';
         vm.isLoad = true;
@@ -74,7 +74,7 @@
                 vm.currentStage = enumConstants.cardStages[response.data];
                 vm.isLoad = true;
             });
-                VacancyHttpService.getVacancy(vid).then(function (response) {
+                vacancyHttpService.getVacancy(vid).then(function (response) {
                     vm.vacancy = response;
                 });
         })();

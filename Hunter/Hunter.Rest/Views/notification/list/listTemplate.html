@@ -3,6 +3,6 @@
         <td>{{notification.pending | localDate | date:'dd.MM.yyyy HH:mm'}}</td>
         <td>{{notification.message}}</td>
         <td><span class="glyphicon glyphicon-trash" title="Remove notification" ng-click="notificationListCtrl.deleteNotification($index)"></span></td>
-        <td ng-hide="{{notificationListCtrl.isModal}}"><a href="#/candidate/{{notification.candidateId}}"><span class="glyphicon glyphicon-user" title="View candidate profile"></span></a></td>
+        <td ng-hide="{{notificationListCtrl.isModal}}"><a href="#/candidate/{{notification.candidateId}}">{{notification.candidateName}}</a></td>
     </tr>
 </table>

@@ -57,6 +57,7 @@
                     notificationHttpService.notificationShown($scope.clickedNotification.id);
                     alertify.alert(alertMessage, function () {
                         $location.url('/candidate/' + $scope.clickedNotification.candidateId);
+                        $scope.$apply();
                     });
                 }
             });

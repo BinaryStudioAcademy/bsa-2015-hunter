@@ -152,7 +152,7 @@ namespace Hunter.Rest.Controllers
             try
             {
                 var login = RequestContext.Principal.Identity.Name;
-                var notifications = _scheduledNotificationService.GetActive(login);
+                var notifications = _scheduledNotificationService.GetCandidateNotifications(login, id);
                 return Request.CreateResponse(HttpStatusCode.OK, notifications);
             }
             catch (Exception ex)

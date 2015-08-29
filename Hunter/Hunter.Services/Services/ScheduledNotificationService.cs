@@ -64,7 +64,7 @@ namespace Hunter.Services
         {
             var currentDate = DateTime.UtcNow;
             var userProfile = _userProfileRepository.Get(p => p.UserLogin == userLogin);
-            var notifications = _scheduledNotificationRepository.Query().Where(n => n.UserProfile.Id == userProfile.Id && n.Pending < currentDate && !n.IsShown).ToList();
+            var notifications = _scheduledNotificationRepository.Query().Where(n => n.UserProfile.Id == userProfile.Id && n.NotificationDate < currentDate && !n.IsShown).ToList();
             return notifications.Select(item => item.ToScheduledNotificationDto()).ToList();
         }
 
@@ -94,7 +94,7 @@ namespace Hunter.Services
         {
             throw new NotImplementedException();
             var pendingDate = DateTime.UtcNow.Date.AddDays(1);
-            var notifications = _scheduledNotificationRepository.QueryIncluding(n => n.Pending < pendingDate && !n.IsSent).OrderBy(n => n.UserProfileId).ToList();
+            var notifications = _scheduledNotificationRepository.QueryIncluding(n => n.NotificationDate < pendingDate && !n.IsSent).OrderBy(n => n.UserProfileId).ToList();
             var currentEmail = string.Empty;
             var emailClient = new SmtpClient();
             MailMessage mailMessage = null;

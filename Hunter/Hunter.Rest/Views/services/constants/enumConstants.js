@@ -94,7 +94,12 @@
             itemsOnPage: {
                 defaultItem: 10,
                 items: [5, 10, 20, 50]
-            }
+            },
+            notificationType: [
+                { id: 0, name: 'Call' },
+                { id: 1, name: 'Interview' },
+                { id: 2, name: 'Test' }
+            ]
             //    { text: '5', value: 5, defaultItem: 0 },
             //    { text: '10', value: 10, defaultItem: 1 },
             //    { text: '20', value: 20, defaultItem: 0 },

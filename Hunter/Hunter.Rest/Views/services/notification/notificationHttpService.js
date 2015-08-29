@@ -13,6 +13,7 @@
     function NotificationHttpService($q, httpHandler) {
         var service = {
             getNotifications: getNotifications,
+            getCandidateNotifications: getCandidateNotifications,
             getActiveNotifications: getActiveNotifications,
             addNotification: addNotification,
             notificationShown: notificationShown,
@@ -29,6 +30,22 @@
                 },
                 errorCallback: function (status) {
                     console.log("Get notification list error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
+
+        function getCandidateNotifications(id) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/notifications/candidate/' + id,
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get candidate notification list error");
                     console.log(status);
                 }
             });
