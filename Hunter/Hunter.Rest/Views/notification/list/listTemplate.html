@@ -1,8 +1,22 @@
-﻿<table class="table table-bordered table-condensed table-striped table-hover" ng-controller="NotificationListController as notificationListCtrl">
-    <tr class="tr-vert-center" ng-repeat="notification in notificationListCtrl.notifications">
-        <td>{{notification.pending | localDate | date:'dd.MM.yyyy HH:mm'}}</td>
-        <td>{{notification.message}}</td>
-        <td><span class="glyphicon glyphicon-trash" title="Remove notification" ng-click="notificationListCtrl.deleteNotification($index)"></span></td>
-        <td ng-hide="{{notificationListCtrl.isModal}}"><a href="#/candidate/{{notification.candidateId}}">{{notification.candidateName}}</a></td>
-    </tr>
-</table>
+﻿<div ng-controller="NotificationListController as notificationListCtrl">
+    <table ng-hide="notificationListCtrl.isModal && notificationListCtrl.notifications.length == 0" class="table table-bordered table-condensed table-striped table-hover">
+        <tr class="tr-vert-center">
+            <td><label>Type</label></td>
+            <td><label>Date</label></td>
+            <td ng-hide="{{notificationListCtrl.isModal}}"><label>Candidate</label></td>
+            <td><label>Message</label></td>
+            <td><label>Sent</label></td>
+            <td><label>Viewed</label></td>
+            <td></td>
+        </tr>
+        <tr class="tr-vert-center" ng-repeat="notification in notificationListCtrl.notifications">
+            <td><i class="glyphicon {{notificationListCtrl.notificationTypes[notification.notificationType].icon}}"></i></td>
+            <td>{{notification.notificationDate | localDate | date:'dd.MM.yyyy HH:mm'}}</td>
+            <td ng-hide="{{notificationListCtrl.isModal}}"><a href="#/candidate/{{notification.candidateId}}">{{notification.candidateName}}</a></td>
+            <td>{{notification.message}}</td>
+            <td><input type="checkbox" ng-checked="{{notification.isSent}}" readonly /></td>
+            <td><input type="checkbox" ng-checked="{{notification.isShown}}" readonly /></td>
+            <td><span class="glyphicon glyphicon-trash" title="Remove notification" ng-click="notificationListCtrl.deleteNotification($index)"></span></td>
+        </tr>
+    </table>
+</div>

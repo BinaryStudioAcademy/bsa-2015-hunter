@@ -9,12 +9,14 @@
         '$location',
         'AuthService',
         'NotificationHttpService',
-        '$routeParams'
+        '$routeParams',
+        'EnumConstants'
     ];
 
-    function NotificationListController($location, authService, notificationHttpService, $routeParams) {
+    function NotificationListController($location, authService, notificationHttpService, $routeParams, enumConstants) {
         var vm = this;
         vm.controllerName = 'Notification list';
+        vm.notificationTypes = enumConstants.notificationTypes;
         vm.isModal = false;
         vm.deleteNotification = deleteNotification;
         var candidateId = $routeParams["cid"];

@@ -9,7 +9,9 @@
             </div>
             <div class="modal-body">
                 <label>Notification Date</label>
-                <input type="datetime-local" ng-model="addEditCtrl.newNotification.pending" class="form-control" />
+                <input type="datetime-local" ng-model="addEditCtrl.newNotification.notificationDate" class="form-control"/>
+                <label>Notification Type</label>
+                <select ng-model="addEditCtrl.notificationType" ng-options="nt.name for nt in addEditCtrl.notificationTypes" class="form-control"></select>
                 <label>Message</label>
                 <textarea class="form-control" ng-model="addEditCtrl.newNotification.message"></textarea>
                 <hr />

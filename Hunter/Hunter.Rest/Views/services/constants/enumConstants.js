@@ -95,10 +95,10 @@
                 defaultItem: 10,
                 items: [5, 10, 20, 50]
             },
-            notificationType: [
-                { id: 0, name: 'Call' },
-                { id: 1, name: 'Interview' },
-                { id: 2, name: 'Test' }
+            notificationTypes: [
+                { id: 0, name: 'Call', icon: 'glyphicon-earphone' },
+                { id: 1, name: 'Interview', icon: 'glyphicon-list-alt' },
+                { id: 2, name: 'Test', icon: 'glyphicon-envelope' }
             ]
             //    { text: '5', value: 5, defaultItem: 0 },
             //    { text: '10', value: 10, defaultItem: 1 },
