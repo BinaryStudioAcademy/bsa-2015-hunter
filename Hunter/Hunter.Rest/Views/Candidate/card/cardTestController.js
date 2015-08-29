@@ -278,8 +278,8 @@
         
 
         function checkTechExpert(userId) {
-            console.log(userId);
-            console.log(vm.checkedTestId);
+            console.log("user: " + userId);
+            console.log("test: " + vm.checkedTestId);
             CardTestHttpService.addCheckingToTest(userId, vm.checkedTestId);
         };
     }

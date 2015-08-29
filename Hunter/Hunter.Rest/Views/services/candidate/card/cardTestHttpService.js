@@ -59,10 +59,10 @@
             });
         }
 
-        function addCheckingToTest(checkingId, testId) {
+        function addCheckingToTest(userId, testId) {
             HttpHandler.sendRequest({
                 verb: 'PUT',
-                url: '/api/test/addChecking/' + checkingId + "/" + testId,
+                url: '/api/test/addChecking/' + testId + "/" + userId,
                 
                 successCallback: function (response) {
                     console.log("ok add checking to test");
