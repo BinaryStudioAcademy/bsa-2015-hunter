@@ -36,7 +36,14 @@ namespace Hunter.Services.Services
             _userProfileRepository = userProfileRepository;
         }
 
-        public IEnumerable<TestDto> GetTestNotChecked(string login) 
+        public void ChangeCheckedTest(int testId)
+        {
+            var test = _testRepository.Get(testId);
+            test.IsChecked = true;
+            _testRepository.UpdateAndCommit(test);
+        }
+
+        public IEnumerable<TestForCheckDto> GetTestNotChecked(string login) 
         {
             var tests = _userProfileRepository
                 .Query()
@@ -44,7 +51,7 @@ namespace Hunter.Services.Services
                 .FirstOrDefault()
                 .Test
                 .Where(e => e.IsChecked == false)
-                .Select(e => e.ToTestDto());
+                .Select(e => e.ToTestForCheckDto());
             
             return tests;
         }

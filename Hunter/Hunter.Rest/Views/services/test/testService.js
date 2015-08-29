@@ -6,16 +6,17 @@
         .factory('TestService', TestService);
 
     TestService.$inject = [
-        'CardHttpService'
+       
     ];
 
-    function TestService(CardHttpService) {
+    function TestService() {
         var service = {
-            getLinkOnTest: getLinkOnTest
+            getUrlOnTest: getUrlOnTest
         }
 
-        function getLinkOnTest() {
-
+        function getUrlOnTest(vacancyId,candidateId) {
+            var urlOnTest = '#/vacancy/' + vacancyId + '/candidate/' + candidateId + '?tab=test';
+            return urlOnTest;
         }
 
         return service;

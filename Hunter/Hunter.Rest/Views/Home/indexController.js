@@ -17,9 +17,10 @@
         var vm = this;
         vm.name = "Index";
         vm.amount = 0;
-        vm.countTasks = 0;
+        vm.countTests = 0;
         $scope.radioModel = 'Home';
         vm.notifications = null;
+        vm.setCountTests = setCountTests;
 
         callRefreshFunctions();
 
@@ -39,8 +40,11 @@
         function getCountTasksForCheck() {
             indexHttpService.getTasksForCheck().then(function (result) {
                 console.log("count = " + result);
-                vm.countTasks = result;
+                vm.countTests = result;
             });
+        }
+        function setCountTests(count) {
+            vm.countTests = count;
         }
 
         function getActiveNotifications() {

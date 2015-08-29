@@ -772,7 +772,7 @@
     <Content Include="Views\candidate\card\cardApplicationsController.js" />
     <Content Include="Views\candidate\card\cardSummary.html" />
     <Content Include="Views\candidate\card\cardSummaryController.js" />
-    <Content Include="Views\services\directive\modalWindowDirective.js" />
+    <Content Include="Views\services\card\cardHttpService.js" />
     <Content Include="Views\directives\thumbButtonDirective.js" />
     <Content Include="Views\filters\localDateFilter.js" />
     <Content Include="Views\notification\addEdit\addEditModal.html" />
@@ -850,6 +850,7 @@
     <Content Include="Views\services\longlist\longlistHttpService.js" />
     <Content Include="Views\services\notification\notificationHttpService.js" />
     <Content Include="Views\services\test\testHttpService.js" />
+    <Content Include="Views\services\test\testService.js" />
     <Content Include="Views\services\userRole\userRoleHttpService.js" />
     <Content Include="Views\services\user\userHttpService.js" />
     <Content Include="Views\Statistics\list.html" />

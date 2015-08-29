@@ -12,7 +12,8 @@
 
     function TestHttpService(httpHandler, $q) {
         var service = {
-            getTestsNotChecked: getTestsNotChecked
+            getTestsNotChecked: getTestsNotChecked,
+            changeCheckedTest: changeCheckedTest
         }
 
         function getTestsNotChecked() {
@@ -31,6 +32,17 @@
             return deferred.promise;
         }
 
+        function changeCheckedTest(testId, success) {
+            httpHandler.sendRequest({
+                url: '/api/test/change/' + testId,
+                verb: 'POST',
+                successCallback: success,
+                errorCallback: function (status) {
+                    console.log("Get tests for check error");
+                    console.log(status);
+                }
+            });
+        }
         return service;
 
     }

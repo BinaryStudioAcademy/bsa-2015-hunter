@@ -19,6 +19,21 @@ namespace Hunter.Rest.Controllers
             _testService = testService;
         }
 
+        [HttpPost]
+        [Route("change/{id:int}")]
+        public HttpResponseMessage ChangeCheckedTest(int id)
+        {
+            try 
+            {
+                _testService.ChangeCheckedTest(id);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch(Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            
+        }
         
         [HttpGet]
         [Route("notChecked")]

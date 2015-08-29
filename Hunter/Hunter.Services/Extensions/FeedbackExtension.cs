@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Hunter.DataAccess.Entities;
 ﻿using Hunter.DataAccess.Entities.Entites.Enums;
-﻿using Hunter.Services.Dto;
 
 namespace Hunter.Services.Extensions
 {
