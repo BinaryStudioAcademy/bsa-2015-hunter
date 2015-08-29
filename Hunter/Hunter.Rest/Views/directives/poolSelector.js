@@ -9,17 +9,44 @@
         return {
             restrict: 'EA',
             link: function (scope, elem, attr, ctrl) {
-//                $(document).click(function (event) {
-//                    if ($(event.target).closest('#addPoolBtn').length != 0) {
-//                        return;
-//                    }
+//                $(document).click(function (e) {
+//                    if ($(e.target).is('#addPoolBtn', '#addPoolBtn *')) return;
 //
-//                    var test = $(event.target).closest('#selectPoolMain').length;
-//                    if ($(event.target).closest('#selectPoolMain').length != 0 && scope.poolSelectorCtrl.show)
-//                        return;
+//                    if ($(e.target).is('#selectPoolMain, #selectPoolMain *')) return;
 //
 //                    scope.poolSelectorCtrl.close();
 //                });
+                $(document).click(function (event) {
+                    if ($(event.target).closest('#addPoolBtn').length != 0) {
+                        return;
+                    }
+
+                    //edit-link-search
+                    //back-search
+                    //add-pool-btn-search
+                    if (hasClass(event.target) != '' && $(hasClass(event.target)).length == 0) {
+                        return;
+                    }
+
+                    var test = $(event.target).closest('#selectPoolMain').length;
+                    if ($(event.target).closest('#selectPoolMain').length != 0 && scope.poolSelectorCtrl.show)
+                        return;
+
+                    scope.poolSelectorCtrl.close();
+                });
+
+                function hasClass(elem) {
+                    var search = ['edit-link-search', 'back-search', 'add-pool-btn-search'];
+                    var res = '';
+
+                    search.forEach(function(s) {
+                        if ($(elem).hasClass(s)) {
+                            res = s;
+                        }
+                    });
+
+                    return res;
+                }
 
             },
             scope: {

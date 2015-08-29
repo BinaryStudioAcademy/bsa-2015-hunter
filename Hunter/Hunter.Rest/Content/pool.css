@@ -1,4 +1,8 @@
-﻿.pool_container {
+﻿.page-width {
+    width: 380px;
+}
+
+.pool_container {
     width: 350px;
     float: left;
     border: 1px solid darkgray;
