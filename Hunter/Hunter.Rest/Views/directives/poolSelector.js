@@ -56,7 +56,7 @@
                 }
 
                 vm.removePoolFromCandidate = function(pool) {
-                    var index = $scope.candidate.poolNames.indexOf(pool);
+                    var index = $scope.candidate.poolNames.indexOf(pool.name);
                     if (index != -1) {
                         $scope.candidate.poolNames.splice(index, 1);
                         delete $scope.candidate.poolColors[pool.name];
