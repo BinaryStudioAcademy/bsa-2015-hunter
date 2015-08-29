@@ -18,5 +18,6 @@ namespace Hunter.Services.Dto
         public DateTime Added { get; set; }
         public FileDto File { get; set; }
         public FeedbackDto Feedback { get; set; }
+        public bool IsChecked { get; set; }
     }
 }

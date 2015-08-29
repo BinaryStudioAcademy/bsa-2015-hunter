@@ -27,6 +27,11 @@ namespace Hunter.Services
             _activityHelperService = activityHelperService;
         }
 
+        public CardDto GetCard(int id)
+        {
+            return _cardRepository.Get(id).ToCardDto();
+        }
+
         public void AddCards(IEnumerable<CardDto> dtoCards, string name)
         {
             //if (dtoCards == null) return;

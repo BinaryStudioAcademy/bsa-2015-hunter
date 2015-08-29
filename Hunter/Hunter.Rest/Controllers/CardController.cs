@@ -32,10 +32,18 @@ namespace Hunter.Rest.Controllers
 
         // GET: api/Card/5
         [HttpGet]
-        [Route("")]
-        public string Get(int id)
+        [Route("{id:int}")]
+        public HttpResponseMessage Get(int id)
         {
-            return "value";
+            try 
+            {
+                var card = _cardService.GetCard(id);
+                return Request.CreateResponse(HttpStatusCode.OK, card);
+            }
+            catch(Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
+            }
         }
 
         // GET: api/Card/5

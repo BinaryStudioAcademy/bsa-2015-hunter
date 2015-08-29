@@ -849,11 +849,14 @@
     <Content Include="Views\services\home\indexHttpService.js" />
     <Content Include="Views\services\longlist\longlistHttpService.js" />
     <Content Include="Views\services\notification\notificationHttpService.js" />
+    <Content Include="Views\services\test\testHttpService.js" />
     <Content Include="Views\services\userRole\userRoleHttpService.js" />
     <Content Include="Views\services\user\userHttpService.js" />
     <Content Include="Views\Statistics\list.html" />
     <Content Include="Views\Statistics\statisticsController.js" />
     <Content Include="Views\templates\pagination.html" />
+    <Content Include="Views\test\list\list.html" />
+    <Content Include="Views\test\list\testListController.js" />
     <Content Include="Views\user\addEdit\addEdit.html" />
     <Content Include="Views\user\addEdit\userAddEditController.js" />
     <Content Include="Views\user\list\list.html" />

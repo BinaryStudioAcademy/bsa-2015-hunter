@@ -1,0 +1,22 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <table class="table table-striped">
+                <tr>
+                    <th>Added</th>
+                    <th>Link</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="test in testListCtrl.tests">
+                    <td>{{test.added | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td>
+                        <a href="#">test</a>
+                    </td>
+                    <td>
+                        <button class="btn btn-default">Checked!</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -26,7 +26,8 @@ namespace Hunter.Services.Extensions
                 Added = test.Added,
                 Url = test.Url,
                 File = file,
-                Feedback = feedbackDto
+                Feedback = feedbackDto,
+                IsChecked = test.IsChecked
             };
         }
 
@@ -40,6 +41,7 @@ namespace Hunter.Services.Extensions
             test.Url = testDto.Url;
             test.Added = testDto.Added;
             test.UserProfileId = testDto.UserProfileId;
+            test.IsChecked = test.IsChecked;
 
             if(test.File != null)
                 testDto.File.ToFile(test.File = new File());

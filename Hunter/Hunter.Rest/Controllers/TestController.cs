@@ -19,6 +19,22 @@ namespace Hunter.Rest.Controllers
             _testService = testService;
         }
 
+        
+        [HttpGet]
+        [Route("notChecked")]
+        public HttpResponseMessage GetTestNotChecked() 
+        {
+            try 
+            {
+                var tests = _testService.GetTestNotChecked(User.Identity.Name);
+                return Request.CreateResponse(HttpStatusCode.OK, tests);
+            }
+            catch(Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
+            }
+        }
+
         [HttpGet]
         [Route("count")]
         public HttpResponseMessage GetCountNotCheck() 

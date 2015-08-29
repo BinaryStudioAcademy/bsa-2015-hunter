@@ -13,5 +13,6 @@ namespace Hunter.Services.Interfaces
         void DeleteCard(int vid, int cid);
         IEnumerable<AppResultCardDto> GetApplicationResults(int cid);
         AppResultCardDto GetCardInfo(int vid, int cid);
+        CardDto GetCard(int id);
     }
 }

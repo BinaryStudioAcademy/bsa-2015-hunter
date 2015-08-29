@@ -36,6 +36,19 @@ namespace Hunter.Services.Services
             _userProfileRepository = userProfileRepository;
         }
 
+        public IEnumerable<TestDto> GetTestNotChecked(string login) 
+        {
+            var tests = _userProfileRepository
+                .Query()
+                .Where(e => e.UserLogin.ToLower() == login.ToLower())
+                .FirstOrDefault()
+                .Test
+                .Where(e => e.IsChecked == false)
+                .Select(e => e.ToTestDto());
+            
+            return tests;
+        }
+
         public int GetCountNoChecked(string userName) 
         {
             var count = _userProfileRepository
