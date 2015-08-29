@@ -32,6 +32,7 @@
         vm.techExperts = [];
         vm.checkTechExpert = checkTechExpert;
         vm.checkedTestId = 0;
+        vm.isCheckingTest = isCheckingTest;
 
 		vm.test;
         vm.changeCurrentTest = changeCurrentTest;
@@ -84,6 +85,7 @@
         function loadAllTests() {
             CardTestHttpService.getAllTests(vm.vacancyId, candidateId, function(response) {
                 vm.test = response.data;
+                console.log(response.data);
                 initializeTests();
             });
         }
@@ -93,6 +95,7 @@
         function loadVacancyTests() {
             CardTestHttpService.getTest(vm.vacancyId, candidateId, function(response) {
                 vm.test = response.data;
+                console.log(response.data);
                 initializeTests();
             });
         }
@@ -275,12 +278,15 @@
             console.log(result);
         });
 
-        
-
         function checkTechExpert(userId) {
-            console.log("user: " + userId);
-            console.log("test: " + vm.checkedTestId);
+            //console.log("user: " + userId);
+            //console.log("test: " + vm.checkedTestId);
             CardTestHttpService.addCheckingToTest(userId, vm.checkedTestId);
         };
+
+        function isCheckingTest(userProfileId) {
+            console.log("userProfileId:");
+            console.log(userProfileId);
+        }
     }
 })();

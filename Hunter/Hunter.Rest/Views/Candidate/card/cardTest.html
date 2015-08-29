@@ -33,7 +33,8 @@
                     <div class="col-md-10">
 
 						<a href="/api/file/download/{{test.file.id}}">{{test.file.fileName}}</a> Size: {{test.file.size}} Uploaded: {{test.file.added | date:'dd.MM.yyyy HH:mm:ss'}}
-                        <button ng-click="testCtrl.checkedTestId = test.id" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add expert to test</button>
+                        <button ng-show="(test.userAlias == null) && (test.isChecked == false)" ng-click="testCtrl.checkedTestId = test.id" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add expert to test</button>
+                        <span ng-hide="(test.userAlias != null) && (test.isChecked == false)">now checking {{test.userAlias}}</span>
                     </div>
                     <div class="col-md-1">
                         <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index, test)">
@@ -46,7 +47,8 @@
                     <div class="col-md-1"><label>Task</label></div>
                     <div class="col-md-10">
                         <a href="{{test.url}}">{{test.url}}</a> Added {{test.added | date:'dd.MM.yyyy HH:mm:ss'}}
-                        <button ng-click="testCtrl.checkedTestId = test.id" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add expert to test</button>
+                        <button ng-show="(test.userAlias == null) && (test.isChecked == false)" ng-click="testCtrl.checkedTestId = test.id" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add expert to test</button>
+                        <span ng-show="(test.userAlias != null) && (test.isChecked == false)">now checking {{test.userAlias}}</span>
                     </div>
                     <div class="col-md-1">
                         <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index, test)">
