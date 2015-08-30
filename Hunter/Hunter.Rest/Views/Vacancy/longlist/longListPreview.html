@@ -19,7 +19,7 @@
                 </div>
                 <div class="ll_preview_info_control">
                     <a class="btn btn-default" href="#/vacancy/{{llPreviewCtrl.vacancyId}}/candidate/{{llPreviewCtrl.candidateDetails.id}}">Details</a>
-                    <a class="btn btn-default" href="PreviewCtrl.candidateDetails.photoUrl#/candidate/edit/{{llPreviewCtrl.candidateDetails.id}}">Edit Profile</a>
+                    <a class="btn btn-default" href="#/candidate/edit/{{llPreviewCtrl.candidateDetails.id}}">Edit Profile</a>
                     <button class="btn btn-default" type="button" ng-click="llPreviewCtrl.removeCard(llPreviewCtrl.candidateDetails.id)">Remove from List</button>
                 </div>
                 <div class="col-md-12">
@@ -34,7 +34,7 @@
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane fade in active ll_preview_overview_wrap">
                             <p ng-hide="llPreviewCtrl.currentTabEmpty">No {{llPreviewCtrl.currentTabName}}
-                            <p>
+                            </p>
                                 <div id="card-dynamic" ng-include="llPreviewCtrl.templateToShow"></div>
                         </div>
                     </div>

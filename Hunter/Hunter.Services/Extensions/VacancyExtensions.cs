@@ -18,7 +18,6 @@ namespace Hunter.Services
                 Status = vacancy.Status,
                 StartDate = vacancy.StartDate,
                 EndDate = vacancy.EndDate,
-                Location = vacancy.Location,
                 Description = vacancy.Description,
                 PoolId = vacancy.PoolId,
                 StatusName = ((Status)vacancy.Status).ToString(),
@@ -52,7 +51,6 @@ namespace Hunter.Services
                 Status = vacancy.Status,
                 StartDate = vacancy.StartDate,
                 EndDate = vacancy.EndDate,
-                Location = vacancy.Location,
                 Description = vacancy.Description,
                 PoolId = vacancy.PoolId
             };
@@ -66,7 +64,6 @@ namespace Hunter.Services
             vacancy.Status = vacancyDto.Status;
             vacancy.StartDate = vacancyDto.StartDate;
             vacancy.EndDate = vacancyDto.EndDate;
-            vacancy.Location = vacancyDto.Location;
             vacancy.Description = vacancyDto.Description;
             vacancy.PoolId = vacancyDto.PoolId;
         }

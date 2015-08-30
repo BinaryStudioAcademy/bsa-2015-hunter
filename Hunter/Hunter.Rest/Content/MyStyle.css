@@ -169,11 +169,8 @@ li {
     height: 200px;
     width: 200px;
 }
-
-.personal-info {
-    font-size: 20px;
-    margin-bottom: 20px;
-    padding: 15px 15px;
+.image {
+    width:500px;
 }
 
 .candidate-name {
@@ -181,7 +178,7 @@ li {
     padding: 5px;
 }
 
-.filter-settings, .personal-info, .note-info-conteiner, .note-info-nav li {
+.filter-settings, .note-info-conteiner, .note-info-nav li {
     border: 1px solid #ddd;
 }
 
@@ -258,16 +255,13 @@ li {
         height: 30px;
     }
 /*partia candidate detailes in candidate list*/
-.partia-candidate-detailes {
-    position: fixed;
-    top: 42px;
+.partial-candidate-details {
+    position: absolute;
     right: 0%;
-    height: 100%;
     z-index: 10;
-    border: 1px solid black;
     background-color: white;
 }
-.partia-candidate-detailes.ng-hide-add, .partia-candidate-detailes.ng-hide-remove {
+.partial-candidate-details.ng-hide-add, .partial-candidate-details.ng-hide-remove {
   transition: all linear 0.5s;
   -webkit-transition:all linear 0.5s;
 

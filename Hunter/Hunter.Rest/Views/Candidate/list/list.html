@@ -15,6 +15,13 @@
             <div class="filter-settings">
                 <ul>
                     <li>
+                        <ul>
+                            <li >
+                                <input ng-click="candidateListCtrl.updateCandidate()" type="checkbox" ng-model="candidateListCtrl.filter.shortListed" > ShortListed
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
                         Pool
                         <ul>
                             <li ng-repeat="pool in candidateListCtrl.pools">
@@ -34,7 +41,7 @@
                         Added by
                         <ul>
                             <li ng-repeat="inv in candidateListCtrl.inviters">
-                                <input  ng-click="candidateListCtrl.updateCandidate()" type="checkbox" checklist-model="candidateListCtrl.filter.inviters" checklist-value="inv.userLogin"> {{inv.alias}}({{inv.countOfAddedCandidates}})
+                                <input ng-click="candidateListCtrl.updateCandidate()" type="checkbox" checklist-model="candidateListCtrl.filter.inviters" checklist-value="inv.userLogin"> {{inv.alias}}({{inv.countOfAddedCandidates}})
                             </li>
                         </ul>
                     </li>
@@ -177,9 +184,7 @@
                     </div>
                 </nav>-->
             </div>
-            <div class="col-md-4 partia-candidate-detailes" ng-show="$root.candidateDetails.show" ng-include="'/Views/candidate/profilePartial/profilePartial.html'"></div>
-
-
+            <div class="col-md-4 partial-candidate-details" ng-show="$root.candidateDetails.show" ng-include="'/Views/candidate/profilePartial/profilePartial.html'"></div>
     </div>
 </div>
 

@@ -59,6 +59,7 @@
     <Compile Include="Entites\Card.cs" />
     <Compile Include="Entites\Enums\ActivityType.cs" />
     <Compile Include="Entites\Enums\FeedbackType.cs" />
+    <Compile Include="Entites\Enums\NotificationType.cs" />
     <Compile Include="Entites\Enums\Origin.cs" />
     <Compile Include="Entites\Enums\PoolBackground.cs" />
     <Compile Include="Entites\Enums\Resolution.cs" />
@@ -188,6 +189,14 @@
     <Compile Include="Migrations\201508271411390_AddScheduledNotificationTable.Designer.cs">
       <DependentUpon>201508271411390_AddScheduledNotificationTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508290646591_remove-location-field-in-vacancy.cs" />
+    <Compile Include="Migrations\201508290646591_remove-location-field-in-vacancy.Designer.cs">
+      <DependentUpon>201508290646591_remove-location-field-in-vacancy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508291052555_AddNotificationTypeForScheduledNotification.cs" />
+    <Compile Include="Migrations\201508291052555_AddNotificationTypeForScheduledNotification.Designer.cs">
+      <DependentUpon>201508291052555_AddNotificationTypeForScheduledNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -272,6 +281,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508271411390_AddScheduledNotificationTable.resx">
       <DependentUpon>201508271411390_AddScheduledNotificationTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508290646591_remove-location-field-in-vacancy.resx">
+      <DependentUpon>201508290646591_remove-location-field-in-vacancy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508291052555_AddNotificationTypeForScheduledNotification.resx">
+      <DependentUpon>201508291052555_AddNotificationTypeForScheduledNotification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
