@@ -8,9 +8,11 @@
         </div>
         <div class="candidate-info">
             <div class="candidate-personal-info row">
+                <pool-selector pool-readonly="false" pool-short="false" candidate="candidatePartCtrl.candidate"></pool-selector>
+
                 <div class="image col-md-5">
                     <shor-list-star is-short="candidatePartCtrl.candidate.shortListed" candidate-id="candidatePartCtrl.candidate.id" size="'30px'" ng-click="$event.stopPropagation();"></shor-list-star>
-                    <img class="preview-profile-photo img-circle" ng-src="{{candidatePartCtrl.candidate.photoUrl}}" />
+                    <img class="preview-profile-photo img-circle" ng-src="{{candidatePartCtrl.candidate.photoUrl}}"/>
                 </div>
                 <div class="col-md-7">
 

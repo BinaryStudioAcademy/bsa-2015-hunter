@@ -19,5 +19,7 @@ namespace Hunter.Services.Dto
         public bool Shortlisted { get; set; }
         public string UserAlias { get; set; }
         public string LastResumeUrl { get; set; }
+        public IEnumerable<string> PoolNames { get; set; }
+        public Dictionary<string, string> PoolColors { get; set; }
     }
 }

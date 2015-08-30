@@ -181,6 +181,8 @@ namespace Hunter.Rest.Controllers
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, "Vacatcy has no candidates!");
                 }
+
+                candidate.PoolColors = _candidateService.GetColors(cid);
                 return Request.CreateResponse(HttpStatusCode.OK, candidate);
             }
             catch (Exception ex)
