@@ -106,7 +106,7 @@ namespace Hunter.Services.Services
                         feedbackRoute = "hrinterview";
                         break;
                     case 2:
-                        feedbackType = "Tech";
+                        feedbackType = "Technical";
                         feedbackRoute = "technicalinterview";
                         break;
                     case 3:
@@ -235,6 +235,23 @@ namespace Hunter.Services.Services
             }
             catch (Exception e)
             {
+                _logger.Log("Creating activity exception : " + e.Message);
+            }
+        }
+
+        public void CreateUpdateCandidateResolution(Candidate candidate, Resolution oldResolution)
+        {
+            try
+            {
+                string message = string.Format("Resolution for {0} {1} has been changed from {2} to {3}",
+                    candidate.FirstName, candidate.LastName, oldResolution, candidate.Resolution);
+                ActivityType type = ActivityType.Candidate;
+                Uri url = new Uri("#/candidate/"+candidate.Id, UriKind.Relative);
+                _activityPostService.Post(message, type, url);
+            }
+            catch (Exception e)
+            {
+
                 _logger.Log("Creating activity exception : " + e.Message);
             }
         }
