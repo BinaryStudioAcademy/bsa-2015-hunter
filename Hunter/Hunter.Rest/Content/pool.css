@@ -82,6 +82,7 @@
 
 .column_data {
     margin-top: 10px;
+    list-style-type: none;
 }
 .column_data p{
     width: 85%;

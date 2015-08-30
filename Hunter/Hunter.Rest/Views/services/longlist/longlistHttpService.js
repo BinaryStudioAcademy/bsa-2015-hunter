@@ -36,16 +36,77 @@
 
         function removeCard(vid, cid) {
             httpHandler.sendRequest({
-                url: 'api/card/' + vid + '/' + cid,
-                verb: "DELETE",
+                url: 'api/card/isUsed/' + vid + '/' + cid,
+                verb: 'GET',
                 successCallback: function (result) {
+                    if (result.data) {
+                        var clickResult = confirm('Would you like to remove card from Long List and delete all its feedbacks and notes?');
+                        if (clickResult === true) {
+                            (function () {
+                                httpHandler.sendRequest({
+                                    url: 'api/card/deleteallinfo/' + vid + '/' + cid,
+                                    verb: "DELETE",
+                                    successCallback: function (result) {
+                                        //console.log(result);
+                                    },
+                                    successMessageToUser: 'Card and all feedbacks and notes were removed',
+                                    errorMessageToUser: 'Card was not removed. Card is used',
+                                    errorCallback: function (result) { console.log(result); }
+                                });
+                            })();
+                            //alert('user click true');
+                        } else {
+                             //alert('user click cancel');
+                        }
+                    } else {
+                        //alert('is Card used result (else): ' + result.data);
+                        (function () {
+                            httpHandler.sendRequest({
+                                url: 'api/card/' + vid + '/' + cid,
+                                verb: "DELETE",
+                                successCallback: function (result) {
+                                    //console.log(result);
+                                },
+                                successMessageToUser: 'Card was removed',
+                                errorMessageToUser: 'Card was not removed. Card is used',
+                                errorCallback: function (result) { console.log(result); }
+                            });
+                        })();
+                    }
                     //console.log(result);
                     //$location.url("/vacancy/1/longlist");
                 },
-                successMessageToUser: 'Card was removed',
-                errorMessageToUser: 'Card was not removed. Card is used',
+                //successMessageToUser: 'Card was removed',
+                //errorMessageToUser: 'Card was not removed. Card is used',
                 errorCallback: function (result) { console.log(result); }
             });
+
+
+
+
+            /**
+             
+             function getCardInfo(vid, cid) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/card/info/' + vid + '/' + cid,
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get application results error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
+             * /
+             */
+
+
+
+            
         }
 
         function getAppResults(cid) {

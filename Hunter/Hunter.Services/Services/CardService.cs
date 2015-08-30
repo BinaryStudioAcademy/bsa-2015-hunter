@@ -16,16 +16,24 @@ namespace Hunter.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICardRepository _cardRepository;
         private readonly IUserProfileRepository _userProfileRepository;
+        private readonly ISpecialNoteRepository _specialNoteRepository;
+        private readonly IFeedbackRepository _feedbackRepository;
+        private readonly IInterviewRepository _interviewRepository;
+        private readonly ITestRepository _testRepository;
         private readonly ILogger _logger;
         private readonly IActivityHelperService _activityHelperService;
 
-        public CardService(ICardRepository cardRepository, IUserProfileRepository userProfileRepository, IUnitOfWork unitOfWork, ILogger logger, IActivityHelperService activityHelperService)
+        public CardService(ICardRepository cardRepository, IUserProfileRepository userProfileRepository, IUnitOfWork unitOfWork, ILogger logger, IActivityHelperService activityHelperService, ISpecialNoteRepository specialNoteRepository, IFeedbackRepository feedbackRepository, IInterviewRepository interviewRepository, ITestRepository testRepository)
         {
             _cardRepository = cardRepository;
             _userProfileRepository = userProfileRepository;
             _unitOfWork = unitOfWork;
             _logger = logger;
             _activityHelperService = activityHelperService;
+            _specialNoteRepository = specialNoteRepository;
+            _feedbackRepository = feedbackRepository;
+            _interviewRepository = interviewRepository;
+            _testRepository = testRepository;
         }
 
         public void AddCards(IEnumerable<CardDto> dtoCards, string name)
@@ -93,6 +101,50 @@ namespace Hunter.Services
             }
         }
 
+        public void DeleteAllInfo(int vid, int cid)
+        {
+            try
+            {
+                //IEnumerable<Feedback> feedbacks = new List<Feedback>();
+
+                var card = _cardRepository.Query().FirstOrDefault(c => c.VacancyId == vid && c.CandidateId == cid);
+                if (card != null)
+                {
+                    var tests = card.Test.Where(t => t.CardId == card.Id);
+                    foreach (var test in tests)
+                    {
+                        _testRepository.DeleteAndCommit(test);
+                    }
+                    //var feedbacks = card.Feedback.Where(f => f.CardId == card.Id);
+                    var feedbacks = card.Feedback.GroupBy(f => f.Type).Select(f => f.Last());
+                    foreach (var feedback in feedbacks)
+                    {
+                        _feedbackRepository.DeleteAndCommit(feedback);
+                    }
+
+                    var interviews = card.Interview.GroupBy(i => i.Card).Select(i => i.Last());
+                    foreach (var interview in interviews)
+                    {
+                        _interviewRepository.DeleteAndCommit(interview);
+                    }
+                }
+
+                var specialNotes = _specialNoteRepository.Query().Where(n => n.VacancyId == vid && n.CandidateId == cid);
+                
+                if (specialNotes != null)
+                {
+                    foreach (var specialNote in specialNotes)
+                    {
+                        _specialNoteRepository.DeleteAndCommit(specialNote);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+            }
+        }
+
         public IEnumerable<AppResultCardDto> GetApplicationResults(int cid)
         {
             try
@@ -138,6 +190,34 @@ namespace Hunter.Services
             {
                 _logger.Log(ex);
                 throw new Exception("no card found!");
+            }
+        }
+
+        public bool IsCardUsed(int vid, int cid)
+        {
+            try
+            {
+                var card = _cardRepository.Query().FirstOrDefault(c => c.VacancyId == vid && c.CandidateId == cid);
+
+                if (card != null)
+                {
+                    var feedback = card.Feedback.Any();
+                    var interview = card.Interview.Any();
+                    var test = card.Test.Any();
+
+                    if (feedback || interview || test)
+                    {
+                        return true;
+                    }
+                }
+
+                var specialNote = _specialNoteRepository.Query().Any(n => n.VacancyId == vid && n.CandidateId == cid);
+                return specialNote;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return false;
             }
         }
     }

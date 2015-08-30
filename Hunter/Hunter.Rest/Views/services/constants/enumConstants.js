@@ -92,8 +92,8 @@
                 '8': 'Photo'
             },
             itemsOnPage: {
-                defaultItem: 10,
-                items: [5, 10, 20, 50]
+                defaultItem: 25,
+                items: [5, 25, 50, 100]
             },
             notificationTypes: [
                 { id: 0, name: 'Call', icon: 'glyphicon-earphone' },
