@@ -15,7 +15,7 @@ namespace Hunter.Services.Services.Interfaces
         void UpdateComment(int id, string comment);
         void AddCheckingToTest(int testId, int userId);
         int GetCountNoChecked(string userName);
-        IEnumerable<TestForCheckDto> GetTestNotChecked(string login);
+        IEnumerable<TestForCheckDto> GetTestByUser(string login);
         void ChangeCheckedTest(int testId);
     }
 }

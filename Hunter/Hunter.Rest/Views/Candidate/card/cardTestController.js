@@ -32,7 +32,6 @@
         vm.techExperts = [];
         vm.checkTechExpert = checkTechExpert;
         vm.checkedTestId = 0;
-        vm.isCheckingTest = isCheckingTest;
 
 		vm.test;
         vm.changeCurrentTest = changeCurrentTest;
@@ -282,11 +281,8 @@
             //console.log("user: " + userId);
             //console.log("test: " + vm.checkedTestId);
             CardTestHttpService.addCheckingToTest(userId, vm.checkedTestId);
-        };
+            loadVacancyTests();
 
-        function isCheckingTest(userProfileId) {
-            console.log("userProfileId:");
-            console.log(userProfileId);
-        }
+        };
     }
 })();

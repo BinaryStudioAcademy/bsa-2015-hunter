@@ -30,18 +30,18 @@ namespace Hunter.Rest.Controllers
             }
             catch(Exception e)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
             }
             
         }
         
         [HttpGet]
         [Route("notChecked")]
-        public HttpResponseMessage GetTestNotChecked() 
+        public HttpResponseMessage GetTestByUser() 
         {
             try 
             {
-                var tests = _testService.GetTestNotChecked(User.Identity.Name);
+                var tests = _testService.GetTestByUser(User.Identity.Name);
                 return Request.CreateResponse(HttpStatusCode.OK, tests);
             }
             catch(Exception e)

@@ -16,9 +16,9 @@
         vm.tests = [];
         vm.getUrlOnTest = getUrlOnTest;
         vm.changeCheckedTest = changeCheckedTest;
-        LoadTests();
+        vm.getClassForTr = getClassForTr;
 
-        //console.log($scope.$parent.IndexCtrl);
+        LoadTests();
         
         function LoadTests() {
             TestHttpService.getTestsNotChecked().then(function (result) {
@@ -35,8 +35,20 @@
             TestHttpService.changeCheckedTest(testId, function (result) {
                 LoadTests();
                 $scope.$parent.IndexCtrl.setCountTests($scope.$parent.IndexCtrl.countTests - 1);
-            });
-            
+            });            
+        }
+
+        function getClassForTr(status) {
+            var resultClass = '';
+            switch (status) {
+                case 1:
+                    resultClass = 'success';
+                    break;
+                case 2:
+                    resultClass = 'danger'
+                    break;
+            }
+            return resultClass;
         }
      
     }

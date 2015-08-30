@@ -43,14 +43,13 @@ namespace Hunter.Services.Services
             _testRepository.UpdateAndCommit(test);
         }
 
-        public IEnumerable<TestForCheckDto> GetTestNotChecked(string login) 
+        public IEnumerable<TestForCheckDto> GetTestByUser(string login) 
         {
             var tests = _userProfileRepository
                 .Query()
                 .Where(e => e.UserLogin.ToLower() == login.ToLower())
                 .FirstOrDefault()
                 .Test
-                .Where(e => e.IsChecked == false)
                 .Select(e => e.ToTestForCheckDto());
             
             return tests;
