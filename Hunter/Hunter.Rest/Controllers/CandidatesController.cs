@@ -285,6 +285,20 @@ namespace Hunter.Rest.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("{candidateId:int}/pools/update/{oldId:int}/{newId:int}")]
+        public IHttpActionResult UpdateCandidatesPool(int candidateId, int oldId, int newId)
+        {
+            try
+            {
+                _candidateService.ChangeCandidatesPool(oldId, newId, candidateId);
+                return Ok();
+            }catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpDelete]
         [Route("{candidateId:int}/removepool/{poolId:int}")]
         public IHttpActionResult RemovePoolFromCandidate(int candidateId, int poolId)

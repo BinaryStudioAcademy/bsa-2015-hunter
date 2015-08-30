@@ -289,5 +289,25 @@ namespace Hunter.Services
                 throw ex;
             }
         }
+
+        public void ChangeCandidatesPool(int oldId, int newId, int candidateId)
+        {
+            try
+            {
+                var oldPool = _poolRepository.Get(oldId);
+                var newPool = _poolRepository.Get(newId);
+                var candidate = _candidateRepository.Get(candidateId);
+
+                candidate.Pool.Remove(oldPool);
+                candidate.Pool.Add(newPool);
+
+                _candidateRepository.UpdateAndCommit(candidate);
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                throw ex;
+            }
+        }
     }
 }

@@ -17,6 +17,8 @@
         vm.poolChanged = poolChanged;
         vm.poolRemoved = poolRemoved;
         vm.getCandidatePools = getCandidatePools;
+        vm.checkIsLabelClicked = checkIsLabelClicked;
+        vm.changeLabel = changeLabel;
 
         function selectPool(pool) {
             if ($scope.poolSelectorCtrl != undefined) {
@@ -50,6 +52,18 @@
             } else {
                 return [];
             }
+        }
+
+        function checkIsLabelClicked() {
+            if ($scope.poolSelectorCtrl != undefined) {
+                return $scope.poolSelectorCtrl.labelClicked;
+            } else {
+                return '';
+            }
+        }
+
+        function changeLabel(pool, oldId) {
+            $scope.poolSelectorCtrl.changePoolClick(pool, oldId);
         }
     }
 })()

@@ -26,6 +26,7 @@
             updateCandidateResolution: updateCandidateResolution,
             addCandidatePool: addCandidatePool,
             removeCandidatePool: removeCandidatePool,
+            changeCandidatePool: changeCandidatePool,
             getOdataCandidateList: getOdataCandidateList
         };
 
@@ -198,6 +199,20 @@
                 'verb': 'DELETE',
                 'successCallback': function(response) {
                     console.log('Pool removed successful');
+                    deferred.resolve(response.data);
+                }
+            });
+
+            return deferred.promise;
+        }
+
+        function changeCandidatePool(oldId, newId, candidateId) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                'url': 'api/candidates/' + candidateId + '/pools/update/' + oldId + '/' + newId,
+                'verb': 'PUT',
+                'successCallback': function(response) {
+                    console.log('Pools changed');
                     deferred.resolve(response.data);
                 }
             });

@@ -14,6 +14,10 @@
                         return;
                     }
 
+                    if ($(event.target).hasClass('pool-label')) {
+                        return;
+                    }
+
                     //edit-link-search
                     //back-search
                     //add-pool-btn-search
@@ -23,6 +27,7 @@
 
                     var test = $(event.target).closest('#selectPoolMain').length;
                     if ($(event.target).closest('#selectPoolMain').length != 0 && scope.poolSelectorCtrl.show)
+//                    if ($(event.target).closest('pool-selector').length != 0 && scope.poolSelectorCtrl.show)
                         return;
 
                     scope.poolSelectorCtrl.close();
@@ -52,13 +57,20 @@
                 var vm = this;
                 vm.show = false;
                 $scope.wid = $scope.poolReadonly === 'true' ? '100%' : 'auto';
+                vm.labelClicked = '';
 
-                vm.toggleShow = function() {
-                    vm.show = !vm.show;
+                vm.toggleShow = function () {
+                    if (vm.labelClicked != '') {
+                        vm.labelClicked = '';
+                    }else{
+                        vm.show = !vm.show;
+                        vm.labelClicked = '';
+                    }
                 }
 
                 vm.close = function() {
                     vm.show = false;
+                    vm.labelClicked = '';
                     $scope.$apply();
                 }
 
@@ -81,6 +93,10 @@
                                 delete $scope.candidate.poolColors[pool.name.toLowerCase()];
                         });
                     }
+
+                    if (vm.labelClicked != '') {
+                        vm.show = false;
+                    }
                 }
 
                 vm.syncPools = function(pool, oldPool) {
@@ -98,16 +114,37 @@
                         $scope.candidate.poolNames.splice(index, 1);
                         delete $scope.candidate.poolColors[pool.name];
                     }
+
+                    if (vm.labelClicked != '') {
+                        vm.labelClicked = '';
+                        vm.show = false;
+                    }
                 }
 
                 vm.candidatePools = function() {
                     return $scope.candidate.poolNames;
                 }
+
+                vm.onLabelClick = function(pool) {
+                    vm.labelClicked = pool;
+                    vm.show = true;
+                }
+
+                vm.changePoolClick = function (pool, oldId) {
+                    CandidateHttpService.changeCandidatePool(oldId, pool.id, $scope.candidate.id).then(function() {
+                        var i = $scope.candidate.poolNames.indexOf(vm.labelClicked);
+                        $scope.candidate.poolNames[i] = pool.name;
+                        delete $scope.candidate.poolColors[vm.labelClicked.toLowerCase()];
+                        $scope.candidate.poolColors[pool.name.toLowerCase()] = pool.color;
+
+                        vm.labelClicked = pool.name;
+                    });
+                }
             }],
             template: 
                 '<div style="width: auto; display: block;">' +
                     '<div style="width: {{wid}};" class="pool-label-container">' +
-                        '<div ng-if="poolShort === \'false\'" ng-repeat="pool in candidate.poolNames" class="pool-label" style="background-color: {{candidate.poolColors[pool.toLowerCase()]}};">' +
+                        '<div ng-if="poolShort === \'false\'" ng-repeat="pool in candidate.poolNames" class="pool-label" ng-click="poolSelectorCtrl.onLabelClick(pool)" style="background-color: {{candidate.poolColors[pool.toLowerCase()]}};">' +
                         '{{pool}}</div>' +
                         '<div ng-if="poolShort === \'true\'" ng-repeat="pool in candidate.poolNames" class="pool-label-short" style="background-color: {{candidate.poolColors[pool.toLowerCase()]}};">' +
                         '</div>' +
