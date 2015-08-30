@@ -45,21 +45,21 @@ namespace Hunter.Services
                     feedbacks = _cardRepository
                         .Query()
                         .Where(e => e.CandidateId == cid)
-                        .SelectMany(c => c.Feedback.Where(f => f.Type == 0 || f.Type == 1 || f.Type == 2));
+                        .SelectMany(c => c.Feedback.Where(f => f.Type == 0 || f.Type == 1));
                 }
                 else if (vid == -1)
                 {
                     feedbacks = _cardRepository
                         .Query()
                         .Where(e => e.CandidateId == cid)
-                        .SelectMany(c => c.Feedback.Where(f => (f.Type == 0 || f.Type == 1 || f.Type == 2) && f.UserProfile.UserLogin == name));
+                        .SelectMany(c => c.Feedback.Where(f => (f.Type == 0 || f.Type == 1) && f.UserProfile.UserLogin == name));
                 }
                 else
                 {
                     feedbacks = _cardRepository
                         .Query()
                         .Where(e => e.VacancyId == vid && e.CandidateId == cid)
-                        .SelectMany(c => c.Feedback.Where(f => f.Type == 0 || f.Type == 1 || f.Type == 2));
+                        .SelectMany(c => c.Feedback.Where(f => f.Type == 0 || f.Type == 1));
                 }
 
                 return feedbacks.ToFeedbacksDto().OrderBy(f => f.Type);
