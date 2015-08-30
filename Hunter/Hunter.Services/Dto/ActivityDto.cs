@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Hunter.DataAccess.Entities.Entites.Enums;
+using Hunter.DataAccess.Entities;
 
 namespace Hunter.Services.Dto
 {

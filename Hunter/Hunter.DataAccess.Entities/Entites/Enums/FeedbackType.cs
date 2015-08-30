@@ -10,7 +10,7 @@ namespace Hunter.DataAccess.Entities.Enums
     {
         English,
         Personal,
-        Expertie,
+        Expertise,
         TechFeedback,
         TestFeedback,
         Summary
