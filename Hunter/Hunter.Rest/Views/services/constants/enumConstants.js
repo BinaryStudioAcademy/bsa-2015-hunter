@@ -51,10 +51,9 @@
             feedbackTypes: [
                 { id: 0, name: 'English' },
                 { id: 1, name: 'Personal' },
-                { id: 2, name: 'Expertise' },
-                { id: 3, name: 'Tech Feedback' },
-                { id: 4, name: 'Test Feedback' },
-                { id: 5, name: 'Summary' }
+                { id: 2, name: 'Tech Feedback' },
+                { id: 3, name: 'Test Feedback' },
+                { id: 4, name: 'Summary' }
             ],
             poolBackgroundColors: [
                 { id: 0, color: 'Green', colorCode: 'rgb(44, 201, 99)' },
@@ -92,20 +91,14 @@
                 '8': 'Photo'
             },
             itemsOnPage: {
-                defaultItem: 10,
-                items: [5, 10, 20, 50]
+                defaultItem: 25,
+                items: [5, 25, 50, 100]
             },
             notificationTypes: [
                 { id: 0, name: 'Call', icon: 'glyphicon-earphone' },
                 { id: 1, name: 'Interview', icon: 'glyphicon-list-alt' },
                 { id: 2, name: 'Test', icon: 'glyphicon-envelope' }
             ]
-            //    { text: '5', value: 5, defaultItem: 0 },
-            //    { text: '10', value: 10, defaultItem: 1 },
-            //    { text: '20', value: 20, defaultItem: 0 },
-            //    { text: '50', value: 50, defaultItem: 0 },
-            //    { text: 'All', value: 500, defaultItem: 0 }
-            //]
         });
 
 })();

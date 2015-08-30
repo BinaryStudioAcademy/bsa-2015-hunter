@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Entities.Enums;
 
 namespace Hunter.Services.Interfaces
 {
@@ -19,6 +20,7 @@ namespace Hunter.Services.Interfaces
         void CreateUploadedTestActivity(Card card);
         void CreateUploadedResumeActivity(Candidate candidate);
         void CreateUploadedPhotoActivity(Candidate candidate);
-        void CreateChangedCardStageActivity(Card card);
+        void CreateChangedCardStageActivity(Card card, Stage oldStage);
+        void CreateUpdateCandidateResolution(Candidate candidate, Resolution oldResolution);
     }
 }

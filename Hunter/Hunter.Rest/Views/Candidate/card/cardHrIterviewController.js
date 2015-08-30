@@ -46,7 +46,7 @@
                 }
             }
 
-            vm.HrFeedbackTypes = EnumConstants.feedbackTypes.slice(0, 3);
+            vm.HrFeedbackTypes = EnumConstants.feedbackTypes.slice(0, 2);
 
         })();
 

@@ -172,8 +172,10 @@ namespace Hunter.Services
         public void UpdateResolution(int id, Resolution resolution)
         {
             var candidate = _candidateRepository.Get(id);
+            var oldResolution = candidate.Resolution;
             candidate.Resolution = resolution;
             _candidateRepository.UpdateAndCommit(candidate);
+            _activityHelperService.CreateUpdateCandidateResolution(candidate, oldResolution);
         }
 
         public void Add(CandidateDto dto, string name)

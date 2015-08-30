@@ -16,10 +16,11 @@
         'LonglistService',
         'FeedbackHttpService',
         'CardTestHttpService',
-        'SpecialNoteHttpService'
+        'SpecialNoteHttpService',
+        '$timeout'
     ];
 
-    function LongListPreviewController($scope, $location, $route, $rootScope, candidateHttpService, longlistHttpService, EnumConstants, longlistService, feedbackHttpService, cardTestHttpService, specialNoteHttpService) {
+    function LongListPreviewController($scope, $location, $route, $rootScope, candidateHttpService, longlistHttpService, EnumConstants, longlistService, feedbackHttpService, cardTestHttpService, specialNoteHttpService, $timeout) {
         var vm = this;
 
         vm.hideCandidatePreview = hideCandidatePreview;
@@ -98,8 +99,14 @@
 
         function removeCard(cid) {
             longlistHttpService.removeCard(vm.vacancyId, cid);
-            vm.isPreviewShown = false;
-            $route.reload();
+            
+            $timeout(function () {
+                vm.isPreviewShown = false;
+                $scope.$emit('getCardsAfterCardDeleting');
+            }, 1200);
+
+            //$route.reload();
+            //$scope.$emit('getCardsAfterCardDeleting');
         }
 
         function changeTemplate(tab) {
