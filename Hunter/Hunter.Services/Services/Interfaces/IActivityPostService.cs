@@ -1,5 +1,5 @@
 ﻿using System;
-using Hunter.DataAccess.Entities.Entites.Enums;
+using Hunter.DataAccess.Entities;
 
 namespace Hunter.Services.Interfaces
 {

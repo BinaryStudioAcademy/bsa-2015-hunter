@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hunter.DataAccess.Entities.Enums;
+using Hunter.DataAccess.Entities;
 
 namespace Hunter.Services.Dto
 {
@@ -34,7 +35,7 @@ namespace Hunter.Services.Dto
             Origin = candidate.Origin;
             DateOfBirth = candidate.DateOfBirth;
             UserAlias = candidate.UserAlias;
-            ResolutionString = Enum.GetName(typeof (Resolution), (DataAccess.Entities.Enums.Resolution)Resolution);
+            ResolutionString = Enum.GetName(typeof (Resolution), (DataAccess.Entities.Resolution)Resolution);
         }
     }
 }

@@ -58,6 +58,7 @@
     <Compile Include="Entites\Candidate.cs" />
     <Compile Include="Entites\Card.cs" />
     <Compile Include="Entites\Enums\ActivityType.cs" />
+    <Compile Include="Entites\Enums\Extentions\GetDescription.cs" />
     <Compile Include="Entites\Enums\FeedbackType.cs" />
     <Compile Include="Entites\Enums\NotificationType.cs" />
     <Compile Include="Entites\Enums\Origin.cs" />

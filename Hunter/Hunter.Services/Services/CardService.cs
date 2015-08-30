@@ -7,6 +7,7 @@ using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Interface.Base;
 using Hunter.Services.Extensions;
 using Hunter.Services.Interfaces;
+using Hunter.DataAccess.Entities;
 
 namespace Hunter.Services
 {
@@ -57,9 +58,10 @@ namespace Hunter.Services
         {
             var card = _cardRepository.Get(c => c.VacancyId == vid && c.CandidateId == cid);
             if (card == null) return false;
+            Stage oldStage = (Stage) card.Stage;
             card.Stage = stage;
             _cardRepository.UpdateAndCommit(card);
-            _activityHelperService.CreateChangedCardStageActivity(card);
+            _activityHelperService.CreateChangedCardStageActivity(card, oldStage);
             return true;
         }
 
