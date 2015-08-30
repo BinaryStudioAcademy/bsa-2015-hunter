@@ -17,7 +17,7 @@
 }
 
 .filter-settings>ul ul{
-    list-style-type: disc;
+    list-style-type: none;
 }
 .filter-settings span {
     color: rgb(185, 180, 180);

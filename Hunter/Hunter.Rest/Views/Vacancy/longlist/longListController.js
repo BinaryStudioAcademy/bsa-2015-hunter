@@ -60,6 +60,10 @@
             vm.activateItemId = 0;
         });
 
+        $scope.$on('getCardsAfterCardDeleting', function () {
+            vm.getCandidatesForLongList();
+        });
+
         // filtering/sorting candidates
         vm.pageSize = 10;
         vm.skip = 0;
@@ -85,7 +89,7 @@
             hr: [],
             currentPage: 1
         };
-
+        
         vm.name = 'CandidatesForLongList';
  
         var CandidatesForLongList = $odataresource('/api/candidates/longlist/' + $routeParams.id + '/odata');
