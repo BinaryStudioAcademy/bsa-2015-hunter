@@ -3,6 +3,6 @@
          ng-repeat="result in cardAppCtrl.appResults"
          style="background-color: {{cardAppCtrl.stages[result.stage].bgcolor}}">
         <a class="col-md-7" href="#/vacancy/{{result.vacancyId}}/longlist" title="Candidate was added {{result.date | date:'dd.MM.yyyy'}} to the vacancy">{{result.vacancy}}</a>
-        <div class="col-md-5">{{cardAppCtrl.stages[result.stage].name}}</div>
+        <a class="col-md-5" href="#/vacancy/{{result.vacancyId}}/candidate/{{cardAppCtrl.candidateId}}">{{cardAppCtrl.stages[result.stage].name}}</a>
     </div>
 </div>
