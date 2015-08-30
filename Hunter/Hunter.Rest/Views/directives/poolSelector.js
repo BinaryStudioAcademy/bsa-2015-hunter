@@ -9,29 +9,29 @@
         return {
             restrict: 'EA',
             link: function (scope, elem, attr, ctrl) {
-                $(document).click(function (event) {
-                    if ($(event.target).closest('#addPoolBtn').length != 0) {
-                        return;
-                    }
+                if(scope.poolReadonly === 'false'){
+                    $(document).click(function (event) {
+                        if ($(event.target).closest('#addPoolBtn').length != 0) {
+                            return;
+                        }
 
-                    if ($(event.target).hasClass('pool-label')) {
-                        return;
-                    }
+                        if ($(event.target).hasClass('pool-label')) {
+                            return;
+                        }
 
-                    //edit-link-search
-                    //back-search
-                    //add-pool-btn-search
-                    if (hasClass(event.target) != '' && $(hasClass(event.target)).length == 0) {
-                        return;
-                    }
+                        //edit-link-search
+                        //back-search
+                        //add-pool-btn-search
+                        if (hasClass(event.target) != '' && $(hasClass(event.target)).length == 0) {
+                            return;
+                        }
 
-                    var test = $(event.target).closest('#selectPoolMain').length;
-                    if ($(event.target).closest('#selectPoolMain').length != 0 && scope.poolSelectorCtrl.show)
-//                    if ($(event.target).closest('pool-selector').length != 0 && scope.poolSelectorCtrl.show)
-                        return;
+                        if ($(event.target).closest('#selectPoolMain').length != 0 && scope.poolSelectorCtrl.show)
+                            return;
 
-                    scope.poolSelectorCtrl.close();
-                });
+                        scope.poolSelectorCtrl.close();
+                    });
+                }
 
                 function hasClass(elem) {
                     var search = ['edit-link-search', 'back-search', 'add-pool-btn-search'];
@@ -144,9 +144,17 @@
             template: 
                 '<div style="width: auto; display: block;">' +
                     '<div style="width: {{wid}};" class="pool-label-container">' +
-                        '<div ng-if="poolShort === \'false\'" ng-repeat="pool in candidate.poolNames" class="pool-label" ng-click="poolSelectorCtrl.onLabelClick(pool)" style="background-color: {{candidate.poolColors[pool.toLowerCase()]}};">' +
-                        '{{pool}}</div>' +
-                        '<div ng-if="poolShort === \'true\'" ng-repeat="pool in candidate.poolNames" class="pool-label-short" style="background-color: {{candidate.poolColors[pool.toLowerCase()]}};">' +
+                        '<div ng-if="poolShort === \'false\' && poolReadonly === \'false\'">' +
+                            '<div ng-repeat="pool in candidate.poolNames" class="pool-label" ng-click="poolSelectorCtrl.onLabelClick(pool)" style="background-color: {{candidate.poolColors[pool.toLowerCase()]}};">' +
+                            '{{pool}}</div>' +
+                        '</div>' +
+                        '<div ng-if="poolShort === \'false\' && poolReadonly === \'true\'">' +
+                            '<div ng-repeat="pool in candidate.poolNames" class="pool-label" style="background-color: {{candidate.poolColors[pool.toLowerCase()]}};">' +
+                            '{{pool}}</div>' +
+                        '</div>' +
+                        '<div ng-if="poolShort === \'true\'">' +
+                            '<div ng-if="poolShort === \'true\'" ng-repeat="pool in candidate.poolNames" class="pool-label-short" style="background-color: {{candidate.poolColors[pool.toLowerCase()]}};">' +
+                            '</div>' +
                         '</div>' +
                     '</div>' +
                     '<button ng-if="poolReadonly === \'false\'" style="margin-left: 5px;" id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class=" btn btn-default"><i class="fa fa-plus"></i></button>' +
