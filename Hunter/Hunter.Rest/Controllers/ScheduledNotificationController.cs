@@ -112,7 +112,7 @@ namespace Hunter.Rest.Controllers
 
         [HttpPut]
         [Route("{id:int}/shown")]
-        public HttpResponseMessage NotificationShowed(int id)
+        public HttpResponseMessage NotificationShown(int id)
         {
             try
             {
@@ -137,6 +137,23 @@ namespace Hunter.Rest.Controllers
             {
                 _scheduledNotificationService.Delete(id);
                 return Request.CreateResponse(HttpStatusCode.OK, "Ok");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("candidate/{id:int}")]
+        [ResponseType(typeof(IEnumerable<ScheduledNotificationDto>))]
+        public HttpResponseMessage GetCandidateNotifications(int id)
+        {
+            try
+            {
+                var login = RequestContext.Principal.Identity.Name;
+                var notifications = _scheduledNotificationService.GetCandidateNotifications(login, id);
+                return Request.CreateResponse(HttpStatusCode.OK, notifications);
             }
             catch (Exception ex)
             {

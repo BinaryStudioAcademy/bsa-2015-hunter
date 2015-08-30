@@ -15,6 +15,7 @@ namespace Hunter.Services.Interfaces
         ScheduledNotificationDto Get(int id);
         IList<ScheduledNotificationDto> GetActive(string userLogin);
         void NotificationShown(int id);
+        IList<ScheduledNotificationDto> GetCandidateNotifications(string userLogin, int candidateId);
         void Notify();
     }
 }

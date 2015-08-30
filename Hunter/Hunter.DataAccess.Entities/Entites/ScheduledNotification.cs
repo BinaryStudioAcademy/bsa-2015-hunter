@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Hunter.DataAccess.Entities.Enums;
 
 namespace Hunter.DataAccess.Entities
 {
@@ -10,7 +11,8 @@ namespace Hunter.DataAccess.Entities
         public int Id { get; set; }
         public int CandidateId { get; set; }
         public int UserProfileId { get; set; }
-        public DateTime Pending { get; set; }
+        public DateTime NotificationDate { get; set; }
+        public NotificationType NotificationType { get; set; }
         [StringLength(2000)]
         public string Message { get; set; }
         public bool IsSent { get; set; }

@@ -4,7 +4,7 @@
             <div class="candidate-personal-info row">
                 <div class="image col-md-2">
                     <shor-list-star is-short="generalCardCtrl.candidate.shortListed" candidate-id="generalCardCtrl.candidate.id" size="'30px'"></shor-list-star>
-                    <img class="profile-photo img-circle" ng-src="{{generalCardCtrl.candidate.photoUrl}}"/>
+                    <img class="profile-photo img-circle" ng-src="{{generalCardCtrl.candidate.photoUrl}}" />
                 </div>
                 <div class="col-md-5">
                     <div class="personal-info">
@@ -27,10 +27,9 @@
                     <div class="candidate-resolution form-group">
                         <label>Resolution</label>
                         <select class="form-control" name="resolution"
-                                ng-change="generalCardCtrl.updateResolution()" 
-                                ng-model="generalCardCtrl.candidate.resolution" 
-                                ng-options="resolution.id as resolution.name for resolution in generalCardCtrl.resolutions">
-                        </select>
+                                ng-change="generalCardCtrl.updateResolution()"
+                                ng-model="generalCardCtrl.candidate.resolution"
+                                ng-options="resolution.id as resolution.name for resolution in generalCardCtrl.resolutions"></select>
                     </div>
                     <div ng-if="generalCardCtrl.isLLM" class="candidate-resolution form-group">
                         <label>Substatus</label>
@@ -44,8 +43,10 @@
                     <a ng-if="generalCardCtrl.isLLM" class="btn btn-default btn-block" href="#/candidate/{{generalCardCtrl.candidate.id}}">Full Profile</a>
                     <button ng-if="generalCardCtrl.isLLM"
                             class="btn btn-default btn-block"
-                            type="button" 
-                            ng-click="generalCardCtrl.removeCard(generalCardCtrl.candidate.id)">Remove from List</button>
+                            type="button"
+                            ng-click="generalCardCtrl.removeCard(generalCardCtrl.candidate.id)">
+                        Remove from List
+                    </button>
                     <a class="btn btn-default btn-block" ng-show="generalCardCtrl.candidate.linkedin != null" href="{{generalCardCtrl.candidate.linkedin}}" target="_blank">View LinkenIn Profile</a>
                     <a class="btn btn-default btn-block" href="#" data-toggle="modal" data-target="#addEditNotificationModal">Add Notification</a>
                     <div ng-include="'/Views/notification/addEdit/addEditModal.html'"></div>
@@ -79,7 +80,7 @@
                 </div>
             </div>
             <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[6]}}">{{generalCardCtrl.stages[6].name}}</label>
-        </div><br/>
+        </div><br />
     </div>
     <div class="row col-md-12">
         <ul class="nav nav-tabs" role="tablist">

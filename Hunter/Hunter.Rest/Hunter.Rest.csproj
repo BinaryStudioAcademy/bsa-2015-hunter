@@ -316,15 +316,6 @@
   <ItemGroup>
     <Content Include="App_Data\no_photo.png" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
-    <Content Include="bower_components\alertifyjs\dist\css\alertify-bootstrap-3.css" />
-    <Content Include="bower_components\alertifyjs\dist\css\alertify-bootstrap.css" />
-    <Content Include="bower_components\alertifyjs\dist\css\alertify.css" />
-    <Content Include="bower_components\alertifyjs\dist\js\alertify.js" />
-    <Content Include="bower_components\alertifyjs\src\css\core.css" />
-    <Content Include="bower_components\alertifyjs\src\css\themes\bootstrap3\bootstrap.css" />
-    <Content Include="bower_components\alertifyjs\src\css\themes\bootstrap\bootstrap.css" />
-    <Content Include="bower_components\alertifyjs\src\css\themes\default\default.css" />
-    <Content Include="bower_components\alertifyjs\src\js\alertify.js" />
     <Content Include="bower_components\angular-animate\angular-animate.min.js" />
     <Content Include="bower_components\angular-bootstrap\.gitignore" />
     <Content Include="bower_components\angular-bootstrap\index.js" />
@@ -545,19 +536,6 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="bower.json" />
-    <Content Include="bower_components\alertifyjs\.bower.json" />
-    <Content Include="bower_components\alertifyjs\.jshintrc" />
-    <Content Include="bower_components\alertifyjs\bower.json" />
-    <Content Include="bower_components\alertifyjs\changelog.md" />
-    <Content Include="bower_components\alertifyjs\dist\js\alertify.js.map" />
-    <Content Include="bower_components\alertifyjs\LICENSE.md" />
-    <Content Include="bower_components\alertifyjs\README.md" />
-    <Content Include="bower_components\alertifyjs\src\.jshintrc" />
-    <Content Include="bower_components\alertifyjs\src\sass\core.scss" />
-    <Content Include="bower_components\alertifyjs\src\sass\themes\bootstrap3\bootstrap.scss" />
-    <Content Include="bower_components\alertifyjs\src\sass\themes\bootstrap\bootstrap.scss" />
-    <Content Include="bower_components\alertifyjs\src\sass\themes\default\default.scss" />
-    <Content Include="bower_components\alertifyjs\update.json" />
     <Content Include="bower_components\angular-bootstrap\.bower.json" />
     <Content Include="bower_components\angular-bootstrap\.npmignore" />
     <Content Include="bower_components\angular-bootstrap\bower.json" />

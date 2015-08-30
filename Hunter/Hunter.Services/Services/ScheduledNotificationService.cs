@@ -62,9 +62,9 @@ namespace Hunter.Services
 
         public IList<ScheduledNotificationDto> GetActive(string userLogin)
         {
-            var pendingDate = DateTime.UtcNow;
+            var currentDate = DateTime.UtcNow;
             var userProfile = _userProfileRepository.Get(p => p.UserLogin == userLogin);
-            var notifications = _scheduledNotificationRepository.Query().Where(n => n.UserProfile.Id == userProfile.Id && n.Pending < pendingDate && !n.IsShown).ToList();
+            var notifications = _scheduledNotificationRepository.Query().Where(n => n.UserProfile.Id == userProfile.Id && n.NotificationDate < currentDate && !n.IsShown).ToList();
             return notifications.Select(item => item.ToScheduledNotificationDto()).ToList();
         }
 
@@ -83,11 +83,18 @@ namespace Hunter.Services
             _scheduledNotificationRepository.UpdateAndCommit(notification);
         }
 
+        public IList<ScheduledNotificationDto> GetCandidateNotifications(string userLogin, int candidateId)
+        {
+            var userProfile = _userProfileRepository.Get(p => p.UserLogin == userLogin);
+            var notifications = _scheduledNotificationRepository.Query().Where(n => n.UserProfileId == userProfile.Id && n.CandidateId == candidateId).ToList();
+            return notifications.Select(item => item.ToScheduledNotificationDto()).ToList();
+        }
+
         public void Notify()
         {
             throw new NotImplementedException();
             var pendingDate = DateTime.UtcNow.Date.AddDays(1);
-            var notifications = _scheduledNotificationRepository.QueryIncluding(n => n.Pending < pendingDate && !n.IsSent).OrderBy(n => n.UserProfileId).ToList();
+            var notifications = _scheduledNotificationRepository.QueryIncluding(n => n.NotificationDate < pendingDate && !n.IsSent).OrderBy(n => n.UserProfileId).ToList();
             var currentEmail = string.Empty;
             var emailClient = new SmtpClient();
             MailMessage mailMessage = null;

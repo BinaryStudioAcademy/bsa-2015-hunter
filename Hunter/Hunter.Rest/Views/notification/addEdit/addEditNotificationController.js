@@ -9,24 +9,29 @@
         "$location",
         "AuthService",
         "NotificationHttpService",
-        '$routeParams'
+        '$routeParams',
+        'EnumConstants'
     ];
 
-    function AddEditNotificationController($location, authService, notificationHttpService, $routeParams) {
+    function AddEditNotificationController($location, authService, notificationHttpService, $routeParams, enumConstants) {
         var vm = this;
         vm.controllerName = 'Add / Edit notification';
         vm.addNotification = addNotification;
+        vm.notificationTypes = enumConstants.notificationTypes;
+        vm.notificationType = vm.notificationTypes[0];
         vm.newNotification = {
             id: 0,
             candidateId: $routeParams.cid,
-            pending: new Date(),
-            message: 'Call to candidate',
+            notificationDate: new Date(),
+            notificationType: 0,
+            message: '',
             isSent: false,
             isShown: false,
             userLogin: authService.login
         };
 
         function addNotification() {
+            vm.newNotification.notificationType = vm.notificationType.id;
             notificationHttpService.addNotification(vm.newNotification);
         };
     };

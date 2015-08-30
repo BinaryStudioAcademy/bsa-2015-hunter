@@ -29,9 +29,10 @@
 }
 
 .personal-info{
-    font-size: 20px;
-    border: 1px solid #ddd;
+    font-size: 17px;
+    margin-bottom: 20px;
     padding: 15px 15px;
+    clear:left;
 }
 
 .candidate-name{
@@ -39,7 +40,7 @@
     padding: 5px;
 }
 
-.filter-settings, .personal-info, .note-info-conteiner, .note-info-nav li{
+.filter-settings, .note-info-conteiner, .note-info-nav li{
     border: 1px solid #ddd;	
 }
 
