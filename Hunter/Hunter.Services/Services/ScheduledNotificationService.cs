@@ -7,6 +7,10 @@ using Hunter.DataAccess.Interface.Base;
 using Hunter.Services.Extensions;
 using Hunter.Services.Interfaces;
 using System.Net.Mail;
+using System.Net;
+using Hunter.DataAccess.Entities;
+using System.IO;
+using System.Text;
 
 namespace Hunter.Services
 {
@@ -92,25 +96,72 @@ namespace Hunter.Services
 
         public void Notify()
         {
-            throw new NotImplementedException();
-            var pendingDate = DateTime.UtcNow.Date.AddDays(1);
-            var notifications = _scheduledNotificationRepository.QueryIncluding(n => n.NotificationDate < pendingDate && !n.IsSent).OrderBy(n => n.UserProfileId).ToList();
+            //throw new NotImplementedException();
+            var hunterHost = "localhost:53147";
+            var notificationDate = DateTime.UtcNow.Date.AddDays(1);
+            var notifications = _scheduledNotificationRepository.Query().Where(n => n.NotificationDate < notificationDate && !n.IsSent).OrderBy(n => n.UserProfileId).ToList();
             var currentEmail = string.Empty;
-            var emailClient = new SmtpClient();
-            MailMessage mailMessage = null;
-            foreach (var n in notifications)
+            var body = string.Empty;
+            var idList = new List<ScheduledNotification>();
+            for (var i = 0; i < notifications.Count; ++i)
             {
+                var n = notifications[i];
+                idList.Add(n);
+                if (i == 0)
+                    currentEmail = n.UserProfile.UserLogin;
+
                 if (currentEmail != n.UserProfile.UserLogin)
                 {
-                    if (currentEmail != string.Empty)
-                    {
-                        emailClient.Send(mailMessage);
-                    }
                     currentEmail = n.UserProfile.UserLogin;
-                    mailMessage = new MailMessage("Hunter App", currentEmail);
-                    emailClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    SendMail(currentEmail, body, idList);
+                    body = string.Empty;
+                }
+                body += string.Format("{0}<br/><a href='{5}/#/candidate/{3}'>{1} {2}</a><br/>{4}<br/><br/>",
+                                             n.NotificationDate,
+                                             n.Candidate.FirstName,
+                                             n.Candidate.LastName,
+                                             n.CandidateId,
+                                             n.Message,
+                                             hunterHost);
+            }
+            if (currentEmail != string.Empty)
+                SendMail(currentEmail, body, idList);
+        }
+
+        private void SendMail(string to, string body, List<ScheduledNotification> ids)
+        {
+            try
+            {
+                var from = new MailAddress("hunter.bsa2015@mail.ru", "Hunter Application");
+                var subject = string.Format("Hunter Scheduled Notifications {0}", DateTime.UtcNow.Date.ToShortDateString());
+                using (var mail = new MailMessage())
+                {
+                    mail.IsBodyHtml = true;
+                    mail.From = from;
+                    mail.To.Add(new MailAddress(to));
+                    mail.SubjectEncoding = Encoding.UTF8;
+                    mail.Subject = subject;
+                    mail.BodyEncoding = Encoding.UTF8;
+                    mail.Body = body;
+                    using (var client = new SmtpClient())
+                    {
+                        client.Host = "smtp.mail.ru";
+                        client.Port = 25;
+                        client.Credentials = new NetworkCredential(from.Address, "hunterapplication");
+                        client.EnableSsl = true;
+                        client.Send(mail);
+                        UpdateSentNotifications(ids);
+                    }
                 }
             }
+            catch
+            { }
+        }
+
+        private void UpdateSentNotifications(List<ScheduledNotification> notifications)
+        {
+            notifications.ForEach(n => n.IsSent = true);
+            _unitOfWork.SaveChanges();
         }
     }
 }

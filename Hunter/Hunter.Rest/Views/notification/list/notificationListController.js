@@ -19,6 +19,7 @@
         vm.notificationTypes = enumConstants.notificationTypes;
         vm.isModal = false;
         vm.deleteNotification = deleteNotification;
+        vm.notify = notify;
         var candidateId = $routeParams["cid"];
         if (candidateId) {
             vm.isModal = true;
@@ -48,6 +49,11 @@
                     notificationHttpService.deleteNotification(id);
                 }
             });
+        }
+
+        function notify()
+        {
+            notificationHttpService.notify();
         }
     }
 })();

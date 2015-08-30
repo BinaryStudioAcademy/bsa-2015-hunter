@@ -17,7 +17,8 @@
             getActiveNotifications: getActiveNotifications,
             addNotification: addNotification,
             notificationShown: notificationShown,
-            deleteNotification: deleteNotification
+            deleteNotification: deleteNotification,
+            notify: notify
         };
 
         function getNotifications() {
@@ -101,6 +102,19 @@
                 errorMessageToUser: 'Scheduled notification not deleted',
                 errorCallback: function (status) {
                     console.log("Delete Scheduled notification error");
+                    console.log(status);
+                }
+            });
+        }
+
+        function notify() {
+            httpHandler.sendRequest({
+                verb: 'GET',
+                url: '/api/notifications/notify',
+                successMessageToUser: 'Scheduled notifications sent',
+                errorMessageToUser: 'Scheduled notifications not sent',
+                errorCallback: function (status) {
+                    console.log("Scheduled notifications sending error");
                     console.log(status);
                 }
             });
