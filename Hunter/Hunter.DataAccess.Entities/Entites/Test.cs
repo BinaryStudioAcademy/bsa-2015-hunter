@@ -22,6 +22,10 @@ namespace Hunter.DataAccess.Entities
 
         public int? FeedbackId { get; set; }
 
+        public int? UserProfileId { get; set; }
+
+        public bool IsChecked { get; set; }
+
         public DateTime Added { get; set; }
 
         public virtual Card Card { get; set; }
@@ -29,5 +33,7 @@ namespace Hunter.DataAccess.Entities
         public virtual File File { get; set; }
 
         public virtual Feedback Feedback { get; set; }
+
+        public virtual UserProfile UserProfile { get; set; }
     }
 }

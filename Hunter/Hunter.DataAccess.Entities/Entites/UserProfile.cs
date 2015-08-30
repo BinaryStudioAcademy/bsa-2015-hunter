@@ -17,6 +17,7 @@ namespace Hunter.DataAccess.Entities
             SpeacialNote = new HashSet<SpecialNote>();
             Activity = new HashSet<Activity>();
             ScheduledNotifications = new HashSet<ScheduledNotification>();
+            Test = new HashSet<Test>();
         }
         
         [Required]
@@ -45,5 +46,7 @@ namespace Hunter.DataAccess.Entities
         public virtual ICollection<Activity> Activity { get; set; }
 
         public virtual ICollection<ScheduledNotification> ScheduledNotifications { get; set; }
+
+        public virtual ICollection<Test> Test { get; set; }
     }
 }

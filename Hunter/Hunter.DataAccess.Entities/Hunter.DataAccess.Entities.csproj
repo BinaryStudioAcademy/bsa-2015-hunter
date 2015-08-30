@@ -198,6 +198,12 @@
     <Compile Include="Migrations\201508291052555_AddNotificationTypeForScheduledNotification.Designer.cs">
       <DependentUpon>201508291052555_AddNotificationTypeForScheduledNotification.cs</DependentUpon>
     </Compile>
+	
+	<Compile Include="Migrations\201508300952162_AddUserProfileInTestEntity.cs" />
+    <Compile Include="Migrations\201508300952162_AddUserProfileInTestEntity.Designer.cs">
+      <DependentUpon>201508300952162_AddUserProfileInTestEntity.cs</DependentUpon>
+    </Compile>
+
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -288,6 +294,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508291052555_AddNotificationTypeForScheduledNotification.resx">
       <DependentUpon>201508291052555_AddNotificationTypeForScheduledNotification.cs</DependentUpon>
+    </EmbeddedResource>
+	<EmbeddedResource Include="Migrations\201508300952162_AddUserProfileInTestEntity.resx">
+      <DependentUpon>201508300952162_AddUserProfileInTestEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
