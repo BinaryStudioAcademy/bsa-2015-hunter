@@ -78,11 +78,17 @@ angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.dir
                     controllerAs: 'candidateAddEditCtrl'
                 });
 
+//            $routeProvider
+//                .when('/pool', {
+//                    templateUrl: viewPath + 'pool/list/list.html',
+//                    controller: 'PoolListController',
+//                    controllerAs: 'poolCtrl'
+            //                });
             $routeProvider
                 .when('/pool', {
-                    templateUrl: viewPath + 'pool/list/list.html',
-                    controller: 'PoolListController',
-                    controllerAs: 'poolCtrl'
+                    templateUrl: viewPath + 'pool/poolGeneral.html',
+                    controller: 'PoolGeneralController',
+                    controllerAs: 'generalCtrl'
                 });
 
             $routeProvider
