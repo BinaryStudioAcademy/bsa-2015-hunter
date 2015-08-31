@@ -15,18 +15,18 @@
         <div class="col-md-3 filte-form-wrapper">
             <div class="form-group">
                 <label>Filter</label>
-                <input type="search" class="form-control" ng-model="longListCtrl.filter.search">
+                <input type="search" class="form-control" ng-model="longListCtrl.filter.search" ng-change="longListCtrl.updateUrl()">
             </div>
             <div class="filter-settings">
                 <ul>
                     <li>
-                        <input type="checkbox" checklist-model="longListCtrl.filter.shortlisted" checklist-value="true"> Shortlisted
+                        <input type="checkbox" ng-click="longListCtrl.updateUrl()" ng-model="longListCtrl.filter.shortlisted"> Shortlisted
                     </li>
                     <li>
                         Stage
                         <ul>
                             <li ng-repeat="st in longListCtrl.stages">
-                                <input type="checkbox" checklist-model="longListCtrl.filter.stages" checklist-value="st.id"> {{st.name}}
+                                <input ng-click="longListCtrl.updateUrl()" type="checkbox" checklist-model="longListCtrl.filter.stages" checklist-value="st.id"> {{st.name}}
                             </li>
                         </ul>
                     </li>
@@ -34,7 +34,7 @@
                         Added by
                         <ul>
                             <li ng-repeat="addedby in longListCtrl.addedByList">
-                                <input type="checkbox" checklist-model="longListCtrl.filter.hr" checklist-value="addedby.userLogin"> {{addedby.userLogin == '' ? 'unknown' : addedby.alias}} <span>({{addedby.countOfAddedCandidates}})</span>
+                                <input ng-click="longListCtrl.updateUrl()" type="checkbox" checklist-model="longListCtrl.filter.hr" checklist-value="addedby.userLogin"> {{addedby.userLogin == '' ? 'unknown' : addedby.alias}} <span>({{addedby.countOfAddedCandidates}})</span>
                             </li>
                         </ul>
                     </li>
@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="col-md-5" spinner="longListCtrl.listSpinner">
-            <select class="form-control" ng-change="longListCtrl.getCandidatesForLongList()" ng-options="item.options as item.text for item in longListCtrl.sortOptions" ng-model="longListCtrl.order"></select>
+            <select class="form-control" ng-change="longListCtrl.updateUrl()" ng-options="item.options as item.text for item in longListCtrl.sortOptions" ng-model="longListCtrl.filter.order"></select>
             <div class="ll_candidate_item" ng-repeat="candidate in longListCtrl.candidatesList" ng-click="longListCtrl.viewCandidateInfo(candidate.id)" ng-class="{ll_candidate_item_active: longListCtrl.activateItemId == candidate.id}">
                 <div class="col-md-4 ll_candidate_item_img">
                     <shor-list-star is-short="candidate.shortlisted" candidate-id="candidate.id" size="'18px'" ng-click="$event.stopPropagation();"></shor-list-star>
@@ -74,13 +74,13 @@
                         <option value="25">25</option>
                         <option value="50">50</option>
                         <option value="100">100</option>
-                        <option value="">All</option>
                     </select>
                 </div>
                 <pagination total-items="longListCtrl.totalItems"
                             ng-model="longListCtrl.filter.currentPage"
-                            items-per-page="longListCtrl.pageSize"
+                            items-per-page="longListCtrl.filter.pageSize"
                             max-size="5"
+                            ng-click="longListCtrl.updateUrl()"
                             class="pagination-sm ll_pagination"
                             boundary-links="true"
                             template-url="../../Views/templates/pagination.html">

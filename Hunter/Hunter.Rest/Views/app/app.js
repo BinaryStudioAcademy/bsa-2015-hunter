@@ -39,7 +39,8 @@ angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.dir
                 .when('/vacancy/:id/longlist', {
                     templateUrl: viewPath + 'vacancy/longlist/longlist.html',
                     controller: "LongListController",
-                    controllerAs: 'longListCtrl'
+                    controllerAs: 'longListCtrl',
+                    reloadOnSearch: false
                 })
                 .when('/vacancy/edit/:id', {
                     templateUrl: viewPath + 'vacancy/addEdit/addEdit.html',
