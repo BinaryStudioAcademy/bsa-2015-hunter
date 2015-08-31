@@ -20,6 +20,9 @@
         var vm = this;
         //Here we should write all vm variables default values. For Example:
 
+//        vm.currentPool;
+//        vm.color;
+
         vm.controllerName = 'Add / Edit Vacancy';
         vm.statuses = enumConstants.vacancyStates;
         vm.isNewVacancy = true;
@@ -70,6 +73,18 @@
                     description: data.description,
                     poolId: data.poolId
                 };
+                
+//                //!!!!!
+//                for (var i in vm.pools) {
+//                    var pool = vm.pools[i];
+//                    if (pool.id == vm.currentVacancy.poolId) {
+//                        vm.currentPool = pool;
+//                        break;
+//                    }
+//                }
+//                vm.color[vm.currentPool.name.toLowerCase()] = vm.currentPool.color;
+//                //!!!!!!
+
                 console.log('Original date - ' + data.endDate);
                 console.log('Converted data', new Date(data.endDate));
             });

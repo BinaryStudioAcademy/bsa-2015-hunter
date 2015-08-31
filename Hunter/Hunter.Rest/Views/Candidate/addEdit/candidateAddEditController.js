@@ -30,6 +30,8 @@
             { name: 'Hired', value: 3 }, { name: 'Unfit', value: 4 }, { name: 'Not now', value: 5 }
         ];
         vm.pools = [];
+        vm.candidatePoolColors = {};
+
         vm.candidate = null;
         vm.errorObject = {
             emptyCategoryError: false,
@@ -203,6 +205,7 @@
                     for (var j = 0; j < vm.pools.length; j++) {
                         if (response.data.poolNames[i] == vm.pools[j].name) {
                             vm.selectedPools.push(vm.pools[j].name);
+                            vm.candidatePoolColors[vm.pools[j].name.toLowerCase()] = vm.pools[j].color;
                         }
                     }
                 }

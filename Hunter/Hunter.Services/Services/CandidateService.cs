@@ -244,5 +244,72 @@ namespace Hunter.Services
                 _logger.Log(ex);
             }
         }
+
+        public void UpdateCandidatePool(int candidateId, int poolId, bool delete = false)
+        {
+            try
+            {
+                var candidate = _candidateRepository.Get(candidateId);
+                var pool = _poolRepository.Get(poolId);
+                if (!delete)
+                {
+                    if (candidate.Pool.Any(x => x.Id == poolId))
+                    {
+                        throw new Exception("This candidate is already in this pool");
+                    }
+
+                    candidate.Pool.Add(pool);
+                    Update(candidate.ToCandidateDto());
+                }
+                else
+                {
+                    candidate.Pool.Remove(pool);
+                    Update(candidate.ToCandidateDto());
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                throw ex;
+            }
+        }
+
+        public Dictionary<string, string> GetColors(int id)
+        {
+            try
+            {
+                var colors = _candidateRepository.Query()
+                    .Where(x => x.Id == id)
+                    .SelectMany(cand => cand.Pool, (cand, pool) => new {Name = pool.Name, Color = pool.Color})
+                    .ToDictionary(x => x.Name.ToLower(), x => x.Color);
+
+                return colors;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex.Message);
+                throw ex;
+            }
+        }
+
+        public void ChangeCandidatesPool(int oldId, int newId, int candidateId)
+        {
+            try
+            {
+                var oldPool = _poolRepository.Get(oldId);
+                var newPool = _poolRepository.Get(newId);
+                var candidate = _candidateRepository.Get(candidateId);
+
+                candidate.Pool.Remove(oldPool);
+                candidate.Pool.Add(newPool);
+
+                _candidateRepository.UpdateAndCommit(candidate);
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                throw ex;
+            }
+        }
     }
 }
