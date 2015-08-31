@@ -22,7 +22,7 @@ namespace Hunter.Services.Extensions
                 Comment = test.Comment,
                 FeedbackId = test.FeedbackId,
                 FileId = test.FileId,
-                UserProfile = test.AssignedUserProfile == null ? null : test.AssignedUserProfile.ToUserProfileDto(),
+                AssignedUserProfile = test.AssignedUserProfile == null ? null : test.AssignedUserProfile.ToUserProfileDto(),
                 Added = test.Added,
                 Url = test.Url,
                 File = file,
