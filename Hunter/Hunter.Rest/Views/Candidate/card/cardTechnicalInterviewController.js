@@ -17,7 +17,7 @@
         var vm = this;
         vm.templateName = 'Technical Interview';
         vm.techFeedbacks = {};
-        vm.newTechFeedback = {};
+        vm.newTechFeedbackText = '';
         vm.vacancy = {};
         vm.saveFeedback = saveFeedback;
         vm.updateFeedback = updateFeedback;
@@ -41,20 +41,34 @@
 
         })();
 
-        function saveFeedback(feedback) {
-            var body = {
-                id: feedback.id,
-                cardId: $scope.$parent.generalCardCtrl.cardInfo.cardId,
-                text: feedback.text,
-                type: 2,
-                successStatus: feedback.successStatus
+        function saveFeedback(feedback, isNew) {
+            if (!isNew) {
+                var body = {
+                    id: feedback.id,
+                    cardId: $scope.$parent.generalCardCtrl.cardInfo.cardId,
+                    text: feedback.text,
+                    type: 2,
+                    successStatus: feedback.successStatus
+                }
+            }
+            else {
+                var body = {
+                    cardId: $scope.$parent.generalCardCtrl.cardInfo.cardId,
+                    text: feedback,
+                    type: 2,
+                }
             }
 
             FeedbackHttpService.saveFeedback(body, $routeParams.vid, $routeParams.cid).then(function (result) {
-                feedback.id = result.id;
-                feedback.date = result.update;
-                feedback.userAlias = result.userAlias;
-                vm.techFeedbacks.push(result);
+                if (!isNew) {
+                    feedback.id = result.id;
+                    feedback.date = result.date;
+                    feedback.userAlias = result.userAlias;
+                }              
+                else {
+                    vm.techFeedbacks.push(result);
+                    vm.newTechFeedbackText = '';
+                }
             });
         }
 
@@ -65,7 +79,7 @@
                 feedback.editMode = !feedback.editMode;
             } else {
                 feedback.editMode = !feedback.editMode;
-                vm.saveFeedback(feedback);
+                vm.saveFeedback(feedback, false);
             }
         }
 
