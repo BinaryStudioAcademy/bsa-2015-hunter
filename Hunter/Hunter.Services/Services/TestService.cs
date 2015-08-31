@@ -122,7 +122,6 @@ namespace Hunter.Services.Services
         {
             Test test = new Test();
             newTestDto.ToTest(test);
-            test.UserProfileId = _userProfileRepository.Get(x => x.UserLogin == newTestDto.UserProfile.Login).Id;
             try
             {
                 _testRepository.UpdateAndCommit(test);
@@ -213,7 +212,7 @@ namespace Hunter.Services.Services
         public void AddCheckingToTest(int testId, int userId) 
         {
             var test = _testRepository.Get(testId);
-            test.UserProfileId = userId;
+            test.AssignedUserProfileId = userId;
             _testRepository.UpdateAndCommit(test);
         }
 
