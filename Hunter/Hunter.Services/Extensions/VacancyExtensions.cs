@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using Hunter.DataAccess.Entities;
 using Hunter.DataAccess.Entities.Enums;
+using Hunter.Services.Extensions;
 
 
 namespace Hunter.Services
@@ -20,9 +21,11 @@ namespace Hunter.Services
                 EndDate = vacancy.EndDate,
                 Location = vacancy.Location,
                 Description = vacancy.Description,
-                PoolId = vacancy.PoolId,
+//                PoolId = vacancy.PoolId,
+                Pools = vacancy.Pool.Select(x => x.ToPoolViewModel()),
                 StatusName = ((Status)vacancy.Status).ToString(),
                 UserLogin = vacancy.UserProfile != null ? vacancy.UserProfile.Alias : string.Empty
+                
             };
             return v;
         }
@@ -36,7 +39,8 @@ namespace Hunter.Services
                 Status = vacancy.Status,
                 StartDate = vacancy.StartDate,
                 EndDate = vacancy.EndDate,
-                PoolName = vacancy.Pool.Name,
+//                PoolName = vacancy.Pool.Name,
+                Pools = vacancy.Pool.Select(x => x.ToPoolViewModel()),
                 AddedByName = vacancy.UserProfile != null ? vacancy.UserProfile.Alias : string.Empty,
                 AddedById = vacancy.UserProfile != null ? vacancy.UserProfile.Id : 0
             };
@@ -54,7 +58,8 @@ namespace Hunter.Services
                 EndDate = vacancy.EndDate,
                 Location = vacancy.Location,
                 Description = vacancy.Description,
-                PoolId = vacancy.PoolId
+//                PoolId = vacancy.PoolId
+                Pool = (ICollection<Pool>) vacancy.Pools.Select(x => x.ToPoolModel())
             };
             return v;
         }
@@ -68,7 +73,8 @@ namespace Hunter.Services
             vacancy.EndDate = vacancyDto.EndDate;
             vacancy.Location = vacancyDto.Location;
             vacancy.Description = vacancyDto.Description;
-            vacancy.PoolId = vacancyDto.PoolId;
+            vacancy.Pool = (ICollection<Pool>) vacancyDto.Pools.Select(x => x.ToPoolModel());
+//            vacancy.PoolId = vacancyDto.PoolId;
         }
 
         public static VacancyLongListDto ToVacancyLongListDto(this Vacancy vacancy)

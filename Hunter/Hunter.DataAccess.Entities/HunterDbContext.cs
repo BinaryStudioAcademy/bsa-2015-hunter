@@ -68,10 +68,20 @@ namespace Hunter.DataAccess.Entities
                 .Property(e => e.Comment)
                 .IsFixedLength();
 
-            modelBuilder.Entity<Pool>()
-                .HasMany(e => e.Vacancy)
-                .WithRequired(e => e.Pool)
-                .WillCascadeOnDelete(false);
+//            modelBuilder.Entity<Pool>()
+//                .HasMany(e => e.Vacancy)
+//                .WithRequired(e => e.Pool)
+//                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Vacancy>()
+                .HasMany(e => e.Pool)
+                .WithMany(e => e.Vacancy)
+                .Map(m =>
+                {
+                    m.ToTable("Vacancy_Pool");
+                    m.MapLeftKey("VacancyId");
+                    m.MapRightKey("PoolId");
+                });
 
             modelBuilder.Entity<UserProfile>()
                 .HasMany(e => e.Candidate)

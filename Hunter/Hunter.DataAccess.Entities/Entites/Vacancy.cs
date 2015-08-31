@@ -33,7 +33,7 @@ namespace Hunter.DataAccess.Entities
         [StringLength(4000)]
         public string Description { get; set; }
 
-        public int PoolId { get; set; }
+//        public int PoolId { get; set; }
 
         public int? UserProfileId { get; set; }
 
@@ -43,7 +43,7 @@ namespace Hunter.DataAccess.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SpecialNote> SpecialNote { get; set; }
 
-        public virtual Pool Pool { get; set; }
+        public virtual ICollection<Pool> Pool { get; set; }
 
         public virtual UserProfile UserProfile { get; set; }
     }

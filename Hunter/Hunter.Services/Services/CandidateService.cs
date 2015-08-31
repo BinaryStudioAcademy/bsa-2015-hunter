@@ -110,7 +110,7 @@ namespace Hunter.Services
             try
             {
                 var cardsLongList =
-                    _cardRepository.QueryIncluding(c => c.Candidate, c => c.UserProfile)
+                    _cardRepository.QueryIncluding(c => c.Candidate.Pool, c => c.UserProfile)
                         .Where(card => card.VacancyId == vid)
                         .ToList()
                         .ToDto();// All().Where(card => card.VacancyId == vid).ToCandidateLongListDto().OrderByDescending(c => c.AddDate);

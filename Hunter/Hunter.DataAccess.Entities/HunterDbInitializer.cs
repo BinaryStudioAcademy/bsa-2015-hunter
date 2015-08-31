@@ -130,7 +130,7 @@ namespace Hunter.DataAccess.Entities
                 UserProfileId = 1,
                 StartDate = new DateTime(2015, 8, 1),
                 EndDate = new DateTime(2015, 10, 5),
-                Pool = phpPool,
+                Pool = new List<Pool>() { phpPool },
                 Description = @"Company Description:
                                 Brandastic is a fast expanding design company in Orange County, California specializing in custom web platforms, online marketing, and more.
 
@@ -172,7 +172,7 @@ namespace Hunter.DataAccess.Entities
                 UserProfileId = 2,
                 StartDate = new DateTime(2015, 8, 2),
                 EndDate = new DateTime(2015, 10, 5),
-                Pool = phpPool,
+                Pool = new List<Pool>() { phpPool },
                 Description = @"Company Description:
                                For two decades Guidance Solutions has stood at the forefront of eCommerce innovation. We are based in beautiful Marina del Rey, CA just steps from the beach where we develop customized eCommerce strategy for our clients. Using social commerce and the best of Web 2.0 we offer clients a range of services from Information Architecture, User Experience, and Web Design to Development, Hosting, eMarketing and Mobile App Development.
                                We believe in hiring the best so we can deliver the best. We are passionate about the work we do and believe it is possible to do great work and have fun at the same time. We have been voted one of the Best Places to Work, by the LA Business Journal. We offer a relaxed, casual environment where passion, commitment, and excellence reign.
@@ -189,7 +189,7 @@ namespace Hunter.DataAccess.Entities
                 UserProfileId = 3,
                 StartDate = new DateTime(2015, 8, 3),
                 EndDate = new DateTime(2015, 10, 5),
-                Pool = phpPool,
+                Pool = new List<Pool>() { phpPool },
                 Description = @"Company Description:
                                 A Santa Monica-based pre-IPO tech company; CallFire is a voice and text platform, with technologies that fit with today mobile lifestyle. We work with major brands, including Public Storage, Dominoes Pizza, AllState, Pepsi and many others. We are a tight knit group of professionals who are passionate about our mission.
 
@@ -223,7 +223,7 @@ namespace Hunter.DataAccess.Entities
                 Status = 0,
                 UserProfileId = 1,
                 StartDate = new DateTime(2015, 8, 4),
-                Pool = jsPool,
+                Pool = new List<Pool>(){jsPool},
                 Description = @"About You:
                                 You're pretty much a master with Node.js (it's a long-term relationship but it still feels like you met yesterday).
                                 You also love trying out new languages, frameworks, libraries, and leveraging them off, whenever necessary (a recent fling with Ionic is a plus!).
@@ -256,7 +256,7 @@ namespace Hunter.DataAccess.Entities
                 Status = 0,
                 UserProfileId = 2,
                 StartDate = new DateTime(2015, 8, 5),
-                Pool = jsPool,
+                Pool = new List<Pool>() { jsPool },
                 Description = @"We are looking for the best and brightest minds in Web Development. Someone who is truly passionate about creating beautiful innovative next generation UIs using bleeding edge technologies.
                                 
                                 As a member of a SCRUM team, you are asked to deliver the following:
@@ -289,7 +289,7 @@ namespace Hunter.DataAccess.Entities
                 Name = "Senior JavaScript Developer",
                 Status = 0,
                 StartDate = new DateTime(2015, 8, 6),
-                Pool = jsPool,
+                Pool = new List<Pool>() { jsPool },
                 UserProfileId = 3,
                 Description = @"Job Description
                                 As Senior JavaScript Developer you will be working on our most challenging and important TV projects and products. You will have a core role in our team of experienced developers, designers, project managers.
@@ -335,7 +335,7 @@ namespace Hunter.DataAccess.Entities
                 Status = 0,
                 UserProfileId = 1,
                 StartDate = new DateTime(2015, 8, 7),
-                Pool = netPool,
+                Pool = new List<Pool>(){netPool},
                 Description = @"Job Description
 
                                 Roles and Responsibilities: 
@@ -384,7 +384,7 @@ namespace Hunter.DataAccess.Entities
                 Status = 1,
                 UserProfileId = 2,
                 StartDate = new DateTime(2015, 8, 8),
-                Pool = netPool,
+                Pool = new List<Pool>() { netPool },
                 Description = @"Job Description
 
                                 We are an innovative software company who produce awesome casino and bingo gaming content in an agile manner and using best practice techniques and approaches.
@@ -422,7 +422,7 @@ namespace Hunter.DataAccess.Entities
                 Status = 1,
                 UserProfileId = 3,
                 StartDate = new DateTime(2015, 8, 2),
-                Pool = netPool,
+                Pool = new List<Pool>() { netPool },
                 Description = @"Job Description
 
                                 Whether you’re fresh out of college or an experienced professional, if you love working with .Net, APIs and MongoDB, GAN Integrity Solutions (GAN) would like to hear from you.

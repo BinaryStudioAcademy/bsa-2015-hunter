@@ -52,7 +52,8 @@ namespace Hunter.Services
             if (filterParams.Pools.Any())
             {
                 var selectedPools = filterParams.Pools.Select(Int32.Parse).ToList();
-                query = query.Where(vac => selectedPools.Contains(vac.PoolId));
+//                query = query.Where(vac => selectedPools.Contains(vac.PoolId));
+                query = query.Where(vac => selectedPools.Any(x => vac.Pool.Any(p => p.Id == x)));//??
             }
 
             if (filterParams.Statuses.Any())
