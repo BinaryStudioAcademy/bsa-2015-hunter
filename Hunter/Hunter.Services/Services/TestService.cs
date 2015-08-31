@@ -122,7 +122,7 @@ namespace Hunter.Services.Services
         {
             Test test = new Test();
             newTestDto.ToTest(test);
-
+            test.UserProfileId = _userProfileRepository.Get(x => x.UserLogin == newTestDto.UserProfile.Login).Id;
             try
             {
                 _testRepository.UpdateAndCommit(test);

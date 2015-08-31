@@ -15,12 +15,13 @@
         'UserHttpService',
 		'VacancyHttpService',
         'AuthService',
-        'TestHttpService'
+        'TestHttpService',
+        'localStorageService'
     ];
 
     function CardTestController(CardTestHttpService, $routeParams,
         FeedbackHttpService, UploadTestService, $scope, EnumConstants, UserHttpService, VacancyHttpService,
-        AuthService, TestHttpService) {
+        AuthService, TestHttpService,localStorageService) {
 
         var vm = this;
         vm.templateName = 'Test';
@@ -188,7 +189,8 @@
             $scope.$apply();
         }
 
-        vm.uploadFile = function() {
+        vm.uploadFile = function () {
+            console.log(candidateId, vm.vacancyId);
             UploadTestService.uploadTest(candidateId, vm.vacancyId, function(response) {
                 var fileId = response.data;
 
@@ -197,7 +199,12 @@
                     'fileId': fileId,
                     'cardId': vm.test.cardId,
                     'feedbackId': null,
-                    'added': new Date()
+                    'added': new Date(),
+                    'userProfile': {
+                        Id: 0,
+                        Alias: '',
+                        Login: localStorageService.get('authorizationData').userName
+                    }
                 };
 
                 CardTestHttpService.sendTest(test, function (response) {
