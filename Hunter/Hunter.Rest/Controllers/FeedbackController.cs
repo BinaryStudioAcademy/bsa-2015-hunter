@@ -140,7 +140,7 @@ namespace Hunter.Rest.Controllers
         {
             try
             {
-                var feedbacks = _feedbackService.GetAllFeedbacks(vacancyId, candidateId);
+                var feedbacks = _feedbackService.GetLastFeedbacks(vacancyId, candidateId);
                 if (feedbacks == null)
                     return Request.CreateResponse(HttpStatusCode.NoContent, "not feedbacks");
                 return Request.CreateResponse(HttpStatusCode.OK, feedbacks);
@@ -150,6 +150,24 @@ namespace Hunter.Rest.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
             }
 
+        }
+
+        [HttpGet]
+        [Route("history/{vacancyId:int}/{candidateId:int}")]
+        [ResponseType(typeof(IEnumerable<FeedbackDto>))]
+        public HttpResponseMessage GetHistory(int vacancyId, int candidateId)
+        {
+            try
+            {
+                var feedbacks = _feedbackService.GetFeedbacksHistory(vacancyId, candidateId);
+                if (feedbacks == null)
+                    return Request.CreateResponse(HttpStatusCode.NoContent, "not feedbacks");
+                return Request.CreateResponse(HttpStatusCode.OK, feedbacks);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
+            }
         }
 
     }

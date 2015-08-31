@@ -21,6 +21,7 @@
             saveSummary: saveSummary,
             updateSuccessStatus: updateSuccessStatus,
             getLastFeedbacks: getLastFeedbacks,
+            getFeedbacksHistory: getFeedbacksHistory
         }
 
         function getHrFeedback(vid, cid) {
@@ -161,6 +162,22 @@
             });
             return deferred.promise;
         };
+
+        function getFeedbacksHistory(vid, cid) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: '/api/feedback/history/' + vid + '/' + cid,
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get history feedbacks error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
 
         return service;
     }

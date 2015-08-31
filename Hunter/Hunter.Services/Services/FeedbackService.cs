@@ -96,8 +96,8 @@ namespace Hunter.Services
                 else
                 {
                     feedbacks = _cardRepository
-                .Query()
-                .Where(e => e.VacancyId == vacancyId && e.CandidateId == candidateId)
+                        .Query()
+                        .Where(e => e.VacancyId == vacancyId && e.CandidateId == candidateId)
                         .SelectMany(c => c.Feedback.Where(f => f.Type == type));
                 }
 
@@ -195,7 +195,7 @@ namespace Hunter.Services
             }
         }
 
-        public IEnumerable<FeedbackDto> GetAllFeedbacks(int vacancyId, int candidateId)
+        public IEnumerable<FeedbackDto> GetLastFeedbacks(int vacancyId, int candidateId)
         {
 
             IEnumerable<Feedback> feedbacks = new List<Feedback>();
@@ -215,6 +215,42 @@ namespace Hunter.Services
                         .Where(c => c.CandidateId == candidateId);
 
                     feedbacks = cards.SelectMany(c => c.Feedback).ToList().GroupBy(f => f.Type).Select(f => f.Last());
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                throw ex;
+            }
+
+            return feedbacks.ToFeedbacksDto();
+        }
+
+        public IEnumerable<FeedbackDto> GetFeedbacksHistory(int vacancyId, int candidateId)
+        {
+            IEnumerable<Feedback> feedbacks = new List<Feedback>();
+            IEnumerable<Feedback> lastFeedbacks = new List<Feedback>();
+            try
+            {
+
+                if (vacancyId != 0)
+                {
+                    Card card = _cardRepository.Query()
+                        .FirstOrDefault(c => c.CandidateId == candidateId && c.VacancyId == vacancyId);
+                    if (card != null)
+                    {
+                        lastFeedbacks = card.Feedback.GroupBy(f => f.Type).Select(f => f.Last());
+                        feedbacks = card.Feedback.Where(f => !lastFeedbacks.Contains(f));
+                    }
+                       
+                }
+                else
+                {
+                    var cards = _cardRepository.Query()
+                        .Where(c => c.CandidateId == candidateId);
+
+                    lastFeedbacks = cards.SelectMany(c => c.Feedback).ToList().GroupBy(f => f.Type).Select(f => f.Last());
+                    feedbacks = cards.SelectMany(c => c.Feedback).ToList().Where(f => !lastFeedbacks.Contains(f));
                 }
             }
             catch (Exception ex)
