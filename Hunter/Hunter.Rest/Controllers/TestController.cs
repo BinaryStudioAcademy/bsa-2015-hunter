@@ -19,6 +19,52 @@ namespace Hunter.Rest.Controllers
             _testService = testService;
         }
 
+        [HttpPost]
+        [Route("change/{id:int}")]
+        public HttpResponseMessage ChangeCheckedTest(int id)
+        {
+            try 
+            {
+                _testService.ChangeCheckedTest(id);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch(Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
+            }
+            
+        }
+        
+        [HttpGet]
+        [Route("notChecked")]
+        public HttpResponseMessage GetTestByUser() 
+        {
+            try 
+            {
+                var tests = _testService.GetTestByUser(User.Identity.Name);
+                return Request.CreateResponse(HttpStatusCode.OK, tests);
+            }
+            catch(Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("count")]
+        public HttpResponseMessage GetCountNotCheck() 
+        {
+            try 
+            {
+                int count = _testService.GetCountNoChecked(User.Identity.Name);
+                return Request.CreateResponse(HttpStatusCode.OK, count);
+            }
+            catch(Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
+            }
+        }
+
         [HttpGet]
         [Route("")]
         public IHttpActionResult GetTest(int vacancyId, int candidateId)
@@ -77,6 +123,22 @@ namespace Hunter.Rest.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpPut]
+        [Route("addChecking/{testId:int}/{userId:int}")]
+        public IHttpActionResult AddCheckingToTest(int testId, int userId)
+        {
+            try 
+            {
+                _testService.AddCheckingToTest(testId, userId);
+                return Ok();
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+            
         }
 
         [HttpDelete]

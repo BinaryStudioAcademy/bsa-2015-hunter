@@ -18,7 +18,9 @@
         var vm = this;
         vm.name = "Index";
         vm.amount = 0;
+        vm.countTests = 0;
         $scope.radioModel = 'Home';
+        vm.setCountTests = setCountTests;
         $rootScope.notifications = null;
         $rootScope.clickedNotification = null;
 
@@ -29,12 +31,22 @@
         function callRefreshFunctions() {
             getActivityAmount();
             getActiveNotifications();
+            getCountTasksForCheck();
         }
 
         function getActivityAmount() {
             indexHttpService.getActivityAmount(function (response) {
                 vm.amount = response.data;
             });
+        }
+        function getCountTasksForCheck() {
+            indexHttpService.getTasksForCheck().then(function (result) {
+                console.log("count = " + result);
+                vm.countTests = result;
+            });
+        }
+        function setCountTests(count) {
+            vm.countTests = count;
         }
 
         function getActiveNotifications() {
