@@ -35,7 +35,7 @@
                 pools: routeParams.pools || [],
                 inviters: routeParams.inviters || [],
                 statuses: [],
-                shortListed: routeParams.shortListed || false,
+                shortListed: routeParams.shortListed=='true' ? true : false,
                 search: routeParams.search || '',
                 pageSize: parseInt(routeParams.pageSize) || 10,
                 currentPage: routeParams.currentPage || 1,
