@@ -125,6 +125,9 @@
                     <input type="checkbox" checklist-model="candidateAddEditCtrl.selectedPools" checklist-value="pool.name"> {{pool.name}}
                 </li>
             </ul>
+            <pool-selector pool-lazy="true" pool-readonly="false" pool-short="false"
+                           candidate="{poolNames: candidateAddEditCtrl.selectedPools, 
+                                        poolColors: candidateAddEditCtrl.candidatePoolColors}"></pool-selector>
         </div>
 
         <div class="col-md-4">

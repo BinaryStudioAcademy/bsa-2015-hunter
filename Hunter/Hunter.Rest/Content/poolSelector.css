@@ -3,7 +3,7 @@
     float: left;
     margin-left: 3px;
     padding: 0 5px;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .pool-label-short {
@@ -11,7 +11,7 @@
     height: 13px;
     float: left;
     margin-left: 3px;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .pool-label-container {

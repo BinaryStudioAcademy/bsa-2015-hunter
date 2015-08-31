@@ -50,7 +50,8 @@
             scope: {
                 'candidate': '=candidate',
                 'poolReadonly': '@poolReadonly',
-                'poolShort': '@poolShort'
+                'poolShort': '@poolShort',
+                'poolLazy': '@poolLazy'
             },
             controllerAs: 'poolSelectorCtrl',
             controller: ['$scope', 'CandidateHttpService', function ($scope, CandidateHttpService) {
@@ -64,32 +65,49 @@
                     vm.firstUse = false;
                 }
 
+                //close selector
                 vm.close = function() {
                     vm.show = false;
                     $scope.$apply();
                 }
-
+                //Start check pool
                 vm.addPoolToCandidate = function (pool) {
 
                     if ($scope.candidate.poolNames.indexOf(pool.name) == -1) {
+                        if ($scope.poolLazy === 'true') {
+                            selectPool(pool);
+                        }
                         CandidateHttpService.addCandidatePool($scope.candidate.id, pool.id)
                             .then(function(data) {
-                                $scope.candidate.poolNames.push(pool.name);
-
-                                if (!(pool.name in $scope.candidate.poolColors)) {
-                                    $scope.candidate.poolColors[pool.name.toLowerCase()] = pool.color;
-                                }
-                            });
+                                selectPool(pool);
+                        });
                     } else {
+                        if ($scope.poolLazy === 'true') {
+                            unselectPool(pool);
+                        }
                         CandidateHttpService.removeCandidatePool($scope.candidate.id, pool.id)
                             .then(function(data) {
-                                var index = $scope.candidate.poolNames.indexOf(pool);
-                                $scope.candidate.poolNames.splice(index, 1);
-                                delete $scope.candidate.poolColors[pool.name.toLowerCase()];
+                                unselectPool(pool);
                         });
                     }
                 }
+                //add pool from candidate poolList
+                function selectPool(pool) {
+                    $scope.candidate.poolNames.push(pool.name);
 
+                    if (!(pool.name in $scope.candidate.poolColors)) {
+                        $scope.candidate.poolColors[pool.name.toLowerCase()] = pool.color;
+                    }
+                }
+                //delete pool from candidate poolList
+                function unselectPool(pool) {
+                    var index = $scope.candidate.poolNames.indexOf(pool);
+                    $scope.candidate.poolNames.splice(index, 1);
+                    delete $scope.candidate.poolColors[pool.name.toLowerCase()];
+                }
+                //End check label
+
+                //apply changes from selector
                 vm.syncPools = function(pool, oldPool) {
                     var index = $scope.candidate.poolNames.indexOf(oldPool.name);
                     if(index != -1){
@@ -99,6 +117,7 @@
                     }
                 }
 
+                //pool was deleted in checker
                 vm.removePoolFromCandidate = function(pool) {
                     var index = $scope.candidate.poolNames.indexOf(pool.name);
                     if (index != -1) {
@@ -112,10 +131,11 @@
                     }
                 }
 
+                //get all pooof candidate
                 vm.candidatePools = function() {
                     return $scope.candidate.poolNames;
                 }
-
+                
                 vm.onLabelClick = function(pool) {
                     vm.show = true;
                     vm.firstUse = false;
@@ -127,20 +147,37 @@
                         '<div ng-if="poolShort === \'false\' && poolReadonly === \'false\'">' +
                             '<div ng-repeat="pool in candidate.poolNames" class="pool-label" ng-click="poolSelectorCtrl.onLabelClick(pool)" style="background-color: {{candidate.poolColors[pool.toLowerCase()]}};">' +
                             '{{pool}}</div>' +
+
+                            '<button ng-if="poolReadonly === \'false\'" style="margin-left: 5px;" id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class=" btn btn-default"><i class="fa fa-plus"></i></button>' +
+                            '<div ng-if="!poolSelectorCtrl.firstUse && poolReadonly === \'false\'" id="selectPoolMain" ng-show="poolSelectorCtrl.show" class="pool-widget-container" ng-controller="PoolGeneralController as generalCtrl">' +
+                                '<div style="width: 380px;" ng-include="generalCtrl.link"></div>' +
+                            '</div>' +
                         '</div>' +
+
                         '<div ng-if="poolShort === \'false\' && poolReadonly === \'true\'">' +
                             '<div ng-repeat="pool in candidate.poolNames" class="pool-label" style="background-color: {{candidate.poolColors[pool.toLowerCase()]}};">' +
                             '{{pool}}</div>' +
+
+                            '<button ng-if="poolReadonly === \'false\'" style="margin-left: 5px;" id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class=" btn btn-default"><i class="fa fa-plus"></i></button>' +
+                            '<div ng-if="!poolSelectorCtrl.firstUse && poolReadonly === \'false\'" id="selectPoolMain" ng-show="poolSelectorCtrl.show" class="pool-widget-container" ng-controller="PoolGeneralController as generalCtrl">' +
+                                '<div style="width: 380px;" ng-include="generalCtrl.link"></div>' +
+                            '</div>' +
                         '</div>' +
+
                         '<div ng-if="poolShort === \'true\'">' +
                             '<div ng-if="poolShort === \'true\'" ng-repeat="pool in candidate.poolNames" class="pool-label-short" style="background-color: {{candidate.poolColors[pool.toLowerCase()]}};">' +
                             '</div>' +
+
+                            '<button ng-if="poolReadonly === \'false\'" style="margin-left: 5px;" id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class=" btn btn-default"><i class="fa fa-plus"></i></button>' +
+                            '<div ng-if="!poolSelectorCtrl.firstUse && poolReadonly === \'false\'" id="selectPoolMain" ng-show="poolSelectorCtrl.show" class="pool-widget-container" ng-controller="PoolGeneralController as generalCtrl">' +
+                                '<div style="width: 380px;" ng-include="generalCtrl.link"></div>' +
+                            '</div>' +
                         '</div>' +
                     '</div>' +
-                    '<button ng-if="poolReadonly === \'false\'" style="margin-left: 5px;" id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class=" btn btn-default"><i class="fa fa-plus"></i></button>' +
-                    '<div ng-if="!poolSelectorCtrl.firstUse && poolReadonly === \'false\'" id="selectPoolMain" ng-show="poolSelectorCtrl.show" class="pool-widget-container" ng-controller="PoolGeneralController as generalCtrl">' +
-                        '<div style="width: 380px;" ng-include="generalCtrl.link"></div>' +
-                    '</div>' +
+//                    '<button ng-if="poolReadonly === \'false\'" style="margin-left: 5px;" id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class=" btn btn-default"><i class="fa fa-plus"></i></button>' +
+//                    '<div ng-if="!poolSelectorCtrl.firstUse && poolReadonly === \'false\'" id="selectPoolMain" ng-show="poolSelectorCtrl.show" class="pool-widget-container" ng-controller="PoolGeneralController as generalCtrl">' +
+//                        '<div style="width: 380px;" ng-include="generalCtrl.link"></div>' +
+//                    '</div>' +
                 '</div>'
         }
     }

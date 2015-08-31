@@ -5,11 +5,11 @@
                 <div class="image col-md-2">
                     <shor-list-star is-short="generalCardCtrl.candidate.shortListed" candidate-id="generalCardCtrl.candidate.id" size="'30px'"></shor-list-star>
                     <img class="profile-photo img-circle" ng-src="{{generalCardCtrl.candidate.photoUrl}}"/>
+                    <pool-selector pool-readonly="false" pool-short="false" candidate="generalCardCtrl.candidate"></pool-selector>
                 </div>
                 <div class="col-md-5">
                     <div class="personal-info">
                         <div>
-                            <pool-selector pool-readonly="false" pool-short="false" candidate="generalCardCtrl.candidate"></pool-selector>
                             <span ng-if="!generalCardCtrl.isLLM" class="candidate-name">{{generalCardCtrl.candidate.firstName+" "+generalCardCtrl.candidate.lastName}} from General Pool</span>
                             <span ng-if="generalCardCtrl.isLLM" class="candidate-name">{{generalCardCtrl.candidate.firstName+" "+generalCardCtrl.candidate.lastName}} from {{generalCardCtrl.vacancy.name}}</span>
 
