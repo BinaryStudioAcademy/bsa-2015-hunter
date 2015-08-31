@@ -6,7 +6,8 @@
         .factory('CardTestHttpService', CardTestHttpService);
 
     CardTestHttpService.$inject = [
-        'HttpHandler'
+        'HttpHandler',
+        
     ];
 
     function CardTestHttpService(HttpHandler) {
@@ -59,15 +60,12 @@
             });
         }
 
-        function addCheckingToTest(userId, testId) {
+        function addCheckingToTest(userId, testId, success) {
             HttpHandler.sendRequest({
                 verb: 'PUT',
                 url: '/api/test/addChecking/' + testId + "/" + userId,
                 
-                successCallback: function (response) {
-                    console.log("ok add checking to test");
-                    console.log(response);
-                },
+                successCallback: success,
                 errorCallback: function (response) {
                     console.log("error add checking to test");
                     console.log(response);

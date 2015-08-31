@@ -13,11 +13,14 @@
         '$scope',
         'EnumConstants',
         'UserHttpService',
-		'VacancyHttpService'
+		'VacancyHttpService',
+        'AuthService',
+        'TestHttpService'
     ];
 
     function CardTestController(CardTestHttpService, $routeParams,
-        FeedbackHttpService, UploadTestService, $scope, EnumConstants, UserHttpService,VacancyHttpService) {
+        FeedbackHttpService, UploadTestService, $scope, EnumConstants, UserHttpService, VacancyHttpService,
+        AuthService, TestHttpService) {
 
         var vm = this;
         vm.templateName = 'Test';
@@ -32,11 +35,14 @@
         vm.techExperts = [];
         vm.checkTechExpert = checkTechExpert;
         vm.checkedTestId = 0;
+        vm.isCurrentUser = isCurrentUser;
+        vm.changeCheckedTest = changeCheckedTest;
 
 		vm.test;
         vm.changeCurrentTest = changeCurrentTest;
         vm.loadAllTests = loadAllTests;
         vm.loadVacancyTests = loadVacancyTests;
+
 
         if (vm.vacancyId != undefined) {
             loadVacancyTests();
@@ -278,11 +284,35 @@
         });
 
         function checkTechExpert(userId) {
-            //console.log("user: " + userId);
-            //console.log("test: " + vm.checkedTestId);
-            CardTestHttpService.addCheckingToTest(userId, vm.checkedTestId);
-            loadVacancyTests();
+            CardTestHttpService.addCheckingToTest(userId, vm.checkedTestId, function () {
+                if (vm.vacancyId != undefined) {
+                    loadVacancyTests();
+                } else {
+                    loadAllTests();
+                }
+            });
+            
 
         };
+
+        function isCurrentUser(userProfile, isChecked) {
+            if ((userProfile != null) && (AuthService.authentication.userName == userProfile.login) && (!isChecked)) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        function changeCheckedTest(testId) {
+            TestHttpService.changeCheckedTest(testId, function (result) {
+                $scope.$parent.IndexCtrl.setCountTests($scope.$parent.IndexCtrl.countTests - 1);
+                if (vm.vacancyId != undefined) {
+                    loadVacancyTests();
+                } else {
+                    loadAllTests();
+                }
+            });
+        };
+
     }
 })();

@@ -35,6 +35,7 @@
 						<a href="/api/file/download/{{test.file.id}}">{{test.file.fileName}}</a> Size: {{test.file.size}} Uploaded: {{test.file.added | date:'dd.MM.yyyy HH:mm:ss'}}
                         <button ng-show="(test.userProfile == null) && (test.isChecked == false)" ng-click="testCtrl.checkedTestId = test.id" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add expert to test</button>
                         <span ng-hide="(test.userProfile != null) && (test.isChecked == false)">now checking {{test.userProfile.alias}}</span>
+                        <button ng-show="testCtrl.isCurrentUser(test.userProfile, test.isChecked)" class=" btn btn-default" ng-click="testCtrl.changeCheckedTest(test.id)">Checked!</button>
                     </div>
                     <div class="col-md-1">
                         <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index, test)">
@@ -49,6 +50,7 @@
                         <a href="{{test.url}}">{{test.url}}</a> Added {{test.added | date:'dd.MM.yyyy HH:mm:ss'}}
                         <button ng-show="(test.userProfile == null) && (test.isChecked == false)" ng-click="testCtrl.checkedTestId = test.id" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add expert to test</button>
                         <span ng-show="(test.userProfile != null) && (test.isChecked == false)">now checking {{test.userProfile.alias}}</span>
+                        <button ng-show="testCtrl.isCurrentUser(test.userProfile, test.isChecked)" class="btn btn-default" ng-click="testCtrl.changeCheckedTest(test.id)">Checked!</button>
                     </div>
                     <div class="col-md-1">
                         <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index, test)">
