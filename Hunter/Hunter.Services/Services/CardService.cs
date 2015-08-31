@@ -105,24 +105,22 @@ namespace Hunter.Services
         {
             try
             {
-                //IEnumerable<Feedback> feedbacks = new List<Feedback>();
-
                 var card = _cardRepository.Query().FirstOrDefault(c => c.VacancyId == vid && c.CandidateId == cid);
                 if (card != null)
                 {
-                    var tests = card.Test.Where(t => t.CardId == card.Id);
+                    var tests = card.Test;
                     foreach (var test in tests)
                     {
                         _testRepository.DeleteAndCommit(test);
                     }
-                    //var feedbacks = card.Feedback.Where(f => f.CardId == card.Id);
-                    var feedbacks = card.Feedback.GroupBy(f => f.Type).Select(f => f.Last());
+                    
+                    var feedbacks = card.Feedback;
                     foreach (var feedback in feedbacks)
                     {
                         _feedbackRepository.DeleteAndCommit(feedback);
                     }
 
-                    var interviews = card.Interview.GroupBy(i => i.Card).Select(i => i.Last());
+                    var interviews = card.Interview;
                     foreach (var interview in interviews)
                     {
                         _interviewRepository.DeleteAndCommit(interview);
@@ -131,7 +129,7 @@ namespace Hunter.Services
 
                 var specialNotes = _specialNoteRepository.Query().Where(n => n.VacancyId == vid && n.CandidateId == cid);
                 
-                if (specialNotes != null)
+                if (specialNotes.Any())
                 {
                     foreach (var specialNote in specialNotes)
                     {
