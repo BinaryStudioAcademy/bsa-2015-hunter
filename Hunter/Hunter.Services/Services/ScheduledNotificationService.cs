@@ -167,13 +167,13 @@ namespace Hunter.Services
         }
 
 
-        public PageDto<ScheduledNotificationDto> Get(string userAlias, ScheduledNotificationFilterDto filter)
+        public PageDto<ScheduledNotificationDto> Get(string userLogin, ScheduledNotificationFilterDto filter)
         {
-            IQueryable<ScheduledNotification> query = _scheduledNotificationRepository.QueryIncluding(v => v.NotificationType, v => v.UserProfile);
-            query = query.Where(n => n.UserProfile.Alias == userAlias);
-            if (filter.NotofocationTypes.Any())
+            IQueryable<ScheduledNotification> query = _scheduledNotificationRepository.QueryIncluding(v => v.UserProfile);
+            query = query.Where(n => n.UserProfile.UserLogin == userLogin);
+            if (filter.NotificationTypes.Any())
             {
-                var notofocationTypes = filter.NotofocationTypes.Select(nt => nt).ToList();
+                var notofocationTypes = filter.NotificationTypes.Select(nt => nt).ToList();
                 query = query.Where(n => notofocationTypes.Contains((int)n.NotificationType));
             }
 

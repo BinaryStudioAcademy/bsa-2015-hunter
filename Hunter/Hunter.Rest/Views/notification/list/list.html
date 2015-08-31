@@ -2,22 +2,29 @@
     <h3>{{notificationListCtrl.controllerName}}</h3>
     <div class="row">
         <div class="col-md-3">
-            <div class="form-group">
+            <!--<div class="form-group">
                 <label>Filter</label>
                 <input type="search" class="form-control" ng-model="notificationListCtrl.filter.search" ng-change="notificationListCtrl.updateData()">
-            </div>
+            </div>-->
             <div class="filter-settings">
                 <label>Notification Types</label>
-                {{notificationListCtrl.filter}}
                 <ul >
                     <li ng-repeat="nt in notificationListCtrl.notificationTypes">
-                        <input ng-click="notificationListCtrl.updateData()" type="checkbox" checklist-model="notificationListCtrl.filter.notoficationTypes" checklist-value="nt.id"> {{nt.name}}
+                        <input ng-click="notificationListCtrl.updateData()" type="checkbox" checklist-model="notificationListCtrl.filter.notificationTypes" checklist-value="nt.id"> {{nt.name}}
                     </li>
                 </ul>
             </div>
         </div>
         <div class="col-md-9">
-            <div class="btn btn-default" ng-click="notificationListCtrl.notify()">Notify by email</div><br />
+            <div class="row">
+                <div class="col-md-4">
+                    <select class="form-control" ng-model="notificationListCtrl.sortAction" ng-options="s.name for s in notificationListCtrl.sortBy"></select>
+                </div>
+                <div class="col-md-1">
+                    <div class="btn btn-default" ng-click="notificationListCtrl.notify()">Notify by email</div><br />
+                </div>
+            </div>
+            <br />
             <div ng-include="'/Views/notification/list/listTemplate.html'"></div>
         </div>
     </div>
