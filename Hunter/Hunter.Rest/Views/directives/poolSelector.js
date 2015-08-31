@@ -51,7 +51,8 @@
                 'candidate': '=candidate',
                 'poolReadonly': '@poolReadonly',
                 'poolShort': '@poolShort',
-                'poolLazy': '@poolLazy'
+                'poolLazy': '@poolLazy',
+                'poolOne': '@poolOne'
             },
             controllerAs: 'poolSelectorCtrl',
             controller: ['$scope', 'CandidateHttpService', function ($scope, CandidateHttpService) {
@@ -76,19 +77,21 @@
                     if ($scope.candidate.poolNames.indexOf(pool.name) == -1) {
                         if ($scope.poolLazy === 'true') {
                             selectPool(pool);
+                        }else{
+                            CandidateHttpService.addCandidatePool($scope.candidate.id, pool.id)
+                                .then(function(data) {
+                                    selectPool(pool);
+                                });
                         }
-                        CandidateHttpService.addCandidatePool($scope.candidate.id, pool.id)
-                            .then(function(data) {
-                                selectPool(pool);
-                        });
                     } else {
                         if ($scope.poolLazy === 'true') {
                             unselectPool(pool);
+                        }else{
+                            CandidateHttpService.removeCandidatePool($scope.candidate.id, pool.id)
+                                .then(function(data) {
+                                    unselectPool(pool);
+                                });
                         }
-                        CandidateHttpService.removeCandidatePool($scope.candidate.id, pool.id)
-                            .then(function(data) {
-                                unselectPool(pool);
-                        });
                     }
                 }
                 //add pool from candidate poolList
@@ -140,6 +143,23 @@
                     vm.show = true;
                     vm.firstUse = false;
                 }
+
+                vm.isPoolOneRestrict = function() {
+                    return $scope.poolOne === 'true';
+                }
+
+                vm.poolOneSelect = function (pool, isChecked) {
+                    if (isChecked) {
+                        $scope.candidate.poolNames = [];
+                        $scope.candidate.poolColors = {};
+                        $scope.candidate.id = 0;
+                    }else{
+                        $scope.candidate.poolNames = [pool.name];
+                        $scope.candidate.poolColors = {};
+                        $scope.candidate.poolColors[pool.name.toLowerCase()] = pool.color;
+                        $scope.candidate.id = pool.id;
+                    }
+                }
             }],
             template: 
                 '<div style="width: auto; display: block;">' +
@@ -148,7 +168,7 @@
                             '<div ng-repeat="pool in candidate.poolNames" class="pool-label" ng-click="poolSelectorCtrl.onLabelClick(pool)" style="background-color: {{candidate.poolColors[pool.toLowerCase()]}};">' +
                             '{{pool}}</div>' +
 
-                            '<button ng-if="poolReadonly === \'false\'" style="margin-left: 5px;" id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class=" btn btn-default"><i class="fa fa-plus"></i></button>' +
+                            '<button ng-if="poolReadonly === \'false\'" style="margin-left: 5px;" id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class="pool-selector-btn btn btn-default"><i class="fa fa-plus pool-selector-btn-icon"></i></button>' +
                             '<div ng-if="!poolSelectorCtrl.firstUse && poolReadonly === \'false\'" id="selectPoolMain" ng-show="poolSelectorCtrl.show" class="pool-widget-container" ng-controller="PoolGeneralController as generalCtrl">' +
                                 '<div style="width: 380px;" ng-include="generalCtrl.link"></div>' +
                             '</div>' +
@@ -158,7 +178,7 @@
                             '<div ng-repeat="pool in candidate.poolNames" class="pool-label" style="background-color: {{candidate.poolColors[pool.toLowerCase()]}};">' +
                             '{{pool}}</div>' +
 
-                            '<button ng-if="poolReadonly === \'false\'" style="margin-left: 5px;" id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class=" btn btn-default"><i class="fa fa-plus"></i></button>' +
+                            '<button ng-if="poolReadonly === \'false\'" style="margin-left: 5px;" id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class="pool-selector-btn btn btn-default"><i class="fa fa-plus pool-selector-btn-icon"></i></button>' +
                             '<div ng-if="!poolSelectorCtrl.firstUse && poolReadonly === \'false\'" id="selectPoolMain" ng-show="poolSelectorCtrl.show" class="pool-widget-container" ng-controller="PoolGeneralController as generalCtrl">' +
                                 '<div style="width: 380px;" ng-include="generalCtrl.link"></div>' +
                             '</div>' +
@@ -168,7 +188,7 @@
                             '<div ng-if="poolShort === \'true\'" ng-repeat="pool in candidate.poolNames" class="pool-label-short" style="background-color: {{candidate.poolColors[pool.toLowerCase()]}};">' +
                             '</div>' +
 
-                            '<button ng-if="poolReadonly === \'false\'" style="margin-left: 5px;" id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class=" btn btn-default"><i class="fa fa-plus"></i></button>' +
+                            '<button ng-if="poolReadonly === \'false\'" style="margin-left: 5px;" id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class=" btn btn-default pool-selector-btn"><i class="fa fa-plus pool-selector-btn-icon"></i></button>' +
                             '<div ng-if="!poolSelectorCtrl.firstUse && poolReadonly === \'false\'" id="selectPoolMain" ng-show="poolSelectorCtrl.show" class="pool-widget-container" ng-controller="PoolGeneralController as generalCtrl">' +
                                 '<div style="width: 380px;" ng-include="generalCtrl.link"></div>' +
                             '</div>' +

@@ -46,8 +46,17 @@
         }
 
         function choosePool(pool) {
-            $scope.generalCtrl.selectPool(pool);
-            pool.isChecked = !pool.isChecked;
+            if ($scope.generalCtrl.hasRestriction()) {
+                $scope.generalCtrl.changePool(pool, pool.isChecked);
+                pool.isChecked = !pool.isChecked;
+                vm.poolsList.forEach(function(p) {
+                    if (p.id != pool.id)
+                        p.isChecked = false;
+                });
+            } else {
+                $scope.generalCtrl.selectPool(pool);
+                pool.isChecked = !pool.isChecked;
+            }
         }
 
         function close() {

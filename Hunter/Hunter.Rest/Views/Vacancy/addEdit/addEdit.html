@@ -29,6 +29,10 @@
         <div class="col-md-4">
             <h3>Pool</h3><hr />
             <select class="form-control" ng-model="vacancyAddEditCtrl.currentVacancy.poolId" ng-options="pool.id as pool.name for pool in vacancyAddEditCtrl.pools"></select>
+<!--            <pool-selector pool-one="true" pool-lazy="true" pool-readonly="false" pool-short="false"-->
+<!--                           candidate="{poolNames: [vacancyAddEditCtrl.currentPool.name],-->
+<!--                                        poolColors: vacancyAddEditCtrl.color,-->
+<!--                                        id: vacancyAddEditCtrl.currentPool.id}"></pool-selector>-->
         </div>
         <div class="col-md-4">
             <input class="btn btn-primary pull-right" type="submit" value="Done" ng-click="vacancyAddEditCtrl.submitVacancy()" />

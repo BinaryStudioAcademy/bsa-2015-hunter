@@ -17,6 +17,8 @@
         vm.poolChanged = poolChanged;
         vm.poolRemoved = poolRemoved;
         vm.getCandidatePools = getCandidatePools;
+        vm.hasRestriction = hasRestriction;
+        vm.changePool = changePool;
 
         function selectPool(pool) {
             if ($scope.poolSelectorCtrl != undefined) {
@@ -49,6 +51,20 @@
                 return $scope.poolSelectorCtrl.candidatePools();
             } else {
                 return [];
+            }
+        }
+
+        function hasRestriction() {
+            if ($scope.poolSelectorCtrl != undefined) {
+                return $scope.poolSelectorCtrl.isPoolOneRestrict();
+            } else {
+                return false;
+            }
+        }
+
+        function changePool(pool, isChecked) {
+            if ($scope.poolSelectorCtrl != undefined) {
+                $scope.poolSelectorCtrl.poolOneSelect(pool, isChecked);
             }
         }
     }
