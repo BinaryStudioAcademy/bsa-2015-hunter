@@ -23,10 +23,12 @@ namespace Hunter.Rest.Controllers
     public class CandidatesController : ApiController
     {
         private readonly ICandidateService _candidateService;
+        private readonly IPoolService _poolService;
 
-        public CandidatesController(ICandidateService candidateService)
+        public CandidatesController(ICandidateService candidateService, IPoolService poolService)
         {
             _candidateService = candidateService;
+            _poolService = poolService;
         }
 
         public CandidatesController()
@@ -106,6 +108,8 @@ namespace Hunter.Rest.Controllers
                     return Request.CreateResponse(HttpStatusCode.NotFound);
                 }
 
+                data.PoolColors = _candidateService.GetColors(id);
+
                 return Request.CreateResponse(HttpStatusCode.OK, data);
             }
             catch (Exception e)
@@ -177,6 +181,8 @@ namespace Hunter.Rest.Controllers
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, "Vacatcy has no candidates!");
                 }
+
+                candidate.PoolColors = _candidateService.GetColors(cid);
                 return Request.CreateResponse(HttpStatusCode.OK, candidate);
             }
             catch (Exception ex)
@@ -261,6 +267,50 @@ namespace Hunter.Rest.Controllers
             else
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+        [HttpPut]
+        [Route("{candidateId:int}/addpool/{poolId:int}")]
+        public IHttpActionResult AddPoolToCandidate(int candidateId, int poolId)
+        {
+            try
+            {
+                _candidateService.UpdateCandidatePool(candidateId, poolId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("{candidateId:int}/pools/update/{oldId:int}/{newId:int}")]
+        public IHttpActionResult UpdateCandidatesPool(int candidateId, int oldId, int newId)
+        {
+            try
+            {
+                _candidateService.ChangeCandidatesPool(oldId, newId, candidateId);
+                return Ok();
+            }catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Route("{candidateId:int}/removepool/{poolId:int}")]
+        public IHttpActionResult RemovePoolFromCandidate(int candidateId, int poolId)
+        {
+            try
+            {
+                _candidateService.UpdateCandidatePool(candidateId, poolId, true);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
             }
         }
 

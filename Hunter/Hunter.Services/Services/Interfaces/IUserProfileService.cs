@@ -10,5 +10,6 @@ namespace Hunter.Services.Interfaces
         ResourceApiResult<EditUserProfileVm> GetById(long userProfileId);
         ApiResult Save(EditUserProfileVm userProfile);
         IdApiResult Delete(long userProfileId);
+        IEnumerable<UserProfileRowVm> GetUserProfile(string roleName);
     }
 }

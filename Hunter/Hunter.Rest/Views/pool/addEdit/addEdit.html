@@ -1,9 +1,9 @@
-﻿<div class="container">
+﻿<div class="container page-width" ng-controller="PoolAddEditController as poolAddEditCtrl">
     <div class="pool_container">
         <div class="pool_title">
-            <div><a class="back" href="../../#/pool" title="Back"></a></div>
+            <div><a class="back back-search" href="" ng-click="poolAddEditCtrl.goBack()" title="Back"></a></div>
             <h3>{{poolAddEditCtrl.pageConfig.pageTitle}}</h3>
-            <div><a class="close_back" href="../../#/pool" title="Close"></a></div>
+            <div><a class="close_back" href="" ng-click="poolAddEditCtrl.close()" title="Close"></a></div>
         </div>
 
         <div class="pool_form">

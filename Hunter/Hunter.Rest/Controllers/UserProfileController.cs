@@ -7,6 +7,8 @@ using Hunter.Common.Concrete;
 using Hunter.Services.Dto.ApiResults;
 using Hunter.Services.Dto.User;
 using Hunter.Services.Interfaces;
+using System.Net.Http;
+using System.Web.Http.Description;
 
 namespace Hunter.Rest.Controllers
 {
@@ -18,6 +20,22 @@ namespace Hunter.Rest.Controllers
         public UserProfileController(IUserProfileService profileService)
         {
             _profileService = profileService;
+        }
+
+        [HttpGet]
+        [Route("users/role/{roleName}")]
+        [ResponseType(typeof(IEnumerable<UserProfileRowVm>))]
+        public HttpResponseMessage GetAllTech(string roleName)
+        {
+            try 
+            {
+                var users = _profileService.GetUserProfile(roleName);
+                return Request.CreateResponse(HttpStatusCode.OK, users);
+            }
+            catch(Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
+            }
         }
 
         // GET: api/userprofile

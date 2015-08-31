@@ -20,12 +20,12 @@
             <div ng-form="form">
                 <div class="form-group" ng-class="{'has-warning': !form.NoteText.$valid}">
                     <textarea name="text" class="form-control"
-                              ng-model="newTechFeedback.text" 
+                              ng-model="techInterviewCtrl.newTechFeedbackText" 
                               msd-elastic required placeholder="Enter new feedback"></textarea>
                     <span ng-show="form.text.$error.required" class="help-block">Required</span>
                 </div>
                 <button class="btn btn-success col-sm-4" type="submit"
-                        ng-click="techInterviewCtrl.saveFeedback(newTechFeedback)"
+                        ng-click="techInterviewCtrl.saveFeedback(techInterviewCtrl.newTechFeedbackText, true)"
                         data-ng-disabled="!form.$valid">
                     Add
                 </button>

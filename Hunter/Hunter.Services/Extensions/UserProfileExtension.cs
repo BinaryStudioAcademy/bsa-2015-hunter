@@ -23,7 +23,8 @@ namespace Hunter.Services.Extensions
             var userProfile = new UserProfile() 
             {
                 Id = userDto.Id,
-                UserLogin = userDto.Login
+                UserLogin = userDto.Login,
+                Alias = userDto.Alias
             };
             return userProfile;
         }

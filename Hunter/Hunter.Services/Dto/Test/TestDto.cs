@@ -14,8 +14,10 @@ namespace Hunter.Services.Dto
         public string Comment { get; set; }
         public int CardId { get; set; }
         public int? FeedbackId { get; set; }
+        public UserProfileDto AssignedUserProfile { get; set; }
         public DateTime Added { get; set; }
         public FileDto File { get; set; }
         public FeedbackDto Feedback { get; set; }
+        public bool IsChecked { get; set; }
     }
 }

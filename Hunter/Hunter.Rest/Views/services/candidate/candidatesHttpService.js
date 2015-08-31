@@ -24,6 +24,9 @@
             getAddedByList: getAddedByList,
             setShortListFlag: setShortListFlag,
             updateCandidateResolution: updateCandidateResolution,
+            addCandidatePool: addCandidatePool,
+            removeCandidatePool: removeCandidatePool,
+            changeCandidatePool: changeCandidatePool,
             getOdataCandidateList: getOdataCandidateList
         };
 
@@ -175,6 +178,47 @@
             return deferred.promise;
         }
 
+        function addCandidatePool(candidateId, poolId) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                'url': 'api/candidates/' + candidateId + '/addpool/' + poolId,
+                'verb': 'PUT',
+                'successCallback': function(response) {
+                    console.log('Pool added successful');
+                    deferred.resolve(response.data);
+                }
+            });
+
+            return deferred.promise;
+        }
+
+        function removeCandidatePool(candidateId, poolId) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                'url': 'api/candidates/' + candidateId + '/removepool/' + poolId,
+                'verb': 'DELETE',
+                'successCallback': function(response) {
+                    console.log('Pool removed successful');
+                    deferred.resolve(response.data);
+                }
+            });
+
+            return deferred.promise;
+        }
+
+        function changeCandidatePool(oldId, newId, candidateId) {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                'url': 'api/candidates/' + candidateId + '/pools/update/' + oldId + '/' + newId,
+                'verb': 'PUT',
+                'successCallback': function(response) {
+                    console.log('Pools changed');
+                    deferred.resolve(response.data);
+                }
+            });
+
+            return deferred.promise;
+        }
 
         function getOdataCandidateList(filter) {
             var deferred = $q.defer();
@@ -245,7 +289,6 @@
                                 .query(function () {
                                     deferred.resolve(cands);
                                 });
-
 
             return deferred.promise;
         }

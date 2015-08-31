@@ -6,12 +6,14 @@
         .factory('IndexHttpService', IndexHttpService);
 
     IndexHttpService.$inject = [
-        'HttpHandler'
+        'HttpHandler',
+        '$q'
     ];
 
-    function IndexHttpService(HttpHandler) {
+    function IndexHttpService(HttpHandler, $q) {
         var service = {
-            'getActivityAmount': getActivityAmount
+            'getActivityAmount': getActivityAmount,
+            'getTasksForCheck': getTasksForCheck
         };
 
         function getActivityAmount(successCallback) {
@@ -24,6 +26,21 @@
             });
         }
 
+        function getTasksForCheck() {
+            var deferred = $q.defer();
+            HttpHandler.sendRequest({
+                url: '/api/test/count',
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get test count error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
         return service;
     }
 

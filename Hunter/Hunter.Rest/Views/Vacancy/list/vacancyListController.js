@@ -12,10 +12,11 @@
         '$filter',
         'VacancyHttpService',
         'PoolsHttpService',
-        'EnumConstants'
+        'EnumConstants',
+        '$location'
     ];
 
-    function vacancyListController($scope, $filter, vacancyHttpService, poolsHttpService, enumConstants) {
+    function vacancyListController($scope, $filter, vacancyHttpService, poolsHttpService, enumConstants, $location) {
         var vm = this;
 
         vm.filterParams = {
@@ -78,6 +79,8 @@
             } else {
                 collection.splice(index, 1);
             }
+
+            $location.search(vm.filterParams);
         }
 
         vacancyHttpService.getAddedByList().then(function (result) {

@@ -21,16 +21,50 @@ namespace Hunter.Services.Services
         private readonly ICardRepository _cardRepository;
         private readonly IFeedbackRepository _feedbackRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserProfileRepository _userProfileRepository;
         private readonly ILogger _logger;
 
         public TestService(ITestRepository testRepository, ICardRepository cardRepository, 
-            IFeedbackRepository feedbackRepository, IUnitOfWork unitOfWork,ILogger logger)
+            IFeedbackRepository feedbackRepository, IUnitOfWork unitOfWork,ILogger logger,
+            IUserProfileRepository userProfileRepository)
         {
             _testRepository = testRepository;
             _cardRepository = cardRepository;
             _unitOfWork = unitOfWork;
             _logger = logger;
             _feedbackRepository = feedbackRepository;
+            _userProfileRepository = userProfileRepository;
+        }
+
+        public void ChangeCheckedTest(int testId)
+        {
+            var test = _testRepository.Get(testId);
+            test.IsChecked = true;
+            _testRepository.UpdateAndCommit(test);
+        }
+
+        public IEnumerable<TestForCheckDto> GetTestByUser(string login) 
+        {
+            var tests = _userProfileRepository
+                .Query()
+                .Where(e => e.UserLogin.ToLower() == login.ToLower())
+                .FirstOrDefault()
+                .Test
+                .Select(e => e.ToTestForCheckDto());
+            
+            return tests;
+        }
+
+        public int GetCountNoChecked(string userName) 
+        {
+            var count = _userProfileRepository
+                .Query()
+                .Where(e => e.UserLogin.ToUpper() == userName.ToUpper())
+                .FirstOrDefault()
+                .Test.Where(e => e.IsChecked == false)
+                .Count();
+            
+            return count;
         }
 
         public TestsResult GetAllCandidatesTests(int candidateId)
@@ -88,7 +122,6 @@ namespace Hunter.Services.Services
         {
             Test test = new Test();
             newTestDto.ToTest(test);
-
             try
             {
                 _testRepository.UpdateAndCommit(test);
@@ -175,5 +208,13 @@ namespace Hunter.Services.Services
                 throw ex;
             }
         }
+
+        public void AddCheckingToTest(int testId, int userId) 
+        {
+            var test = _testRepository.Get(testId);
+            test.AssignedUserProfileId = userId;
+            _testRepository.UpdateAndCommit(test);
+        }
+
     }
 }

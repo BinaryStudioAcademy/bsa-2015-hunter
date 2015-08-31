@@ -92,9 +92,16 @@
 
         // TODO: Define event function at the beginning of controller and only then should be implementation vm.saveHrFeedback = saveHrFeedback; function saveHrFeedback() {}
         function changeTemplate(tab) {
-            vm.currentTabName = tab.name;
-            vm.templateToShow = cardService.changeTemplate(tab.route);
-            $location.search('tab', tab.route);      
+            if (tab.name === 'Overview') {
+                vm.currentTabName = tab.name;
+                vm.templateToShow = cardService.changeTemplate(tab.route);
+                $location.search('tab', null);
+                //$location.url($location.path());
+            } else {
+                vm.currentTabName = tab.name;
+                vm.templateToShow = cardService.changeTemplate(tab.route);
+                $location.search('tab', tab.route);
+            }
         };
 
         vm.changeTemplate($filter('filter')(vm.tabs, { route: $location.search().tab }, true)[0]);

@@ -256,7 +256,8 @@ li {
     }
 /*partia candidate detailes in candidate list*/
 .partial-candidate-details {
-    position: absolute;
+    position: fixed;
+    top: 52px;
     right: 0%;
     z-index: 10;
     background-color: white;

@@ -70,7 +70,8 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li ng-model="radioModel" btn-radio="'Activity'"><a href="#/activity">Activity<span class="badge " ng-cloak ng-show="IndexCtrl.amount != 0">{{IndexCtrl.amount}}</span></a></li>
+                        <li ng-model="radioModel"><a href="#/tests">Tests for check<span class="badge " ng-cloak ng-show="IndexCtrl.countTests > 0">{{IndexCtrl.countTests}}</span></a></li>
+                         <li ng-model="radioModel" btn-radio="'Activity'"><a href="#/activity">Activity<span class="badge " ng-cloak ng-show="IndexCtrl.amount != 0">{{IndexCtrl.amount}}</span></a></li>
                     </ul>
                 </div>
             </div>

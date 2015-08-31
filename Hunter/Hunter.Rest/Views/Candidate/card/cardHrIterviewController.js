@@ -21,7 +21,8 @@
         vm.templateName = 'HR Interview';
         vm.vacancy;
         vm.feedbacks;
-        vm.newFeedback;
+        vm.newFeedbackText = '';
+        vm.newFeedbackType = null;
         vm.saveFeedback = saveFeedback;
         vm.updateFeedback = updateFeedback;
         vm.getFeedbacks = getFeedbacks;
@@ -51,15 +52,37 @@
         })();
 
 
-        function saveFeedback(feedback) {
+        function saveFeedback(feedback, isNew) {
+            if (!isNew) {
+                var body = {
+                    id: feedback.id,
+                    cardId: $scope.$parent.generalCardCtrl.cardInfo.cardId,
+                    text: feedback.text,
+                    type: feedback.type,
+                    successStatus: feedback.successStatus
+                }
+            }
+            else {
+                var body = {
+                    cardId: $scope.$parent.generalCardCtrl.cardInfo.cardId,
+                    text: feedback,
+                    type: vm.newFeedbackType,
+                }
+            }
 
-            feedback.cardId = $scope.$parent.generalCardCtrl.cardInfo.cardId;
 
-            FeedbackHttpService.saveFeedback(feedback, $routeParams.vid, $routeParams.cid).then(function (result) {
-                feedback.id = result.id;
-                feedback.date = result.update;
-                feedback.userAlias = result.userAlias;
-                vm.feedbacks.push(result);
+ //           feedback.cardId = $scope.$parent.generalCardCtrl.cardInfo.cardId;
+
+            FeedbackHttpService.saveFeedback(body, $routeParams.vid, $routeParams.cid).then(function (result) {
+                if(!isNew){
+                    feedback.id = result.id;
+                    feedback.date = result.date;
+                    feedback.userAlias = result.userAlias;
+                }
+                else {
+                    vm.feedbacks.push(result);
+                    vm.newFeedbackText = '';
+                }
             });
         }
 
@@ -68,7 +91,7 @@
                 feedback.editMode = !feedback.editMode;
             } else {
                 feedback.editMode = !feedback.editMode;
-                vm.saveFeedback(feedback);
+                vm.saveFeedback(feedback,false);
             }
         }
 
