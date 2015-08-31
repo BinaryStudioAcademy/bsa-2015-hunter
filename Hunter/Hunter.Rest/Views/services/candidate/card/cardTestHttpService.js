@@ -6,7 +6,8 @@
         .factory('CardTestHttpService', CardTestHttpService);
 
     CardTestHttpService.$inject = [
-        'HttpHandler'
+        'HttpHandler',
+        
     ];
 
     function CardTestHttpService(HttpHandler) {
@@ -14,7 +15,8 @@
             'getTest': getTest,
             'sendTest': uploadTest,
             'updateTestComment': updateTestComment,
-            'getAllTests': getAllTests
+            'getAllTests': getAllTests,
+            addCheckingToTest: addCheckingToTest
         };
 
         function getTest(vacancyId, candidateId, success) {
@@ -57,6 +59,19 @@
                 errorMessageToDev: 'POST TEST COMMENT ERROR'
             });
         }
+
+        function addCheckingToTest(userId, testId, success) {
+            HttpHandler.sendRequest({
+                verb: 'PUT',
+                url: '/api/test/addChecking/' + testId + "/" + userId,
+                
+                successCallback: success,
+                errorCallback: function (response) {
+                    console.log("error add checking to test");
+                    console.log(response);
+                }
+            });
+        };
 
         return service;
     }

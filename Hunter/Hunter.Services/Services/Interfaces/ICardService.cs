@@ -14,6 +14,7 @@ namespace Hunter.Services.Interfaces
         void DeleteAllInfo(int vid, int cid);
         IEnumerable<AppResultCardDto> GetApplicationResults(int cid);
         AppResultCardDto GetCardInfo(int vid, int cid);
+        CardDto GetCard(int id);
         bool IsCardUsed(int vid, int cid);
     }
 }
