@@ -12,10 +12,14 @@
             </div>
             <div class="col-md-7">
                 <div class="personal-info">
-                    <div>
+                    <div style="float: left;">
                         <span class="candidate-name">{{candidateCtrl.candidate.firstName+" "+candidateCtrl.candidate.lastName}}</span>
                     </div>
-                    <div>current/past: {{candidateCtrl.candidate.currentPosition}}</div>
+                    <pool-selector candidate="candidateCtrl.candidate"></pool-selector>
+
+                    <!--!!!!style!!!!-->
+                    <div style="margin-top: 10px;">current/past: {{candidateCtrl.candidate.currentPosition}}</div>
+                    <!--!!!!-->
                     <div>years of experience: {{candidateCtrl.candidate.yearsOfExperience}}</div>
                     <div>company/location: {{candidateCtrl.candidate.company+", "+candidateCtrl.candidate.location}}</div>
                     <div>email: {{candidateCtrl.candidate.email}}</div>
@@ -41,14 +45,14 @@
             </div>
         </div>
         <div class="note-info-container" ng-include='candidateCtrl.templateToShow'></div>
-            <div class="note-info-nav col-md-4">
-                <ul class="nav">
-                    <li ng-repeat="subItem in candidateCtrl.subMenuItems" ng-class="{active: subItem.isActive}" ng-click="candidateCtrl.changeTemplate(subItem.name)">{{subItem.name}}</li>
-                    <!--<li class="active" ng>Aplications</li>
-                    <li>Spetial Notes</li>
-                    <li>Tests</li>
-                    <li>Interviews</li>-->
-                </ul>
-            </div>
+        <div class="note-info-nav col-md-4">
+            <ul class="nav">
+                <li ng-repeat="subItem in candidateCtrl.subMenuItems" ng-class="{active: subItem.isActive}" ng-click="candidateCtrl.changeTemplate(subItem.name)">{{subItem.name}}</li>
+                <!--<li class="active" ng>Aplications</li>
+                <li>Spetial Notes</li>
+                <li>Tests</li>
+                <li>Interviews</li>-->
+            </ul>
+        </div>
     </div>
 </div>

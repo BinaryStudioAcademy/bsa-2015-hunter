@@ -71,11 +71,13 @@
     <Compile Include="Dto\Feedback\FeedbackDto.cs" />
     <Compile Include="Dto\FileDto.cs" />
     <Compile Include="Dto\FilterInfoDto.cs" />
+    <Compile Include="Dto\PoolCandidateDto.cs" />
     <Compile Include="Dto\ResumeDto.cs" />
     <Compile Include="Dto\ScheduledNotification\ScheduledNotificationDto.cs" />
     <Compile Include="Dto\Test\TestCommentDto.cs" />
     <Compile Include="Dto\Test\TestDto.cs" />
     <Compile Include="Dto\SpecialNoteDto.cs" />
+    <Compile Include="Dto\Test\TestForCheckDto.cs" />
     <Compile Include="Dto\UserDto.cs" />
     <Compile Include="Dto\UserProfileDto.cs" />
     <Compile Include="Dto\Vacancy\AddedByDto.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="Extensions\ScheduledNotificationExtension.cs" />
     <Compile Include="Extensions\TestExtension.cs" />
     <Compile Include="Extensions\SpecialNoteExtension.cs" />
+    <Compile Include="Extensions\TestForCheckExtension.cs" />
     <Compile Include="Extensions\UserExtension.cs" />
     <Compile Include="Extensions\UserProfileExtension.cs" />
     <Compile Include="Extensions\UserRoleExtention.cs" />

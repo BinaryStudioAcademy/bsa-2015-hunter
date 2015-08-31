@@ -2,15 +2,17 @@
     <div id="card-static">
         <div class="candidate-info">
             <div class="candidate-personal-info row">
-                <div class="image col-md-2">
+                <div class="col-md-2">
                     <shor-list-star is-short="generalCardCtrl.candidate.shortListed" candidate-id="generalCardCtrl.candidate.id" size="'30px'"></shor-list-star>
-                    <img class="profile-photo img-circle" ng-src="{{generalCardCtrl.candidate.photoUrl}}" />
+                    <img class="profile-photo img-circle" ng-src="{{generalCardCtrl.candidate.photoUrl}}"/>
+                    <pool-selector pool-readonly="false" pool-short="false" candidate="generalCardCtrl.candidate"></pool-selector>
                 </div>
                 <div class="col-md-5">
                     <div class="personal-info">
                         <div>
                             <span ng-if="!generalCardCtrl.isLLM" class="candidate-name">{{generalCardCtrl.candidate.firstName+" "+generalCardCtrl.candidate.lastName}} from General Pool</span>
                             <span ng-if="generalCardCtrl.isLLM" class="candidate-name">{{generalCardCtrl.candidate.firstName+" "+generalCardCtrl.candidate.lastName}} from {{generalCardCtrl.vacancy.name}}</span>
+
                         </div>
                         <div>current/past: {{generalCardCtrl.candidate.currentPosition}}</div>
                         <div>company/location: {{generalCardCtrl.candidate.company+", "+generalCardCtrl.candidate.location}}</div>
@@ -47,7 +49,7 @@
                             ng-click="generalCardCtrl.removeCard(generalCardCtrl.candidate.id)">
                         Remove from List
                     </button>
-                    <a class="btn btn-default btn-block" ng-show="generalCardCtrl.candidate.linkedin != null" href="{{generalCardCtrl.candidate.linkedin}}" target="_blank">View LinkenIn Profile</a>
+                    <a class="btn btn-default btn-block" ng-show="generalCardCtrl.candidate.linkedin != ''" href="{{generalCardCtrl.candidate.linkedin}}" target="_blank">View LinkenIn Profile</a>
                     <a class="btn btn-default btn-block" href="#" data-toggle="modal" data-target="#addEditNotificationModal">Add Notification</a>
                     <div ng-include="'/Views/notification/addEdit/addEditModal.html'"></div>
                 </div>

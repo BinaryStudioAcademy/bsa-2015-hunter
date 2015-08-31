@@ -22,7 +22,8 @@ namespace Hunter.DataAccess.Entities
 
         public int? FeedbackId { get; set; }
 
-        public int? UserProfileId { get; set; }
+        [Column("UserProfileId")]
+        public int? AssignedUserProfileId { get; set; }
 
         public bool IsChecked { get; set; }
 
@@ -34,6 +35,7 @@ namespace Hunter.DataAccess.Entities
 
         public virtual Feedback Feedback { get; set; }
 
-        public virtual UserProfile UserProfile { get; set; }
+        [Column("UserProfile")]
+        public virtual UserProfile AssignedUserProfile { get; set; }
     }
 }

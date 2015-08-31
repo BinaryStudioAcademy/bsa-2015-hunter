@@ -22,5 +22,8 @@ namespace Hunter.Services.Interfaces
         IEnumerable<AddedByDto> GetCandidatesAddedBy();
         void UpdateShortFlag(int id, bool isShort);
         void UpdateResolution(int id, Resolution resolution);
+        void UpdateCandidatePool(int candidateId, int poolId, bool delete = false);
+        Dictionary<string, string> GetColors(int id);
+        void ChangeCandidatesPool(int oldId, int newId, int candidateId);
     }
 }

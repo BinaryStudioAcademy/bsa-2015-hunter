@@ -22,10 +22,12 @@ namespace Hunter.Services.Extensions
                 Comment = test.Comment,
                 FeedbackId = test.FeedbackId,
                 FileId = test.FileId,
+                AssignedUserProfile = test.AssignedUserProfile == null ? null : test.AssignedUserProfile.ToUserProfileDto(),
                 Added = test.Added,
                 Url = test.Url,
                 File = file,
-                Feedback = feedbackDto
+                Feedback = feedbackDto,
+                IsChecked = test.IsChecked
             };
         }
 
@@ -38,6 +40,7 @@ namespace Hunter.Services.Extensions
             test.FileId = testDto.FileId;
             test.Url = testDto.Url;
             test.Added = testDto.Added;
+            test.IsChecked = test.IsChecked;
 
             if(test.File != null)
                 testDto.File.ToFile(test.File = new File());

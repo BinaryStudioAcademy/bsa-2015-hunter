@@ -9,24 +9,37 @@
         "$location",
         "AuthService",
         "HttpHandler",
-        "$routeParams"
+        "$scope"
     ];
 
-    function PoolAddEditController($location, AuthService, HttpHandler, $routeParams) {
+    function PoolAddEditController($location, AuthService, HttpHandler, $scope) {
         var vm = this;
         vm.pageConfig = {};
         vm.id = 0;
         vm.pool = {};
         vm.poolColors = {};
         vm.poolUrl = "";
-        vm.addEditFlag = $routeParams.id;
+        vm.addEditFlag = $scope.generalCtrl.selectedPool.id;
+
+        vm.goBack = goBack;
+        vm.close = close;
+
+        function goBack() {
+            $scope.generalCtrl.link = 'Views/pool/list/list.html';
+        }
+
+        function close() {
+            $scope.generalCtrl.closeChooser();
+        }
 
         if (vm.addEditFlag > 0) {
             vm.pageConfig.deleteButton = true;
             vm.pageConfig.pageTitle = "Edit a pool";
             vm.pageConfig.postPutButtonValue = "Edit Pool";
 
-            vm.poolUrl = "/api/pool/" + $routeParams.id;
+            //!!!
+            vm.poolUrl = "/api/pool/" + $scope.generalCtrl.selectedPool.id;
+//            vm.pool = $scope.generalCtrl.selectedPool;
             HttpHandler.sendRequest({
                 url: vm.poolUrl,
                 verb: "GET",
@@ -45,7 +58,9 @@
                     body: JSON.stringify(vm.pool),
                     successCallback: function (result) {
                         //console.log(result);
-                        $location.url("/pool");
+                        //                        $location.url("/pool");
+                        $scope.generalCtrl.link = 'Views/pool/list/list.html';
+                        $scope.generalCtrl.poolChanged(vm.pool);
                     },
                     errorCallback: function (result) { console.log(result); }
                 });
@@ -57,7 +72,9 @@
                     verb: "DELETE",
                     successCallback: function (result) {
                         //console.log(result);
-                        $location.url("/pool");
+                        //                        $location.url("/pool");
+                        $scope.generalCtrl.link = 'Views/pool/list/list.html';
+                        $scope.generalCtrl.poolRemoved(vm.pool);
                     },
                     errorCallback: function (result) { console.log(result); }
                 });
@@ -81,14 +98,15 @@
                 errorCallback: function (result) { console.log(result); }
             });
 
-            vm.poolPostPut = function () {
+            vm.poolPostPut = function (pool) {
                 HttpHandler.sendRequest({
                     url: vm.poolUrl,
                     verb: "POST",
                     body: JSON.stringify(vm.pool),
                     successCallback: function (result) {
                         console.log(result);
-                        $location.url('/pool');
+                        //                        $location.url('/pool');
+                        $scope.generalCtrl.link = 'Views/pool/list/list.html';
                     },
                     errorCallback: function (result) { console.log(result); }
                 });
