@@ -39,7 +39,8 @@ angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.dir
                 .when('/vacancy/:id/longlist', {
                     templateUrl: viewPath + 'vacancy/longlist/longlist.html',
                     controller: "LongListController",
-                    controllerAs: 'longListCtrl'
+                    controllerAs: 'longListCtrl',
+                    reloadOnSearch: false
                 })
                 .when('/vacancy/edit/:id', {
                     templateUrl: viewPath + 'vacancy/addEdit/addEdit.html',
@@ -148,6 +149,13 @@ angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.dir
                     templateUrl: viewPath + 'notification/list/list.html',
                     controller: 'NotificationListController',
                     controllerAs: 'notificationListCtrl'
+                });
+
+            $routeProvider
+                .when('/tests', {
+                    templateUrl: viewPath + 'test/list/list.html',
+                    controller: 'TestListController',
+                    controllerAs: 'testListCtrl'
                 });
 
             //result on statistics button click (slide 1)

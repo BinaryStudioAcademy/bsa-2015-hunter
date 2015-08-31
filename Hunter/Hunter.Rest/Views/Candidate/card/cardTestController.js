@@ -12,11 +12,16 @@
         'UploadTestService',
         '$scope',
         'EnumConstants',
-        'VacancyHttpService'
+        'UserHttpService',
+		'VacancyHttpService',
+        'AuthService',
+        'TestHttpService'
     ];
 
     function CardTestController(CardTestHttpService, $routeParams,
-        FeedbackHttpService, UploadTestService, $scope, EnumConstants, VacancyHttpService) {
+        FeedbackHttpService, UploadTestService, $scope, EnumConstants, UserHttpService, VacancyHttpService,
+        AuthService, TestHttpService) {
+
         var vm = this;
         vm.templateName = 'Test';
         vm.editingIndex = -1;
@@ -27,10 +32,17 @@
         vm.testLink = '';
         vm.testFile = '';
 
-        vm.test;
+        vm.techExperts = [];
+        vm.checkTechExpert = checkTechExpert;
+        vm.checkedTestId = 0;
+        vm.isCurrentUser = isCurrentUser;
+        vm.changeCheckedTest = changeCheckedTest;
+
+		vm.test;
         vm.changeCurrentTest = changeCurrentTest;
         vm.loadAllTests = loadAllTests;
         vm.loadVacancyTests = loadVacancyTests;
+
 
         if (vm.vacancyId != undefined) {
             loadVacancyTests();
@@ -78,7 +90,7 @@
         function loadAllTests() {
             CardTestHttpService.getAllTests(vm.vacancyId, candidateId, function(response) {
                 vm.test = response.data;
-
+                console.log(response.data);
                 initializeTests();
             });
         }
@@ -88,7 +100,7 @@
         function loadVacancyTests() {
             CardTestHttpService.getTest(vm.vacancyId, candidateId, function(response) {
                 vm.test = response.data;
-
+                console.log(response.data);
                 initializeTests();
             });
         }
@@ -265,5 +277,42 @@
             }
             
         }
+
+        UserHttpService.getUsersByRole2('Technical Specialist').then(function (result) {
+            vm.techExperts = result;
+            console.log(result);
+        });
+
+        function checkTechExpert(userId) {
+            CardTestHttpService.addCheckingToTest(userId, vm.checkedTestId, function () {
+                if (vm.vacancyId != undefined) {
+                    loadVacancyTests();
+                } else {
+                    loadAllTests();
+                }
+            });
+            
+
+        };
+
+        function isCurrentUser(userProfile, isChecked) {
+            if ((userProfile != null) && (AuthService.authentication.userName == userProfile.login) && (!isChecked)) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        function changeCheckedTest(testId) {
+            TestHttpService.changeCheckedTest(testId, function (result) {
+                $scope.$parent.IndexCtrl.setCountTests($scope.$parent.IndexCtrl.countTests - 1);
+                if (vm.vacancyId != undefined) {
+                    loadVacancyTests();
+                } else {
+                    loadAllTests();
+                }
+            });
+        };
+
     }
 })();
