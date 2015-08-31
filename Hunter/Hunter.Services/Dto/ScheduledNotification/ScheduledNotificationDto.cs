@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hunter.Services
+namespace Hunter.Services.Dto.ScheduledNotification
 {
     public class ScheduledNotificationDto
     {

@@ -1,5 +1,24 @@
 ﻿<div class="container">
     <h3>{{notificationListCtrl.controllerName}}</h3>
-    <div class="btn btn-default" ng-click="notificationListCtrl.notify()">Notify by email</div><br />
-    <div ng-include="'/Views/notification/list/listTemplate.html'"></div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Filter</label>
+                <input type="search" class="form-control" ng-model="notificationListCtrl.filter.search" ng-change="notificationListCtrl.updateData()">
+            </div>
+            <div class="filter-settings">
+                <label>Notification Types</label>
+                {{notificationListCtrl.filter}}
+                <ul >
+                    <li ng-repeat="nt in notificationListCtrl.notificationTypes">
+                        <input ng-click="notificationListCtrl.updateData()" type="checkbox" checklist-model="notificationListCtrl.filter.notoficationTypes" checklist-value="nt.id"> {{nt.name}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="btn btn-default" ng-click="notificationListCtrl.notify()">Notify by email</div><br />
+            <div ng-include="'/Views/notification/list/listTemplate.html'"></div>
+        </div>
+    </div>
 </div>

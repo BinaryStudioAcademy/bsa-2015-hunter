@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Hunter.Services.Dto.ScheduledNotification;
 
 namespace Hunter.Services.Interfaces
 {
@@ -17,5 +14,6 @@ namespace Hunter.Services.Interfaces
         void NotificationShown(int id);
         IList<ScheduledNotificationDto> GetCandidateNotifications(string userLogin, int candidateId);
         void Notify();
+        PageDto<ScheduledNotificationDto> Get(string userAlias, ScheduledNotificationFilterDto filter);
     }
 }

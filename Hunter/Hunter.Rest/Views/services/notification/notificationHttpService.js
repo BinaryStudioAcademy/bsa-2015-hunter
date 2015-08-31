@@ -12,13 +12,15 @@
 
     function NotificationHttpService($q, httpHandler) {
         var service = {
-            getNotifications: getNotifications,
+           // getNotifications: getNotifications,
             getCandidateNotifications: getCandidateNotifications,
             getActiveNotifications: getActiveNotifications,
             addNotification: addNotification,
             notificationShown: notificationShown,
             deleteNotification: deleteNotification,
-            notify: notify
+            notify: notify,
+            convertRouteParamsToFilter: convertRouteParamsToFilter,
+            getNotificationsByFilter: getNotificationsByFilter
         };
 
         function getNotifications() {
@@ -118,6 +120,55 @@
                     console.log(status);
                 }
             });
+        }
+
+        function convertRouteParamsToFilter(routeParams) {
+            var filter = {
+                search: 'йцу',
+                notificationTypes: [],
+                pageSize: 10,
+                page: 1,
+                orderField: 'notificationDate',
+                inverOrder: false
+            };
+            console.log('Filter params ' + filter);
+            if (routeParams) {
+                console.log('if (routeParams) {');
+                filter.search = routeParams.search || '';
+                filter.pageSize = parseInt(routeParams.pageSize) || 10;
+                filter.page = routeParams.page || 1;
+                filter.orderField = routeParams.orderField || 'notificationDate';
+                filter.inverOrder = routeParams.invertOrder || false;
+                if (routeParams.notificationTypes) {
+                    if (angular.isArray(routeParams.notificationTypes)) {
+                        angular.forEach(routeParams.notificationTypes, function (item) {
+                            filter.notificationTypes.push(parseInt(item));
+                        });
+                    } else {
+                        filter.notificationTypes.push(parseInt(routeParams.notificationTypes));
+                    }
+                }
+            }
+
+            return filter;
+        }
+
+        function getNotificationsByFilter(filter) {
+            var deferred = $q.defer();
+            console.log(filter);
+            httpHandler.sendRequest({
+                url: '/api/notifications',
+                verb: 'GET',
+                body: filter,
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get filtered notification list error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
         }
 
         return service;

@@ -10,27 +10,31 @@
         'AuthService',
         'NotificationHttpService',
         '$routeParams',
-        'EnumConstants'
+        'EnumConstants',
+        '$scope'
     ];
 
-    function NotificationListController($location, authService, notificationHttpService, $routeParams, enumConstants) {
+    function NotificationListController($location, authService, notificationHttpService, $routeParams, enumConstants, $scope) {
         var vm = this;
         vm.controllerName = 'Notification list';
         vm.notificationTypes = enumConstants.notificationTypes;
+        vm.filter = notificationHttpService.convertRouteParamsToFilter($routeParams);
         vm.isModal = false;
         vm.deleteNotification = deleteNotification;
         vm.notify = notify;
+        vm.updateData = updateData;
+        vm.showSpinner = false;
         var candidateId = $routeParams["cid"];
         if (candidateId) {
             vm.isModal = true;
         }
-
         vm.notifications = null;
-        loadNotifications(candidateId);
+        loadNotifications();
 
         function loadNotifications(candidateId) {
             if (candidateId == undefined) {
-                notificationHttpService.getNotifications().then(function(result) {
+                var filter = notificationHttpService.convertRouteParamsToFilter($routeParams);
+                notificationHttpService.getNotificationsByFilter(filter).then(function (result) {
                     vm.notifications = result;
                 });
             } else {
@@ -55,5 +59,16 @@
         {
             notificationHttpService.notify();
         }
+
+        function updateData() {
+            $location.search(vm.filter);
+        }
+
+        $scope.$on('$routeUpdate', function () {
+            vm.filter = notificationHttpService.convertRouteParamsToFilter($routeParams);
+            notificationHttpService.getNotificationsByFilter(vm.filter).then(function (result) {
+                vm.notifications = result;
+            });
+        });
     }
 })();

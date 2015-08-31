@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Hunter.Services;
+using Hunter.Services.Dto.ScheduledNotification;
 using Hunter.Services.Interfaces;
 
 namespace Hunter.Rest.Controllers
@@ -20,15 +21,34 @@ namespace Hunter.Rest.Controllers
             _scheduledNotificationService = scheduledNotificationService;
         }
 
+        //[HttpGet]
+        //[Route("")]
+        //[ResponseType(typeof(IEnumerable<ScheduledNotificationDto>))]
+        //public HttpResponseMessage Get()
+        //{
+        //    try
+        //    {
+        //        var login = RequestContext.Principal.Identity.Name;
+        //        var notifications = _scheduledNotificationService.Get(login);
+        //        return Request.CreateResponse(HttpStatusCode.OK, notifications);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+        //    }
+        //}
+
         [HttpGet]
         [Route("")]
-        [ResponseType(typeof(IEnumerable<ScheduledNotificationDto>))]
-        public HttpResponseMessage Get()
+        [ResponseType(typeof(PageDto<ScheduledNotificationDto>))]
+        public HttpResponseMessage Get([FromBody] ScheduledNotificationFilterDto filter)
+        //public HttpResponseMessage Get()
         {
             try
             {
                 var login = RequestContext.Principal.Identity.Name;
-                var notifications = _scheduledNotificationService.Get(login);
+                //ScheduledNotificationFilterDto filter = null;
+                var notifications = _scheduledNotificationService.Get(login, filter);
                 return Request.CreateResponse(HttpStatusCode.OK, notifications);
             }
             catch (Exception ex)
