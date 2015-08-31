@@ -28,10 +28,11 @@
         vm.stages = [];
         vm.shortlisted = true;
 
+        vm.name = '';
         vm.filter = {};
         vm.itemsPerPage = [];
-        vm.vacancy;
-        vm.candidateDetails;
+        vm.vacancy = {};
+        vm.candidateDetails = {};
         vm.viewCandidateInfo = viewCandidateInfo;
         vm.getCandidatesForLongList = getCandidatesForLongList;
         vm.listSpinner = false;
@@ -65,7 +66,7 @@
             vm.getCandidatesForLongList(vm.filter);
         });
 
-        vm.name = 'CandidatesForLongList';
+       
 
         function getCandidatesForLongList(filter) {
             vm.listSpinner = true;
@@ -81,6 +82,7 @@
 
         // initializating function
         (function () {
+            vm.name = 'CandidatesForLongList';
             vm.itemsPerPage = [5, 10, 20, 40];
             vm.sortOptions = [
                 { text: 'Added Date (new first)', options: 'AddDate_desc' },
