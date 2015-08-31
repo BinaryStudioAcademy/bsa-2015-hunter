@@ -16,14 +16,14 @@
         var vm = this;
 
         vm.appResults = [];
-        vm.stages = [];
+	    vm.stages = EnumConstants.cardStages;
+	    vm.candidateId = $routeParams.cid;
 
-        (function () {
-            longlistHttpService.getAppResults($routeParams.cid).then(function (result) {
+    	(function () {
+        	longlistHttpService.getAppResults(vm.candidateId).then(function (result) {
                 vm.appResults = result;
             });
 
-            vm.stages = EnumConstants.cardStages;
         })();
 
 

@@ -13,5 +13,9 @@ namespace Hunter.Services.Services.Interfaces
         TestsResult GetCardTests(int vacancyId, int candidateId);
         void UpdateFeedback(int testId, int feedbackId);
         void UpdateComment(int id, string comment);
+        void AddCheckingToTest(int testId, int userId);
+        int GetCountNoChecked(string userName);
+        IEnumerable<TestForCheckDto> GetTestByUser(string login);
+        void ChangeCheckedTest(int testId);
     }
 }

@@ -32,10 +32,18 @@ namespace Hunter.Rest.Controllers
 
         // GET: api/Card/5
         [HttpGet]
-        [Route("")]
-        public string Get(int id)
+        [Route("{id:int}")]
+        public HttpResponseMessage Get(int id)
         {
-            return "value";
+            try 
+            {
+                var card = _cardService.GetCard(id);
+                return Request.CreateResponse(HttpStatusCode.OK, card);
+            }
+            catch(Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
+            }
         }
 
         // GET: api/Card/5
@@ -59,26 +67,27 @@ namespace Hunter.Rest.Controllers
             }
         }
 
-        /*
-         
-        public HttpResponseMessage GetCandidateLongList(int id)
+        // GET
+        [HttpGet]
+        [Route("isUsed/{vid:int}/{cid:int}")]
+        [ResponseType(typeof(bool))]
+        public HttpResponseMessage IsCardUsed(int vid, int cid)
         {
             try
             {
-                var candidates = _candidateService.GetLongList(id);
-                if (candidates == null)
+                var result = _cardService.IsCardUsed(vid, cid);
+                if (result == true)
                 {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Vacancy has no candidates!");
+                    return Request.CreateResponse(HttpStatusCode.OK, result);
                 }
-                return Request.CreateResponse(HttpStatusCode.OK, candidates);
+                return Request.CreateResponse(HttpStatusCode.OK, result);
             }
             catch (Exception ex)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
         }
-         */
-
+        
         // POST: api/Card
         [HttpPost]
         [Route("")]
@@ -153,6 +162,28 @@ namespace Hunter.Rest.Controllers
             }
         }
 
+        // DELETE: api/Card/5/5
+        [HttpDelete]
+        [Route("deleteallinfo/{vid:int}/{cid:int}")]
+        public HttpResponseMessage DeleteAllInfo(int vid, int cid)
+        {
+            try
+            {
+                if (!_cardService.IsCardExist(vid, cid))
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound,
+                        string.Format("No card for vacancy with id={0} and candidate with id={1}!", vid, cid));
+                }
+                _cardService.DeleteAllInfo(vid, cid);
+
+                return Request.CreateResponse(HttpStatusCode.OK, string.Format("Card and all interviews and notes for vacancy with id={0} and candidate with id={1} were deleted!", vid, cid));
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
         [HttpGet]
         [Route("info/{vid:int}/{cid:int}")]
         [ResponseType(typeof(AppResultCardDto))]
@@ -168,6 +199,5 @@ namespace Hunter.Rest.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
     }
 }

@@ -22,6 +22,7 @@ namespace Hunter.Services
         private readonly ILogger _logger;
         private readonly IActivityHelperService _activityHelperService;
         private readonly IUserProfileRepository _userProfileRepository;
+        private readonly IPoolRepository _poolRepository;
 
         public VacancyService(
             IVacancyRepository vacancyRepository,
@@ -30,7 +31,8 @@ namespace Hunter.Services
             ILogger logger,
             IUnitOfWork unitOfWork,
             IActivityHelperService activityHelperService,
-            IUserProfileRepository userProfileRepository)
+            IUserProfileRepository userProfileRepository,
+            IPoolRepository poolRepository)
         {
             _vacancyRepository = vacancyRepository;
             _candidateRepository = candidateRepository;
@@ -39,6 +41,7 @@ namespace Hunter.Services
             _unitOfWork = unitOfWork;
             _activityHelperService = activityHelperService;
             _userProfileRepository = userProfileRepository;
+            _poolRepository = poolRepository;
         }
         public IList<VacancyRowDto> Get()
         {
@@ -118,6 +121,14 @@ namespace Hunter.Services
             var vacancy = dto.ToVacancy();
             var user = _userProfileRepository.Get(x => x.UserLogin == dto.UserLogin);
             vacancy.UserProfileId = user != null ? user.Id : (int?) null;
+
+            //!!!!!
+            vacancy.Pool = new List<Pool>();
+            foreach (string poolName in dto.PoolNames)
+            {
+                vacancy.Pool.Add(_poolRepository.Query().FirstOrDefault(x => x.Name == poolName));
+            }
+
             _vacancyRepository.UpdateAndCommit(vacancy);
             _activityHelperService.CreateAddedVacancyActivity(vacancy);
         }
@@ -126,6 +137,14 @@ namespace Hunter.Services
         {
             var vacancy = _vacancyRepository.Get(entity.Id);
             entity.ToVacancy(vacancy);
+
+            //!!!!
+            vacancy.Pool.Clear();
+            foreach (string poolName in entity.PoolNames)
+            {
+                vacancy.Pool.Add(_poolRepository.Query().FirstOrDefault(x => x.Name == poolName));
+            }
+
             _vacancyRepository.UpdateAndCommit(vacancy);
         }
 
@@ -216,6 +235,21 @@ namespace Hunter.Services
             {
                 _logger.Log(ex);
                 return new List<VacancyByStateDto>();
+            }
+        }
+
+        public Dictionary<string, string> GetColors(int vacancyId)
+        {
+            try
+            {
+                return _vacancyRepository.Query()
+                    .First(x => x.Id == vacancyId)
+                    .Pool.ToDictionary(x => x.Name.ToLower(), x => x.Color);
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                throw ex;
             }
         }
     }

@@ -33,7 +33,6 @@
     "underscore": "~1.8.3",
     "angular-resource": "~1.4.1",
     "bootstrap": "~3.3.5",
-    "alertifyjs": "~0.3.16",
     "angular-bootstrap": "~0.13.3",
     "angular-local-storage": "~0.2.2",
     "angular-utils-pagination": "~0.8.3",

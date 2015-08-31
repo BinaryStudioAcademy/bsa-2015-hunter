@@ -38,6 +38,23 @@ namespace Hunter.Rest.Controllers
         }
 
         [HttpGet]
+        [Route("active")]
+        [ResponseType(typeof(IEnumerable<ScheduledNotificationDto>))]
+        public HttpResponseMessage GetActive()
+        {
+            try
+            {
+                var login = RequestContext.Principal.Identity.Name;
+                var notifications = _scheduledNotificationService.GetActive(login);
+                return Request.CreateResponse(HttpStatusCode.OK, notifications);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [HttpGet]
         [Route("{id:int}")]
         [ResponseType(typeof(ScheduledNotificationDto))]
         public HttpResponseMessage Get(int id)
@@ -61,6 +78,8 @@ namespace Hunter.Rest.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var login = RequestContext.Principal.Identity.Name;
+                    value.UserLogin = login;
                     _scheduledNotificationService.Add(value);
                     return Request.CreateResponse(HttpStatusCode.OK, "Ok");
                 }
@@ -91,6 +110,25 @@ namespace Hunter.Rest.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("{id:int}/shown")]
+        public HttpResponseMessage NotificationShown(int id)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _scheduledNotificationService.NotificationShown(id);
+                    return Request.CreateResponse(HttpStatusCode.OK, "Ok");
+                }
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid model state");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
         [HttpDelete]
         [Route("{id:int}")]
         public HttpResponseMessage Delete(int id)
@@ -99,6 +137,23 @@ namespace Hunter.Rest.Controllers
             {
                 _scheduledNotificationService.Delete(id);
                 return Request.CreateResponse(HttpStatusCode.OK, "Ok");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("candidate/{id:int}")]
+        [ResponseType(typeof(IEnumerable<ScheduledNotificationDto>))]
+        public HttpResponseMessage GetCandidateNotifications(int id)
+        {
+            try
+            {
+                var login = RequestContext.Principal.Identity.Name;
+                var notifications = _scheduledNotificationService.GetCandidateNotifications(login, id);
+                return Request.CreateResponse(HttpStatusCode.OK, notifications);
             }
             catch (Exception ex)
             {

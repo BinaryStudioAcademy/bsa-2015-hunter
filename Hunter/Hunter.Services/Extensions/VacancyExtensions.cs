@@ -19,10 +19,9 @@ namespace Hunter.Services
                 Status = vacancy.Status,
                 StartDate = vacancy.StartDate,
                 EndDate = vacancy.EndDate,
-                Location = vacancy.Location,
                 Description = vacancy.Description,
 //                PoolId = vacancy.PoolId,
-                Pools = vacancy.Pool.Select(x => x.ToPoolViewModel()),
+                PoolNames = vacancy.Pool.Select(x => x.Name).ToList(),
                 StatusName = ((Status)vacancy.Status).ToString(),
                 UserLogin = vacancy.UserProfile != null ? vacancy.UserProfile.Alias : string.Empty
                 
@@ -40,7 +39,7 @@ namespace Hunter.Services
                 StartDate = vacancy.StartDate,
                 EndDate = vacancy.EndDate,
 //                PoolName = vacancy.Pool.Name,
-                Pools = vacancy.Pool.Select(x => x.ToPoolViewModel()),
+                PoolNames = vacancy.Pool.Select(x => x.Name).ToList(),
                 AddedByName = vacancy.UserProfile != null ? vacancy.UserProfile.Alias : string.Empty,
                 AddedById = vacancy.UserProfile != null ? vacancy.UserProfile.Id : 0
             };
@@ -56,10 +55,8 @@ namespace Hunter.Services
                 Status = vacancy.Status,
                 StartDate = vacancy.StartDate,
                 EndDate = vacancy.EndDate,
-                Location = vacancy.Location,
                 Description = vacancy.Description,
-//                PoolId = vacancy.PoolId
-                Pool = (ICollection<Pool>) vacancy.Pools.Select(x => x.ToPoolModel())
+//                Pool = (ICollection<Pool>) vacancy.Pools.Select(x => x.ToPoolModel())
             };
             return v;
         }
@@ -71,10 +68,8 @@ namespace Hunter.Services
             vacancy.Status = vacancyDto.Status;
             vacancy.StartDate = vacancyDto.StartDate;
             vacancy.EndDate = vacancyDto.EndDate;
-            vacancy.Location = vacancyDto.Location;
             vacancy.Description = vacancyDto.Description;
-            vacancy.Pool = (ICollection<Pool>) vacancyDto.Pools.Select(x => x.ToPoolModel());
-//            vacancy.PoolId = vacancyDto.PoolId;
+//            vacancy.Pool = (ICollection<Pool>) vacancyDto.Pools.Select(x => x.ToPoolModel());
         }
 
         public static VacancyLongListDto ToVacancyLongListDto(this Vacancy vacancy)
@@ -84,7 +79,8 @@ namespace Hunter.Services
                
                 Id = vacancy.Id,
                 Name = vacancy.Name,
-                AddedByName = vacancy.UserProfile != null ? vacancy.UserProfile.UserLogin : string.Empty
+                AddedByName = vacancy.UserProfile != null ? vacancy.UserProfile.UserLogin : string.Empty,
+                PoolNames = vacancy.Pool.Select(x => x.Name)
                 //PoolId = vacancy.PoolId
             };
             return vll;

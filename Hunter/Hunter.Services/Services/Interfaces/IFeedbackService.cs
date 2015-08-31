@@ -16,6 +16,7 @@ namespace Hunter.Services
         IEnumerable<FeedbackDto> GetTechInterview(int vacancyId, int candidateId, string name);
         FeedbackDto GetSummary(int vacancyId, int candidateId);
         FeedbackDto UpdateSuccessStatus(int feedbackId, SuccessStatus status, string name);
-        IEnumerable<FeedbackDto> GetAllFeedbacks(int vacancyId, int candidateId);
+        IEnumerable<FeedbackDto> GetLastFeedbacks(int vacancyId, int candidateId);
+        IEnumerable<FeedbackDto> GetFeedbacksHistory(int vacancyId, int candidateId);
     }
 }

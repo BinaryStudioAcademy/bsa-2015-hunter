@@ -10,8 +10,8 @@
             <input type="date" ng-model="vacancyAddEditCtrl.currentVacancy.startDate" class="form-control" />
             <label>End Date</label>
             <input type="date" ng-model="vacancyAddEditCtrl.currentVacancy.endDate" class="form-control" />
-            <label>Location</label>
-            <input type="text" ng-model="vacancyAddEditCtrl.currentVacancy.location" class="form-control" />
+            <!--<label>Location</label>
+            <input type="text" ng-model="vacancyAddEditCtrl.currentVacancy.location" class="form-control" />-->
         </div>
         <div class="col-md-4">
             <h3>Description</h3><hr />
@@ -28,11 +28,9 @@
     <div class="row">
         <div class="col-md-4">
             <h3>Pool</h3><hr />
-            <select class="form-control" ng-model="vacancyAddEditCtrl.currentVacancy.poolId" ng-options="pool.id as pool.name for pool in vacancyAddEditCtrl.pools"></select>
-<!--            <pool-selector pool-one="true" pool-lazy="true" pool-readonly="false" pool-short="false"-->
-<!--                           candidate="{poolNames: [vacancyAddEditCtrl.currentPool.name],-->
-<!--                                        poolColors: vacancyAddEditCtrl.color,-->
-<!--                                        id: vacancyAddEditCtrl.currentPool.id}"></pool-selector>-->
+<!--            <select class="form-control" ng-model="vacancyAddEditCtrl.currentVacancy.poolId" ng-options="pool.id as pool.name for pool in vacancyAddEditCtrl.pools"></select>-->
+            <pool-selector pool-lazy="true" pool-readonly="false" pool-short="false"
+                           candidate="vacancyAddEditCtrl.currentVacancy"></pool-selector>
         </div>
         <div class="col-md-4">
             <input class="btn btn-primary pull-right" type="submit" value="Done" ng-click="vacancyAddEditCtrl.submitVacancy()" />

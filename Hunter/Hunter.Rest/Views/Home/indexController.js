@@ -8,22 +8,71 @@
     IndexController.$inject = [
         '$scope',
         'IndexHttpService',
-        '$interval'
+        '$interval',
+        'NotificationHttpService',
+        '$location',
+        '$rootScope'
     ];
 
-    function IndexController($scope, IndexHttpService, $interval) {
+    function IndexController($scope, indexHttpService, $interval, notificationHttpService, $location, $rootScope) {
         var vm = this;
         vm.name = "Index";
         vm.amount = 0;
+        vm.countTests = 0;
         $scope.radioModel = 'Home';
+        vm.setCountTests = setCountTests;
+        $rootScope.notifications = null;
+        $rootScope.clickedNotification = null;
 
-        getActivityAmount();
+        callRefreshFunctions();
 
-        $interval(getActivityAmount, 180000);   //3 minutes
+        $interval(callRefreshFunctions, 180000);   //3 minutes
+
+        function callRefreshFunctions() {
+            getActivityAmount();
+            getActiveNotifications();
+            getCountTasksForCheck();
+        }
 
         function getActivityAmount() {
-            IndexHttpService.getActivityAmount(function (response) {
+            indexHttpService.getActivityAmount(function (response) {
                 vm.amount = response.data;
+            });
+        }
+        function getCountTasksForCheck() {
+            indexHttpService.getTasksForCheck().then(function (result) {
+                console.log("count = " + result);
+                vm.countTests = result;
+            });
+        }
+        function setCountTests(count) {
+            vm.countTests = count;
+        }
+
+        function getActiveNotifications() {
+            notificationHttpService.getActiveNotifications().then(function (result) {
+                $rootScope.notifications = result;
+                if ($rootScope.notifications != null) {
+                    for (var i = 0; i < $rootScope.notifications.length; i++) {
+                        alertNotification(i);
+                    }
+                }
+            });
+        }
+
+        function alertNotification(index) {
+            $rootScope.clickedNotification = $rootScope.notifications[index];
+            var alertMessage = $rootScope.clickedNotification.notificationDate + ' ' + $rootScope.clickedNotification.message + '<a href="#/candidate/' + $rootScope.clickedNotification.candidateId + '"></a>';
+
+            alertify.message('Click me to show a notification!', 180, function (isClicked) {
+                if (isClicked) {
+                    console.log($rootScope.clickedNotification);
+                    notificationHttpService.notificationShown($rootScope.clickedNotification.id);
+                    alertify.alert(alertMessage, function () {
+                        $location.url('/candidate/' + $rootScope.clickedNotification.candidateId);
+                        $rootScope.$apply();
+                    });
+                }
             });
         }
     }

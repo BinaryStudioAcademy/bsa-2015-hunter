@@ -46,7 +46,7 @@
                 id: feedback.id,
                 cardId: $scope.$parent.generalCardCtrl.cardInfo.cardId,
                 text: feedback.text,
-                type: 3,
+                type: 2,
                 successStatus: feedback.successStatus
             }
 

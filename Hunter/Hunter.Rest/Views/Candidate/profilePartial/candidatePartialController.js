@@ -11,18 +11,33 @@
         '$rootScope',
         'AuthService',
         'CandidateHttpService',
-        'EnumConstants'
+        'EnumConstants',
+        'LonglistHttpService',
+        'SpecialNoteHttpService',
+        'CandidatePartialProfileService'
     ];
 
-    function CandidatePartialController($scope, $location, $rootScope, authService, candidateHttpService, EnumConstants) {
+    function CandidatePartialController($scope, $location, $rootScope, authService, candidateHttpService, EnumConstants,
+        longlistHttpService, specialNoteHttpService, candidatePartialProfileService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         vm.isEmpty = false;
 
+        vm.stages = EnumConstants.cardStages;
+        vm.tabs = [
+            { name: 'Notes', route: 'specialnotes' },
+            { name: 'App results', route: 'appresults' }
+        ];
+        vm.templateToShow = '';
         vm.candidate;
+        vm.appResults = [];
+        vm.specialNotes = [];
         vm.resolutions = EnumConstants.resolutions;
-        vm.updateResolution = updateResolution;
+        vm.specialNotes = [];
 
+        vm.updateResolution = updateResolution;
+        vm.changeTemplate = changeTemplate;
+        vm.showResume = showResume;
         $rootScope.$watch(
             '$root.candidateDetails.id',
             function () {
@@ -31,6 +46,7 @@
                 } else {
                     getCandidateDetails($rootScope.candidateDetails.id);
                     vm.isEmpty = false;
+                    vm.changeTemplate(vm.tabs[1]);
                 }
             });
 
@@ -46,7 +62,15 @@
         function getCandidateDetails(id) {
             vm.prevLoad = true;
             candidateHttpService.getCandidate(id).then(function (response) {
-                vm.candidate = response.data;
+                vm.candidate = response.data;        
+            });
+
+            longlistHttpService.getAppResults(id).then(function (response) {
+                vm.appResults = response;
+            });
+
+            specialNoteHttpService.getCandidateSpecialNote(id).then(function (response) {
+                vm.specialNotes = response.data;
                 vm.prevLoad = false;
             });
 
@@ -60,5 +84,15 @@
                 }
             });
         };
+
+        function changeTemplate(tab) {
+            vm.currentTabName = tab.name;
+            vm.currentTabEmpty = candidatePartialProfileService.isCurrentTabEmpty(tab.route, vm.specialNotes, vm.appResults);
+            vm.templateToShow = candidatePartialProfileService.changeTemplate(tab.route);
+        }
+
+        function showResume() {
+            window.open(vm.candidate.lastResumeUrl);
+        }
     }
 })();

@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Hunter.Services;
 using Hunter.Services.Interfaces;
+using WebGrease.Css.Extensions;
 
 namespace Hunter.Rest.Controllers
 {
@@ -40,6 +41,7 @@ namespace Hunter.Rest.Controllers
                     AddedBy = addedBy
                 };
                 var vacancies = _vacancyService.Get(filterParams);
+                vacancies.Rows.ForEach(x => x.PoolColors = _vacancyService.GetColors(x.Id));
                 return Request.CreateResponse(HttpStatusCode.OK, vacancies);
             }
             catch (Exception ex)
@@ -56,6 +58,8 @@ namespace Hunter.Rest.Controllers
             try
             {
                 var vacancy = _vacancyService.Get(id);
+                vacancy.PoolColors = _vacancyService.GetColors(id);
+
                 return Request.CreateResponse(HttpStatusCode.OK, vacancy);
             }
             catch (Exception ex)
@@ -73,6 +77,7 @@ namespace Hunter.Rest.Controllers
             try
             {
                 var vacancy = _vacancyService.GetLongList(id);
+                vacancy.PoolColors = _vacancyService.GetColors(id);
 
                 return Request.CreateResponse(HttpStatusCode.OK, vacancy);
             }

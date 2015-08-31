@@ -143,7 +143,7 @@
             vm.sortOptions = [
                 { text: 'Name \u25BC', options: 'FirstName_asc'  },
                 { text: 'Name \u25B2', options: 'FirstName_desc'  },
-                { text: 'Added \u25BC', options: { field: 'AddDate_asc' } },
+                { text: 'Added \u25BC', options:  'AddDate_asc'  },
                 { text: 'Added \u25B2', options:  'AddDate_desc' },
                 { text: 'Status \u25BC', options:  'Resolution_asc' },
                 { text: 'Status \u25B2', options:  'Resolution_desc' },
@@ -163,7 +163,6 @@
             vm.statuses = EnumConstants.resolutions;
 
             vm.filter = CandidateService.convertRouteParamsToFilter($routeParams);
-            console.log(vm.filter);
             vm.getCandidates(vm.filter);
 
             // get vacancy info

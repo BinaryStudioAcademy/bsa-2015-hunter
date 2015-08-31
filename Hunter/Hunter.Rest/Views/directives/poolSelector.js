@@ -107,7 +107,7 @@
                 }
                 //delete pool from candidate poolList
                 function unselectPool(pool) {
-                    var index = $scope.candidate.poolNames.indexOf(pool);
+                    var index = $scope.candidate.poolNames.indexOf(pool.name);
                     $scope.candidate.poolNames.splice(index, 1);
                     delete $scope.candidate.poolColors[pool.name.toLowerCase()];
                 }

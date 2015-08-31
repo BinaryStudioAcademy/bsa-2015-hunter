@@ -86,6 +86,7 @@
 
 .column_data {
     margin-top: 10px;
+    list-style-type: none;
 }
 .pool-type{
     width: 85%;

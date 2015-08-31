@@ -31,10 +31,11 @@
             name: '',
             startDate: new Date(),
             endDate: null,
-            location: '',
+            //location: '',
             status: 0,
             description: '',
-            poolId: 1
+            poolNames: [],
+            poolColors: {}
         };
         vm.pools = [];
         poolsHttpService.getAllPools().then(function (data) {
@@ -68,10 +69,11 @@
                     name: data.name,
                     startDate: new Date(data.startDate),
                     endDate: data.endDate != null ? new Date(data.endDate) : null,
-                    location: data.location,
+                    //location: data.location,
                     status: data.status,
                     description: data.description,
-                    poolId: data.poolId
+                    poolNames: data.poolNames,
+                    poolColors: data.poolColors
                 };
                 
 //                //!!!!!

@@ -15,6 +15,7 @@ using Hunter.DataAccess.Entities.Enums;
 using Hunter.Services.Dto;
 using Hunter.Services.Interfaces;
 using Hunter.Services;
+using WebGrease.Css.Extensions;
 
 namespace Hunter.Rest.Controllers
 {
@@ -159,6 +160,7 @@ namespace Hunter.Rest.Controllers
                         candidates as IEnumerable<CandidateLongListDto>,
                         Request.ODataProperties().NextLink,
                         Request.ODataProperties().TotalCount);
+                filteredCardidates.Items.ForEach(x => x.PoolColors = _candidateService.GetColors(x.Id));
 
                 return Request.CreateResponse(HttpStatusCode.OK, filteredCardidates);
             }

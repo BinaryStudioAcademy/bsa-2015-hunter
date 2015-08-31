@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Entities.Enums;
 
 namespace Hunter.Services.Extensions
 {
@@ -15,8 +16,10 @@ namespace Hunter.Services.Extensions
             {
                 Id = notification.Id,
                 CandidateId = notification.CandidateId,
+                CandidateName = string.Format("{0} {1}", notification.Candidate.FirstName, notification.Candidate.LastName),
                 Message = notification.Message,
-                Pending = notification.Pending,
+                NotificationDate = notification.NotificationDate,
+                NotificationType = (int)notification.NotificationType,
                 UserProfileId = notification.UserProfileId,
                 IsSent = notification.IsSent,
                 IsShown = notification.IsShown,
@@ -29,7 +32,8 @@ namespace Hunter.Services.Extensions
         {
             var notification = new ScheduledNotification
             {
-                Pending = notificationDto.Pending,
+                NotificationDate = notificationDto.NotificationDate,
+                NotificationType = (NotificationType)notificationDto.NotificationType,
                 Message = notificationDto.Message,
                 IsSent = notificationDto.IsSent,
                 IsShown = notificationDto.IsShown,
@@ -42,7 +46,8 @@ namespace Hunter.Services.Extensions
         public static void ToScheduledNotification(this ScheduledNotificationDto notificationDto,
             ScheduledNotification notification)
         {
-            notification.Pending = notificationDto.Pending;
+            notification.NotificationDate = notificationDto.NotificationDate;
+            notification.NotificationType = (NotificationType)notificationDto.NotificationType;
             notification.Message = notificationDto.Message;
             notification.IsSent = notificationDto.IsSent;
             notification.IsShown = notificationDto.IsShown;

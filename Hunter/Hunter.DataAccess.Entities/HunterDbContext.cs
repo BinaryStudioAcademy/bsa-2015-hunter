@@ -98,10 +98,22 @@ namespace Hunter.DataAccess.Entities
                 .WithOptional(e => e.UserProfile)
                 .HasForeignKey(e => e.ProfileId);
 
+            modelBuilder.Entity<UserProfile>()
+               .HasMany(e => e.Test)
+               .WithOptional(e => e.UserProfile)
+               .HasForeignKey(e => e.UserProfileId)
+               .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<UserRole>()
                 .HasMany(e => e.Users)
                 .WithRequired(e => e.UserRole)
                 .HasForeignKey(e => e.RoleId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<UserProfile>()
+                .HasMany(e => e.Test)
+                .WithOptional(e => e.UserProfile)
+                .HasForeignKey(e => e.UserProfileId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Vacancy>()

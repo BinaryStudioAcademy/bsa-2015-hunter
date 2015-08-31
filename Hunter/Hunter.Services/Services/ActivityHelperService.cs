@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Entities;
-using Hunter.DataAccess.Entities.Entites.Enums;
-using Hunter.DataAccess.Entities.Enums;
 using Hunter.DataAccess.Interface;
-using Hunter.Services.Dto.ApiResults;
 using Hunter.Services.Interfaces;
 
 namespace Hunter.Services.Services
@@ -106,7 +99,7 @@ namespace Hunter.Services.Services
                         feedbackRoute = "hrinterview";
                         break;
                     case 2:
-                        feedbackType = "Tech";
+                        feedbackType = "Technical";
                         feedbackRoute = "technicalinterview";
                         break;
                     case 3:
@@ -141,13 +134,13 @@ namespace Hunter.Services.Services
         {
             try
             {
-                //var card = _cardRepository.Get(x => x.Id == specialNote.CardId);
-                //string message = string.Format("A special note for {0} {1} on {2} has been added",
-                //card.Candidate.FirstName, card.Candidate.LastName, card.Vacancy.Name);
-                //ActivityType type = ActivityType.SpecialNote;
-                //Uri url = new Uri(string.Format("#/vacancy/{0}/candidate/{1}?tab={2}",
-                //    card.VacancyId, card.CandidateId, "specialnotes"), UriKind.Relative);
-                //_activityPostService.Post(message, type, url);
+                var card = _cardRepository.Get(x => x.CandidateId == specialNote.CandidateId &&  x.VacancyId == specialNote.VacancyId);
+                string message = string.Format("A special note for {0} {1} on '{2}' has been added",
+                card.Candidate.FirstName, card.Candidate.LastName, card.Vacancy.Name);
+                ActivityType type = ActivityType.SpecialNote;
+                Uri url = new Uri(string.Format("#/vacancy/{0}/candidate/{1}?tab={2}",
+                    card.VacancyId, card.CandidateId, "specialnotes"), UriKind.Relative);
+                _activityPostService.Post(message, type, url);
             }
             catch (Exception e)
             {
@@ -159,14 +152,13 @@ namespace Hunter.Services.Services
         {
             try
             {
-                //var card = _cardRepository.Get(x => x.Id == specialNote.CardId);
-                //string message = string.Format("A special note for {0} {1} on {2} has been updated",
-                //    card.Candidate.FirstName, card.Candidate.LastName,
-                //    card.Vacancy.Name);
-                //ActivityType type = ActivityType.SpecialNote;
-                //Uri url = new Uri(string.Format("#/vacancy/{0}/candidate/{1}?tab={2}",
-                //    card.VacancyId, card.CandidateId, "specialnotes"), UriKind.Relative);
-                //_activityPostService.Post(message, type, url);
+                var card = _cardRepository.Get(x => x.CandidateId == specialNote.CandidateId && x.VacancyId == specialNote.VacancyId);
+                string message = string.Format("A special note for {0} {1} on '{2}' has been updated",
+                card.Candidate.FirstName, card.Candidate.LastName, card.Vacancy.Name);
+                ActivityType type = ActivityType.SpecialNote;
+                Uri url = new Uri(string.Format("#/vacancy/{0}/candidate/{1}?tab={2}",
+                    card.VacancyId, card.CandidateId, "specialnotes"), UriKind.Relative);
+                _activityPostService.Post(message, type, url);
             }
             catch (Exception e)
             {
@@ -194,7 +186,7 @@ namespace Hunter.Services.Services
         {
             try
             {
-                string message = string.Format("A test of {0} {1} on {2} has been uploaded", card.Candidate.FirstName,
+                string message = string.Format("A test for {0} {1} on {2} has been uploaded", card.Candidate.FirstName,
                     card.Candidate.LastName, card.Vacancy.Name);
                 ActivityType type = ActivityType.Test;
                 Uri url = new Uri(string.Format("#/vacancy/{0}/candidate/{1}?tab={2}",
@@ -215,6 +207,38 @@ namespace Hunter.Services.Services
                     candidate.LastName);
                 ActivityType type = ActivityType.Photo;
                 Uri url = new Uri("#/candidate/" + candidate.Id, UriKind.Relative);
+                _activityPostService.Post(message, type, url);
+            }
+            catch (Exception e)
+            {
+                _logger.Log("Creating activity exception : " + e.Message);
+            }
+        }
+
+        public void CreateChangedCardStageActivity(Card card, Stage oldStage)
+        {
+            try
+            {
+                string message = string.Format("Card stage for candidate {0} {1} in vacancy '{2}' has been changed from '{3}' to '{4}'", 
+                    card.Candidate.FirstName, card.Candidate.LastName, card.Vacancy.Name, oldStage.GetCustomDescription(), ((Stage)card.Stage).GetCustomDescription());
+                ActivityType type = ActivityType.Vacancy;
+                Uri url = new Uri("#/vacancy/" + card.VacancyId + "/candidate/" + card.CandidateId, UriKind.Relative);
+                _activityPostService.Post(message, type, url);
+            }
+            catch (Exception e)
+            {
+                _logger.Log("Creating activity exception : " + e.Message);
+            }
+        }
+
+        public void CreateUpdateCandidateResolution(Candidate candidate, Resolution oldResolution)
+        {
+            try
+            {
+                string message = string.Format("Resolution for {0} {1} has been changed from '{2}' to '{3}'",
+                    candidate.FirstName, candidate.LastName, oldResolution.GetCustomDescription(), ((Resolution)candidate.Resolution).GetCustomDescription());
+                ActivityType type = ActivityType.Candidate;
+                Uri url = new Uri("#/candidate/"+candidate.Id, UriKind.Relative);
                 _activityPostService.Post(message, type, url);
             }
             catch (Exception e)

@@ -16,5 +16,22 @@
                       msd-elastic></textarea>
         </div>
     </div>
-
+    <a ng-hide="overviewCtrl.showHistoryBlock" ng-click="overviewCtrl.GetFeedbacksHistory()" title="Show History Feedbacks">View Older</a>
+    <div ng-show="overviewCtrl.showHistoryBlock" ng- ng-repeat="feedback in overviewCtrl.feedbacksHistory">
+        <div class="row">
+            <div class="col-md-5">
+                <h3>{{generalCardCtrl.feedbackTypes[feedback.type].name}} {{ !generalCardCtrl.isLLM ? 'from ' + feedback.vacancy :''}}</h3>
+            </div>
+            <div class="col-md-7" style="text-align: right; margin-top: 25px">
+                <span ng-hide="feedback.date == ''">Updated by {{feedback.userAlias}} {{feedback.date | date:'dd.MM.yyyy HH:mm'}}</span>
+            </div>
+        </div>
+        <div ng-hide="feedback.text == ''">
+            <textarea class="form-control"
+                      ng-style="{'border-color':overviewCtrl.voteColors[feedback.successStatus] }"
+                      disabled name="text"
+                      ng-model="feedback.text"
+                      msd-elastic></textarea>
+        </div>
+    </div>
 </div>

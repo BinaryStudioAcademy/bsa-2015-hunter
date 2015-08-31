@@ -257,6 +257,10 @@
                 filt.push(stPred);
             }
 
+            if (filter.shortListed) {
+                filt.push(new $odata.Predicate('ShortListed', filter.shortListed));
+            }
+
             if (filter.search != undefined && filter.search.length > 0) {
                 var pred = $odata.Predicate.or([
                     new $odata.Func('substringof', new $odata.Property('tolower(\'' + filter.search + '\')'), new $odata.Property('tolower(FirstName)')),
