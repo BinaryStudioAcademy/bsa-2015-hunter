@@ -38,8 +38,8 @@
             </div>
         </div>
         <div class="hrInterview_comments">
-            <div class="hrInterview_form" ng-repeat="feedback in hrInterviewCtrl.feedbacks">
-                <form name="feedbackForm" >
+            <div class="hrInterview_form" ng-repeat="feedback in hrInterviewCtrl.feedbacks | orderBy: '-date'">
+                <form name="feedbackForm">
                     <div>
                         <div>
                             <div style="width: auto;">
@@ -56,8 +56,10 @@
                             <span ng-hide="feedback.date == '' || feedback.id==0">Updated by {{feedback.userAlias}} {{feedback.date | date:'dd.MM.yyyy hh.mm'}}</span>
                         </div>
                         <textarea class="form-control" ng-readonly="!feedback.editMode" name="text"
-                                  ng-model="feedback.text" msd-elastic 
-                                  ng-style="{'border-color':hrInterviewCtrl.voteColors[feedback.successStatus] }">{{feedback.text}}</textarea>
+                                  ng-model="feedback.text" msd-elastic
+                                  ng-style="{'border-color':hrInterviewCtrl.voteColors[feedback.successStatus] }">
+                            {{feedback.text}}
+                        </textarea>
                     </div>
                     <div>
                         <button ng-click="hrInterviewCtrl.updateFeedback(feedback)"
