@@ -87,6 +87,7 @@
         }
 
         function updateData() {
+            if (vm.isModal) return;
             $location.search(vm.filter);
         }
     }
