@@ -117,10 +117,10 @@
             if (routeParams.addedBy) {
                 if (angular.isArray(routeParams.addedBy)) {
                     angular.forEach(routeParams.addedBy, function (item) {
-                        filter.addedBy.push(item);
+                        filter.addedBy.push(parseInt(item));
                     });
                 } else {
-                    filter.addedBy.push(routeParams.addedBy);
+                    filter.addedBy.push(parseInt(routeParams.addedBy));
                 }
             };
             if (routeParams.status) {

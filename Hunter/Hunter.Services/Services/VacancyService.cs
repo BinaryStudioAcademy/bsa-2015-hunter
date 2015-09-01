@@ -69,8 +69,8 @@ namespace Hunter.Services
 
             if (filterParams.AddedByArray.Any())
             {
-                var selectedCreators = filterParams.AddedByArray;
-                query = query.Where(vac => selectedCreators.Contains(vac.UserProfile.UserLogin));
+                var selectedCreators = filterParams.AddedByArray.Select(Int32.Parse).ToList();
+                query = query.Where(vac => selectedCreators.Any(x=> vac.UserProfileId == x));
             }
 
             if (!string.IsNullOrWhiteSpace(filterParams.Filter))
@@ -201,6 +201,7 @@ namespace Hunter.Services
                     .GroupBy(c => c.UserProfile)
                     .Select(c => new AddedByDto()
                     {
+                        Id = c.Key.Id,
                         UserLogin = c.Key.UserLogin ?? "",
                         Alias = c.Key.Alias ?? "Nobody"
                     });
