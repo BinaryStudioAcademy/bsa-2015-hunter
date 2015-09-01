@@ -7,18 +7,17 @@
                     <img class="profile-photo img-circle" ng-src="{{generalCardCtrl.candidate.photoUrl}}"/>
                     <pool-selector pool-readonly="false" pool-short="false" candidate="generalCardCtrl.candidate"></pool-selector>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <div class="personal-info">
                         <div>
                             <span ng-if="!generalCardCtrl.isLLM" class="candidate-name">{{generalCardCtrl.candidate.firstName+" "+generalCardCtrl.candidate.lastName}} from General Pool</span>
                             <span ng-if="generalCardCtrl.isLLM" class="candidate-name">{{generalCardCtrl.candidate.firstName+" "+generalCardCtrl.candidate.lastName}} from {{generalCardCtrl.vacancy.name}}</span>
-
                         </div>
-                        <div>current/past: {{generalCardCtrl.candidate.currentPosition}}</div>
-                        <div>company/location: {{generalCardCtrl.candidate.company+", "+generalCardCtrl.candidate.location}}</div>
-                        <div>email: {{generalCardCtrl.candidate.email}}</div>
-                        <div>skype: {{generalCardCtrl.candidate.skype}}</div>
-                        <div>phone: {{generalCardCtrl.candidate.phone}}</div>
+                        <div>Current/Past: {{generalCardCtrl.candidate.currentPosition}}</div>
+                        <div>Company/Location: {{generalCardCtrl.candidate.company+", "+generalCardCtrl.candidate.location}}</div>
+                        <div>Email: {{generalCardCtrl.candidate.email}}</div>
+                        <div>Skype: {{generalCardCtrl.candidate.skype}}</div>
+                        <div>Phone: {{generalCardCtrl.candidate.phone}}</div>
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -34,7 +33,7 @@
                                 ng-options="resolution.id as resolution.name for resolution in generalCardCtrl.resolutions"></select>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="salary-wrapper">{{generalCardCtrl.candidate.salary}}</div>
                     <input class="btn-veiw-resume btn btn-default btn-block" type="button" value="Veiw Resume" ng-click="generalCardCtrl.showResume()" ng-disabled="generalCardCtrl.candidate.lastResumeUrl==''">
                     <a class="btn btn-default btn-block" href="#/candidate/edit/{{generalCardCtrl.candidate.id}}">Edit Profile</a>
