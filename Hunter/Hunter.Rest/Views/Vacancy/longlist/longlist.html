@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="row">
-                <h1 class="col-md-3">{{longListCtrl.vacancy.name}}</h1>
+                <h3 class="col-md-3">{{longListCtrl.vacancy.name}}</h3>
                 <div class="col-md-5">
                     <a class="btn btn-default" href="#/vacancy/edit/{{longListCtrl.vacancy.id}}">Edit Vacancy</a>
                     <a class="btn btn-default" href="#/candidate/edit">Create New Candidate</a>
@@ -14,16 +14,16 @@
     <div class="row">
         <div class="col-md-3 filte-form-wrapper">
             <div class="form-group">
-                <label>Filter</label>
+                <label>Search</label>
                 <input type="search" class="form-control" ng-model="longListCtrl.filter.search" ng-change="longListCtrl.updateUrl()">
             </div>
             <div class="filter-settings">
                 <ul>
                     <li>
-                        <input type="checkbox" ng-click="longListCtrl.updateUrl()" ng-model="longListCtrl.filter.shortlisted"> Shortlisted
+                        <input type="checkbox" ng-click="longListCtrl.updateUrl()" ng-model="longListCtrl.filter.shortlisted"> <label>Shortlisted</label>
                     </li>
                     <li>
-                        Stage
+                        <label>Stage</label>
                         <ul>
                             <li ng-repeat="st in longListCtrl.stages">
                                 <input ng-click="longListCtrl.updateUrl()" type="checkbox" checklist-model="longListCtrl.filter.stages" checklist-value="st.id"> {{st.name}}
@@ -31,7 +31,7 @@
                         </ul>
                     </li>
                     <li>
-                        Added by
+                        <label>Added by</label>
                         <ul>
                             <li ng-repeat="addedby in longListCtrl.addedByList">
                                 <input ng-click="longListCtrl.updateUrl()" type="checkbox" checklist-model="longListCtrl.filter.hr" checklist-value="addedby.userLogin"> {{addedby.userLogin == '' ? 'unknown' : addedby.alias}} <span>({{addedby.countOfAddedCandidates}})</span>

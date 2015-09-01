@@ -8,7 +8,7 @@
         <div class="filte-form-wrapper col-md-3">
 
             <div class="form-group">
-                <label>Filter</label>
+                <label>Search</label>
                 <input type="search" class="form-control" ng-model="candidateListCtrl.filter.search" ng-change="candidateListCtrl.updateCandidate()">
             </div>
 
@@ -17,12 +17,12 @@
                     <li>
                         <ul>
                             <li >
-                                <input ng-click="candidateListCtrl.updateCandidate()" type="checkbox" ng-model="candidateListCtrl.filter.shortListed" > ShortListed
+                                <input ng-click="candidateListCtrl.updateCandidate()" type="checkbox" ng-model="candidateListCtrl.filter.shortListed" > <label>ShortListed</label>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        Pool
+                        <label>Pool</label>
                         <ul>
                             <li ng-repeat="pool in candidateListCtrl.pools">
                                 <input ng-click="candidateListCtrl.updateCandidate()" type="checkbox" checklist-model="candidateListCtrl.filter.pools" checklist-value="pool.name"> {{pool.name}}
@@ -30,7 +30,7 @@
                         </ul>
                     </li>
                     <li>
-                        Resolution
+                        <label>Resolution</label>
                         <ul>
                             <li ng-repeat="status in candidateListCtrl.statuses">
                                 <input ng-click="candidateListCtrl.updateCandidate()" type="checkbox" checklist-model="candidateListCtrl.filter.statuses" checklist-value="status.id"> {{status.name}}
@@ -38,7 +38,7 @@
                         </ul>
                     </li>
                     <li>
-                        Added by
+                        <label>Added by</label>
                         <ul>
                             <li ng-repeat="inv in candidateListCtrl.inviters">
                                 <input ng-click="candidateListCtrl.updateCandidate()" type="checkbox" checklist-model="candidateListCtrl.filter.inviters" checklist-value="inv.userLogin"> {{inv.alias}}({{inv.countOfAddedCandidates}})
