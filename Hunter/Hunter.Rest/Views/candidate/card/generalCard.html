@@ -33,10 +33,6 @@
                                 ng-model="generalCardCtrl.candidate.resolution"
                                 ng-options="resolution.id as resolution.name for resolution in generalCardCtrl.resolutions"></select>
                     </div>
-                    <div ng-if="generalCardCtrl.isLLM" class="candidate-resolution form-group">
-                        <label>Substatus</label>
-                        <select class="form-control" ng-model="generalCardCtrl.currentSubstatus" ng-options="status as status.name for status in generalCardCtrl.substatuses"></select>
-                    </div>
                 </div>
                 <div class="col-md-3">
                     <div class="salary-wrapper">{{generalCardCtrl.candidate.salary}}</div>
@@ -51,7 +47,8 @@
                     </button>
                     <a class="btn btn-default btn-block" ng-show="generalCardCtrl.candidate.linkedin != ''" href="{{generalCardCtrl.candidate.linkedin}}" target="_blank">View LinkenIn Profile</a>
                     <a class="btn btn-default btn-block" href="#" data-toggle="modal" data-target="#addEditNotificationModal">Add Notification</a>
-                    <div ng-include="'/Views/notification/addEdit/addEditModal.html'"></div>
+                    <div ng-controller="NotificationListController as notificationListCtrl"
+                         ng-include="'/Views/notification/addEdit/addEditModal.html'"></div>
                 </div>
             </div>
         </div>

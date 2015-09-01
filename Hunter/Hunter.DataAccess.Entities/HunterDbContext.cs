@@ -100,8 +100,8 @@ namespace Hunter.DataAccess.Entities
 
             modelBuilder.Entity<UserProfile>()
                .HasMany(e => e.Test)
-               .WithOptional(e => e.UserProfile)
-               .HasForeignKey(e => e.UserProfileId)
+               .WithOptional(e => e.AssignedUserProfile)
+               .HasForeignKey(e => e.AssignedUserProfileId)
                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<UserRole>()
@@ -112,8 +112,8 @@ namespace Hunter.DataAccess.Entities
 
             modelBuilder.Entity<UserProfile>()
                 .HasMany(e => e.Test)
-                .WithOptional(e => e.UserProfile)
-                .HasForeignKey(e => e.UserProfileId)
+                .WithOptional(e => e.AssignedUserProfile)
+                .HasForeignKey(e => e.AssignedUserProfileId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Vacancy>()

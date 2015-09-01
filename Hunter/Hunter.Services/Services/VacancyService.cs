@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Hunter.DataAccess.Interface;
 using Hunter.Common.Interfaces;
-using Hunter.DataAccess.Interface.Base;
-using System.Reflection;
 using Hunter.DataAccess.Entities;
-using System;
-using System.Globalization;
-using Hunter.DataAccess.Entities.Entites.Enums;
+using Hunter.DataAccess.Interface;
+using Hunter.DataAccess.Interface.Base;
 using Hunter.Services.Dto.Vacancy;
 using Hunter.Services.Interfaces;
 

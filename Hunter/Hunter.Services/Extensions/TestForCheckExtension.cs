@@ -22,7 +22,7 @@ namespace Hunter.Services.Extensions
                 Comment = test.Comment,
                 FeedbackId = test.FeedbackId,
                 FileId = test.FileId,
-                UserProfileId = test.UserProfileId,
+                UserProfileId = test.AssignedUserProfileId,
                 Added = test.Added,
                 Url = test.Url,
                 File = file,
@@ -42,7 +42,7 @@ namespace Hunter.Services.Extensions
             test.FileId = testDto.FileId;
             test.Url = testDto.Url;
             test.Added = testDto.Added;
-            test.UserProfileId = testDto.UserProfileId;
+            test.AssignedUserProfileId = testDto.UserProfileId;
             test.IsChecked = test.IsChecked;
 
             if (test.File != null)

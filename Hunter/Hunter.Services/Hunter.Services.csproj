@@ -74,6 +74,8 @@
     <Compile Include="Dto\PoolCandidateDto.cs" />
     <Compile Include="Dto\ResumeDto.cs" />
     <Compile Include="Dto\ScheduledNotification\ScheduledNotificationDto.cs" />
+    <Compile Include="Dto\ScheduledNotification\ScheduledNotificationFilterDto.cs" />
+    <Compile Include="Dto\ScheduledNotification\ScheduledNotificationPageDto.cs" />
     <Compile Include="Dto\Test\TestCommentDto.cs" />
     <Compile Include="Dto\Test\TestDto.cs" />
     <Compile Include="Dto\SpecialNoteDto.cs" />

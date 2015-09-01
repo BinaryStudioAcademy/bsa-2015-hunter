@@ -1,4 +1,4 @@
-﻿<div ng-controller="NotificationListController as notificationListCtrl">
+﻿<div spinner="notificationListCtrl.showSpinner">
     <table ng-hide="notificationListCtrl.isModal && notificationListCtrl.notifications.length == 0" class="table table-bordered table-condensed table-striped table-hover">
         <tr class="tr-vert-center">
             <td><label>Type</label></td>
@@ -9,14 +9,32 @@
             <td><label>Viewed</label></td>
             <td></td>
         </tr>
-        <tr class="tr-vert-center" ng-repeat="notification in notificationListCtrl.notifications">
+        <tr dir-paginate="notification in notificationListCtrl.notifications | itemsPerPage: vacancyListCtrl.filter.pageSize"
+            total-items="vacancyListCtrl.totalCount" current-page="vacancyListCtrl.filter.page" class="tr-vert-center">
             <td><i class="glyphicon {{notificationListCtrl.notificationTypes[notification.notificationType].icon}}"></i></td>
             <td>{{notification.notificationDate | localDate | date:'dd.MM.yyyy HH:mm'}}</td>
             <td ng-hide="{{notificationListCtrl.isModal}}"><a href="#/candidate/{{notification.candidateId}}">{{notification.candidateName}}</a></td>
             <td>{{notification.message}}</td>
-            <td><input type="checkbox" ng-checked="{{notification.isSent}}" readonly /></td>
-            <td><input type="checkbox" ng-checked="{{notification.isShown}}" readonly /></td>
+            <td><input type="checkbox" ng-checked="{{notification.isSent}}" ng-disabled="true" /></td>
+            <td><input type="checkbox" ng-checked="{{notification.isShown}}" ng-disabled="true" /></td>
             <td><span class="glyphicon glyphicon-trash" title="Remove notification" ng-click="notificationListCtrl.deleteNotification($index)"></span></td>
         </tr>
     </table>
+    <div class="text-center">
+        <div class="pagination form-inline page-count-wrapper">
+            <span>Items on page</span>
+            <select class="form-control" ng-init="notificationListCtrl.filter.pageSize=25" 
+                    ng-model="notificationListCtrl.filter.pageSize" ng-change="">
+                <option value="5">5</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="{{notificationListCtrl.totalCount}}">All</option>
+            </select>
+        </div>
+        <dir-pagination-controls boundary-links="true"
+                                 on-page-change="notificationListCtrl.pageChangeHandler(newPageNumber)" 
+                                 template-url="/Views/vacancy/list/dirPagination.tpl.html">
+        </dir-pagination-controls>
+    </div>
 </div>

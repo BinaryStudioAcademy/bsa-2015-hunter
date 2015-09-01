@@ -200,11 +200,6 @@
                     'cardId': vm.test.cardId,
                     'feedbackId': null,
                     'added': new Date(),
-                    'userProfile': {
-                        Id: 0,
-                        Alias: '',
-                        Login: localStorageService.get('authorizationData').userName
-                    }
                 };
 
                 CardTestHttpService.sendTest(test, function (response) {

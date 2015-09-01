@@ -5,7 +5,9 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Hunter.Services;
+using Hunter.Services.Dto.ScheduledNotification;
 using Hunter.Services.Interfaces;
+using System.Linq;
 
 namespace Hunter.Rest.Controllers
 {
@@ -20,15 +22,43 @@ namespace Hunter.Rest.Controllers
             _scheduledNotificationService = scheduledNotificationService;
         }
 
+        //[HttpGet]
+        //[Route("")]
+        //[ResponseType(typeof(IEnumerable<ScheduledNotificationDto>))]
+        //public HttpResponseMessage Get()
+        //{
+        //    try
+        //    {
+        //        var login = RequestContext.Principal.Identity.Name;
+        //        var notifications = _scheduledNotificationService.Get(login);
+        //        return Request.CreateResponse(HttpStatusCode.OK, notifications);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+        //    }
+        //}
+
         [HttpGet]
         [Route("")]
-        [ResponseType(typeof(IEnumerable<ScheduledNotificationDto>))]
-        public HttpResponseMessage Get()
+        [ResponseType(typeof(PageDto<ScheduledNotificationDto>))]
+        public HttpResponseMessage Get(int page, int pageSize, string orderField, bool invertOrder, string notificationTypes)
         {
             try
             {
                 var login = RequestContext.Principal.Identity.Name;
-                var notifications = _scheduledNotificationService.Get(login);
+                var nTypes = notificationTypes.Trim('"');
+                var filter = new ScheduledNotificationFilterDto
+                {
+                    Page = page,
+                    PageSize = pageSize,
+                    OrderField = orderField,
+                    InvertOrder = invertOrder,
+                    NotificationTypes = !string.IsNullOrWhiteSpace(nTypes) ?
+                                        nTypes.Split(',').Select(n => int.Parse(n)).ToArray() : 
+                                        new int[0]
+                };
+                var notifications = _scheduledNotificationService.Get(login, filter);
                 return Request.CreateResponse(HttpStatusCode.OK, notifications);
             }
             catch (Exception ex)

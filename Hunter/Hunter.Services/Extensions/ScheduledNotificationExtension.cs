@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hunter.DataAccess.Entities;
 using Hunter.DataAccess.Entities.Enums;
+using Hunter.Services.Dto.ScheduledNotification;
 
 namespace Hunter.Services.Extensions
 {
