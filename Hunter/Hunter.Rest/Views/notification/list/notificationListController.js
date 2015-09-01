@@ -16,7 +16,7 @@
 
     function NotificationListController($location, authService, notificationHttpService, $routeParams, enumConstants, $scope) {
         var vm = this;
-        vm.controllerName = 'Notification list';
+        vm.controllerName = 'Notification List';
         vm.notificationTypes = enumConstants.notificationTypes;
         vm.filter = notificationHttpService.convertRouteParamsToFilter($routeParams);
         vm.isModal = false;
@@ -87,6 +87,7 @@
         }
 
         function updateData() {
+            if (vm.isModal) return;
             $location.search(vm.filter);
         }
     }

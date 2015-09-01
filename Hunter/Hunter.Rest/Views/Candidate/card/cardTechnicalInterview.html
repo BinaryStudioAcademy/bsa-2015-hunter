@@ -34,7 +34,7 @@
 
 
         <div class="hrInterview_comments">
-            <div class="hrInterview_form" ng-repeat="item in techInterviewCtrl.techFeedbacks">
+            <div class="hrInterview_form" ng-repeat="item in techInterviewCtrl.techFeedbacks | orderBy: '-date'">
                 <form name="feedbackForm" >
                     <div>
                         <div>

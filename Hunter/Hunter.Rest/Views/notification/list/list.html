@@ -2,12 +2,8 @@
     <h3>{{notificationListCtrl.controllerName}}</h3>
     <div class="row">
         <div class="col-md-3">
-            <!--<div class="form-group">
-                <label>Filter</label>
-                <input type="search" class="form-control" ng-model="notificationListCtrl.filter.search" ng-change="notificationListCtrl.updateData()">
-            </div>-->
+            <label>Notification Types</label>
             <div class="filter-settings">
-                <label>Notification Types</label>
                 <ul >
                     <li ng-repeat="nt in notificationListCtrl.notificationTypes">
                         <input ng-click="notificationListCtrl.updateData()" type="checkbox" checklist-model="notificationListCtrl.filter.notificationTypes" checklist-value="nt.id"> {{nt.name}}

@@ -60,6 +60,7 @@
                 vm.show = false;
                 $scope.wid = $scope.poolReadonly === 'true' ? '100%' : 'auto';
                 vm.firstUse = true;
+//                vm.poolSpinner = false;
 
                 vm.toggleShow = function () {
                     vm.show = !vm.show;
@@ -73,6 +74,7 @@
                 }
                 //Start check pool
                 vm.addPoolToCandidate = function (pool) {
+//                    vm.poolSpinner = true;
 
                     if ($scope.candidate.poolNames.indexOf(pool.name) == -1) {
                         if ($scope.poolLazy === 'true') {
@@ -93,6 +95,7 @@
                                 });
                         }
                     }
+//                    vm.poolSpinner = false;
                 }
                 //add pool from candidate poolList
                 function selectPool(pool) {
@@ -104,7 +107,7 @@
                 }
                 //delete pool from candidate poolList
                 function unselectPool(pool) {
-                    var index = $scope.candidate.poolNames.indexOf(pool);
+                    var index = $scope.candidate.poolNames.indexOf(pool.name);
                     $scope.candidate.poolNames.splice(index, 1);
                     delete $scope.candidate.poolColors[pool.name.toLowerCase()];
                 }
