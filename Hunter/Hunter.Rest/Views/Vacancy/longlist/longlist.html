@@ -3,6 +3,10 @@
         <div class="col-md-12">
             <div class="row">
                 <h3 class="col-md-3">{{longListCtrl.vacancy.name}}</h3>
+                    <h1 class="">{{longListCtrl.vacancy.name}}</h1>
+                    <pool-selector pool-lazy="true" pool-readonly="true" pool-short="false"
+                                   candidate="longListCtrl.vacancy"></pool-selector>
+                </div>
                 <div class="col-md-5">
                     <a class="btn btn-default" href="#/vacancy/edit/{{longListCtrl.vacancy.id}}">Edit Vacancy</a>
                     <a class="btn btn-default" href="#/candidate/edit">Create New Candidate</a>
@@ -48,6 +52,8 @@
                     <shor-list-star is-short="candidate.shortlisted" candidate-id="candidate.id" size="'18px'" ng-click="$event.stopPropagation();"></shor-list-star>
                     <img ng-src="{{candidate.photoUrl}}"/>
                     <p class="years_of_experience" title="Years of Experience">{{candidate.yearsOfExperience}}</p>
+                    <pool-selector pool-lazy="true" pool-readonly="true" pool-short="true"
+                                   candidate="candidate"></pool-selector>
                 </div>
                 <div class="col-md-4">
                     <p>

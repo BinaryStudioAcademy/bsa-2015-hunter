@@ -98,7 +98,7 @@ namespace Hunter.Services
                 AddedBy = c.UserProfile != null ? c.UserProfile.UserLogin : "",
                 AddDate = c.Added,
                 PhotoUrl = "api/fileupload/pictures/" + c.CandidateId,
-                
+                PoolNames = c.Candidate.Pool.Select(x => x.Name),
                 Shortlisted = c.Candidate != null && c.Candidate.Shortlisted,
                 UserAlias = c.UserProfile != null ? c.UserProfile.Alias : ""
             });

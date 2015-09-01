@@ -18,7 +18,7 @@
     </div>
     <hr>
     <a ng-hide="overviewCtrl.showHistoryBlock" ng-click="overviewCtrl.GetFeedbacksHistory()" title="Show History Feedbacks">View Older</a>
-    <div ng-show="overviewCtrl.showHistoryBlock" ng-repeat="feedback in overviewCtrl.feedbacksHistory">
+    <div ng-show="overviewCtrl.showHistoryBlock" ng-repeat="feedback in overviewCtrl.feedbacksHistory | orderBy: ['type','-date']">
         <div class="row">
             <div class="col-md-5">
                 <h3>{{generalCardCtrl.feedbackTypes[feedback.type].name}} {{ !generalCardCtrl.isLLM ? 'from ' + feedback.vacancy :''}}</h3>

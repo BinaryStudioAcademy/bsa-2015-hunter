@@ -16,5 +16,6 @@ namespace Hunter.Services.Interfaces
         IEnumerable<AddedByDto> GetVacanciesAddedBy();
 
         IEnumerable<VacancyByStateDto> GetVacancyByState(int id);
+        Dictionary<string, string> GetColors(int vacancyId);
     }
 }

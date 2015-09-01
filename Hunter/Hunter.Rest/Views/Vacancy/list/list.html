@@ -27,7 +27,7 @@
                 <ul>
                     <li ng-repeat="pool in vacancyListCtrl.pools">
                         <div class="checkbox">
-                            <label><input type="checkbox" ng-click="vacancyListCtrl.pushPopItem(vacancyListCtrl.pools[$index].id, vacancyListCtrl.filterParams.pool)">{{pool.name}}</label>
+                            <label><input type="checkbox" checklist-model="vacancyListCtrl.filterParams.pool" checklist-value="pool.id">{{pool.name}}</label>
                         </div>
                     </li>
                 </ul>
@@ -36,7 +36,7 @@
                 <ul>
                     <li ng-repeat="status in vacancyListCtrl.statuses">
                         <div class="checkbox">
-                            <label><input type="checkbox" ng-click="vacancyListCtrl.pushPopItem(vacancyListCtrl.statuses[$index].id, vacancyListCtrl.filterParams.status)" ng-checked="status.id == 1">{{status.name}}</label>
+                            <label><input type="checkbox" checklist-model="vacancyListCtrl.filterParams.status" checklist-value="status.id">{{status.name}}</label>
                         </div>
                     </li>
                 </ul>
@@ -45,7 +45,7 @@
                 <ul>
                     <li ng-repeat="adder in vacancyListCtrl.adders">
                         <div class="checkbox">
-                            <label><input type="checkbox" ng-click="vacancyListCtrl.pushPopItem(vacancyListCtrl.adders[$index].userLogin, vacancyListCtrl.filterParams.addedBy)">{{adder.alias}}</label>
+                            <label><input type="checkbox" checklist-model="vacancyListCtrl.filterParams.addedBy" checklist-value="adder.id">{{adder.alias}}</label>
                         </div>
                     </li>
                 </ul>
@@ -75,7 +75,10 @@
                             <td class="rowlink-skip">
                                 <a href="#/vacancy/edit/{{vacancy.id}}" title="Edit Vacancy"><i class="fa fa-pencil"></i></a>
                             </td>
-                            <td>{{vacancy.poolName}}</td>
+                            <td>
+                                <pool-selector pool-lazy="true" pool-readonly="true" pool-short="false"
+                                               candidate="vacancy"></pool-selector>
+                            </td>
                             <td>{{vacancy.startDate == null ? 'no date' : vacancy.startDate | date:'dd.MM.yyyy'}}</td>
 <!--                            <td>{{vacancy.endDate == null ? 'no date' : vacancy.endDate | date:'dd.MM.yyyy'}}</td>-->
                             <td><a href="#/user/edit/{{vacancy.addedById}}">{{vacancy.addedByName}}</a></td>                            
@@ -85,7 +88,7 @@
                 <div class="text-center">
                     <div class="pagination form-inline page-count-wrapper">
                         <span>Items on page</span>
-                        <select class="form-control" ng-init="vacancyListCtrl.filterParams.pageSize=25" ng-model="vacancyListCtrl.filterParams.pageSize" ng-change="">
+                        <select class="form-control" ng-model="vacancyListCtrl.filterParams.pageSize" ng-change="">
                             <option value="5">5</option>
                             <option value="25">25</option>
                             <option value="50">50</option>
@@ -94,7 +97,7 @@
                         </select>
 
                     </div>
-                    <dir-pagination-controls boundary-links="true" on-page-change="vacancyListCtrl.pageChangeHandler(newPageNumber)" template-url="/Views/vacancy/list/dirPagination.tpl.html"></dir-pagination-controls>
+                    <dir-pagination-controls boundary-links="true" ng-model="vacancyListCtrl.filterParams.page" on-page-change="vacancyListCtrl.pageChangeHandler(newPageNumber)" template-url="/Views/vacancy/list/dirPagination.tpl.html"></dir-pagination-controls>
                 </div>
             </div>
         </form>
