@@ -33,10 +33,6 @@
                                 ng-model="generalCardCtrl.candidate.resolution"
                                 ng-options="resolution.id as resolution.name for resolution in generalCardCtrl.resolutions"></select>
                     </div>
-                    <div ng-if="generalCardCtrl.isLLM" class="candidate-resolution form-group">
-                        <label>Substatus</label>
-                        <select class="form-control" ng-model="generalCardCtrl.currentSubstatus" ng-options="status as status.name for status in generalCardCtrl.substatuses"></select>
-                    </div>
                 </div>
                 <div class="col-md-3">
                     <div class="salary-wrapper">{{generalCardCtrl.candidate.salary}}</div>
