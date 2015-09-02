@@ -45,12 +45,10 @@
             if ($scope.$parent.generalCardCtrl.isLLM) {
                 FeedbackHttpService.getFeedbacksHistory($routeParams.vid, $routeParams.cid).then(function (result) {
                     vm.feedbacksHistory = result;
-                    console.log(result);
                 });
             } else {
                 FeedbackHttpService.getFeedbacksHistory(0, $routeParams.cid).then(function (result) {
-                    vm.feedbacksHistory = result;
-                    console.log(result);
+                    vm.feedbacksHistory = result;;
                 });
             }
             
