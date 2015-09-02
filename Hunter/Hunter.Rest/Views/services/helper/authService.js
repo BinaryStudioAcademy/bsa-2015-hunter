@@ -28,13 +28,23 @@
 
         var _login = function (loginData) {
 
-            var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
+            var data = {email: loginData.userName ,password: loginData.password}
 
             var deferred = $q.defer();
 
-            $http.post('/token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
-
-                .success(function (response) {
+            $http.defaults.useXDomain = true;
+            $http({
+                    method: 'POST',
+                    url: 'http://team.binary-studio.com/auth/api/login',
+                    headers: {
+                        'Content-Type': 'application/json;charset=UTF-8'
+                    },
+                    withCredentials: true,
+                    data: {
+                        "email": loginData.userName,
+                        "password": loginData.password
+                    }
+                }).success(function (response) {
 
                     localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName });
 

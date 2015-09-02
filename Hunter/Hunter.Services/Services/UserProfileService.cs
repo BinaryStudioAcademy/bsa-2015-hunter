@@ -45,6 +45,11 @@ namespace Hunter.Services
             return users;
         }
 
+        public bool UserExist(string userName)
+        {
+            return _profileRepo.Query().Any(p => p.UserLogin.ToLower() == userName.ToLower());
+        }
+
         public IList<UserProfileRowVm> LoadPage(int page)
         {
             if (page <= 0)

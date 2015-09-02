@@ -4,9 +4,9 @@
         .module('hunter-app')
         .factory('AuthInterceptorService', AuthInterceptorService);
 
-    AuthInterceptorService.$inject = ['$q', '$injector', '$location', 'localStorageService'];
+    AuthInterceptorService.$inject = ['$q', '$injector', '$location', 'localStorageService', '$cookies', '$window'];
 
-    function AuthInterceptorService($q, $injector, $location, localStorageService) {
+    function AuthInterceptorService($q, $injector, $location, localStorageService, $cookies, $window) {
 
     var authInterceptorServiceFactory = {};
 
@@ -24,9 +24,12 @@
     var _responseError = function (rejection) {
         if (rejection.status === 401) {
             var authService = $injector.get('AuthService');
-            
+            console.log(rejection);
             authService.logOut();
-            $location.path('/login');
+            $cookies.put('referer', $location.absUrl());
+            $window.location.href = 'http://localhost:2020';
+            //$window.location.href = 'http://team.binary-studio.com/auth/';
+           // $location.path('/login');
         }
         return $q.reject(rejection);
     }

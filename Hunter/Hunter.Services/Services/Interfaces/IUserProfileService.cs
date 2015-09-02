@@ -11,5 +11,6 @@ namespace Hunter.Services.Interfaces
         ApiResult Save(EditUserProfileVm userProfile);
         IdApiResult Delete(long userProfileId);
         IEnumerable<UserProfileRowVm> GetUserProfile(string roleName);
+        bool UserExist(string userName);
     }
 }
