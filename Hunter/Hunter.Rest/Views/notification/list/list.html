@@ -1,10 +1,10 @@
-﻿<div class="container">
+﻿<div class="container site-content">
     <h3>{{notificationListCtrl.controllerName}}</h3>
     <div class="row">
         <div class="col-md-3">
             <label>Notification Types</label>
             <div class="filter-settings">
-                <ul >
+                <ul>
                     <li ng-repeat="nt in notificationListCtrl.notificationTypes">
                         <input ng-click="notificationListCtrl.updateData()" type="checkbox" checklist-model="notificationListCtrl.filter.notificationTypes" checklist-value="nt.id"> {{nt.name}}
                     </li>

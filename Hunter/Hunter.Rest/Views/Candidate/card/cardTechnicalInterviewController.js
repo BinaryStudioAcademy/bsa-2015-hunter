@@ -66,6 +66,7 @@
                     feedback.userAlias = result.userAlias;
                 }              
                 else {
+                    setFeedbackConfig(result);
                     vm.techFeedbacks.push(result);
                     vm.newTechFeedbackText = '';
                 }

@@ -21,7 +21,6 @@ body {
 
 .container {
     background-color: white;
-    margin-left: 5px;
 }
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
@@ -45,4 +44,18 @@ body {
 
 .edit-page-photo {
     height: 300px;
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.site-content {
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.site-menu {
+    padding-left: 0;
+    padding-right: 0;
 }

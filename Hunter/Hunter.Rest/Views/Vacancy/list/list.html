@@ -1,10 +1,10 @@
 ﻿<!--should includ MyStyle.css -->
-<div class="container">
+<div class="container site-content">
     <h3>Vacancies</h3>
     <div class="row">
         <div class="col-md-3">
             <label>Search</label>
-            <input type="text" class="form-control" id="searchFilter" placeholder="Search" ng-model="vacancyListCtrl.filterParams.filter"><br/>
+            <input type="text" class="form-control" id="searchFilter" placeholder="Search" ng-model="vacancyListCtrl.filterParams.filter"><br />
             <label>Pool</label>
             <div class="filter-settings">
                 <ul>
@@ -52,24 +52,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="vacancy in vacancyListCtrl.vacancies | itemsPerPage: vacancyListCtrl.filterParams.pageSize"
-                        total-items="vacancyListCtrl.totalCount" current-page="vacancyListCtrl.filterParams.page">
-                        <td>
-                            <input type="checkbox"/>
-                        </td>
-                        <td>
-                            <a href="#/vacancy/{{vacancy.id}}/longlist">{{vacancy.name}}</a>
-                        </td>
-                        <td class="rowlink-skip">
-                            <a href="#/vacancy/edit/{{vacancy.id}}" title="Edit Vacancy"><i class="fa fa-pencil"></i></a>
-                        </td>
-                        <td>
-                            <pool-selector pool-lazy="true" pool-readonly="true" pool-short="false"
-                                           candidate="vacancy"></pool-selector>
-                        </td>
-                        <td>{{vacancy.startDate == null ? 'no date' : vacancy.startDate | date:'dd.MM.yyyy'}}</td>
-                        <td><a href="#/user/edit/{{vacancy.addedById}}">{{vacancy.addedByName}}</a></td>
-                    </tr>
+                        <tr dir-paginate="vacancy in vacancyListCtrl.vacancies | itemsPerPage: vacancyListCtrl.filterParams.pageSize"
+                            total-items="vacancyListCtrl.totalCount" current-page="vacancyListCtrl.filterParams.page">
+                            <td>
+                                <input type="checkbox" />
+                            </td>
+                            <td>
+                                <a href="#/vacancy/{{vacancy.id}}/longlist">{{vacancy.name}}</a>
+                            </td>
+                            <td class="rowlink-skip">
+                                <a href="#/vacancy/edit/{{vacancy.id}}" title="Edit Vacancy"><i class="fa fa-pencil"></i></a>
+                            </td>
+                            <td>
+                                <pool-selector pool-lazy="true" pool-readonly="true" pool-short="false"
+                                               candidate="vacancy"></pool-selector>
+                            </td>
+                            <td>{{vacancy.startDate == null ? 'no date' : vacancy.startDate | date:'dd.MM.yyyy'}}</td>
+                            <td><a href="#/user/edit/{{vacancy.addedById}}">{{vacancy.addedByName}}</a></td>
+                        </tr>
                     </tbody>
                 </table>
                 <div>
