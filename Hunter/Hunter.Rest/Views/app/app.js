@@ -104,7 +104,8 @@ angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.dir
                 .when('/activity', {
                     templateUrl: viewPath + 'activity/list/list.html',
                     controller: "ActivityListController",
-                    controllerAs: "ActivityListCtrl"
+                    controllerAs: "ActivityListCtrl",
+                    reloadOnSearch: false
                 });
 
             $routeProvider

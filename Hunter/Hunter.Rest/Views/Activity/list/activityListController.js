@@ -38,39 +38,44 @@
         //})();
 
         vm.getActivitiesOdata = getActivitiesOdata;
-
+        vm.update = update;
         vm.activitiesList = [];
 
-        vm.filterSpinner = false;
-        
+        vm.filterSpinner = false;        
+
+        vm.filter = {
+            users: [],
+            tags: [],
+            currentPage: 1,
+            pageSize: vm.itemsOnPage.defaultItem
+        };
+        vm.skip = 0;
+        var predicate;        
+
         // get filter options 
         (function () {
             vm.filterSpinner = true;
             vm.filterUsers = [];
             vm.filterTags = [];
-            activityHttpService.getFilterOptions().then(function(data) {
+            activityHttpService.getFilterOptions().then(function (data) {
                 vm.filterUsers = activityService.getFilterUsers(data);
                 vm.filterTags = activityService.getFilterTags(data);
                 vm.filterSpinner = false;
             });
+            vm.filter = activityService.convertUrlToFilter($location.search());
+            //console.log(vm.filter);
+            vm.getActivitiesOdata(vm.filter);
+            //activityService.convertUrlToFilter($location.search());
         })();
 
-        vm.filter = {
-            users: [],
-            tags: [],
-            currentPage: 1
-        };
-        vm.pageSize = vm.itemsOnPage.defaultItem;
-        vm.skip = 0;
-        var predicate;
-        var activitiesOdata = $odataresource('/api/activities/odata');
+        vm.listSpinner = false;
 
-        vm.listSpinner = false; 
-        function getActivitiesOdata() {
+        function getActivitiesOdata(filter) {
             vm.listSpinner = true;
-            var acts = activitiesOdata.odata()
+            //console.log(vm.filter);
+           /* var acts = activitiesOdata.odata()
                                         .withInlineCount()
-                                        .take(vm.pageSize)
+                                        .take(vm.filter.pageSize)
                                         .skip(vm.skip)
                                         .filter(predicate)
                                         .orderBy('Time', 'desc')
@@ -78,48 +83,25 @@
                                             vm.activitiesList = acts.items;
                                             vm.totalItems = acts.count;
                                             vm.listSpinner = false; 
-                                        });
+                                        });*/
+            activityHttpService.getActivitiesByFilter(filter).then(function (result) {
+                vm.activitiesList = result.items;
+                vm.totalItems = result.count;
+                vm.listSpinner = false;
+            });
         };
+        
+        function update() {
+            $location.search(vm.filter);
+        }
 
+        $scope.$on('$routeUpdate', function () {
+            vm.getActivitiesOdata(vm.filter);
+        });
         // filters
-        $scope.$watch('ActivityListCtrl.filter', function () {
-            var filt = [];
-
-            if (vm.filter.users.length > 0) {
-                var uPred = [];
-                angular.forEach(vm.filter.users, function (value, key) {
-                    uPred.push(new $odata.Predicate('UserAlias', value));
-                });
-
-                uPred = $odata.Predicate.or(uPred);
-                filt.push(uPred);
-            }
-
-            if (vm.filter.tags.length > 0) {
-                var tPred = [];
-                angular.forEach(vm.filter.tags, function (value, key) {
-                    tPred.push(new $odata.Predicate('Tag', value));
-                });
-
-                tPred = $odata.Predicate.or(tPred);
-                filt.push(tPred);
-            }
-
-            if (filt.length > 0) {
-                predicate = $odata.Predicate.and(filt);
-            } else {
-                predicate = undefined;
-            }
-
-            vm.skip = (vm.filter.currentPage - 1) * vm.pageSize;
-
-            vm.getActivitiesOdata();
-        }, true);
-
-        vm.getActivitiesOdata();
-
-
-
+        //$scope.$watch('ActivityListCtrl.filter', function () {
+            
+        //}, true);    
 
         vm.activityList;
         // Here we should write any functions we need, for example, body of user actions methods.
