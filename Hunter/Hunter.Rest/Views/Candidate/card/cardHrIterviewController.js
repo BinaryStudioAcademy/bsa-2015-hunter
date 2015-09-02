@@ -80,6 +80,7 @@
                     feedback.userAlias = result.userAlias;
                 }
                 else {
+                    setFeedbackConfig(result);
                     vm.feedbacks.push(result);
                     vm.newFeedbackText = '';
                 }

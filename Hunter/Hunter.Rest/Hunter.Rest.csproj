@@ -503,6 +503,8 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\hrInterview.css" />
     <Content Include="Content\hrSpecialNote.css" />
+    <Content Include="Content\img\favicon.ico" />
+    <Content Include="Content\img\no_photo.png" />
     <Content Include="Content\longlist.css" />
     <Content Include="Content\MyStyle.css" />
     <Content Include="Content\pool.css" />
