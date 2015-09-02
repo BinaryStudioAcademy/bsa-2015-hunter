@@ -17,7 +17,8 @@
 
         var service = {
             getFilterUsers: getFilterUsers,
-            getFilterTags: getFilterTags
+            getFilterTags: getFilterTags,
+            convertUrlToFilter: convertUrlToFilter
         };
         
         function getFilterUsers(f) {
@@ -43,6 +44,40 @@
             return vm.filterTags;
         }
 
+        function convertUrlToFilter(url) {
+            var filter = {
+                pageSize: url.pageSize || EnumConstants.itemsOnPage.defaultItem,
+                currentPage: url.currentPage || 1,
+                users: [],
+                tags: [] 
+            }
+            
+            if(url.tags)
+            {
+                if(angular.isArray(url.tags)){
+                    angular.forEach(url.tags, function(item){
+                        filter.tags.push(item);
+                    });
+                }
+                else {
+                    filter.tags.push(url.tags);
+                }
+            }
+            
+            if(url.users)
+            {
+                if(angular.isArray(url.users)){
+                    angular.forEach(url.users, function(item){
+                        filter.users.push(item);
+                    });
+                }
+                else {
+                    filter.users.push(url.users);
+                }
+            }
+       
+            return filter;
+        }
 
         return service;
     }

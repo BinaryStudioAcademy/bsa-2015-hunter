@@ -13,14 +13,14 @@
                     <li>User
                         <ul>
                             <li ng-repeat="u in ActivityListCtrl.filterUsers">
-                                <input type="checkbox" checklist-model="ActivityListCtrl.filter.users" checklist-value="u.name"> {{u.name}} <span>({{u.count}})</span>
+                                <input type="checkbox" ng-click="ActivityListCtrl.update()" checklist-model="ActivityListCtrl.filter.users" checklist-value="u.name"> {{u.name}} <span>({{u.count}})</span>
                             </li>
                         </ul>
                     </li>
                     <li>Tag Type
                         <ul>
                             <li ng-repeat="t in ActivityListCtrl.filterTags">
-                                <input type="checkbox" checklist-model="ActivityListCtrl.filter.tags" checklist-value="t.name"> {{t.name}} <span>({{t.count}})</span>
+                                <input type="checkbox" ng-click="ActivityListCtrl.update()" checklist-model="ActivityListCtrl.filter.tags" checklist-value="t.name"> {{t.name}} <span>({{t.count}})</span>
                             </li>
                         </ul>
                     </li>
@@ -42,11 +42,12 @@
             </table>
             <div class="pagination page-count-wrapper form-inline">
                 <span>Items on page</span>
-                <select class="form-control" ng-change="ActivityListCtrl.getActivitiesOdata()" ng-options="item as item for item in ActivityListCtrl.itemsOnPage.items" ng-model="ActivityListCtrl.pageSize"></select>
+                <select class="form-control" ng-change="ActivityListCtrl.update()" ng-options="item as item for item in ActivityListCtrl.itemsOnPage.items" ng-model="ActivityListCtrl.filter.pageSize"></select>
             </div>
             <pagination total-items="ActivityListCtrl.totalItems"
                         ng-model="ActivityListCtrl.filter.currentPage"
-                        items-per-page="ActivityListCtrl.pageSize"
+                        ng-click="ActivityListCtrl.update()"
+                        items-per-page="ActivityListCtrl.filter.pageSize"
                         max-size="5"
                         class="pagination-sm"
                         boundary-links="true"
