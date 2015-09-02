@@ -9,7 +9,7 @@
             </div>
         </div>
         <div ng-hide="feedback.text == ''">
-            <textarea class="form-control"
+            <textarea class="form-control feedbackField"
                       ng-style="{'border-color':overviewCtrl.voteColors[feedback.successStatus]}"
                       disabled name="text"
                       ng-model="feedback.text"
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div ng-hide="feedback.text == ''">
-            <textarea class="form-control"
+            <textarea class="form-control feedbackField"
                       ng-style="{'border-color':overviewCtrl.voteColors[feedback.successStatus] }"
                       disabled name="text"
                       ng-model="feedback.text"
