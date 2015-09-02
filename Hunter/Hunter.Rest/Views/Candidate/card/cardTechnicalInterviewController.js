@@ -86,17 +86,35 @@
         function getAllFeedbacks() {
             FeedbackHttpService.getTechFeedback(0, $routeParams.cid).then(function (result) {
                 vm.techFeedbacks = result;
+                vm.techFeedbacks.forEach(function(feedback) {
+                    setFeedbackConfig(feedback);
+                });
             });
         }
         function getMyFeedbacks() {
             FeedbackHttpService.getTechFeedback(-1, $routeParams.cid).then(function (result) {
                 vm.techFeedbacks = result;
+                vm.techFeedbacks.forEach(function (feedback) {
+                    setFeedbackConfig(feedback);
+                });
             });
         }
         function getFeedbacks() {
             FeedbackHttpService.getTechFeedback($routeParams.vid, $routeParams.cid).then(function (result) {
                 vm.techFeedbacks = result;
+                vm.techFeedbacks.forEach(function (feedback) {
+                    setFeedbackConfig(feedback);
+                });
             });
+        }
+
+        function setFeedbackConfig(feedback) {
+            feedback.feedbackConfig = {};
+            feedback.feedbackConfig.style = {
+                "border-color": feedback.successStatus == 0 ? EnumConstants.voteColors['None']
+                    : feedback.successStatus == 1 ? EnumConstants.voteColors['Like']
+                    : EnumConstants.voteColors['Dislike']
+            }
         }
 
     }
