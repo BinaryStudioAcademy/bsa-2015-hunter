@@ -96,7 +96,7 @@ namespace Hunter.Rest
                         ValidateAudience = false,
                         IssuerSigningToken = new BinarySecretSecurityToken(secret),
                     },
-                    Provider = new CookiesJwtOAuthProvider(NinjectContainer.Resolve<IUserProfileService>())
+                    Provider = new CookiesJwtOAuthProvider()
 
                 });
         }

@@ -8,12 +8,13 @@ namespace Hunter.Rest.Providers
 {
     public class CookiesJwtOAuthProvider : OAuthBearerAuthenticationProvider
     {
-        private readonly IUserProfileService _userProfileService;
+        //private  IUserProfileService _userProfileService;
 
-        public CookiesJwtOAuthProvider(IUserProfileService userProfileService)
-        {
-            _userProfileService = userProfileService;
-        }
+        //public  CookiesJwtOAuthProvider()
+        //{
+        //    _userProfileService = NinjectContainer.Resolve<IUserProfileService>();
+        //}
+        
         
 
         public override Task RequestToken(OAuthRequestTokenContext context)
@@ -29,6 +30,8 @@ namespace Hunter.Rest.Providers
 
         public override Task ValidateIdentity(OAuthValidateIdentityContext context)
         {
+            IUserProfileService _userProfileService = NinjectContainer.Resolve<IUserProfileService>();
+
             if (!_userProfileService.UserExist(context.Ticket.Identity.Name))
             {
                 _userProfileService.Save(new EditUserProfileVm()
