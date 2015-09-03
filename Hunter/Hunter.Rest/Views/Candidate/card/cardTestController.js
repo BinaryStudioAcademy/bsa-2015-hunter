@@ -165,7 +165,7 @@
                     'testId': test.id
                 }).then(function(result) {
                     test.feedback.id = result.id;
-                    test.feedback.date = result.update;
+                    test.feedback.date = result.date;
                     test.feedback.userAlias = result.userAlias;
                 });
             }
@@ -271,7 +271,7 @@
                             'testId': test.id
                         }).then(function(result) {
                             test.feedback.id = result.id;
-                            test.feedback.date = result.update;
+                            test.feedback.date = result.date;
                             test.feedback.userAlias = result.userAlias;
                             test.feedbackId = result.id;
                         });
