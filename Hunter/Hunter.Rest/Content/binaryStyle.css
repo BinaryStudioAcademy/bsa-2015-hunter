@@ -28,6 +28,7 @@ body {
 }
 
 .dropdown-menu li > a:hover, .dropdown-menu li > a:focus, .dropdown-submenu:hover > a {
+    background-color: black;
     color: #ff9a06;
 }
 

@@ -18,19 +18,22 @@ namespace Hunter.Tests.Services
         private readonly ICardRepository _cardRepository;
         private readonly IVacancyService _vacancyService;
         private readonly ICandidateService _candidateService;
+        private IPoolRepository _poolRepository;
 
         public VacancyServiceTests()
         {
             _vacancyRepository = Substitute.For<IVacancyRepository>();
             _candidateRepository = Substitute.For<ICandidateRepository>();
             _cardRepository = Substitute.For<ICardRepository>();
+            _poolRepository = Substitute.For<IPoolRepository>();
 
             var unitOfWork = Substitute.For<IUnitOfWork>();
             var logger = Substitute.For<ILogger>();
             var activityHelperService = Substitute.For<IActivityHelperService>();
             var userProfieRepository = Substitute.For<IUserProfileRepository>();
 
-            _vacancyService = new VacancyService(_vacancyRepository, _candidateRepository,_cardRepository, logger, unitOfWork, activityHelperService, userProfieRepository) ;
+            _vacancyService = new VacancyService(_vacancyRepository, _candidateRepository,_cardRepository, logger, unitOfWork,
+                                                 activityHelperService, userProfieRepository, _poolRepository);
 
         }
 

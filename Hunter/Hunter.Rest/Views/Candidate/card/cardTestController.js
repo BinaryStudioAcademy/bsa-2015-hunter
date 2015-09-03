@@ -71,6 +71,9 @@
             CardTestHttpService.sendTest(testSend, function(response) {
                 var lastUploadTestId = response.data;
                 testSend.id = lastUploadTestId;
+                testSend.assignedUserProfile = null;
+                testSend.isChecked = false;
+
                 testSend.feedback = {
                     'cardId': vm.test.cardId,
                     'text': '',
@@ -204,6 +207,8 @@
 
                 CardTestHttpService.sendTest(test, function (response) {
                     var testId = response.data;
+                    test.assignedUserProfile = null;
+                    test.isChecked = false;
 
                     test.id = testId;
                     test.feedback = {
