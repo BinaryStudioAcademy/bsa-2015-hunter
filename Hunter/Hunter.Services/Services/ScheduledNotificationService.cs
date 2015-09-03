@@ -11,6 +11,7 @@ using System.Net;
 using Hunter.DataAccess.Entities;
 using System.IO;
 using System.Text;
+using Hunter.Services.Dto.ScheduledNotification;
 
 namespace Hunter.Services
 {
@@ -162,6 +163,38 @@ namespace Hunter.Services
         {
             notifications.ForEach(n => n.IsSent = true);
             _unitOfWork.SaveChanges();
+            notifications.Clear();
+        }
+
+
+        public PageDto<ScheduledNotificationDto> Get(string userLogin, ScheduledNotificationFilterDto filter)
+        {
+            IQueryable<ScheduledNotification> query = _scheduledNotificationRepository.QueryIncluding(v => v.UserProfile);
+            query = query.Where(n => n.UserProfile.UserLogin == userLogin);
+            if (filter.NotificationTypes.Any())
+            {
+                var notofocationTypes = filter.NotificationTypes.Select(nt => nt).ToList();
+                query = query.Where(n => notofocationTypes.Contains((int)n.NotificationType));
+            }
+
+            IOrderedQueryable<ScheduledNotification> orderedQuery = null;
+            if (filter.OrderField == "notificationDate")
+            {
+                orderedQuery = filter.InvertOrder ? query.OrderByDescending(v => v.NotificationDate) : query.OrderBy(v => v.NotificationDate);
+            }
+            else
+            {
+                orderedQuery = query.OrderByDescending(v => v.NotificationDate);
+            }
+
+            var countRecords = query.Count();
+            var notificationsFiltered = orderedQuery.Skip((filter.Page - 1) * filter.PageSize).Take(filter.PageSize).ToList();
+            var list = notificationsFiltered.Select(item => item.ToScheduledNotificationDto()).ToList();
+            return new PageDto<ScheduledNotificationDto>
+            {
+                TotalCount = countRecords,
+                Rows = list
+            };
         }
     }
 }

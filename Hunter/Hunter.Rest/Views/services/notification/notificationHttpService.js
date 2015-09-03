@@ -12,13 +12,15 @@
 
     function NotificationHttpService($q, httpHandler) {
         var service = {
-            getNotifications: getNotifications,
+           // getNotifications: getNotifications,
             getCandidateNotifications: getCandidateNotifications,
             getActiveNotifications: getActiveNotifications,
             addNotification: addNotification,
             notificationShown: notificationShown,
             deleteNotification: deleteNotification,
-            notify: notify
+            notify: notify,
+            convertRouteParamsToFilter: convertRouteParamsToFilter,
+            getNotificationsByFilter: getNotificationsByFilter
         };
 
         function getNotifications() {
@@ -118,6 +120,50 @@
                     console.log(status);
                 }
             });
+        }
+
+        function convertRouteParamsToFilter(routeParams) {
+            var filter = {
+                notificationTypes: [0, 1, 2],
+                pageSize: parseInt(routeParams.pageSize) || 10,
+                page: routeParams.page || 1,
+                orderField: routeParams.orderField || 'notificationDate',
+                invertOrder: routeParams.invertOrder || false
+            };
+            if (routeParams.notificationTypes) {
+                filter.notificationTypes = [];
+                if (angular.isArray(routeParams.notificationTypes)) {
+                    angular.forEach(routeParams.notificationTypes, function (item) {
+                        filter.notificationTypes.push(parseInt(item));
+                    });
+                } else {
+                    filter.notificationTypes.push(parseInt(routeParams.notificationTypes));
+                }
+            }
+
+            return filter;
+        }
+
+        function getNotificationsByFilter(filter) {
+            var requestUrl = '/api/notifications/?' +
+                'page=' + filter.page + '&' +
+                'pageSize=' + filter.pageSize + '&' +
+                'orderField=' + filter.orderField + '&' +
+                'invertOrder=' + filter.invertOrder + '&' +
+                'notificationTypes="' + filter.notificationTypes.toString() + '"';
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                url: requestUrl,
+                verb: 'GET',
+                successCallback: function (result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function (status) {
+                    console.log("Get filtered notification list error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
         }
 
         return service;

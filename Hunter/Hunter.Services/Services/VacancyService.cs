@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Hunter.DataAccess.Interface;
 using Hunter.Common.Interfaces;
-using Hunter.DataAccess.Interface.Base;
-using System.Reflection;
 using Hunter.DataAccess.Entities;
-using System;
-using System.Globalization;
-using Hunter.DataAccess.Entities.Entites.Enums;
+using Hunter.DataAccess.Interface;
+using Hunter.DataAccess.Interface.Base;
 using Hunter.Services.Dto.Vacancy;
 using Hunter.Services.Interfaces;
 
@@ -22,6 +19,7 @@ namespace Hunter.Services
         private readonly ILogger _logger;
         private readonly IActivityHelperService _activityHelperService;
         private readonly IUserProfileRepository _userProfileRepository;
+        private readonly IPoolRepository _poolRepository;
 
         public VacancyService(
             IVacancyRepository vacancyRepository,
@@ -30,7 +28,8 @@ namespace Hunter.Services
             ILogger logger,
             IUnitOfWork unitOfWork,
             IActivityHelperService activityHelperService,
-            IUserProfileRepository userProfileRepository)
+            IUserProfileRepository userProfileRepository,
+            IPoolRepository poolRepository)
         {
             _vacancyRepository = vacancyRepository;
             _candidateRepository = candidateRepository;
@@ -39,6 +38,7 @@ namespace Hunter.Services
             _unitOfWork = unitOfWork;
             _activityHelperService = activityHelperService;
             _userProfileRepository = userProfileRepository;
+            _poolRepository = poolRepository;
         }
         public IList<VacancyRowDto> Get()
         {
@@ -52,7 +52,8 @@ namespace Hunter.Services
             if (filterParams.Pools.Any())
             {
                 var selectedPools = filterParams.Pools.Select(Int32.Parse).ToList();
-                query = query.Where(vac => selectedPools.Contains(vac.PoolId));
+//                query = query.Where(vac => selectedPools.Contains(vac.PoolId));
+                query = query.Where(vac => selectedPools.Any(x => vac.Pool.Any(p => p.Id == x)));//??
             }
 
             if (filterParams.Statuses.Any())
@@ -68,8 +69,8 @@ namespace Hunter.Services
 
             if (filterParams.AddedByArray.Any())
             {
-                var selectedCreators = filterParams.AddedByArray;
-                query = query.Where(vac => selectedCreators.Contains(vac.UserProfile.UserLogin));
+                var selectedCreators = filterParams.AddedByArray.Select(Int32.Parse).ToList();
+                query = query.Where(vac => selectedCreators.Any(x=> vac.UserProfileId == x));
             }
 
             if (!string.IsNullOrWhiteSpace(filterParams.Filter))
@@ -117,6 +118,14 @@ namespace Hunter.Services
             var vacancy = dto.ToVacancy();
             var user = _userProfileRepository.Get(x => x.UserLogin == dto.UserLogin);
             vacancy.UserProfileId = user != null ? user.Id : (int?) null;
+
+            //!!!!!
+            vacancy.Pool = new List<Pool>();
+            foreach (string poolName in dto.PoolNames)
+            {
+                vacancy.Pool.Add(_poolRepository.Query().FirstOrDefault(x => x.Name == poolName));
+            }
+
             _vacancyRepository.UpdateAndCommit(vacancy);
             _activityHelperService.CreateAddedVacancyActivity(vacancy);
         }
@@ -125,6 +134,14 @@ namespace Hunter.Services
         {
             var vacancy = _vacancyRepository.Get(entity.Id);
             entity.ToVacancy(vacancy);
+
+            //!!!!
+            vacancy.Pool.Clear();
+            foreach (string poolName in entity.PoolNames)
+            {
+                vacancy.Pool.Add(_poolRepository.Query().FirstOrDefault(x => x.Name == poolName));
+            }
+
             _vacancyRepository.UpdateAndCommit(vacancy);
         }
 
@@ -184,6 +201,7 @@ namespace Hunter.Services
                     .GroupBy(c => c.UserProfile)
                     .Select(c => new AddedByDto()
                     {
+                        Id = c.Key.Id,
                         UserLogin = c.Key.UserLogin ?? "",
                         Alias = c.Key.Alias ?? "Nobody"
                     });
@@ -215,6 +233,21 @@ namespace Hunter.Services
             {
                 _logger.Log(ex);
                 return new List<VacancyByStateDto>();
+            }
+        }
+
+        public Dictionary<string, string> GetColors(int vacancyId)
+        {
+            try
+            {
+                return _vacancyRepository.Query()
+                    .First(x => x.Id == vacancyId)
+                    .Pool.ToDictionary(x => x.Name.ToLower(), x => x.Color);
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                throw ex;
             }
         }
     }

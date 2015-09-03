@@ -29,7 +29,9 @@ namespace Hunter.Services
         [StringLength(4000)]
         public string Description { get; set; }
 
-        public int PoolId { get; set; }
+//        public IEnumerable<PoolViewModel> Pools { get; set; }
+        public IEnumerable<string> PoolNames { get; set; }
+        public Dictionary<string, string> PoolColors { get; set; }
 
         public string StatusName { get; set; }
 
@@ -52,7 +54,9 @@ namespace Hunter.Services
 
         public DateTime? EndDate { get; set; }
 
-        public string PoolName { get; set; }
+//        public IEnumerable<PoolViewModel> Pools { get; set; }
+        public IEnumerable<string> PoolNames { get; set; }
+        public Dictionary<string, string> PoolColors { get; set; }
 
         public string AddedByName { get; set; }
 

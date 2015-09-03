@@ -80,6 +80,7 @@
                     feedback.userAlias = result.userAlias;
                 }
                 else {
+                    setFeedbackConfig(result);
                     vm.feedbacks.push(result);
                     vm.newFeedbackText = '';
                 }
@@ -98,16 +99,35 @@
         function getAllFeedbacks() {
             FeedbackHttpService.getHrFeedback(0, $routeParams.cid).then(function (result) {
                 vm.feedbacks = result;
+                vm.feedbacks.forEach(function(feedback) {
+                    setFeedbackConfig(feedback);
+                });
             });
         }
         function getMyFeedbacks() {
             FeedbackHttpService.getHrFeedback(-1, $routeParams.cid).then(function (result) {
                 vm.feedbacks = result;
+                vm.feedbacks.forEach(function(feedback) {
+                    setFeedbackConfig(feedback);
+                });
             });
         }
+
+        function setFeedbackConfig(feedback) {
+            feedback.feedbackConfig = {};
+            feedback.feedbackConfig.style = {
+                "border-color": feedback.successStatus == 0 ? EnumConstants.voteColors['None']
+                    : feedback.successStatus == 1 ? EnumConstants.voteColors['Like']
+                    : EnumConstants.voteColors['Dislike']
+            }
+        }
+
         function getFeedbacks() {
             FeedbackHttpService.getHrFeedback($routeParams.vid, $routeParams.cid).then(function (result) {
                 vm.feedbacks = result;
+                vm.feedbacks.forEach(function (feedback) {
+                    setFeedbackConfig(feedback);
+                });
             });
         }
 

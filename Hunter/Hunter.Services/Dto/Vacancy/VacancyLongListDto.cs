@@ -16,5 +16,7 @@ namespace Hunter.Services
         public string Name { get; set; }
         public string AddedByName { get; set; }
         //public int PoolId { get; set; }
+        public IEnumerable<string> PoolNames { get; set; }
+        public Dictionary<string, string> PoolColors { get; set; }
     }
 }

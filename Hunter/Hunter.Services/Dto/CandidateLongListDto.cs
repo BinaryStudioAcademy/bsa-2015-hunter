@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Hunter.Services
 {
@@ -19,5 +20,7 @@ namespace Hunter.Services
         public string PhotoUrl { get; set; }
         public bool Shortlisted { get; set; }
         public string UserAlias { get; set; }
+        public IEnumerable<string> PoolNames { get; set; }
+        public Dictionary<string, string> PoolColors { get; set; }
     }
 }

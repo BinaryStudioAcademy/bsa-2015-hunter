@@ -496,6 +496,7 @@
     <Content Include="bower_components\ng-file-upload\robots.txt" />
     <Content Include="bower_components\underscore\underscore-min.js" />
     <Content Include="bower_components\underscore\underscore.js" />
+    <Content Include="Content\binaryStyle.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\candidate.css" />
@@ -503,6 +504,8 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\hrInterview.css" />
     <Content Include="Content\hrSpecialNote.css" />
+    <Content Include="Content\img\favicon.ico" />
+    <Content Include="Content\img\no_photo.png" />
     <Content Include="Content\longlist.css" />
     <Content Include="Content\MyStyle.css" />
     <Content Include="Content\pool.css" />

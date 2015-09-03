@@ -20,6 +20,9 @@ angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.dir
                     templateUrl: '',
                     controller: 'newsController',
                     controllerAs: 'newsCtrl'
+                })
+                .otherwise({
+                    redirectTo: '/vacancy/list'
                 });
 
             // sample of all needed routes for entity
@@ -101,8 +104,10 @@ angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.dir
                 .when('/activity', {
                     templateUrl: viewPath + 'activity/list/list.html',
                     controller: "ActivityListController",
-                    controllerAs: "ActivityListCtrl"
+                    controllerAs: "ActivityListCtrl",
+                    reloadOnSearch: false
                 });
+
             $routeProvider
                 .when('/files', {
                     templateUrl: viewPath + 'files/list/list.html',
@@ -224,7 +229,7 @@ angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.dir
                         templateUrl: '',
                         controller: 'testworkController',
                         controllerAs: 'testworkCtrl'
-                    });
+                });
         }
     ])
     .config(['$httpProvider', function ($httpProvider) {

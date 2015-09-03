@@ -4,10 +4,12 @@
             <p class="ll_close_button" ng-click="llPreviewCtrl.hideCandidatePreview(llPreviewCtrl.candidateDetails.id)"><span class=" glyphicon glyphicon-remove"></span></p>
             <h2>Preview</h2>
             <div class="ll_preview_info">
-                <pool-selector pool-readonly="false" pool-short="false" candidate="llPreviewCtrl.candidateDetails"></pool-selector>
+<!--                <pool-selector pool-readonly="false" pool-short="false" candidate="llPreviewCtrl.candidateDetails"></pool-selector>-->
                 <div class="ll_preview_info_img">
                     <shor-list-star is-short="llPreviewCtrl.candidateDetails.shortlisted" candidate-id="llPreviewCtrl.candidateDetails.id" size="'30px'"></shor-list-star>
                     <img ng-src="{{llPreviewCtrl.candidateDetails.photoUrl}}" alt="{{llPreviewCtrl.candidateDetails.firstName}} {{llPreviewCtrl.candidateDetails.lastName}} foto" title="{{llPreviewCtrl.candidateDetails.firstName}} {{llPreviewCtrl.candidateDetails.lastName}} foto"/>
+                    <pool-selector pool-lazy="true" pool-readonly="true" pool-short="false"
+                                   candidate="llPreviewCtrl.candidateDetails"></pool-selector>
                 </div>
                 <div class="ll_preview_info_all">
                     <p>
