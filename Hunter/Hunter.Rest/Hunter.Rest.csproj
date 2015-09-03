@@ -732,6 +732,8 @@
     <Content Include="bower_components\angular-elastic\bower.json" />
     <Content Include="bower_components\angular-elastic\package.json" />
     <Content Include="bower_components\angular-elastic\README.md" />
+    <None Include="Properties\PublishProfiles\binary-team.pubxml" />
+    <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -814,7 +816,6 @@
     <Content Include="Views\services\candidate\addEdit\candidateAddEditService.js" />
     <Content Include="Views\register\register.html" />
     <Content Include="Views\register\registerController.js" />
-    <Content Include="Views\services\candidate\addEdit\addEditService.js" />
     <Content Include="Views\services\candidate\candidatesHttpService.js" />
     <Content Include="Views\services\candidate\card\cardTestHttpService.js" />
     <Content Include="Views\services\directive\filechange.js" />
@@ -876,7 +877,6 @@
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\_references.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
