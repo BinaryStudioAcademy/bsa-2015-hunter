@@ -30,10 +30,14 @@
                             <div>Skype: {{candidatePartCtrl.candidate.skype}}</div>
                             <div>Phone: {{candidatePartCtrl.candidate.phone}}</div>
                  </div>
-                  <div class="candidate-resolution form-group">
+                <div class="candidate-resolution form-inline">
+                    <label>Resolution</label>
+                    <select class="form-control" name="resolution" ng-change="candidatePartCtrl.updateResolution()" ng-model="candidatePartCtrl.candidate.resolution" ng-options="resolution.id as resolution.name for resolution in candidatePartCtrl.resolutions"></select>
+                </div>
+                  <!--<div class="candidate-resolution form-group">
                         <label>Resolution</label>
                         <select class="form-control" name="resolution" ng-change="candidatePartCtrl.updateResolution()" ng-model="candidatePartCtrl.candidate.resolution" ng-options="resolution.id as resolution.name for resolution in candidatePartCtrl.resolutions"></select>
-                  </div>
+                  </div>-->
                 <!--<div class="ll_preview_info_control">
                     <a class="btn btn-default" href="#/candidate/{{candidatePartCtrl.candidate.id}}">Full Profile</a>
                     <a class="btn btn-default" href="#/candidate/edit/{{candidatePartCtrl.candidate.id}}">Edit Profile</a>
