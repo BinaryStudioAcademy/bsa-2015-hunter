@@ -31,7 +31,7 @@
             <div class="hrSpecialNote_form" ng-repeat="item in specialNotesCtrl.notes">
                 <form ng-init="editMode=false">
                     <div class="pull-right">
-                        <span>Updated by {{item.userAlias}} {{item.lastEdited | date:'medium'}}</span>
+                        <span>Updated by {{item.userAlias}} {{item.lastEdited | date:'dd.MM.yyyy HH.mm'}}</span>
                         <a title="Edit Note" ng-click="editMode=true" ng-hide="editMode"><i class="fa fa-2x fa-pencil-square"></i></a>
                         <a title="Save Edit" ng-click="editMode=false; specialNotesCtrl.saveOldNote(item)" ng-show="editMode"><i class="fa fa-2x fa-check-square text-success"></i></a>
                     </div>
