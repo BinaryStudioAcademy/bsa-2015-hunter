@@ -12,44 +12,22 @@ namespace Hunter.Services.Extensions
     {
         public static TestForCheckDto ToTestForCheckDto(this Test test)
         {
-            var feedbackDto = test.FeedbackId != null ? test.Feedback.ToFeedbackDto() : null;
-            FileDto file = test.File != null ? test.File.ToFileDto() : null;
-
             return new TestForCheckDto
             {
                 Id = test.Id,
-                CardId = test.CardId,
-                Comment = test.Comment,
-                FeedbackId = test.FeedbackId,
-                FileId = test.FileId,
-                UserProfileId = test.AssignedUserProfileId,
                 Added = test.Added,
-                Url = test.Url,
-                File = file,
-                Feedback = feedbackDto,
                 IsChecked = test.IsChecked,
                 VacancyId = test.Card.VacancyId,
-                CandidateId = test.Card.CandidateId
+                CandidateId = test.Card.CandidateId,
+                FeedbackStatus = test.Feedback != null ? (int)test.Feedback.SuccessStatus : 0
             };
         }
 
         public static void ToTestForCheck(this TestForCheckDto testDto, Test test)
         {
             test.Id = testDto.Id;
-            test.CardId = testDto.CardId;
-            test.Comment = testDto.Comment;
-            test.FeedbackId = testDto.FeedbackId;
-            test.FileId = testDto.FileId;
-            test.Url = testDto.Url;
             test.Added = testDto.Added;
-            test.AssignedUserProfileId = testDto.UserProfileId;
-            test.IsChecked = test.IsChecked;
-
-            if (test.File != null)
-                testDto.File.ToFile(test.File = new File());
-
-            if (testDto.Feedback != null)
-                testDto.Feedback.ToFeedback((test.Feedback = new Feedback()));
+            test.IsChecked = testDto.IsChecked;
         }
     }
 }

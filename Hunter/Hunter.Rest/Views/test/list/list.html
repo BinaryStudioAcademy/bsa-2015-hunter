@@ -7,7 +7,7 @@
                     <th>Link</th>
                     <th></th>
                 </tr>
-                <tr ng-repeat="test in testListCtrl.tests" ng-class="testListCtrl.getClassForTr(test.feedback.successStatus)">
+                <tr ng-repeat="test in testListCtrl.tests" ng-class="testListCtrl.getClassForTr(test.feedbackStatus)">
                     <td>{{test.added | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                     <td>
                         <a href="{{testListCtrl.getUrlOnTest(test.vacancyId,test.candidateId)}}">go to test!</a>

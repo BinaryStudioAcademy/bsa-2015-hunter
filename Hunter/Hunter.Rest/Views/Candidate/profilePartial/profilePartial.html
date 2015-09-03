@@ -9,11 +9,10 @@
                     <img ng-src="{{candidatePartCtrl.candidate.photoUrl}}" alt="{{candidatePartCtrl.candidate.firstName}} {{candidatePartCtrl.candidate.lastName}} foto" title="{{candidatePartCtrl.candidate.firstName}} {{candidatePartCtrl.candidate.lastName}} foto" />
                 </div>
                 <div class="ll_preview_info_all">
-                    <p>
+                    <div>
                         <a href="#/candidate/{{candidatePartCtrl.candidate.id}}">{{candidatePartCtrl.candidate.firstName + " " + candidatePartCtrl.candidate.lastName}}</a>
-                    </p>
-                    <p>{{candidatePartCtrl.candidate.salary}}</p>
-                    <p></p>
+                    </div>
+                    <div>{{candidatePartCtrl.candidate.salary}}</div>
                     <div class="group-btn">
                         <a class="btn btn-default" href="#/candidate/{{candidatePartCtrl.candidate.id}}" title="Full Profile"><i class="fa fa-newspaper-o"></i></a>
                         <a class="btn btn-default" href="#/candidate/edit/{{candidatePartCtrl.candidate.id}}" title="Edit Profile"><i class="fa fa-pencil"></i></a>
@@ -30,10 +29,14 @@
                             <div>Skype: {{candidatePartCtrl.candidate.skype}}</div>
                             <div>Phone: {{candidatePartCtrl.candidate.phone}}</div>
                  </div>
-                  <div class="candidate-resolution form-group">
+                <div class="candidate-resolution form-inline">
+                    <label>Resolution</label>
+                    <select class="form-control" name="resolution" ng-change="candidatePartCtrl.updateResolution()" ng-model="candidatePartCtrl.candidate.resolution" ng-options="resolution.id as resolution.name for resolution in candidatePartCtrl.resolutions"></select>
+                </div>
+                  <!--<div class="candidate-resolution form-group">
                         <label>Resolution</label>
                         <select class="form-control" name="resolution" ng-change="candidatePartCtrl.updateResolution()" ng-model="candidatePartCtrl.candidate.resolution" ng-options="resolution.id as resolution.name for resolution in candidatePartCtrl.resolutions"></select>
-                  </div>
+                  </div>-->
                 <!--<div class="ll_preview_info_control">
                     <a class="btn btn-default" href="#/candidate/{{candidatePartCtrl.candidate.id}}">Full Profile</a>
                     <a class="btn btn-default" href="#/candidate/edit/{{candidatePartCtrl.candidate.id}}">Edit Profile</a>
