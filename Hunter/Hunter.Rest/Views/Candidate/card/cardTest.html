@@ -47,7 +47,7 @@
                 <div ng-show="test.url != null && test.file == null">
                     <div class="col-md-1"><label>Task</label></div>
                     <div class="col-md-10">
-                        <a href="{{test.url}}">{{test.url}}</a> Added {{test.added | date:'dd.MM.yyyy HH:mm:ss'}}
+                        <a href="{{test.url}}">{{test.url}}</a> Added {{test.added | localDate | date:'dd.MM.yyyy HH:mm:ss'}}
                         <button ng-if="(test.assignedUserProfile == null) && (test.isChecked == false)" ng-click="testCtrl.checkedTestId = test.id" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add expert to test</button>
                         <span ng-if="(test.assignedUserProfile != null) && (test.isChecked == false)">now checking {{test.assignedUserProfile.alias}}</span>
                         <button ng-if="testCtrl.isCurrentUser(test.assignedUserProfile, test.isChecked)" class="btn btn-default" ng-click="testCtrl.changeCheckedTest(test.id)">Checked!</button>

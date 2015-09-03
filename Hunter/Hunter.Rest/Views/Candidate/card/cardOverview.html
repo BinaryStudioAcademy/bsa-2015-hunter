@@ -5,7 +5,7 @@
                 <h4>{{generalCardCtrl.feedbackTypes[feedback.type].name}} {{ !generalCardCtrl.isLLM ? 'from ' + feedback.vacancy :''}}</h4>
             </div>
             <div class="col-md-5" style="text-align: right; margin-top: 25px">
-                <span ng-hide="feedback.date == ''">Updated by {{feedback.userAlias}} {{feedback.date | localDate | date:'dd.MM.yyyy HH:mm'}}</span>
+                <span ng-hide="feedback.date == ''">Updated by {{feedback.userAlias}} {{feedback.date | date:'dd.MM.yyyy HH:mm'}}</span>
             </div>
         </div>
         <div ng-hide="feedback.text == ''">
@@ -24,7 +24,7 @@
                 <h4>{{generalCardCtrl.feedbackTypes[feedback.type].name}} {{ !generalCardCtrl.isLLM ? 'from ' + feedback.vacancy :''}}</h4>
             </div>
             <div class="col-md-5" style="text-align: right; margin-top: 25px">
-                <span ng-hide="feedback.date == ''">Updated by {{feedback.userAlias}} {{feedback.date | localDate | date:'dd.MM.yyyy HH:mm'}}</span>
+                <span ng-hide="feedback.date == ''">Updated by {{feedback.userAlias}} {{feedback.date | date:'dd.MM.yyyy HH:mm'}}</span>
             </div>
         </div>
         <div ng-hide="feedback.text == ''">

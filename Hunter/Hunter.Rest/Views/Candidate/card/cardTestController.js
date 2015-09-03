@@ -73,6 +73,7 @@
                 testSend.id = lastUploadTestId;
                 testSend.assignedUserProfile = null;
                 testSend.isChecked = false;
+                testSend.added = testSend.added.toUTCString();
 
                 testSend.feedback = {
                     'cardId': vm.test.cardId,
@@ -202,13 +203,14 @@
                     'fileId': fileId,
                     'cardId': vm.test.cardId,
                     'feedbackId': null,
-                    'added': new Date(),
+                    'added': new Date()
                 };
 
                 CardTestHttpService.sendTest(test, function (response) {
                     var testId = response.data;
                     test.assignedUserProfile = null;
                     test.isChecked = false;
+                    test.added = test.added.getUTCDate();
 
                     test.id = testId;
                     test.feedback = {
