@@ -233,6 +233,12 @@
                     vm.test.tests.push(test);
                 });
             });
+
+            if (vm.vacancyId != undefined) {
+                loadVacancyTests();
+            } else {
+                loadAllTests();
+            }
         }
 
         function changeCurrentTest(index, test) {
