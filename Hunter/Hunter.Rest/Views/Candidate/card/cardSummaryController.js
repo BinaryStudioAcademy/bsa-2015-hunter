@@ -29,7 +29,7 @@
             }
             feedbackHttpService.saveSummary(body, $routeParams.vid, $routeParams.cid).then(function (result) {
                 summary.id = result.id;
-                summary.date = result.update;
+                summary.date = result.date;
                 summary.userAlias = result.userAlias;
 
                 console.log("result after update");
