@@ -21,7 +21,7 @@
 
 //namespace Hunter.Rest.Controllers
 //{
-//    [Authorize]
+//    [ExternalAuthorize]
 //    [RoutePrefix("api/Account")]
 //    public class AccountController : ApiController
 //    {

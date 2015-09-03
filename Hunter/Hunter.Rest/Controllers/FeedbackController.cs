@@ -7,13 +7,14 @@ using System.Web.Http;
 using Hunter.Services.Dto;
 using System.Web.Http.Description;
 using Hunter.DataAccess.Entities.Entites.Enums;
+using Hunter.Rest.Providers;
 using Hunter.Services;
 using Hunter.Services.Dto.Feedback;
 using Hunter.Services.Services.Interfaces;
 
 namespace Hunter.Rest.Controllers
 {
-    [Authorize]
+    [ExternalAuthorize]
     [RoutePrefix("api/feedback")]
     public class FeedbackController : ApiController
     {

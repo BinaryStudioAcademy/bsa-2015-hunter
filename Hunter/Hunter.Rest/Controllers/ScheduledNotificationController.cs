@@ -8,10 +8,11 @@ using Hunter.Services;
 using Hunter.Services.Dto.ScheduledNotification;
 using Hunter.Services.Interfaces;
 using System.Linq;
+using Hunter.Rest.Providers;
 
 namespace Hunter.Rest.Controllers
 {
-    [Authorize]
+    [ExternalAuthorize]
     [RoutePrefix("api/notifications")]
     public class ScheduledNotificationController : ApiController
     {

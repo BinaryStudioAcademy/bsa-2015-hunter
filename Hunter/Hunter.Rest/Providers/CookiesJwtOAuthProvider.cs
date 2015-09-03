@@ -28,20 +28,20 @@ namespace Hunter.Rest.Providers
             return Task.FromResult<object>(null);
         }
 
-        public override Task ValidateIdentity(OAuthValidateIdentityContext context)
-        {
-            IUserProfileService _userProfileService = NinjectContainer.Resolve<IUserProfileService>();
+        //public override Task ValidateIdentity(OAuthValidateIdentityContext context)
+        //{
+        //    IUserProfileService _userProfileService = NinjectContainer.Resolve<IUserProfileService>();
 
-            if (!_userProfileService.UserExist(context.Ticket.Identity.Name))
-            {
-                _userProfileService.Save(new EditUserProfileVm()
-                {
-                    Login = context.Ticket.Identity.Name,
-                    Position = context.Ticket.Identity.Name
-                });
-            }
-            context.Validated();
-            return Task.FromResult<object>(null);
-        }
+        //    if (!_userProfileService.UserExist(context.Ticket.Identity.Name))
+        //    {
+        //        _userProfileService.Save(new EditUserProfileVm()
+        //        {
+        //            Login = context.Ticket.Identity.Name,
+        //            Position = context.Ticket.Identity.Name
+        //        });
+        //    }
+        //    context.Validated();
+        //    return Task.FromResult<object>(null);
+        //}
     }
 }

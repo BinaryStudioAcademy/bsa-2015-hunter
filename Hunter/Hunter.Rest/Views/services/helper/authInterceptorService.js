@@ -24,12 +24,10 @@
     var _responseError = function (rejection) {
         if (rejection.status === 401) {
             var authService = $injector.get('AuthService');
-            console.log(rejection);
             authService.logOut();
             $cookies.put('referer', $location.absUrl());
             $window.location.href = 'http://localhost:2020';
             //$window.location.href = 'http://team.binary-studio.com/auth/';
-           // $location.path('/login');
         }
         return $q.reject(rejection);
     }

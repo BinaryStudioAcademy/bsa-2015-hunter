@@ -2,12 +2,13 @@
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Hunter.Rest.Providers;
 using Hunter.Services.Dto;
 using Hunter.Services.Services.Interfaces;
 
 namespace Hunter.Rest.Controllers
 {
-    [Authorize]
+    [ExternalAuthorize]
     [RoutePrefix("api/specialnote")]
     public class SpecialNoteController : ApiController
     {
