@@ -32,10 +32,10 @@
                     <div class="col-md-1"><label>Task</label></div>
                     <div class="col-md-10">
 
-						<a href="/api/file/download/{{test.file.id}}">{{test.file.fileName}}</a> Size: {{test.file.size}} Uploaded: {{test.file.added | date:'dd.MM.yyyy HH:mm:ss'}}
-                        <button ng-show="(test.assignedUserProfile == null) && (test.isChecked == false)" ng-click="testCtrl.checkedTestId = test.id" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add expert to test</button>
-                        <span ng-hide="(test.assignedUserProfile != null) && (test.isChecked == false)">now checking {{test.assignedUserProfile.alias}}</span>
-                        <button ng-show="testCtrl.isCurrentUser(test.assignedUserProfile, test.isChecked)" class=" btn btn-default" ng-click="testCtrl.changeCheckedTest(test.id)">Checked!</button>
+						<a href="/api/file/download/{{test.file.id}}">{{test.file.fileName}}</a> Size: {{test.file.size}} Uploaded: {{test.file.added | date:'dd.MM.yyyy HH.mm'}}
+                        <button ng-if="(test.assignedUserProfile == null) && (test.isChecked == false)" ng-click="testCtrl.checkedTestId = test.id" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add expert to test</button>
+                        <span ng-if="(test.assignedUserProfile != null) && (test.isChecked == false)">now checking {{test.assignedUserProfile.alias}}</span>
+                        <button ng-if="testCtrl.isCurrentUser(test.assignedUserProfile, test.isChecked)" class=" btn btn-default" ng-click="testCtrl.changeCheckedTest(test.id)">Checked!</button>
                     </div>
                     <div class="col-md-1">
                         <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index, test)">
@@ -47,10 +47,10 @@
                 <div ng-show="test.url != null && test.file == null">
                     <div class="col-md-1"><label>Task</label></div>
                     <div class="col-md-10">
-                        <a href="{{test.url}}">{{test.url}}</a> Added {{test.added | date:'dd.MM.yyyy HH:mm:ss'}}
-                        <button ng-show="(test.assignedUserProfile == null) && (test.isChecked == false)" ng-click="testCtrl.checkedTestId = test.id" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add expert to test</button>
-                        <span ng-show="(test.assignedUserProfile != null) && (test.isChecked == false)">now checking {{test.assignedUserProfile.alias}}</span>
-                        <button ng-show="testCtrl.isCurrentUser(test.assignedUserProfile, test.isChecked)" class="btn btn-default" ng-click="testCtrl.changeCheckedTest(test.id)">Checked!</button>
+                        <a href="{{test.url}}">{{test.url}}</a> Added {{test.added | localDate | date:'dd.MM.yyyy HH.mm'}}
+                        <button ng-if="(test.assignedUserProfile == null) && (test.isChecked == false)" ng-click="testCtrl.checkedTestId = test.id" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Add expert to test</button>
+                        <span ng-if="(test.assignedUserProfile != null) && (test.isChecked == false)">now checking {{test.assignedUserProfile.alias}}</span>
+                        <button ng-if="testCtrl.isCurrentUser(test.assignedUserProfile, test.isChecked)" class="btn btn-default" ng-click="testCtrl.changeCheckedTest(test.id)">Checked!</button>
                     </div>
                     <div class="col-md-1">
                         <i class="btn" ng-disabled="testCtrl.editingIndex == $index && test.feedback.text == ''" ng-click="testCtrl.changeCurrentTest($index, test)">
@@ -82,8 +82,8 @@
                         <thumb-button btn-type="btn-danger" btn-icon="fa-thumbs-o-down" feedback="test.feedback"
                                       key="Dislike"></thumb-button>
                     </div>
-                    <div style="display: inline; float: right; margin-top: 10px;" ng-show="test.feedback.userName != undefined">
-                        <span>updated by {{test.feedback.userAlias}} {{test.feedback.date | date:'dd.MM.yyyy HH:mm'}}</span>
+                    <div style="display: inline; float: right; margin-top: 10px;" ng-show="test.feedback.userAlias != undefined">
+                        <span>updated by {{test.feedback.userAlias}} {{test.feedback.date | date:'dd.MM.yyyy HH.mm'}}</span>
                     </div>
                     <textarea class="form-control feedbackField"
                               msd-elastic

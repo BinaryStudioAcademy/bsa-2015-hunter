@@ -71,6 +71,10 @@
             CardTestHttpService.sendTest(testSend, function(response) {
                 var lastUploadTestId = response.data;
                 testSend.id = lastUploadTestId;
+                testSend.assignedUserProfile = null;
+                testSend.isChecked = false;
+                testSend.added = testSend.added.toUTCString();
+
                 testSend.feedback = {
                     'cardId': vm.test.cardId,
                     'text': '',
@@ -162,7 +166,7 @@
                     'testId': test.id
                 }).then(function(result) {
                     test.feedback.id = result.id;
-                    test.feedback.date = result.update;
+                    test.feedback.date = result.date;
                     test.feedback.userAlias = result.userAlias;
                 });
             }
@@ -199,11 +203,14 @@
                     'fileId': fileId,
                     'cardId': vm.test.cardId,
                     'feedbackId': null,
-                    'added': new Date(),
+                    'added': new Date()
                 };
 
                 CardTestHttpService.sendTest(test, function (response) {
                     var testId = response.data;
+                    test.assignedUserProfile = null;
+                    test.isChecked = false;
+                    test.added = test.added.getUTCDate();
 
                     test.id = testId;
                     test.feedback = {
@@ -233,6 +240,12 @@
                     vm.test.tests.push(test);
                 });
             });
+
+            if (vm.vacancyId != undefined) {
+                loadVacancyTests();
+            } else {
+                loadAllTests();
+            }
         }
 
         function changeCurrentTest(index, test) {
@@ -266,7 +279,7 @@
                             'testId': test.id
                         }).then(function(result) {
                             test.feedback.id = result.id;
-                            test.feedback.date = result.update;
+                            test.feedback.date = result.date;
                             test.feedback.userAlias = result.userAlias;
                             test.feedbackId = result.id;
                         });
