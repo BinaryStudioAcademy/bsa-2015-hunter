@@ -10,7 +10,7 @@
             isCurrentTabEmpty: isCurrentTabEmpty,
             changeTemplate: changeTemplate
         }
-        var viewsPath = '/Views/candidate/profilePartial/';
+        var viewsPath = './Views/candidate/profilePartial/';
 
         function changeTemplate(templateRoute) {
             switch (templateRoute.toLowerCase()) {

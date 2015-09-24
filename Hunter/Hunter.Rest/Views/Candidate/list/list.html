@@ -105,11 +105,11 @@
                             ng-click="candidateListCtrl.updateCandidate()"
                             class="pagination-sm"
                             boundary-links="true"
-                            template-url="../../Views/templates/pagination.html"></pagination>
+                            template-url="./Views/templates/pagination.html"></pagination>
 
             </div>
         </div>
-        <div class="col-md-4 partial-candidate-details" ng-show="$root.candidateDetails.show" ng-include="'/Views/candidate/profilePartial/profilePartial.html'"></div>
+        <div class="col-md-4 partial-candidate-details" ng-show="$root.candidateDetails.show" ng-include="'./Views/candidate/profilePartial/profilePartial.html'"></div>
     </div>
 </div>
 

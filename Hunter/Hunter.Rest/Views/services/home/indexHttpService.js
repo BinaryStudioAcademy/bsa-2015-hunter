@@ -19,7 +19,7 @@
         function getActivityAmount(successCallback) {
             HttpHandler.sendRequest({
                 'verb': 'GET',
-                'url': 'api/activities/amount',
+                'url': '/api/activities/amount',
                 'successCallback': successCallback,
                 'errorMessageToDev': 'GET ACTIVITY INFO ERROR: ',
                 'errorMessageToUser': 'Failed'

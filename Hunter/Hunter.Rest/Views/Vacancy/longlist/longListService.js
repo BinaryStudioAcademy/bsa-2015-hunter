@@ -7,7 +7,7 @@
     LonglistService.$inject = [
         'HttpHandler',
         '$q',
-	    '$location',
+        '$location',
         '$rootScope'
     ];
 
@@ -20,7 +20,7 @@
 
         // click on candidate item shows candidates preview
 
-        var viewsPath = '/Views/vacancy/longlist/';
+        var viewsPath = './Views/vacancy/longlist/';
 
         function changeTemplate(templateRoute) {
             switch (templateRoute.toLowerCase()) {

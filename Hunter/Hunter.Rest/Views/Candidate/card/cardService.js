@@ -16,7 +16,7 @@
             updateCardStage: updateCardStage,
             getCardStage: getCardStage
             },
-            viewsPath = '/Views/candidate/card/';
+            viewsPath = './Views/candidate/card/';
 
         function changeTemplate(templateRoute) {
             switch (templateRoute.toLowerCase()) {
