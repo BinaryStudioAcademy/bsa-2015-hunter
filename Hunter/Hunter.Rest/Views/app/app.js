@@ -7,8 +7,10 @@ angular.module('hunter-app',
      'ngAnimate', 'monospaced.elastic',
      'ngCookies'])
     .config([
-        '$routeProvider', function ($routeProvider) {
+        '$routeProvider','$locationProvider', function ($routeProvider, $locationProvider) {
             
+            $locationProvider.html5Mode(true);
+
             var viewPath =  "./Views/";
             $routeProvider
                 //result on Latest activity button click (slide 1 and menu item on slide 3)
