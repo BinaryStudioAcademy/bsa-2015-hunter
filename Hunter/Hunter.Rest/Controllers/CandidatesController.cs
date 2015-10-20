@@ -20,7 +20,7 @@ using WebGrease.Css.Extensions;
 
 namespace Hunter.Rest.Controllers
 {
-    [ExternalAuthorize]
+    //[ExternalAuthorize]
     [RoutePrefix("api/candidates")]
     public class CandidatesController : ApiController
     {
