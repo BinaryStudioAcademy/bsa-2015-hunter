@@ -42,7 +42,7 @@
         function addCandidate(body, successCallback) {
             httpHandler.sendRequest({
                 verb: 'POST',
-                url: 'api/candidates/',
+                url: '/api/candidates/',
                 body: body,
                 successCallback: successCallback
             });
@@ -181,7 +181,7 @@
         function addCandidatePool(candidateId, poolId) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                'url': 'api/candidates/' + candidateId + '/addpool/' + poolId,
+                'url': '/api/candidates/' + candidateId + '/addpool/' + poolId,
                 'verb': 'PUT',
                 'successCallback': function(response) {
                     console.log('Pool added successful');
@@ -195,7 +195,7 @@
         function removeCandidatePool(candidateId, poolId) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                'url': 'api/candidates/' + candidateId + '/removepool/' + poolId,
+                'url': '/api/candidates/' + candidateId + '/removepool/' + poolId,
                 'verb': 'DELETE',
                 'successCallback': function(response) {
                     console.log('Pool removed successful');
@@ -209,7 +209,7 @@
         function changeCandidatePool(oldId, newId, candidateId) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                'url': 'api/candidates/' + candidateId + '/pools/update/' + oldId + '/' + newId,
+                'url': '/api/candidates/' + candidateId + '/pools/update/' + oldId + '/' + newId,
                 'verb': 'PUT',
                 'successCallback': function(response) {
                     console.log('Pools changed');
@@ -278,7 +278,7 @@
 
             var skip = (filter.currentPage - 1) * filter.pageSize;
             //
-            var Candidates = $odataresource('/api/Candidates/odata');
+            var Candidates = $odataresource('./api/Candidates/odata');
 
             var cands = Candidates.odata()
                                 .withInlineCount()

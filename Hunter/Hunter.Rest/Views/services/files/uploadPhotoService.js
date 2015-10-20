@@ -19,7 +19,7 @@
                 console.log(file);
 
                 Upload.upload({
-                    url: 'api/fileupload/pictures/' + id,
+                    url: '/api/fileupload/pictures/' + id,
                     file: file,
                     method: 'POST'
                 });

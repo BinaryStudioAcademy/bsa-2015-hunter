@@ -22,7 +22,7 @@
         function getTest(vacancyId, candidateId, success) {
             HttpHandler.sendRequest({
                 'verb': 'GET',
-                'url': 'api/test?vacancyId=' + vacancyId + '&candidateId=' + candidateId,
+                'url': '/api/test?vacancyId=' + vacancyId + '&candidateId=' + candidateId,
                 'successCallback': success,
                 'errorMessageToDev': 'GET TEST ERROR',
                 'errorMessageToUser': 'Failed'
@@ -32,7 +32,7 @@
         function getAllTests(vacancyId, candidateId, success) {
             HttpHandler.sendRequest({
                 'verb': 'GET',
-                'url': 'api/test/all/' + candidateId,
+                'url': '/api/test/all/' + candidateId,
                 'successCallback': success,
                 'errorMessageToDev': 'GET ALL TESTS ERROR',
                 'errorMessageToUser': 'Failed'

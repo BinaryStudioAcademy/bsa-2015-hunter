@@ -41,7 +41,7 @@
         $rootScope.$watch(
             '$root.candidateDetails.id',
             function () {
-                if ($rootScope.candidateDetails.id == 0) {
+                if (!$rootScope.candidateDetails.id) {
                     vm.isEmpty = true;
                 } else {
                     getCandidateDetails($rootScope.candidateDetails.id);

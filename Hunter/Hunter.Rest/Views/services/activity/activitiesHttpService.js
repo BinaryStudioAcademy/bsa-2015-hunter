@@ -34,7 +34,7 @@
         function saveActivityId(successCallback, body) {
             httpHandler.sendRequest({
                 'verb': 'POST',
-                'url': 'api/activities/save/lastid',
+                'url': '/api/activities/save/lastid',
                 'body': body,
                 'successCallback': successCallback,
                 'errorMessageToDev': 'POST ACTIVITY_ID ERROR',
@@ -60,7 +60,7 @@
 
         function getActivitiesByFilter(filter) {
             var deferred = $q.defer();
-            var activitiesOdata = $odataresource('/api/activities/odata');
+            var activitiesOdata = $odataresource('./api/activities/odata');
             var predicate;
 
             var filt = [];

@@ -33,7 +33,7 @@
         function deleteUserProfile(id, successCallback) {
             httpHandler.sendRequest({
                 verb: 'DELETE',
-                url: 'api/userprofile/' + id,
+                url: '/api/userprofile/' + id,
                 successCallback: successCallback,
                 successMessageToUser: "User with id " + id + " deleted.",
                 errorCallback: function (error) {
