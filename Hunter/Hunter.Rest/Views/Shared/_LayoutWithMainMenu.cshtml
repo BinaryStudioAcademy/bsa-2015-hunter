@@ -43,20 +43,20 @@
                     <ul class="nav navbar-nav">
                         <li ng-model="radioModel" btn-radio="'Home'"><a href="#/">Home</a></li>
                         <li ng-model="radioModel" btn-radio="'Candidates'" class="dropdown">
-                            <a href="#/candidate/list"
+                            <a href="/candidate/list"
                                class="dropdown-toggle" data-toggle="dropdown" role="button">Candidates<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li class="visible-xs"><a href="#/candidate/list">Show All</a></li>
-                                <li><a href="#/candidate/edit">Add new</a></li>
+                                <li class="visible-xs"><a href="/candidate/list">Show All</a></li>
+                                <li><a href="/candidate/edit">Add new</a></li>
                             </ul>
 
                         </li>
                         <li ng-model="radioModel" btn-radio="'Vacancies'" class="dropdown">
-                            <a href="#/vacancy/list"
+                            <a href="/vacancy/list"
                                class="dropdown-toggle" data-toggle="dropdown" role="button">Vacancies<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li class="visible-xs"><a href="#/vacancy/list">Show All</a></li>
-                                <li><a href="#/vacancy/edit">Add new</a></li>
+                                <li class="visible-xs"><a href="/vacancy/list">Show All</a></li>
+                                <li><a href="/vacancy/edit">Add new</a></li>
                             </ul>
                         </li>
                         @*<li ng-model="radioModel" btn-radio="'Statistics'"><a href="#/statistics">Statistics</a></li>*@
@@ -64,16 +64,16 @@
                         <li ng-model="radioModel" btn-radio="'Settings'" class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" role="button">Settings<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#/pool">Pools</a></li>
-                                <li><a href="#/user">Users</a></li>
+                                <li><a href="/pool">Pools</a></li>
+                                <li><a href="/user">Users</a></li>
                                 @*<li><a href="#/role">Roles</a></li>*@
                             </ul>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li ng-model="radioModel" btn-radio="'Notifications'"><a href="#/notifications"><i title="Notifications" class="fa fa-comments icon-button"></i></a></li>
-                        <li ng-model="radioModel"><a href="#/tests"><i title="Tests for check" class="fa fa-check-square icon-button"></i><span class="badge" ng-cloak ng-show="IndexCtrl.countTests > 0">{{IndexCtrl.countTests}}</span></a></li>
-                        <li ng-model="radioModel" btn-radio="'Activity'"><a href="#/activity"><i title="Activity" class="fa fa-bell icon-button"></i><span class="badge" ng-cloak ng-show="IndexCtrl.amount != 0">{{IndexCtrl.amount}}</span></a></li>
+                        <li ng-model="radioModel" btn-radio="'Notifications'"><a href="/notifications"><i title="Notifications" class="fa fa-comments icon-button"></i></a></li>
+                        <li ng-model="radioModel"><a href="/tests"><i title="Tests for check" class="fa fa-check-square icon-button"></i><span class="badge" ng-cloak ng-show="IndexCtrl.countTests > 0">{{IndexCtrl.countTests}}</span></a></li>
+                        <li ng-model="radioModel" btn-radio="'Activity'"><a href="/activity"><i title="Activity" class="fa fa-bell icon-button"></i><span class="badge" ng-cloak ng-show="IndexCtrl.amount != 0">{{IndexCtrl.amount}}</span></a></li>
                     </ul>
                 </div>
             </div>

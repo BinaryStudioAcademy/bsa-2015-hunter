@@ -37,8 +37,9 @@ namespace Hunter.DataAccess.Entities
             var techspec2 = new User() { Login = "techspec1@local.com", RoleId = 2, State = 0, PasswordHash = "7ab8123c7ff047f3e556a5a2b3e2a8502944b54f4f62089635b3850ded96b3f700026af0684ba794bcafec70433ccce5a10368fdb2dcf1ac5658c37b422e6a04" };
             var techspec3 = new User() { Login = "techspec2@local.com", RoleId = 2, State = 0, PasswordHash = "fd088e4d0ead7cc5d1c2cfe385c3e9b763aeba92ac77ef2307fbb59604e14a896f706ac9d7f6788c9a99f7ee6175a0f46004eab324a5ef2ec93284276767c7a0" };
             var admin = new User() { Login = "admin@local.com", RoleId = 3, State = 0, PasswordHash = "AO+POAp4pSwtxgaOu74yRWoYALimtAjpWgsy1746KKw+NkKG+aFUB8UWLS89Jc98VQ==" };
+            var test = new User() { Login = "test", RoleId = 3, State = 0, PasswordHash = "123" };
 
-            var users = new List<User> { recruiter1, recruiter2, recruiter3, techspec1, techspec2, techspec3, admin };
+            var users = new List<User> { recruiter1, recruiter2, recruiter3, techspec1, techspec2, techspec3, admin,test };
             users.ForEach(user => context.User.Add(user));
             context.SaveChanges();
 
