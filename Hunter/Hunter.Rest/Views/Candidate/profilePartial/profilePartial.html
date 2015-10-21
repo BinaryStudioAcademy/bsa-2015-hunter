@@ -10,12 +10,12 @@
                 </div>
                 <div class="ll_preview_info_all">
                     <div>
-                        <a href="#/candidate/{{candidatePartCtrl.candidate.id}}">{{candidatePartCtrl.candidate.firstName + " " + candidatePartCtrl.candidate.lastName}}</a>
+                        <a href="/candidate/{{candidatePartCtrl.candidate.id}}">{{candidatePartCtrl.candidate.firstName + " " + candidatePartCtrl.candidate.lastName}}</a>
                     </div>
                     <div>{{candidatePartCtrl.candidate.salary}}</div>
                     <div class="group-btn">
-                        <a class="btn btn-default" href="#/candidate/{{candidatePartCtrl.candidate.id}}" title="Full Profile"><i class="fa fa-newspaper-o"></i></a>
-                        <a class="btn btn-default" href="#/candidate/edit/{{candidatePartCtrl.candidate.id}}" title="Edit Profile"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-default" href="/candidate/{{candidatePartCtrl.candidate.id}}" title="Full Profile"><i class="fa fa-newspaper-o"></i></a>
+                        <a class="btn btn-default" href="/candidate/edit/{{candidatePartCtrl.candidate.id}}" title="Edit Profile"><i class="fa fa-pencil"></i></a>
                         <a class="btn btn-default" ng-show="candidatePartCtrl.candidate.lastResumeUrl != ''" ng-click="candidatePartCtrl.showResume()" title="View Resume"><i class="fa fa-file-text-o"></i></a>
                         <!--<input class="btn btn-default" type="button" value='<i class="fa fa-file-text-o"></i>' title="View Resume" ng-click="candidatePartCtrl.showResume()" ng-disabled="candidatePartCtrl.candidate.lastResumeUrl==''">-->
                         <a class="btn btn-default" ng-show="candidatePartCtrl.candidate.linkedin != ''" href="{{candidatePartCtrl.candidate.linkedin}}" target="_blank" title="View LinkedIn Profile"><i class="fa fa-linkedin-square"></i></a>
@@ -38,8 +38,8 @@
                         <select class="form-control" name="resolution" ng-change="candidatePartCtrl.updateResolution()" ng-model="candidatePartCtrl.candidate.resolution" ng-options="resolution.id as resolution.name for resolution in candidatePartCtrl.resolutions"></select>
                   </div>-->
                 <!--<div class="ll_preview_info_control">
-                    <a class="btn btn-default" href="#/candidate/{{candidatePartCtrl.candidate.id}}">Full Profile</a>
-                    <a class="btn btn-default" href="#/candidate/edit/{{candidatePartCtrl.candidate.id}}">Edit Profile</a>
+                    <a class="btn btn-default" href="/candidate/{{candidatePartCtrl.candidate.id}}">Full Profile</a>
+                    <a class="btn btn-default" href="/candidate/edit/{{candidatePartCtrl.candidate.id}}">Edit Profile</a>
                 </div>-->
 
                 <div class="col-md-12">

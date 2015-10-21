@@ -62,7 +62,7 @@
 
         function alertNotification(index) {
             $rootScope.clickedNotification = $rootScope.notifications[index];
-            var alertMessage = $rootScope.clickedNotification.notificationDate + ' ' + $rootScope.clickedNotification.message + '<a href="#/candidate/' + $rootScope.clickedNotification.candidateId + '"></a>';
+            var alertMessage = $rootScope.clickedNotification.notificationDate + ' ' + $rootScope.clickedNotification.message + '<a href="/candidate/' + $rootScope.clickedNotification.candidateId + '"></a>';
 
             alertify.message('Click me to show a notification!', 180, function (isClicked) {
                 if (isClicked) {

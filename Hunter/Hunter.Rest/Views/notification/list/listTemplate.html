@@ -16,7 +16,7 @@
             total-items="vacancyListCtrl.totalCount" current-page="vacancyListCtrl.filter.page" class="tr-vert-center">
             <td><i class="glyphicon {{notificationListCtrl.notificationTypes[notification.notificationType].icon}}"></i></td>
             <td>{{notification.notificationDate | localDate | date:'dd.MM.yyyy HH:mm'}}</td>
-            <td ng-hide="{{notificationListCtrl.isModal}}"><a href="#/candidate/{{notification.candidateId}}">{{notification.candidateName}}</a></td>
+            <td ng-hide="{{notificationListCtrl.isModal}}"><a href="/candidate/{{notification.candidateId}}">{{notification.candidateName}}</a></td>
             <td>{{notification.message}}</td>
             <td><input type="checkbox" ng-checked="{{notification.isSent}}" ng-disabled="true"/></td>
             <td><input type="checkbox" ng-checked="{{notification.isShown}}" ng-disabled="true"/></td>
