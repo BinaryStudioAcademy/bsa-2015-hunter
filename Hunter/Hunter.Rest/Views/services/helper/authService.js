@@ -5,9 +5,9 @@
         .module('hunter-app')
         .factory('AuthService', AuthService);
 
-    AuthService.$inject = ['$http', '$q', 'localStorageService'];
+    AuthService.$inject = ['$http', '$q', 'localStorageService', '$cookies', 'jwtHelper'];
 
-    function AuthService($http, $q, localStorageService) {
+    function AuthService($http, $q, localStorageService, $cookies, jwtHelper) {
 
         var authServiceFactory = {};
 
@@ -18,7 +18,7 @@
 
         var _saveRegistration = function (registration) {
 
-            _logOut();
+            //_logOut();
 
             return $http.post('/api/account/register', registration).then(function (response) {
                 return response;
@@ -28,34 +28,24 @@
 
         var _login = function (loginData) {
 
-            var data = {email: loginData.userName ,password: loginData.password}
-
             var deferred = $q.defer();
 
-            $http.defaults.useXDomain = true;
-            $http({
-                    method: 'POST',
-                    url: 'http://team.binary-studio.com/auth/api/login',
-                    headers: {
-                        'Content-Type': 'application/json;charset=UTF-8'
-                    },
-                    withCredentials: true,
-                    data: {
-                        "email": loginData.userName,
-                        "password": loginData.password
-                    }
-                }).success(function (response) {
-
-                    localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName });
+            $http.post('/api/login', loginData)
+                  .success(function (response) {
 
                     _authentication.isAuth = true;
                     _authentication.userName = loginData.userName;
 
+                    if (response.referer === undefined || response.referer === '') {
+                        $location.path('/');
+                    } else {
+                        window.location.href = decodeURIComponent(response.referer);
+                    }
+                    _fillAuthData();
                     deferred.resolve(response);
-
                 })
                 .error(function (err, status) {
-                    _logOut();
+                   // _logOut();
                     deferred.reject(err);
                 });
             return deferred.promise;
@@ -63,7 +53,7 @@
 
         var _logOut = function () {
 
-            localStorageService.remove('authorizationData');
+            //localStorageService.remove('authorizationData');
 
             _authentication.isAuth = false;
             _authentication.userName = "";
@@ -72,11 +62,14 @@
 
         var _fillAuthData = function () {
 
-            var authData = localStorageService.get('authorizationData');
-            if (authData) {
+            var token = $cookies.get('x-access-token');
+            if (token) {
+
+                var payload = jwtHelper.decodeToken(token);
+
                 _authentication.isAuth = true;
-                _authentication.userName = authData.userName;
-                console.log(authData);
+                _authentication.userName = token.email;
+                _authentication.role = token.role;
             }
         };
 

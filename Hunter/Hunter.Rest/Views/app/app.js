@@ -5,7 +5,8 @@ angular.module('hunter-app',
      'ui.bootstrap', 'ngFileUpload',
      'ODataResources', 'checklist-model',
      'ngAnimate', 'monospaced.elastic',
-     'ngCookies'])
+     'ngCookies',
+     'angular-jwt'])
     .config([
         '$routeProvider','$locationProvider', function ($routeProvider, $locationProvider) {
             

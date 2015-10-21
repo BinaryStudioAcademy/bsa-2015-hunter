@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using Hunter.Services.Dto.User;
@@ -27,17 +28,15 @@ namespace Hunter.Rest.Providers
             base.OnAuthorization(actionContext);
         }
 
-        //protected override void HandleUnauthorizedRequest(HttpActionContext actionContext)
-        //{
-        //    if (actionContext == null)
-        //    {
-        //        throw new ArgumentNullException("actionContext");
-        //    }
+        protected override void HandleUnauthorizedRequest(HttpActionContext actionContext)
+        {
+            if (actionContext == null)
+            {
+                throw new ArgumentNullException("actionContext");
+            }
 
-        //    actionContext.Response = actionContext.ControllerContext.Request.CreateResponse(HttpStatusCode.Unauthorized, "Unauthorized");
-        //    actionContext.Response.Headers.Location = new Uri("http://localhost:2020/");
-            
-
-        //}
+            actionContext.Response = actionContext.ControllerContext.Request.CreateResponse(HttpStatusCode.Unauthorized, "Unauthorized");
+            actionContext.Response.Headers.Location = new Uri(WebConfigurationManager.AppSettings["authUrl"]);
+        }
     }
 }

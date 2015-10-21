@@ -1,5 +1,5 @@
 ﻿(function () {
-'use strict';
+    'use strict';
     angular
         .module('hunter-app')
         .factory('AuthInterceptorService', AuthInterceptorService);
@@ -8,33 +8,27 @@
 
     function AuthInterceptorService($q, $injector, $location, localStorageService, $cookies, $window) {
 
-    var authInterceptorServiceFactory = {};
+        var authInterceptorServiceFactory = {};
 
-    var _request = function (config) {
+        var _responseError = function (rejection) {
 
-        config.headers = config.headers || {};
-       
-        var authData = localStorageService.get('authorizationData');
-        if (authData) {
-            config.headers.Authorization = 'Bearer ' + authData.token;
+            if (rejection.status === 401) {
+
+                if ($window.location.href != rejection.headers('location')) {
+
+                    // var authService = $injector.get('AuthService');
+                    // authService.logOut();
+
+                    $cookies.put('referer', $location.absUrl());
+                    $window.location.href = rejection.headers('location');
+                }
+            }
+
+            return $q.reject(rejection);
         }
-        return config;
+
+        authInterceptorServiceFactory.responseError = _responseError;
+
+        return authInterceptorServiceFactory;
     }
-
-    var _responseError = function (rejection) {
-        if (rejection.status === 401) {
-            var authService = $injector.get('AuthService');
-            authService.logOut();
-            $cookies.put('referer', $location.absUrl());
-            $window.location.href = 'http://localhost:2020';
-            //$window.location.href = 'http://team.binary-studio.com/auth/';
-        }
-        return $q.reject(rejection);
-    }
-
-    authInterceptorServiceFactory.request = _request;
-    authInterceptorServiceFactory.responseError = _responseError;
-
-    return authInterceptorServiceFactory;
-}
 })();

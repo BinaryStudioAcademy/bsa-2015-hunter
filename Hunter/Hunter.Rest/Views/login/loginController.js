@@ -16,17 +16,10 @@
 
         vm.message = "";
 
-        vm.login = function () {
-            AuthService.login(vm.loginData).then(function (response) {
-
-                $location.path('/');
-
-            },
-             function (err) {
-                 vm.message = err.error_description;
-             });
-        };
+        vm.login = function() {
+            AuthService.login(vm.loginData);
 
 
+        }
     };
 })();
