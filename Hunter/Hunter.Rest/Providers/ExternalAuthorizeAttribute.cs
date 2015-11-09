@@ -34,9 +34,17 @@ namespace Hunter.Rest.Providers
             {
                 throw new ArgumentNullException("actionContext");
             }
-
-            actionContext.Response = actionContext.ControllerContext.Request.CreateResponse(HttpStatusCode.Unauthorized, "Unauthorized");
-            actionContext.Response.Headers.Location = new Uri(WebConfigurationManager.AppSettings["authUrl"]);
+            if (Config.UseExternalAuth)
+            {
+                actionContext.Response = actionContext.ControllerContext.Request.CreateResponse(HttpStatusCode.Unauthorized, "Unauthorized");
+                actionContext.Response.Headers.Location = new Uri(Config.ExternalPath);
+            }
+            else
+            {
+                // current local auth controller clones API of external server
+                actionContext.Response = actionContext.ControllerContext.Request.CreateResponse(HttpStatusCode.Unauthorized, "Unauthorized");
+                actionContext.Response.Headers.Location = Config.GetLocalLoginUri();
+            }
         }
     }
 }
