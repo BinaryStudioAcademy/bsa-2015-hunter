@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -16,13 +17,18 @@ namespace Hunter.Rest.Providers
     {
         public override void OnAuthorization(HttpActionContext actionContext)
         {
+            Contract.Assert(actionContext != null);
+
+            if (skipAuthorization(actionContext)) return;
+
             IUserProfileService _userProfileService = NinjectContainer.Resolve<IUserProfileService>();
             if (!_userProfileService.UserExist(actionContext.RequestContext.Principal.Identity.Name))
                 {
                 _userProfileService.Save(new EditUserProfileVm()
                 {
                     Login = actionContext.RequestContext.Principal.Identity.Name,
-                    Position = actionContext.RequestContext.Principal.Identity.Name
+                    Alias = "NEW",
+                    Position = "Unconfirmed",
                 });
             }
             base.OnAuthorization(actionContext);
@@ -30,10 +36,8 @@ namespace Hunter.Rest.Providers
 
         protected override void HandleUnauthorizedRequest(HttpActionContext actionContext)
         {
-            if (actionContext == null)
-            {
-                throw new ArgumentNullException("actionContext");
-            }
+            Contract.Assert(actionContext != null);
+
             if (Config.UseExternalAuth)
             {
                 actionContext.Response = actionContext.ControllerContext.Request.CreateResponse(HttpStatusCode.Unauthorized, "Unauthorized");
@@ -45,6 +49,14 @@ namespace Hunter.Rest.Providers
                 actionContext.Response = actionContext.ControllerContext.Request.CreateResponse(HttpStatusCode.Unauthorized, "Unauthorized");
                 actionContext.Response.Headers.Location = Config.GetLocalLoginUri();
             }
+        }
+
+        private static bool skipAuthorization(HttpActionContext actionContext)
+        {
+            Contract.Assert(actionContext != null);
+
+            return actionContext.ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Any()
+                   || actionContext.ControllerContext.ControllerDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Any();
         }
     }
 }

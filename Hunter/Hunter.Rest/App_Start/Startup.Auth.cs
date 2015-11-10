@@ -4,9 +4,11 @@ using System.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.ServiceModel.Security.Tokens;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web.Configuration;
 using Hunter.Rest.Providers;
 using Microsoft.Owin.Security.Jwt;
+using Microsoft.Owin.Security.OAuth;
 using Owin;
 using AuthenticationMode = Microsoft.Owin.Security.AuthenticationMode;
 
@@ -55,5 +57,44 @@ namespace Hunter.Rest
             }
             return jwt;
         }
+    }
+
+    public class CookiesJwtOAuthProvider : OAuthBearerAuthenticationProvider
+    {
+        //private  IUserProfileService _userProfileService;
+
+        //public  CookiesJwtOAuthProvider()
+        //{
+        //    _userProfileService = NinjectContainer.Resolve<IUserProfileService>();
+        //}
+
+
+
+        public override Task RequestToken(OAuthRequestTokenContext context)
+        {
+            var token = context.Request.Cookies["x-access-token"];
+            if (!string.IsNullOrEmpty(token))
+            {
+                context.Token = token;
+            }
+
+            return Task.FromResult<object>(null);
+        }
+
+        //public override Task ValidateIdentity(OAuthValidateIdentityContext context)
+        //{
+        //    IUserProfileService _userProfileService = NinjectContainer.Resolve<IUserProfileService>();
+
+        //    if (!_userProfileService.UserExist(context.Ticket.Identity.Name))
+        //    {
+        //        _userProfileService.Save(new EditUserProfileVm()
+        //        {
+        //            Login = context.Ticket.Identity.Name,
+        //            Position = context.Ticket.Identity.Name
+        //        });
+        //    }
+        //    context.Validated();
+        //    return Task.FromResult<object>(null);
+        //}
     }
 }
