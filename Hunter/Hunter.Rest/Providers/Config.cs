@@ -39,7 +39,10 @@ namespace Hunter.Rest.Providers
                 catch (Exception)
                 {
                 }
-                return string.IsNullOrEmpty(res) ? "/" : "/" + res.Trim('/');
+                if (String.IsNullOrEmpty(res) || res == "/")
+                    return "/";
+                
+                return res;
             }
         }
 

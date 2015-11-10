@@ -804,6 +804,7 @@
     <Content Include="Views\Activity\list\activityListController.js" />
     <Content Include="Views\Activity\list\list.html" />
     <Content Include="Views\app\app.js" />
+    <Content Include="Views\app\globalService.js" />
     <Content Include="Views\Candidate\addEdit\addEdit.html" />
     <Content Include="Views\Candidate\addEdit\candidateAddEditController.js" />
     <Content Include="Views\Candidate\candidateService.js" />
@@ -939,8 +940,10 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_LayoutWithMainMenu.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <None Include="Web.TeamDeploy.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bower_components\checklist-model\test\" />
@@ -986,6 +989,15 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TeamDeploy|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
