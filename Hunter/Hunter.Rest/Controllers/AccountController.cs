@@ -28,7 +28,6 @@ namespace Hunter.Rest.Controllers
 
             if (user != null)
             {
-                var sekretKey = WebConfigurationManager.AppSettings["secret"];
                 var payload = new Dictionary<string, object>()
                 {
                     {"id", user.Id},
@@ -36,7 +35,7 @@ namespace Hunter.Rest.Controllers
                     {"role",user.UserRole.Name }
                 };
 
-                var jwtToken = JsonWebToken.Encode(payload, sekretKey, JwtHashAlgorithm.HS256);
+                var jwtToken = JsonWebToken.Encode(payload, Config.TokenSecret, JwtHashAlgorithm.HS256);
 
                 HttpContext.Current.Response.Cookies.Add(new HttpCookie("x-access-token", jwtToken));
 

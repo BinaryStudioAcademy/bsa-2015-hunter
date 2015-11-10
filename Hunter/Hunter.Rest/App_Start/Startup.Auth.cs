@@ -18,9 +18,9 @@ namespace Hunter.Rest
     {
         private void ConfigureOAuthToken(IAppBuilder app)
         {
-            var secret = Encoding.UTF8.GetBytes(WebConfigurationManager.AppSettings["secret"]);
+            var secret = Encoding.UTF8.GetBytes(Config.TokenSecret);
 
-            CustomJwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>()
+            JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>()
             {
                 { "email", ClaimTypes.Name },
                 { "id", ClaimTypes.NameIdentifier },

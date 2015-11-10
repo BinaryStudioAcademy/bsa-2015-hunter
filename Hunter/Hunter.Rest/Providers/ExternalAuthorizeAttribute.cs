@@ -21,15 +21,20 @@ namespace Hunter.Rest.Providers
 
             if (skipAuthorization(actionContext)) return;
 
+            
             IUserProfileService _userProfileService = NinjectContainer.Resolve<IUserProfileService>();
-            if (!_userProfileService.UserExist(actionContext.RequestContext.Principal.Identity.Name))
+
+            if (Config.UseExternalAuth)
+            {
+                if (!_userProfileService.UserExist(actionContext.RequestContext.Principal.Identity.Name))
                 {
-                _userProfileService.Save(new EditUserProfileVm()
-                {
-                    Login = actionContext.RequestContext.Principal.Identity.Name,
-                    Alias = "NEW",
-                    Position = "Unconfirmed",
-                });
+                    _userProfileService.Save(new EditUserProfileVm()
+                    {
+                        Login = actionContext.RequestContext.Principal.Identity.Name,
+                        Alias = "NEW",
+                        Position = "Unconfirmed",
+                    });
+                }
             }
             base.OnAuthorization(actionContext);
         }

@@ -50,5 +50,14 @@ namespace Hunter.Rest.Providers
                 return new Uri("/login", UriKind.Relative);
             return new Uri(basePath.TrimEnd('/') + "/login", UriKind.Relative);
         }
+
+        
+        public static string TokenSecret
+        {
+            get
+            {
+                return WebConfigurationManager.AppSettings["secret"];
+            }
+        }
     }
 }
