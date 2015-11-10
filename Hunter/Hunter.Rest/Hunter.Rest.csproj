@@ -345,6 +345,14 @@
     <Content Include="bower_components\angular-elastic\elastic.js" />
     <Content Include="bower_components\angular-elastic\index.html" />
     <Content Include="bower_components\angular-elastic\LICENCE.txt" />
+    <Content Include="bower_components\angular-jwt\dist\angular-jwt.js" />
+    <Content Include="bower_components\angular-jwt\dist\angular-jwt.min.js" />
+    <Content Include="bower_components\angular-jwt\gulpfile.js" />
+    <Content Include="bower_components\angular-jwt\index.js" />
+    <Content Include="bower_components\angular-jwt\karma-dist-concatenated.conf.js" />
+    <Content Include="bower_components\angular-jwt\karma-dist-minified.conf.js" />
+    <Content Include="bower_components\angular-jwt\karma-src.conf.js" />
+    <Content Include="bower_components\angular-jwt\LICENSE.txt" />
     <Content Include="bower_components\angular-local-storage\.gitattributes" />
     <Content Include="bower_components\angular-local-storage\.gitignore" />
     <Content Include="bower_components\angular-local-storage\demo\demo-app.js" />
@@ -774,6 +782,11 @@
     <Content Include="bower_components\alertifyjs\src\sass\themes\bootstrap\bootstrap.scss" />
     <Content Include="bower_components\alertifyjs\src\sass\themes\default\default.scss" />
     <Content Include="bower_components\alertifyjs\update.json" />
+    <Content Include="bower_components\angular-jwt\.bower.json" />
+    <Content Include="bower_components\angular-jwt\bower.json" />
+    <Content Include="bower_components\angular-jwt\History.md" />
+    <Content Include="bower_components\angular-jwt\package.json" />
+    <Content Include="bower_components\angular-jwt\README.md" />
     <None Include="Properties\PublishProfiles\binary-team.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
