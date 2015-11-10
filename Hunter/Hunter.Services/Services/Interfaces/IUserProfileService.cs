@@ -7,10 +7,10 @@ namespace Hunter.Services.Interfaces
     public interface IUserProfileService
     {
         IList<UserProfileRowVm> LoadPage(int page);
+        IEnumerable<UserProfileRowVm> GetUserProfiles(string roleName);
         ResourceApiResult<EditUserProfileVm> GetById(long userProfileId);
         ApiResult Save(EditUserProfileVm userProfile);
         IdApiResult Delete(long userProfileId);
-        IEnumerable<UserProfileRowVm> GetUserProfile(string roleName);
         bool UserExist(string userName);
     }
 }
