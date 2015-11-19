@@ -62,27 +62,52 @@ namespace Hunter.Tests.Tools
             var edu = info.Education;
             List<string> checkEdu = new List<string>()
             {
-                "National Forestry University of UkrainianMaster's degree, IT2013 - 2015",
-                "National Forestry University of UkraineBachelor's degree, Computer science2009 - 2013"
+                "National Forestry University of UkrainianMaster's degree, IT2013 – 2015",
+                "National Forestry University of UkraineBachelor's degree, Computer science2009 – 2013"
             };
 
             // Assert
             Assert.AreEqual(checkEdu, edu);
         }
 
+        //[Test]
+        //public void Should_give_correct_location_When_set_url()
+        //{
+        //    // Arrange
+        //    var info = _parser.GetPageInfo("https://ua.linkedin.com/pub/myroslav-dmytrus/b7/a02/436");
+        //    // Act
+        //    var loc = info.Location;
+        //    var checkLoc = "Ukraine";
+
+        //    // Assert
+        //    Assert.AreEqual(checkLoc, loc);
+        //}
+
         [Test]
-        public void Should_give_correct_location_When_set_url()
+        public void Should_give_correct_industry_When_set_url()
         {
             // Arrange
             var info = _parser.GetPageInfo("https://ua.linkedin.com/pub/myroslav-dmytrus/b7/a02/436");
             // Act
-            var loc = info.Location;
-            var checkLoc = "Ukraine";
+            var ind = info.Industry;
+            var checkInd = "Program Development";
 
             // Assert
-            Assert.AreEqual(checkLoc, loc);
+            Assert.AreEqual(checkInd, ind);
         }
 
+        [Test]
+        public void Should_give_correct_headline_When_set_url()
+        {
+            // Arrange
+            var info = _parser.GetPageInfo("https://ua.linkedin.com/pub/myroslav-dmytrus/b7/a02/436");
+            // Act
+            var headline = info.Headline;
+            var checkHeadline = "Attended NFU";
+
+            // Assert
+            Assert.AreEqual(checkHeadline, headline);
+        }
 
         [Test]
         public void Should_give_correct_img_url_When_set_url()
@@ -92,7 +117,7 @@ namespace Hunter.Tests.Tools
             // Act
             var img = info.Img;
             var checkImg =
-                "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAN4AAAAJDQwMTI2ODUzLWI2MWItNDZkYS05YWNhLTJjMDZjOWFkMTZlNA.jpg";
+                "https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAN4AAAAJDQwMTI2ODUzLWI2MWItNDZkYS05YWNhLTJjMDZjOWFkMTZlNA.jpg";
 
 
             // Assert
@@ -130,10 +155,10 @@ namespace Hunter.Tests.Tools
         public void Should_give_correct_time_expirience_When_set_url()
         {
             // Arrange
-            var info = _parser.GetPageInfo("https://ua.linkedin.com/pub/dmitriy-beseda/a4/742/497/en");
+            var info = _parser.GetPageInfo("https://ua.linkedin.com/in/yuriy-simashkevych-7a11947a");
             // Act
             var time = info.ExperienceTime;
-            var checkTime = new TimeSpan(314,0,0,0);
+            var checkTime = new TimeSpan(748, 0, 0, 0);
 
             // Assert
             Assert.AreEqual(checkTime.Days, time.Days);
@@ -148,7 +173,7 @@ namespace Hunter.Tests.Tools
             var work = info.Experience;
             List<string> checkWork = new List<string>()
             {
-                    "Web DeveloperBinary StudioOctober 2014 - Present (11 months)Украина"
+                    "Web DeveloperBinary StudioOctober 2014 – Present (1 year 2 months)"
             };
 
             // Assert
@@ -162,7 +187,7 @@ namespace Hunter.Tests.Tools
             var info = _parser.GetPageInfo("https://ua.linkedin.com/pub/yuriy-simashkevych/7a/194/7a1");
             // Act
             var summary = info.Summary;
-            var checkSummary = "Thank you for viewing my profile.\n\nI have over 1.5 year of experience in software industry.\nBeing involved in a few projects I have carried out and got experience in requirements analysis, test case creation and execution, defects reporting and tracking.\nI am open-minded and goal-oriented with good interpersonal and communication skills. Also I'm willing to learn and grow.\n\nYou can always contact me by e-mail: yuriy.simashkevych@yahoo.com ";
+            var checkSummary = "Thank you for viewing my profile.I have over 1.5 year of experience in software industry.Being involved in a few projects I have carried out and got experience in requirements analysis, test case creation and execution, defects reporting and tracking.I am open-minded and goal-oriented with good interpersonal and communication skills. Also I’m willing to learn and grow.You can always contact me by e-mail: yuriy.simashkevych@yahoo.com ";
             // Assert
             Assert.AreEqual(checkSummary, summary);
         }

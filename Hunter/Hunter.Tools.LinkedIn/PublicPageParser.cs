@@ -22,31 +22,32 @@ namespace Hunter.Tools.LinkedIn
 
             info.Img = GetImg();
 
-            info.Name = SmallInfo("//span[@class='full-name']");
+            info.Name = SmallInfo("//h1[@id='name']");
 
-            info.Location = SmallInfo("//span[@class='locality']");
+            //info.Location = SmallInfo("//span[@class='locality']");
 
-            info.Industry = SmallInfo("//dd[@class='industry']");
+            info.Industry = SmallInfo("//dd[@class='descriptor']");
 
-            info.Headline = SmallInfo("//div[@id='headline']");
+            info.Headline = SmallInfo("//p[@class='headline title']");
 
-            //var summary = Document.DocumentNode.SelectNodes("//p[@class='description']");
-            info.Summary = Summary("//p[@class='description']");
+            info.Summary = Summary("//div[@class='description']");
 
             info.Skills = GetSkills();
 
             info.Experience = MoreInfo("experience");
 
+            //????
             info.Courses = MoreInfo("courses");
 
-            info.Projects = MoreInfo("projects");
+            //info.Projects = MoreInfo("projects");
+            info.Projects = MoreInfoCustomSelector("//li[@class='project']");
 
             info.Certifications = MoreInfo("certifications");
 
-            info.Languages = Languages("//div[@id='background-languages']");
+            info.Languages = Languages("//section[@id='languages']");
 
-            info.Education = MoreInfo("education");
-
+            //info.Education = MoreInfo("education");
+            info.Education = MoreInfoCustomSelector("//li[@class='school']");
             //other info we can get "interests",
             //"patents","publications","honors","test-scores","organizations","volunteering"
             return info;
@@ -79,11 +80,26 @@ namespace Hunter.Tools.LinkedIn
             }
 
         }
+        private IList<string> MoreInfoCustomSelector(string selector)
+        {
+            try
+            {
+                var items = Document.DocumentNode.SelectNodes(selector);
+                var inf = Save(items);
+                if (inf.Count() == 2 && inf.LastOrDefault().Length == 0 || inf.Count() == 0)
+                    return null;
+                return inf.ToList();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
         private IList<string> MoreInfo(string value)
         {
             try
             {
-                string selector = String.Format("//div[@id='background-{0}']", value);
+                string selector = String.Format("//section[@id='{0}']", value);
                 var items = Document.DocumentNode.SelectNodes(selector).Nodes().Where(x => x.Name != "script").Where(x => x.DescendantNodes().Count() != 1);
                 var inf = Save(items);
                 if (inf.Count() == 2 && inf.LastOrDefault().Length == 0 || inf.Count() == 0)
@@ -100,7 +116,8 @@ namespace Hunter.Tools.LinkedIn
             //get img link if exist
             try
             {
-                return Document.DocumentNode.SelectNodes("//img[@id='bg-blur-profile-picture']").FirstOrDefault().GetAttributeValue("src", "null");
+                var a = Document.DocumentNode.SelectNodes("//img").FirstOrDefault();
+                return Document.DocumentNode.SelectNodes("//img").FirstOrDefault().GetAttributeValue("data-delayed-url", "null");
             }
             catch (Exception)
             {
@@ -112,7 +129,7 @@ namespace Hunter.Tools.LinkedIn
             //get all skills into one string, if exist
             try
             {
-                var skills = Document.DocumentNode.SelectNodes("//span[@class='skill-pill']");
+                var skills = Document.DocumentNode.SelectNodes("//li[@class='skill']");
                 //var skillsList = String.Empty;
                 return Save(skills).ToList();//.ForEach(x => skillsList += String.Format("{0}, ", x));
                 //skillsList = skillsList.Remove(skillsList.LastIndexOf(","));
@@ -130,7 +147,7 @@ namespace Hunter.Tools.LinkedIn
             IEnumerable<string> allDates;
             try
             {
-                allDates = Document.DocumentNode.SelectNodes("//span[@class='experience-date-locale']").Select(x => x.InnerText);
+                allDates = Document.DocumentNode.SelectNodes("//li[@class='position']/div[@class='meta']/span[@class='date-range']").Select(x => x.InnerText);
             }
             catch (Exception)
             {
@@ -141,7 +158,7 @@ namespace Hunter.Tools.LinkedIn
             var lastDatesString = allDates.LastOrDefault();
 
 
-            var firstIndex = allDates.FirstOrDefault().IndexOf(";");
+            var firstIndex = allDates.FirstOrDefault().IndexOf("–");
             var lastIndex = allDates.FirstOrDefault().IndexOf("(");
             firstDatesString = firstDatesString.Substring(firstIndex + 1, lastIndex - firstIndex - 1);
             DateTime date1;
@@ -160,7 +177,7 @@ namespace Hunter.Tools.LinkedIn
                     date1 = new DateTime(int.Parse(firstDatesString), 1, 1);
                 }
             }
-            lastIndex = lastDatesString.IndexOf("&");
+            lastIndex = lastDatesString.IndexOf("–");
             lastDatesString = lastDatesString.Substring(0, lastIndex);
             DateTime date2;
             try
