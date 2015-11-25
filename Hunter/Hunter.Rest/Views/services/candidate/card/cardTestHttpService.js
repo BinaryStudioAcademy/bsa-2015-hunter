@@ -22,7 +22,7 @@
         function getTest(vacancyId, candidateId, success) {
             HttpHandler.sendRequest({
                 'verb': 'GET',
-                'url': '/api/test?vacancyId=' + vacancyId + '&candidateId=' + candidateId,
+                'url': './api/test?vacancyId=' + vacancyId + '&candidateId=' + candidateId,
                 'successCallback': success,
                 'errorMessageToDev': 'GET TEST ERROR',
                 'errorMessageToUser': 'Failed'
@@ -32,7 +32,7 @@
         function getAllTests(vacancyId, candidateId, success) {
             HttpHandler.sendRequest({
                 'verb': 'GET',
-                'url': '/api/test/all/' + candidateId,
+                'url': './api/test/all/' + candidateId,
                 'successCallback': success,
                 'errorMessageToDev': 'GET ALL TESTS ERROR',
                 'errorMessageToUser': 'Failed'
@@ -42,7 +42,7 @@
         function uploadTest(body, success) {
             HttpHandler.sendRequest({
                 'verb': 'POST',
-                'url': '/api/test/add',
+                'url': './api/test/add',
                 'body': body,
                 'successCallback': success,
                 'errorMessageToDev': 'POST TEST ERROR',
@@ -53,7 +53,7 @@
         function updateTestComment(body, success) {
             HttpHandler.sendRequest({
                 verb: 'PUT',
-                url: '/api/test/comment',
+                url: './api/test/comment',
                 body: body,
                 successCallback: success,
                 errorMessageToDev: 'POST TEST COMMENT ERROR'
@@ -63,7 +63,7 @@
         function addCheckingToTest(userId, testId, success) {
             HttpHandler.sendRequest({
                 verb: 'PUT',
-                url: '/api/test/addChecking/' + testId + "/" + userId,
+                url: './api/test/addChecking/' + testId + "/" + userId,
                 
                 successCallback: success,
                 errorCallback: function (response) {

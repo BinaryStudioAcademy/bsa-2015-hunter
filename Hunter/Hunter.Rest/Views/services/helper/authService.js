@@ -20,7 +20,7 @@
 
             //_logOut();
 
-            return $http.post('/api/account/register', registration).then(function (response) {
+            return $http.post('./api/account/register', registration).then(function (response) {
                 return response;
             });
 
@@ -30,7 +30,7 @@
 
             var deferred = $q.defer();
 
-            $http.post('/api/login', loginData)
+            $http.post('./api/login', loginData)
                   .success(function (response) {
 
                     _authentication.isAuth = true;

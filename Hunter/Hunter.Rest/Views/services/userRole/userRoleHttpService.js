@@ -18,7 +18,7 @@
         function getUserRoles() {
             var deferred = $q.defer();
             HttpHandler.sendRequest({
-                url: '/api/userRole',
+                url: './api/userRole',
                 verb: 'get',
                 successCallback: function (result) {
                     deferred.resolve(result.data);

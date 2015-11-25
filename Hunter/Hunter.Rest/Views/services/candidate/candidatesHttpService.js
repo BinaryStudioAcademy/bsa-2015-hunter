@@ -33,7 +33,7 @@
         function updateCandidate(body, successCallback, id) {
             httpHandler.sendRequest({
                 verb: 'PUT',
-                url: '/api/candidates/' + id,
+                url: './api/candidates/' + id,
                 body: body,
                 successCallback: successCallback
             });
@@ -42,7 +42,7 @@
         function addCandidate(body, successCallback) {
             httpHandler.sendRequest({
                 verb: 'POST',
-                url: '/api/candidates/',
+                url: './api/candidates/',
                 body: body,
                 successCallback: successCallback
             });
@@ -52,7 +52,7 @@
             var deferred = $q.defer();
             httpHandler.sendRequest({
                 verb: 'GET',
-                url: '/api/candidates/' + id,
+                url: './api/candidates/' + id,
                 //                body: body,
                 successCallback: function (response) {
                     deferred.resolve(response);
@@ -69,7 +69,7 @@
             var deferred = $q.defer();
             httpHandler.sendRequest({
                 verb: 'GET',
-                url: '/api/candidates/',
+                url: './api/candidates/',
                 //                body: body,
                 successCallback: function (response) {
                     deferred.resolve(response);
@@ -85,7 +85,7 @@
         //function getLongList(id) {
         //    var deferred = $q.defer();
         //    httpHandler.sendRequest({
-        //        url: '/api/candidates/longlist/' + id,
+        //        url: './api/candidates/longlist/' + id,
         //        verb: 'GET',
         //        successCallback: function (result) {
         //            deferred.resolve(result.data);
@@ -101,7 +101,7 @@
         function getLongListDetails(vid, cid) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/candidates/candidatelonglist/' + vid + '/' + cid,
+                url: './api/candidates/candidatelonglist/' + vid + '/' + cid,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -117,7 +117,7 @@
         function parseLinkedIn(url) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/resume/parse?url=' + url,
+                url: './api/resume/parse?url=' + url,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -133,7 +133,7 @@
         function getAddedByList() {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/candidates/addedby',
+                url: './api/candidates/addedby',
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -149,7 +149,7 @@
         function setShortListFlag(cid, isShort) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/candidates/' + cid + '/' + isShort,
+                url: './api/candidates/' + cid + '/' + isShort,
                 verb: 'PUT',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -165,7 +165,7 @@
         function updateCandidateResolution(cid, resolution) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/candidates/' + cid + '/resolution/' + resolution,
+                url: './api/candidates/' + cid + '/resolution/' + resolution,
                 verb: 'PUT',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -181,7 +181,7 @@
         function addCandidatePool(candidateId, poolId) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                'url': '/api/candidates/' + candidateId + '/addpool/' + poolId,
+                'url': './api/candidates/' + candidateId + '/addpool/' + poolId,
                 'verb': 'PUT',
                 'successCallback': function(response) {
                     console.log('Pool added successful');
@@ -195,7 +195,7 @@
         function removeCandidatePool(candidateId, poolId) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                'url': '/api/candidates/' + candidateId + '/removepool/' + poolId,
+                'url': './api/candidates/' + candidateId + '/removepool/' + poolId,
                 'verb': 'DELETE',
                 'successCallback': function(response) {
                     console.log('Pool removed successful');
@@ -209,7 +209,7 @@
         function changeCandidatePool(oldId, newId, candidateId) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                'url': '/api/candidates/' + candidateId + '/pools/update/' + oldId + '/' + newId,
+                'url': './api/candidates/' + candidateId + '/pools/update/' + oldId + '/' + newId,
                 'verb': 'PUT',
                 'successCallback': function(response) {
                     console.log('Pools changed');

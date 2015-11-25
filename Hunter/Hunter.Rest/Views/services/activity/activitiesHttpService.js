@@ -23,7 +23,7 @@
         function getActivityList(successCallback, body) {
             httpHandler.sendRequest({
                 verb: 'GET',
-                url: '/api/activities/',
+                url: './api/activities/',
                 //                body: body,
                 successCallback: successCallback,
                 errorMessageToDev: 'GET ACTIVITY INFO ERROR: ',
@@ -34,7 +34,7 @@
         function saveActivityId(successCallback, body) {
             httpHandler.sendRequest({
                 'verb': 'POST',
-                'url': '/api/activities/save/lastid',
+                'url': './api/activities/save/lastid',
                 'body': body,
                 'successCallback': successCallback,
                 'errorMessageToDev': 'POST ACTIVITY_ID ERROR',
@@ -45,7 +45,7 @@
         function getFilterOptions() {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/activities/filters',
+                url: './api/activities/filters',
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);

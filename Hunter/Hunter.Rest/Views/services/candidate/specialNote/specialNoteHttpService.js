@@ -26,7 +26,7 @@
             var deferred = $q.defer();
             httpHandler.sendRequest({
                 verb: 'PUT',
-                url: '/api/specialnote/' + id,
+                url: './api/specialnote/' + id,
                 body: body,
                 successCallback: function (response) {
                     deferred.resolve(response.data);
@@ -40,7 +40,7 @@
             var deferred = $q.defer();
             httpHandler.sendRequest({
                 verb: 'POST',
-                url: '/api/specialnote/create',
+                url: './api/specialnote/create',
                 body: body,
                 successCallback: function (response) {
                      deferred.resolve(response.data);
@@ -54,7 +54,7 @@
             var deferred = $q.defer();
             httpHandler.sendRequest({
                 verb: 'GET',
-                url: '/api/specialnote/' + id,
+                url: './api/specialnote/' + id,
                 successCallback: function (response) {
                     deferred.resolve(response);
                 },
@@ -70,7 +70,7 @@
             var deferred = $q.defer();
             httpHandler.sendRequest({
                 verb: 'GET',
-                url: '/api/specialnote/',
+                url: './api/specialnote/',
                 successCallback: function (response) {
                     deferred.resolve(response);
                 },
@@ -85,7 +85,7 @@
         function getCandidateSpecialNote(id) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/specialnote/candidate/' + id,
+                url: './api/specialnote/candidate/' + id,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result);
@@ -101,7 +101,7 @@
         function getCardSpecialNote(vid, cid) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/specialnote/' + vid + '/' + cid,
+                url: './api/specialnote/' + vid + '/' + cid,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result);
@@ -117,7 +117,7 @@
         function getUserSpecialNote(cid) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/specialnote/user/' + cid,
+                url: './api/specialnote/user/' + cid,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result);
@@ -133,7 +133,7 @@
         //function deleteSpecialNote(id) {
         //    var deferred = $q.defer();
         //    httpHandler.sendRequest({
-        //        url: '/api/specialnote/' + id,
+        //        url: './api/specialnote/' + id,
         //        verb: 'DELETE',
         //        successCallback: function (result) {
         //            deferred.resolve(result.data);

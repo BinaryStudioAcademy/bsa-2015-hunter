@@ -15,7 +15,7 @@
             var deferred = $q.defer();
             httpHandler.sendRequest({
                 verb: 'GET',
-                url: '/api/pool',
+                url: './api/pool',
                 successCallback: function(result) {
                     deferred.resolve(result.data);
                 },

@@ -26,7 +26,7 @@
         }
 
         function getFilteredVacancies(filter) {
-            var requestUrl = '/api/vacancy/?' +
+            var requestUrl = './api/vacancy/?' +
                 'page=' + filter.page + '&' +
                 'pageSize=' + filter.pageSize + '&' +
                 'sortColumn=' + filter.sortColumn + '&' +
@@ -53,7 +53,7 @@
         function getVacancy(id) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/vacancy/' + id,
+                url: './api/vacancy/' + id,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -69,7 +69,7 @@
         function addVacancy(data) {
             httpHandler.sendRequest({
                 verb: 'POST',
-                url: '/api/vacancy',
+                url: './api/vacancy',
                 body: data,
                 successMessageToUser: 'Vacancy added',
                 errorMessageToUser: 'Vacancy not added',
@@ -84,7 +84,7 @@
             console.log(data);
             httpHandler.sendRequest({
                 verb: 'PUT',
-                url: '/api/vacancy/' + id,
+                url: './api/vacancy/' + id,
                 body: data,
                 successMessageToUser: 'Vacancy updated',
                 errorMessageToUser: 'Vacancy not updated',
@@ -98,7 +98,7 @@
         function deleteVacancy(id) {
             httpHandler.sendRequest({
                 verb: 'DELETE',
-                url: '/api/vacancy/' + id,
+                url: './api/vacancy/' + id,
                 successMessageToUser: 'Vacancy deleted',
                 errorMessageToUser: 'Vacancy not deleted',
                 errorCallback: function (status) {
@@ -127,7 +127,7 @@
         {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/vacancy/longlist/' + id,
+                url: './api/vacancy/longlist/' + id,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -143,7 +143,7 @@
         function getLongListAddedBy(vid) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/vacancy/longlist/' + vid + '/addedby',
+                url: './api/vacancy/longlist/' + vid + '/addedby',
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -159,7 +159,7 @@
         function getFilterInfo(roleName) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/vacancy/filterInfo/' + roleName,
+                url: './api/vacancy/filterInfo/' + roleName,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -175,7 +175,7 @@
         function getAddedByList() {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/vacancy/addedby',
+                url: './api/vacancy/addedby',
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -191,7 +191,7 @@
         function getVacancyByState(id) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/vacancy/state/' + id,
+                url: './api/vacancy/state/' + id,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);

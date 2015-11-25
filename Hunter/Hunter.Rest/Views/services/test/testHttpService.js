@@ -19,7 +19,7 @@
         function getTestsNotChecked() {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/test/notChecked',
+                url: './api/test/notChecked',
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -34,7 +34,7 @@
 
         function changeCheckedTest(testId, success) {
             httpHandler.sendRequest({
-                url: '/api/test/change/' + testId,
+                url: './api/test/change/' + testId,
                 verb: 'POST',
                 successCallback: success,
                 errorCallback: function (status) {

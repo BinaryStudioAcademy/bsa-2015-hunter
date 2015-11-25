@@ -13,7 +13,7 @@
                 </div>
                 <div class="ll_preview_info_all">
                     <p>
-                        <a href="/vacancy/{{llPreviewCtrl.vacancyId}}/candidate/{{llPreviewCtrl.candidateDetails.id}}">{{llPreviewCtrl.candidateDetails.firstName + " " + llPreviewCtrl.candidateDetails.lastName}}</a>
+                        <a href="./vacancy/{{llPreviewCtrl.vacancyId}}/candidate/{{llPreviewCtrl.candidateDetails.id}}">{{llPreviewCtrl.candidateDetails.firstName + " " + llPreviewCtrl.candidateDetails.lastName}}</a>
                     </p>
                     <p>{{llPreviewCtrl.candidateDetails.salary}}</p>
                     <p title="Resolution / Stage">{{llPreviewCtrl.resolutions[llPreviewCtrl.candidateDetails.resolution].name}} / {{llPreviewCtrl.stages[llPreviewCtrl.candidateDetails.stage].name}}</p>
@@ -21,8 +21,8 @@
                 <div class="ll_preview_info_control">
                 </div>
                 <div class="ll_preview_info_control">
-                    <a class="btn btn-default" href="/vacancy/{{llPreviewCtrl.vacancyId}}/candidate/{{llPreviewCtrl.candidateDetails.id}}">Details</a>
-                    <a class="btn btn-default" href="/candidate/edit/{{llPreviewCtrl.candidateDetails.id}}">Edit Profile</a>
+                    <a class="btn btn-default" href="./vacancy/{{llPreviewCtrl.vacancyId}}/candidate/{{llPreviewCtrl.candidateDetails.id}}">Details</a>
+                    <a class="btn btn-default" href="./candidate/edit/{{llPreviewCtrl.candidateDetails.id}}">Edit Profile</a>
                     <button class="btn btn-default" type="button" ng-click="llPreviewCtrl.removeCard(llPreviewCtrl.candidateDetails.id)">Remove from List</button>
                 </div>
                 <div class="col-md-12">

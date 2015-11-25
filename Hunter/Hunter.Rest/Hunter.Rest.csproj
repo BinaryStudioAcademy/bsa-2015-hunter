@@ -804,7 +804,6 @@
     <Content Include="Views\Activity\list\activityListController.js" />
     <Content Include="Views\Activity\list\list.html" />
     <Content Include="Views\app\app.js" />
-    <Content Include="Views\app\globalService.js" />
     <Content Include="Views\Candidate\addEdit\addEdit.html" />
     <Content Include="Views\Candidate\addEdit\candidateAddEditController.js" />
     <Content Include="Views\Candidate\candidateService.js" />
