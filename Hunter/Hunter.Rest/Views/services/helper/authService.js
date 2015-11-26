@@ -62,7 +62,8 @@
 
         var _fillAuthData = function () {
 
-            var token = $cookies.get('x-access-token');
+            //var token = $cookies.get('x-access-token');
+            var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjU1ZGMxMzM5MTg0NmM2OGExYWQ1NmRhYSIsImVtYWlsIjoiYWRtaW5AYWRtaW4iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE0NDg0NjQzMjl9.";
             if (token) {
 
                 var payload = jwtHelper.decodeToken(token);

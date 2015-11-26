@@ -55,16 +55,21 @@ namespace Hunter.Services.Services
             return tests;
         }
 
-        public int GetCountNoChecked(string userName) 
+        public int GetCountNoChecked(string userName)
         {
-            var count = _userProfileRepository
+            var firstOrDefault = _userProfileRepository
                 .Query()
                 .Where(e => e.UserLogin.ToUpper() == userName.ToUpper())
-                .FirstOrDefault()
-                .Test.Where(e => e.IsChecked == false)
-                .Count();
+                .FirstOrDefault();
+            if (firstOrDefault != null)
+            {
+                var count = firstOrDefault
+                    .Test.Where(e => e.IsChecked == false)
+                    .Count();
             
-            return count;
+                return count;
+            }
+            return 0;
         }
 
         public TestsResult GetAllCandidatesTests(int candidateId)

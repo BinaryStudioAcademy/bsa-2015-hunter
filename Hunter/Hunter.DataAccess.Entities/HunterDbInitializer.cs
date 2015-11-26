@@ -6,28 +6,43 @@ using Hunter.DataAccess.Entities.Enums;
 
 namespace Hunter.DataAccess.Entities
 {
-    internal class HunterDbInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<HunterDbContext>
-    //internal class HunterDbInitializer : System.Data.Entity.CreateDatabaseIfNotExists<HunterDbContext>
+    //internal class HunterDbInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<HunterDbContext>
+    internal class HunterDbInitializer : System.Data.Entity.CreateDatabaseIfNotExists<HunterDbContext>
     //DropCreateDatabaseIfModelChanges<HunterDbContext>
     {
+        private static UserRole _recruiterRole = new UserRole() { Name = "Recruiter" };
+        private static UserRole _technicalRole = new UserRole() { Name = "Technical Specialist" };
+        private static UserRole _adminRole = new UserRole() { Name = "Admin" };
+
+        private static Pool _jsPool = new Pool { Name = "JavaScript", Color = "rgb(44,201,99)" };
+        private static Pool _netPool = new Pool { Name = ".Net", Color = "rgb(293,250,85)" };
+        private static Pool _phpPool = new Pool { Name = "PHP", Color = "rgb(240,88,88)" };
+        private static Pool _qaPool = new Pool { Name = "QA", Color = "rgb(245,122,14)" };
 
         protected override void Seed(HunterDbContext context)
         {
-            SeedClearDb(context);
+            DefaultData(context);
+            //SeedClearDb(context);
+        }
+
+        public static void DefaultData(HunterDbContext context)
+        {
+            #region USER ROLES
+
+            var userRoles = new List<UserRole> { _recruiterRole, _technicalRole, _adminRole };
+            userRoles.ForEach(userRole => context.UserRole.Add(userRole));
+            context.SaveChanges();
+            #endregion
+
+            #region POOLS
+            var pools = new List<Pool> { _jsPool, _netPool, _phpPool, _qaPool };
+            pools.ForEach(pool => context.Pool.Add(pool));
+            context.SaveChanges();
+            #endregion
         }
 
         public static void SeedClearDb(HunterDbContext context)
         {
-            #region USER ROLES
-
-            var recruiterRole = new UserRole() { Name = "Recruiter" };
-            var technicalRole = new UserRole() { Name = "Technical Specialist" };
-            var adminRole = new UserRole() { Name = "Admin" };
-
-            var userRoles = new List<UserRole> { recruiterRole, technicalRole, adminRole };
-            userRoles.ForEach(userRole => context.UserRole.Add(userRole));
-            context.SaveChanges();
-            #endregion
 
             #region USERS
             var recruiter1 = new User() { Login = "recruiter@local.com", RoleId = 1, State = 0, PasswordHash = "AL1osj2Akgj8ezBwxcAnj+sn8jQxNU5xJfpkLQl9PKswryRZhwldGQOqFOntmG0zDQ==" };
@@ -112,17 +127,6 @@ namespace Hunter.DataAccess.Entities
             context.SaveChanges();
             #endregion
 
-            #region POOLS
-            var jsPool = new Pool { Name = "JavaScript", Color = "rgb(44,201,99)" };
-            var netPool = new Pool { Name = ".Net", Color = "rgb(293,250,85)" };
-            var phpPool = new Pool { Name = "PHP", Color = "rgb(240,88,88)" };
-            var qaPool = new Pool { Name = "QA", Color = "rgb(245,122,14)" };
-
-            var pools = new List<Pool> { jsPool, netPool, phpPool, qaPool };
-            pools.ForEach(pool => context.Pool.Add(pool));
-            context.SaveChanges();
-            #endregion
-
             #region VACANCIES
             var vacancy1 = new Vacancy()
             {
@@ -131,7 +135,7 @@ namespace Hunter.DataAccess.Entities
                 UserProfileId = 1,
                 StartDate = new DateTime(2015, 8, 1),
                 EndDate = new DateTime(2015, 10, 5),
-                Pool = new List<Pool>() { phpPool },
+                Pool = new List<Pool>() { _phpPool },
                 Description = @"Company Description:
                                 Brandastic is a fast expanding design company in Orange County, California specializing in custom web platforms, online marketing, and more.
 
@@ -173,7 +177,7 @@ namespace Hunter.DataAccess.Entities
                 UserProfileId = 2,
                 StartDate = new DateTime(2015, 8, 2),
                 EndDate = new DateTime(2015, 10, 5),
-                Pool = new List<Pool>() { phpPool },
+                Pool = new List<Pool>() { _phpPool },
                 Description = @"Company Description:
                                For two decades Guidance Solutions has stood at the forefront of eCommerce innovation. We are based in beautiful Marina del Rey, CA just steps from the beach where we develop customized eCommerce strategy for our clients. Using social commerce and the best of Web 2.0 we offer clients a range of services from Information Architecture, User Experience, and Web Design to Development, Hosting, eMarketing and Mobile App Development.
                                We believe in hiring the best so we can deliver the best. We are passionate about the work we do and believe it is possible to do great work and have fun at the same time. We have been voted one of the Best Places to Work, by the LA Business Journal. We offer a relaxed, casual environment where passion, commitment, and excellence reign.
@@ -190,7 +194,7 @@ namespace Hunter.DataAccess.Entities
                 UserProfileId = 3,
                 StartDate = new DateTime(2015, 8, 3),
                 EndDate = new DateTime(2015, 10, 5),
-                Pool = new List<Pool>() { phpPool },
+                Pool = new List<Pool>() { _phpPool },
                 Description = @"Company Description:
                                 A Santa Monica-based pre-IPO tech company; CallFire is a voice and text platform, with technologies that fit with today mobile lifestyle. We work with major brands, including Public Storage, Dominoes Pizza, AllState, Pepsi and many others. We are a tight knit group of professionals who are passionate about our mission.
 
@@ -224,7 +228,7 @@ namespace Hunter.DataAccess.Entities
                 Status = 0,
                 UserProfileId = 1,
                 StartDate = new DateTime(2015, 8, 4),
-                Pool = new List<Pool>(){jsPool},
+                Pool = new List<Pool>(){_jsPool},
                 Description = @"About You:
                                 You're pretty much a master with Node.js (it's a long-term relationship but it still feels like you met yesterday).
                                 You also love trying out new languages, frameworks, libraries, and leveraging them off, whenever necessary (a recent fling with Ionic is a plus!).
@@ -257,7 +261,7 @@ namespace Hunter.DataAccess.Entities
                 Status = 0,
                 UserProfileId = 2,
                 StartDate = new DateTime(2015, 8, 5),
-                Pool = new List<Pool>() { jsPool },
+                Pool = new List<Pool>() { _jsPool },
                 Description = @"We are looking for the best and brightest minds in Web Development. Someone who is truly passionate about creating beautiful innovative next generation UIs using bleeding edge technologies.
                                 
                                 As a member of a SCRUM team, you are asked to deliver the following:
@@ -290,7 +294,7 @@ namespace Hunter.DataAccess.Entities
                 Name = "Senior JavaScript Developer",
                 Status = 0,
                 StartDate = new DateTime(2015, 8, 6),
-                Pool = new List<Pool>() { jsPool },
+                Pool = new List<Pool>() { _jsPool },
                 UserProfileId = 3,
                 Description = @"Job Description
                                 As Senior JavaScript Developer you will be working on our most challenging and important TV projects and products. You will have a core role in our team of experienced developers, designers, project managers.
@@ -336,7 +340,7 @@ namespace Hunter.DataAccess.Entities
                 Status = 0,
                 UserProfileId = 1,
                 StartDate = new DateTime(2015, 8, 7),
-                Pool = new List<Pool>(){netPool},
+                Pool = new List<Pool>(){_netPool},
                 Description = @"Job Description
 
                                 Roles and Responsibilities: 
@@ -385,7 +389,7 @@ namespace Hunter.DataAccess.Entities
                 Status = 1,
                 UserProfileId = 2,
                 StartDate = new DateTime(2015, 8, 8),
-                Pool = new List<Pool>() { netPool },
+                Pool = new List<Pool>() { _netPool },
                 Description = @"Job Description
 
                                 We are an innovative software company who produce awesome casino and bingo gaming content in an agile manner and using best practice techniques and approaches.
@@ -423,7 +427,7 @@ namespace Hunter.DataAccess.Entities
                 Status = 1,
                 UserProfileId = 3,
                 StartDate = new DateTime(2015, 8, 2),
-                Pool = new List<Pool>() { netPool },
+                Pool = new List<Pool>() { _netPool },
                 Description = @"Job Description
 
                                 Whether you’re fresh out of college or an experienced professional, if you love working with .Net, APIs and MongoDB, GAN Integrity Solutions (GAN) would like to hear from you.

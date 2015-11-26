@@ -37,7 +37,8 @@
 
             var config = {
                 'method': httpObject.verb.toUpperCase(),
-                'url': '.' + httpObject.url,
+                //'url': '.' + httpObject.url,
+                'url': httpObject.url,
                 'data': httpObject.body
             };
             if (typeof httpObject.params == 'object') {
