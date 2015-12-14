@@ -69,6 +69,11 @@ namespace Hunter.Services
             _unitOfWork.SaveChanges();
         }
 
+        public User IsValidUser(string username, string password)
+        {
+            return _userRepository.Get(u => u.Login.ToLower() == username && u.PasswordHash == password);
+        }
+
         public void UpdateUser(User user)
         {
             _userRepository.Update(user);

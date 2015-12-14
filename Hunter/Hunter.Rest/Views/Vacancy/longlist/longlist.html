@@ -8,9 +8,9 @@
                                    candidate="longListCtrl.vacancy"></pool-selector>
                 </div>
                 <div class="col-md-5">
-                    <a class="btn btn-default" href="#/vacancy/edit/{{longListCtrl.vacancy.id}}">Edit Vacancy</a>
-                    <a class="btn btn-default" href="#/candidate/edit">Create New Candidate</a>
-                    <a class="btn btn-default" href="#/candidate/list?addToVacancy={{longListCtrl.vacancy.id}}">Add Candidate</a>
+                    <a class="btn btn-default" href="./vacancy/edit/{{longListCtrl.vacancy.id}}">Edit Vacancy</a>
+                    <a class="btn btn-default" href="./candidate/edit">Create New Candidate</a>
+                    <a class="btn btn-default" href="./candidate/list?addToVacancy={{longListCtrl.vacancy.id}}">Add Candidate</a>
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="col-md-4">
                     <p>
-                        <strong><a href="#/vacancy/{{longListCtrl.vacancy.id}}/candidate/{{candidate.id}}">{{candidate.firstName + " " + candidate.lastName}}</a></strong>
+                        <strong><a href="./vacancy/{{longListCtrl.vacancy.id}}/candidate/{{candidate.id}}">{{candidate.firstName + " " + candidate.lastName}}</a></strong>
                     </p>
                     <p>{{candidate.addDate == null ? '' : candidate.addDate | date:'dd.MM.yyyy'}}</p>
                 </div>
@@ -89,7 +89,7 @@
                             ng-click="longListCtrl.updateUrl()"
                             class="pagination-sm ll_pagination"
                             boundary-links="true"
-                            template-url="../../Views/templates/pagination.html">
+                            template-url="./Views/templates/pagination.html">
                 </pagination>
                 <!-- <div class="pagination page-count-wrapper form-inline">-->
                 <!-- <span>Items on page</span>-->
@@ -99,6 +99,6 @@
             </div>
 
         </div>
-        <div class="col-md-4" ng-include="'/Views/vacancy/longlist/longListPreview.html'"></div>
+        <div class="col-md-4" ng-include="'./Views/vacancy/longlist/longListPreview.html'"></div>
     </div>
 </div>

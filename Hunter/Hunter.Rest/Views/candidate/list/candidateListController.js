@@ -166,11 +166,13 @@
             vm.getCandidates(vm.filter);
 
             // get vacancy info
-            vacancyHttpService.getLongList(vm.vacancyId).then(function (result) {
-                console.log(result);
-                vm.vacancy = result;
-                vm.pageConfig.pageTitle = "Add Candidates to '" + vm.vacancy.name + "'";
-            });
+            if ($routeParams.addToVacancy) {
+                vacancyHttpService.getLongList(vm.vacancyId).then(function(result) {
+                    console.log(result);
+                    vm.vacancy = result;
+                    vm.pageConfig.pageTitle = "Add Candidates to '" + vm.vacancy.name + "'";
+                });
+            }
 
             PoolsHttpService.getAllPools().then(function (result) {
                 vm.pools = result;

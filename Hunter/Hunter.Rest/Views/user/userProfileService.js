@@ -20,7 +20,7 @@
         function updateUserProfile(body, onSuccess) {
             httpHandler.sendRequest({
                 verb: 'POST', //'PUT',
-                url: '/api/userprofile/',
+                url: './api/userprofile/',
                 body: body,
                 successMessageToUser: 'User profile updated.',
                 successCallback: onSuccess,
@@ -33,7 +33,7 @@
         function deleteUserProfile(id, successCallback) {
             httpHandler.sendRequest({
                 verb: 'DELETE',
-                url: 'api/userprofile/' + id,
+                url: './api/userprofile/' + id,
                 successCallback: successCallback,
                 successMessageToUser: "User with id " + id + " deleted.",
                 errorCallback: function (error) {
@@ -45,7 +45,7 @@
         function getUserProfile(id, onSuccess) {
             httpHandler.sendRequest({
                 verb: 'GET',
-                url: '/api/userprofile/' + id,
+                url: './api/userprofile/' + id,
                 successCallback: onSuccess,
                 errorMessageToDev: 'GET USERPROFILE INFO ERROR: ',
                 errorMessageToUser: 'Failed'
@@ -55,7 +55,7 @@
         function getUserProfileList(page, successCallback) {
             httpHandler.sendRequest({
                 verb: 'GET',
-                url: '/api/userprofile/',
+                url: './api/userprofile/',
                 params: {'page': page},
                 successCallback: successCallback,
                 errorMessageToDev: 'GET USERPROFILE INFO ERROR: ',

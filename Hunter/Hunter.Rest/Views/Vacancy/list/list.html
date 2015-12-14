@@ -36,7 +36,7 @@
                     <select class="form-control" ng-model="vacancyListCtrl.sortAction" ng-options="s.name for s in vacancyListCtrl.sortBy"></select>
                 </div>
                 <div class="col-md-2">
-                    <a href="#/vacancy/edit" class="btn"><span class="glyphicon glyphicon-plus-sign"></span>Add new</a>
+                    <a href="./vacancy/edit" class="btn"><span class="glyphicon glyphicon-plus-sign"></span>Add new</a>
                 </div>
             </div>
             <div class="row">
@@ -58,17 +58,17 @@
                                 <input type="checkbox" />
                             </td>
                             <td>
-                                <a href="#/vacancy/{{vacancy.id}}/longlist">{{vacancy.name}}</a>
+                                <a href="./vacancy/{{vacancy.id}}/longlist">{{vacancy.name}}</a>
                             </td>
                             <td class="rowlink-skip">
-                                <a href="#/vacancy/edit/{{vacancy.id}}" title="Edit Vacancy"><i class="fa fa-pencil"></i></a>
+                                <a href="./vacancy/edit/{{vacancy.id}}" title="Edit Vacancy"><i class="fa fa-pencil"></i></a>
                             </td>
                             <td>
                                 <pool-selector pool-lazy="true" pool-readonly="true" pool-short="false"
                                                candidate="vacancy"></pool-selector>
                             </td>
                             <td>{{vacancy.startDate == null ? 'no date' : vacancy.startDate | date:'dd.MM.yyyy'}}</td>
-                            <td><a href="#/user/edit/{{vacancy.addedById}}">{{vacancy.addedByName}}</a></td>
+                            <td><a href="./user/edit/{{vacancy.addedById}}">{{vacancy.addedByName}}</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -88,7 +88,7 @@
                                 ng-click="vacancyListCtrl.loadDataByParams()"
                                 class="pagination-sm"
                                 boundary-links="true"
-                                template-url="../../Views/templates/pagination.html"></pagination>
+                                template-url="./Views/templates/pagination.html"></pagination>
                 </div>
             </div>
         </div>

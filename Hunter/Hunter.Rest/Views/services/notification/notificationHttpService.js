@@ -26,7 +26,7 @@
         function getNotifications() {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/notifications',
+                url: './api/notifications',
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -42,7 +42,7 @@
         function getCandidateNotifications(id) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/notifications/candidate/' + id,
+                url: './api/notifications/candidate/' + id,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -58,7 +58,7 @@
         function getActiveNotifications() {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/notifications/active',
+                url: './api/notifications/active',
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -74,7 +74,7 @@
         function addNotification(data) {
             httpHandler.sendRequest({
                 verb: 'POST',
-                url: '/api/notifications',
+                url: './api/notifications',
                 body: data,
                 successMessageToUser: 'Scheduled notification added',
                 errorMessageToUser: 'Scheduled notification not added',
@@ -88,7 +88,7 @@
         function notificationShown(id) {
             httpHandler.sendRequest({
                 verb: 'PUT',
-                url: '/api/notifications/' + id + '/shown',
+                url: './api/notifications/' + id + '/shown',
                 errorCallback: function (status) {
                     console.log("Shown Scheduled notification error");
                     console.log(status);
@@ -99,7 +99,7 @@
         function deleteNotification(id) {
             httpHandler.sendRequest({
                 verb: 'DELETE',
-                url: '/api/notifications/' + id,
+                url: './api/notifications/' + id,
                 successMessageToUser: 'Scheduled notification deleted',
                 errorMessageToUser: 'Scheduled notification not deleted',
                 errorCallback: function (status) {
@@ -112,7 +112,7 @@
         function notify() {
             httpHandler.sendRequest({
                 verb: 'GET',
-                url: '/api/notifications/notify',
+                url: './api/notifications/notify',
                 successMessageToUser: 'Scheduled notifications sent',
                 errorMessageToUser: 'Scheduled notifications not sent',
                 errorCallback: function (status) {
@@ -145,7 +145,7 @@
         }
 
         function getNotificationsByFilter(filter) {
-            var requestUrl = '/api/notifications/?' +
+            var requestUrl = './api/notifications/?' +
                 'page=' + filter.page + '&' +
                 'pageSize=' + filter.pageSize + '&' +
                 'orderField=' + filter.orderField + '&' +

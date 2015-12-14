@@ -13,6 +13,7 @@ namespace Hunter.Services
         void AddToRole(User user, string roleName);
         void DeleteUser(User user);
         void UpdateUser(User user);
+        User IsValidUser(string username, string password);
         FilterInfoDto GetFilterInfo(string roleName);
     }
 }

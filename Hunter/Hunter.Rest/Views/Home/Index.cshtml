@@ -1,24 +1,24 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutWithMainMenu.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="shortcut icon" type="image/ico" href="~/Content/img/favicon.ico">
-<link href="../../fonts/FontAwesome.otf" rel="MIME"/>
-<link href="../../fonts/fontawesome-webfont.eot" rel="MIME"/>
-<link href="../../fonts/fontawesome-webfont.svg" rel="MIME"/>
-<link href="../../fonts/fontawesome-webfont.ttf" rel="MIME"/>
-<link href="../../fonts/fontawesome-webfont.woff" rel="MIME"/>
-<link href="../../fonts/fontawesome-webfont.woff2" rel="MIME"/>
-<link href="../../Content/font-awesome.min.css" rel="stylesheet"/>
+<link href="~/Content/img/favicon.ico" rel="shortcut icon" type="image/ico">
+<link href="~/fonts/FontAwesome.otf" rel="MIME"/>
+<link href="~/fonts/fontawesome-webfont.eot" rel="MIME" />
+<link href="~/fonts/fontawesome-webfont.svg" rel="MIME" />
+<link href="~/fonts/fontawesome-webfont.ttf" rel="MIME" />
+<link href="~/fonts/fontawesome-webfont.woff" rel="MIME" />
+<link href="~/fonts/fontawesome-webfont.woff2" rel="MIME" />
+<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
 <link href="~/Content/pool.css" rel="stylesheet"/>
 <link href="~/Content/longlist.css" rel="stylesheet"/>
 <link href="~/Content/hrInterview.css" rel="stylesheet"/>
 <link href="~/Content/candidate.css" rel="stylesheet"/>
 <link href="~/Content/spinnerStyle.css" rel="stylesheet" />
 <link href="~/Content/card/cardTest.css" rel="stylesheet"/>
-<link href="~/Content/alertify.css" rel="stylesheet">
-<link href="~/Content/themes/semantic.css" rel="stylesheet">
+<link href="~/Content/alertify.min.css" rel="stylesheet">
+<link href="~/Content/themes/semantic.min.css" rel="stylesheet">
 <link href="~/Content/MyStyle.css" rel="stylesheet" />
 <link href="~/Content/poolSelector.css" rel="stylesheet"/>
 <link href="~/Content/binaryStyle.css" rel="stylesheet" />
@@ -28,22 +28,24 @@
 <!-- Start bower components -->
 <script src="~/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="~/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-<script src='~/bower_components/angular-route/angular-route.js'></script>
+<script src="~/bower_components/angular-route/angular-route.js"></script>
 <script src="~/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
 <script src="~/bower_components/angular-utils-pagination/dirPagination.js"></script>
 <script src="~/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
+<script src="~/bower_components/angular-cookies/angular-cookies.min.js"></script>
 @*<script src="~/bower_components/alertifyjs/dist/js/alertify.js"></script>*@
 <script src="~/bower_components/ng-file-upload/ng-file-upload.min.js"></script>
 <script src="~/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
 <script src="~/bower_components/checklist-model/checklist-model.js"></script>
 <script src="~/bower_components/angular-animate/angular-animate.min.js"></script>
 <script src="~/bower_components/angular-elastic/elastic.js"></script>
+<script src="~/bower_components/angular-jwt/dist/angular-jwt.min.js"></script>
 <script src="~/Scripts/odataresources.js"></script>
-<script src="~/Scripts/alertify.js"></script>
+<script src="~/Scripts/alertify.min.js"></script>
 <!-- End bower components -->
 
 <!-- Start app -->
-<script src='~/Views/app/app.js'></script>
+<script src="~/Views/app/app.js"></script>
 <!-- End app -->
 
 <!-- Start helpers -->
@@ -71,10 +73,8 @@
 <script src="~/Views/candidate/profile/profileSpecialNotesController.js"></script>
 <script src="~/Views/candidate/profile/profileTestsController.js"></script>
 <script src="~/Views/candidate/profile/profileInterviewsController.js"></script>
-<script src="~/Views/candidate/list/candidateListController.js"></script>
 <script src="~/Views/filters/candidates/candidatesListFilter.js"></script>
 <script src="~/Views/candidate/candidateService.js"></script>
-<script src="~/Views/candidate/list/candidateListController.js"></script>
 <script src="~/Views/candidate/profilePartial/candidatePartialController.js"></script>
 <script src="~/Views/services/candidate/profile/candidatePartialProfileService.js"></script>
 <!-- End Candidates -->

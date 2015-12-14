@@ -19,7 +19,7 @@
         function getActivityAmount(successCallback) {
             HttpHandler.sendRequest({
                 'verb': 'GET',
-                'url': 'api/activities/amount',
+                'url': './api/activities/amount',
                 'successCallback': successCallback,
                 'errorMessageToDev': 'GET ACTIVITY INFO ERROR: ',
                 'errorMessageToUser': 'Failed'
@@ -29,7 +29,7 @@
         function getTasksForCheck() {
             var deferred = $q.defer();
             HttpHandler.sendRequest({
-                url: '/api/test/count',
+                url: './api/test/count',
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);

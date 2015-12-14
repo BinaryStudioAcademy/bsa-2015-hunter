@@ -24,7 +24,7 @@
         function getFiles() {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/file',
+                url: './api/file',
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -40,7 +40,7 @@
         function getFile(id) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/file/' + id,
+                url: './api/file/' + id,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -56,7 +56,7 @@
         function getResume(id) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/file/resume/' + id,
+                url: './api/file/resume/' + id,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -72,7 +72,7 @@
         function addFile(data) {
             httpHandler.sendRequest({
                 verb: 'POST',
-                url: '/api/file',
+                url: './api/file',
                 body: data,
                 errorCallback: function (status) {
                     console.log("Add file error");
@@ -84,7 +84,7 @@
         function updateFile(data, id) {
             httpHandler.sendRequest({
                 verb: 'PUT',
-                url: '/api/file/' + id,
+                url: './api/file/' + id,
                 body: data,
                 errorCallback: function (status) {
                     console.log("Update file error");
@@ -96,7 +96,7 @@
         function deleteFile(id,success) {
             httpHandler.sendRequest({
                 verb: 'DELETE',
-                url: '/api/file/' + id,
+                url: './api/file/' + id,
                 successCallback:success,
                 errorCallback: function (status) {
                     console.log("Delete file error");

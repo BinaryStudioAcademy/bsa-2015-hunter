@@ -24,7 +24,7 @@
         function addCards(body, newLocation) {
             httpHandler.sendRequest({
                 verb: 'POST',
-                url: '/api/card',
+                url: './api/card',
                 body: JSON.stringify(body),
                 successCallback: function (result) {
                     $location.url(newLocation);
@@ -40,7 +40,7 @@
 
         function removeCard(vid, cid) {
             httpHandler.sendRequest({
-                url: 'api/card/isUsed/' + vid + '/' + cid,
+                url: './api/card/isUsed/' + vid + '/' + cid,
                 verb: 'GET',
                 successCallback: function (result) {
                     if (result.data) {
@@ -48,7 +48,7 @@
                         if (clickResult === true) {
                             (function () {
                                 httpHandler.sendRequest({
-                                    url: 'api/card/deleteallinfo/' + vid + '/' + cid,
+                                    url: './api/card/deleteallinfo/' + vid + '/' + cid,
                                     verb: "DELETE",
                                     successCallback: function (result) {
                                         //console.log(result);
@@ -66,7 +66,7 @@
                         //alert('is Card used result (else): ' + result.data);
                         (function () {
                             httpHandler.sendRequest({
-                                url: 'api/card/' + vid + '/' + cid,
+                                url: './api/card/' + vid + '/' + cid,
                                 verb: "DELETE",
                                 successCallback: function (result) {
                                     //console.log(result);
@@ -93,7 +93,7 @@
              function getCardInfo(vid, cid) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/card/info/' + vid + '/' + cid,
+                url: './api/card/info/' + vid + '/' + cid,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -117,7 +117,7 @@
 
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/card/appResults/' + cid,
+                url: './api/card/appResults/' + cid,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -133,7 +133,7 @@
         function getCardInfo(vid, cid) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/card/info/' + vid + '/' + cid,
+                url: './api/card/info/' + vid + '/' + cid,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -194,7 +194,7 @@
 
             var skip = (filter.currentPage - 1) * filter.pageSize;
 
-            var CandidatesForLongList = $odataresource('/api/candidates/longlist/' + $routeParams.id + '/odata');
+            var CandidatesForLongList = $odataresource('./api/candidates/longlist/' + $routeParams.id + '/odata');
 
             var cands = CandidatesForLongList.odata()
                                            .withInlineCount()

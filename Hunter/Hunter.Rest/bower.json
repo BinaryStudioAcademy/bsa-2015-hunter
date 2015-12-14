@@ -28,8 +28,6 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.4.1",
-    "angular-route": "~1.4.1",
     "underscore": "~1.8.3",
     "angular-resource": "~1.4.1",
     "bootstrap": "~3.3.5",
@@ -40,7 +38,11 @@
     "ng-file-upload": "~6.0.4",
     "checklist-model": "~0.4.0",
     "angular-animate": "1.4.3",
-    "angular-elastic": "~2.5.0"
+    "angular-elastic": "~2.5.0",
+    "angular-cookies": "~1.4.1",
+    "angular-jwt": "~0.0.9",
+    "angular": "*",
+    "angular-route": "~1.4.8"
   },
   "resolutions": {
     "angular": ">=1.1.4"

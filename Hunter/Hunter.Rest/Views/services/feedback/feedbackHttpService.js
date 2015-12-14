@@ -27,7 +27,7 @@
         function getHrFeedback(vid, cid) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/feedback/hr/' + vid + '/' + cid,
+                url: './api/feedback/hr/' + vid + '/' + cid,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -44,7 +44,7 @@
         function saveHrFeedback(feedback, vid, cid) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/feedback/save',
+                url: './api/feedback/save',
                 verb: 'POST',
                 body: JSON.stringify(feedback),
                 successCallback: function (result) {
@@ -61,7 +61,7 @@
             console.log(feedbackObj);
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/feedback/test/update',
+                url: './api/feedback/test/update',
                 verb: 'PUT',
                 body: feedbackObj,
                 successCallback: function(response) {
@@ -77,7 +77,7 @@
         function getTechFeedback(vacancyId, candidateId) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/feedback/tech/' + vacancyId + '/' + candidateId,
+                url: './api/feedback/tech/' + vacancyId + '/' + candidateId,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -92,7 +92,7 @@
         function saveFeedback(feedback, vacancyId, candidateId) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/feedback/save',
+                url: './api/feedback/save',
                 verb: 'POST',
                 body: JSON.stringify(feedback),
                 successCallback: function (result) {
@@ -110,7 +110,7 @@
         function getSummary(vid, cid) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/feedback/summary/' + vid + '/' + cid,
+                url: './api/feedback/summary/' + vid + '/' + cid,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -126,7 +126,7 @@
         function saveSummary(feedback, vid, cid) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/feedback/save',
+                url: './api/feedback/save',
                 verb: 'POST',
                 body: JSON.stringify(feedback),
                 successCallback: function (result) {
@@ -139,7 +139,7 @@
 
         function updateSuccessStatus(feedbackId, status) {
             httpHandler.sendRequest({
-                'url': '/api/feedback/' + feedbackId + '/success/update',
+                'url': './api/feedback/' + feedbackId + '/success/update',
                 'verb': 'PUT',
                 body: status,
                 'successCallback': function (response) { console.log(response); },
@@ -150,7 +150,7 @@
         function getLastFeedbacks(vid,cid) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/feedback/overview/' + vid + '/' + cid,
+                url: './api/feedback/overview/' + vid + '/' + cid,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -166,7 +166,7 @@
         function getFeedbacksHistory(vid, cid) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/feedback/history/' + vid + '/' + cid,
+                url: './api/feedback/history/' + vid + '/' + cid,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);

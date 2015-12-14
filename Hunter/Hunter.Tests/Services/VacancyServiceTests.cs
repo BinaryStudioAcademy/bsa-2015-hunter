@@ -18,7 +18,7 @@ namespace Hunter.Tests.Services
         private readonly ICardRepository _cardRepository;
         private readonly IVacancyService _vacancyService;
         private readonly ICandidateService _candidateService;
-        private IPoolRepository _poolRepository;
+        private readonly IPoolRepository _poolRepository;
 
         public VacancyServiceTests()
         {
@@ -32,8 +32,7 @@ namespace Hunter.Tests.Services
             var activityHelperService = Substitute.For<IActivityHelperService>();
             var userProfieRepository = Substitute.For<IUserProfileRepository>();
 
-            _vacancyService = new VacancyService(_vacancyRepository, _candidateRepository,_cardRepository, logger, unitOfWork,
-                                                 activityHelperService, userProfieRepository, _poolRepository);
+            _vacancyService = new VacancyService(_vacancyRepository, _candidateRepository,_cardRepository, logger, unitOfWork, activityHelperService, userProfieRepository,_poolRepository) ;
 
         }
 

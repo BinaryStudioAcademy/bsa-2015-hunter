@@ -14,6 +14,38 @@ using Hunter.Services.Interfaces;
 
 namespace Hunter.Services
 {
+    public class AccountService
+    {
+        public AccountService(
+            //IUnitOfWork unitOfWork,
+            IUserRoleRepository roleRepository)
+        {
+            //_unitOfWork = unitOfWork;
+            _roleRepository = roleRepository;
+        }
+
+        private readonly IUserRoleRepository _roleRepository;
+        private readonly IUserProfileRepository _profileRepo;
+
+        public IEnumerable<UserProfileRowVm> GetUserProfiles(string roleName)
+        {
+            var users = _roleRepository
+                .Query().FirstOrDefault(e => e.Name == roleName)
+                .Users
+                .Select(u=> u.Login);
+
+            var profiles = _profileRepo.Query()
+                                 .Where(pr => users.Contains(pr.UserLogin))
+                                 .Select(UserProfileRowVm.Create);
+            return profiles;
+        }
+
+        public bool UserExist(string userName)
+        {
+            return _profileRepo.Query().Any(p => p.UserLogin.ToLower() == userName.ToLower());
+        }
+    }
+
     public class UserProfileService : IUserProfileService
     {
         private const int _ItemsPerPage = 15;
@@ -34,7 +66,7 @@ namespace Hunter.Services
             _roleRepository = roleRepository;
         }
 
-        public IEnumerable<UserProfileRowVm> GetUserProfile(string roleName) 
+        public IEnumerable<UserProfileRowVm> GetUserProfiles(string roleName)
         {
             var users = _roleRepository
                 .Query()
@@ -43,6 +75,11 @@ namespace Hunter.Services
                 .Users
                 .Select(e => UserProfileRowVm.Create(_profileRepo.Get(e.Id)));
             return users;
+        }
+
+        public bool UserExist(string userName)
+        {
+            return _profileRepo.Query().Any(p => p.UserLogin.ToLower() == userName.ToLower());
         }
 
         public IList<UserProfileRowVm> LoadPage(int page)

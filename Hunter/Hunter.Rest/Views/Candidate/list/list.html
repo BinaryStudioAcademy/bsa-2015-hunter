@@ -70,7 +70,7 @@
                 <tbody>
                     <tr ng-repeat="item in candidateListCtrl.candidateList" ng-click="candidateListCtrl.ShowDetails(item)" ng-class="candidateListCtrl.ActiveTr(item.id)">
                         <td><input type="checkbox" checklist-model="candidateListCtrl.selectedCandidates" checklist-value="item.id" ng-click="$event.stopPropagation();"></td>
-                        <td><a href="#/candidate/{{item.id}}">{{item.firstName + " " + item.lastName}}</a></td>
+                        <td><a href="./candidate/{{item.id}}">{{item.firstName + " " + item.lastName}}</a></td>
                         <td>{{item.addDate | localDate | date:'dd.MM.yyyy'}}</td>
                         <td>{{candidateListCtrl.statuses[item.resolution].name}}</td>
                         <td>{{item.yearsOfExperience}}</td>
@@ -105,11 +105,11 @@
                             ng-click="candidateListCtrl.updateCandidate()"
                             class="pagination-sm"
                             boundary-links="true"
-                            template-url="../../Views/templates/pagination.html"></pagination>
+                            template-url="./Views/templates/pagination.html"></pagination>
 
             </div>
         </div>
-        <div class="col-md-4 partial-candidate-details" ng-show="$root.candidateDetails.show" ng-include="'/Views/candidate/profilePartial/profilePartial.html'"></div>
+        <div class="col-md-4 partial-candidate-details" ng-show="$root.candidateDetails.show" ng-include="'./Views/candidate/profilePartial/profilePartial.html'"></div>
     </div>
 </div>
 

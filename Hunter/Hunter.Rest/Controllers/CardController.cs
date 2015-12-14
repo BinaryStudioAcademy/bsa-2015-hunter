@@ -8,10 +8,11 @@ using System.Net.Http;
 using System.Web.Http;
 using Hunter.Services.Interfaces;
 using System.Web.Http.Description;
+using Hunter.Rest.Providers;
 
 namespace Hunter.Rest.Controllers
 {
-    [Authorize]
+    [ExternalAuthorize]
     [RoutePrefix("api/card")]
     public class CardController : ApiController
     {

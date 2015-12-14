@@ -1,9 +1,18 @@
 ﻿
-angular.module('hunter-app', ['ngRoute', 'LocalStorageModule', 'angularUtils.directives.dirPagination', 'ui.bootstrap', 'ngFileUpload', 'ODataResources', 'checklist-model', 'ngAnimate', 'monospaced.elastic'])
+angular.module('hunter-app',
+    ['ngRoute', 'LocalStorageModule',
+     'angularUtils.directives.dirPagination',
+     'ui.bootstrap', 'ngFileUpload',
+     'ODataResources', 'checklist-model',
+     'ngAnimate', 'monospaced.elastic',
+     'ngCookies',
+     'angular-jwt'])
     .config([
-        '$routeProvider', function ($routeProvider) {
+        '$routeProvider','$locationProvider', function ($routeProvider, $locationProvider) {
+            
+            $locationProvider.html5Mode(true);
 
-            var viewPath = "/Views/";
+            var viewPath =  "./Views/";
             $routeProvider
                 //result on Latest activity button click (slide 1 and menu item on slide 3)
                 .when('/login', {

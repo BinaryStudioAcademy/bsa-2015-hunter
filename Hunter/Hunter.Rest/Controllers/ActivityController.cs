@@ -11,11 +11,12 @@ using System.Web.Http.OData;
 using System.Collections.Generic;
 using System.Web.Http.OData.Extensions;
 using System.Web.Http.Description;
+using Hunter.Rest.Providers;
 
 namespace Hunter.Rest.Controllers
 {
     [RoutePrefix("api/activities")]
-    [Authorize]
+    [ExternalAuthorize]
     public class ActivityController : ApiController
     {
         private readonly IActivityService _activityService;

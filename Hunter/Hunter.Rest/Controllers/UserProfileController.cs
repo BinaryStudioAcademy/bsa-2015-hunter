@@ -29,7 +29,7 @@ namespace Hunter.Rest.Controllers
         {
             try 
             {
-                var users = _profileService.GetUserProfile(roleName);
+                var users = _profileService.GetUserProfiles(roleName);
                 return Request.CreateResponse(HttpStatusCode.OK, users);
             }
             catch(Exception e)

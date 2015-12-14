@@ -36,8 +36,8 @@
                 <div class="col-md-2">
                     <div class="salary-wrapper">{{generalCardCtrl.candidate.salary}}</div>
                     <input class="btn-veiw-resume btn btn-default btn-block" type="button" value="Veiw Resume" ng-click="generalCardCtrl.showResume()" ng-disabled="generalCardCtrl.candidate.lastResumeUrl==''">
-                    <a class="btn btn-default btn-block" href="#/candidate/edit/{{generalCardCtrl.candidate.id}}">Edit Profile</a>
-                    <a ng-if="generalCardCtrl.isLLM" class="btn btn-default btn-block" href="#/candidate/{{generalCardCtrl.candidate.id}}">Full Profile</a>
+                    <a class="btn btn-default btn-block" href="./candidate/edit/{{generalCardCtrl.candidate.id}}">Edit Profile</a>
+                    <a ng-if="generalCardCtrl.isLLM" class="btn btn-default btn-block" href="./candidate/{{generalCardCtrl.candidate.id}}">Full Profile</a>
                     <button ng-if="generalCardCtrl.isLLM"
                             class="btn btn-default btn-block"
                             type="button"
@@ -47,7 +47,7 @@
                     <a class="btn btn-default btn-block" ng-show="generalCardCtrl.candidate.linkedin != ''" href="{{generalCardCtrl.candidate.linkedin}}" target="_blank">View LinkenIn Profile</a>
                     <a class="btn btn-default btn-block" href="#" data-toggle="modal" data-target="#addEditNotificationModal">Add Notification</a>
                     <div ng-controller="NotificationListController as notificationListCtrl"
-                         ng-include="'/Views/notification/addEdit/addEditModal.html'"></div>
+                         ng-include="'./Views/notification/addEdit/addEditModal.html'"></div>
                 </div>
             </div>
         </div>

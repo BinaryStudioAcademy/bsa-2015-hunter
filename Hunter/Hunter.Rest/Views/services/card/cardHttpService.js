@@ -16,7 +16,7 @@
         function getCardById(id) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/card/' + id,
+                url: './api/card/' + id,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);

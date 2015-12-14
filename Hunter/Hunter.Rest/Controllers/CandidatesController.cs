@@ -12,6 +12,7 @@ using System.Web.Http.OData.Extensions;
 using System.Web.Http.OData.Query;
 using Hunter.DataAccess.Entities;
 using Hunter.DataAccess.Entities.Enums;
+using Hunter.Rest.Providers;
 using Hunter.Services.Dto;
 using Hunter.Services.Interfaces;
 using Hunter.Services;
@@ -19,7 +20,7 @@ using WebGrease.Css.Extensions;
 
 namespace Hunter.Rest.Controllers
 {
-    [Authorize]
+    [ExternalAuthorize]
     [RoutePrefix("api/candidates")]
     public class CandidatesController : ApiController
     {

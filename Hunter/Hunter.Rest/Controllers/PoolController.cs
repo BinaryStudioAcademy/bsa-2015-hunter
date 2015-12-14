@@ -6,10 +6,11 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Threading.Tasks;
+using Hunter.Rest.Providers;
 
 namespace Hunter.Rest
 {
-    //[Authorize]
+    [ExternalAuthorize]
     [RoutePrefix("api/pool")]
     public class PoolController : ApiController
     {

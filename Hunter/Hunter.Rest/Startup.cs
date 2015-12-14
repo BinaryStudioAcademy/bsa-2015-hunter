@@ -7,6 +7,7 @@ using Owin;
 using Ninject;
 using System.Reflection;
 using System.Web;
+using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Hunter.DataAccess.Db;
 using Hunter.DataAccess.Interface;
@@ -15,9 +16,13 @@ using Ninject.Web.Common;
 using Hunter.Common.Concrete;
 using Hunter.DataAccess.Db.Repositories;
 using Hunter.DataAccess.Entities;
+using Hunter.Rest.Providers;
 using Hunter.Services.Services;
 using Hunter.Services.Services.Interfaces;
 using Hunter.Tools.LinkedIn;
+using Ninject.Web.Common.OwinHost;
+using Ninject.Web.WebApi;
+using Ninject.Web.WebApi.OwinHost;
 
 [assembly: OwinStartup(typeof(Hunter.Rest.Startup))]
 
@@ -27,16 +32,23 @@ namespace Hunter.Rest
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
+            app.UseNinjectMiddleware(NinjectContainer.CreateKernel);
+          //  ConfigureAuth(app);
             ConfigureOAuthToken(app);
         }
+     }
 
-        public static StandardKernel CreateKernel()
+
+    public class NinjectContainer
+    {
+        public static IKernel kernel;
+
+        static NinjectContainer()
         {
-            var kernel = new StandardKernel();
-            kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
+            kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
-            kernel.Bind<IUserStore<User, int>>().To<HunterUserStore>();
+            kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
+            // kernel.Bind<IUserStore<User, int>>().To<HunterUserStore>();
 
             kernel.Bind<IDatabaseFactory>().To<DatabaseFactory>().InRequestScope();
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
@@ -81,7 +93,15 @@ namespace Hunter.Rest
             kernel.Bind<Common.Interfaces.ILogger>().To<Logger>();
             kernel.Bind<IPublicPageParser>().To<PublicPageParser>();
 
+        }
+        public static IKernel CreateKernel()
+        {
             return kernel;
+        }
+
+        public static T Resolve<T>()
+        {
+            return kernel.Get<T>();
         }
     }
 }

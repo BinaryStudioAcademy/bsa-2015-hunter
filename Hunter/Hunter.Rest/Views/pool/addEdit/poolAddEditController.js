@@ -38,7 +38,7 @@
             vm.pageConfig.postPutButtonValue = "Edit Pool";
 
             //!!!
-            vm.poolUrl = "/api/pool/" + $scope.generalCtrl.selectedPool.id;
+            vm.poolUrl = "./api/pool/" + $scope.generalCtrl.selectedPool.id;
 //            vm.pool = $scope.generalCtrl.selectedPool;
             HttpHandler.sendRequest({
                 url: vm.poolUrl,
@@ -86,10 +86,10 @@
             vm.pageConfig.pageTitle = "Add new pool";
             vm.pageConfig.postPutButtonValue = "Add Pool";
 
-            vm.poolUrl = "/api/pool/";
+            vm.poolUrl = "./api/pool/";
 
             HttpHandler.sendRequest({
-                url: "/api/pool",
+                url: "./api/pool",
                 verb: "GET",
                 successCallback: function (result) {
                     console.log(result.data);

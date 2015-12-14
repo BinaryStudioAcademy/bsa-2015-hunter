@@ -16,7 +16,7 @@
             updateCardStage: updateCardStage,
             getCardStage: getCardStage
             },
-            viewsPath = '/Views/candidate/card/';
+            viewsPath = './Views/candidate/card/';
 
         function changeTemplate(templateRoute) {
             switch (templateRoute.toLowerCase()) {
@@ -42,7 +42,7 @@
         function updateCardStage(vid, cid, stage) {
             httpHandler.sendRequest({
                 verb: 'PUT',
-                url: '/api/card/stage/?vid=' + vid + '&cid=' + cid,
+                url: './api/card/stage/?vid=' + vid + '&cid=' + cid,
                 body: stage,
                 successMessageToUser: 'Card stage was updated',
                 errorMessageToUser: 'Card stage update failed',
@@ -56,7 +56,7 @@
             var deferred = $q.defer();
             httpHandler.sendRequest({
                 verb: 'GET',
-                url: '/api/card/stage/?vid=' + vid + '&cid=' + cid,
+                url: './api/card/stage/?vid=' + vid + '&cid=' + cid,
                 successCallback: function (response) {
                     deferred.resolve(response);
                 },

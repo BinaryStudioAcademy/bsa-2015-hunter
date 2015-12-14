@@ -19,7 +19,7 @@
                 console.log(file);
 
                 Upload.upload({
-                    url: 'api/fileupload/pictures/' + id,
+                    url: './api/fileupload/pictures/' + id,
                     file: file,
                     method: 'POST'
                 });
@@ -30,7 +30,7 @@
             var deferred = $q.defer();
             httpHandler.sendRequest({
                 verb: 'GET',
-                url: '/api/fileupload/pictures/' + id,
+                url: './api/fileupload/pictures/' + id,
                 successCallback: function (response) {
                     deferred.resolve(response);
                 },
@@ -76,7 +76,7 @@
 
             httpHandler.sendRequest({
                 verb: 'POST',
-                url: '/api/fileupload/pictures/fromUrl/' + id,
+                url: './api/fileupload/pictures/fromUrl/' + id,
                 body: JSON.stringify(photoUrl)
             });
         }

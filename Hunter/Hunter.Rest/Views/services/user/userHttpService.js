@@ -19,7 +19,7 @@
         function getUsersByRole(roleName) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/user/' + roleName,
+                url: './api/user/' + roleName,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);
@@ -35,7 +35,7 @@
         function getUsersByRole2(roleName) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
-                url: '/api/userprofile/users/role/' + roleName,
+                url: './api/userprofile/users/role/' + roleName,
                 verb: 'GET',
                 successCallback: function (result) {
                     deferred.resolve(result.data);

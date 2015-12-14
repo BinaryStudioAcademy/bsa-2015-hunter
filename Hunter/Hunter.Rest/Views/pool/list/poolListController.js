@@ -21,7 +21,7 @@
 
         (function() {
             HttpHandler.sendRequest({
-                url: "/api/pool",
+                url: "./api/pool",
                 verb: "GET",
                 successCallback: function(result) {
                     console.log(result.data);
