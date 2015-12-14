@@ -19,7 +19,7 @@
                     // var authService = $injector.get('AuthService');
                     // authService.logOut();
 
-                    $cookies.put('referer', $location.absUrl());
+                    //$cookies.put('referer', $location.absUrl());
                     $window.location.href = rejection.headers('location');
                 }
             }

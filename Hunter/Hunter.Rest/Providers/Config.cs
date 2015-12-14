@@ -27,6 +27,14 @@ namespace Hunter.Rest.Providers
             }
         }
 
+        public static string ProductionUrl
+        {
+            get
+            {
+                return WebConfigurationManager.AppSettings["productionUrl"];
+            }
+        }
+
         public static string BasePath
         {
             get

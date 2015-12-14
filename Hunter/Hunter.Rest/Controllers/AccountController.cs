@@ -22,7 +22,9 @@ namespace Hunter.Rest.Controllers
         public IHttpActionResult Login(LocalLogin login)
         {
             if (Config.UseExternalAuth)
+            {
                 return Redirect(Config.ExternalPath);
+            }
 
             var user = _userService.IsValidUser(login.UserName, login.Password);
 
