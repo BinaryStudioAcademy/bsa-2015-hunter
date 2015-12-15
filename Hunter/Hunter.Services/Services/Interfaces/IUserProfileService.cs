@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Hunter.Services.Dto.ApiResults;
 using Hunter.Services.Dto.User;
 
@@ -12,5 +13,6 @@ namespace Hunter.Services.Interfaces
         ApiResult Save(EditUserProfileVm userProfile);
         IdApiResult Delete(long userProfileId);
         bool UserExist(string userName);
+        Task<OAuthUserDto> CreateUserAlias(string url);
     }
 }

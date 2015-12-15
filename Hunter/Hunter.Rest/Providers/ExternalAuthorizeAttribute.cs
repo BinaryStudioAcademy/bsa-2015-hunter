@@ -1,42 +1,55 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web;
-using System.Web.Configuration;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using Hunter.Services.Dto.User;
 using Hunter.Services.Interfaces;
+using System.Data.Entity.Infrastructure;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 
 namespace Hunter.Rest.Providers
 {
     public class ExternalAuthorizeAttribute : AuthorizeAttribute
     {
-        public override void OnAuthorization(HttpActionContext actionContext)
+        public override async Task OnAuthorizationAsync(HttpActionContext actionContext, CancellationToken cancellationToken)
         {
             Contract.Assert(actionContext != null);
 
-            if (skipAuthorization(actionContext)) return;
+            if (SkipAuthorization(actionContext)) return;
 
-            
-            IUserProfileService _userProfileService = NinjectContainer.Resolve<IUserProfileService>();
-
+            IUserProfileService userProfileService = NinjectContainer.Resolve<IUserProfileService>();
+            // TODO new recognise alias and position
             if (Config.UseExternalAuth)
             {
-                if (!_userProfileService.UserExist(actionContext.RequestContext.Principal.Identity.Name))
+                //actionContext.RequestContext.Principal.Identity.Name != null &&
+                if (!userProfileService.UserExist(actionContext.RequestContext.Principal.Identity.Name))
                 {
-                    _userProfileService.Save(new EditUserProfileVm()
+                    try
                     {
-                        Login = actionContext.RequestContext.Principal.Identity.Name,
-                        Alias = "NEW",
-                        Position = "Unconfirmed",
-                    });
+                        var user = await userProfileService.CreateUserAlias(Config.ExternalPath + "api/users/" + actionContext.RequestContext.Principal.Identity.GetUserId());
+                        if (user != null)
+                        {
+                            userProfileService.Save(new EditUserProfileVm()
+                            {
+                                Login = user.Email,
+                                Alias = user.Name,
+                                Position = user.Role
+                            });
+                        }
+
+                    }
+                    catch (DbUpdateException)
+                    {
+
+                    }
                 }
             }
-            base.OnAuthorization(actionContext);
+            await base.OnAuthorizationAsync(actionContext, cancellationToken);
         }
 
         protected override void HandleUnauthorizedRequest(HttpActionContext actionContext)
@@ -56,7 +69,7 @@ namespace Hunter.Rest.Providers
             }
         }
 
-        private static bool skipAuthorization(HttpActionContext actionContext)
+        private static bool SkipAuthorization(HttpActionContext actionContext)
         {
             Contract.Assert(actionContext != null);
 

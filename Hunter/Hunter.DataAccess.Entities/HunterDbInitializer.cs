@@ -22,7 +22,7 @@ namespace Hunter.DataAccess.Entities
         protected override void Seed(HunterDbContext context)
         {
             DefaultData(context);
-            //SeedClearDb(context);
+            SeedClearDb(context);
         }
 
         public static void DefaultData(HunterDbContext context)

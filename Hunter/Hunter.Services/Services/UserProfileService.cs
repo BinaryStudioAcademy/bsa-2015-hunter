@@ -1,6 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
 using Hunter.Common.Concrete;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Entities;
@@ -11,6 +17,8 @@ using Hunter.Services.Dto.ApiResults;
 using Hunter.Services.Dto.User;
 using Hunter.Services.Extensions;
 using Hunter.Services.Interfaces;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Hunter.Services
 {
@@ -32,7 +40,7 @@ namespace Hunter.Services
             var users = _roleRepository
                 .Query().FirstOrDefault(e => e.Name == roleName)
                 .Users
-                .Select(u=> u.Login);
+                .Select(u => u.Login);
 
             var profiles = _profileRepo.Query()
                                  .Where(pr => users.Contains(pr.UserLogin))
@@ -154,6 +162,28 @@ namespace Hunter.Services
                 Logger.Instance.Log(ex);
                 return Api.Error(userProfileId, ex.Message);
             }
+        }
+
+        public async Task<OAuthUserDto> CreateUserAlias(string url)
+        {
+            var http = new HttpClient();
+
+            var httpCookie = HttpContext.Current.Request.Cookies.Get("x-access-token");
+            if (httpCookie == null) return null;
+            var token = httpCookie.Value;
+
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, url);
+            requestMessage.Headers.Add("x-access-token", token);
+            var response = await http.SendAsync(requestMessage);
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            var user = JsonConvert.DeserializeObject<OAuthUserDto>(json);
+            var alias = string.Empty;
+            user.Name.Split(' ').ToList().ForEach(i => alias += i[0]);
+            user.Name = alias;
+
+            return user;
         }
     }
 }

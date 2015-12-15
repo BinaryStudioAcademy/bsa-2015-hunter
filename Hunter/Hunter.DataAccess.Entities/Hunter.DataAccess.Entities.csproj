@@ -206,6 +206,10 @@
     <Compile Include="Migrations\201508311744586_AddManyToManyVacancyAndPool.Designer.cs">
       <DependentUpon>201508311744586_AddManyToManyVacancyAndPool.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512151308375_AddedIndexToUserLoginField.cs" />
+    <Compile Include="Migrations\201512151308375_AddedIndexToUserLoginField.Designer.cs">
+      <DependentUpon>201512151308375_AddedIndexToUserLoginField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -302,6 +306,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508311744586_AddManyToManyVacancyAndPool.resx">
       <DependentUpon>201508311744586_AddManyToManyVacancyAndPool.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512151308375_AddedIndexToUserLoginField.resx">
+      <DependentUpon>201512151308375_AddedIndexToUserLoginField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

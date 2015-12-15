@@ -82,6 +82,7 @@
     <Compile Include="Dto\Test\TestForCheckDto.cs" />
     <Compile Include="Dto\UserDto.cs" />
     <Compile Include="Dto\UserProfileDto.cs" />
+    <Compile Include="Dto\User\OAuthUserDto.cs" />
     <Compile Include="Dto\Vacancy\AddedByDto.cs" />
     <Compile Include="Dto\Vacancy\VacancyByStateDto.cs" />
     <Compile Include="Dto\Vacancy\VacancyLongListDto.cs" />

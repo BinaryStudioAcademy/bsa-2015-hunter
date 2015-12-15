@@ -28,6 +28,7 @@ namespace Hunter.DataAccess.Entities
         public string Alias { get; set; }
 
         [StringLength(100)]
+        [Index("UserLoginIndex", IsUnique = true)]
         public string UserLogin { get; set; }
 
         public DateTime Added { get; set; }
