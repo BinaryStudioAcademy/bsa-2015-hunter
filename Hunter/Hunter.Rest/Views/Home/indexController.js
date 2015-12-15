@@ -11,10 +11,11 @@
         '$interval',
         'NotificationHttpService',
         '$location',
-        '$rootScope'
+        '$rootScope',
+        '$cookies'
     ];
 
-    function IndexController($scope, indexHttpService, $interval, notificationHttpService, $location, $rootScope) {
+    function IndexController($scope, indexHttpService, $interval, notificationHttpService, $location, $rootScope,$cookies) {
         var vm = this;
         vm.name = "Index";
         vm.amount = 0;
@@ -23,6 +24,8 @@
         vm.setCountTests = setCountTests;
         $rootScope.notifications = null;
         $rootScope.clickedNotification = null;
+
+        vm.logOut = logOut;
 
         callRefreshFunctions();
 
@@ -74,5 +77,13 @@
                 }
             });
         }
+
+        function logOut() {
+            
+            $cookies.remove('x-access-token');
+            $location.url('');
+            }
+        
+
     }
 })();
