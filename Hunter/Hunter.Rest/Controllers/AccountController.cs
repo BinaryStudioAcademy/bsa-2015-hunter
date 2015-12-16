@@ -55,8 +55,8 @@ namespace Hunter.Rest.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("api/something")]
+        [HttpGet]
+        [Route("auth/logout")]
         public HttpResponseMessage LogOut()
         {
             if (HttpContext.Current.Request.Cookies["x-access-token"] != null)
@@ -65,9 +65,6 @@ namespace Hunter.Rest.Controllers
                 myCookie.Expires = DateTime.Now.AddDays(-1d);
                 HttpContext.Current.Response.Cookies.Add(myCookie);
             }
-            //HttpContext.Current.Response.Headers.Remove("x-access-token");
-            ////HttpContext.Current.Response.Cookies.Add(new HttpCookie("referer", Config.OAuthReferer));
-            ////return Ok();
             return Request.CreateResponse(HttpStatusCode.OK);
         }
     }

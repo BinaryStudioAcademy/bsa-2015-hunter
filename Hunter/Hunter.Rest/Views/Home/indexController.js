@@ -83,8 +83,7 @@
 
         function logOut() {
             UserHttpService.logout().then(function (data) {
-                //$cookies.remove('x-access-token');
-                //$location.url('./');
+                $location.url('./');
             });
         }
     }
