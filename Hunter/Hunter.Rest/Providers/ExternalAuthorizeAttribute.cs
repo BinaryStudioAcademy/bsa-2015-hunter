@@ -29,22 +29,19 @@ namespace Hunter.Rest.Providers
                 //actionContext.RequestContext.Principal.Identity.Name != null &&
                 if (!userProfileService.UserExist(actionContext.RequestContext.Principal.Identity.Name))
                 {
-                    try
+                    var user =
+                        await
+                            userProfileService.CreateUserAlias(Config.ExternalPath + "api/users/" +
+                                                               actionContext.RequestContext.Principal.Identity.GetUserId
+                                                                   ());
+                    if (user != null)
                     {
-                        var user = await userProfileService.CreateUserAlias(Config.ExternalPath + "api/users/" + actionContext.RequestContext.Principal.Identity.GetUserId());
-                        if (user != null)
+                        userProfileService.Save(new EditUserProfileVm()
                         {
-                            userProfileService.Save(new EditUserProfileVm()
-                            {
-                                Login = user.Email,
-                                Alias = user.Name,
-                                Position = user.Role
-                            });
-                        }
-
-                    }
-                    catch (DbUpdateException)
-                    {
+                            Login = user.Email,
+                            Alias = user.Name,
+                            Position = user.Role ?? "Unknown"
+                        });
 
                     }
                 }

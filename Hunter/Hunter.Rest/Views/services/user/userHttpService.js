@@ -13,7 +13,8 @@
     function UserHttpService($q, httpHandler) {
         var services = {
             getUsersByRole: getUsersByRole,
-            getUsersByRole2: getUsersByRole2
+            getUsersByRole2: getUsersByRole2,
+            logout: logout
         }
 
         function getUsersByRole(roleName) {
@@ -21,10 +22,10 @@
             httpHandler.sendRequest({
                 url: './api/user/' + roleName,
                 verb: 'GET',
-                successCallback: function (result) {
+                successCallback: function(result) {
                     deferred.resolve(result.data);
                 },
-                errorCallback: function (status) {
+                errorCallback: function(status) {
                     console.log("Get users by role error");
                     console.log(status);
                 }
@@ -37,11 +38,27 @@
             httpHandler.sendRequest({
                 url: './api/userprofile/users/role/' + roleName,
                 verb: 'GET',
-                successCallback: function (result) {
+                successCallback: function(result) {
                     deferred.resolve(result.data);
                 },
-                errorCallback: function (status) {
+                errorCallback: function(status) {
                     console.log("Get users by role error");
+                    console.log(status);
+                }
+            });
+            return deferred.promise;
+        }
+
+        function logout() {
+            var deferred = $q.defer();
+            httpHandler.sendRequest({
+                verb: 'GET',
+                url: '/auth/logout',
+                successCallback: function(result) {
+                    deferred.resolve(result.data);
+                },
+                errorCallback: function(status) {
+                    console.log("logout error");
                     console.log(status);
                 }
             });

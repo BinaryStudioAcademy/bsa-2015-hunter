@@ -10,12 +10,13 @@
         'IndexHttpService',
         '$interval',
         'NotificationHttpService',
+        'UserHttpService',
         '$location',
         '$rootScope',
         '$cookies'
     ];
 
-    function IndexController($scope, indexHttpService, $interval, notificationHttpService, $location, $rootScope,$cookies) {
+    function IndexController($scope, indexHttpService, $interval, notificationHttpService, UserHttpService, $location, $rootScope, $cookies) {
         var vm = this;
         vm.name = "Index";
         vm.amount = 0;
@@ -29,7 +30,7 @@
 
         callRefreshFunctions();
 
-        $interval(callRefreshFunctions, 180000);   //3 minutes
+        $interval(callRefreshFunctions, 180000); //3 minutes
 
         function callRefreshFunctions() {
             getActivityAmount();
@@ -38,22 +39,24 @@
         }
 
         function getActivityAmount() {
-            indexHttpService.getActivityAmount(function (response) {
+            indexHttpService.getActivityAmount(function(response) {
                 vm.amount = response.data;
             });
         }
+
         function getCountTasksForCheck() {
-            indexHttpService.getTasksForCheck().then(function (result) {
+            indexHttpService.getTasksForCheck().then(function(result) {
                 console.log("count = " + result);
                 vm.countTests = result;
             });
         }
+
         function setCountTests(count) {
             vm.countTests = count;
         }
 
         function getActiveNotifications() {
-            notificationHttpService.getActiveNotifications().then(function (result) {
+            notificationHttpService.getActiveNotifications().then(function(result) {
                 $rootScope.notifications = result;
                 if ($rootScope.notifications != null) {
                     for (var i = 0; i < $rootScope.notifications.length; i++) {
@@ -67,10 +70,10 @@
             $rootScope.clickedNotification = $rootScope.notifications[index];
             var alertMessage = $rootScope.clickedNotification.notificationDate + ' ' + $rootScope.clickedNotification.message + '<a href="./candidate/' + $rootScope.clickedNotification.candidateId + '"></a>';
 
-            alertify.message('Click me to show a notification!', 180, function (isClicked) {
+            alertify.message('Click me to show a notification!', 180, function(isClicked) {
                 if (isClicked) {
                     notificationHttpService.notificationShown($rootScope.clickedNotification.id);
-                    alertify.alert(alertMessage, function () {
+                    alertify.alert(alertMessage, function() {
                         $location.url('/candidate/' + $rootScope.clickedNotification.candidateId);
                         $rootScope.$apply();
                     });
@@ -79,11 +82,10 @@
         }
 
         function logOut() {
-            
-            $cookies.remove('x-access-token');
-            $location.url('');
-            }
-        
-
+            UserHttpService.logout().then(function (data) {
+                //$cookies.remove('x-access-token');
+                //$location.url('./');
+            });
+        }
     }
 })();

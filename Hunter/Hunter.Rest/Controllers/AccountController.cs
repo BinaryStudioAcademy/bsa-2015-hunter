@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Web.SessionState;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Http;
@@ -51,5 +55,20 @@ namespace Hunter.Rest.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("api/something")]
+        public HttpResponseMessage LogOut()
+        {
+            if (HttpContext.Current.Request.Cookies["x-access-token"] != null)
+            {
+                HttpCookie myCookie = new HttpCookie("x-access-token");
+                myCookie.Expires = DateTime.Now.AddDays(-1d);
+                HttpContext.Current.Response.Cookies.Add(myCookie);
+            }
+            //HttpContext.Current.Response.Headers.Remove("x-access-token");
+            ////HttpContext.Current.Response.Cookies.Add(new HttpCookie("referer", Config.OAuthReferer));
+            ////return Ok();
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
     }
 }

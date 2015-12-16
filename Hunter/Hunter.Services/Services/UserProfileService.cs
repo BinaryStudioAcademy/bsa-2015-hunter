@@ -1,24 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using Hunter.Common.Concrete;
-using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Entities;
-using Hunter.DataAccess.Entities.Entites.Enums;
 using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Interface.Base;
 using Hunter.Services.Dto.ApiResults;
 using Hunter.Services.Dto.User;
-using Hunter.Services.Extensions;
 using Hunter.Services.Interfaces;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Hunter.Services
 {
@@ -138,7 +133,14 @@ namespace Hunter.Services
             {
                 profile.Added = DateTime.UtcNow;
             }
-            _profileRepo.UpdateAndCommit(profile);
+            try
+            {
+                _profileRepo.UpdateAndCommit(profile);
+            }
+            catch (DbUpdateException ex)
+            {
+                Debug.WriteLine("Exception:", ex.Message);
+            }
             if (editedUserProfile.Id == 0)
             {
                 _activityHelperService.CreateAddedUserProfileActivity(profile);
@@ -179,9 +181,17 @@ namespace Hunter.Services
             var json = await response.Content.ReadAsStringAsync();
 
             var user = JsonConvert.DeserializeObject<OAuthUserDto>(json);
-            var alias = string.Empty;
-            user.Name.Split(' ').ToList().ForEach(i => alias += i[0]);
-            user.Name = alias;
+            if (user.Name != null)
+            {
+                var alias = string.Empty;
+                user.Name.Split(' ').ToList().ForEach(i => alias += i[0]);
+            }
+            else
+            {
+                user.Name = user.Email.Substring(0, user.Email.IndexOf('@'));
+            }
+            //user.Name.Split(' ').ToList().ForEach(i => alias += i[0]);
+            //user.Name = alias;
 
             return user;
         }

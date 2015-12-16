@@ -81,7 +81,7 @@ namespace Hunter.Rest
                 context.Token = token;
             } else
             {
-                HttpContext.Current.Response.Cookies.Add(new HttpCookie("referer", Config.ProductionUrl));
+                HttpContext.Current.Response.Cookies.Add(new HttpCookie("referer", Config.OAuthReferer));
             }
 
             return Task.FromResult<object>(null);

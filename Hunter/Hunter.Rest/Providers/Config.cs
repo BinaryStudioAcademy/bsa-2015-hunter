@@ -27,11 +27,15 @@ namespace Hunter.Rest.Providers
             }
         }
 
-        public static string ProductionUrl
+        public static string OAuthReferer
         {
             get
             {
-                return WebConfigurationManager.AppSettings["productionUrl"];
+                #if DEBUG
+                    return WebConfigurationManager.AppSettings["debugRefererUrl"];
+                #else
+                     return WebConfigurationManager.AppSettings["releaseRefereUrl"];
+                #endif
             }
         }
 
