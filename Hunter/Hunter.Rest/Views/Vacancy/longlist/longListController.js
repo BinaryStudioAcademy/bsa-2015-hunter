@@ -83,7 +83,7 @@
         // initializating function
         (function () {
             vm.name = 'CandidatesForLongList';
-            vm.itemsPerPage = [5, 10, 20, 40];
+            //vm.itemsPerPage = [5, 10, 20, 40];
             vm.sortOptions = [
                 { text: 'Added Date (new first)', options: 'AddDate_desc' },
                 { text: 'Added Date (old first)', options: 'AddDate_asc' },
