@@ -57,7 +57,7 @@
                 salary: [],
                 hr: [],
                 currentPage: routeParams.currentPage || 1,
-                pageSize: parseInt(routeParams.pageSize) || 10,
+                pageSize: parseInt(routeParams.pageSize) || 25,
                 order: routeParams.order || 'AddDate_desc'
 
             };
