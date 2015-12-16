@@ -37,7 +37,7 @@
                 statuses: [],
                 shortListed: routeParams.shortListed=='true' ? true : false,
                 search: routeParams.search || '',
-                pageSize: parseInt(routeParams.pageSize) || 10,
+                pageSize: parseInt(routeParams.pageSize) || 25,
                 currentPage: routeParams.currentPage || 1,
                 order: routeParams.order || 'AddDate_asc'
             };

@@ -20,10 +20,15 @@
                 </div>
                 <div class="ll_preview_info_control">
                 </div>
+                <div class="group-btn">
+
+                </div>
                 <div class="ll_preview_info_control">
-                    <a class="btn btn-default" href="./vacancy/{{llPreviewCtrl.vacancyId}}/candidate/{{llPreviewCtrl.candidateDetails.id}}">Details</a>
-                    <a class="btn btn-default" href="./candidate/edit/{{llPreviewCtrl.candidateDetails.id}}">Edit Profile</a>
-                    <button class="btn btn-default" type="button" ng-click="llPreviewCtrl.removeCard(llPreviewCtrl.candidateDetails.id)">Remove from List</button>
+                        <a class="btn btn-default" href="./vacancy/{{llPreviewCtrl.vacancyId}}/candidate/{{llPreviewCtrl.candidateDetails.id}}" title="Details"><i class="fa fa-newspaper-o"></i></a>
+                        <a class="btn btn-default" href="./candidate/edit/{{llPreviewCtrl.candidateDetails.id}}" title="Edit Profile"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-default" ng-show="llPreviewCtrl.candidateDetails.lastResumeUrl !=''" ng-click="llPreviewCtrl.showResume()" title="View Resume"><i class="fa fa-file-text-o"></i></a>
+                        <a class="btn btn-default" ng-show="llPreviewCtrl.candidateDetails.linkedin != null" href="{{llPreviewCtrl.candidateDetails.linkedin}}" target="_blank" title="View LinkedIn Profile"><i class="fa fa-linkedin-square"></i></a>
+                        <a class="btn btn-default" ng-click="llPreviewCtrl.removeCard(llPreviewCtrl.candidateDetails.id)" title="Remove from List"><i class="fa fa-minus-square-o"></i></a>
                 </div>
                 <div class="col-md-12">
                     <ul class="nav nav-tabs" role="tablist">
@@ -41,10 +46,6 @@
                                 <div id="card-dynamic" ng-include="llPreviewCtrl.templateToShow"></div>
                         </div>
                     </div>
-                </div>
-                <div class="ll_preview_info_control">
-                    <input class="btn btn-default" type="button" value="View Resume" ng-click="llPreviewCtrl.showResume()" ng-disabled="llPreviewCtrl.candidateDetails.lastResumeUrl==''">
-                    <a class="btn btn-default" ng-show="llPreviewCtrl.candidateDetails.linkedin != null" href="{{llPreviewCtrl.candidateDetails.linkedin}}" target="_blank">View LinkenIn Profile</a>
                 </div>
             </div>
         </div>
