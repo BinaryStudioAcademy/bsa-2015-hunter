@@ -95,7 +95,7 @@
                     <select class="form-control"
                             ng-model="candidateListCtrl.filter.pageSize"
                             ng-change="candidateListCtrl.updateCandidate()">
-                        <option ng-repeat="i in [25,50,75,100]" value="25">{{i}}</option>
+                        <option ng-repeat="i in [25,50,75,100]">{{i}}</option>
                     </select>
                 </div>
                 <pagination total-items="candidateListCtrl.totalItems"
