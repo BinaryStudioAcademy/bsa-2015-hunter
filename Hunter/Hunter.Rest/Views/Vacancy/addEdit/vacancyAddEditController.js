@@ -46,7 +46,7 @@
         vm.submitVacancy = function () {
             if (vacancyHttpService.validateVacancy(vm.currentVacancy)) {
                 if (vm.isNewVacancy) {
-                    vm.currentVacancy.userLogin = localStorageService.get('authorizationData').userName;
+                    //vm.currentVacancy.userLogin = localStorageService.get('authorizationData').userName;
                     vacancyHttpService.addVacancy(vm.currentVacancy);
                 } else {
                     vacancyHttpService.updateVacancy(vm.currentVacancy, vm.currentVacancy.id);

@@ -78,7 +78,7 @@
                         <select class="form-control"
                                 ng-model="vacancyListCtrl.filterParams.pageSize"
                                 ng-change="vacancyListCtrl.loadDataByParams()">
-                            <option ng-repeat="i in [5, 10, 25, 50, 100]">{{i}}</option>
+                            <option ng-repeat="i in [25, 50, 75, 100]">{{i}}</option>
                         </select>
                     </div>
                     <pagination total-items="vacancyListCtrl.totalCount"

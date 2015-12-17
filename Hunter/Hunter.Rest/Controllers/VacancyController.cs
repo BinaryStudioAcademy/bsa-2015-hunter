@@ -131,6 +131,8 @@ namespace Hunter.Rest.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    //todo check if name is correct
+                    value.UserLogin = User.Identity.Name;
                     _vacancyService.Add(value);
                     return Request.CreateResponse(HttpStatusCode.OK, "Ok");
                 }
