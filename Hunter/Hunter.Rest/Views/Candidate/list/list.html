@@ -46,12 +46,15 @@
         </div>
 
         <div class="col-md-9" spinner="candidateListCtrl.tableSpinner">
-            <div class="form-group col-md-5">
-                <label>Order By</label>
+            <div class="form-group col-md-4">
                 <select class="form-control"
                         ng-options="item.options as item.text for item in candidateListCtrl.sortOptions"
                         ng-model="candidateListCtrl.filter.order"
                         ng-change="candidateListCtrl.updateCandidate()"></select>
+            </div>
+
+            <div class="col-md-2">
+                <a href="./candidate/edit" class="btn"><span class="glyphicon glyphicon-plus-sign"></span>Add new</a>
             </div>
 
             <table class="table table-striped table-hover table-responsive">
