@@ -841,7 +841,6 @@
     <Content Include="Views\notification\addEdit\addEditNotificationController.js" />
     <Content Include="Views\notification\list\list.html" />
     <Content Include="Views\notification\list\notificationListController.js" />
-    <Content Include="Views\services\directive\autoExpandTextareaDirective.js" />
     <Content Include="Views\files\list\fileListController.js" />
     <Content Include="Views\files\list\list.html" />
     <Content Include="Views\filters\vacancies\vacanciesListFilter.js" />
@@ -862,6 +861,7 @@
     <Content Include="Views\services\candidate\candidatesHttpService.js" />
     <Content Include="Views\services\candidate\card\cardTestHttpService.js" />
     <Content Include="Views\services\directive\filechange.js" />
+    <Content Include="Views\services\directive\isNumer.js" />
     <Content Include="Views\services\directive\spinnerDirective.js" />
     <Content Include="Views\services\feedback\cardHrInterviewService.js" />
     <Content Include="Views\services\feedback\feedbackHttpService.js" />

@@ -37,6 +37,16 @@
                     errorObject.message += ' Date of birth; ';
                     noErrors = false;
             }
+
+            if (!isNumeric(data.YearsOfExperience)) {            
+                    errorObject.message += ' Years Of Experience; ';
+                    noErrors = false;
+            }
+            if (!isNumeric(data.Salary)) {            
+                    errorObject.message += ' Salary; ';
+                    noErrors = false;
+            }
+
             return noErrors;
         }
 
