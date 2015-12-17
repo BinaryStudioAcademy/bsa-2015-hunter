@@ -322,7 +322,7 @@
   <ItemGroup>
     <Content Include="App_Data\no_photo.png" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
-   <!--  <Content Include="bower_components\alertifyjs\dist\css\alertify.css" />
+    <!--  <Content Include="bower_components\alertifyjs\dist\css\alertify.css" />
     <Content Include="bower_components\alertifyjs\dist\js\alertify.js" />
     <Content Include="bower_components\alertifyjs\src\css\core.css" />
     <Content Include="bower_components\alertifyjs\src\css\themes\bootstrap3\bootstrap.css" />
@@ -785,6 +785,7 @@
     <Content Include="Scripts\odataresources.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\header.js" />
     <Content Include="Views\Activity\list\activityListController.js" />
     <Content Include="Views\Activity\list\list.html" />
     <Content Include="Views\app\app.js" />
