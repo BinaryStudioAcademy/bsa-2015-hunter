@@ -54,6 +54,7 @@ body {
 .site-content {
     padding-bottom: 15px;
     padding-top: 15px;
+    /*margin-left: 250px;*/
 }
 
 .site-menu {
@@ -73,9 +74,9 @@ body {
     transition: all 0.5s ease;
 }
 
-#wrapper.toggled {
+/*#wrapper.toggled {
     padding-left: 250px;
-}
+}*/
 
 #sidebar-wrapper {
     z-index: 1000;
@@ -156,9 +157,13 @@ body {
 }
 
 @media(min-width:768px) {
-    #wrapper {
-        padding-left: 250px;
+    #main-content {
+        margin-left: 250px;
     }
+
+    .site-content {
+    margin-left: 0;
+}
 
     #wrapper.toggled {
         padding-left: 0;
