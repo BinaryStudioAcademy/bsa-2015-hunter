@@ -178,7 +178,7 @@ namespace Hunter.Services
             _activityHelperService.CreateUpdateCandidateResolution(candidate, oldResolution);
         }
 
-        public void Add(CandidateDto dto, string name)
+        public CandidateDto Add(CandidateDto dto, string name)
         {
             var candidate = new Candidate();
             dto.ToCandidateModel(candidate);
@@ -202,6 +202,7 @@ namespace Hunter.Services
                 candidate.AddDate = DateTime.Now;
                 _candidateRepository.UpdateAndCommit(candidate);
                 _activityHelperService.CreateAddedCandidateActivity(candidate);
+                return candidate.ToCandidateDto();
             }
             catch (Exception ex)
             {

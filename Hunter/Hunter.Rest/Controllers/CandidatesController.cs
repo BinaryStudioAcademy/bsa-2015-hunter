@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Http.OData;
 using System.Web.Http.OData.Extensions;
 using System.Web.Http.OData.Query;
 using Hunter.DataAccess.Entities;
-using Hunter.DataAccess.Entities.Enums;
 using Hunter.Rest.Providers;
 using Hunter.Services.Dto;
 using Hunter.Services.Interfaces;
@@ -237,8 +234,7 @@ namespace Hunter.Rest.Controllers
         {
             try
             {
-                _candidateService.Add(candidate, User.Identity.Name);
-                var cand = _candidateService.Get(i => i.FirstName.Equals(candidate.FirstName) && i.LastName.Equals(candidate.LastName) && i.DateOfBirth.Equals(candidate.DateOfBirth)).ToCandidateDto();
+                var cand = _candidateService.Add(candidate, User.Identity.Name);
                 return Request.CreateResponse(HttpStatusCode.Created, cand);
 
             }

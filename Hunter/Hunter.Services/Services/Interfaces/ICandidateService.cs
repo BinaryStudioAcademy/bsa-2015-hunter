@@ -14,7 +14,7 @@ namespace Hunter.Services.Interfaces
         IQueryable<Candidate> Query();
         IEnumerable<CandidateDto> GetAllInfo();
         CandidateDto GetInfo(int id);
-        void Add(CandidateDto candidate, string name);
+        CandidateDto Add(CandidateDto candidate, string name);
         void Delete(Candidate candidate);
         void Update(CandidateDto candidate);
         IEnumerable<CandidateLongListDto> GetLongList(int id);
