@@ -38,11 +38,11 @@
                     noErrors = false;
             }
 
-            if (!isNumeric(data.YearsOfExperience)) {            
+            if (!isNumeric(data.YearsOfExperience) && data.YearsOfExperience != undefined) {            
                     errorObject.message += ' Years Of Experience; ';
                     noErrors = false;
             }
-            if (!isNumeric(data.Salary)) {            
+            if (!isNumeric(data.Salary) && data.Salary != undefined) {            
                     errorObject.message += ' Salary; ';
                     noErrors = false;
             }

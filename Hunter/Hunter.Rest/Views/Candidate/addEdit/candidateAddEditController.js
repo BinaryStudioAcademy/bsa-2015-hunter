@@ -14,11 +14,12 @@
         'PoolsHttpService',
         'UploadResumeService',
         'UploadPhotoService',
-        'FileHttpService'
+        'FileHttpService',
+        'SpecialNoteHttpService'
     ];
 
     function CandidateAddEditController($location, $routeParams, authService,
-        candidateHttpService, candidateAddEditService, poolsHttpService, uploadResumeService, uploadPhotoService, fileHttpService) {
+        candidateHttpService, candidateAddEditService, poolsHttpService, uploadResumeService, uploadPhotoService, fileHttpService, specialNoteHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         //vm.categories = [{ name: 'Select Candidate Category' }]; // .NET, JS, PHP
@@ -49,6 +50,8 @@
         vm.photoUrl = '';
         vm.externalUrl = '';
         var firstPreviewUrl = '';
+
+        vm.note = '';
 
         //Here we should write all signatures for user actions callback method, for example,
         vm.addEditCandidate = addEditCandidate;
@@ -234,6 +237,15 @@
             } else {
                 uploadPhotoService.uploadPicture(vm.picture, data.data.id);
             }
+
+            //add note
+
+            var note = {
+                text: vm.note,
+                vacancyId: null,
+                candidateId: data.data.id
+            };
+            specialNoteHttpService.addSpecialNote(note);
             
             $location.url('/candidate/list');
         }
