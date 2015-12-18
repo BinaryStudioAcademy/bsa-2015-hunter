@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="filte-form-wrapper col-md-3">
+        <div class="filte-form-wrapper col-md-2">
 
             <div class="form-group">
                 <label>Search</label>
@@ -14,9 +14,6 @@
 
             <div class="filter-settings">
                 <ul>
-                    <li>
-                        <input ng-click="candidateListCtrl.updateCandidate()" type="checkbox" ng-model="candidateListCtrl.filter.shortListed"> <label>Shortlisted</label>
-                    </li>
                     <li>
                         <label>Pool</label>
                         <ul>
@@ -45,7 +42,7 @@
             </div>
         </div>
 
-        <div class="col-md-9" spinner="candidateListCtrl.tableSpinner">
+        <div class="col-md-10" spinner="candidateListCtrl.tableSpinner">
             <div class="form-group col-md-4">
                 <select class="form-control"
                         ng-options="item.options as item.text for item in candidateListCtrl.sortOptions"

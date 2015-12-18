@@ -2,35 +2,34 @@
 <div class="container site-content">
     <h3>Vacancies</h3>
     <div class="row">
-        <div class="col-md-3">
+        <div class="filte-form-wrapper col-md-2">
             <label>Search</label>
             <input type="text" class="form-control" id="searchFilter" placeholder="Search" ng-model="vacancyListCtrl.filterParams.filter"><br />
-            <label>Tag</label>
             <div class="filter-settings">
                 <ul>
-                    <li ng-repeat="pool in vacancyListCtrl.pools">
-                        <input type="checkbox" checklist-model="vacancyListCtrl.filterParams.pool" checklist-value="pool.id"> {{pool.name}}
-                    </li>
-                </ul>
-            </div><br />
-            <label>State</label>
-            <div class="filter-settings">
-                <ul>
-                    <li ng-repeat="status in vacancyListCtrl.statuses">
-                        <input type="checkbox" checklist-model="vacancyListCtrl.filterParams.status" checklist-value="status.id"> {{status.name}}
-                    </li>
-                </ul>
-            </div><br />
-            <label>Added by</label>
-            <div class="filter-settings">
-                <ul>
-                    <li ng-repeat="adder in vacancyListCtrl.adders">
-                        <input type="checkbox" checklist-model="vacancyListCtrl.filterParams.addedBy" checklist-value="adder.id"> {{adder.alias}}
-                    </li>
+                        <label>Tag</label>
+                            <ul>
+                                <li ng-repeat="pool in vacancyListCtrl.pools">
+                                    <input type="checkbox" checklist-model="vacancyListCtrl.filterParams.pool" checklist-value="pool.id"> {{pool.name}}
+                                </li>
+                            </ul>
+
+                    <label>State</label>
+                        <ul>
+                            <li ng-repeat="status in vacancyListCtrl.statuses">
+                                <input type="checkbox" checklist-model="vacancyListCtrl.filterParams.status" checklist-value="status.id"> {{status.name}}
+                            </li>
+                        </ul>
+                    <label>Added by</label>
+                        <ul>
+                            <li ng-repeat="adder in vacancyListCtrl.adders">
+                                <input type="checkbox" checklist-model="vacancyListCtrl.filterParams.addedBy" checklist-value="adder.id"> {{adder.alias}}
+                            </li>
+                        </ul>
                 </ul>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div class="row">
                 <div class="col-md-4">
                     <select class="form-control" ng-model="vacancyListCtrl.sortAction" ng-options="s.name for s in vacancyListCtrl.sortBy"></select>

@@ -245,7 +245,10 @@
                 vacancyId: null,
                 candidateId: data.data.id
             };
-            specialNoteHttpService.addSpecialNote(note);
+
+            if (note.text != '') {
+                specialNoteHttpService.addSpecialNote(note);
+            }
             
             $location.url('/candidate/list');
         }
