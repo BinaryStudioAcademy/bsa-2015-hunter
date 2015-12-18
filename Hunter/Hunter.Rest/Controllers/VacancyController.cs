@@ -14,12 +14,12 @@ namespace Hunter.Rest.Controllers
     public class VacancyController : ApiController
     {
         private readonly IVacancyService _vacancyService;
-        private readonly IUserService _userService;
+        //private readonly IUserService _userService;
 
-        public VacancyController(IVacancyService vacancyService, IUserService userService)
+        public VacancyController(IVacancyService vacancyService)//, IUserService userService)
         {
             _vacancyService = vacancyService;
-            _userService = userService;
+            //_userService = userService;
         }
 
         [HttpGet]
@@ -184,9 +184,9 @@ namespace Hunter.Rest.Controllers
         {
             try 
             {
-                var filterInfo = _userService.GetFilterInfo(roleName);
-                return Request.CreateResponse(HttpStatusCode.OK, filterInfo);
-    
+                //var filterInfo = _userService.GetFilterInfo(roleName);
+                return Request.CreateResponse(HttpStatusCode.OK); //, filterInfo);
+
             } catch(Exception e)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);

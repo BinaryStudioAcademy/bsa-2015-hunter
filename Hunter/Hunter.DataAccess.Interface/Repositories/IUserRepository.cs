@@ -1,10 +1,10 @@
 ﻿using Hunter.DataAccess.Entities;
-using Hunter.DataAccess.Interface.Base;
+//using Hunter.DataAccess.Interface.Base;
 
-namespace Hunter.DataAccess.Interface.Repositories
-{
-    public interface IUserRepository : IRepository<User>
-    {
+//namespace Hunter.DataAccess.Interface.Repositories
+//{
+//    public interface IUserRepository : IRepository<User>
+//    {
 
-    }
-}
+//    }
+//}

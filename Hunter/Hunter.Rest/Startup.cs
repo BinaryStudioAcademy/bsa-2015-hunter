@@ -64,7 +64,7 @@ namespace Hunter.Rest
             kernel.Bind<ISpecialNoteRepository>().To<SpecialNoteRepository>();
             kernel.Bind<ITestRepository>().To<TestRepository>();
             kernel.Bind<IUserProfileRepository>().To<UserProfileRepository>();
-            kernel.Bind<IUserRepository>().To<UserRepository>();
+            //kernel.Bind<IUserRepository>().To<UserRepository>();
             kernel.Bind<IUserRoleRepository>().To<UserRoleRepository>();
             kernel.Bind<IVacancyRepository>().To<VacancyRepository>();
             kernel.Bind<IFileRepository>().To<FileRepository>();
@@ -72,7 +72,7 @@ namespace Hunter.Rest
             #endregion
 
             #region Services
-            kernel.Bind<IUserService>().To<UserService>();
+            //kernel.Bind<IUserService>().To<UserService>();
             kernel.Bind<IPoolService>().To<PoolService>();
             kernel.Bind<ICandidateService>().To<CandidateService>();
             kernel.Bind<IActivityService>().To<ActivityService>();
