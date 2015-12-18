@@ -210,6 +210,10 @@
     <Compile Include="Migrations\201512151308375_AddedIndexToUserLoginField.Designer.cs">
       <DependentUpon>201512151308375_AddedIndexToUserLoginField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512181221356_drop-User-table.cs" />
+    <Compile Include="Migrations\201512181221356_drop-User-table.Designer.cs">
+      <DependentUpon>201512181221356_drop-User-table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -309,6 +313,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512151308375_AddedIndexToUserLoginField.resx">
       <DependentUpon>201512151308375_AddedIndexToUserLoginField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512181221356_drop-User-table.resx">
+      <DependentUpon>201512181221356_drop-User-table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

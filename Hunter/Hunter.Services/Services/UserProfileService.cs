@@ -30,17 +30,20 @@ namespace Hunter.Services
         private readonly IUserRoleRepository _roleRepository;
         private readonly IUserProfileRepository _profileRepo;
 
+        //todo new fix figure out
+
         public IEnumerable<UserProfileRowVm> GetUserProfiles(string roleName)
         {
-            var users = _roleRepository
-                .Query().FirstOrDefault(e => e.Name == roleName)
-                .Users
-                .Select(u => u.Login);
+            //var users = _roleRepository
+            //    .Query().FirstOrDefault(e => e.Name == roleName)
+            //    .Users
+            //    .Select(u => u.Login);
 
-            var profiles = _profileRepo.Query()
-                                 .Where(pr => users.Contains(pr.UserLogin))
-                                 .Select(UserProfileRowVm.Create);
-            return profiles;
+            //var profiles = _profileRepo.Query()
+            //                     .Where(pr => users.Contains(pr.UserLogin))
+            //                     .Select(UserProfileRowVm.Create);
+            //return profiles;
+            return null;
         }
 
         public bool UserExist(string userName)
@@ -69,15 +72,18 @@ namespace Hunter.Services
             _roleRepository = roleRepository;
         }
 
+        //todo new figure out
+
         public IEnumerable<UserProfileRowVm> GetUserProfiles(string roleName)
         {
-            var users = _roleRepository
-                .Query()
-                .Where(e => e.Name == roleName)
-                .FirstOrDefault()
-                .Users
-                .Select(e => UserProfileRowVm.Create(_profileRepo.Get(e.Id)));
-            return users;
+            //var users = _roleRepository
+            //    .Query()
+            //    .Where(e => e.Name == roleName)
+            //    .FirstOrDefault()
+            //    .Users
+            //    .Select(e => UserProfileRowVm.Create(_profileRepo.Get(e.Id)));
+            //return users;
+            return null;
         }
 
         public bool UserExist(string userName)

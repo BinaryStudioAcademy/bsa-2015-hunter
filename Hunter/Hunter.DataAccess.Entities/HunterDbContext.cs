@@ -27,7 +27,7 @@ namespace Hunter.DataAccess.Entities
         public virtual DbSet<Test> Test { get; set; }
         public virtual DbSet<UserProfile> UserProfile { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
-        public virtual DbSet<User> User { get; set; }
+        //public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Vacancy> Vacancy { get; set; }
         public virtual DbSet<File> File { get; set; }
         public virtual DbSet<ScheduledNotification> ScheduledNotification { get; set; }
@@ -104,11 +104,11 @@ namespace Hunter.DataAccess.Entities
                .HasForeignKey(e => e.AssignedUserProfileId)
                .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<UserRole>()
-                .HasMany(e => e.Users)
-                .WithRequired(e => e.UserRole)
-                .HasForeignKey(e => e.RoleId)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<UserRole>()
+            //    .HasMany(e => e.Users)
+            //    .WithRequired(e => e.UserRole)
+            //    .HasForeignKey(e => e.RoleId)
+            //    .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<UserProfile>()
                 .HasMany(e => e.Test)
