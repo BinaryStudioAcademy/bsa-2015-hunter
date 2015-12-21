@@ -19,7 +19,8 @@
 
     function CandidatePartialController($scope, $location, $rootScope, authService, candidateHttpService, EnumConstants,
         longlistHttpService, specialNoteHttpService, candidatePartialProfileService) {
-        var vm = this;
+        var vm = this,
+            firstUse = true;
         //Here we should write all vm variables default values. For Example:
         vm.isEmpty = false;
 
@@ -38,6 +39,8 @@
         vm.updateResolution = updateResolution;
         vm.changeTemplate = changeTemplate;
         vm.showResume = showResume;
+        vm.closeModal = closeModal;
+
         $rootScope.$watch(
             '$root.candidateDetails.id',
             function () {
@@ -57,6 +60,35 @@
                     vm.candidate.shortListed = $rootScope.candidateDetails.shortListed;
                 }
             });
+
+        (function() {
+            $(document).click(function(event) {
+                if (!firstUse) {
+                    var some = $(event.target),
+                        parentLength = some.parents(".container-partial").length,
+                        itemLength = some.parents(".candidate").length;
+                    if (!parentLength && !itemLength) {
+                        closeModal();
+                        return;
+                    }
+                }
+                firstUse = false;
+                console.log(event);
+            });
+        })();
+
+        function closeModal() {
+            $scope.candidateListCtrl.showDetails = false;
+            firstUse = true;
+            $('.container-partial').hide();
+            if (!$scope.$$phase) {
+                $rootScope.$digest();
+            } else {
+                setTimeout(function () {
+                    $rootScope.$digest();
+                }, 100);
+            }
+        }
 
 
         function getCandidateDetails(id) {

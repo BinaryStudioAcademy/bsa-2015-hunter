@@ -26,6 +26,7 @@
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         vm.name = 'Candidates';
+        vm.showDetails = false;
 
         $rootScope.candidateDetails = {
             id: null,
@@ -82,14 +83,19 @@
         vm.ShowDetails = function (item) {
             if ($rootScope.candidateDetails.id != item.id) {
                 $rootScope.candidateDetails.id = item.id;
-                $rootScope.candidateDetails.show = true;
+                //$rootScope.candidateDetails.show = true;
+                $scope.candidateListCtrl.showDetails = true;
+                $('.container-partial').show();
                 $rootScope.candidateDetails.shortListed = item.shortListed;
                 //vm.tableSize = 'col-md-5';
             } else if ($rootScope.candidateDetails.id === item.id && $rootScope.candidateDetails.show === true) {
-                $rootScope.candidateDetails.show = false;
+                //$rootScope.candidateDetails.show = false;
+                $scope.candidateListCtrl.showDetails = false;
                 //vm.tableSize = 'col-md-9';
             } else {
-                $rootScope.candidateDetails.show = true;
+                //$rootScope.candidateDetails.show = true;
+                $scope.candidateListCtrl.showDetails = true;
+                $('.container-partial').show();
                 //vm.tableSize = 'col-md-5';
             }
         }
