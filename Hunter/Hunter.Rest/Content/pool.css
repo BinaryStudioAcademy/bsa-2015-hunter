@@ -1,9 +1,10 @@
 ﻿.page-width {
-    width: 380px;
+    width: 300px;
+    margin-left: 0;
 }
 
 .pool_container {
-    width: 350px;
+    width: 280px;
     float: left;
     border: 1px solid darkgray;
     border-radius: 3px;
@@ -89,7 +90,7 @@
     list-style-type: none;
 }
 .pool-type{
-    width: 85%;
+    width: 100%;
     border: 1px solid rgb(204, 204, 204);
     box-shadow: 0 0 2px rgb(92, 92, 92);
     text-align: center;
@@ -165,4 +166,19 @@
 
 .pool_colors input:hover {
     cursor: pointer;
+}
+/*Pool view*/
+.pool_page_container {
+    width: 350px;
+    float: left;
+    padding: 10px;
+}
+
+.pool_page_container * {
+    width: 100%;
+    float: left;
+}
+
+.pool_page_container .pool-type{
+    width: 85%;
 }

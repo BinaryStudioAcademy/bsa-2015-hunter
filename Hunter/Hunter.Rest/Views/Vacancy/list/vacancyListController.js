@@ -33,7 +33,7 @@
         vm.totalCount = 0;
         vm.pools = [];
         poolsHttpService.getAllPools().then(function (data) {
-            vm.pools = data;
+            vm.pools = data.data;
         });
 
         vm.statuses = enumConstants.vacancyStates;

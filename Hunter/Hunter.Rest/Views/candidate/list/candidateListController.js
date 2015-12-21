@@ -175,7 +175,7 @@
             }
 
             PoolsHttpService.getAllPools().then(function (result) {
-                vm.pools = result;
+                vm.pools = result.data;
             });
 
             CandidateHttpService.getAddedByList().then(function (result) {
