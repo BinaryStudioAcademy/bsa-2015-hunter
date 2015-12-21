@@ -119,6 +119,10 @@ body {
     list-style: none;
 }
 
+    .sidebar-nav .badge {
+            display: inline;
+    }
+
 .sidebar-nav li {
     text-indent: 5px;
     line-height: 40px;

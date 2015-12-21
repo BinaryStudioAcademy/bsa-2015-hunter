@@ -1,4 +1,7 @@
 ﻿<div ng-controller="CardOverviewController as overviewCtrl" ng-cloak>
+    <div ng-show="overviewCtrl.feedbacks == 0">
+        <h4>You don't have any notifications</h4>
+    </div>
     <div ng-repeat="feedback in overviewCtrl.feedbacks">
         <div class="row">
             <div class="col-md-7">
@@ -17,7 +20,7 @@
         </div>
     </div>
     <hr>
-    <a ng-hide="overviewCtrl.showHistoryBlock" ng-click="overviewCtrl.GetFeedbacksHistory()" title="Show History Feedbacks">View Older</a>
+    <a ng-hide="overviewCtrl.showHistoryBlock || overviewCtrl.feedbacks == 0" ng-click="overviewCtrl.GetFeedbacksHistory()" title="Show History Feedbacks">View Older</a>
     <div ng-show="overviewCtrl.showHistoryBlock" ng-repeat="feedback in overviewCtrl.feedbacksHistory | orderBy: ['type','-date']">
         <div class="row">
             <div class="col-md-7">
