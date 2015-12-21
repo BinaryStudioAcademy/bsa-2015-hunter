@@ -188,3 +188,47 @@ body {
         margin-right: 0;
     }
 }
+
+/*wide screen*/
+@media(min-width:1600px) {
+    #main-content {
+        padding-left: 300px;
+    }
+
+    .sidebar-nav {
+    width: 300px;
+}
+
+    .sidebar-nav li {
+        text-indent: 50px;
+    }
+    .sidebar-nav .badge {
+            display: inline;
+    }
+    .site-content {
+    margin-left: 0;
+    width: 100%;
+}
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 300px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
