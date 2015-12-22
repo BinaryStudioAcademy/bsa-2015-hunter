@@ -46,8 +46,8 @@
                     errorObject.message += ' Salary; ';
                     noErrors = false;
             }
-
-            if (!isNumeric(data.Phone) && data.Phone != undefined && data.Phone != "") {            
+            var phone = /^\d{3} \d{3} \d{2} \d{2}$/;
+            if (!phone.test(data.Phone) && data.Phone != undefined && data.Phone != "") {            
                     errorObject.message += ' Phone; ';
                     noErrors = false;
             }
