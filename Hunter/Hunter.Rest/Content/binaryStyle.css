@@ -201,7 +201,10 @@ body {
 
     .sidebar-nav {
     width: 300px;
-}
+    }
+    .dropdown-menu {
+    margin-left: 60px;
+    }
 
     .sidebar-nav li {
         text-indent: 50px;

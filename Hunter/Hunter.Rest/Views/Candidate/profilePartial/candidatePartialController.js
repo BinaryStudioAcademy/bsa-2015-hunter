@@ -73,7 +73,6 @@
                     }
                 }
                 firstUse = false;
-                console.log(event);
             });
         })();
 
