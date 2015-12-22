@@ -36,6 +36,7 @@
             vm.pools = data.data;
         });
 
+        vm.pageSize = [25, 50, 75, 100]
         vm.statuses = enumConstants.vacancyStates;
 
         vm.sortBy = [

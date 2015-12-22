@@ -34,6 +34,7 @@
         };
         //vm.tableSize = 'col-md-9';
         vm.sortOptions = [];
+        vm.pageSize = [25, 50, 75, 100]
         vm.totalItems = 0;
         vm.inviters = [];
         vm.pools = [];

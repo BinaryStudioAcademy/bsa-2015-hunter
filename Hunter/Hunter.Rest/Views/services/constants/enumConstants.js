@@ -94,6 +94,7 @@
                 defaultItem: 25,
                 items: [5, 25, 50, 100]
             },
+            itemsOnPageForCandidate: [25, 50, 75, 100],
             notificationTypes: [
                 { id: 0, name: 'Call', icon: 'glyphicon-earphone' },
                 { id: 1, name: 'Interview', icon: 'glyphicon-list-alt' },

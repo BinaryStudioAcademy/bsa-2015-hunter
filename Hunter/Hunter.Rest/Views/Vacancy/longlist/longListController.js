@@ -36,6 +36,7 @@
         vm.viewCandidateInfo = viewCandidateInfo;
         vm.getCandidatesForLongList = getCandidatesForLongList;
         vm.listSpinner = false;
+        vm.pageSize = EnumConstants.itemsOnPageForCandidate;
 
         // click on candidate item shows candidates preview
         $rootScope.candidatePreview = {
