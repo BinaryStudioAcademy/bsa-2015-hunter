@@ -65,7 +65,7 @@
             $(document).click(function(event) {
                 if (!firstUse) {
                     var some = $(event.target),
-                        parentLength = some.parents(".container-partial").length,
+                        parentLength = some.parents(".container-partial-in-pool").length,
                         itemLength = some.parents(".candidate").length;
                     if (!parentLength && !itemLength) {
                         closeModal();
@@ -80,7 +80,7 @@
         function closeModal() {
             $scope.candidateListCtrl.showDetails = false;
             firstUse = true;
-            $('.container-partial').hide();
+            $('.container-partial-in-pool').hide();
             if (!$scope.$$phase) {
                 $rootScope.$digest();
             } else {

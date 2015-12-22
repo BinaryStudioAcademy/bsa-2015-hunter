@@ -85,7 +85,7 @@
                 $rootScope.candidateDetails.id = item.id;
                 //$rootScope.candidateDetails.show = true;
                 $scope.candidateListCtrl.showDetails = true;
-                $('.container-partial').show();
+                $('.container-partial-in-pool').show();
                 $rootScope.candidateDetails.shortListed = item.shortListed;
                 //vm.tableSize = 'col-md-5';
             } else if ($rootScope.candidateDetails.id === item.id && $rootScope.candidateDetails.show === true) {
@@ -95,7 +95,7 @@
             } else {
                 //$rootScope.candidateDetails.show = true;
                 $scope.candidateListCtrl.showDetails = true;
-                $('.container-partial').show();
+                $('.container-partial-in-pool').show();
                 //vm.tableSize = 'col-md-5';
             }
         }
