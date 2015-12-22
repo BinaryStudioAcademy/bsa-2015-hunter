@@ -81,15 +81,18 @@
                 if (candidateAddEditService.validateData(candidate, vm.errorObject)) {
                     candidateHttpService.updateCandidate(candidate, successAddEditCandidate, candidate.Id);
                 } else {
-                    //alertify.error('Some Fields Are Incorrect');
-                    alert('Some Fields Are Incorrect : ' + vm.errorObject.message);
+
+                    alertify.error('Some Fields Are Incorrect');
+                    //alert('Some Fields Are Incorrect : ' + vm.errorObject.message);
                 }
             } else if (candidate) {
                 if (candidateAddEditService.validateData(candidate, vm.errorObject)) {
                     candidateHttpService.addCandidate(candidate, successAddEditCandidate);
                 } else {
+                    alertify
+                    .alert("Some Fields Are Incorrect: ", vm.errorObject.message);
                     //alertify.error('Some Fields Are Incorrect');
-                    alert('Some Fields Are Incorrect : ' + vm.errorObject.message);
+                    //alert('Some Fields Are Incorrect : ' + vm.errorObject.message);
                 }
             }          
            

@@ -73,7 +73,7 @@
             alertify.message('Click me to show a notification!', 180, function(isClicked) {
                 if (isClicked) {
                     notificationHttpService.notificationShown($rootScope.clickedNotification.id);
-                    alertify.alert(alertMessage, function() {
+                    alertify.alert("Notification", alertMessage, function () {
                         $location.url('/candidate/' + $rootScope.clickedNotification.candidateId);
                         $rootScope.$apply();
                     });
