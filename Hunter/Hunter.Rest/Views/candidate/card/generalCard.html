@@ -5,11 +5,11 @@
                 <div class="col-md-2">
                     <shor-list-star is-short="generalCardCtrl.candidate.shortListed" candidate-id="generalCardCtrl.candidate.id" size="'30px'"></shor-list-star>
                     <img class="profile-photo img-circle" ng-src="{{generalCardCtrl.candidate.photoUrl}}" />
-                    <pool-selector pool-readonly="false" pool-short="false" candidate="generalCardCtrl.candidate"></pool-selector>
+                    
                 </div>
                 <div class="col-md-6">
                     <div class="personal-info">
-                        <div>
+                        <div class="card-candidate-name">
                             <span ng-if="!generalCardCtrl.isLLM" class="candidate-name">{{generalCardCtrl.candidate.firstName+" "+generalCardCtrl.candidate.lastName}} from General Pool</span>
                             <span ng-if="generalCardCtrl.isLLM" class="candidate-name">{{generalCardCtrl.candidate.firstName+" "+generalCardCtrl.candidate.lastName}} from {{generalCardCtrl.vacancy.name}}</span>
                         </div>
@@ -19,6 +19,7 @@
                         <div>Skype: {{generalCardCtrl.candidate.skype}}</div>
                         <div>Phone: {{generalCardCtrl.candidate.phone}}</div>
                     </div>
+                    <pool-selector pool-readonly="false" pool-short="false" candidate="generalCardCtrl.candidate"></pool-selector>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">

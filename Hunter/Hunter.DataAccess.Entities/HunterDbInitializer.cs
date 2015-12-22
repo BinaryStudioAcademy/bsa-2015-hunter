@@ -14,10 +14,10 @@ namespace Hunter.DataAccess.Entities
         private static UserRole _technicalRole = new UserRole() { Name = "Technical Specialist" };
         private static UserRole _adminRole = new UserRole() { Name = "Admin" };
 
-        private static Pool _jsPool = new Pool { Name = "JavaScript", Color = "rgb(44,201,99)" };
-        private static Pool _netPool = new Pool { Name = ".Net", Color = "rgb(293,250,85)" };
-        private static Pool _phpPool = new Pool { Name = "PHP", Color = "rgb(240,88,88)" };
-        private static Pool _qaPool = new Pool { Name = "QA", Color = "rgb(245,122,14)" };
+        private static Pool _jsPool = new Pool { Name = "JavaScript", Color = "#009688" };
+        private static Pool _netPool = new Pool { Name = ".Net", Color = "#FFEB3B" };
+        private static Pool _phpPool = new Pool { Name = "PHP", Color = "#E91E63" };
+        private static Pool _qaPool = new Pool { Name = "QA", Color = "#03A9F4" };
 
         protected override void Seed(HunterDbContext context)
         {

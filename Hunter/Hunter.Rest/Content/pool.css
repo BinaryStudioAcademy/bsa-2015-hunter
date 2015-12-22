@@ -90,9 +90,11 @@
     list-style-type: none;
 }
 .pool-type{
+    color: white;
+    font-weight: 700;
     width: 100%;
-    border: 1px solid rgb(204, 204, 204);
-    box-shadow: 0 0 2px rgb(92, 92, 92);
+    /*border: 1px solid rgb(204, 204, 204);
+    box-shadow: 0 0 2px rgb(92, 92, 92);*/
     text-align: center;
     height: 34px;
     line-height: 34px;
@@ -102,8 +104,8 @@
 .pool-check {
     width: 10px;
     position: absolute;
-    right: 25%;
-    padding-top: 5px;
+    right: 15%;
+    padding-top: 10px;
 }
 
 .column_data a{

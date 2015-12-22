@@ -56,10 +56,10 @@
                 { id: 4, name: 'Summary' }
             ],
             poolBackgroundColors: [
-                { id: 0, color: 'Green', colorCode: 'rgb(44, 201, 99)' },
-                { id: 1, color: 'Yellow', colorCode: 'rgb(293, 250, 85)' },
-                { id: 2, color: 'Red', colorCode: 'rgb(240, 88, 88)' },
-                { id: 3, color: 'Orange', colorCode: 'rgb(245,122 , 14)' },
+                { id: 0, color: 'Green', colorCode: '#009688' },
+                { id: 1, color: 'Yellow', colorCode: '#FFEB3B' },
+                { id: 2, color: 'Red', colorCode: '#E91E63' },
+                { id: 3, color: 'Blue', colorCode: '#03A9F4' },
                 { id: 4, color: 'Aquamarine', colorCode: 'rgb(76, 222, 181)' },
                 { id: 5, color: 'Purple', colorCode: 'rgb(181, 60, 181)' },
                 { id: 6, color: 'Blue', colorCode: 'rgb(87, 166, 235)' }
