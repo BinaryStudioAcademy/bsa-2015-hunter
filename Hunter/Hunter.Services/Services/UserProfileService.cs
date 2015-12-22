@@ -185,6 +185,7 @@ namespace Hunter.Services
             {
                 var alias = string.Empty;
                 user.Name.Split(' ').ToList().ForEach(i => alias += i[0]);
+                user.Name = alias;
             }
             else
             {
