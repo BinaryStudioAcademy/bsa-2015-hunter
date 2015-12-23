@@ -125,7 +125,8 @@
         function getFromUrl() {
             uploadPhotoService.validateUrl(vm.externalUrl).then(function(isImage) {
                 if (isImage) {
-                    vm.photoUrl = vm.externalUrl;     
+                    vm.photoUrl = vm.externalUrl;
+                    vm.photoLoaded = true;     
                 } else {
                     vm.externalUrl = '';
                     vm.photoUrl = firstPreviewUrl;
