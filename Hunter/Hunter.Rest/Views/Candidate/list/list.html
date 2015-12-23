@@ -81,8 +81,9 @@
                 </tbody>
             </table>
             <div ng-show="candidateListCtrl.pageConfig.isAddToVacancyButton" class="row form-inline">
-                <select class="col-md-8 form-control" ng-model="candidateListCtrl.vacancyId">
-                    <option ng-repeat="option in candidateListCtrl.vacancyByState" value="{{option.id}}">{{option.name}}</option>
+                <select class="col-md-8 form-control"
+                    ng-model="candidateListCtrl.vacancyId"
+                    ng-options="option.id as option.name for option in candidateListCtrl.vacancyByState">
                 </select>
                 <button class="btn btn-default col-md-offset-1 col-md-3" type="button" ng-click="candidateListCtrl.addCandidateToLongList()">Add to Long List</button>
             </div>

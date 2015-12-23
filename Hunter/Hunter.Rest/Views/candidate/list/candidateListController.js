@@ -195,6 +195,7 @@
                     console.log(result);
                     for (var j = 0; j < result.length; j++) {
                         vm.vacancyByState.push(result[j]);
+                        vm.vacancyId = vm.vacancyByState[0].id;
                     }
                 });
             }
