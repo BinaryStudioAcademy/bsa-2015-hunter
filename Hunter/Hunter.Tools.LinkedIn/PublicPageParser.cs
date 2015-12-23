@@ -160,7 +160,14 @@ namespace Hunter.Tools.LinkedIn
 
             var firstIndex = allDates.FirstOrDefault().IndexOf("–");
             var lastIndex = allDates.FirstOrDefault().IndexOf("(");
-            firstDatesString = firstDatesString.Substring(firstIndex + 1, lastIndex - firstIndex - 1);
+            try
+            {
+                firstDatesString = firstDatesString.Substring(firstIndex + 1, lastIndex - firstIndex - 1);
+            }
+            catch (Exception)
+            {
+                return TimeSpan.Zero;
+            }
             DateTime date1;
             if (firstDatesString.ToLower().Contains("present"))
             {

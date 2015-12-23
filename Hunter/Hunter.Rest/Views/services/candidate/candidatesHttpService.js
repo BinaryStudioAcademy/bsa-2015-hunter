@@ -123,8 +123,9 @@
                     deferred.resolve(result.data);
                 },
                 errorCallback: function (status) {
-                    console.log("Get candidates long list error");
+                    console.log("Get information from LinkedIn");
                     console.log(status);
+                    alertify.error("Getting information from LinkedIn Error");
                 }
             });
             return deferred.promise;
