@@ -38,8 +38,8 @@ namespace Hunter.Rest.Providers
                     {
                         userProfileService.Save(new EditUserProfileVm()
                         {
-                            Login = user.Email,
-                            Alias = user.Name,
+                            Login = user.Email ?? "Unknown",
+                            Alias = user.Name ?? "Unknown",
                             Position = user.Role ?? "Unknown"
                         });
 

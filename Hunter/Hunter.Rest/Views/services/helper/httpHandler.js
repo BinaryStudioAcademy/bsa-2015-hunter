@@ -66,7 +66,7 @@
                 }
 
                 if (httpObject.errorMessageToUser) {
-                    alertify.error(httpObject.errorMessageToUser);
+                    //alertify.error(httpObject.errorMessageToUser);
                 }
 
                 if (httpObject.errorCallback && typeof httpObject.errorCallback === 'function') {
@@ -78,7 +78,7 @@
         function checkUrl(url) {
             if (!url) {
                 console.log('HTTP REQUEST ERROR: URL DOES NOT SPECIFIED');
-                alertify.error('Action Failed');
+                //alertify.error('Action Failed');
                 return false;
             }
 
@@ -88,7 +88,7 @@
         function checkRequestType(type) {
             if (typeof type !== 'string' || !type) {
                 console.log('HTTP REQUEST ERROR: HTTP REQUEST TYPE DOES NOT SPECIFIED');
-                alertify.error('Action Failed');
+                //alertify.error('Action Failed');
                 return false;
             }
             return true;

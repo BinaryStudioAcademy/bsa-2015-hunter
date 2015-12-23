@@ -181,16 +181,16 @@ namespace Hunter.Services
             var json = await response.Content.ReadAsStringAsync();
 
             var user = JsonConvert.DeserializeObject<OAuthUserDto>(json);
-            if (user.Name != null)
-            {
-                var alias = string.Empty;
-                user.Name.Split(' ').ToList().ForEach(i => alias += i[0]);
-                user.Name = alias;
-            }
-            else
-            {
+            //if (user.Name != null)
+            //{
+            //    var alias = string.Empty;
+            //    user.Name.Split(' ').ToList().ForEach(i => alias += i[0]);
+            //    user.Name = alias;
+            //}
+            //else
+            //{
                 user.Name = user.Email.Substring(0, user.Email.IndexOf('@'));
-            }
+            //}
             //user.Name.Split(' ').ToList().ForEach(i => alias += i[0]);
             //user.Name = alias;
 
