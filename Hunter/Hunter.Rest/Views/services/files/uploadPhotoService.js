@@ -45,11 +45,12 @@
         function validatePicture(file) {
             if (file != null) {
                 if (file.size > 500000) {
-                    alert("File size too big");
+                    alertify.alert("Picture error","File size too big");
+                    //alert("File size too big");
                     return false;
                 }
                 if (file.type.split("/")[0] != "image") {
-                    alert("File is not an image");
+                    alertify.alert("Picture error","File is not an image");
                     return false;
                 }
                 return true;

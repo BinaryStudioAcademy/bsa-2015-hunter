@@ -45,7 +45,8 @@
 
                 <img class="edit-page-photo" ng-if="!candidateAddEditCtrl.photoLoaded" ngf-src="candidateAddEditCtrl.picture" />
                 <img class="edit-page-photo" ng-if="candidateAddEditCtrl.photoLoaded" src="{{candidateAddEditCtrl.photoUrl}}" />
-            </div><br />
+            </div>
+            <h5><small>Max size of Photo is 5 MB</small></h5>
             <div class="input-group">
                 <input placeholder="Enter external url" type="text" class="form-control" ng-model="candidateAddEditCtrl.externalUrl" />
                 <span class="input-group-btn">
