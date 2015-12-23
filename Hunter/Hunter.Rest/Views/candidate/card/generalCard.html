@@ -1,4 +1,4 @@
-﻿<div class="card-wrapper container site-content">
+﻿<div class="card-wrapper container site-content" spinner="generalCardCtrl.cardSpinner">
     <div id="card-static">
         <div class="candidate-info">
             <div class="candidate-personal-info row">
@@ -53,7 +53,7 @@
             </div>
         </div>
     </div>
-    <div ng-if="generalCardCtrl.isLLM" class="row col-md-12">
+    <div ng-if="generalCardCtrl.isLLM" class="row col-md-12" spinner="generalCardCtrl.cardSpinner">
         <div class="btn-group btn-group-justified">
             <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[0]}}">{{generalCardCtrl.stages[0].name}}</label>
             <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[1]}}">{{generalCardCtrl.stages[1].name}}</label>
@@ -81,7 +81,7 @@
             <label class="btn btn-default" ng-model="generalCardCtrl.currentStage" btn-radio="{{generalCardCtrl.stages[6]}}">{{generalCardCtrl.stages[6].name}}</label>
         </div><br />
     </div>
-    <div class="row col-md-12">
+    <div class="row col-md-12" spinner="generalCardCtrl.cardSpinner">
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation"
                 ng-class="{active: generalCardCtrl.currentTabName == tab.name}"
