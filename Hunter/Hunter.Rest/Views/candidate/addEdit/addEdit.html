@@ -142,7 +142,7 @@
                            candidate="{poolNames: candidateAddEditCtrl.selectedPools,
                                         poolColors: candidateAddEditCtrl.candidatePoolColors}"></pool-selector>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" ng-show='candidateAddEditCtrl.id == null'>
             <h4>Note</h4><hr />
             <textarea rows="10" class="form-control" ng-model="candidateAddEditCtrl.note" ></textarea>
         </div>
