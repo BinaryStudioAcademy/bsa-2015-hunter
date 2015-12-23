@@ -141,6 +141,10 @@ namespace Hunter.Services
             {
                 Debug.WriteLine("Exception:", ex.Message);
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
             if (editedUserProfile.Id == 0)
             {
                 _activityHelperService.CreateAddedUserProfileActivity(profile);
@@ -181,16 +185,20 @@ namespace Hunter.Services
             var json = await response.Content.ReadAsStringAsync();
 
             var user = JsonConvert.DeserializeObject<OAuthUserDto>(json);
-            //if (user.Name != null)
-            //{
-            //    var alias = string.Empty;
-            //    user.Name.Split(' ').ToList().ForEach(i => alias += i[0]);
-            //    user.Name = alias;
-            //}
-            //else
-            //{
+            if (user.Name != null)
+            {
+                var alias = string.Empty;
+                user.Name.Split(' ').ToList().ForEach(i => alias += i[0]);
+                user.Name = alias;
+            }
+            else
+            {
                 user.Name = user.Email.Substring(0, user.Email.IndexOf('@'));
-            //}
+            }
+            if (user.Name.Length > 15)
+            {
+                user.Name = user.Name.Substring(0, 14);
+            }
             //user.Name.Split(' ').ToList().ForEach(i => alias += i[0]);
             //user.Name = alias;
 
