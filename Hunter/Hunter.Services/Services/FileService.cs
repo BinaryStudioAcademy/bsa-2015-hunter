@@ -96,13 +96,14 @@ namespace Hunter.Services
             catch (Exception ex)
             {
                 _logger.Log(ex);
+                throw ex;
             }
             return -1;
         }
 
         private string FormatFileName(FileDto file)
         {
-            return string.Format("{0}##{1}##{2}", file.CandidateId, file.Added.ToShortDateString(), file.FileName);
+            return string.Format("{0}##{1}.{2}.{3}##{4}", file.CandidateId, file.Added.Day,file.Added.Month,file.Added.Year, file.FileName);
         }
 
         private void SaveFile(Stream file, string fileName)

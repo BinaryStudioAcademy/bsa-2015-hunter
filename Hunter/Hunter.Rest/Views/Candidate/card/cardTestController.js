@@ -43,7 +43,7 @@
         vm.changeCurrentTest = changeCurrentTest;
         vm.loadAllTests = loadAllTests;
         vm.loadVacancyTests = loadVacancyTests;
-
+        vm.showTestFile = showTestFile;
 
         if (vm.vacancyId != undefined) {
             loadVacancyTests();
@@ -328,6 +328,10 @@
                 }
             });
         };
+
+        function showTestFile(id) {
+            window.open("api/file/open/"+id);
+        }
 
     }
 })();

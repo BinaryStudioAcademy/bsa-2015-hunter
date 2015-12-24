@@ -32,7 +32,7 @@
                     <div class="col-md-1">
                         <label>Task</label></div>
                     <div class="col-md-3">
-						<a href="./api/file/download/{{test.file.id}}">{{test.file.fileName}}</a>
+						<input class="btn-link" type="button" value="{{test.file.fileName}}" ng-click="testCtrl.showTestFile(test.file.id)">
                     </div>
                     <div class="col-md-3">
                         Uploaded: {{test.file.added | date:'dd.MM.yyyy HH.mm'}}
@@ -54,7 +54,7 @@
                     <div class="col-md-1">
                         <label>Task</label></div>
                     <div class="col-md-3">
-                        <a href="{{test.url}}">{{test.url}}</a>
+                        <a href="{{test.url}}" target="_blank">{{test.url}}</a>
                     </div>
                     <div class="col-md-3">
                         Added {{test.added | localDate | date:'dd.MM.yyyy HH.mm'}}
