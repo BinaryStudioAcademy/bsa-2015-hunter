@@ -33,10 +33,10 @@
                 noErrors = false;
             }
 
-            if (!data.DateOfBirth) {            
-                    errorObject.message += ' Date of birth; ';
-                    noErrors = false;
-            }
+            //if (!data.DateOfBirth) {            
+            //        errorObject.message += ' Date of birth; ';
+              //      noErrors = false;
+            //}
 
             if (!isNumeric(data.YearsOfExperience) && data.YearsOfExperience != undefined && data.YearsOfExperience != "") {            
                     errorObject.message += ' Years Of Experience; ';
