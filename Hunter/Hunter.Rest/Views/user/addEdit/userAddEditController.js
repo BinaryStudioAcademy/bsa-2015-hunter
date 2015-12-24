@@ -9,10 +9,11 @@
         "$location",
         "AuthService",
         "UserProfileService",
-        "$routeParams"
+        "$routeParams",
+        'localStorageService'
     ];
 
-    function userAddEditController($location, authService, service, $routeParams) {
+    function userAddEditController($location, authService, service, $routeParams, localStorageService) {
         var vm = this;
         vm.editingMode = (typeof $routeParams.id == 'string');
         vm.entityId = 0;
@@ -35,12 +36,13 @@
                     vm.entity = response.data;
                     vm.entityId = response.data.id;
                 }
+                $location.url(localStorageService.get('oldUrl'));
             });
         }
 
         vm.delete = function () {
             service.deleteUserProfile(vm.entityId, function (response) {
-                $location.path("/user");
+                $location.url(localStorageService.get('oldUrl'));
             });
         }
 
