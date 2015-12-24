@@ -14,7 +14,7 @@
     function UploadResumeService(upload, enumConstants) {
         var service = {
             onFileSelect: onFileSelect,
-            uploadResume: uploadResume,
+            uploadResume: uploadResume
             //uploadWithLatenc: uploadWithLatenc
         };
 
@@ -22,6 +22,9 @@
 
         function onFileSelect($files) {
             _files = $files;
+            if (_files[0] != null) {
+                alertify.success('Resume File is selected');
+            }
         }
 
         function uploadResume(candidate) {
