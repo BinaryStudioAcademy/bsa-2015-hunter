@@ -16,11 +16,12 @@
         'UploadPhotoService',
         'FileHttpService',
         'SpecialNoteHttpService',
-        'EnumConstants'
+        'EnumConstants',
+        'localStorageService'
     ];
 
     function CandidateAddEditController($location, $routeParams, authService,
-        candidateHttpService, candidateAddEditService, poolsHttpService, uploadResumeService, uploadPhotoService, fileHttpService, specialNoteHttpService, enumConstants) {
+        candidateHttpService, candidateAddEditService, poolsHttpService, uploadResumeService, uploadPhotoService, fileHttpService, specialNoteHttpService, enumConstants, localStorageService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         //vm.categories = [{ name: 'Select Candidate Category' }]; // .NET, JS, PHP
@@ -252,7 +253,7 @@
                 specialNoteHttpService.addSpecialNote(note);
             }
             
-            $location.url('/candidate/list');
+            $location.url(localStorageService.get('oldUrl'));
         }
     }
 })();

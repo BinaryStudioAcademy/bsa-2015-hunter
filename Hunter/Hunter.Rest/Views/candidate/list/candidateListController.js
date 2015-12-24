@@ -195,6 +195,8 @@
                     console.log(result);
                     for (var j = 0; j < result.length; j++) {
                         vm.vacancyByState.push(result[j]);
+                    }
+                    if (!$routeParams.addToVacancy){
                         vm.vacancyId = vm.vacancyByState[0].id;
                     }
                 });

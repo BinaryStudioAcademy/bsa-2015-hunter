@@ -51,7 +51,7 @@
                 } else {
                     vacancyHttpService.updateVacancy(vm.currentVacancy, vm.currentVacancy.id);
                 }
-                $location.url('/vacancy/list');
+                $location.url(localStorageService.get('oldUrl'));
             }
         };
 

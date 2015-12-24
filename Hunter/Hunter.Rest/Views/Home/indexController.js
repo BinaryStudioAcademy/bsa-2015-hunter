@@ -13,10 +13,11 @@
         'UserHttpService',
         '$location',
         '$rootScope',
-        '$cookies'
+        '$cookies',
+        'localStorageService'
     ];
 
-    function IndexController($scope, indexHttpService, $interval, notificationHttpService, UserHttpService, $location, $rootScope, $cookies) {
+    function IndexController($scope, indexHttpService, $interval, notificationHttpService, UserHttpService, $location, $rootScope, $cookies, localStorageService) {
         var vm = this;
         vm.name = "Index";
         vm.amount = 0;
@@ -86,5 +87,16 @@
                 $location.url('./');
             });
         }
+
+
+        localStorageService.set('oldUrl', $location.url());
+        $rootScope.$on('$locationChangeStart', function () {
+            
+            if (localStorageService.get('oldUrl') != $location.url()) {
+                localStorageService.set('oldUrl', localStorageService.get('newUrl'));
+                localStorageService.set('newUrl',$location.url());
+            };
+        });        
+
     }
 })();
