@@ -9,7 +9,10 @@
 
             <div class="form-group">
                 <label>Search</label>
-                <input type="search" class="form-control" ng-model="candidateListCtrl.filter.search" ng-change="candidateListCtrl.updateCandidate()">
+                <input type="search" class="form-control"
+                ng-model="candidateListCtrl.filter.search"
+                ng-model-options="{updateOn: 'change'}"
+                ng-change="candidateListCtrl.updateCandidate()">
             </div>
 
             <div class="filter-settings">

@@ -19,7 +19,10 @@
         <div class="col-md-2 filte-form-wrapper">
             <div class="form-group">
                 <label>Search</label>
-                <input type="search" class="form-control" ng-model="longListCtrl.filter.search" ng-change="longListCtrl.updateUrl()">
+                <input type="search" class="form-control"
+                ng-model="longListCtrl.filter.search"
+                ng-model-options="{updateOn: 'change'}"
+                ng-change="longListCtrl.updateUrl()">
             </div>
             <div class="filter-settings">
                 <ul>
