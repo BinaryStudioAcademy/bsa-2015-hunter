@@ -67,7 +67,9 @@
                                                candidate="vacancy"></pool-selector>
                             </td>
                             <td>{{vacancy.startDate == null ? 'no date' : vacancy.startDate | date:'dd.MM.yyyy'}}</td>
-                            <td><a href="./user/edit/{{vacancy.addedById}}">{{vacancy.addedByName}}</a></td>
+                            <td><a>{{vacancy.addedByName}}</a></td>
+                            <!--<td><a href="./user/edit/{{vacancy.addedById}}">{{vacancy.addedByName}}</a></td>-->
+
                         </tr>
                     </tbody>
                 </table>
