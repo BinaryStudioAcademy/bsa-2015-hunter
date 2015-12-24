@@ -90,12 +90,16 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4" ng-form name="contactsForm">
             <h4>Contacts</h4><hr />
             <div>
                 <label>Phone </label>
-                <input type="text" class="form-control" placeholder="095 123 45 67"
-                ng-model="candidateAddEditCtrl.Phone"/>
+                <input name="phone" type="text" class="form-control" ng-pattern="/^\d{3} \d{3} \d{2} \d{2}$/" placeholder="095 123 45 67"
+                       ng-model="candidateAddEditCtrl.Phone"/>
+                <span ng-show="!contactsForm.phone.$valid && contactsForm.phone.$touched"> Phone Number formmat is incorrect</span>
+                <!--{{contactsForm.phone.$valid}}-->
+                <!--{{contactsForm.phone.$touched}}
+                {{contactsForm.phone.$dirty}}-->
             </div>
             <div>
                 <label>Email</label>
