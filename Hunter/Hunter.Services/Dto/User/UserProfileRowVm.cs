@@ -19,14 +19,18 @@ namespace Hunter.Services.Dto.User
 
         public string Added { get; set; }
 
+        public int RoleId { get; set; }
+
         public static UserProfileRowVm Create(UserProfile user)
         {
+
             return new UserProfileRowVm
             {
                 Id = user.Id,
                 Login = user.UserLogin,
                 Alias = user.Alias,
-                Position = user.Position
+                Position = user.Position,
+                RoleId = user.RoleId
             };
         }
     }

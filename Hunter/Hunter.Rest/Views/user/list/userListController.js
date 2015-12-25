@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
     'use strict';
 
     angular
@@ -10,10 +10,11 @@
         '$location',
         '$routeParams',
         'AuthService',
-        'UserProfileService' //change on your service
+        'UserProfileService', //change on your service
+        'UserRoleHttpService'
     ];
 
-    function userListController($scope, $location, $routeParams, authService, service) {
+    function userListController($scope, $location, $routeParams, authService, service, userRoleHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         vm.controllerName = 'This is users page';
@@ -27,7 +28,7 @@
         //        $location.url('/login');
         //    }
         //})();
-       
+       vm.rolesList = [];
 
         // Here we should write any functions we need, for example, body of user actions methods.
         var updatePage = function (newPageNum) {
@@ -57,5 +58,9 @@
         }
 
         updatePage($routeParams.page);
+
+        userRoleHttpService.getUserRoles().then(function (result) {
+                vm.rolesList = result.data;
+            });
     }
 })();

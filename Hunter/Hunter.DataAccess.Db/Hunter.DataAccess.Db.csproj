@@ -73,6 +73,7 @@
     <Compile Include="Repositories\InterviewRepository.cs" />
     <Compile Include="Repositories\PoolRepository.cs" />
     <Compile Include="Repositories\ResumeRepository.cs" />
+    <Compile Include="Repositories\RoleMappingRepository.cs" />
     <Compile Include="Repositories\ScheduledNotificationRepository.cs" />
     <Compile Include="Repositories\SpecialNoteRepository.cs" />
     <Compile Include="Repositories\TestRepository.cs" />

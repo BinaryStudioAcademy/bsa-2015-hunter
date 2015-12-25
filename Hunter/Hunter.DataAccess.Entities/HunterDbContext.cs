@@ -1,3 +1,5 @@
+using Hunter.DataAccess.Entities.Entites;
+
 namespace Hunter.DataAccess.Entities
 {
     using System.Data.Entity;
@@ -30,6 +32,7 @@ namespace Hunter.DataAccess.Entities
         //public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Vacancy> Vacancy { get; set; }
         public virtual DbSet<File> File { get; set; }
+        public virtual DbSet<RoleMapping> RoleMapping { get; set; }
         public virtual DbSet<ScheduledNotification> ScheduledNotification { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -124,6 +127,18 @@ namespace Hunter.DataAccess.Entities
             modelBuilder.Entity<Vacancy>()
                 .HasMany(e => e.SpecialNote)
                 .WithOptional(e => e.Vacancy)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<UserRole>()
+                .HasMany(e => e.UserProfile)
+                .WithRequired(e => e.UserRole)
+                .HasForeignKey(e => e.RoleId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<UserRole>()
+                .HasMany(e => e.RoleMapping)
+                .WithRequired(e => e.UserRole)
+                .HasForeignKey(e => e.RoleId)
                 .WillCascadeOnDelete(false);
 
         }

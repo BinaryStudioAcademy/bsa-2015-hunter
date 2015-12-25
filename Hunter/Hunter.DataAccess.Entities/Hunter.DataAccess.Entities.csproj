@@ -64,6 +64,7 @@
     <Compile Include="Entites\Enums\Origin.cs" />
     <Compile Include="Entites\Enums\PoolBackground.cs" />
     <Compile Include="Entites\Enums\Resolution.cs" />
+    <Compile Include="Entites\Enums\Roles.cs" />
     <Compile Include="Entites\Enums\Stage.cs" />
     <Compile Include="Entites\Enums\Status.cs" />
     <Compile Include="Entites\Enums\SuccessStatus.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Entites\Interview.cs" />
     <Compile Include="Entites\Pool.cs" />
     <Compile Include="Entites\Resume.cs" />
+    <Compile Include="Entites\RoleMapping.cs" />
     <Compile Include="Entites\ScheduledNotification.cs" />
     <Compile Include="Entites\SpecialNote.cs" />
     <Compile Include="Entites\Test.cs" />
@@ -214,6 +216,10 @@
     <Compile Include="Migrations\201512181221356_drop-User-table.Designer.cs">
       <DependentUpon>201512181221356_drop-User-table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512250959541_addRoleMappingTable.cs" />
+    <Compile Include="Migrations\201512250959541_addRoleMappingTable.Designer.cs">
+      <DependentUpon>201512250959541_addRoleMappingTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -316,6 +322,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512181221356_drop-User-table.resx">
       <DependentUpon>201512181221356_drop-User-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512250959541_addRoleMappingTable.resx">
+      <DependentUpon>201512250959541_addRoleMappingTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿<div class="container site-content">
+<div class="container site-content">
     <div class="row">
         <div class="col-md-6">
             <h3>User Profiles</h3>
@@ -9,6 +9,7 @@
                         <th>Login/E-mail</th>
                         <th>Alias</th>
                         <th>Position</th>
+                        <th>Role</th>
                     </tr>
                 </thead>
                 <tbody data-link="row" class="rowlink">
@@ -17,6 +18,12 @@
                         <!--<td><a href="./user/edit/{{row.id}}">{{row.login}}</a></td>-->
                         <td>{{row.alias}}</td>
                         <td>{{row.position}}</td>
+                        <td>
+                            <select class="form-control"
+                                ng-model="row.roleId"
+                                ng-options="option.id as option.name for option in userListCtrl.rolesList">
+                            </select>
+                        </td>
                     </tr>
                 </tbody>
             </table>

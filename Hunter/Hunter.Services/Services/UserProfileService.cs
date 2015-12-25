@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
 using System.Linq;
@@ -8,6 +9,8 @@ using System.Threading.Tasks;
 using System.Web;
 using Hunter.Common.Concrete;
 using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Entities.Entites;
+using Hunter.DataAccess.Entities.Entites.Enums;
 using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Interface.Base;
 using Hunter.Services.Dto.ApiResults;
@@ -17,40 +20,40 @@ using Newtonsoft.Json;
 
 namespace Hunter.Services
 {
-    public class AccountService
-    {
-        public AccountService(
-            //IUnitOfWork unitOfWork,
-            IUserRoleRepository roleRepository)
-        {
-            //_unitOfWork = unitOfWork;
-            _roleRepository = roleRepository;
-        }
+    //public class AccountService
+    //{
+    //    public AccountService(
+    //        //IUnitOfWork unitOfWork,
+    //        IUserRoleRepository roleRepository)
+    //    {
+    //        //_unitOfWork = unitOfWork;
+    //        _roleRepository = roleRepository;
+    //    }
 
-        private readonly IUserRoleRepository _roleRepository;
-        private readonly IUserProfileRepository _profileRepo;
+    //    private readonly IUserRoleRepository _roleRepository;
+    //    private readonly IUserProfileRepository _profileRepo;
 
-        //todo new fix figure out
+    //    //todo new fix figure out
 
-        public IEnumerable<UserProfileRowVm> GetUserProfiles(string roleName)
-        {
-            //var users = _roleRepository
-            //    .Query().FirstOrDefault(e => e.Name == roleName)
-            //    .Users
-            //    .Select(u => u.Login);
+    //    public IEnumerable<UserProfileRowVm> GetUserProfiles(string roleName)
+    //    {
+    //        //var users = _roleRepository
+    //        //    .Query().FirstOrDefault(e => e.Name == roleName)
+    //        //    .Users
+    //        //    .Select(u => u.Login);
 
-            //var profiles = _profileRepo.Query()
-            //                     .Where(pr => users.Contains(pr.UserLogin))
-            //                     .Select(UserProfileRowVm.Create);
-            //return profiles;
-            return null;
-        }
+    //        //var profiles = _profileRepo.Query()
+    //        //                     .Where(pr => users.Contains(pr.UserLogin))
+    //        //                     .Select(UserProfileRowVm.Create);
+    //        //return profiles;
+    //        return null;
+    //    }
 
-        public bool UserExist(string userName)
-        {
-            return _profileRepo.Query().Any(p => p.UserLogin.ToLower() == userName.ToLower());
-        }
-    }
+    //    public bool UserExist(string userName)
+    //    {
+    //        return _profileRepo.Query().Any(p => p.UserLogin.ToLower() == userName.ToLower());
+    //    }
+    //}
 
     public class UserProfileService : IUserProfileService
     {
@@ -59,17 +62,19 @@ namespace Hunter.Services
         private readonly IUserProfileRepository _profileRepo;
         private readonly IUserRoleRepository _roleRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IRoleMappingRepository _roleMappingRepository;
 
         public UserProfileService(
             IActivityHelperService activityHelperService,
             IUserProfileRepository profileRepo,
             IUnitOfWork unitOfWork,
-            IUserRoleRepository roleRepository)
+            IUserRoleRepository roleRepository, IRoleMappingRepository roleMappingRepository)
         {
             _activityHelperService = activityHelperService;
             _profileRepo = profileRepo;
             _unitOfWork = unitOfWork;
             _roleRepository = roleRepository;
+            _roleMappingRepository = roleMappingRepository;
         }
 
         //todo new figure out
@@ -134,6 +139,20 @@ namespace Hunter.Services
             if (same != null && same.Id != profile.Id)
                 return Api.Conflict(string.Format("Profile with alias {0} already exists", editedUserProfile.Alias));
 
+            try
+            {
+                editedUserProfile.RoleId = _roleMappingRepository.Get(x => x.Position == editedUserProfile.Position).Id;
+            }
+            catch (Exception ex)
+            {
+                var role = _roleRepository.Get(x => x.Name == Roles.TechnicalSpecialist.ToString());
+                _roleMappingRepository.UpdateAndCommit(new RoleMapping()
+                {
+                    Position = editedUserProfile.Position,
+                    RoleId = role.Id
+                });
+                editedUserProfile.RoleId = role.Id;
+            }
             editedUserProfile.Map(profile, _unitOfWork);
             if (profile.IsNew())
             {
@@ -205,6 +224,11 @@ namespace Hunter.Services
             {
                 user.Name = user.Name.Substring(0, 14);
             }
+
+
+            
+
+
             //user.Name.Split(' ').ToList().ForEach(i => alias += i[0]);
             //user.Name = alias;
 

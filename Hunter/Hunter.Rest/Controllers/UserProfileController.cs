@@ -9,10 +9,12 @@ using Hunter.Services.Dto.User;
 using Hunter.Services.Interfaces;
 using System.Net.Http;
 using System.Web.Http.Description;
+using Hunter.Rest.Providers;
 
 namespace Hunter.Rest.Controllers
 {
     [RoutePrefix("api/userprofile")]
+    [ExternalAuthorize]
     public class UserProfileController : ApiController
     {
         private readonly IUserProfileService _profileService;

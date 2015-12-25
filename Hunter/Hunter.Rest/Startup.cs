@@ -65,6 +65,7 @@ namespace Hunter.Rest
             kernel.Bind<ITestRepository>().To<TestRepository>();
             kernel.Bind<IUserProfileRepository>().To<UserProfileRepository>();
             //kernel.Bind<IUserRepository>().To<UserRepository>();
+            kernel.Bind<IRoleMappingRepository>().To<RoleMappingRepository>();
             kernel.Bind<IUserRoleRepository>().To<UserRoleRepository>();
             kernel.Bind<IVacancyRepository>().To<VacancyRepository>();
             kernel.Bind<IFileRepository>().To<FileRepository>();

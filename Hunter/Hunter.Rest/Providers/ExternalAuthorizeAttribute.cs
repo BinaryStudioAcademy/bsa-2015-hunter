@@ -40,7 +40,7 @@ namespace Hunter.Rest.Providers
                         {
                             Login = user.Email ?? "Unknown",
                             Alias = user.Name ?? "Unknown",
-                            Position = user.Role ?? "Unknown"
+                            Position = user.Role ?? "Unknown" 
                         });
 
                     }

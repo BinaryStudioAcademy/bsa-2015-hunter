@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hunter.DataAccess.Entities.Entites;
 using Hunter.DataAccess.Entities.Entites.Enums;
 using Hunter.DataAccess.Entities.Enums;
 
@@ -11,7 +12,7 @@ namespace Hunter.DataAccess.Entities
     //DropCreateDatabaseIfModelChanges<HunterDbContext>
     {
         private static UserRole _recruiterRole = new UserRole() { Name = "Recruiter" };
-        private static UserRole _technicalRole = new UserRole() { Name = "Technical Specialist" };
+        private static UserRole _technicalRole = new UserRole() { Name = "TechnicalSpecialist" };
         private static UserRole _adminRole = new UserRole() { Name = "Admin" };
 
         private static Pool _jsPool = new Pool { Name = "JavaScript", Color = "#009688" };
@@ -31,6 +32,20 @@ namespace Hunter.DataAccess.Entities
 
             var userRoles = new List<UserRole> { _recruiterRole, _technicalRole, _adminRole };
             userRoles.ForEach(userRole => context.UserRole.Add(userRole));
+            context.SaveChanges();
+            #endregion
+
+            #region ROLE MAPPING
+
+            var rolemaping1 =  new RoleMapping() {Position = "ADMIN", UserRole = _adminRole};
+            var rolemaping2 = new RoleMapping() { Position = "DEVELOPER", UserRole = _technicalRole };
+            var rolemaping3 = new RoleMapping() { Position = "HR", UserRole = _recruiterRole };
+            var rolemaping4 = new RoleMapping() { Position = "CEO", UserRole = _adminRole };
+            var rolemaping5 = new RoleMapping() { Position = "Tech Lead", UserRole = _technicalRole };
+
+            var rolemapings = new List<RoleMapping> { rolemaping1, rolemaping2, rolemaping3, rolemaping4, rolemaping5 };
+
+            rolemapings.ForEach(x => context.RoleMapping.Add(x));
             context.SaveChanges();
             #endregion
 

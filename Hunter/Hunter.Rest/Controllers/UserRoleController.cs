@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using Hunter.Rest.Providers;
 using Hunter.Services;
 using Hunter.Services.Dto;
 
 namespace Hunter.Rest.Controllers
 {
+    [RoutePrefix("api/userRole")]
+    [ExternalAuthorize]
     public class UserRoleController : ApiController
     {
         private readonly IUserRoleService _userRoleService;
@@ -16,6 +19,7 @@ namespace Hunter.Rest.Controllers
 
         // GET: api/Role
         [HttpGet]
+        [Route("")]
         public IEnumerable<UserRoleDto> Get()
         {
             return _userRoleService.GetAllUserRoles();

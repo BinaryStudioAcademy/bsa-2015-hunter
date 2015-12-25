@@ -21,7 +21,7 @@
                 url: './api/userRole',
                 verb: 'get',
                 successCallback: function (result) {
-                    deferred.resolve(result.data);
+                    deferred.resolve(result);
                 },
                 errorCallback: function (status) {
                     console.log("error");
