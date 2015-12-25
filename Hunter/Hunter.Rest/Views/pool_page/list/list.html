@@ -1,0 +1,21 @@
+﻿<div class="container page-width" ng-controller="PoolPageListController as poolCtrl">
+    <div class="pool_page_container">
+        <div class="pool_title">
+            <div></div>
+            <h3>Pools</h3>
+        </div>
+        <div class="pool_list">
+            <div><input ng-model="searchPool" class="form-control" ng-model="poolAddEditCtrl.pool.name" title="Pool name" type="text" placeholder="Search..." /></div>
+            <ul class="column_data">
+                <li ng-repeat="pool in poolCtrl.poolsList | filter:searchPool" style="cursor: pointer; margin-bottom: 10px;">
+                    <div class="pool-type" style="background-color: {{pool.color}}">
+                            <p>{{pool.name}}</p>
+                        
+                    </div>
+                    <a class="edit-link-search" href="./pool/edit/{{pool.id}}"  title="Edit"></a>
+                </li>
+            </ul>
+            <a class="pool_btn btn add-pool-btn-search" href="./pool/edit/" >Create New Pool</a>
+        </div>
+    </div>
+</div>

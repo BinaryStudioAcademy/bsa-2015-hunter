@@ -8,7 +8,7 @@
             <label>Start Date</label>
             <input type="date" ng-model="vacancyAddEditCtrl.currentVacancy.startDate" class="form-control" />
             <label>End Date</label>
-            <input type="date" ng-model="vacancyAddEditCtrl.currentVacancy.endDate" class="form-control" />
+            <input type="date" min="{{vacancyAddEditCtrl.currentVacancy.startDate | date: 'yyyy-MM-dd'}}" ng-model="vacancyAddEditCtrl.currentVacancy.endDate" class="form-control" />
         </div>
         <div class="col-md-6">
             <h4>Description</h4><hr />

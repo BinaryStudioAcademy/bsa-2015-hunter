@@ -99,15 +99,22 @@ angular.module('hunter-app',
             //                });
             $routeProvider
                 .when('/pool', {
-                    templateUrl: viewPath + 'pool/poolGeneral.html',
-                    controller: 'PoolGeneralController',
-                    controllerAs: 'generalCtrl'
+                    templateUrl: viewPath + 'pool_page/list/list.html',
+                    controller: 'PoolPageListController',
+                    controllerAs: 'poolCtrl'
                 });
 
             $routeProvider
                 .when("/pool/edit/:id", {
-                    templateUrl: viewPath + "pool/addEdit/addEdit.html",
-                    controller: "PoolAddEditController",
+                    templateUrl: viewPath + "pool_page/addEdit/addEdit.html",
+                    controller: "PoolPageAddEditController",
+                    controllerAs: "poolAddEditCtrl"
+                });
+
+            $routeProvider
+                .when("/pool/edit/", {
+                    templateUrl: viewPath + "pool_page/addEdit/addEdit.html",
+                    controller: "PoolPageAddEditController",
                     controllerAs: "poolAddEditCtrl"
                 });
             $routeProvider

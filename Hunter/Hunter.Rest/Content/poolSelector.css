@@ -1,7 +1,13 @@
 ﻿.pool-label {
-    width: auto; 
+    color: white;
+    font-weight: 600;
+    height: 30px;
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     float: left;
-    margin-left: 3px;
+    margin-left: 5px;
     padding: 0 5px;
     border-radius: 5px;
 }
@@ -15,6 +21,7 @@
 }
 
 .pool-label-container {
+    padding-left: 15px;
     float: left; 
     width: auto; 
     display: inline-block;
@@ -28,10 +35,15 @@
 }
 
 .pool-selector-btn {
-    height: 20px;
+    height: 30px;
+    /*margin-left: 10px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center*/
 }
 
-.pool-selector-btn-icon {
+/*.pool-selector-btn-icon {
     position: relative;
     bottom: 6px;
-}
+}*/

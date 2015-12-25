@@ -33,9 +33,10 @@
         vm.totalCount = 0;
         vm.pools = [];
         poolsHttpService.getAllPools().then(function (data) {
-            vm.pools = data;
+            vm.pools = data.data;
         });
 
+        vm.pageSize = [25, 50, 75, 100]
         vm.statuses = enumConstants.vacancyStates;
 
         vm.sortBy = [

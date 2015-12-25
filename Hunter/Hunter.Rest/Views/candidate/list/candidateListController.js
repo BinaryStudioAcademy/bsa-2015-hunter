@@ -26,6 +26,7 @@
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         vm.name = 'Candidates';
+        vm.showDetails = false;
 
         $rootScope.candidateDetails = {
             id: null,
@@ -33,6 +34,7 @@
         };
         //vm.tableSize = 'col-md-9';
         vm.sortOptions = [];
+        vm.pageSize = [25, 50, 75, 100]
         vm.totalItems = 0;
         vm.inviters = [];
         vm.pools = [];
@@ -82,14 +84,19 @@
         vm.ShowDetails = function (item) {
             if ($rootScope.candidateDetails.id != item.id) {
                 $rootScope.candidateDetails.id = item.id;
-                $rootScope.candidateDetails.show = true;
+                //$rootScope.candidateDetails.show = true;
+                $scope.candidateListCtrl.showDetails = true;
+                $('.container-partial-in-pool').show();
                 $rootScope.candidateDetails.shortListed = item.shortListed;
                 //vm.tableSize = 'col-md-5';
             } else if ($rootScope.candidateDetails.id === item.id && $rootScope.candidateDetails.show === true) {
-                $rootScope.candidateDetails.show = false;
+                //$rootScope.candidateDetails.show = false;
+                $scope.candidateListCtrl.showDetails = false;
                 //vm.tableSize = 'col-md-9';
             } else {
-                $rootScope.candidateDetails.show = true;
+                //$rootScope.candidateDetails.show = true;
+                $scope.candidateListCtrl.showDetails = true;
+                $('.container-partial-in-pool').show();
                 //vm.tableSize = 'col-md-5';
             }
         }
@@ -145,8 +152,8 @@
                 { text: 'Name \u25B2', options: 'FirstName_desc'  },
                 { text: 'Added \u25BC', options:  'AddDate_asc'  },
                 { text: 'Added \u25B2', options:  'AddDate_desc' },
-                { text: 'Status \u25BC', options:  'Resolution_asc' },
-                { text: 'Status \u25B2', options:  'Resolution_desc' },
+                { text: 'Resolution \u25BC', options:  'Resolution_asc' },
+                { text: 'Resolution \u25B2', options:  'Resolution_desc' },
                 { text: 'Email \u25BC', options:  'Email_asc' },
                 { text: 'Email \u25B2', options:  'Email_desc' },
                 { text: 'Years Of Experience \u25BC', options:  'YearsOfExperience_asc' },
@@ -175,7 +182,7 @@
             }
 
             PoolsHttpService.getAllPools().then(function (result) {
-                vm.pools = result;
+                vm.pools = result.data;
             });
 
             CandidateHttpService.getAddedByList().then(function (result) {
@@ -188,6 +195,9 @@
                     console.log(result);
                     for (var j = 0; j < result.length; j++) {
                         vm.vacancyByState.push(result[j]);
+                    }
+                    if (!$routeParams.addToVacancy){
+                        vm.vacancyId = vm.vacancyByState[0].id;
                     }
                 });
             }

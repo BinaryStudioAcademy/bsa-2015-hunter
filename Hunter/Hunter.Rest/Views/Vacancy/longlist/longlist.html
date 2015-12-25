@@ -16,10 +16,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3 filte-form-wrapper">
+        <div class="col-md-2 filte-form-wrapper">
             <div class="form-group">
                 <label>Search</label>
-                <input type="search" class="form-control" ng-model="longListCtrl.filter.search" ng-change="longListCtrl.updateUrl()">
+                <input type="search" class="form-control"
+                ng-model="longListCtrl.filter.search"
+                ng-model-options="{updateOn: 'change'}"
+                ng-change="longListCtrl.updateUrl()">
             </div>
             <div class="filter-settings">
                 <ul>
@@ -75,11 +78,8 @@
             <div>
                 <div class="pagination page-count-wrapper form-inline">
                     <span>Items on page:</span>
-                    <select class="form-control" ng-init="longListCtrl.pageSize=25" ng-model="longListCtrl.filter.pageSize" ng-change="longListCtrl.updateUrl()">
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="75">75</option>
-                        <option value="100">100</option>
+                    <select class="form-control" ng-model="longListCtrl.filter.pageSize" ng-change="longListCtrl.updateUrl()"
+                    ng-options="item as item for item in longListCtrl.pageSize">
                     </select>
                 </div>
                 <pagination total-items="longListCtrl.totalItems"

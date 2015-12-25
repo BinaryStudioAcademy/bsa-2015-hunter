@@ -5,18 +5,18 @@
         </div>
     </div>
     <div class="row">
-        <div class="filte-form-wrapper col-md-3">
+        <div class="filte-form-wrapper col-md-2">
 
             <div class="form-group">
                 <label>Search</label>
-                <input type="search" class="form-control" ng-model="candidateListCtrl.filter.search" ng-change="candidateListCtrl.updateCandidate()">
+                <input type="search" class="form-control"
+                ng-model="candidateListCtrl.filter.search"
+                ng-model-options="{updateOn: 'change'}"
+                ng-change="candidateListCtrl.updateCandidate()">
             </div>
 
             <div class="filter-settings">
                 <ul>
-                    <li>
-                        <input ng-click="candidateListCtrl.updateCandidate()" type="checkbox" ng-model="candidateListCtrl.filter.shortListed"> <label>Shortlisted</label>
-                    </li>
                     <li>
                         <label>Pool</label>
                         <ul>
@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <div class="col-md-9" spinner="candidateListCtrl.tableSpinner">
+        <div class="col-md-10" spinner="candidateListCtrl.tableSpinner">
             <div class="form-group col-md-4">
                 <select class="form-control"
                         ng-options="item.options as item.text for item in candidateListCtrl.sortOptions"
@@ -71,7 +71,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in candidateListCtrl.candidateList" ng-click="candidateListCtrl.ShowDetails(item)" ng-class="candidateListCtrl.ActiveTr(item.id)">
+                    <tr class="candidate" ng-repeat="item in candidateListCtrl.candidateList" ng-click="candidateListCtrl.ShowDetails(item)" ng-class="candidateListCtrl.ActiveTr(item.id)">
                         <td><input type="checkbox" checklist-model="candidateListCtrl.selectedCandidates" checklist-value="item.id" ng-click="$event.stopPropagation();"></td>
                         <td><a href="./candidate/{{item.id}}">{{item.firstName + " " + item.lastName}}</a></td>
                         <td>{{item.addDate | localDate | date:'dd.MM.yyyy'}}</td>
@@ -84,8 +84,9 @@
                 </tbody>
             </table>
             <div ng-show="candidateListCtrl.pageConfig.isAddToVacancyButton" class="row form-inline">
-                <select class="col-md-8 form-control" ng-model="candidateListCtrl.vacancyId">
-                    <option ng-repeat="option in candidateListCtrl.vacancyByState" value="{{option.id}}">{{option.name}}</option>
+                <select class="col-md-8 form-control"
+                    ng-model="candidateListCtrl.vacancyId"
+                    ng-options="option.id as option.name for option in candidateListCtrl.vacancyByState">
                 </select>
                 <button class="btn btn-default col-md-offset-1 col-md-3" type="button" ng-click="candidateListCtrl.addCandidateToLongList()">Add to Long List</button>
             </div>
@@ -97,8 +98,9 @@
                     <span>Items on page</span>
                     <select class="form-control"
                             ng-model="candidateListCtrl.filter.pageSize"
-                            ng-change="candidateListCtrl.updateCandidate()">
-                        <option ng-repeat="i in [25,50,75,100]">{{i}}</option>
+                            ng-change="candidateListCtrl.updateCandidate()"
+                            ng-options="item as item for item in candidateListCtrl.pageSize">
+                        <!--<option ng-repeat="i in [25,50,75,100]">{{i}}</option>-->
                     </select>
                 </div>
                 <pagination total-items="candidateListCtrl.totalItems"
@@ -112,7 +114,8 @@
 
             </div>
         </div>
-        <div class="col-md-4 partial-candidate-details" ng-show="$root.candidateDetails.show" ng-include="'./Views/candidate/profilePartial/profilePartial.html'"></div>
+        <!--<div class="col-md-4 partial-candidate-details" ng-show="$root.candidateDetails.show" ng-include="'./Views/candidate/profilePartial/profilePartial.html'"></div>-->
+        <div class="col-md-4 partial-candidate-details" ng-show="candidateListCtrl.showDetails" ng-include="'./Views/candidate/profilePartial/profilePartial.html'"></div>
     </div>
 </div>
 

@@ -111,9 +111,19 @@ namespace Hunter.Rest.Controllers
         // POST api/<controller>
         [HttpPost]
         [Route("")]
-        public int Post(FileDto data)
+        public HttpResponseMessage Post(FileDto data)
         {
-            return _fileService.Add(data);
+
+            try
+            {
+                var id = _fileService.Add(data);
+                return Request.CreateResponse(HttpStatusCode.OK, id);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.Conflict, ex.Message);
+            }
+            
         }
     }
 }

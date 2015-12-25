@@ -1,15 +1,17 @@
 ﻿<div class="container site-content">
     <h3>Add / Edit candidate : {{candidateAddEditCtrl.nameInTitle}}</h3>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4" ng-form name="generalForm">
             <h4>General</h4><hr />
             <div>
                 <label>First Name</label>
-                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.FirstName" />
+                <input type="text" class="form-control" name="name" ng-model="candidateAddEditCtrl.FirstName" required />
+                <span class="text-danger" ng-show="generalForm.name.$error.required"> First Name is required </span>
             </div>
             <div>
                 <label>Last Name</label>
-                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.LastName" />
+                <input type="text" class="form-control" name="lastName" ng-model="candidateAddEditCtrl.LastName" required/>
+                <span class="text-danger" ng-show="generalForm.lastName.$error.required"> Last Name is required</span>
             </div>
             <div>
                 <label>Birth Date</label>
@@ -45,7 +47,8 @@
 
                 <img class="edit-page-photo" ng-if="!candidateAddEditCtrl.photoLoaded" ngf-src="candidateAddEditCtrl.picture" />
                 <img class="edit-page-photo" ng-if="candidateAddEditCtrl.photoLoaded" src="{{candidateAddEditCtrl.photoUrl}}" />
-            </div><br />
+            </div>
+            <h5><small>Max size of Photo is 5 MB</small></h5>
             <div class="input-group">
                 <input placeholder="Enter external url" type="text" class="form-control" ng-model="candidateAddEditCtrl.externalUrl" />
                 <span class="input-group-btn">
@@ -89,11 +92,16 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4" ng-form name="contactsForm">
             <h4>Contacts</h4><hr />
             <div>
-                <label>Phone</label>
-                <input type="text" class="form-control" ng-model="candidateAddEditCtrl.Phone" />
+                <label>Phone </label>
+                <input name="phone" type="text" class="form-control" ng-pattern="/^\d{3} \d{3} \d{2} \d{2}$/" placeholder="095 123 45 67"
+                       ng-model="candidateAddEditCtrl.Phone"/>
+                <span class="text-danger" ng-show="!contactsForm.phone.$valid && contactsForm.phone.$touched"> Phone Number formmat is incorrect</span>
+                <!--{{contactsForm.phone.$valid}}-->
+                <!--{{contactsForm.phone.$touched}}
+                {{contactsForm.phone.$dirty}}-->
             </div>
             <div>
                 <label>Email</label>
@@ -141,7 +149,7 @@
                            candidate="{poolNames: candidateAddEditCtrl.selectedPools,
                                         poolColors: candidateAddEditCtrl.candidatePoolColors}"></pool-selector>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" ng-show='candidateAddEditCtrl.id == null'>
             <h4>Note</h4><hr />
             <textarea rows="10" class="form-control" ng-model="candidateAddEditCtrl.note" ></textarea>
         </div>

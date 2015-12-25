@@ -13,10 +13,11 @@
         'UserHttpService',
         '$location',
         '$rootScope',
-        '$cookies'
+        '$cookies',
+        'localStorageService'
     ];
 
-    function IndexController($scope, indexHttpService, $interval, notificationHttpService, UserHttpService, $location, $rootScope, $cookies) {
+    function IndexController($scope, indexHttpService, $interval, notificationHttpService, UserHttpService, $location, $rootScope, $cookies, localStorageService) {
         var vm = this;
         vm.name = "Index";
         vm.amount = 0;
@@ -73,7 +74,7 @@
             alertify.message('Click me to show a notification!', 180, function(isClicked) {
                 if (isClicked) {
                     notificationHttpService.notificationShown($rootScope.clickedNotification.id);
-                    alertify.alert(alertMessage, function() {
+                    alertify.alert("Notification", alertMessage, function () {
                         $location.url('/candidate/' + $rootScope.clickedNotification.candidateId);
                         $rootScope.$apply();
                     });
@@ -86,5 +87,16 @@
                 $location.url('./');
             });
         }
+
+
+        localStorageService.set('oldUrl', $location.url());
+        $rootScope.$on('$locationChangeStart', function () {
+            
+            if (localStorageService.get('oldUrl') != $location.url()) {
+                localStorageService.set('oldUrl', localStorageService.get('newUrl'));
+                localStorageService.set('newUrl',$location.url());
+            };
+        });        
+
     }
 })();

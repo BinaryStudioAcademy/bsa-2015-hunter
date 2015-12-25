@@ -15,21 +15,20 @@
         'UploadResumeService',
         'UploadPhotoService',
         'FileHttpService',
-        'SpecialNoteHttpService'
+        'SpecialNoteHttpService',
+        'EnumConstants',
+        'localStorageService'
     ];
 
     function CandidateAddEditController($location, $routeParams, authService,
-        candidateHttpService, candidateAddEditService, poolsHttpService, uploadResumeService, uploadPhotoService, fileHttpService, specialNoteHttpService) {
+        candidateHttpService, candidateAddEditService, poolsHttpService, uploadResumeService, uploadPhotoService, fileHttpService, specialNoteHttpService, enumConstants, localStorageService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
         //vm.categories = [{ name: 'Select Candidate Category' }]; // .NET, JS, PHP
 
         vm.nameInTitle = '';
-        vm.origins = [{ name: 'Sourced', value: 0 }, { name: 'Applied', value: 1 }];
-        vm.resolutions = [
-            { name: 'None', value: 0 }, { name: 'Available', value: 1 }, { name: 'Not interested', value: 2 },
-            { name: 'Hired', value: 3 }, { name: 'Unfit', value: 4 }, { name: 'Not now', value: 5 }
-        ];
+        vm.origins = enumConstants.origins;
+        vm.resolutions = enumConstants.resolutions;
         vm.pools = [];
         vm.candidatePoolColors = {};
 
@@ -83,15 +82,18 @@
                 if (candidateAddEditService.validateData(candidate, vm.errorObject)) {
                     candidateHttpService.updateCandidate(candidate, successAddEditCandidate, candidate.Id);
                 } else {
-                    //alertify.error('Some Fields Are Incorrect');
-                    alert('Some Fields Are Incorrect : ' + vm.errorObject.message);
+
+                    alertify.error('Some Fields Are Incorrect');
+                    //alert('Some Fields Are Incorrect : ' + vm.errorObject.message);
                 }
             } else if (candidate) {
                 if (candidateAddEditService.validateData(candidate, vm.errorObject)) {
                     candidateHttpService.addCandidate(candidate, successAddEditCandidate);
                 } else {
+                    alertify
+                    .alert("Some Fields Are Incorrect: ", vm.errorObject.message);
                     //alertify.error('Some Fields Are Incorrect');
-                    alert('Some Fields Are Incorrect : ' + vm.errorObject.message);
+                    //alert('Some Fields Are Incorrect : ' + vm.errorObject.message);
                 }
             }          
            
@@ -124,7 +126,8 @@
         function getFromUrl() {
             uploadPhotoService.validateUrl(vm.externalUrl).then(function(isImage) {
                 if (isImage) {
-                    vm.photoUrl = vm.externalUrl;     
+                    vm.photoUrl = vm.externalUrl;
+                    vm.photoLoaded = true;     
                 } else {
                     vm.externalUrl = '';
                     vm.photoUrl = firstPreviewUrl;
@@ -135,9 +138,9 @@
         // not user-event functions
         // TODO: Data Functions (not user event functions) Should Be In Services
         function createCandidateRequestBody() {
-            var Origin = vm.selectedOrigin.value;
+            var Origin = vm.selectedOrigin.id;
 
-            var Resolution = vm.selectedResolution.value;
+            var Resolution = vm.selectedResolution.id;
 
             Pools = vm.selectedPools;
             
@@ -245,9 +248,12 @@
                 vacancyId: null,
                 candidateId: data.data.id
             };
-            specialNoteHttpService.addSpecialNote(note);
+
+            if (note.text != '') {
+                specialNoteHttpService.addSpecialNote(note);
+            }
             
-            $location.url('/candidate/list');
+            $location.url(localStorageService.get('oldUrl'));
         }
     }
 })();

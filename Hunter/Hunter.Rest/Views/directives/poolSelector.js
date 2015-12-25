@@ -173,7 +173,7 @@
 
                             '<button ng-if="poolReadonly === \'false\'" style="margin-left: 5px;" id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class="pool-selector-btn btn btn-default"><i class="fa fa-plus pool-selector-btn-icon"></i></button>' +
                             '<div ng-if="!poolSelectorCtrl.firstUse && poolReadonly === \'false\'" id="selectPoolMain" ng-show="poolSelectorCtrl.show" class="pool-widget-container" ng-controller="PoolGeneralController as generalCtrl">' +
-                                '<div style="width: 380px;" ng-include="generalCtrl.link"></div>' +
+                                '<div style="width: 300px;" ng-include="generalCtrl.link"></div>' +
                             '</div>' +
                         '</div>' +
 
@@ -183,7 +183,7 @@
 
                             '<button ng-if="poolReadonly === \'false\'" style="margin-left: 5px;" id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class="pool-selector-btn btn btn-default"><i class="fa fa-plus pool-selector-btn-icon"></i></button>' +
                             '<div ng-if="!poolSelectorCtrl.firstUse && poolReadonly === \'false\'" id="selectPoolMain" ng-show="poolSelectorCtrl.show" class="pool-widget-container" ng-controller="PoolGeneralController as generalCtrl">' +
-                                '<div style="width: 380px;" ng-include="generalCtrl.link"></div>' +
+                                '<div style="width: 300px;" ng-include="generalCtrl.link"></div>' +
                             '</div>' +
                         '</div>' +
 
@@ -193,13 +193,13 @@
 
                             '<button ng-if="poolReadonly === \'false\'" style="margin-left: 5px;" id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class=" btn btn-default pool-selector-btn"><i class="fa fa-plus pool-selector-btn-icon"></i></button>' +
                             '<div ng-if="!poolSelectorCtrl.firstUse && poolReadonly === \'false\'" id="selectPoolMain" ng-show="poolSelectorCtrl.show" class="pool-widget-container" ng-controller="PoolGeneralController as generalCtrl">' +
-                                '<div style="width: 380px;" ng-include="generalCtrl.link"></div>' +
+                                '<div style="width: 300px;" ng-include="generalCtrl.link"></div>' +
                             '</div>' +
                         '</div>' +
                     '</div>' +
 //                    '<button ng-if="poolReadonly === \'false\'" style="margin-left: 5px;" id="addPoolBtn" ng-click="poolSelectorCtrl.toggleShow()" class=" btn btn-default"><i class="fa fa-plus"></i></button>' +
 //                    '<div ng-if="!poolSelectorCtrl.firstUse && poolReadonly === \'false\'" id="selectPoolMain" ng-show="poolSelectorCtrl.show" class="pool-widget-container" ng-controller="PoolGeneralController as generalCtrl">' +
-//                        '<div style="width: 380px;" ng-include="generalCtrl.link"></div>' +
+//                        '<div style="width: 300px;" ng-include="generalCtrl.link"></div>' +
 //                    '</div>' +
                 '</div>'
         }

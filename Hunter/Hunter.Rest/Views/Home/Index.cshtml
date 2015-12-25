@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Hunter";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/img/favicon.ico" rel="shortcut icon" type="image/ico">
@@ -110,13 +110,18 @@
 <!-- End Login -->
 
 <!-- Start Pools -->
-<script src="~/Views/pool/list/poolListController.js"></script>
-<script src="~/Views/pool/addEdit/poolAddEditController.js"></script>
+<script src="~/Views/pool_page/list/poolPageListController.js"></script>
+<script src="~/Views/pool_page/addEdit/poolPageAddEditController.js"></script>
 <script src="~/Views/services/pool/poolsHttpService.js"></script>
+<!-- End Pools -->
+
+<!-- Start Pools Directiv -->
+<script src="~/Views/pool/list/poolListController.js"></script>
 
 <script src="~/Views/directives/poolSelector.js"></script>
 <script src="~/Views/pool/poolGeneralController.js"></script>
-<!-- End Pools -->
+<!-- End Pools Directiv -->
+
 
 <!-- Start Activities -->
 <script src="~/Views/services/activity/activitiesHttpService.js"></script>

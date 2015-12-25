@@ -35,7 +35,7 @@
 
         <div class="hrInterview_comments">
             <div class="hrInterview_form" ng-repeat="item in techInterviewCtrl.techFeedbacks | orderBy: '-date'">
-                <form name="feedbackForm" >
+                <form name="feedbackForm">
                     <div>
                         <div>
                             <div style="width: auto;">
@@ -58,10 +58,17 @@
                     </div>
                     <div>
                         <button ng-click="techInterviewCtrl.updateFeedback(item)"
-                               class="btn" type="button">{{item.editMode == true ?'Save':'Edit' }}</button>
+                                class="btn" type="button">{{item.editMode == true ?'Save':'Edit' }}</button>
                     </div>
                 </form>
             </div>
+        </div>
+        <div class="row" ng-hide="techInterviewCtrl.techFeedbacks.length">
+            <br />
+            <p class="text-info">
+                There are now tech feedbacks for this candidate so far. Click
+                <i class="fa fa-plus-circle"></i> above to add new note.
+            </p>
         </div>
     </div>
 </div>

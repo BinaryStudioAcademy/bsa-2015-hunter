@@ -40,6 +40,7 @@
         vm.cardInfo = {};
         vm.isLLM = false;
         vm.showResume = showResume;
+        vm.cardSpinner = true;
 
         var vid = $routeParams["vid"];
         var cid = $routeParams["cid"];
@@ -49,8 +50,10 @@
         }
 
         (function () {
+            vm.cardSpinner = true;
             candidateHttpService.getCandidate(cid).then(function (response) {
                 vm.candidate = response.data;
+                vm.cardSpinner = false;
             });
         })();
 
@@ -76,6 +79,7 @@
             });
                 vacancyHttpService.getVacancy(vid).then(function (response) {
                     vm.vacancy = response;
+                    vm.cardSpinner = false;
                 });
         })();
         } else {
