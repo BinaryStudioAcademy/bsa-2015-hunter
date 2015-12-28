@@ -17,11 +17,11 @@ namespace Hunter.Rest.Controllers
     [RoutePrefix("api/roleMapping")]
     public class RoleMappingController : ApiController
     {
-        private readonly IUserRoleMappingService _userRoleMappingService;
+        private readonly IRoleMappingService _roleMappingService;
 
-        public RoleMappingController(IUserRoleMappingService userRoleMappingService)
+        public RoleMappingController(IRoleMappingService roleMappingService)
         {
-            _userRoleMappingService = userRoleMappingService;
+            _roleMappingService = roleMappingService;
         }
 
         [HttpGet]
@@ -31,7 +31,7 @@ namespace Hunter.Rest.Controllers
         {
             try
             {
-                var data = _userRoleMappingService.GetAllInfo().OrderByDescending(c => c.Position).ToUseRoleMappingDtos().ToList();
+                var data = _roleMappingService.GetAllInfo().OrderByDescending(c => c.Position).ToUseRoleMappingDtos().ToList();
                 return Request.CreateResponse(HttpStatusCode.OK, data);
             }
             catch (Exception e)
@@ -47,7 +47,7 @@ namespace Hunter.Rest.Controllers
         {
             try
             {
-                _userRoleMappingService.Update(roleMappingDto.ToRoleMapping());
+                _roleMappingService.Update(roleMappingDto.ToRoleMapping());
             }
             catch (Exception e)
             {

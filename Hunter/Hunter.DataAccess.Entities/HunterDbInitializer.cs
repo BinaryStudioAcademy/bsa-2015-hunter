@@ -37,16 +37,16 @@ namespace Hunter.DataAccess.Entities
 
             #region ROLE MAPPING
 
-            var rolemaping1 =  new RoleMapping() {Position = "ADMIN", UserRole = _adminRole};
-            var rolemaping2 = new RoleMapping() { Position = "DEVELOPER", UserRole = _technicalRole };
-            var rolemaping3 = new RoleMapping() { Position = "HR", UserRole = _recruiterRole };
-            var rolemaping4 = new RoleMapping() { Position = "CEO", UserRole = _adminRole };
-            var rolemaping5 = new RoleMapping() { Position = "Tech Lead", UserRole = _technicalRole };
+            //var rolemaping1 =  new RoleMapping() {Position = "ADMIN", UserRole = _adminRole};
+            //var rolemaping2 = new RoleMapping() { Position = "DEVELOPER", UserRole = _technicalRole };
+            //var rolemaping3 = new RoleMapping() { Position = "HR", UserRole = _recruiterRole };
+            //var rolemaping4 = new RoleMapping() { Position = "CEO", UserRole = _adminRole };
+            //var rolemaping5 = new RoleMapping() { Position = "Tech Lead", UserRole = _technicalRole };
 
-            var rolemapings = new List<RoleMapping> { rolemaping1, rolemaping2, rolemaping3, rolemaping4, rolemaping5 };
+            //var rolemapings = new List<RoleMapping> { rolemaping1, rolemaping2, rolemaping3, rolemaping4, rolemaping5 };
 
-            rolemapings.ForEach(x => context.RoleMapping.Add(x));
-            context.SaveChanges();
+            //rolemapings.ForEach(x => context.RoleMapping.Add(x));
+            //context.SaveChanges();
             #endregion
 
             #region POOLS

@@ -7,9 +7,10 @@ using Hunter.DataAccess.Entities.Entites;
 
 namespace Hunter.Services.Services.Interfaces
 {
-    public interface IUserRoleMappingService
+    public interface IRoleMappingService
     {
         IEnumerable<RoleMapping> GetAllInfo();
         void Update(RoleMapping roleMapping);
+        int AddRoleMapping(string position);
     }
 }

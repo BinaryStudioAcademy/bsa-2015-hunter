@@ -220,6 +220,10 @@
     <Compile Include="Migrations\201512250959541_addRoleMappingTable.Designer.cs">
       <DependentUpon>201512250959541_addRoleMappingTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512281202503_addPositionIndex.cs" />
+    <Compile Include="Migrations\201512281202503_addPositionIndex.Designer.cs">
+      <DependentUpon>201512281202503_addPositionIndex.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -325,6 +329,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512250959541_addRoleMappingTable.resx">
       <DependentUpon>201512250959541_addRoleMappingTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512281202503_addPositionIndex.resx">
+      <DependentUpon>201512281202503_addPositionIndex.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

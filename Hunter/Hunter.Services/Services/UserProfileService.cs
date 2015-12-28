@@ -16,6 +16,7 @@ using Hunter.DataAccess.Interface.Base;
 using Hunter.Services.Dto.ApiResults;
 using Hunter.Services.Dto.User;
 using Hunter.Services.Interfaces;
+using Hunter.Services.Services.Interfaces;
 using Newtonsoft.Json;
 
 namespace Hunter.Services
@@ -62,19 +63,19 @@ namespace Hunter.Services
         private readonly IUserProfileRepository _profileRepo;
         private readonly IUserRoleRepository _roleRepository;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IRoleMappingRepository _roleMappingRepository;
+        private readonly IRoleMappingService _roleMappingService;
 
         public UserProfileService(
             IActivityHelperService activityHelperService,
             IUserProfileRepository profileRepo,
             IUnitOfWork unitOfWork,
-            IUserRoleRepository roleRepository, IRoleMappingRepository roleMappingRepository)
+            IUserRoleRepository roleRepository, IRoleMappingService roleMappingService)
         {
             _activityHelperService = activityHelperService;
             _profileRepo = profileRepo;
             _unitOfWork = unitOfWork;
             _roleRepository = roleRepository;
-            _roleMappingRepository = roleMappingRepository;
+            _roleMappingService = roleMappingService;
         }
 
         //todo new figure out
@@ -128,32 +129,16 @@ namespace Hunter.Services
         //TODO important fix this 
         public ApiResult Save(EditUserProfileVm editedUserProfile)
         {
-            if (string.IsNullOrEmpty(editedUserProfile.Login))
-                return Api.Conflict("Login is required to be a valid e-mail");
-
-            var profile = _profileRepo.Get(editedUserProfile.Id) ?? new UserProfile();
-
-            var same = _profileRepo.Get(pr => pr.UserLogin == editedUserProfile.Login);
-            if (same != null && same.Id != profile.Id)
+            var profile = CheckIfUserExist(editedUserProfile);
+            if (profile == null)
+            {
                 return Api.Conflict(string.Format("Profile with e-mail {0} already exists", editedUserProfile.Login));
-
-            same = _profileRepo.Get(pr => pr.Alias == editedUserProfile.Alias);
-            if (same != null && same.Id != profile.Id)
-                return Api.Conflict(string.Format("Profile with alias {0} already exists", editedUserProfile.Alias));
-
-            try
-            {
-                editedUserProfile.RoleId = _roleMappingRepository.Get(x => x.Position == editedUserProfile.Position).Id;
             }
-            catch (Exception ex)
+
+            var roleId = _roleMappingService.AddRoleMapping(editedUserProfile.Position);
+            if (roleId != 0)
             {
-                var role = _roleRepository.Get(x => x.Name == Roles.TechnicalSpecialist.ToString());
-                _roleMappingRepository.UpdateAndCommit(new RoleMapping()
-                {
-                    Position = editedUserProfile.Position,
-                    RoleId = role.Id
-                });
-                editedUserProfile.RoleId = role.Id;
+                editedUserProfile.RoleId = roleId;
             }
             editedUserProfile.Map(profile, _unitOfWork);
             if (profile.IsNew())
@@ -228,7 +213,7 @@ namespace Hunter.Services
             }
 
 
-            
+
 
 
             //user.Name.Split(' ').ToList().ForEach(i => alias += i[0]);
@@ -255,5 +240,25 @@ namespace Hunter.Services
             }
             return Api.Updated(profile.Id);
         }
+
+        private UserProfile CheckIfUserExist(EditUserProfileVm editedUserProfile)
+        {
+            if (string.IsNullOrEmpty(editedUserProfile.Login))
+                return null;
+
+            var profile = _profileRepo.Get(editedUserProfile.Id);
+
+            var same = _profileRepo.Get(pr => pr.UserLogin == editedUserProfile.Login);
+            if (same != null && same.Id != profile.Id)
+                return null;
+
+            same = _profileRepo.Get(pr => pr.Alias == editedUserProfile.Alias);
+            if (same != null && same.Id != profile.Id)
+                return null;
+
+
+            return new UserProfile();
+        }
+
     }
 }
