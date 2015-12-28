@@ -81,6 +81,7 @@
     <Compile Include="Dto\FilterInfoDto.cs" />
     <Compile Include="Dto\PoolCandidateDto.cs" />
     <Compile Include="Dto\ResumeDto.cs" />
+    <Compile Include="Dto\RoleMappingDto.cs" />
     <Compile Include="Dto\ScheduledNotification\ScheduledNotificationDto.cs" />
     <Compile Include="Dto\ScheduledNotification\ScheduledNotificationFilterDto.cs" />
     <Compile Include="Dto\ScheduledNotification\ScheduledNotificationPageDto.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Dto\PoolViewModel.cs" />
     <Compile Include="Dto\CandidateDto.cs" />
     <Compile Include="Extensions\CandidateExtensions.cs" />
+    <Compile Include="Extensions\RoleMappingExtension.cs" />
     <Compile Include="Extensions\ScheduledNotificationExtension.cs" />
     <Compile Include="Extensions\TestExtension.cs" />
     <Compile Include="Extensions\SpecialNoteExtension.cs" />
@@ -138,6 +140,7 @@
     <Compile Include="Services\Interfaces\ITestService.cs" />
     <Compile Include="Services\Interfaces\ISpecialNoteService.cs" />
     <Compile Include="Services\Interfaces\IUserProfileService.cs" />
+    <Compile Include="Services\Interfaces\IUserRoleMappingService.cs" />
     <Compile Include="Services\Interfaces\IUserService.cs" />
     <Compile Include="Services\Interfaces\IVacancyService.cs" />
     <Compile Include="Services\Interfaces\IUserRoleService.cs" />
@@ -147,6 +150,7 @@
     <Compile Include="Services\TestService.cs" />
     <Compile Include="Services\SpecialNoteService.cs" />
     <Compile Include="Services\UserProfileService.cs" />
+    <Compile Include="Services\UserRoleMappingService.cs" />
     <Compile Include="Services\UserRoleService.cs" />
     <Compile Include="Services\PoolService.cs" />
     <Compile Include="Services\UserService.cs" />

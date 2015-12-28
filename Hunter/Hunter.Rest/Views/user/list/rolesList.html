@@ -8,13 +8,14 @@
                     </tr>
                 </thead>
                 <tbody data-link="row" class="rowlink">
-                    <tr class="tr-vert-center" ng-repeat="row in roleListCtr.profilesList">
-                        <td><a>{{row.login}}</a></td>
+                    <tr class="tr-vert-center" ng-repeat="row in roleListCtr.roleMapping">
+                        <td><a>{{row.position}}</a></td>
                         <!--<td><a href="./user/edit/{{row.id}}">{{row.login}}</a></td>-->
                         <td>
                             <select class="form-control"
                                 ng-model="row.roleId"
-                                ng-options="option.id as option.name for option in roleListCtr.rolesList">
+                                ng-options="option.id as option.name for option in roleListCtr.rolesList"
+                                ng-change='roleListCtr.changeRole(row)'>
                             </select>
                         </td>
                     </tr>

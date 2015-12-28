@@ -11,16 +11,27 @@
         '$routeParams',
         'AuthService',
         'UserProfileService', //change on your service
+        'RoleMappingHttpService',
         'UserRoleHttpService'
     ];
 
-    function rolesListController($scope, $location, $routeParams, authService, service, userRoleHttpService) {
+    function rolesListController($scope, $location, $routeParams, authService, service, roleMappingHttpService, userRoleHttpService) {
         var vm = this;
 
+        vm.roleMapping = {};
+        vm.rolesList = {};
+        vm.changeRole = changeRole;
+
+        roleMappingHttpService.getAllRoleMapping().then(function (response) {
+                vm.roleMapping = response.data;
+            });
 
         userRoleHttpService.getUserRoles().then(function (result) {
                 vm.rolesList = result.data;
             });
+
+        
+
     };
 
 })();

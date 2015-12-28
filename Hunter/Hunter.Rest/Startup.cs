@@ -89,6 +89,7 @@ namespace Hunter.Rest
             kernel.Bind<IActivityHelperService>().To<ActivityHelperService>();
             kernel.Bind<ICardService>().To<CardService>();
             kernel.Bind<IScheduledNotificationService>().To<ScheduledNotificationService>();
+            kernel.Bind<IUserRoleMappingService>().To<UserRoleMappingService>();
             #endregion
 
             kernel.Bind<Common.Interfaces.ILogger>().To<Logger>();

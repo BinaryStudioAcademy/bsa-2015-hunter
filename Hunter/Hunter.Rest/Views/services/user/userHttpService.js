@@ -49,6 +49,8 @@
             return deferred.promise;
         }
 
+
+        
         function logout() {
             var deferred = $q.defer();
             httpHandler.sendRequest({

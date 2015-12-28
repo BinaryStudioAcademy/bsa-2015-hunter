@@ -29,18 +29,18 @@
                    { name: 'Roles', route: 'roles' },
                 ];
                 vm.currentTabName = vm.tabs[0].name;
-                vm.templateToShow = templateUrl(vm.tabs[0].route);
+                vm.templateToShow = templatePath(vm.tabs[0].route);
             })();
 
 
         function changeTemplate(tab) {
                 vm.currentTabName = tab.name;
-                vm.templateToShow = templateUrl(tab.route);
+                vm.templateToShow = templatePath(tab.route);
                 $location.search('tab', tab.route);
             }
         
 
-        function templateUrl(templateName) {
+        function templatePath(templateName) {
             //viewsPath = './Views/user/list/';
             switch (templateName.toLowerCase()) {
                 case 'users':
