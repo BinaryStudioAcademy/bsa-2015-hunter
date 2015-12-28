@@ -30,7 +30,9 @@
                 vm.rolesList = result.data;
             });
 
-        
+        function changeRole(roleMapping){
+            roleMappingHttpService.updateRoleMapping(roleMapping);
+        }
 
     };
 

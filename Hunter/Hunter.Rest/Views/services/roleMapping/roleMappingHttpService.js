@@ -9,7 +9,7 @@
     function RoleMappingHttpService(httpHandler, $q) {
         var service = {
             getAllRoleMapping: getAllRoleMapping,
-            updatePool: updatePool
+            updateRoleMapping: updateRoleMapping
         }
 
         function getAllRoleMapping() {
@@ -29,7 +29,7 @@
         }
 
         
-        function updatePool(body) {
+        function updateRoleMapping(body) {
             var deferred = $q.defer();
             httpHandler.sendRequest({
                 verb: 'PUT',

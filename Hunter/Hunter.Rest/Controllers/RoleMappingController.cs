@@ -41,5 +41,23 @@ namespace Hunter.Rest.Controllers
 
         }
 
+        [HttpPut]
+        [Route("")]
+        public HttpResponseMessage Put(RoleMappingDto roleMappingDto)
+        {
+            try
+            {
+                _userRoleMappingService.Update(roleMappingDto.ToRoleMapping());
+            }
+            catch (Exception e)
+            {
+
+                return Request.CreateResponse(HttpStatusCode.NotFound, e.Message);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
     }
+
+
 }
