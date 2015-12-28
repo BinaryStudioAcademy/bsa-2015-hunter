@@ -157,8 +157,8 @@ angular.module('hunter-app',
             $routeProvider
                 .when('/user', {
                     templateUrl: viewPath + 'user/list/list.html',
-                    controller: 'UserListController',
-                    controllerAs: 'userListCtrl',
+                    controller: 'ListController',
+                    controllerAs: 'listCtrl',
                     reloadOnSearch: false
                 })
                 .when('/user/edit', {

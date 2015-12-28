@@ -1,0 +1,33 @@
+        <div class="" ng-controller="UsersListController as userListCtrl">
+            <table class="table table-bordered table-condensed table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Login/E-mail</th>
+                        <th>Alias</th>
+                        <th>Position</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody data-link="row" class="rowlink">
+                    <tr class="tr-vert-center" ng-repeat="row in userListCtrl.profilesList">
+                        <td><a>{{row.login}}</a></td>
+                        <!--<td><a href="./user/edit/{{row.id}}">{{row.login}}</a></td>-->
+                        <td>{{row.alias}}</td>
+                        <td>{{row.position}}</td>
+                        <td>
+                            <select class="form-control"
+                                ng-model="row.roleId"
+                                ng-options="option.id as option.name for option in userListCtrl.rolesList">
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <nav>
+                <ul class="pager">
+                    <li><a ng-click="userListCtrl.prevPage()">Previous</a></li>
+                    <li>Page {{userListCtrl.page}}</li>
+                    <li><a ng-click="userListCtrl.nextPage()">Next</a></li>
+                </ul>
+            </nav>
+        </div>

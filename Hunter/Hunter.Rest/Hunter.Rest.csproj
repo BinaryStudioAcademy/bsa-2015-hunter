@@ -296,6 +296,7 @@
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\ResumeController.cs" />
     <Compile Include="Controllers\ScheduledNotificationController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -896,7 +897,12 @@
     <Content Include="Views\user\addEdit\addEdit.html" />
     <Content Include="Views\user\addEdit\userAddEditController.js" />
     <Content Include="Views\user\list\list.html" />
+    <Content Include="Views\user\list\listController.js" />
+    <Content Include="Views\user\list\rolesList.html" />
+    <Content Include="Views\user\list\rolesListController.js" />
     <Content Include="Views\user\list\userListController.js" />
+    <Content Include="Views\user\list\usersList.html" />
+    <Content Include="Views\user\list\userslistController.js" />
     <Content Include="Views\user\userProfileService.js" />
     <Content Include="Views\vacancy\addEdit\addEdit.html" />
     <Content Include="Views\vacancy\addEdit\vacancyAddEditController.js" />

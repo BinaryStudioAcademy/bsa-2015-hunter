@@ -3,9 +3,9 @@
 
     angular
         .module('hunter-app')
-        .controller('UserListController', userListController);
+        .controller('ListController', listController);
 
-    userListController.$inject = [
+    listController.$inject = [
         '$scope',
         '$location',
         '$routeParams',
@@ -14,21 +14,13 @@
         'UserRoleHttpService'
     ];
 
-    function userListController($scope, $location, $routeParams, authService, service, userRoleHttpService) {
+    function listController($scope, $location, $routeParams, authService, service, userRoleHttpService) {
         var vm = this;
         //Here we should write all vm variables default values. For Example:
-        vm.controllerName = 'This is users page';
-        vm.profilesList = [{ Alias: "Loading ...", Position:"Please wait" }];
-
-        //(function() {
-        //    // This is function for initialization actions, for example checking auth
-        //    if (authService.isLoggedIn()) {
-        //    // Can Make Here Any Actions For Data Initialization, for example, http queries, etc.
-        //    } else {
-        //        $location.url('/login');
-        //    }
-        //})();
        vm.rolesList = [];
+       vm.changeTemplate = changeTemplate;
+       vm.currentTabName = {};
+       vm.templateToShow = '';
 
         // Here we should write any functions we need, for example, body of user actions methods.
         var updatePage = function (newPageNum) {
@@ -62,5 +54,34 @@
         userRoleHttpService.getUserRoles().then(function (result) {
                 vm.rolesList = result.data;
             });
-    }
+
+        (function () {
+                vm.tabs = [
+                   { name: 'Users', route: 'users' },
+                   { name: 'Roles', route: 'roles' },
+                ];
+                vm.currentTabName = vm.tabs[0].name;
+                vm.templateToShow = templateUrl(vm.tabs[0].route);
+            })();
+
+
+        function changeTemplate(tab) {
+                vm.currentTabName = tab.name;
+                vm.templateToShow = templateUrl(tab.route);
+                $location.search('tab', tab.route);
+            }
+        
+
+        function templateUrl(templateName) {
+            //viewsPath = './Views/user/list/';
+            switch (templateName.toLowerCase()) {
+                case 'users':
+                    return './Views/user/list/' + 'usersList.html';
+                case 'roles':
+                    return './Views/user/list/' + 'rolesList.html';
+                default:
+                    return '';
+            }
+        }
+        };
 })();

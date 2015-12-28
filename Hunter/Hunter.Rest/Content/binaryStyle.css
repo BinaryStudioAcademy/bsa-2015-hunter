@@ -36,12 +36,12 @@ body {
     font-size: 15px;
 }
 
-.nav-tabs > li.active > a,
+/*.nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus{
     color: black;
     background-color: #ff9a06;  
-}
+}*/
 
 .edit-page-photo {
     height: 300px;
