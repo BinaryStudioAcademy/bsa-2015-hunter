@@ -124,6 +124,8 @@ namespace Hunter.Services
             return Api.Details(userProfileId, EditUserProfileVm.Create(profile));
         }
 
+
+        //TODO important fix this 
         public ApiResult Save(EditUserProfileVm editedUserProfile)
         {
             if (string.IsNullOrEmpty(editedUserProfile.Login))
@@ -233,6 +235,25 @@ namespace Hunter.Services
             //user.Name = alias;
 
             return user;
+        }
+
+        public ApiResult Update(EditUserProfileVm editedUserProfile)
+        {
+            var profile = _profileRepo.Get(editedUserProfile.Id);
+            editedUserProfile.Map(profile, _unitOfWork);
+            try
+            {
+                _profileRepo.UpdateAndCommit(profile);
+            }
+            catch (DbUpdateException ex)
+            {
+                Debug.WriteLine("Exception:", ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return Api.Updated(profile.Id);
         }
     }
 }

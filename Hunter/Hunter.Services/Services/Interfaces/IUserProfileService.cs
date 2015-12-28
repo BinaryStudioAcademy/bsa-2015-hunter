@@ -11,6 +11,7 @@ namespace Hunter.Services.Interfaces
         IEnumerable<UserProfileRowVm> GetUserProfiles(string roleName);
         ResourceApiResult<EditUserProfileVm> GetById(long userProfileId);
         ApiResult Save(EditUserProfileVm userProfile);
+        ApiResult Update(EditUserProfileVm userProfile);
         IdApiResult Delete(long userProfileId);
         bool UserExist(string userName);
         Task<OAuthUserDto> CreateUserAlias(string url);

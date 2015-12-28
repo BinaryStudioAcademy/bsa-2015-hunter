@@ -19,7 +19,7 @@
 
         function updateUserProfile(body, onSuccess) {
             httpHandler.sendRequest({
-                verb: 'POST', //'PUT',
+                verb: 'PUT',
                 url: './api/userprofile/',
                 body: body,
                 successMessageToUser: 'User profile updated.',

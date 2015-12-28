@@ -14,10 +14,12 @@
         'UserRoleHttpService'
     ];
 
-    function usersListController($scope, $location, $routeParams, authService, service, userRoleHttpService) {
+    function usersListController($scope, $location, $routeParams, authService, userProfileService, userRoleHttpService) {
         var vm = this;
-        //Here we should write all vm variables default values. For Example:
-       
+
+        vm.rolesList = [];
+        vm.changeRole = changeRole;
+
         // Here we should write any functions we need, for example, body of user actions methods.
         var updatePage = function (newPageNum) {
             if (typeof newPageNum !== "number" || newPageNum <= 0) {
@@ -28,7 +30,7 @@
 
         vm.loadUsers = function () {
             $location.search('page', vm.page);
-            service.getUserProfileList(vm.page, function (response) {
+            userProfileService.getUserProfileList(vm.page, function (response) {
                 vm.profilesList = response.data;
             });
         }
@@ -51,32 +53,8 @@
                 vm.rolesList = result.data;
             });
 
-        (function () {
-                vm.tabs = [
-                   { name: 'Users', route: 'users' },
-                   { name: 'Roles', route: 'roles' },
-                ];
-                vm.currentTabName = vm.tabs[0].name;
-                vm.templateToShow = templateUrl(vm.tabs[0].route);
-            })();
-
-
-        function changeTemplate(tab) {
-                vm.currentTabName = tab.name;
-                vm.templateToShow = templateUrl(tab.route);
-                $location.search('tab', tab.route);
-            }
-
-        function templateUrl(templateName) {
-            //viewsPath = './Views/user/list/';
-            switch (templateName.toLowerCase()) {
-                case 'users':
-                    return './Views/user/list/' + 'usersList.html';
-                case 'roles':
-                    return './Views/user/list/' + 'rolesList.html';
-                default:
-                    return '';
-            }
+        function changeRole(user){
+            userProfileService.updateUserProfile(user);
         }
     };
 })();

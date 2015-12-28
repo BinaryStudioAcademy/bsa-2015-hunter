@@ -73,6 +73,14 @@ namespace Hunter.Rest.Controllers
             return FromApiResult(() => _profileService.Save(profileVm));
         }
 
+        // PUT: api/Pool - add new profile
+        [HttpPut]
+        [Route("")]
+        public IHttpActionResult Put([FromBody] EditUserProfileVm profileVm)
+        {
+            return FromApiResult(() => _profileService.Update(profileVm));
+        }
+
         // DELETE: api/Pool/5
         [HttpDelete]
         [Route("{id:int}")]
