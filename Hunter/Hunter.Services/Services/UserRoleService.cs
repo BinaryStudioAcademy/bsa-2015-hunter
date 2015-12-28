@@ -115,5 +115,10 @@ namespace Hunter.Services
                 return false;
             }
         }
+
+        public UserRoleDto GetRoleByName(string name)
+        {
+            return _userRoleRepository.Query().FirstOrDefault(x => x.Name == name).ToUserRoleDto();
+        }
     }
 }

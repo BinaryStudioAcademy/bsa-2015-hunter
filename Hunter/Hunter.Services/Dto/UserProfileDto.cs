@@ -8,5 +8,7 @@ namespace Hunter.Services.Dto
         public string Login { get; set; }
 
         public string Alias { get; set; }
+
+        public string Position { get; set; }
     }
 }

@@ -99,6 +99,12 @@
                 { id: 0, name: 'Call', icon: 'glyphicon-earphone' },
                 { id: 1, name: 'Interview', icon: 'glyphicon-list-alt' },
                 { id: 2, name: 'Test', icon: 'glyphicon-envelope' }
+            ],
+            userRoles:[
+            {    "id": 1,    "name": "Recruiter"  },
+            {    "id": 2,    "name": "TechnicalSpecialist"  },
+            {    "id": 3,    "name": "Admin"  },
+            {    "id": 4,    "name": "Default"  }
             ]
         });
 

@@ -13,7 +13,8 @@ namespace Hunter.Services.Extensions
             {
                 Id = user.Id,
                 Login = user.UserLogin,
-                Alias = user.Alias
+                Alias = user.Alias,
+                Position = user.Position
             };
             return userDto;
         }
@@ -24,7 +25,8 @@ namespace Hunter.Services.Extensions
             {
                 Id = userDto.Id,
                 UserLogin = userDto.Login,
-                Alias = userDto.Alias
+                Alias = userDto.Alias,
+                Position = userDto.Position
             };
             return userProfile;
         }

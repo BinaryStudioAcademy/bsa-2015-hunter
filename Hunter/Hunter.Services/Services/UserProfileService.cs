@@ -13,8 +13,10 @@ using Hunter.DataAccess.Entities.Entites;
 using Hunter.DataAccess.Entities.Entites.Enums;
 using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Interface.Base;
+using Hunter.Services.Dto;
 using Hunter.Services.Dto.ApiResults;
 using Hunter.Services.Dto.User;
+using Hunter.Services.Extensions;
 using Hunter.Services.Interfaces;
 using Hunter.Services.Services.Interfaces;
 using Newtonsoft.Json;
@@ -61,7 +63,7 @@ namespace Hunter.Services
         private const int _ItemsPerPage = 15;
         private readonly IActivityHelperService _activityHelperService;
         private readonly IUserProfileRepository _profileRepo;
-        private readonly IUserRoleRepository _roleRepository;
+        private readonly IUserRoleService _roleService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRoleMappingService _roleMappingService;
 
@@ -69,27 +71,40 @@ namespace Hunter.Services
             IActivityHelperService activityHelperService,
             IUserProfileRepository profileRepo,
             IUnitOfWork unitOfWork,
-            IUserRoleRepository roleRepository, IRoleMappingService roleMappingService)
+            IUserRoleService userRoleService, IRoleMappingService roleMappingService)
         {
             _activityHelperService = activityHelperService;
             _profileRepo = profileRepo;
             _unitOfWork = unitOfWork;
-            _roleRepository = roleRepository;
+            _roleService = userRoleService;
             _roleMappingService = roleMappingService;
         }
 
         //todo new figure out
 
-        public IEnumerable<UserProfileRowVm> GetUserProfiles(string roleName)
+        public IEnumerable<UserProfileDto> GetUserProfiles(string roleName)
         {
+            try
+            {
+                var role = _roleService.GetRoleByName(roleName);
+                var users = _profileRepo.Query().Where(x => x.RoleId == role.Id);
+                //var newuser=users    .Select(x => x.ToUserProfileDto()).ToList();
+                return users.ToUserProfilesDto().ToList();
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
             //var users = _roleRepository
             //    .Query()
             //    .Where(e => e.Name == roleName)
             //    .FirstOrDefault()
-            //    .Users
+            //    .UserProfile
             //    .Select(e => UserProfileRowVm.Create(_profileRepo.Get(e.Id)));
             //return users;
-            return null;
+            //return null;
         }
 
         public bool UserExist(string userName)

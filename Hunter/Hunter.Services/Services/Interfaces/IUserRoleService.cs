@@ -12,5 +12,6 @@ namespace Hunter.Services
         void DeleteUserRole(int id);
         bool IsRoleExist(string name);
         bool IsRoleExist(int id);
+        UserRoleDto GetRoleByName(string name);
     }
 }

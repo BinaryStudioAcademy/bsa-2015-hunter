@@ -293,7 +293,7 @@
             
         }
 
-        UserHttpService.getUsersByRole2('Technical Specialist').then(function (result) {
+        UserHttpService.getUsersByRole2(EnumConstants.userRoles[1].name).then(function (result) {
             vm.techExperts = result;
             console.log(result);
         });

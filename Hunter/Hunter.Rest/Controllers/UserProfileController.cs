@@ -10,6 +10,7 @@ using Hunter.Services.Interfaces;
 using System.Net.Http;
 using System.Web.Http.Description;
 using Hunter.Rest.Providers;
+using Hunter.Services.Dto;
 
 namespace Hunter.Rest.Controllers
 {
@@ -26,7 +27,7 @@ namespace Hunter.Rest.Controllers
 
         [HttpGet]
         [Route("users/role/{roleName}")]
-        [ResponseType(typeof(IEnumerable<UserProfileRowVm>))]
+        [ResponseType(typeof(IEnumerable<UserProfileDto>))]
         public HttpResponseMessage GetAllTech(string roleName)
         {
             try 
