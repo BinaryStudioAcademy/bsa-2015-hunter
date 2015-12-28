@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Entities.Entites;
 using Hunter.DataAccess.Entities.Entites.Enums;
@@ -58,7 +56,7 @@ namespace Hunter.Services.Services
             {
                 return roleMapping.RoleId;
             }
-            var role = _roleRepository.Get(x => x.Name == Roles.TechnicalSpecialist.ToString());
+            var role = _roleRepository.Get(x => x.Name == Roles.Default.ToString());
 
             try
             {
@@ -68,7 +66,7 @@ namespace Hunter.Services.Services
                     RoleId = role.Id
                 });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return 0;
             }

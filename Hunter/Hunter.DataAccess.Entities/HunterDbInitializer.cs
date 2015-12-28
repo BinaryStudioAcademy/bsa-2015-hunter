@@ -14,6 +14,7 @@ namespace Hunter.DataAccess.Entities
         private static UserRole _recruiterRole = new UserRole() { Name = "Recruiter" };
         private static UserRole _technicalRole = new UserRole() { Name = "TechnicalSpecialist" };
         private static UserRole _adminRole = new UserRole() { Name = "Admin" };
+        private static UserRole _defaultRole = new UserRole() { Name = "Default" };
 
         private static Pool _jsPool = new Pool { Name = "JavaScript", Color = "#009688" };
         private static Pool _netPool = new Pool { Name = ".Net", Color = "#FFEB3B" };
@@ -30,7 +31,7 @@ namespace Hunter.DataAccess.Entities
         {
             #region USER ROLES
 
-            var userRoles = new List<UserRole> { _recruiterRole, _technicalRole, _adminRole };
+            var userRoles = new List<UserRole> { _recruiterRole, _technicalRole, _adminRole, _defaultRole };
             userRoles.ForEach(userRole => context.UserRole.Add(userRole));
             context.SaveChanges();
             #endregion

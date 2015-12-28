@@ -12,6 +12,7 @@ namespace Hunter.DataAccess.Entities.Entites.Enums
         [Description("Technical Specialist")]
         TechnicalSpecialist,
         Recruiter,
-        Admin
+        Admin,
+        Default
     }
 }
