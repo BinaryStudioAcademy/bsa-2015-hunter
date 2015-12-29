@@ -4,12 +4,14 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Hunter.Rest.Providers;
 using Hunter.Services;
 using Hunter.Services.Interfaces;
 using WebGrease.Css.Extensions;
 
 namespace Hunter.Rest.Controllers
 {
+    [ExternalAuthorize]
     [RoutePrefix("api/vacancy")]
     public class VacancyController : ApiController
     {

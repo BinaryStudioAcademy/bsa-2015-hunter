@@ -15,7 +15,7 @@
         }
 
         function getUrlOnTest(vacancyId,candidateId) {
-            var urlOnTest = '#/vacancy/' + vacancyId + '/candidate/' + candidateId + '?tab=test';
+            var urlOnTest = './vacancy/' + vacancyId + '/candidate/' + candidateId + '?tab=test';
             return urlOnTest;
         }
 

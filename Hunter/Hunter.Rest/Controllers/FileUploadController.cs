@@ -4,11 +4,13 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Hunter.Rest.Providers;
 using Hunter.Services;
 using Hunter.Services.Interfaces;
 
 namespace Hunter.Rest.Controllers
 {
+    [ExternalAuthorize]
     [RoutePrefix("api/fileupload")]
     public class FileUploadController : ApiController
     {

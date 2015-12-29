@@ -9,9 +9,11 @@ using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Hunter.Rest.Providers;
 
 namespace Hunter.Rest.Controllers
 {
+    [ExternalAuthorize]
     [RoutePrefix("api/file")]
     public class FileController : ApiController
     {

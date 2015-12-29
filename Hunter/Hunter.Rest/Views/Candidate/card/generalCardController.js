@@ -15,11 +15,10 @@
         '$filter',
         'LonglistHttpService',
         '$timeout',
-        'VacancyHttpService',
-        'isTechSpec'
+        'VacancyHttpService'
     ];
 
-    function GeneralCardController($routeParams, $scope, candidateHttpService, cardService, enumConstants, $location, $filter, longlistHttpService, $timeout, vacancyHttpService, isTechSpec) {
+    function GeneralCardController($routeParams, $scope, candidateHttpService, cardService, enumConstants, $location, $filter, longlistHttpService, $timeout, vacancyHttpService) {
         var vm = this;
         vm.templateToShow = '';
         vm.isLoad = true;

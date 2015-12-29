@@ -4,11 +4,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Hunter.Rest.Providers;
 using Hunter.Services.Dto;
 using Hunter.Services.Services.Interfaces;
 
 namespace Hunter.Rest.Controllers
 {
+    [ExternalAuthorize]
     [RoutePrefix("api/test")]
     public class TestController : ApiController
     {

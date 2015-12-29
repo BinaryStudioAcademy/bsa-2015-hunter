@@ -13,10 +13,11 @@
         'VacancyHttpService',
         'PoolsHttpService',
         'EnumConstants',
-        '$location'
+        '$location',
+        '$rootScope'
     ];
 
-    function vacancyListController($scope, $filter, vacancyHttpService, poolsHttpService, enumConstants, $location) {
+    function vacancyListController($scope, $filter, vacancyHttpService, poolsHttpService, enumConstants, $location, $rootScope) {
         var vm = this;
 
         vm.filterParams = {
@@ -29,6 +30,13 @@
             status: [],
             addedBy: []
         };
+
+        (function() {
+            if ($rootScope.errorMessage) {
+                alertify.error($rootScope.errorMessage);
+                $rootScope.errorMessage = null;
+            }
+        })();
 
         vm.totalCount = 0;
         vm.pools = [];

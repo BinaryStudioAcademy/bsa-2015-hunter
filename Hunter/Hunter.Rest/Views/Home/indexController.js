@@ -33,6 +33,7 @@
 
         $interval(callRefreshFunctions, 180000); //3 minutes
 
+
         function callRefreshFunctions() {
             getActivityAmount();
             getActiveNotifications();

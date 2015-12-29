@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Hunter.Rest.Providers;
 using Hunter.Services.Services;
 using Hunter.Tools.LinkedIn;
 
 namespace Hunter.Rest.Controllers
 {
+    [ExternalAuthorize]
     [RoutePrefix("api/Resume")]
     public class ResumeController : ApiController
     {

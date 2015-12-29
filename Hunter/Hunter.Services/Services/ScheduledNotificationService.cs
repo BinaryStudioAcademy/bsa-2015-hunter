@@ -117,7 +117,7 @@ namespace Hunter.Services
                     SendMail(currentEmail, body, idList);
                     body = string.Empty;
                 }
-                body += string.Format("{0}<br/><a href='{5}/#/candidate/{3}'>{1} {2}</a><br/>{4}<br/><br/>",
+                body += string.Format("{0}<br/><a href='{5}/./candidate/{3}'>{1} {2}</a><br/>{4}<br/><br/>",
                                              n.NotificationDate,
                                              n.Candidate.FirstName,
                                              n.Candidate.LastName,
