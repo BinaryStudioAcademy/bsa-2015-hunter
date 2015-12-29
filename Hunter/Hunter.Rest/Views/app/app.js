@@ -83,7 +83,16 @@ angular.module('hunter-app',
                     templateUrl: viewPath + 'candidate/card/generalCard.html',
                     controller: 'GeneralCardController',
                     controllerAs: 'generalCardCtrl',
-                    reloadOnSearch: false
+                    reloadOnSearch: false,
+                    resolve: {
+                        isTechSpec: function() {
+                            if (techSpec) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                    }
                 })
                 .when('/candidate/edit/:id', {
                     templateUrl: viewPath + 'candidate/addEdit/addEdit.html',
@@ -251,6 +260,7 @@ angular.module('hunter-app',
     ])
     .config(['$httpProvider', function ($httpProvider) {
         $httpProvider.interceptors.push('AuthInterceptorService');
+         $httpProvider.interceptors.push('responseObserver');
     }])
     .run(['AuthService', function (AuthService) {
         AuthService.fillAuthData();

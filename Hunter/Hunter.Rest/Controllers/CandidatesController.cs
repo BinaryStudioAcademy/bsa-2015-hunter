@@ -70,6 +70,7 @@ namespace Hunter.Rest.Controllers
 
 
         [HttpGet]
+        [CheckRole(Roles = "HR")]
         [Route("odata")]
         public IHttpActionResult GetOdata(ODataQueryOptions<CandidateDto> options)
         {

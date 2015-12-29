@@ -314,6 +314,7 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\CheckRole.cs" />
     <Compile Include="Providers\Config.cs" />
     <Compile Include="Providers\ExternalAuthorizeAttribute.cs" />
     <Compile Include="Providers\HunterJwtFormat.cs" />
@@ -881,6 +882,7 @@
     <Content Include="Views\services\helper\authService.js" />
     <Content Include="Views\services\files\uploadResumeService.js" />
     <Content Include="Views\services\helper\candidateStarDirective.js" />
+    <Content Include="Views\services\helper\httpErrorHandler.js" />
     <Content Include="Views\services\helper\httpHandler.js" />
     <Content Include="Views\services\home\indexHttpService.js" />
     <Content Include="Views\services\longlist\longlistHttpService.js" />
