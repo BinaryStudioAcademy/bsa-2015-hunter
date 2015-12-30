@@ -150,11 +150,11 @@ namespace Hunter.Services
                 return Api.Conflict(string.Format("Profile with e-mail {0} already exists", editedUserProfile.Login));
             }
 
-            var roleId = _roleMappingService.AddRoleMapping(editedUserProfile.Position);
-            if (roleId != 0)
-            {
-                editedUserProfile.RoleId = roleId;
-            }
+            //_roleMappingService.TransferRole(editedUserProfile.Position);
+            //if (roleId != 0)
+            //{
+            //    editedUserProfile.RoleId = roleId;
+            //}
             editedUserProfile.Map(profile, _unitOfWork);
             if (profile.IsNew())
             {

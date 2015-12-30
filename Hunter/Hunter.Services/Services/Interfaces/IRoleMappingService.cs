@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hunter.DataAccess.Entities.Entites;
+using Hunter.Services.Dto;
 
 namespace Hunter.Services.Services.Interfaces
 {
     public interface IRoleMappingService
     {
         IEnumerable<RoleMapping> GetAllInfo();
+        IEnumerable<RoleMappingDto> GetRoleMap();
         void Update(RoleMapping roleMapping);
-        int AddRoleMapping(string position);
+        string TransferRole(string authRole);
     }
 }

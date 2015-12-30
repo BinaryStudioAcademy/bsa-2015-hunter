@@ -16,7 +16,8 @@ namespace Hunter.Services.Extensions
             {
                 Id = r.Id,
                 RoleId = r.RoleId,
-                Position = r.Position
+                Position = r.Position,
+                RoleName = r.UserRole.Name
             });
         }
 
@@ -26,7 +27,8 @@ namespace Hunter.Services.Extensions
             {
                 Id = roleMapping.Id,
                 RoleId = roleMapping.RoleId,
-                Position = roleMapping.Position
+                Position = roleMapping.Position,
+                RoleName = roleMapping.UserRole.Name
             };
         }
 

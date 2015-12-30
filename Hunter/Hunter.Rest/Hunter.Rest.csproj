@@ -882,7 +882,6 @@
     <Content Include="Views\services\helper\authService.js" />
     <Content Include="Views\services\files\uploadResumeService.js" />
     <Content Include="Views\services\helper\candidateStarDirective.js" />
-    <Content Include="Views\services\helper\httpErrorHandler.js" />
     <Content Include="Views\services\helper\httpHandler.js" />
     <Content Include="Views\services\home\indexHttpService.js" />
     <Content Include="Views\services\longlist\longlistHttpService.js" />
