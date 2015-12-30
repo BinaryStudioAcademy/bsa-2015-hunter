@@ -31,8 +31,9 @@ namespace Hunter.Rest.Controllers
         {
             try
             {
-                var data = _roleMappingService.GetAllInfo().OrderByDescending(c => c.Position).ToUseRoleMappingDtos().ToList();
-                return Request.CreateResponse(HttpStatusCode.OK, data);
+                var data = _roleMappingService.GetAllInfo();
+                var a = data.OrderByDescending(c => c.Position).ToUseRoleMappingDtos().ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, a);
             }
             catch (Exception e)
             {

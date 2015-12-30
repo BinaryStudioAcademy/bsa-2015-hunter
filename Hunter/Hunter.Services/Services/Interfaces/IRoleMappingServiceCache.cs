@@ -8,9 +8,10 @@ using Hunter.Services.Dto;
 
 namespace Hunter.Services.Services.Interfaces
 {
-    public interface IRoleMappingService
+    public interface IRoleMappingServiceCache
     {
-        IEnumerable<RoleMapping> GetAllInfo();
-        void Update(RoleMapping roleMapping);
+        IEnumerable<RoleMappingDto> GetRoleMap();
+        string TransformRole(string authRole);
+        void InitializeMap();
     }
 }

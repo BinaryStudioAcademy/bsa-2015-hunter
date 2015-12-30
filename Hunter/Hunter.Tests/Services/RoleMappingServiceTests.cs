@@ -16,7 +16,7 @@ namespace Hunter.Tests.Services
 {
     class RoleMappingServiceTests
     {
-        IRoleMappingService _roleMappingService;
+        IRoleMappingServiceCache _roleMappingService;
         IRoleMappingRepository _roleMappingRepository;
         IUserRoleRepository _userRoleRepository;
         ILogger _logger;
@@ -27,7 +27,7 @@ namespace Hunter.Tests.Services
             _userRoleRepository = Substitute.For<IUserRoleRepository>();
             _logger = Substitute.For<ILogger>();
 
-            _roleMappingService = new RoleMappingService(_roleMappingRepository, _userRoleRepository, _logger);
+            _roleMappingService = new RoleMappingServiceCache(_roleMappingRepository, _userRoleRepository, _logger);
         }
 
         [SetUp]
@@ -56,7 +56,7 @@ namespace Hunter.Tests.Services
             var authRole = "Developer";
 
             // Act
-            var hunerRole = _roleMappingService.TransferRole(authRole);
+            var hunerRole = _roleMappingService.TransformRole(authRole);
 
             // Assert
             Assert.AreEqual("TechnicalSpecialist", hunerRole);
@@ -70,7 +70,7 @@ namespace Hunter.Tests.Services
             var authRole = "CEO";
 
             // Act
-            var hunerRole = _roleMappingService.TransferRole(authRole);
+            var hunerRole = _roleMappingService.TransformRole(authRole);
 
             // Assert
             Assert.AreEqual("Default", hunerRole);
@@ -83,7 +83,7 @@ namespace Hunter.Tests.Services
             var authRole = "ADMIN";
 
             // Act
-            var hunerRole = _roleMappingService.TransferRole(authRole);
+            var hunerRole = _roleMappingService.TransformRole(authRole);
 
             // Assert
             Assert.AreEqual("Admin", hunerRole);
