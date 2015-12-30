@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.ServiceModel.Security.Tokens;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Configuration;
 using Hunter.Rest.Providers;
@@ -11,7 +13,9 @@ using Microsoft.Owin.Security.Jwt;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using System.Web;
+using Microsoft.Owin.Extensions;
 using AuthenticationMode = Microsoft.Owin.Security.AuthenticationMode;
+
 
 namespace Hunter.Rest
 {
@@ -27,7 +31,6 @@ namespace Hunter.Rest
                 { "id", ClaimTypes.NameIdentifier },
                 { "role", ClaimTypes.Role }
             };
-
             app.UseJwtBearerAuthentication(
                 new JwtBearerAuthenticationOptions
                 {
@@ -42,8 +45,21 @@ namespace Hunter.Rest
                     },
                     Provider = new CookiesJwtOAuthProvider(),
                 });
+            //app.UseStageMarker(PipelineStage.Authenticate);
+            //app.UseClaimsTransformationComponent();
+            //app.UseStageMarker(PipelineStage.PostAuthorize);
         }
 
+    }
+
+    public static class AppBuilderExtensions
+    {
+        public static void UseClaimsTransformationComponent(this IAppBuilder appBuilder)
+        {
+            appBuilder.Use<ClaimsTransformationComponent>();
+        }
+
+        
     }
 
     class CustomJwtSecurityTokenHandler : JwtSecurityTokenHandler
@@ -57,6 +73,57 @@ namespace Hunter.Rest
                 jwt.Payload.AddClaim(new Claim("iss", "default")); // this is a hack
             }
             return jwt;
+        }
+    }
+
+    public class ClaimsTransformationComponent
+    {
+        private readonly Func<IDictionary<string, object>, Task> _nextComponent;
+
+        public ClaimsTransformationComponent(Func<IDictionary<string, object>, Task> appFunc)
+        {
+            if (appFunc == null) throw new ArgumentNullException("AppFunc of next component");
+            _nextComponent = appFunc;
+        }
+
+        public async Task Invoke(IDictionary<string, object> environment)
+        {
+            ClaimsPrincipal claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
+            if (claimsPrincipal != null)
+            {
+                ClaimsIdentity claimsIdentity = claimsPrincipal.Identity as ClaimsIdentity;
+                Debug.WriteLine("User authenticated in OWIN middleware: {0}", claimsIdentity.IsAuthenticated);
+                IEnumerable<Claim> claimsCollection = claimsPrincipal.Claims;
+                foreach (Claim claim in claimsCollection)
+                {
+                    Debug.WriteLine("Claim type in OWIN: {0}, claim value type: {1}, claim value: {2}", claim.Type, claim.ValueType, claim.Value);
+                }
+                IEnumerable<Claim> finalClaims = await Transform(claimsCollection);
+                ClaimsPrincipal extendedPrincipal = new ClaimsPrincipal(new ClaimsIdentity(finalClaims, "CustomAuthType"));
+                Thread.CurrentPrincipal = extendedPrincipal;
+                HttpContext.Current.User = extendedPrincipal;
+                environment["server.User"] = extendedPrincipal;
+            }
+            await _nextComponent(environment);
+
+            var newContext = HttpContext.Current.User;
+        }
+
+        private async Task<IEnumerable<Claim>> Transform(IEnumerable<Claim> initialClaims)
+        {
+            ClaimsTransformationService service = new ClaimsTransformationService();
+            IEnumerable<Claim> finalClaims = await service.TransformInititalClaims(initialClaims);
+            return finalClaims;
+        }
+    }
+
+    public class ClaimsTransformationService
+    {
+        public Task<IEnumerable<Claim>> TransformInititalClaims(IEnumerable<Claim> initialClaims)
+        {
+            var result = new List<Claim>(initialClaims);
+            result.Add(new Claim("transformed", "true"));
+            return Task.FromResult<IEnumerable<Claim>>(result);
         }
     }
 

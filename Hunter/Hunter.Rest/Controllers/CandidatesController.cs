@@ -9,6 +9,7 @@ using System.Web.Http.OData;
 using System.Web.Http.OData.Extensions;
 using System.Web.Http.OData.Query;
 using Hunter.DataAccess.Entities;
+using Hunter.DataAccess.Entities.Entites.Enums;
 using Hunter.Rest.Providers;
 using Hunter.Services.Dto;
 using Hunter.Services.Interfaces;
@@ -70,7 +71,8 @@ namespace Hunter.Rest.Controllers
 
 
         [HttpGet]
-        [CheckRole(Roles = "HR")]
+        [CheckRole(Role = new[] { "Recruiter", "Admin"})]
+        //[CheckRole(Role = new List<string> {"fgbh","fgh"})]
         [Route("odata")]
         public IHttpActionResult GetOdata(ODataQueryOptions<CandidateDto> options)
         {
@@ -87,7 +89,6 @@ namespace Hunter.Rest.Controllers
             }
             catch (Exception e)
             {
-
                 return BadRequest(e.Message);
             }
         }
