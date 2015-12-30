@@ -29,8 +29,15 @@ namespace Hunter.Services.Services
         public void InitializeMap()
         {
             RoleMap.Clear();
-            var data = _roleMappingRepository.Query().ToList();
-            data.ForEach(d => RoleMap.Add(d.Position, d.UserRole.Name));
+            try
+            {
+                var data = _roleMappingRepository.Query().ToList();
+                data.ForEach(d => RoleMap.Add(d.Position, d.UserRole.Name));
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+            }
         }
 
         public IEnumerable<RoleMappingDto> GetRoleMap()

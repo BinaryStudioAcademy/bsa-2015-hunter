@@ -129,11 +129,6 @@ namespace Hunter.DataAccess.Entities
                 .WithOptional(e => e.Vacancy)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<UserRole>()
-                .HasMany(e => e.UserProfile)
-                .WithRequired(e => e.UserRole)
-                .HasForeignKey(e => e.RoleId)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<UserRole>()
                 .HasMany(e => e.RoleMapping)

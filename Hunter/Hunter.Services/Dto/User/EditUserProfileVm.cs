@@ -14,8 +14,6 @@ namespace Hunter.Services.Dto.User
 
         public string Position { get; set; }
 
-        public string Role { get; set; }
-        public int RoleId { get; set; }
 
         public string Added { get; set; }
         //TODO figure out we need here role or no
@@ -29,8 +27,7 @@ namespace Hunter.Services.Dto.User
                 Login = user.UserLogin,
                 Position = user.Position,
                 Alias = user.Alias,
-                Added = user.Added.ToString("dd.MM.yy"),
-                Role = user.UserRole.Name 
+                Added = user.Added.ToString("dd.MM.yy")
             };
         }
 
@@ -39,7 +36,6 @@ namespace Hunter.Services.Dto.User
             user.UserLogin = Login;
             user.Position = Position;
             user.Alias = Alias;
-            user.RoleId = RoleId;
         }
     }
 }

@@ -65,19 +65,19 @@ namespace Hunter.Services
         private readonly IUserProfileRepository _profileRepo;
         private readonly IUserRoleService _roleService;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IRoleMappingService _roleMappingService;
+        private readonly IRoleMappingServiceCache _roleMappingServiceCache;
 
         public UserProfileService(
             IActivityHelperService activityHelperService,
             IUserProfileRepository profileRepo,
             IUnitOfWork unitOfWork,
-            IUserRoleService userRoleService, IRoleMappingService roleMappingService)
+            IUserRoleService userRoleService, IRoleMappingServiceCache roleMappingServiceCache)
         {
             _activityHelperService = activityHelperService;
             _profileRepo = profileRepo;
             _unitOfWork = unitOfWork;
             _roleService = userRoleService;
-            _roleMappingService = roleMappingService;
+            _roleMappingServiceCache = roleMappingServiceCache;
         }
 
         //todo new figure out
@@ -87,10 +87,10 @@ namespace Hunter.Services
             try
             {
                 var role = _roleService.GetRoleByName(roleName);
-                var users = _profileRepo.Query().Where(x => x.RoleId == role.Id);
-                //var newuser=users    .Select(x => x.ToUserProfileDto()).ToList();
-                return users.ToUserProfilesDto().ToList();
-
+                //var users = _profileRepo.Query().Where(x => x.RoleId == role.Id);
+                ////var newuser=users    .Select(x => x.ToUserProfileDto()).ToList();
+                //return users.ToUserProfilesDto().ToList();
+                return null;
             }
             catch (Exception)
             {
@@ -149,12 +149,13 @@ namespace Hunter.Services
             {
                 return Api.Conflict(string.Format("Profile with e-mail {0} already exists", editedUserProfile.Login));
             }
-
+            var role = _roleMappingServiceCache.TransformRole(editedUserProfile.Position);
             //_roleMappingService.TransferRole(editedUserProfile.Position);
             //if (roleId != 0)
             //{
             //    editedUserProfile.RoleId = roleId;
             //}
+            //editedUserProfile.RoleId = 1;
             editedUserProfile.Map(profile, _unitOfWork);
             if (profile.IsNew())
             {

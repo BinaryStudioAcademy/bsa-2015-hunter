@@ -36,9 +36,7 @@ namespace Hunter.DataAccess.Entities
         [Column("LViewedActivity")]
         public int LastViewedActivityId { get; set; }
 
-        public int RoleId { get; set; }
 
-        public virtual UserRole UserRole { get; set; }
 
         public virtual ICollection<Candidate> Candidate { get; set; }
 

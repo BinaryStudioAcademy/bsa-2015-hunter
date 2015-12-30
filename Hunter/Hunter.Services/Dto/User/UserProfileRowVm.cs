@@ -19,8 +19,6 @@ namespace Hunter.Services.Dto.User
 
         public string Added { get; set; }
 
-        public int RoleId { get; set; }
-
         public static UserProfileRowVm Create(UserProfile user)
         {
 
@@ -29,8 +27,7 @@ namespace Hunter.Services.Dto.User
                 Id = user.Id,
                 Login = user.UserLogin,
                 Alias = user.Alias,
-                Position = user.Position,
-                RoleId = user.RoleId
+                Position = user.Position
             };
         }
     }
