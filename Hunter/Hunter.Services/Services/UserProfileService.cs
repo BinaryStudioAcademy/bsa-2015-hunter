@@ -86,25 +86,19 @@ namespace Hunter.Services
         {
             try
             {
-                var role = _roleService.GetRoleByName(roleName);
-                //var users = _profileRepo.Query().Where(x => x.RoleId == role.Id);
-                ////var newuser=users    .Select(x => x.ToUserProfileDto()).ToList();
-                //return users.ToUserProfilesDto().ToList();
-                return null;
+                var roles = _roleService.GetRoleByName(roleName).RoleMapping;
+                var users = _profileRepo.Query().ToList();
+
+                var us = from role in roles
+                    join user in users on role.Position.ToLower() equals user.Position.ToLower()
+                    select new UserProfileDto() {Alias = user.Alias,Id= user.Id,Login = user.UserLogin, Position = user.Position};
+
+                return us.ToList();
             }
             catch (Exception)
             {
                 return null;
             }
-
-            //var users = _roleRepository
-            //    .Query()
-            //    .Where(e => e.Name == roleName)
-            //    .FirstOrDefault()
-            //    .UserProfile
-            //    .Select(e => UserProfileRowVm.Create(_profileRepo.Get(e.Id)));
-            //return users;
-            //return null;
         }
 
         public bool UserExist(string userName)

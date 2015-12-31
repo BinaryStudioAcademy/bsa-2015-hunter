@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Hunter.DataAccess.Entities;
 using Hunter.Services.Dto;
 
 namespace Hunter.Services
@@ -12,6 +13,6 @@ namespace Hunter.Services
         void DeleteUserRole(int id);
         bool IsRoleExist(string name);
         bool IsRoleExist(int id);
-        UserRoleDto GetRoleByName(string name);
+        UserRole GetRoleByName(string name);
     }
 }

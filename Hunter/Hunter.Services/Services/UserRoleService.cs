@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Hunter.Common.Interfaces;
+using Hunter.DataAccess.Entities;
 using Hunter.DataAccess.Interface;
 using Hunter.DataAccess.Interface.Base;
 using Hunter.Services.Dto;
@@ -116,9 +117,9 @@ namespace Hunter.Services
             }
         }
 
-        public UserRoleDto GetRoleByName(string name)
+        public UserRole GetRoleByName(string name)
         {
-            return _userRoleRepository.Query().FirstOrDefault(x => x.Name == name).ToUserRoleDto();
+            return _userRoleRepository.Query().FirstOrDefault(x => x.Name == name);
         }
     }
 }
