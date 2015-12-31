@@ -90,7 +90,7 @@ namespace Hunter.Rest
             kernel.Bind<ICardService>().To<CardService>();
             kernel.Bind<IScheduledNotificationService>().To<ScheduledNotificationService>();
             kernel.Bind<IRoleMappingService>().To<RoleMappingService>();
-            kernel.Bind<IRoleMappingServiceCache>().To<RoleMappingServiceCache>().InSingletonScope();
+            kernel.Bind<IRoleMappingServiceCache>().To<RoleMappingServiceCache>();
             #endregion
 
             kernel.Bind<Common.Interfaces.ILogger>().To<Logger>();

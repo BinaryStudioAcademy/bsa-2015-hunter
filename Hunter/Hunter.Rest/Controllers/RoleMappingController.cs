@@ -14,6 +14,7 @@ using Hunter.Services.Services.Interfaces;
 namespace Hunter.Rest.Controllers
 {
     [ExternalAuthorize]
+    [CheckRole(Role = new []{"Admin"})]
     [RoutePrefix("api/roleMapping")]
     public class RoleMappingController : ApiController
     {

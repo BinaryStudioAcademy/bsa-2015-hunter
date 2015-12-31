@@ -7,7 +7,6 @@ using Hunter.Tools.LinkedIn;
 
 namespace Hunter.Rest.Controllers
 {
-    [ExternalAuthorize]
     [RoutePrefix("api/Resume")]
     public class ResumeController : ApiController
     {

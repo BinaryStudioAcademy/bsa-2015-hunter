@@ -24,9 +24,6 @@ namespace Hunter.DataAccess.Entities
         //public virtual ICollection<User> Users { get; set; }
 
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserProfile> UserProfile { get; set; }
-
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RoleMapping> RoleMapping { get; set; }

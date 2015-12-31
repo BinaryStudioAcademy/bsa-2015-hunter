@@ -229,7 +229,7 @@ namespace Hunter.Rest.Controllers
             }
         }
 
-
+        [CheckRole(Role = new[] { "Recruiter", "Admin" })]
         [HttpPost]
         [Route("")]
         public HttpResponseMessage Post(CandidateDto candidate)
@@ -246,7 +246,7 @@ namespace Hunter.Rest.Controllers
 
             }
         }
-
+        [CheckRole(Role = new[] { "Recruiter", "Admin" })]
         [HttpPut]
         [Route("{id:int}")]
         public HttpResponseMessage Put(int id, CandidateDto candidate)

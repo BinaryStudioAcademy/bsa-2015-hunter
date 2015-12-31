@@ -144,13 +144,21 @@ namespace Hunter.Services
         //TODO important fix this 
         public ApiResult Save(EditUserProfileVm editedUserProfile)
         {
-            var profile = CheckIfUserExist(editedUserProfile);
+            UserProfile profile = null;
+            try
+            {
+                profile = CheckIfUserExist(editedUserProfile);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception:", ex.Message);
+            }
             if (profile == null)
             {
                 return Api.Conflict(string.Format("Profile with e-mail {0} already exists", editedUserProfile.Login));
             }
             var role = _roleMappingServiceCache.TransformRole(editedUserProfile.Position);
-            //_roleMappingService.TransferRole(editedUserProfile.Position);
+            //_roleMappingServiceCache.TransformRole(editedUserProfile.Position);
             //if (roleId != 0)
             //{
             //    editedUserProfile.RoleId = roleId;
@@ -267,10 +275,16 @@ namespace Hunter.Services
             var same = _profileRepo.Get(pr => pr.UserLogin == editedUserProfile.Login);
             if (same != null && same.Id != profile.Id)
                 return null;
-
-            same = _profileRepo.Get(pr => pr.Alias == editedUserProfile.Alias);
-            if (same != null && same.Id != profile.Id)
-                return null;
+            try
+            {
+                same = _profileRepo.Get(pr => pr.Alias == editedUserProfile.Alias);
+                if (same != null && same.Id != profile.Id)
+                    return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error: ",ex.Message);
+            }
 
 
             return new UserProfile();

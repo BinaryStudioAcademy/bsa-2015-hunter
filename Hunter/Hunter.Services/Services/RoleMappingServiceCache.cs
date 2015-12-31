@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Hunter.Common.Interfaces;
+using Hunter.DataAccess.Entities;
 using Hunter.DataAccess.Entities.Entites;
 using Hunter.Services.Dto;
 using Hunter.DataAccess.Entities.Entites.Enums;
@@ -32,7 +33,7 @@ namespace Hunter.Services.Services
             try
             {
                 var data = _roleMappingRepository.Query().ToList();
-                data.ForEach(d => RoleMap.Add(d.Position, d.UserRole.Name));
+                data.ForEach(d => RoleMap.Add(d.Position.ToLower(), d.UserRole.Name));
             }
             catch (Exception ex)
             {
@@ -56,24 +57,33 @@ namespace Hunter.Services.Services
 
         public string TransformRole(string authRole)
         {
-            var hunterRole = RoleMap.FirstOrDefault(x => x.Key == authRole);
+            string authRoleToLow = authRole.ToLower();
+            var hunterRole = RoleMap.FirstOrDefault(x => x.Key == authRoleToLow);
             if (hunterRole.Key != null)
             {
                 return hunterRole.Value;
             }
 
-            InitializeMap();
-            hunterRole = RoleMap.FirstOrDefault(x => x.Key == authRole);
-            if (hunterRole.Key != null)
+            //InitializeMap();
+            //hunterRole = RoleMap.FirstOrDefault(x => x.Key == authRole);
+            //if (hunterRole.Key != null)
+            //{
+            //    return hunterRole.Value;
+            //}
+            UserRole roleDefault = null;
+            try
             {
-                return hunterRole.Value;
+                roleDefault = _roleRepository.Get(x => x.Name == Roles.Default.ToString());
             }
-            var roleDefault = _roleRepository.Get(x => x.Name == Roles.Default.ToString());
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+            }
             try
             {
                 _roleMappingRepository.UpdateAndCommit(new RoleMapping()
                 {
-                    Position = authRole,
+                    Position = authRoleToLow,
                     RoleId = roleDefault.Id
                 });
                 InitializeMap();

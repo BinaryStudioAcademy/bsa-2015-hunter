@@ -43,6 +43,7 @@ namespace Hunter.Rest.Controllers
 
         // GET: api/userprofile
         // GET: api/userprofile?page=1
+        [CheckRole(Role = new[] { "Admin" })]
         [HttpGet]
         [Route("")]
         public IEnumerable<UserProfileRowVm> GetPage([FromUri(Name = "page")]int page = 1)
@@ -51,6 +52,7 @@ namespace Hunter.Rest.Controllers
         }
 
         // GET: api/userprofile/5
+        [CheckRole(Role = new[] { "Admin" })]
         [HttpGet]
         [Route("{id:int}")]
         public IHttpActionResult Get(int id)
@@ -59,6 +61,7 @@ namespace Hunter.Rest.Controllers
         }
 
         // GET: api/userprofile/page/1
+        [CheckRole(Role = new[] { "Admin" })]
         [HttpGet]
         [Route("page/{id:int}")]
         public IEnumerable<UserProfileRowVm> GetPageV2(int id)
@@ -67,6 +70,7 @@ namespace Hunter.Rest.Controllers
         }
 
         // POST: api/Pool - add new profile
+        [CheckRole(Role = new[] { "Admin" })]
         [HttpPost]
         [Route("")]
         public IHttpActionResult Post([FromBody] EditUserProfileVm profileVm)
@@ -75,6 +79,7 @@ namespace Hunter.Rest.Controllers
         }
 
         // PUT: api/Pool - add new profile
+        [CheckRole(Role = new[] { "Admin" })]
         [HttpPut]
         [Route("")]
         public IHttpActionResult Put([FromBody] EditUserProfileVm profileVm)
@@ -83,6 +88,7 @@ namespace Hunter.Rest.Controllers
         }
 
         // DELETE: api/Pool/5
+        [CheckRole(Role = new[] { "Admin" })]
         [HttpDelete]
         [Route("{id:int}")]
         public IHttpActionResult Delete(int id)

@@ -228,6 +228,10 @@
     <Compile Include="Migrations\201512301526011_deleteRoleFromUserProfile.Designer.cs">
       <DependentUpon>201512301526011_deleteRoleFromUserProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512301650510_totalDeleteRoleFromProfile.cs" />
+    <Compile Include="Migrations\201512301650510_totalDeleteRoleFromProfile.Designer.cs">
+      <DependentUpon>201512301650510_totalDeleteRoleFromProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -339,6 +343,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512301526011_deleteRoleFromUserProfile.resx">
       <DependentUpon>201512301526011_deleteRoleFromUserProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512301650510_totalDeleteRoleFromProfile.resx">
+      <DependentUpon>201512301650510_totalDeleteRoleFromProfile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,7 @@ using Hunter.Services.Services.Interfaces;
 
 namespace Hunter.Rest.Controllers
 {
-    [ExternalAuthorize]
+    
     [RoutePrefix("api/test")]
     public class TestController : ApiController
     {

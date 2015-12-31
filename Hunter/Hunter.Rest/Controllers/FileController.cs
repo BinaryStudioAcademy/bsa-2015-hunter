@@ -13,7 +13,6 @@ using Hunter.Rest.Providers;
 
 namespace Hunter.Rest.Controllers
 {
-    [ExternalAuthorize]
     [RoutePrefix("api/file")]
     public class FileController : ApiController
     {

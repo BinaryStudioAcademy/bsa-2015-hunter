@@ -124,7 +124,7 @@ namespace Hunter.Rest.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
         }
-
+        [CheckRole(Role = new[] { "Recruiter", "Admin" })]
         [HttpPost]
         [Route("")]
         public HttpResponseMessage Post(VacancyDto value)
@@ -145,7 +145,7 @@ namespace Hunter.Rest.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
         }
-
+        [CheckRole(Role = new[] { "Recruiter", "Admin" })]
         [HttpPut]
         [Route("{id:int}")]
         public HttpResponseMessage Update(int id, VacancyDto value)

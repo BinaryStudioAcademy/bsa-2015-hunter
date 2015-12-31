@@ -10,7 +10,6 @@ using Hunter.Services.Interfaces;
 
 namespace Hunter.Rest.Controllers
 {
-    [ExternalAuthorize]
     [RoutePrefix("api/fileupload")]
     public class FileUploadController : ApiController
     {
