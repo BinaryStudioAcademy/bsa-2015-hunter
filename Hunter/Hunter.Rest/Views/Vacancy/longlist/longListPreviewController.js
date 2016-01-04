@@ -29,7 +29,6 @@
         vm.changeTemplate = changeTemplate;
         vm.showResume = showResume;
 
-        vm.isPreviewShown = false;
         vm.stages = EnumConstants.cardStages;
         vm.resolutions = EnumConstants.resolutions;
         vm.feedbackTypes = EnumConstants.feedbackTypes;
@@ -43,7 +42,7 @@
         vm.templateToShow = '';
 
        
-        $rootScope.$watch(
+        /*$rootScope.$watch(
             '$root.candidatePreview.cid',
             function () {
                 vm.vacancyId = $rootScope.candidatePreview.vid;
@@ -55,12 +54,16 @@
                     vm.isPreviewShown = true;
                     vm.changeTemplate(vm.tabs[2]);
                 }
-            });
+            });*/
+        $scope.$on('candidateSelected',function(event,item, vacancyId){
+                    vm.vacancyId = vacancyId;
+                    getCandidateDetails(item.id);
+                    vm.changeTemplate(vm.tabs[2]);
+                })
 
         function hideCandidatePreview() {
             $scope.$emit('hideCandidatePreview');
             $rootScope.candidatePreview.cid = 0;
-            vm.isPreviewShown = false;
         }
 
         vm.overviews = [];
@@ -101,8 +104,8 @@
             longlistHttpService.removeCard(vm.vacancyId, cid);
             
             $timeout(function () {
-                vm.isPreviewShown = false;
-                $scope.$emit('getCardsAfterCardDeleting');
+                $route.reload();
+                //$scope.$emit('getCardsAfterCardDeleting');
             }, 1200);
 
             //$route.reload();

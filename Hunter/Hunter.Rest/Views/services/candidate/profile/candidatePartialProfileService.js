@@ -14,6 +14,8 @@
 
         function changeTemplate(templateRoute) {
             switch (templateRoute.toLowerCase()) {
+                case 'overview':
+                    return viewsPath + 'profilePartialOverview.html';
                 case 'specialnotes':
                     return viewsPath + 'profilePartialSpecialNotes.html';
                 case 'appresults':
@@ -23,12 +25,14 @@
                     return '';
             }
         }
-        function isCurrentTabEmpty(route, notes, appresults) {
+        function isCurrentTabEmpty(route, overviews, notes, appresults) {
             switch (route.toLowerCase()) {
+                case 'overview':
+                    return overviews.length > 0 ? true : false;
                 case 'specialnotes':
                     return notes.length > 0 ? true : false;
                 case 'appresults':
-                    return appresults.length > 0 ? true: false;
+                    return appresults.length > 0 ? true : false;
                 default:
                     return false;
             }

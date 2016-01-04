@@ -1,5 +1,5 @@
-﻿<div class="container-partial" ng-controller='LongListPreviewController as llPreviewCtrl'>
-    <div ng-if="llPreviewCtrl.isPreviewShown" class="row ll_preview" spinner="llPreviewCtrl.prevLoad">
+﻿<div class="card-container-partial" ng-controller='LongListPreviewController as llPreviewCtrl' ng-show='show'>
+    <div class="row ll_preview" spinner="llPreviewCtrl.prevLoad">
         <div class="col-md-12">
             <p class="ll_close_button" ng-click="llPreviewCtrl.hideCandidatePreview(llPreviewCtrl.candidateDetails.id)"><span class=" glyphicon glyphicon-remove"></span></p>
             <h2>Preview</h2>

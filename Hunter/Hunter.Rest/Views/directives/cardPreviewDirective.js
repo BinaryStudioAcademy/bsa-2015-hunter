@@ -8,7 +8,7 @@
     function CardPreviewDirective() {
         return {
         	restrict: 'E',
-            templateUrl: function(elem, attr){
+            templateUrl: './Views/Candidate/profilePartial/profilePartial.html'/*function(elem, attr){
             		switch(attr.type) {
 					    case 'pool':
 					        return './Views/Candidate/profilePartial/profilePartial.html';
@@ -16,17 +16,17 @@
 					        return './Views/Vacancy/longlist/longlistPreview.html';
 					        break;
 					}
-    			},
+    			}*/,
     		scope: {
 		      	//show: '=',
-		      	candidate: '='
+		      	//candidate: '='
 		    },
     		link: function(scope, elem, attr) {
     			    $(document).click(function(event) {
 		                if (!firstUse) {
 		                    var some = $(event.target),
 		                        parentLength = some.parents(".card-container-partial").length,
-		                        itemLength = some.parents(".candidate").length;
+		                        itemLength = some.parents(".candidate-list").length;
 		                    if (!parentLength && !itemLength) {
 		                        scope.hideView();
 		                        if (!scope.$$phase) {

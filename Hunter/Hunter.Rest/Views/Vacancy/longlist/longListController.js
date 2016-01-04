@@ -45,9 +45,12 @@
         };
 
         vm.activateItemId = 0;
-        function viewCandidateInfo(cid) {
-            $rootScope.candidatePreview.cid = cid;
-            vm.activateItemId = cid;
+        function viewCandidateInfo(candidate) {
+            //$rootScope.candidatePreview.cid = cid;
+            //vm.activateItemId = cid;
+            vm.selectedItem = candidate;
+            vm.activateItemId = candidate.id;
+            $scope.$broadcast('candidateSelected',candidate, $routeParams.id);
         }
 
         $scope.$on('hideCandidatePreview', function () {
@@ -74,9 +77,9 @@
             longlistHttpService.getOdataLongList(filter).then(function (result) {
                 vm.candidatesList = result.items;
                 vm.listSpinner = false;
-                if (vm.candidatesList.length > 0) {
+                /*if (vm.candidatesList.length > 0) {
                     vm.viewCandidateInfo(vm.candidatesList[0].id);
-                }
+                }*/
                 vm.totalItems = result.count;
             });
         };

@@ -39,8 +39,8 @@ body {
 .card-container-partial {
     position: absolute;
     z-index: 99999;
-    left: 59%;
-    width: 40%;
+    left: 63%;
+    width: 36%;
     background: white;
     margin: 0;
 }
@@ -250,7 +250,7 @@ body {
         margin-right: 0;
     }
     .card-container-partial {
-    left: 65%;
+    left: 66%;
     width: 30%;
 }
 }

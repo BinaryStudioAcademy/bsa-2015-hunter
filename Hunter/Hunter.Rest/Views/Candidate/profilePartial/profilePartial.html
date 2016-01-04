@@ -13,24 +13,31 @@
                     <div>
                         <a href="./candidate/{{candidatePartCtrl.candidate.id}}">{{candidatePartCtrl.candidate.firstName + " " + candidatePartCtrl.candidate.lastName}}</a>
                     </div>
-                    <div>{{candidatePartCtrl.candidate.salary}}</div>
+                    <div>
+                        <p>{{candidatePartCtrl.candidate.salary}}</p>
+                        <p title="Resolution / Stage" ng-show='candidatePartCtrl.isLongList'>
+                            {{candidatePartCtrl.resolutions[candidatePartCtrl.candidate.resolution].name}} / {{candidatePartCtrl.stages[candidatePartCtrl.candidate.stage].name}}
+                        </p>
+                    </div>
                     <div class="group-btn">
                         <a class="btn btn-default" href="./candidate/{{candidatePartCtrl.candidate.id}}" title="Full Profile"><i class="fa fa-newspaper-o"></i></a>
                         <a class="btn btn-default" href="./candidate/edit/{{candidatePartCtrl.candidate.id}}" title="Edit Profile"><i class="fa fa-pencil"></i></a>
                         <a class="btn btn-default" ng-show="candidatePartCtrl.candidate.lastResumeUrl != ''" ng-click="candidatePartCtrl.showResume()" title="View Resume"><i class="fa fa-file-text-o"></i></a>
                         <!--<input class="btn btn-default" type="button" value='<i class="fa fa-file-text-o"></i>' title="View Resume" ng-click="candidatePartCtrl.showResume()" ng-disabled="candidatePartCtrl.candidate.lastResumeUrl==''">-->
-                        <a class="btn btn-default" ng-show="candidatePartCtrl.candidate.linkedin != ''" href="{{candidatePartCtrl.candidate.linkedin}}" target="_blank" title="View LinkedIn Profile"><i class="fa fa-linkedin-square"></i></a>
+                        <a class="btn btn-default" ng-show="candidatePartCtrl.candidate.linkedin != ''" href="{{candidatePartCtrl.candidate.linkedin}}" target="_blank" title="View LinkedIn Profile"><i class="fa fa-linkedin-square">
+                        </i></a>
+                        <a class="btn btn-default" ng-show="candidatePartCtrl.isLongList" ng-click="candidatePartCtrl.removeCard(candidatePartCtrl.candidate.id)" title="Remove from List"><i class="fa fa-minus-square-o"></i></a>
                     </div>
                 </div>
                 <div class="personal-info">
-                    <div>Current/Past: {{candidatePartCtrl.candidate.currentPosition}}</div>
+                    <!--<div>Current/Past: {{candidatePartCtrl.candidate.currentPosition}}</div>
                     <div>Years of experience: {{candidatePartCtrl.candidate.yearsOfExperience}}</div>
                     <div>Company/Location: {{candidatePartCtrl.candidate.company+", "+candidatePartCtrl.candidate.location}}</div>
                     <div>Email: {{candidatePartCtrl.candidate.email}}</div>
                     <div>Skype: {{candidatePartCtrl.candidate.skype}}</div>
-                    <div>Phone: {{candidatePartCtrl.candidate.phone}}</div>
+                    <div>Phone: {{candidatePartCtrl.candidate.phone}}</div>-->
                 </div>
-                <div class="candidate-resolution form-inline">
+                <div class="candidate-resolution form-inline" ng-hide='candidatePartCtrl.isLongList'>
                     <label>Resolution</label>
                     <select class="form-control" name="resolution" ng-change="candidatePartCtrl.updateResolution()" ng-model="candidatePartCtrl.candidate.resolution" ng-options="resolution.id as resolution.name for resolution in candidatePartCtrl.resolutions"></select>
                 </div>
