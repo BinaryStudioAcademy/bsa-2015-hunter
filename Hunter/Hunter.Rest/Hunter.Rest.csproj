@@ -817,6 +817,7 @@
     <Content Include="Views\Candidate\profilePartial\candidatePartialController.js" />
     <Content Include="Views\Candidate\profilePartial\profilePartial.html" />
     <Content Include="Views\Candidate\profilePartial\profilePartialAppResults.html" />
+    <Content Include="Views\Candidate\profilePartial\profilePartialOverview.html" />
     <Content Include="Views\Candidate\profilePartial\profilePartialSpecialNotes.html" />
     <Content Include="Views\Candidate\profile\candidateProfileController.js" />
     <Content Include="Views\Candidate\profile\profile.html" />
@@ -915,12 +916,9 @@
     <Content Include="Views\Vacancy\list\vacancyListController.js" />
     <Content Include="Views\Vacancy\list\list.html" />
     <Content Include="Views\services\pool\poolsHttpService.js" />
-    <Content Include="Views\vacancy\longlist\longListPreview.html" />
-    <Content Include="Views\vacancy\longlist\longListPreviewController.js" />
+    <Content Include="Views\vacancy\longlist\longlistLarge.html" />
     <Content Include="Views\vacancy\longlist\longListService.js" />
-    <Content Include="Views\vacancy\longlist\previewAppResults.html" />
-    <Content Include="Views\vacancy\longlist\previewOverview.html" />
-    <Content Include="Views\vacancy\longlist\previewSpecialNotes.html" />
+    <Content Include="Views\vacancy\longlist\longlistTable.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

@@ -16,7 +16,7 @@ namespace Hunter.Services.Dto
         public int Stage { get; set; }
         public string PhotoUrl { get; set; }
         public string Linkedin { get; set; }
-        public bool Shortlisted { get; set; }
+        public bool ShortListed { get; set; }
         public string UserAlias { get; set; }
         public string LastResumeUrl { get; set; }
         public IEnumerable<string> PoolNames { get; set; }

@@ -122,7 +122,7 @@ namespace Hunter.Services
                 Resolution = (int)candidate.Resolution,
                 Linkedin = candidate.Linkedin,
                 Stage = card != null ? card.Stage : 0,
-                Shortlisted = candidate.Shortlisted,
+                ShortListed = candidate.Shortlisted,
                 UserAlias = candidate.UserProfile != null ? candidate.UserProfile.Alias : "",
                 LastResumeUrl = candidate.Resume.Count > 0 ? "api/file/open/" + candidate.Resume.LastOrDefault().FileId : "",
                 PoolNames = candidate.Pool.Select(x => x.Name)
