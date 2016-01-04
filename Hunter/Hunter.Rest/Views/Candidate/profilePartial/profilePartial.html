@@ -1,8 +1,8 @@
-﻿<div class="container-partial-in-pool" ng-controller='CandidatePartialController as candidatePartCtrl'>
+﻿<div class="card-container-partial" ng-controller='CandidatePartialController as candidatePartCtrl' ng-show='show'>
     <span> {{candidatesListCtrl.showDetails}}</span>
     <div ng-if="!candidatePartCtrl.isEmpty" spinner='candidatePartCtrl.prevLoad' class="row ll_preview">
         <div class="col-md-12">
-            <p class="ll_close_button" ng-click="candidatePartCtrl.closeModal()"><span class=" glyphicon glyphicon-remove"></span></p>
+            <p class="ll_close_button" ng-click="hideView()"><span class=" glyphicon glyphicon-remove"></span></p>
             <h2>Preview</h2>
             <div class="ll_preview_info">
                 <div class="ll_preview_info_img">

@@ -828,6 +828,7 @@
     <Content Include="Views\Candidate\profile\profileSpecialNotesController.js" />
     <Content Include="Views\Candidate\profile\profileTests.html" />
     <Content Include="Views\Candidate\profile\profileTestsController.js" />
+    <Content Include="Views\directives\cardPreviewDirective.js" />
     <Content Include="Views\pool_page\addEdit\addEdit.html" />
     <Content Include="Views\pool_page\addEdit\poolPageAddEditController.js" />
     <Content Include="Views\pool_page\list\list.html" />

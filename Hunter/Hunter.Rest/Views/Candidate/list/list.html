@@ -115,7 +115,8 @@
             </div>
         </div>
         <!--<div class="col-md-4 partial-candidate-details" ng-show="$root.candidateDetails.show" ng-include="'./Views/candidate/profilePartial/profilePartial.html'"></div>-->
-        <div class="col-md-4 partial-candidate-details" ng-show="candidateListCtrl.showDetails" ng-include="'./Views/candidate/profilePartial/profilePartial.html'"></div>
+        <!--<div class="col-md-4 partial-candidate-details" ng-show="candidateListCtrl.showDetails" ng-include="'./Views/candidate/profilePartial/profilePartial.html'"></div>-->
+        <card-preview type='pool' candidate='candidateListCtrl.selectedItem'> </card-preview>
     </div>
 </div>
 

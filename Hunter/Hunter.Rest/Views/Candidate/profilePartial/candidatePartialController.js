@@ -13,12 +13,11 @@
         'CandidateHttpService',
         'EnumConstants',
         'LonglistHttpService',
-        'SpecialNoteHttpService',
-        'CandidatePartialProfileService'
+        'SpecialNoteHttpService'
     ];
 
     function CandidatePartialController($scope, $location, $rootScope, authService, candidateHttpService, EnumConstants,
-        longlistHttpService, specialNoteHttpService, candidatePartialProfileService) {
+        longlistHttpService, specialNoteHttpService) {
         var vm = this,
             firstUse = true;
         //Here we should write all vm variables default values. For Example:
@@ -39,9 +38,23 @@
         vm.updateResolution = updateResolution;
         vm.changeTemplate = changeTemplate;
         vm.showResume = showResume;
-        vm.closeModal = closeModal;
 
-        $rootScope.$watch(
+        $scope.$on('candidateSelected',function(event,item){
+                    getCandidateDetails(item.id);
+                })
+
+        //getCandidateDetails(cardPreviewDirectiveService.candidate.id);
+        /*$scope.$watch('cardPreviewDirectiveService.candidate.id',
+            function(){
+                if (!cardPreviewDirectiveService.candidate.id) {
+                    getCandidateDetails(cardPreviewDirectiveService.candidate.id);
+                };
+            }
+            );*/
+
+        //vm.closeModal = closeModal;
+
+        /*$rootScope.$watch(
             '$root.candidateDetails.id',
             function () {
                 if (!$rootScope.candidateDetails.id) {
@@ -51,7 +64,7 @@
                     vm.isEmpty = false;
                     vm.changeTemplate(vm.tabs[1]);
                 }
-            });
+            });*/
 
         $rootScope.$watch(
             '$root.candidateDetails.shortListed',
@@ -61,7 +74,7 @@
                 }
             });
 
-        (function() {
+        /*(function() {
             $(document).click(function(event) {
                 if (!firstUse) {
                     var some = $(event.target),
@@ -87,7 +100,7 @@
                     $rootScope.$digest();
                 }, 100);
             }
-        }
+        }*/
 
 
         function getCandidateDetails(id) {

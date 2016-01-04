@@ -27,11 +27,12 @@
         //Here we should write all vm variables default values. For Example:
         vm.name = 'Candidates';
         vm.showDetails = false;
+        vm.selectedItem = {};
 
-        $rootScope.candidateDetails = {
+        /*$rootScope.candidateDetails = {
             id: null,
             show: false
-        };
+        };*/
         //vm.tableSize = 'col-md-9';
         vm.sortOptions = [];
         vm.pageSize = [25, 50, 75, 100]
@@ -81,8 +82,21 @@
             vm.getCandidates(filter);
         });
 
-        vm.ShowDetails = function (item) {
-            if ($rootScope.candidateDetails.id != item.id) {
+        vm.ShowDetails = function(item){
+            vm.selectedItem = item;
+            $scope.$broadcast('candidateSelected',item);
+        }
+        /*function (item) {
+
+            if (vm.selectedItem.id != item.id) {
+                vm.selectedItem = item;
+                vm.showDetails = true;
+            } else if (vm.selectedItem.id === item.id && vm.showDetails === true) {
+                vm.showDetails = false;
+            } else {
+                vm.showDetails = true;
+            }
+            /*if ($rootScope.candidateDetails.id != item.id) {
                 $rootScope.candidateDetails.id = item.id;
                 //$rootScope.candidateDetails.show = true;
                 $scope.candidateListCtrl.showDetails = true;
@@ -99,15 +113,14 @@
                 $('.container-partial-in-pool').show();
                 //vm.tableSize = 'col-md-5';
             }
-        }
-
+        }*/
         vm.ActiveTr = function (id) {
-            if (id == $rootScope.candidateDetails.id && $rootScope.candidateDetails.show === true) {
+            /*if (id == $rootScope.candidateDetails.id && $rootScope.candidateDetails.show === true) {
                 return 'info';
             }
-            else {
+            else*/ {
                 return '';
-            }
+            };
         }
 
         // signatures for user actions callback method

@@ -36,6 +36,16 @@ body {
     font-size: 15px;
 }
 
+.card-container-partial {
+    position: absolute;
+    z-index: 99999;
+    left: 59%;
+    width: 40%;
+    background: white;
+    margin: 0;
+}
+
+
 /*.nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus{
@@ -239,4 +249,8 @@ body {
         position: relative;
         margin-right: 0;
     }
+    .card-container-partial {
+    left: 65%;
+    width: 30%;
+}
 }
