@@ -35,12 +35,15 @@
         vm.candidateDetails = {};
         vm.listSpinner = false;
         vm.showLargeList = false;
+        vm.showInTable = 'active';
+        vm.showInLargList = '';
         vm.pageSize = EnumConstants.itemsOnPageForCandidate;
         vm.cardStages = EnumConstants.cardStages;
 
         vm.viewCandidateInfo = viewCandidateInfo;
         vm.getCandidatesForLongList = getCandidatesForLongList;
         vm.showCandidateInTable = showCandidateInTable;
+        vm.showCandidateLargeView = showCandidateLargeView;
 
         // click on candidate item shows candidates preview
         $rootScope.candidatePreview = {
@@ -88,11 +91,14 @@
             });
         };
         function showCandidateInTable(){
-            if (vm.showLargeList == true) {
-                vm.showLargeList = false;
-            }else{
-                vm.showLargeList = true;
-            };
+            vm.showLargeList = false;
+            vm.showInTable = 'active';
+            vm.showInLargList = '';
+        };
+        function showCandidateLargeView(){
+            vm.showLargeList = true;
+            vm.showInTable = '';
+            vm.showInLargList = 'active';
         };
 
         // initializating function

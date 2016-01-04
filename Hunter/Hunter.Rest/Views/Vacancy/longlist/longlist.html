@@ -7,8 +7,9 @@
                     <pool-selector pool-lazy="true" pool-readonly="true" pool-short="false"
                                    candidate="longListCtrl.vacancy"></pool-selector>
                 </div>
-                <div class="col-md-2">
-                    <a class="btn btn-default" ng-click='longListCtrl.showCandidateInTable()'>Change view</a>
+                <div class="col-md-1">
+                    <a class="btn btn-default button-change-view" ng-class='longListCtrl.showInTable' ng-click='longListCtrl.showCandidateInTable()'><i class="fa fa-table"></i></a>
+                    <a class="btn btn-default button-change-view" ng-class='longListCtrl.showInLargList' ng-click='longListCtrl.showCandidateLargeView()'><i class="fa fa-indent"></i></a>
                 </div>
                 <div class="col-md-5">
                     <a class="btn btn-default" href="./vacancy/edit/{{longListCtrl.vacancy.id}}">Edit Vacancy</a>
