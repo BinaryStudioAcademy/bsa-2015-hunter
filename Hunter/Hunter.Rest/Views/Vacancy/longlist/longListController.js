@@ -33,10 +33,14 @@
         vm.itemsPerPage = [];
         vm.vacancy = {};
         vm.candidateDetails = {};
+        vm.listSpinner = false;
+        vm.showLargeList = false;
+        vm.pageSize = EnumConstants.itemsOnPageForCandidate;
+        vm.cardStages = EnumConstants.cardStages;
+
         vm.viewCandidateInfo = viewCandidateInfo;
         vm.getCandidatesForLongList = getCandidatesForLongList;
-        vm.listSpinner = false;
-        vm.pageSize = EnumConstants.itemsOnPageForCandidate;
+        vm.showCandidateInTable = showCandidateInTable;
 
         // click on candidate item shows candidates preview
         $rootScope.candidatePreview = {
@@ -82,6 +86,13 @@
                 }*/
                 vm.totalItems = result.count;
             });
+        };
+        function showCandidateInTable(){
+            if (vm.showLargeList == true) {
+                vm.showLargeList = false;
+            }else{
+                vm.showLargeList = true;
+            };
         };
 
         // initializating function

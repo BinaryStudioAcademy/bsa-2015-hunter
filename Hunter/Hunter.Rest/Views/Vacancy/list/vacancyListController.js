@@ -46,6 +46,7 @@
 
         vm.pageSize = [25, 50, 75, 100]
         vm.statuses = enumConstants.vacancyStates;
+        vm.tableSpinner = true;
 
         vm.sortBy = [
             { name: "Add Date (new first)", reverseSort: true, sortColumn: "startDate" },
@@ -70,6 +71,7 @@
                 vm.vacancies = result.rows;
                 console.log(vm.vacancies);
                 vm.totalCount = result.totalCount;
+                vm.tableSpinner = false;
             });
         }
 

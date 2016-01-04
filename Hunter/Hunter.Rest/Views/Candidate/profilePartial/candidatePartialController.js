@@ -134,6 +134,7 @@
                 specialNoteHttpService.getCardSpecialNote(vid, cid)
                     .then(function (result) {
                         vm.specialNotes = result.data;
+                        console.log(vm.specialNotes);
                     });
                 longlistHttpService.getAppResults(cid).then(function (result) {
                     vm.appResults = result;

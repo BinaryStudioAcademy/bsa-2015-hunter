@@ -18,7 +18,7 @@
         var vm = this;
 
         vm.rolesList = [];
-        vm.changeRole = changeRole;
+        vm.usersSpinner = true;
 
         // Here we should write any functions we need, for example, body of user actions methods.
         var updatePage = function (newPageNum) {
@@ -32,6 +32,7 @@
             $location.search('page', vm.page);
             userProfileService.getUserProfileList(vm.page, function (response) {
                 vm.profilesList = response.data;
+                vm.usersSpinner = false;
             });
         }
 
@@ -52,9 +53,5 @@
         userRoleHttpService.getUserRoles().then(function (result) {
                 vm.rolesList = result.data;
             });
-
-        function changeRole(user){
-            userProfileService.updateUserProfile(user);
-        }
     };
 })();

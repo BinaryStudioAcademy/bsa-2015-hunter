@@ -2,10 +2,13 @@
     <div class="row">
         <div class="col-md-12">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <h3>{{longListCtrl.vacancy.name}}</h3>
                     <pool-selector pool-lazy="true" pool-readonly="true" pool-short="false"
                                    candidate="longListCtrl.vacancy"></pool-selector>
+                </div>
+                <div class="col-md-2">
+                    <a class="btn btn-default" ng-click='longListCtrl.showCandidateInTable()'>Change view</a>
                 </div>
                 <div class="col-md-5">
                     <a class="btn btn-default" href="./vacancy/edit/{{longListCtrl.vacancy.id}}">Edit Vacancy</a>
@@ -20,9 +23,9 @@
             <div class="form-group">
                 <label>Search</label>
                 <input type="search" class="form-control"
-                ng-model="longListCtrl.filter.search"
-                ng-model-options="{updateOn: 'change'}"
-                ng-change="longListCtrl.updateUrl()">
+                       ng-model="longListCtrl.filter.search"
+                       ng-model-options="{updateOn: 'change'}"
+                       ng-change="longListCtrl.updateUrl()">
             </div>
             <div class="filter-settings">
                 <ul>
@@ -48,56 +51,91 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-5" spinner="longListCtrl.listSpinner">
-            <select class="form-control" ng-change="longListCtrl.updateUrl()" ng-options="item.options as item.text for item in longListCtrl.sortOptions" ng-model="longListCtrl.filter.order"></select>
-            <div class="ll_candidate_item candidate-list" ng-repeat="candidate in longListCtrl.candidatesList" ng-click="longListCtrl.viewCandidateInfo(candidate)" ng-class="{ll_candidate_item_active: longListCtrl.activateItemId == candidate.id}">
-                <div class="col-md-4 ll_candidate_item_img">
-                    <shor-list-star is-short="candidate.shortlisted" candidate-id="candidate.id" size="'18px'" ng-click="$event.stopPropagation();"></shor-list-star>
-                    <img ng-src="{{candidate.photoUrl}}"/>
-                    <p class="years_of_experience" title="Years of Experience">{{candidate.yearsOfExperience}}</p>
-                    <pool-selector pool-lazy="true" pool-readonly="true" pool-short="true"
-                                   candidate="candidate"></pool-selector>
-                </div>
-                <div class="col-md-4">
-                    <p>
-                        <strong><a href="./vacancy/{{longListCtrl.vacancy.id}}/candidate/{{candidate.id}}">{{candidate.firstName + " " + candidate.lastName}}</a></strong>
-                    </p>
-                    <p>{{candidate.addDate == null ? '' : candidate.addDate | date:'dd.MM.yyyy'}}</p>
-                </div>
-                <div class="col-md-4 candidate_item_salary">
-                    <p>{{longListCtrl.stages[candidate.stage].name}}</p>
-                    <p>
-                        <strong>{{candidate.salary}}</strong>
-                    </p>
-                </div>
-                <div class="col-md-4">
-                    <p>{{candidate.email}}</p>
-                    <p>{{candidate.company}} / {{candidate.location}}</p>
+        <div class="col-md-10" spinner="longListCtrl.listSpinner">
+            <div class="row">
+                <div class="col-md-6">
+                    <select class="form-control" ng-change="longListCtrl.updateUrl()" ng-options="item.options as item.text for item in longListCtrl.sortOptions" ng-model="longListCtrl.filter.order"></select>
                 </div>
             </div>
-            <div>
-                <div class="pagination page-count-wrapper form-inline">
-                    <span>Items on page:</span>
-                    <select class="form-control" ng-model="longListCtrl.filter.pageSize" ng-change="longListCtrl.updateUrl()"
-                    ng-options="item as item for item in longListCtrl.pageSize">
-                    </select>
+            <div class='row'>
+                <div class='col-md-6' ng-show='longListCtrl.showLargeList'>
+                    <div class="ll_candidate_item candidate-list" ng-repeat="candidate in longListCtrl.candidatesList" ng-click="longListCtrl.viewCandidateInfo(candidate)" ng-class="{ll_candidate_item_active: longListCtrl.activateItemId == candidate.id}">
+                        <div class="col-md-4 ll_candidate_item_img">
+                            <shor-list-star is-short="candidate.shortlisted" candidate-id="candidate.id" size="'18px'" ng-click="$event.stopPropagation();"></shor-list-star>
+                            <img ng-src="{{candidate.photoUrl}}" />
+                            <p class="years_of_experience" title="Years of Experience">{{candidate.yearsOfExperience}}</p>
+                            <pool-selector pool-lazy="true" pool-readonly="true" pool-short="true"
+                                           candidate="candidate"></pool-selector>
+                        </div>
+                        <div class="col-md-4">
+                            <p>
+                                <strong><a href="./vacancy/{{longListCtrl.vacancy.id}}/candidate/{{candidate.id}}">{{candidate.firstName + " " + candidate.lastName}}</a></strong>
+                            </p>
+                            <p>{{candidate.addDate == null ? '' : candidate.addDate | date:'dd.MM.yyyy'}}</p>
+                        </div>
+                        <div class="col-md-4 candidate_item_salary">
+                            <p>{{longListCtrl.stages[candidate.stage].name}}</p>
+                            <p>
+                                <strong>{{candidate.salary}}</strong>
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <p>{{candidate.email}}</p>
+                            <p>{{candidate.company}} / {{candidate.location}}</p>
+                        </div>
+                    </div>
                 </div>
-                <pagination total-items="longListCtrl.totalItems"
-                            ng-model="longListCtrl.filter.currentPage"
-                            items-per-page="longListCtrl.filter.pageSize"
-                            max-size="5"
-                            ng-click="longListCtrl.updateUrl()"
-                            class="pagination-sm ll_pagination"
-                            boundary-links="true"
-                            template-url="./Views/templates/pagination.html">
-                </pagination>
-                <!-- <div class="pagination page-count-wrapper form-inline">-->
-                <!-- <span>Items on page</span>-->
-                <!-- -->
-                <!---->
-                <!-- </div>-->
+                <div class="col-md-12" ng-hide='longListCtrl.showLargeList'>
+                    <table class="table  table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Added</th>
+                                <th>Stage</th>
+                                <th>Exp</th>
+                                <th>Company</th>
+                                <th>City</th>
+                                <th>Salary</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="candidate candidate-list" ng-repeat="item in longListCtrl.candidatesList" ng-click="longListCtrl.viewCandidateInfo(item)"
+                                ng-class="{ll_candidate_item_active: longListCtrl.activateItemId == candidate.id}">
+                                <td><a href="./vacancy/{{longListCtrl.vacancy.id}}/candidate/{{item.id}}">{{item.firstName + " " + item.lastName}}</a></td>
+                                <td>{{item.addDate | localDate | date:'dd.MM.yyyy'}}</td>
+                                <td>{{longListCtrl.cardStages[item.stage].name}}</td>
+                                <td>{{item.yearsOfExperience}}</td>
+                                <td>{{item.company}}</td>
+                                <td>{{item.location}}</td>
+                                <td>{{item.salary}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-
+            <div class="row">
+                <div class='col-md-6'>
+                    <div class="pagination page-count-wrapper form-inline">
+                        <span>Items on page:</span>
+                        <select class="form-control" ng-model="longListCtrl.filter.pageSize" ng-change="longListCtrl.updateUrl()"
+                                ng-options="item as item for item in longListCtrl.pageSize"></select>
+                    </div>
+                    <pagination total-items="longListCtrl.totalItems"
+                                ng-model="longListCtrl.filter.currentPage"
+                                items-per-page="longListCtrl.filter.pageSize"
+                                max-size="5"
+                                ng-click="longListCtrl.updateUrl()"
+                                class="pagination-sm ll_pagination"
+                                boundary-links="true"
+                                template-url="./Views/templates/pagination.html">
+                    </pagination>
+                    <!-- <div class="pagination page-count-wrapper form-inline">-->
+                    <!-- <span>Items on page</span>-->
+                    <!-- -->
+                    <!---->
+                    <!-- </div>-->
+                </div>
+            </div>
         </div>
         <!--<div class="col-md-4" ng-include="'./Views/vacancy/longlist/longListPreview.html'"></div>-->
         <card-preview type='longlist'> </card-preview>

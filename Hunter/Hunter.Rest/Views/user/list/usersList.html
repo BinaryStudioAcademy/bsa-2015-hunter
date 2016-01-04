@@ -1,11 +1,10 @@
-        <div class="" ng-controller="UsersListController as userListCtrl">
-            <table class="table table-bordered table-condensed table-striped table-hover">
+        <div class="" ng-controller="UsersListController as userListCtrl" >
+            <table class="table table-bordered table-condensed table-striped table-hover" >
                 <thead>
                     <tr>
                         <th>Login/E-mail</th>
                         <th>Alias</th>
                         <th>Position</th>
-                        <th>Role</th>
                     </tr>
                 </thead>
                 <tbody data-link="row" class="rowlink">
@@ -14,13 +13,6 @@
                         <!--<td><a href="./user/edit/{{user.id}}">{{user.login}}</a></td>-->
                         <td>{{user.alias}}</td>
                         <td>{{user.position}}</td>
-                        <td>
-                            <select class="form-control"
-                                ng-model="user.roleId"
-                                ng-options="option.id as option.name for option in userListCtrl.rolesList"
-                                ng-change='userListCtrl.changeRole(user)'>
-                            </select>
-                        </td>
                     </tr>
                 </tbody>
             </table>
