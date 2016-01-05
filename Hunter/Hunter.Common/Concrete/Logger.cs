@@ -21,5 +21,10 @@ namespace Hunter.Common.Concrete
         {
             _log.Error(message);
         }
+
+        public void Log(string format, params object[] paramsObjects)
+        {
+            _log.Error(string.Format(format, paramsObjects));
+        }
     }
 }

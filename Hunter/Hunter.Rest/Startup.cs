@@ -17,12 +17,17 @@ using Hunter.Common.Concrete;
 using Hunter.DataAccess.Db.Repositories;
 using Hunter.DataAccess.Entities;
 using Hunter.Rest.Providers;
+using Hunter.Services.Rest;
+using Hunter.Services.Rest.Intf;
+using Hunter.Services.Rest.Proxies;
 using Hunter.Services.Services;
 using Hunter.Services.Services.Interfaces;
 using Hunter.Tools.LinkedIn;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi;
 using Ninject.Web.WebApi.OwinHost;
+using SOS.Mobile.Common.Server.NetworkErrors;
+using SOS.Mobile.Common.Server.NetworkErrors.ErrorHandlers;
 
 [assembly: OwinStartup(typeof(Hunter.Rest.Startup))]
 
@@ -95,6 +100,14 @@ namespace Hunter.Rest
 
             kernel.Bind<Common.Interfaces.ILogger>().To<Logger>();
             kernel.Bind<IPublicPageParser>().To<PublicPageParser>();
+
+            // for external rest requests
+            kernel.Bind<IRestClient>().To<RestClient>();
+            kernel.Bind<IRestRequest>().To<RestRequest>();
+            kernel.Bind<IHttpClientFactory>().To<HttpClientFactory>();
+            kernel.Bind<NetworkErrorFacade>().ToSelf();
+            kernel.Bind<CustomServerErrorHandler>().ToSelf();
+            kernel.Bind<NotificationProxy>().ToSelf();
 
         }
         public static IKernel CreateKernel()

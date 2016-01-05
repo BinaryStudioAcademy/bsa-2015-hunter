@@ -18,6 +18,7 @@ using Hunter.Services.Dto.ApiResults;
 using Hunter.Services.Dto.User;
 using Hunter.Services.Extensions;
 using Hunter.Services.Interfaces;
+using Hunter.Services.Rest;
 using Hunter.Services.Services.Interfaces;
 using Newtonsoft.Json;
 
@@ -82,7 +83,7 @@ namespace Hunter.Services
 
         //todo new figure out
 
-        public IEnumerable<UserProfileDto> GetUserProfiles(string roleName)
+        public IEnumerable<UserProfileDto> GetUserProfilesByRole(string roleName)
         {
             try
             {
@@ -92,6 +93,25 @@ namespace Hunter.Services
                 var us = from role in roles
                     join user in users on role.Position.ToLower() equals user.Position.ToLower()
                     select new UserProfileDto() {Alias = user.Alias,Id= user.Id,Login = user.UserLogin, Position = user.Position};
+
+                return us.ToList();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public IEnumerable<string> GetAuthUserIdByRole(string roleName)
+        {
+            try
+            {
+                var roles = _roleService.GetRoleByName(roleName).RoleMapping;
+                var users = _profileRepo.Query().ToList();
+
+                var us = from role in roles
+                         join user in users on role.Position.ToLower() equals user.Position.ToLower()
+                         select user.AuthUserId;
 
                 return us.ToList();
             }
@@ -204,9 +224,7 @@ namespace Hunter.Services
         {
             var http = new HttpClient();
 
-            var httpCookie = HttpContext.Current.Request.Cookies.Get("x-access-token");
-            if (httpCookie == null) return null;
-            var token = httpCookie.Value;
+            var token = HttpContextExtensions.GetTokenFromRequest();
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, url);
             requestMessage.Headers.Add("x-access-token", token);

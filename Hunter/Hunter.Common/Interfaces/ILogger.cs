@@ -6,5 +6,6 @@ namespace Hunter.Common.Interfaces
     {
         void Log(Exception ex);
         void Log(string message);
+        void Log(string format, params object[] paraObjects);
     }
 }

@@ -7,18 +7,18 @@ namespace Hunter.DataAccess.Entities.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class totalDeleteRoleFromProfile : IMigrationMetadata
+    public sealed partial class RemoveRoleIdFromUSerProfile : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(totalDeleteRoleFromProfile));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RemoveRoleIdFromUSerProfile));
         
         string IMigrationMetadata.Id
         {
-            get { return "201512301650510_totalDeleteRoleFromProfile"; }
+            get { return "201601041514572_RemoveRoleIdFromUSerProfile"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return Resources.GetString("Source"); }
+            get { return null; }
         }
         
         string IMigrationMetadata.Target

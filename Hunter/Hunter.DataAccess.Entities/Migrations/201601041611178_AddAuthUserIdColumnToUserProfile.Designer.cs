@@ -7,13 +7,13 @@ namespace Hunter.DataAccess.Entities.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class deleteRoleFromUserProfile : IMigrationMetadata
+    public sealed partial class AddAuthUserIdColumnToUserProfile : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(deleteRoleFromUserProfile));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddAuthUserIdColumnToUserProfile));
         
         string IMigrationMetadata.Id
         {
-            get { return "201512301526011_deleteRoleFromUserProfile"; }
+            get { return "201601041611178_AddAuthUserIdColumnToUserProfile"; }
         }
         
         string IMigrationMetadata.Source

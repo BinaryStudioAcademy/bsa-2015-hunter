@@ -24,6 +24,9 @@ namespace Hunter.DataAccess.Entities
         [StringLength(50)]
         public string Position { get; set; }
 
+        [StringLength(50)]
+        public string AuthUserId { get; set; }
+
         [StringLength(15)]
         public string Alias { get; set; }
 

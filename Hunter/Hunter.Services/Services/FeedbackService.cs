@@ -141,7 +141,7 @@ namespace Hunter.Services
             }
         }
 
-        public FeedbackDto SaveFeedback(FeedbackDto feedbackDto, string name)
+        public async Task<FeedbackDto> SaveFeedback(FeedbackDto feedbackDto, string name)
         {
             Feedback feedback;
             var userProfile = _userProfileRepository.Get(u => u.UserLogin.ToLower() == name.ToLower());
@@ -153,7 +153,7 @@ namespace Hunter.Services
                     feedback = _feedbackRepository.Get(feedbackDto.Id);
                     if (feedback == null)
                     {
-    //                    return Api.NotFound(hrInterviewDto.Id);
+                        //                    return Api.NotFound(hrInterviewDto.Id);
                         throw new Exception("Feedback not found");
                     }
                 }
@@ -165,22 +165,22 @@ namespace Hunter.Services
 
                 feedback.ProfileId = userProfile != null ? userProfile.Id : (int?)null;
                 feedbackDto.ToFeedback(feedback);
-            
-            
+
+
                 _feedbackRepository.UpdateAndCommit(feedback);
-                _activityHelperService.CreateUpdatedFeedbackActivity(feedback);
+                await _activityHelperService.CreateUpdatedFeedbackActivity(feedback);
                 var dto = feedback.ToFeedbackDto();
                 return feedback.ToFeedbackDto();
             }
             catch (Exception ex)
             {
                 _logger.Log(ex);
-//                return Api.Error((long)feedback.Id, ex.Message);
+                //                return Api.Error((long)feedback.Id, ex.Message);
                 throw ex;
             }
         }
 
-        public FeedbackDto UpdateSuccessStatus(int feedbackId, SuccessStatus status, string name)
+        public Task<FeedbackDto> UpdateSuccessStatus(int feedbackId, SuccessStatus status, string name)
         {
             try
             {

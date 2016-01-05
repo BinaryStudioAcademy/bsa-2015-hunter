@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Hunter.Common.Interfaces;
 using Hunter.DataAccess.Entities;
 using Hunter.DataAccess.Interface;
@@ -19,14 +20,14 @@ namespace Hunter.Services.Services
             _logger = logger;
         }
 
-        public void CreateAddedUserProfileActivity(UserProfile userProfile)
+        public async Task CreateAddedUserProfileActivity(UserProfile userProfile)
         {
             try
             {
                 string message = string.Format("{0} has joined Hunter", userProfile.UserLogin);
                 ActivityType type = ActivityType.User;
                 Uri url = new Uri("./user/edit/" + userProfile.Id, UriKind.Relative);
-                _activityPostService.Post(message, type, url);
+                await _activityPostService.Post(message, type, url);
             }
             catch (Exception e)
             {
@@ -35,15 +36,15 @@ namespace Hunter.Services.Services
             
         }
 
-        public void CreateAddedCandidateActivity(Candidate candidate)
+        public async Task CreateAddedCandidateActivity(Candidate candidate)
         {
             try
             {
                 string message = string.Format("A new candidate has been added : {0} {1}", candidate.FirstName,
                     candidate.LastName);
                 ActivityType type = ActivityType.Candidate;
-                Uri url = new Uri("./candidate/"+candidate.Id, UriKind.Relative);
-                _activityPostService.Post(message, type, url);
+                Uri url = new Uri("./candidate/" + candidate.Id, UriKind.Relative);
+                await _activityPostService.Post(message, type, url);
             }
             catch (Exception e)
             {
@@ -51,14 +52,14 @@ namespace Hunter.Services.Services
             }
         }
 
-        public void CreateAddedVacancyActivity(Vacancy vacancy)
+        public async Task CreateAddedVacancyActivity(Vacancy vacancy)
         {
             try
             {
                 string message = string.Format("A new vacancy has been created : {0}", vacancy.Name);
                 ActivityType type = ActivityType.Vacancy;
                 Uri url = new Uri("./vacancy/" + vacancy.Id, UriKind.Relative);
-                _activityPostService.Post(message, type, url);
+                await _activityPostService.Post(message, type, url);
             }
             catch (Exception e)
             {
@@ -66,14 +67,14 @@ namespace Hunter.Services.Services
             }
         }
 
-        public void CreateAddedPoolActivity(Pool pool)
+        public async Task CreateAddedPoolActivity(Pool pool)
         {
             try
             {
                 string message = string.Format("A new pool has been created : {0}", pool.Name);
                 ActivityType type = ActivityType.Pool;
                 Uri url = new Uri("./pool", UriKind.Relative);
-                _activityPostService.Post(message, type, url);
+                await _activityPostService.Post(message, type, url);
             }
             catch (Exception e)
             {
@@ -81,7 +82,7 @@ namespace Hunter.Services.Services
             }
         }
 
-        public void CreateUpdatedFeedbackActivity(Feedback feedback)
+        public async Task CreateUpdatedFeedbackActivity(Feedback feedback)
         {
             try
             {
@@ -122,7 +123,7 @@ namespace Hunter.Services.Services
                 //todo: change activity url to /card/:id when the latter is implemented
                 Uri url = new Uri(string.Format("./vacancy/{0}/candidate/{1}?tab={2}",
                     card.VacancyId, card.CandidateId, feedbackRoute), UriKind.Relative);
-                _activityPostService.Post(message, type, url);
+                await _activityPostService.Post(message, type, url);
             }
             catch (Exception e)
             {
@@ -130,17 +131,17 @@ namespace Hunter.Services.Services
             }
         }
 
-        public void CreateAddedSpecialNoteActivity(SpecialNote specialNote)
+        public async Task CreateAddedSpecialNoteActivity(SpecialNote specialNote)
         {
             try
             {
-                var card = _cardRepository.Get(x => x.CandidateId == specialNote.CandidateId &&  x.VacancyId == specialNote.VacancyId);
+                var card = _cardRepository.Get(x => x.CandidateId == specialNote.CandidateId && x.VacancyId == specialNote.VacancyId);
                 string message = string.Format("A special note for {0} {1} on '{2}' has been added",
                 card.Candidate.FirstName, card.Candidate.LastName, card.Vacancy.Name);
                 ActivityType type = ActivityType.SpecialNote;
                 Uri url = new Uri(string.Format("./vacancy/{0}/candidate/{1}?tab={2}",
                     card.VacancyId, card.CandidateId, "specialnotes"), UriKind.Relative);
-                _activityPostService.Post(message, type, url);
+                await _activityPostService.Post(message, type, url);
             }
             catch (Exception e)
             {
@@ -148,7 +149,7 @@ namespace Hunter.Services.Services
             }
         }
 
-        public void CreateUpdatedSpecialNoteActivity(SpecialNote specialNote)
+        public async Task CreateUpdatedSpecialNoteActivity(SpecialNote specialNote)
         {
             try
             {
@@ -158,7 +159,7 @@ namespace Hunter.Services.Services
                 ActivityType type = ActivityType.SpecialNote;
                 Uri url = new Uri(string.Format("./vacancy/{0}/candidate/{1}?tab={2}",
                     card.VacancyId, card.CandidateId, "specialnotes"), UriKind.Relative);
-                _activityPostService.Post(message, type, url);
+                await _activityPostService.Post(message, type, url);
             }
             catch (Exception e)
             {
@@ -166,7 +167,7 @@ namespace Hunter.Services.Services
             }
         }
 
-        public void CreateUploadedResumeActivity(Candidate candidate)
+        public async Task CreateUploadedResumeActivity(Candidate candidate)
         {
             try
             {
@@ -174,7 +175,7 @@ namespace Hunter.Services.Services
                     candidate.LastName);
                 ActivityType type = ActivityType.Resume;
                 Uri url = new Uri("./candidate/" + candidate.Id, UriKind.Relative);
-                _activityPostService.Post(message, type, url);
+                await _activityPostService.Post(message, type, url);
             }
             catch (Exception e)
             {
@@ -182,7 +183,7 @@ namespace Hunter.Services.Services
             }
         }
 
-        public void CreateUploadedTestActivity(Card card)
+        public async Task CreateUploadedTestActivity(Card card)
         {
             try
             {
@@ -191,7 +192,7 @@ namespace Hunter.Services.Services
                 ActivityType type = ActivityType.Test;
                 Uri url = new Uri(string.Format("./vacancy/{0}/candidate/{1}?tab={2}",
                     card.VacancyId, card.CandidateId, "test"), UriKind.Relative);
-                _activityPostService.Post(message, type, url);
+                await _activityPostService.Post(message, type, url);
             }
             catch (Exception e)
             {
@@ -199,7 +200,7 @@ namespace Hunter.Services.Services
             }
         }
 
-        public void CreateUploadedPhotoActivity(Candidate candidate)
+        public async Task CreateUploadedPhotoActivity(Candidate candidate)
         {
             try
             {
@@ -207,7 +208,7 @@ namespace Hunter.Services.Services
                     candidate.LastName);
                 ActivityType type = ActivityType.Photo;
                 Uri url = new Uri("./candidate/" + candidate.Id, UriKind.Relative);
-                _activityPostService.Post(message, type, url);
+                await _activityPostService.Post(message, type, url);
             }
             catch (Exception e)
             {
@@ -215,15 +216,15 @@ namespace Hunter.Services.Services
             }
         }
 
-        public void CreateChangedCardStageActivity(Card card, Stage oldStage)
+        public async Task CreateChangedCardStageActivity(Card card, Stage oldStage)
         {
             try
             {
-                string message = string.Format("Card stage for candidate {0} {1} in vacancy '{2}' has been changed from '{3}' to '{4}'", 
+                string message = string.Format("Card stage for candidate {0} {1} in vacancy '{2}' has been changed from '{3}' to '{4}'",
                     card.Candidate.FirstName, card.Candidate.LastName, card.Vacancy.Name, oldStage.GetCustomDescription(), ((Stage)card.Stage).GetCustomDescription());
                 ActivityType type = ActivityType.Vacancy;
                 Uri url = new Uri("./vacancy/" + card.VacancyId + "/candidate/" + card.CandidateId, UriKind.Relative);
-                _activityPostService.Post(message, type, url);
+                await _activityPostService.Post(message, type, url);
             }
             catch (Exception e)
             {
@@ -231,15 +232,15 @@ namespace Hunter.Services.Services
             }
         }
 
-        public void CreateUpdateCandidateResolution(Candidate candidate, Resolution oldResolution)
+        public async Task CreateUpdateCandidateResolution(Candidate candidate, Resolution oldResolution)
         {
             try
             {
                 string message = string.Format("Resolution for {0} {1} has been changed from '{2}' to '{3}'",
                     candidate.FirstName, candidate.LastName, oldResolution.GetCustomDescription(), ((Resolution)candidate.Resolution).GetCustomDescription());
                 ActivityType type = ActivityType.Candidate;
-                Uri url = new Uri("./candidate/"+candidate.Id, UriKind.Relative);
-                _activityPostService.Post(message, type, url);
+                Uri url = new Uri("./candidate/" + candidate.Id, UriKind.Relative);
+                await _activityPostService.Post(message, type, url);
             }
             catch (Exception e)
             {

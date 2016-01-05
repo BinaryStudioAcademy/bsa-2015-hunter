@@ -224,13 +224,13 @@
     <Compile Include="Migrations\201512281202503_addPositionIndex.Designer.cs">
       <DependentUpon>201512281202503_addPositionIndex.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201512301526011_deleteRoleFromUserProfile.cs" />
-    <Compile Include="Migrations\201512301526011_deleteRoleFromUserProfile.Designer.cs">
-      <DependentUpon>201512301526011_deleteRoleFromUserProfile.cs</DependentUpon>
+    <Compile Include="Migrations\201601041514572_RemoveRoleIdFromUSerProfile.cs" />
+    <Compile Include="Migrations\201601041514572_RemoveRoleIdFromUSerProfile.Designer.cs">
+      <DependentUpon>201601041514572_RemoveRoleIdFromUSerProfile.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201512301650510_totalDeleteRoleFromProfile.cs" />
-    <Compile Include="Migrations\201512301650510_totalDeleteRoleFromProfile.Designer.cs">
-      <DependentUpon>201512301650510_totalDeleteRoleFromProfile.cs</DependentUpon>
+    <Compile Include="Migrations\201601041611178_AddAuthUserIdColumnToUserProfile.cs" />
+    <Compile Include="Migrations\201601041611178_AddAuthUserIdColumnToUserProfile.Designer.cs">
+      <DependentUpon>201601041611178_AddAuthUserIdColumnToUserProfile.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -341,11 +341,11 @@
     <EmbeddedResource Include="Migrations\201512281202503_addPositionIndex.resx">
       <DependentUpon>201512281202503_addPositionIndex.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512301526011_deleteRoleFromUserProfile.resx">
-      <DependentUpon>201512301526011_deleteRoleFromUserProfile.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601041514572_RemoveRoleIdFromUSerProfile.resx">
+      <DependentUpon>201601041514572_RemoveRoleIdFromUSerProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512301650510_totalDeleteRoleFromProfile.resx">
-      <DependentUpon>201512301650510_totalDeleteRoleFromProfile.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601041611178_AddAuthUserIdColumnToUserProfile.resx">
+      <DependentUpon>201601041611178_AddAuthUserIdColumnToUserProfile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

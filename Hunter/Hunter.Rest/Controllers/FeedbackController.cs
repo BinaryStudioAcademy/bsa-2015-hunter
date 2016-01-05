@@ -87,11 +87,11 @@ namespace Hunter.Rest.Controllers
         // POST: api/Feedback
         [HttpPost]
         [Route("save")]
-        public HttpResponseMessage Post([FromBody]FeedbackDto FeedbackDto)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> Post([FromBody]FeedbackDto FeedbackDto)
         {
             try
             {
-                var result = _feedbackService.SaveFeedback(FeedbackDto, User.Identity.Name);
+                var result = await _feedbackService.SaveFeedback(FeedbackDto, User.Identity.Name);
                 return Request.CreateResponse(HttpStatusCode.OK, result);
             }
             catch (Exception ex)

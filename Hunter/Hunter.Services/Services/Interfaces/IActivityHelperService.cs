@@ -10,17 +10,17 @@ namespace Hunter.Services.Interfaces
 {
     public interface IActivityHelperService
     {
-        void CreateAddedUserProfileActivity(UserProfile userProfile);
-        void CreateAddedCandidateActivity(Candidate candidate);
-        void CreateAddedVacancyActivity(Vacancy vacancy);
-        void CreateAddedPoolActivity(Pool pool);
-        void CreateUpdatedFeedbackActivity(Feedback feedback);
-        void CreateAddedSpecialNoteActivity(SpecialNote specialNote);
-        void CreateUpdatedSpecialNoteActivity(SpecialNote specialNote);
-        void CreateUploadedTestActivity(Card card);
-        void CreateUploadedResumeActivity(Candidate candidate);
-        void CreateUploadedPhotoActivity(Candidate candidate);
-        void CreateChangedCardStageActivity(Card card, Stage oldStage);
-        void CreateUpdateCandidateResolution(Candidate candidate, Resolution oldResolution);
+        Task CreateAddedUserProfileActivity(UserProfile userProfile);
+        Task CreateAddedCandidateActivity(Candidate candidate);
+        Task CreateAddedVacancyActivity(Vacancy vacancy);
+        Task CreateAddedPoolActivity(Pool pool);
+        Task CreateUpdatedFeedbackActivity(Feedback feedback);
+        Task CreateAddedSpecialNoteActivity(SpecialNote specialNote);
+        Task CreateUpdatedSpecialNoteActivity(SpecialNote specialNote);
+        Task CreateUploadedTestActivity(Card card);
+        Task CreateUploadedResumeActivity(Candidate candidate);
+        Task CreateUploadedPhotoActivity(Candidate candidate);
+        Task CreateChangedCardStageActivity(Card card, Stage oldStage);
+        Task CreateUpdateCandidateResolution(Candidate candidate, Resolution oldResolution);
     }
 }

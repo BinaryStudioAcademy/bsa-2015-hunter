@@ -10,7 +10,7 @@ namespace Hunter.Services.Dto.User
     public class OAuthUserDto
     {
         [JsonProperty(PropertyName = "_id")]
-        public string Id { get; set; }
+        public string AuthUserId { get; set; }
         [JsonProperty(PropertyName = "email")]
         public string Email { get; set; }
         [JsonProperty(PropertyName = "password")]
