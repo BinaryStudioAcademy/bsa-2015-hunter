@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Hunter.DataAccess.Entities.Entites.Enums;
 using Hunter.Services.Dto;
-using Hunter.Services.Dto.ApiResults;
 
 namespace Hunter.Services
 {

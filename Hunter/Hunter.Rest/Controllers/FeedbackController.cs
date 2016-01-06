@@ -14,7 +14,7 @@ using Hunter.Services.Services.Interfaces;
 
 namespace Hunter.Rest.Controllers
 {
-    [ExternalAuthorize]
+    //[ExternalAuthorize]
     [RoutePrefix("api/feedback")]
     public class FeedbackController : ApiController
     {
@@ -31,7 +31,7 @@ namespace Hunter.Rest.Controllers
         [HttpGet]
         [Route("hr/{vid:int}/{cid:int}")]
         //[ActionName("HrInterview")]
-        [ResponseType(typeof(IEnumerable<FeedbackDto>))]
+        //[ResponseType(typeof(IEnumerable<FeedbackDto>))]
         public HttpResponseMessage GetHrInterview(int vid, int cid)
         {
             try

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Hunter.Common.Interfaces;
@@ -23,7 +24,7 @@ namespace Hunter.Services
         private readonly ILogger _logger;
         private readonly IActivityHelperService _activityHelperService;
 
-        public FeedbackService(IFeedbackRepository feedbackRepository, ICardRepository cardRepository, ILogger logger, 
+        public FeedbackService(IFeedbackRepository feedbackRepository, ICardRepository cardRepository, ILogger logger,
             IUserProfileRepository userProfileRepository, IActivityHelperService activityHelperService)
         {
             _feedbackRepository = feedbackRepository;
@@ -35,31 +36,28 @@ namespace Hunter.Services
 
         public IEnumerable<FeedbackDto> GetAllHrInterviews(int vid, int cid, string name)
         {
-
             try
             {
                 IEnumerable<Feedback> feedbacks;
 
                 if (vid == 0)
                 {
-                    feedbacks = _cardRepository
-                        .Query()
-                        .Where(e => e.CandidateId == cid)
-                        .SelectMany(c => c.Feedback.Where(f => f.Type == 0 || f.Type == 1));
+                    var cards = _cardRepository.Query().Where(e => e.CandidateId == cid).ToList();
+                    feedbacks = cards.SelectMany(c => c.Feedback.Where(f => f.Type == 0 || f.Type == 1));
                 }
                 else if (vid == -1)
                 {
-                    feedbacks = _cardRepository
-                        .Query()
-                        .Where(e => e.CandidateId == cid)
-                        .SelectMany(c => c.Feedback.Where(f => (f.Type == 0 || f.Type == 1) && f.UserProfile.UserLogin == name));
+                    var cards = _cardRepository.Query().Where(e => e.CandidateId == cid).ToList();
+                    feedbacks = cards.SelectMany(c => c.Feedback.Where(f => (f.Type == 0 || f.Type == 1) && f.UserProfile.UserLogin == name)).ToList();
                 }
                 else
                 {
-                    feedbacks = _cardRepository
-                        .Query()
-                        .Where(e => e.VacancyId == vid && e.CandidateId == cid)
-                        .SelectMany(c => c.Feedback.Where(f => f.Type == 0 || f.Type == 1));
+                    var card = _cardRepository.GetByCandidateAndVacancy(cid, vid);
+                    feedbacks = _feedbackRepository.Query().Where(x => x.CardId == card.Id && (x.Type == 0 || x.Type == 1)).ToList();
+                    //feedbacks = _cardRepository
+                    //    .Query()
+                    //    .Where(e => e.VacancyId == vid && e.CandidateId == cid)
+                    //    .SelectMany(c => c.Feedback.Where(f => f.Type == 0 || f.Type == 1));
                 }
 
                 return feedbacks.ToFeedbacksDto().OrderBy(f => f.Type);
@@ -82,24 +80,22 @@ namespace Hunter.Services
 
                 if (vacancyId == 0)
                 {
-                    feedbacks = _cardRepository
-                        .Query()
-                        .Where(e => e.CandidateId == candidateId)
-                        .SelectMany(c => c.Feedback.Where(f => f.Type == type));
+                    var cards = _cardRepository.Query().Where(e => e.CandidateId == candidateId).ToList();
+                    feedbacks = cards.SelectMany(c => c.Feedback.Where(f => f.Type == type));
                 }
                 else if (vacancyId == -1)
                 {
-                    feedbacks = _cardRepository
-                        .Query()
-                        .Where(e => e.CandidateId == candidateId)
-                        .SelectMany(c => c.Feedback.Where(f => f.Type == type && f.UserProfile.UserLogin == name));
+                    var cards = _cardRepository.Query().Where(e => e.CandidateId == candidateId).ToList();
+                    feedbacks = cards.SelectMany(c => c.Feedback.Where(f => f.Type == type && f.UserProfile.UserLogin == name));
                 }
                 else
                 {
-                    feedbacks = _cardRepository
-                        .Query()
-                        .Where(e => e.VacancyId == vacancyId && e.CandidateId == candidateId)
-                        .SelectMany(c => c.Feedback.Where(f => f.Type == type));
+                    var card = _cardRepository.GetByCandidateAndVacancy(candidateId, vacancyId);
+                    feedbacks = _feedbackRepository.Query().Where(x => x.CardId == card.Id && x.Type == type).ToList();
+                    //feedbacks = _cardRepository
+                    //    .Query()
+                    //    .Where(e => e.VacancyId == vacancyId && e.CandidateId == candidateId)
+                    //    .SelectMany(c => c.Feedback.Where(f => f.Type == type));
                 }
 
                 return feedbacks.ToFeedbacksDto();
@@ -110,7 +106,7 @@ namespace Hunter.Services
                 _logger.Log(e);
                 return null;
             }
-             
+
         }
 
         public FeedbackDto GetSummary(int vacancyId, int candidateId)
@@ -243,7 +239,7 @@ namespace Hunter.Services
                         lastFeedbacks = card.Feedback.GroupBy(f => f.Type).Select(f => f.Last());
                         feedbacks = card.Feedback.Where(f => !lastFeedbacks.Contains(f));
                     }
-                       
+
                 }
                 else
                 {
