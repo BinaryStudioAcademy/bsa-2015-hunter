@@ -10,7 +10,6 @@ namespace Hunter.Services.Interfaces
     {
         IList<UserProfileRowVm> LoadPage(int page);
         IEnumerable<UserProfileDto> GetUserProfilesByRole(string roleName);
-        IEnumerable<string> GetAuthUserIdByRole(string roleName);
         ResourceApiResult<EditUserProfileVm> GetById(long userProfileId);
         ApiResult Save(EditUserProfileVm userProfile);
         ApiResult Update(EditUserProfileVm userProfile);

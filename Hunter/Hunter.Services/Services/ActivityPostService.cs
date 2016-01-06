@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -17,6 +18,7 @@ using Hunter.Services.Interfaces;
 using Hunter.Services.Rest;
 using Hunter.Services.Rest.Proxies;
 using Hunter.Services.Rest.Proxies.Dto;
+using Hunter.Services.Services.Interfaces;
 using Newtonsoft.Json;
 
 namespace Hunter.Services
@@ -24,15 +26,13 @@ namespace Hunter.Services
     public class ActivityPostService : IActivityPostService
     {
         private readonly IActivityRepository _activityRepository;
-        private readonly IUserProfileRepository _userProfileRepository;
-        //private readonly IUserProfileService _userProfileService;
+        private readonly IUserProfileAuthenticationService _profileAuthenticationService;
         private readonly NotificationProxy _notificationProxy;
 
-        public ActivityPostService(IActivityRepository activityRepository, IUserProfileRepository userProfileRepository,/*IUserProfileService userProfileService,*/ NotificationProxy notificationProxy)
+        public ActivityPostService(IActivityRepository activityRepository, IUserProfileAuthenticationService profileAuthenticationService, NotificationProxy notificationProxy)
         {
             _activityRepository = activityRepository;
-            _userProfileRepository = userProfileRepository;
-            //_userProfileService = userProfileService;
+            _profileAuthenticationService = profileAuthenticationService;
             _notificationProxy = notificationProxy;
         }
 
@@ -43,17 +43,16 @@ namespace Hunter.Services
                 Message = message,
                 Tag = tag,
                 Url = url != null ? url.ToString() : null,
-                UserProfileId = _userProfileRepository.Get(x => x.UserLogin == Thread.CurrentPrincipal.Identity.Name).Id,
+                UserProfileId = _profileAuthenticationService.GetUserIdByUserLogin(Thread.CurrentPrincipal.Identity.Name),
+                //_userProfileRepository.Get(x => x.UserLogin == Thread.CurrentPrincipal.Identity.Name).Id,
                 Time = DateTime.UtcNow
             };
-            var authNotificationDto = activity.ToAuthNotificationDto();
-            //authNotificationDto.users = _userProfileService.GetAuthUserIdByRole(Roles.Recruiter.ToString()).ToList();
-
-
-            var resp1 = await _notificationProxy.SendNotification(authNotificationDto);
             _activityRepository.UpdateAndCommit(activity);
+            var authNotificationDto = activity.ToAuthNotificationDto();
+            authNotificationDto.users = _profileAuthenticationService.GetAuthUserIdByRole(Roles.Recruiter.ToString(), Thread.CurrentPrincipal.Identity.Name).ToList();
+            var resp1 = await _notificationProxy.SendNotification(authNotificationDto);
+            
         }
-
 
     }
 }

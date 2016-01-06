@@ -67,6 +67,7 @@ namespace Hunter.Services
             catch (Exception ex)
             {
                 _logger.Log(ex);
+                throw ex;
                 return null;
             }
 

@@ -14,6 +14,7 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using System.Web;
 using Microsoft.Owin.Extensions;
+using Owin.Security.Providers.Untappd;
 using AuthenticationMode = Microsoft.Owin.Security.AuthenticationMode;
 
 
@@ -149,6 +150,7 @@ namespace Hunter.Rest
             } else
             {
                 HttpContext.Current.Response.Cookies.Add(new HttpCookie("referer", Config.OAuthReferer));
+                HttpContext.Current.Response.Redirect(Config.ExternalAuthPath);
             }
 
             return Task.FromResult<object>(null);

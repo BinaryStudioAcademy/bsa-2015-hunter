@@ -160,6 +160,7 @@
     <Compile Include="Services\Interfaces\IScheduledNotificationService.cs" />
     <Compile Include="Services\Interfaces\ITestService.cs" />
     <Compile Include="Services\Interfaces\ISpecialNoteService.cs" />
+    <Compile Include="Services\Interfaces\IUserProfileAuthenticationService.cs" />
     <Compile Include="Services\Interfaces\IUserProfileService.cs" />
     <Compile Include="Services\Interfaces\IRoleMappingService.cs" />
     <Compile Include="Services\Interfaces\IUserService.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Services\ScheduledNotificationService.cs" />
     <Compile Include="Services\TestService.cs" />
     <Compile Include="Services\SpecialNoteService.cs" />
+    <Compile Include="Services\UserProfileAuthenticationService.cs" />
     <Compile Include="Services\UserProfileService.cs" />
     <Compile Include="Services\RoleMappingService.cs" />
     <Compile Include="Services\UserRoleService.cs" />

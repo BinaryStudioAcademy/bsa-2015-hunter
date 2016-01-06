@@ -27,7 +27,7 @@ namespace Hunter.Rest.Controllers
         {
             if (Config.UseExternalAuth)
             {
-                return Redirect(Config.ExternalPath);
+                return Redirect(Config.ExternalAuthPath);
             }
 
             //var user = _userService.IsValidUser(login.UserName, login.Password);

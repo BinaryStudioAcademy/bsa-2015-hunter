@@ -32,7 +32,7 @@ namespace Hunter.Rest.Providers
                 {
                     var user =
                         await
-                            userProfileService.CreateUserAlias(Config.ExternalPath + "api/users/" +
+                            userProfileService.CreateUserAlias(Config.ExternalAuthPath + "api/users/" +
                                                                actionContext.RequestContext.Principal.Identity.GetUserId
                                                                    ());
                     if (user != null)
@@ -58,7 +58,7 @@ namespace Hunter.Rest.Providers
             if (Config.UseExternalAuth)
             {
                 actionContext.Response = actionContext.ControllerContext.Request.CreateResponse(HttpStatusCode.Unauthorized, "Unauthorized");
-                actionContext.Response.Headers.Location = new Uri(Config.ExternalPath);
+                actionContext.Response.Headers.Location = new Uri(Config.ExternalAuthPath);
             }
             else
             {

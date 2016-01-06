@@ -19,11 +19,15 @@ namespace Hunter.Rest.Providers
             }
         }
 
-        public static string ExternalPath
+        public static string ExternalAuthPath
         {
             get
             {
-                return WebConfigurationManager.AppSettings["externalAuthUrl"];
+#if DEBUG
+                return WebConfigurationManager.AppSettings["debugExternalAuthUrl"];
+#else
+                     return WebConfigurationManager.AppSettings["releaseExternalAuthUrl"];
+#endif
             }
         }
 

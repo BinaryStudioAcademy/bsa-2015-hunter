@@ -28,15 +28,5 @@ namespace Hunter.Services.Rest.Proxies
 
             return res.StatusCode != null && ((int)res.StatusCode.Value) / 100 == 2;
         }
-
-
-        public async Task<bool> GetUser()
-        {
-
-            var res = await Get("auth/api/users/567bb126cd2307e21e6cd333").WithAuthToken()
-                                             .ExecuteAsync<string>();
-
-            return res.StatusCode != null && ((int)res.StatusCode.Value) / 100 == 2;
-        }
     }
 }

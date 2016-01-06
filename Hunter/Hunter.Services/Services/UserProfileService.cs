@@ -102,25 +102,6 @@ namespace Hunter.Services
             }
         }
 
-        public IEnumerable<string> GetAuthUserIdByRole(string roleName)
-        {
-            try
-            {
-                var roles = _roleService.GetRoleByName(roleName).RoleMapping;
-                var users = _profileRepo.Query().ToList();
-
-                var us = from role in roles
-                         join user in users on role.Position.ToLower() equals user.Position.ToLower()
-                         select user.AuthUserId;
-
-                return us.ToList();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
         public bool UserExist(string userName)
         {
             return _profileRepo.Query().Any(p => p.UserLogin.ToLower() == userName.ToLower());

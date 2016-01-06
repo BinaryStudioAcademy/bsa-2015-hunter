@@ -16,7 +16,7 @@ namespace Hunter.Services.Extensions
                         serviceType = "HR Hunter",
                         url = activity.Url,
                         //TODO delete this hardcode
-                        users = new List<string> { "567bb126cd2307e21e6cd333"},
+                        //users = new List<string> { "567bb126cd2307e21e6cd333"},
                         sound = true.ToString()
     };
 

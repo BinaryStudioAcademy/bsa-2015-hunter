@@ -96,6 +96,7 @@ namespace Hunter.Rest
             kernel.Bind<IScheduledNotificationService>().To<ScheduledNotificationService>();
             kernel.Bind<IRoleMappingService>().To<RoleMappingService>();
             kernel.Bind<IRoleMappingServiceCache>().To<RoleMappingServiceCache>();
+            kernel.Bind<IUserProfileAuthenticationService>().To<UserProfileAuthenticationService>();
             #endregion
 
             kernel.Bind<Common.Interfaces.ILogger>().To<Logger>();
